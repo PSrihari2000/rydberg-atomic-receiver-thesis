@@ -1,0 +1,754 @@
+                                                                                                     Letters
+
+                                                                                          https://doi.org/10.1038/s41567-020-0918-5
+
+Atomic superheterodyne receiver based on
+microwave-dressed Rydberg spectroscopy
+
+Mingyong Jing1,2,3, Ying Hu1,2,3, Jie Ma1,2, Hao Zhang1,2, Linjie Zhang 1,2, Liantuan Xiao 1,2 and
+Suotang Jia 1,2
+
+Highly sensitive phase- and frequency-resolved detection of                        sophisticated approaches9. Beating this limit is very demanding as
+
+microwave electric fields is of central importance in a wide                       it requires non-classical squeezed light in relevant atomic set-ups.
+range of fields, including cosmology1,2, meteorology3, commu-
+nication4 and microwave quantum technology5. Atom-based                            The origin for such difficulties in improving the sensitivity of exist-
+electrometers6,7 promise traceable standards for microwave
+                                                                                   ing atom-based electrometers is that they only realize nonlinear
+electrometry, but their best sensitivity is currently limited to
+a few Vcm-1Hz-1/2 (refs. 8,9) and they only yield information                      detection when the signal is so weak that the corresponding Rabi
+about the field amplitude and polarization10. Here, we demon-
+                                                                                   frequency is smaller than the linewidth of the optical spectrum,
+strate a conceptually new microwave electric field sensor--
+                                                                                   leading to an (approximately) unfavourable scaling of sensitivity
+the Rydberg-atom superheterodyne receiver (superhet). The
+                                                                                   (1/2) with classical noise-induced error . An alternative route
+sensitivity of this technique scales favourably, achieving even
+55nVcm-1Hz-1/2 with a modest set-up. The minimum detect-                           to high sensitivity exploits non-classical Schrödinger cat states,
+able field of 780pVcm-1 is three orders of magnitude smaller
+                                                                                   as recently demonstrated21, but the experiment is infeasible in all
+than what can be reached by existing atomic electrometers.
+                                                                                   but very small atomic systems due to the difficulty in preparing
+The Rydberg-atom superhet allows SI-traceable measure-
+ments, reaching uncertainty levels of 10-8Vcm-1 when mea-                          cat states. Developing new sensing techniques that overcome both
+suring a sub-Vcm-1 field, which has been inaccessible so
+far with atomic sensors. Our method also enables phase and                         above limitations is currently an outstanding challenge.
+
+frequency detection. In sensing Doppler frequencies, sub-Hz                        Here, we realize a conceptually new MW electric-field sensor
+precision is reached for fields of a few hundred nVcm-1. This
+                                                                                   based on MW-dressed Rydberg atoms22 and a tailored electromag-
+work is a first step towards realizing electromagnetic-wave
+                                                                                   netically induced transparency (EIT) spectrum23,24. Not only can it
+quantum sensors with quantum projection noise-limited
+                                                                                   resolve the phase and frequency of MWs, but it also realizes a very
+sensitivity. Such a device will impact diverse areas like radio
+                                                                                   favourable  scaling of sensitivity, providing a remarkably high
+astronomy, radar technology and metrology.                                         sensitivity of 55nVcm-1Hz-1/2 that is accessible to experiments
+
+   Quantum sensing harnesses highly coherent and well-controlled                   even without non-classical resources. This Rydberg-atom sensor is
+quantum systems to measure weak signals with unprecedented sen-
+sitivity and precision11. In particular, the Rydberg atom provides                 functionally reminiscent of an electronic-circuit-based superhet-
+a platform that allows high-sensitivity detection of a microwave
+(MW) electric field6,11,12. This has been highlighted by recent exper-             erodyne receiver (superhet) in conventional electromagnetic-wave
+iments, with the development of traceable Rydberg-atom elec-
+trometers that outperform their classical counterparts8­10,13­15 and               detection architectures4,18, but nonetheless has important advantages
+sensing techniques with subwavelength spatial resolution enabled
+by optical readout16,17.                                                           enabling traceable electric field measurements with high accuracy.
+
+   Two central quests in sensing time-varying electric fields are                  We present a Rydberg-atom superhet based on the set-up shown
+(1) to diagnose the phase and frequency of weak fields, which is
+at the basis of (as a paradigmatic example) radar detections18 and                 in Fig. 1a. The key new ingredient is a strong local MW field reso-
+(2) to improve sensitivity. However, existing atom-based MW field
+sensors only allow us to probe the field amplitude and polariza-                   nant   with Rydberg transitions, with a Rabi  fcroequupelinncgysLe.Oið2urs  goal
+tion vector from the optical readout7­10,13­17,19, severely limiting their         is to  measure a signal MW that leads to a
+practical applications in actual MW detections. Proposals to mea-                                                                                              t þs Þ
+sure the phase and frequency--involving complicated techniques--
+have been reported6,20, but demonstrations with experimentally                     between Rydberg states with sL, and both frequenIcy detuning
+realistic tools have remained elusive. Furthermore, the sensitiv-
+ity of atom-based electrometers has approached the photon shot                     s and phase s are measured relative to the local field. We consider
+noise limit, with ~2Vcm-1Hz-1/2 at best, even when assisted by
+                                                                                   2sEIT, where EIT is the typical EIT linewidth.
+
+                                                                                   In an atomic superhet, the entire information in a MW signal
+
+                                                                                   is encoded in the first-order energy shift of MW-dressed Rydberg
+
+                                                                                   states. The strong on-resonant local MW field results in two dressed
+
+                                                                                   states j ± i energetically separated by L, where  is the Planck
+                                                                                   constanIt; these are, respectively, the symmetric and antisymmetric
+
+                                                                                   superpositions of two bare Rydberg states j3i and j4i. When per-
+                                                                                   turbed by a small MW signal, j ± i acquires anI instantIaneous energy
+                                                                                   shift ± E1 ¼ ± _s cosð2st þI sÞ=2.
+                                                                                      In dI etecting E1, we use L as a control knob to engineer the EIT
+
+                                                                                   spectrum of the Rydberg atoms, as schematically shown in Fig. 1b.
+
+                                                                                   Because the strong local MW induces Autler­Townes (AT) split-
+
+                                                                                   ting23 of the EIT peak, the position of the on-resonance transmis-
+                                                                                   sion point P0 is moved to the hillside of each EIT line, which has a
+                                                                                   slope of maIgnitude . Consequently, when energy perturbations
+
+1State Key Laboratory of Quantum Optics and Quantum Optics Devices, Institute of Laser Spectroscopy, Shanxi University, Taiyuan, Shanxi, China.
+
+2Collaborative Innovation Center of Extreme Optics, Shanxi University, Taiyuan, Shanxi, China. 3These authors contributed equally: Mingyong Jing, Ying Hu.
+e-mail: zlj@sxu.edu.cn; xlt@sxu.edu.cn
+
+Nature Physics | VOL 16 | September 2020 | 911­915 | www.nature.com/naturephysics                                                                              911
+Letters                                                                                                                                          Nature Physics
+
+     a                                 b         P                                              a                                           b
+
+          3            se­i (2st + s)                                                                    0                                                                         1.0
+              3                                                                                        ­5
+                                                  P0                                                  ­10                                                                          0.5
+               c L                                                                                    ­15                                                                               Probe transmission (a.u.)
+                              4                                                  P(s)/P max (dB)
+                           4
+          2    p 2                                                    c
+
+                                            ­E1       +E1
+
+          1                                    ­ +
+
+     c                                                                                              ­20
+
+                                                                                                    ­25           0.003 0.006 0.009         ­20 ­10 0 10                 0
+                                                                                                           0            EL (V cm­1)                  c /(2) (MHz)  20
+
+               Es(t )
+
+                                                 Pout(t )                        c ­20                        Atomic superhet
+                                                                                                              Standard atomic electrometer
+                                       EL(t )                                           ­40                   AT splitting                                         ­36
+
+                                                                                                                                                                   ­38                  AT/(21/2µ) (dBV cm­1)
+
+Fig. 1 | Basic principle of the Rydberg-atom superhet. a, Level scheme.          Signal (dBm Hz­1)                                                                 ­40
+
+States j1i, j2i and Rydberg state j3i are resonantly coupled by probe (p)                           ­60                                                            ­42
+and conItrolI(c) fields, respectiveIly. A local MW electric field (blue)
+                                                                                                                                                                   ­44
+resonantly drives Rydberg transition j3i­ j4i with Rabi frequency L.                                ­80
+                                   a coupI lingIseið2stþsÞ
+A weak signal  MW (red)    yields  local MW. SItate jii (i=2,  with   phase s                                                                                      ­46
+and frequency  s relative  to the                              3, 4)  has decay
+                                                                                                    ­100                                                           ­48
+rate i. b, Schematic of MW sensing with MW-dreI ssed Rydberg EIT
+                                                                                                    ­120                                                           ­50
+spectroscopy. Owing to the strong local MW, probe laser transmission P                                      ­140  Noise base                     Non-resolvable
+
+as a function of control laser detuning c exhibits AT splitting of the EIT                                        ­120  ­100                ­80  ­60 EL ­40
+peaks. Resonant transmission point P0 sits on the hillsides (with slope )
+of the EIT lines, where small energy sIhifts ± E1 ¼ ± _s cosð2st þ sÞ=2                                                 Es (dBV cm­1)
+in the dressed Rydberg states j ± i give lineaIr changes in transmission. c, An
+atomic superhet consisting of RIydberg atoms dressed by a local MW EL(t)         Fig. 2 | Proof-of-principle demonstrations of the optimal point and linear
+detects a MW signal Es(t) as an optical output Pout(t) that has downshifted      dtheetemctaixoinm. uam, jPIoðfsPÞ(j=Ps)m.axExapsearifmunecnttiaolndoaftaELafroersahtoewstnsaigsnbalal,cwkhceirrcelePsIm. aExrrisor
+frequency, original phase and linearly magnified amplitude.                      bars denote 1 standard error obtained from 10 measurements. Pmax occurs
+                                                                                 here for EL=3.0mVcm-1 (r.m.s.), corresponding to L/(2)=7.9IMHz.
+
+                                                                                 The solid grey curve shows theoretical density-matrix calculations.
+
+±E1 shift both EIT lines outwards, this shift transfers linearly--at a           b, Probe laser transmission as a function of control laser detuning c,
+rate --into changes in the resonant light transmission. By tuning                corresponding to the peak in a. The red curve depicts the data recorded
+
+L, we can tailor the   profile of the EIT   lines, thereby effectively con-      by a digital acquisition oscilloscope. The solid blue curve shows
+trolling the position  of P0 therein (Fig.  1b). This allows us to achieve
+an optimal point that haIs maximum slope 0 when P0 sits around                   density-matrix calculations. Dashed yellow curves show a two-peak fit
+                                                               I
+the half-maximum of both EIT lines.                                              of experimental data using Voigt functions. c, Linear versus nonlinear
+
+     The Rydberg-atom superhet thus detects a MW signal as an                    detections. For the atomic superhet, P(s) is measured (blue circles) for
+                                                                                 various values of signal field Es. Error bars denote 1 standard error from
+oscillating optical readout (Fig. 1c), represented by the change                 10 measurements. The linear dynamical range of the atomic superhet is
+PoutðtÞ ¼ PðtÞ  P0 in the resonant light transmission with and                   90dB. EL=3.0mVcm-1 is indicated by a dashed grey line. For comparison,
+                                                                                 we converted our set-up to the standard configuration of atomic
+wIithout signals. When operated at the optimal point, it yields (see             electrometers6,7, and the difference P(Es)=P(Es)-P(0) in the resonant
+                                                                                 probe transmission (dark blue squares) with and without signal was
+Methods)
+
+                 PoutðtÞ ¼ jPðsÞj cosð2st þ sÞ                           ð1Þ     measured. Error bars indicate 1 standard error from 10 measurements.
+                                                                                 Note: to avoid low-frequency noises for atomic electrometers, a 100%
+
+Here, P(f) is the amplitude of the single-sided Fourier spectrum of              amplitude modulation at 150kHz was added to the signal and demodulated
+P(t) at linear frequency f, and the Rabi frequency s of the signal is            with a spectrum analyser with 1Hz resolution bandwidth (RBW). The
+measured as                                                                      blue region denotes the optical readout noise base. For strong Es we apply
+                                                                                 a standard ATp-sffiffipffi litting (AT) measurement technique to obtain a field
+                              s    ¼   jPðsÞj                            ð2Þ     value _AT=ð 2Þ (grey diamonds). Error bars denote 1 standard error
+                                        j0j                                      from thIree measurements. The grey region corresponds to experimentally
+                                                                                 non-resolvable AT splittings. All solid curves in c are linear fits to the data.
+                                                           pffiffi               In a and c, s=150kHz and P(s) is recorded with a spectrum analyser
+This provides us with a signal amplitude Es ¼ ð1= 2Þ_s=, where                   with 1Hz RBW. EL in a and Es in c are calibrated using the standard antenna
+ is the dipole moment associated withI the Rydberg transition.                   method; these are assumed to be the true values here.
+
+Note that the root-mean-square (r.m.s.) amplitude of the electric
+
+field is used throughout this work. Crucially, both 0 and P(s)
+are directly derived from the optical spectrum (see Methods), MW sensors in the measurement of ultra-weak electric fields in
+
+thereby essentially reducing the electric-field measurement to the regime sEIT: as well as phase and frequency resolution, it
+an optical-frequency measurement and ensuring SI-traceability affords a substantial sensitivity gain in traceable amplitude mea-
+
+of the measurement.                                                              surements. In particular, the atomic superhet has favourable scal-
+   Equations (1) and (2) are at the heart of atomic superhet-based
+                                                                                 ings of sensitivity (S /               with   classical noispe-ffiffiiffinduced error ) and
+MW sensing. It offers significant advantages over existing atomic                the minimum detecItable                field  (Emin ¼ S= T with measurement
+                                                                                                                                     I
+
+912                                                                              Nature Physics | VOL 16 | September 2020 | 911­915 | www.nature.com/naturephysics
+Nature Physics                                                                                                                                                                                                                                                                                                                                       Letters
+
+                                                                                                                               T (s)
+
+a                                                                                             b                      100  101  102    103                                                                                                                                                                                                    104102
+
+        5.0                                                                                                     548
+        3.3
+        0.5Es/Ecal (dB)                                                                       Es (nV cm­1)      546                                                                                                                                                                                                                          101     Emin (nV cm­1)
+
+          0                                                                                                     544
+      ­0.5
+      ­3.3                                                                                         542
+      ­5.0                                                                                                                                                    100
+       ­40
+                                                                                                   540
+
+                                                                                              c 103
+
+                         ­60
+
+Es (dBV cm­1)            ­80                                                                  E (f ) (nV cm­1)  102
+
+                         ­100
+
+                         ­120                                                                                   101
+
+                         ­140              Noise base                                                           100
+                         ­157                                                                                           s­40 s­20 s s+20 s+40
+                               ­140  ­120  ­100        ­80  ­60                    ­40
+                                                                                                                             Fourier frequency, f (mHz)
+                               Electric field using standard antenna method, Ecal (dBV cm­1)
+
+Fig. 3 | Sensitivity and uncertainties of the electric field measurement. a, Electric field Es, measured by the atomic superhet, compared with electric
+field Ecal measured by the standard antenna method. Dashed lines in the top and bottom panels correspond to average values of Ecal. The light blue
+shaded area in the top panel depicts measurement uncertainties in the standard antenna method (see Methods). Red circles in the top panel represent
+
+single-shot measurements by the atomic superhet in a 1s measurement time. For every field, 50 single-shot measurements were performed over five days
+
+(10 per day). Their averages are shown by corresponding red circles in the bottom panel. Error bars indicate 1 standard error. In strong-field regimes,
+
+for each signal we performed 15 single-shot AT-splitting measurements (grey diamonds, top panel). Their averages are denoted by the corresponding
+
+grey diamonds in the bottom panel. Error bars indicate 1 standard error. The blue region in the bottom panel denotes the noise base of the electric field
+
+measured by the atomic superhet in a 1s measurement time, indicating a sensitivity of S ¼ 55nVcm-1Hz-1/2. b, Measurements of the same MW signal by
+the atomic superhet at different measurement times T. Black squares denote average Es Ivalues obtained from 50 single-shot measurements at T, which
+
+ssahpt oeTcwdtrinvuoimdveiodsfibbMyleWs0y.fsTiteheledmdEaaðtfsicÞhe¼erdr½ol_irn=ueðppsh2ffitffiffioowÞTsj=Ptð5hf,Þe0j=c0ja0l0csju.mlBalteueaedscuEiIrmrecidnleuasstdiTneg=pit5cht,e0t0hche0assrm.aFcartloelemrsisttthdiceertpeeelcaattakiobwnleeEfIdmieeinlrdi¼vEeImSain=SpaNtTffiffiTRffi ooofbfst5lao7ipndeeBdd, eafrtgoermceteitionhnge.  optical readout noise base
+                                                                                                                                                                                                                                                                                                                                             c, A single-sided Fourier
+                                                                                                                                                                                                                                                                                                                                             with the SNR predicted from
+
+the preset electric field vI alue via the standard antenna method. In all panels, s=150kHz.
+
+time T). This is in contrast to standard atomic electrompetffieffiffirs6,7,        measurements, based on equations (1) and (2). From the electric
+which for psffiffiffi EIT realize nonlinear detection, where S /  and
+Emin ¼ S= 4 T. Combined with operation at the optimaIl point, the                  field Es obtained in a measurement time of 1s (Fig. 3a), we derive a
+aItomic superhet maximizes efficiencies in the effort to enhance                   sensitivity of S ¼ 55nVcm-1Hz-1/2, which represents an improve-
+                                                                                   ment by a factoIr of 38 over the state of the art8,9. To find the smallest
+sensitivity by reducing classical noise or to access smaller fields by             detectable field Emin that can be achieved, we reduce the technical
+                                                                                   noise affecting thIe long-time stability of our system (see Methods).
+increasing the measurement time.
+                                                                                   Measurements of the same signal at different times display a random
+   We implemented our Rydberg-atom superhet using Cs atoms in
+                                                                                   fluctuation within 1% up to T=5,000s (Fig. 3b), showing the stabil-
+a room-temperature vapour cell (see Methods). Figure 2 provides                    ity of our spysffitffieffi m over this time. The measured EminðTÞ agrees with
+                                                                                   Emin ¼ S= T, as expected. We thus achieve EImin ¼ 780pVcm-1
+experimental verifications for the optimal point and linear rela-                  foIr T=5,000s. Figure 3c presents a typical (sinIgle-sided) Fourier
+                                                                                   spectrum of the MW electric field at T=5,000s. Because T is, in
+tion. P(s), scanned as a function of the local MW field, features a                principle, limited by the stability of the external synchronization
+maximum (Fig. 2a), indicating the existence of an optimal point. The               clock and can be extended to more than 4h (ref. 25), we expect to
+                                                                                   reach Emin460pVcm-1. Figure 3a shows that the atomic super-
+EIT spectrum corresponding to this maximum (Fig. 2b), combined                     het alsoI achieves a higher performance than all the other atomic
+
+with a double-peak fit, shows that the resonant transmission point                 sensors in the accuracy of the measurement of a MW field below
+                                                                                   8Vcm-1. The smallest uncertainty is at levels of 10-8Vcm-1
+therein indeed sits at the half-maximum of each EIT line or, equiva-               for 1s measurement time, which is essentially determined by the
+
+lently, L~EIT. The solid curves in Fig. 2a,b represent our theoretical             precision of the optical frequency measurement based on the EIT
+calculations (see Methods), which agree well with the experiment.
+                                                                                   spectrum (see Methods for the uncertainty analysis). Figure 3a,
+Figure 2c corroborates P(s)Es for the atomic superhet when
+sL, but the linearity begins to break down when s~L. To                            moreover, compares measurements by the atomic superhet and by
+further illustrate the advantage of linear over nonlinear detections
+                                                                                   a standard antenna method (see Methods). They agree, within their
+in the regimes sEIT~L given the same optical readout noises,                       combined uncertainty of ~5%, for 177nVcm-1Es1.78mVcm-1.
+we converted our set-up into the standard configuration of atomic                  We believe that this uncertainty originates from that associated
+electrometer from refs. 6,7. Its optical output (Fig. 2c) was then found
+to scale as / Es1:8 (that is, nearly quadratic) with Es, which reaches             with the antenna approach in setting the output power of the MW
+unit signal-tIo-noise ratio (SNR) at a substantially larger Es than the
+atomic superhet. Note that, for s>EIT, a linear detection of Es is                 generator. The relative statistical uncertainty in a single-shot mea-
+viable through an AT-splitting measurement.
+                                                                                   surement by the atomic superhet increases with a reduced signal,
+   Having established our sensing principle, we now demon-
+
+strate the outstanding performance of the atomic superhet in MW
+
+Nature Physics | VOL 16 | September 2020 | 911­915 | www.nature.com/naturephysics                                                                                                                                                                                                                                                                                    913
+Letters                                                                                                    Nature Physics
+
+     a 103                                                                                       Echo      hundreds of nVcm-1. The bandwidth of the current atomic super-
+                                                                                                           het is in excess of 100kHz, which allows us to measure velocities
+     E(f ) (nV cm-1)  102                                                                         ±        from a few ms-1 to a few kms-1, covering motions from cell migra-
+                                                                                                           tion to the rapid flight of rockets.
+                                    s­4.4                                 Antenna Emitted Object
+                                 s­8.8                                                                        The ability of the atomic superhet to resolve the phase of the MW
+                      101                                                     s+4.4                        is demonstrated in Fig. 4b. The phase out extracted from P(t) (see
+                                                                                     s+8.8                 Methods) and the true phase s show good agreement. By measur-
+                                                                                                           ing the out that corresponds to a jumping input phase s (inset),
+            100                  s­10                          s          s+10  s+20                       we estimate a phase resolution of 0.8°, consistent with theory
+               s­20                                                                                        (see Methods).
+                                    Fourier frequency, f (mHz)
+     b                                                                                                        In conclusion, we have developed a new MW sensing technique
+                                                    out 1      Phase (°)                                   based on MW-dressed Rydberg spectroscopy, which simultaneously
+            180                                     s                                                      allows for SI-traceable measurement of a signal electric field with
+             90                                                                                            ultrahigh sensitivity as well as the detection of phase and frequency.
+               00                                           0                                              By producing favourable scalings, our technique has significantly
+                                                                                                           improved the efficiencies in ongoing experimental efforts to reduce
+            ­90out (°)                                  ­1                                                 classical noise for sensitivity gain, thus opening a feasible route
+                                                                                                           towards a quantum projection noise-limited (QPNL) sensitivity
+                                 5                  10                                                     of ~700pVcm-1Hz-1/2 (see Methods), which is challenging in cur-
+                                                                                                           rent experiments. A further boost of sensitivity is anticipated from
+                                 Time (s)                                                                  combinations of the present technique and non-classical resources.
+                                                                                                           Equally appealing is the prospect of applying the Rydberg-atom
+              ­180                                                                                         superhet to traceable MW electric-field standards in ultrasmall-field
+                                                                                                           regimes. This technique can be generalized to detect electromag-
+                           ­180     ­90                        0          90    180                        netic radiation from the radiofrequency regime to the far-infrared
+                                                                                                           and is feasible for miniaturization26­28. Our work provides a remark-
+                                                               s (°)                                       able step on the path to realizing future quantum receivers, such as
+                                                                                                           in radars or radio telescopes, with the benefits of SI-traceable accu-
+Fig. 4 | Frequency and phase detections. a, Doppler frequency                                              racy and ultrahigh sensitivity, or in terahertz communication29,30,
+                                                                                                           allowing us to recover information encoded in terahertz carriers via
+measurement. Inset: an emitted MW, with frequency detuning s=150kHz                                        phase or frequency modulation.
+from the local MW (6.947GHz), is reflected from a target moving
+                                                                                                           Online content
+periodically relative to the antenna. The atomic superhet receives both                                    Any methods, additional references, Nature Research reporting
+                                                                                                           summaries, source data, extended data, supplementary informa-
+emitted and echo MWs to produce an optical output P(t). The single-sided                                   tion, acknowledgements, peer review information; details of author
+                                                                                                           contributions and competing interests; and statements of data and
+Fourier spectrum, E(f), of the electric field is obtained from an average                                  code availability are available at https://doi.org/10.1038/s41567-
+                                                                                                           020-0918-5.
+of 50 continuous measurements of P(t), each sampled over a 5,000s
+                                                                                                           Received: 29 December 2019; Accepted: 24 April 2020;
+measurement time. The horizontal axis indicates detuning of the Fourier                                    Published online: 1 June 2020
+
+frequency from the local MW. The preset radial speed of the object,
+
+determined by the linear stage, is 100ms-1 and the periodicity is 6,000s.
+
+b, Comparisons between the measured phase out and original phase
+ss=in15th0eksHigzn. alo,ut Iwseasiðo2btsatþinesÞd.
+                                                    In the experiment, s/(2)=20kHz and
+                                                    from phase-sensitive measurements of P(t).
+
+Inset: out for a phase s switching between ±1°. The standard error of out
+
+was obtained for the data sampled in the time interval in the grey shaded
+
+block (see Methods).
+
+but can be decreased by averaging over multiple measurements.                                              References
+
+Systematic uncertainty for the atomic superhet only becomes sig-                                           1. Spitler, L. G. et al. A repeating fast radio burst. Nature 531, 202­205 (2016).
+nificant when Es<177nVcm-1 and Es>1.78mVcm-1, the former                                                   2. Shannon, R. M. et al. The dispersion-brightness relation for fast radio bursts
+due to the incoherent sum of signal and noise and the latter due to
+                                                                                                               from a wide-field survey. Nature 562, 386­390 (2018).
+breakdown of the linear relation. Our measurements in ultrasmall                                           3. Alsdorf, D. E. et al. Interferometric radar measurements of water level
+
+field regimes complement the AT-splitting measurement for strong                                               changes on the Amazon flood plain. Nature 404, 174­177 (2000).
+fields, Es4.0mVcm-1.                                                                                       4. Rohde, U. L. & Whitaker, J. C. Communications Receivers: Principles and
+
+   Figure 4a showcases the capability of the atomic superhet to                                                Design 4th edn (McGraw-Hill Education, 2017).
+                                                                                                           5. Maeda, H., Norum, D. V. L. & Gallagher, T. F. Microwave manipulation of an
+
+sense the Doppler frequency shift and discern the motion of tar-                                               atomic electron in a classical orbit. Science 307, 1757­1760 (2005).
+gets, which has important roles in fields such as aviation, meteo-                                         6. Fan, H. et al. Atom based RF electric field sensing. J. Phys. B 48, 202001 (2015).
+rology and biomedical science. In our experiment, an emitted MW                                            7. Sedlacek, J. A. et al. Microwave electrometry with Rydberg atoms in a vapour
+is reflected from a periodically moving object, which is received
+(along with the emitted MW) by the atomic superhet to produce                                                  cell using bright atomic resonances. Nat. Phys. 8, 819­824 (2012).
+                                                                                                           8. Kumar, S., Fan, H., Kübler, H., Sheng, J. & Shaffer, J. P. Atom-based sensing of
+
+                                                                                                               weak radio frequency electric fields using homodyne readout. Sci. Rep. 7,
+
+Pout(t), simulating Doppler radar detection18. The corresponding                                               42981 (2017).
+single-sided Fourier amplitude spectrum displays five pronounced                                           9. Kumar, S., Fan, H., Kübler, H., Jahangiri, A. J. & Shaffer, J. P. Rydberg-atom
+
+peaks (Fig. 4a), the central one corresponding to the emitted fre-                                             based radio-frequency electrometry using frequency modulation spectroscopy
+                                                                                                               in room temperature vapor cells. Opt. Express 25, 8625­8637 (2017).
+quency. The measured Doppler frequency shift, f=±4.4mHz,                                                   10. Sedlacek, J. A., Schwettmann, A., Kübler, H. & Shaffer, J. P. Atom-based
+allows us to determine the radial speed of the object toward (or                                               vector microwave electrometry using rubidium Rydberg atoms in a vapor cell.
+
+away from) the antenna as =95ms-1. The two side peaks, 2f                                                      Phys. Rev. Lett. 111, 063001 (2013).
+away from the centre, indicate the occurrence of multiple reflec-                                          11. Degen, C. L., Reinhard, F. & Cappellaro, P. Quantum sensing. Rev. Mod. Phys.
+
+tions. The frequency resolution is 0.2mHz, limited by the resolu-                                              89, 035002 (2017).
+                                                                                                           12. Mohapatra, A. K., Bason, M. G., Butscher, B., Weatherill, K. J. & Adams, C. S.
+tion bandwidth (RBW) of pthffieffiffiffiffifffiaffiffisffiffitffiffiffiffiFffiourier transform (FFT). The
+frequency precision, RBW= 2 ´ SNR, reaches sub-Hz for fields of                                                A giant electro-optic effect using polarizable dark states. Nat. Phys. 4,
+                                                                                                               890­894 (2008).
+                          I
+
+914                                                                                                        Nature Physics | VOL 16 | September 2020 | 911­915 | www.nature.com/naturephysics
+Nature Physics                                                                       Letters
+
+13. Holloway, C. L. et al. Broadband Rydberg atom-based electric-field probe for     23. Fleischhauer, M., Imamoglu, A. & Marangos, J. P. Electromagnetically
+    SI-traceable, self-calibrated measurements. IEEE Trans. Antennas Propag. 62,         induced transparency: optics in coherent media. Rev. Mod. Phys. 77,
+    6169­6182 (2014).                                                                    633­673 (2005).
+
+14. Holloway, C. L. et al. Electric field metrology for SI traceability: systematic  24. Mohapatra, A. K., Jackson, T. R. & Adams, C. S. Coherent optical detection
+    measurement uncertainties in electromagnetically induced transparency in             of highly excited Rydberg states using electromagnetically induced
+    atomic vapor. J. Appl. Phys. 121, 233106 (2017).                                     transparency. Phys. Rev. Lett. 98, 113003 (2007).
+
+15. Cox, K. C., Meyer, D. H., Fatemi, F. K. & Kunz, P. D. Quantum-limited            25. Boss, J. M., Cujia, K. S., Zopes, J. & Degen, C. L. Quantum sensing with
+    atomic receiver in the electrically small regime. Phys. Rev. Lett. 121,              arbitrary frequency resolution. Science 356, 837­840 (2017).
+    110502 (2018).
+                                                                                     26. Ghosh, S. et al. Low-light-level optical interactions with rubidium vapor in a
+16. Böhi, P. & Treutlein, P. Simple microwave field imaging technique using hot          photonic band-gap fiber. Phys. Rev. Lett. 97, 023603 (2006).
+    atomic vapor cells. Appl. Phys. Lett. 101, 181107 (2012).
+                                                                                     27. Bajcsy, M. et al. Efficient all-optical switching using slow light within a hollow
+17. Wade, C. G. et al. Real-time near-field terahertz imaging with atomic optical        fiber. Phys. Rev. Lett. 102, 203902 (2009).
+    fluorescence. Nat. Photon. 11, 40­43 (2017).
+                                                                                     28. Kübler, H., Shaffer, J. P., Baluktsian, T., Löw, R. & Pfau, T. Coherent excitation
+18. Alabaster, C. Pulse Doppler Radar: Principles, Technology, Applications              of Rydberg atoms in micrometre-sized atomic vapour cells. Nat. Photon. 4,
+    (SciTech, 2012).                                                                     112­116 (2010).
+
+19. Anderson, D. A., Sapiro, R. E. & Raithel, G. An atomic receiver for AM and       29. Koenig, S. et al. Wireless sub-THz communication system with high data
+    FM radio communication. IEEE Trans. Antennas Propag. https://doi.                    rate. Nat. Photon. 7, 977­981 (2013).
+    org/10.1109/TAP.2020.2987112 (2020).
+                                                                                     30. Nagatsuma, T., Ducournau, G. & Renaud, C. C. Advances in terahertz
+20. Pandey, K. Single reference atomic based MW interferometry using EIT.                communications accelerated by photonics. Nat. Photon. 10, 371­379 (2016).
+    Preprint at https://arxiv.org/pdf/1802.09935.pdf (2018).
+                                                                                     Publisher's note Springer Nature remains neutral with regard to jurisdictional claims in
+21. Facon, A. et al. A sensitive electrometer based on a Rydberg atom in a           published maps and institutional affiliations.
+    Schrödinger-cat state. Nature 535, 262­265 (2016).
+                                                                                     © The Author(s), under exclusive licence to Springer Nature Limited 2020
+22. Tanasittikosol, M. et al. Microwave dressing of Rydberg dark states. J. Phys. B
+    44, 184020 (2011).
+
+Nature Physics | VOL 16 | September 2020 | 911­915 | www.nature.com/naturephysics    915
+Letters                                                                                                                                                                                                                                         Nature Physics
+
+Methods                                                                                                                                                                                  P0 ¼ PðcÞjc¼0. Due to AT splitting induced by the strong L, the spectrum PðcÞ
+                                                                                                                                                                                         cIan be described in terms of a superposition of two (three-level) EIT lines repreIsented
+Theory. Here, we derive the probe laser transmission for the Rydberg-atom
+                                                                                                                                                                                         by F ± ðc   ± Þ peaking at ±, respectively. Here, ± correspond to energies of the
+superhet based on the set-up in Fig. 1a. Under normal resonant conditions, p/c=0                                                                                                         dresIsed Rydberg states j ± i (Figs. 1b and 2b), with +--=L. That is
+
+for coupling and probe lasers, and the relevant Hamiltonian takes the form (in the                                                                                                            PðIcÞ ¼ F þðc  þÞ þ F ðc  Þ                                                        ð7Þ
+basis of bare states ½j1i; j2i; j3i; j4iT)
+
+             I                        0        p                                                                                                    1
+                                                2
+                        _B@BBBB          0            0                   0                                                                         CCCCCA                               When all lasers are locked on resonance with the relevant atomic transitions, we
+                                               0
+             HðtÞ    ¼                   p            c                   0                                                                                                      ð3Þ     have c F þjc¼0 ¼ c F jc¼0 and obtain
+                                          2    c       2                                                                                                                                                                                                    
+                                                2                         L þeiSðtÞ s                                                                                                    I      Pðc  Þ                         1 F                F þ  jc ¼0
+                                         0            0                          2                                                                                                               L                             2 c                c
+
+                                         0     0      0 L þeiSðtÞ s                                                                                                                                     jc              ¼0  ¼            jc ¼0                                   ð8Þ
+
+                                                            2
+
+where S(t) denotes the time-dependent relative phase S(t)=2st+s between the                                                                                                                  The optimal point is a special point for which the slope amplitude 0 is
+signal and local MW.                                                                                                                                                                     maximum; that is, it satisfies the condition
+
+    Accounting for spontaneous emission, the dynamics of our system is governed                                                                                                                         ðL Þ                   ¼  2 P 0 ðL Þ  ¼  0                               ð9Þ
+                                                                                                                                                                                                         L                           2L
+by the following master equation for the (four-level) density matrix :
+
+                                      _     ¼  i  ½;  HðtÞ         þ  D½                                                                                                         ð4Þ     Operating the sensor at this optimal point brings an additional advantage: by
+                                               _
+                                                                                                                                                                                         definition, fluctuations in L will not affect the value of 0, at least at first order.
+where the second term is given by                                                                                                                                                        Motivated by previous analysis for cold atoms, we formally write
+
+             0    2  22242322324þ111   4 44        2  12                                                                                 222331233          22234244123444  1                                                        P0
+                                                   2                                                                                                                        ACC                                                      sp
+             BB@                               3   222234334322       22                                                                                                                                                       0  ¼                                              ð10Þ
+       D½                                                          2
+
+                                                                            23343343                                                                 4 44                                Here,  denotes the fraction of photons participating in the EIT, sp is intimately
+                                                                                                                                                                                         related to the typical EIT linewidth EIT, and we interpret sÀp1 as the coherence time
+Here, ij=(i+j), where i (i=2, 3, 4) is the decay rate (Fig. 1a). Note that we
+have ignored the spontaneous emission associated with j3i­j4i and other possible                                                                                                         of the Rydberg-atom superhet.                              I
+transitions, as they are comparatively small. We have alsoIignoI red the laser
+                                                                                                                                                                                         Equations (6), (8) and (9) provide the key equations of our sensing principle
+linewidths, which, as shown below, are a few tens of Hz in our experiment, much
+                                                                                                                                                                                         for high-sensitivity traceable measurement of s (see equation (2)). Finally,
+smaller than the relevant coherence and spontaneous decay rates. Our goal is to                                                                                                          we comment on the Doppler effect. For the transmission spectrum obtained
+
+derive the probe laser transmission in the adiabatic limit of equation (4) when s is                                                                                                     by scanning the control laser, as in the present case, a correction for Doppler
+small compared to the characteristic energy scales of the system dynamics.
+                                                                                                                                                                                         mismatch24 is not needed14. However, the Doppler broadening effect will affect
+    To gain an intuitive understanding, we begin with analytical derivations based
+                                                                                                                                                                                         the EIT profile and thus the value of 0, although it will not change the form of
+on cold atoms. Within the adiabatic approximation, the probe laser transmission                                                                                                          equations (6) to (9). Theoretically, the Doppler broadening effect is accounted for
+
+associated with the instantaneous steady state is written in terms of the imaginary                                                                                                      through the standard Doppler average of (instantaneous) steady-state 21 before
+component of the susceptibility as23 P(t)=Pie-kL[(t)]. Here, Pi is the incident light                                                                                                    calculating the transmission, as in our theoretical calculations, shown in Fig. 2a,b.
+power, L is the length of the cell containing atoms and k=2/p is the wavevector
+of the probe laser. Note that (t)=C21(t) is the susceptibility, where 21(t)                                                                                                              Experimental set-up. For the experiment, we used Cs atoms in a vapour cell at
+denotes the instantaneous steady-state density matrix component associated with
+the j1i­j2i transition. Furthermore, C ¼ 2N0212=ð0_pÞ, where N0 is the total                                                                                                             room temperature. The cell was 5cm long and contained ground-state atoms at
+densiIty oIf atoms, 12 is the dipole momI ent of the ground-state transition and 0 is                                                                                                    a total density of N0=4.89×1010cm-3. We realized the four-level configuration
+the permittivity in vacuum. When sL, assuming 3(4)=0, the imaginary part                                                                                                                 in Fig. 1 using four states in a Cs atom: 6S1/2, F=4; 6P3/2, F=5; 47D5/2; 48P3/2. The
+of (t) under normal resonant conditions is derived as                                                                                                                                    hyperfine states 6S1/2, F=4 and 6P3/2, F=5 comprised the lowest two states j1i
+                                                                                                                                                                                         and j2i in the configuration, with 2/(2)=5.2MHz. The Rydberg state 47D5I/2,
+                                      =½ð;     tÞ     ¼  0          jj2   2                                                                                                      ð5Þ     with iInverse lifetime 3/(2)=3.9kHz, and Rydberg state 48P3/2, with inverse
+                                                                 jj2 þ                                                                                                                   lifetime 4/(2)=1.7kHz, made up states j3i and j4i. In calculating 3 and 4
+                                                                                                                                                                                         at room temperature, we considered black-Ibody-inIduced transitions up to
+where
+                                                                                                                                                                                         n=70. We applied a local MW field at 6.94GHz to resonantly drive the Rydberg
+                                            ¼  p   t u u v2ffiffiffiðffiffiffiffiffic2ffiffiffiþffiffiffiffiffiffiffiffiffip2ffiffiÞffi                                                  transition 47D5/248P3/2. The radial matrix element for this Rydberg transition
+                                                       2p2 þ 22                                                                                                                          was calculated as 2,946.512ea0, where e is the electric charge and a0 is the Bohr
+                                                                                                                                                                                         radius. The corresponding dipole moment was then found as =1,443.450ea0.
+is intimately related to the EIT linewidth,                                                                                                                                              In detecting a MW signal, the local and signal fields were combined by a
+
+                                               0  ¼    C 2 p                                                                                                                             two-way MW resistive power divider (RPD) and coupled to free space via the
+                                                      22 þ 22p
+                                                                                                                                                                                         same resonant horn antenna. The resonant coupling between hyperfine states
+is the peak value of the spectrum, and =L+e-iS(t)s. Perturbative expansions
+                                                                                                                                                                                         6S1/2, F=46P3/2, F=5 and 6P3/2, F=547D5/2 was realized using a 852nm
+of equation (5) in terms of the small parameter s/L at first order give                                                                                                                  probe beam provided by a commercial extended cavity diode laser. Resonant
+=½ðL; tÞ ¼ =½ðLÞ þ SLs cosð2st þ sÞ. Here
+I                                                  "                      #                                                                                                              coupling between states 6P3/2, F=5 and 47D5/2 was realized using a 510nm beam
+                                                         2 L                                                                                                                             generated by a frequency-doubling diode laser. The probe and coupling laser
+                                      SL ¼ 20         ðL2 þ 2Þ2
+                                                                                                                                                                                         beams counterpropagated through the room-temperature Cs cell, with minimized
+                                                                                                                                         pffiffi
+is the slope of function (5) at =L. When L ¼ = 3, the spectrpuffimffi is                                                                                                                 Doppler broadening of the transition. Their polarizations were linear and parallel
+linear near =L, corresponding to the maxIimum slope Smax ¼ 3 30=ð8Þ.
+DPten¼otPin0 gþIð¼P0k=LÞSmasxc,ofosðr2sst/þs1Þ,,                      the transmiIssion                                                                                                  to the direction of the MW fields, leading to excitations of the magnetic sub-level
+                                                   we find            ¼ PiekL0=4.                                                                           as                           m=1/2. For the probe beam, the 1/e2 beam diameter was 1.70±0.04mm, and
+                                                   with P0                                                                                                                               the optical power incident to the vapour cell was 120±4W, effectively yielding
+    In general, for sL, a linear expansionI                                                                                                                                              p/(2)=5.7±0.6MHz. For the coupling beam, the 1/e2 beam diameter was
+ I  generically leads to the expression                            of  the                                                               resonant   transmission                 around  2.00±0.05mm and the incident optical power was 34±1mW, yielding c/
+P0                                                                                                                                                                                       (2)=0.97±0.12MHz. After absorption by Cs atoms, the power of the probe light
+                                                                                                                                                                                         incident on the detector was ~10W. The overview of our complete experimental
+                                                                                                                                                                                         set-up is shown in Extended Data Fig. 1.
+
+                                                                                                                                                                                             Note that we used the Alkali Rydberg Calculator (ARC) package to calculate
+
+                                                                                                                                                                                         the radial matrix element for 47D5/248P3/2, the lifetimes of relevant atomic
+                                                                                                                                                                                         states, the total atom density and the Rabi frequencies of both the probe and
+
+                                                                                                                                                                                         coupling lasers.
+
+I                    PðtÞ ¼ P0 þ s cosð2st þ sÞ                                                                                                                                  ð6Þ
+
+where  is the linear expansion coefficient defined by  ¼ P0=L. A key point to                                                                                                            Reduction of technical noise. The beat note results for the 852nm laser (with
+stcreisssthheerceonistrtholatlasecrandebteunobintagi.n(eNdoftreotmhatth, tehEeIoTrestpiceacltlryIu, PmðPIcðÞccaÞnfobrecas=lcu0l,awtehderine                                              an equivalent system) showed that the linewidth of the 852nm laser was below
+a standard way based on the four-level model in the presenI ce of c0.) We have                                                                                                           20Hz and the linewidth of the 510nm laser was estimated to be <40Hz, as a
+                                                                                                                                                                                         result of the following noise reductions. The frequency noise of the probe laser
+                                                                                                                                                                                         and the seed of the coupling laser were actively cancelled by locking them to a
+                                                                                                                                                                                         10-cm-long ultralow-expansion glass cavity with a frequency noise server (FNS).
+
+                                                                                                                                                                                                                            Nature Physics | www.nature.com/naturephysics
+Nature Physics                                                                                                                                                                                                                         Letters
+
+The cavity was double-coated at 852nm and 1,020nm with a finesse of 200,000.                             from difference sources, each required calibration. For the local MW field, the
+The linewidth of the high-finesse cavity was ~7.5kHz. The cavity was placed in                           insertion loss between the MW source and antenna was found to be l=14.7dB.
+a vacuum system at a residual pressure below 10-8mbar, and its temperature was                           This includes 6.5dB RPD insertion loss and 4m of 1.5dBm-1 wire loss, while the
+stabilized to the zero crossing point of the coefficient of thermal expansion. The                       remaining insertion loss can be attributed to connector insertion loss. For the
+system was mounted on a passive vibration isolation platform and surrounded by                           signal field, we obtained l=11.9dB, which is smaller than for the local MW due to
+an acoustic and temperature insulating box. The FNSs were realized by the Pound­                         use of a shorter transmission wire (3m).
+Drever­Hall (PDH) technique and the feedbacks were injected to the piezoceramic
+(PZTs) and diode currents of both lasers. The locking bandwidths of the 852nm                            Sensitivity spectrum and noise analysis. We experimentally obtained the
+laser and 1,020nm laser were ~250kHz and 350kHz, respectively. Low-frequency
+intensity noise in both lasers was actively eliminated through feedback to                               sensitivity spectrum (sensitivity as a function of signal frequency) associated with
+double-pass acousto-optic modulators in a cat-eye configuration. The 852nm
+probe light was separated into two orthogonally polarized output beams (using a                          the electric field measurement by the Rydberg-atom superhet (Extended Data Fig. 3).
+calcite beam displacer), which propagated in parallel through the centre of the Cs
+vapour cell. High-frequency common-mode intensity noise in the probe light was                           Specifically, we measured the probe laser transmission under normal resonant
+cancelled using the balanced detection technique. Both MW sources and the digital                        conditions in the absence of signal MW (we denote by jP~ðsÞj the corresponding
+acquisition oscilloscope were synchronized with a GPS disciplined oscillator with
+rubidium timebase (GPSDO) to minimize their long-time frequency drift. The                               single-sided Fourier spectrum,     fSoðrusÞni¼t R½_B=Wðp).2ffiffiFoÞlljoP~wðinsÞIgj=frjo0mj feoqruthateiomne(a2s)u,rwede
+signal MW source was 150kHz detuned from the local MW source, offsetting the                             derive the sensitivity spectrum
+interference signal of the Rydberg-atom superhet to sufficiently high frequency and
+preventing low-frequency electronic pink noise.                                                          electric field.                    I
+
+                                                                                                              Extended Data Fig. 3 reveals the primary source of noise limiting the sensitivity
+
+                                                                                                         of the Rydberg-atom superhet, which varies depending on the signal frequency
+
+                                                                                                         s. For frequencies below 1kHz, the 1/f noise of electric circuits dominates over
+                                                                                                         other noises. For frequencies between 1kHz and 100kHz, the transit noise due to
+
+                                                                                                         thermal atoms provides the main noise source. For frequencies above 100kHz,
+
+                                                                                                         it is the frequency noise of the coupling and probe lasers caused by FNS resonance
+
+Electric field measured by the Rydberg-atom superhet. Measurement of s by                                that mainly limits the sensitivity. Given that the noise spectrum with and without
+the atomic superhet (see equation (2) of the main text) requires knowledge of 0
+(at the optimal point) and measurement of P(s). P(s) was obtained by a FFT                               the local MW does not exhibit qualitative variation, we conclude that the local
+of the resonant light transmission, P(t), in the presence of signal. The acquisition
+                                                                                                         MW field does not provide a main noise source for our measured electric field.
+
+of 0 involved optical spectroscopy and an adjustment by sweeping L, both                                 In our experiments, we chose s=150kHz in view of the requirements of both
+                                                                                                         optimal sensitivity and 2sEIT. The corresponding value of SðsÞ, determined
+circumventing the need to know L, as detailed in the following.                                          by the frequency noise, provides the noise base of our electric fieIld measurement
+
+    We have previously shown that  can be obtained from the spectrum                                     shown in Fig. 3a.
+PðcÞ. Experimentally, we performed a two-peak fit of the EIT
+spI ectrum of dressed Rydberg atoms using Voigt functions F ± , that is,                                 Principal error sources of uncertainty. From the noise spectrum associated with
+PðcÞ ¼ F þðc  þÞ þ F ðc  Þ (Fig. 2b), and  is Ireadily obtained from
+eIquation (8).                                                                                           the electric field measurements by the atomic superhet, we see that the minimum
+
+                                                                                                         absolute uncertainty is 55×10-9Vcm-1, determined by the noise base. Here, we
+
+Equation (9) provides a benchmark guiding us to the optimal point. There                                 analyse the main sources of systematic and statistical error that contribute to
+
+are two methods to this end. In the first method, one can measure the second                             the 1 relative standard measurement error s associated with s measurements
+derivative 2P0=L2 as a function of L, utilizing the standard second-harmonic                             in a 1s measurement time based on equation (2). Let the 1 relative standard
+detection mIethod with a lock-in amplifier. The second method measures  while
+                                                                                                         measurement error associated with measpurffieffiffimffiffiffiffieffiffinffiffiffitffisffiffi of P(s) and 0 be denoted
+cscroanssnininggpoiLn. tIn2thPe0  first method, the optimal point corresponds to the zero          of    by P and , respectively. We have s ¼ P2 þ 2. For P in the measurement
+                                  =2L ¼ 0, while in the second, it corresponds to the peak               of P(s), the main relative statisticaIl uncertainty is 1/28, determined by the 8bit
+(L). One can fIurther lock the (unknown) frequency L to the zero crossing                                vertical resolution of our digital oscilloscope (R&S RTO2000 oscilloscope, Rohde
+
+in the first scheme or the peak in the second by sending the error signal into                           b&yS1c=hpwSffiaffiffirNffiffizffiRffi)ffiffi.wHheerne,ESsNR8¼VjPcmð-s1;,wshÞ=erP~eðass  for  Es8Vcm-1 it is determined
+                                                                                                                                                                                                 Þj2  for tpheffiffiffioffiffipffiffiffitffiifficffiffiaffiffiffilffiffirffiffieffiffiaffi dout. The
+conventional servo circuits to control the output power of the local MW source,
+
+that is, to lock to the optimal point.                                                                   relatIive systematic uIncertainty is always given by 1 þ 1=SNR  1, which is
+    We recorded PðcÞ and P(t) with the same digital acquisition oscilloscope.
+                                                                                                         much smaller than 1/28 when Es8Vcm-1, but bIecomes comparable to the
+Accordingly, systemI atic uncertainties shared by measurements of P(s) and 0                             relative statistical uncertainty for Es8Vcm-1. Therefore, P is dominated
+                                                                                                         by 1/28 for Es8Vcm-1, but is controlled by SNR for Es8Vcm-1. For
+based on EIT spectroscopy are largely eliminately once their ratio is taken to yield                      in the measurement of 0, because 0 is measured from the probe laser
+                                                                                                         transmission spectrum in the presence of a strong local MW (for s=0),  is
+s (and thus Es). This can be seen in Extended Data Fig. 2, where we measure                              mainly determined by the statistical relative uncertainty of 1/28 from the vertical
+P(s), 0 and Es for the same signal, choosing different powers of control and
+probe lasers. In Extended Data Fig. 2a, while the measured values of P(s) and 0                          resolution of the digital oscilloscope. Note that the aforementioned statistical
+vary with the lasers, their variation patterns are generally similar. Consequently,
+
+Es derived from their ratio only displays small fluctuations over the various laser                      relative uncertainty can be significantly reduced by using a digital oscilloscope with
+
+parameters (Extended Data Fig. 2b). We note that the variation in P(s) is not                            higher vertical resolution. The present uncertainty analysis is consistent with our
+closely followed by 0 in the seventh measurement (Extended Data Fig. 2a):
+here, strong probe and control lasers may induce a nonlinear effect that strongly                        experiment in Fig. 3a.
+
+modifies the profile of the transmission spectrum.                                                       Measuring the phase from the EIT signal. We extract a phase out from P(t) using
+                                                                                                         a lock-in amplifier. The filter slope of the lock-in amplifier was set to 18dBoct-1 and
+Standard antenna method. Here, we describe how to obtain the (average) value
+                                                                                                         the time constant was fixed at 100ms to realize 1.04Hz equivalent noise bandwidth.
+of Ecal and the uncertainty of a MW electric field in the region of interaction                          This yields a SNR of 44dB for Es=7.8Vcm-1, leading to theoretical estimation of
+between atoms and light based on the standard antenna method. Ecal is given by the                       the phase resolution as 0.6°. To assess the phase resolution experimentally, the 1
+standard antenna equation (IEEE Standard 1309-2013):                                                     standard error of fluctuations in out was measured in a period of 1­5s and 6­10s,
+                                                                                                         respectively, with 1s waiting time for the signal to reach 99% of its final value.
+                                          rffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+                                          g l PMW
+                                  Ecal ¼    4d2                                                    ð11Þ
+
+                                                                                                         Roadmap to QPNL sensitivity. Here, we determine the QPNL sensitivity for
+                                                                                                                                                                                                         p_ffiffi  pffiNffi1ffiaffic.              sp1
+                                                                                                         our  set-up,  which  is  formally  given  by  EQPNL                                          ¼                                Here  c  ¼       is  the
+                                                                                                                                                                                                           2
+where =377 is the intrinsic impedance of free space, PMW is the power setting                            coherence time of the Rydberg-atom suIperhet discussed earlier,Iand Na is the
+of the MW source, l is the insertion loss between the MW source and antenna, g                           number of atoms participating in the EIT process per second. For our set-up,
+is the gain of the antenna and d is the distance between the transmitting antenna                        we estimate c from ÀEI1T, with EIT/(2)=7.9MHz from experiment results. Na
+                                                                                                         is estimated as 2.14×I1013s-1 for the EIT process, which leads to an enhancement
+and the receiving point. To determine l, we use a known test electric field whose
+strength is measured via the AT-splitting approach and substituted into equation (11).                   of 5W light transmission at the photon detector compared to that without
+                                                                                                         the coupling laser. This gives EQPNL700pVcm-1Hz-1/2, as indicated in
+Once l is known, the field strengths can be readily determined using equation (11).                      Extended Data Fig. 3.
+To obtain the uncertainty in the generation of Ecal, we use the calibration
+information of the pre-calibrated MW source (R&S SMF100A microwave signal                                     Extended Data Fig. 3 further suggests a roadmap towards obtaining QPNL
+
+generator, Rohde & Schwarz). When the setting power PMW of both sources is                               sensitivity. For s=150kHz, the primary noise sources in our scheme can be
+above -10dBm, the uncertainty is 0.8dB. When -70dBm<PMW<-10dBm, the                                      systematically eliminated using techniques that are feasible in current quantum
+uncertainty is 0.9dB, and when -90dBm<PMW<-70dBm, the uncertainty is 1dB.
+In Fig. 3a, we used both the average value (the dashed line) and uncertainty (the                        sensing experiments: (1) the transit noise due to thermal atoms can be eliminated
+
+light blue region) from the standard antenna method.                                                     using larger-diameter probe and coupling beams; (2) the laser frequency noise
+
+    In the proof-of-principle demonstrations shown in Fig. 2, we used the average                        can be eliminated by using state-of-the-art lasers with mHz linewidth31,32 and
+
+value of electric field from the standard antenna method as the true value of                            expanding the servo bandwidth to several MHz33,34; (3) the amplifier noise of
+
+the electric field for both the signal and local MW. Because they are emitted                            the photon detector can be reduced through optical heterodyne or homodyne
+
+                                                                                                         detection; (4) the spectrum analyser noise can be removed by using conventional
+
+Nature Physics | www.nature.com/naturephysics
+Letters                                                                               Nature Physics
+
+electronic amplifiers. After eliminating relevant technical noise, the Rydberg-atom   (grant no. 2017YFA0304203), the National Natural Science Foundation of China (grants
+superhet approaches QPNL sensitivity.                                                 61827824, 61527824, 11874038 and 61722507), 1331 Key Subjects Construction and 111
+                                                                                      project (grant no. D18001). L.X. acknowledges support from the Program for Changjiang
+Data availability                                                                     Scholars and Innovative Research Team (grant no. IRT13076). Y.H. and L.Z. also
+                                                                                      acknowledge support from the 100-Talent Program of Shanxi Province.
+The data represented in Figs. 2, 3 and 4 and Extended Data Figs. 2 and 3 are
+available as Source Data. All other data that support the plots within this paper     Author contributions
+and other findings of this study are available from the corresponding author upon
+reasonable request.                                                                   L.X., S.J., L.Z. and M.J. proposed the project. M.J. and Y.H. developed the research.
+                                                                                      M.J. and L.Z. performed the experiments and analysed the experimental data. Y.H.
+References                                                                            and M.J. developed the theory and carried out theoretical calculations. M.J., L.Z. and
+                                                                                      H.Z. contributed to the experimental set-up. Y.H., M.J., L.X., J.M. and L.Z. wrote the
+31. Kessler, T. et al. A sub-40-mHz-linewidth laser based on a silicon                manuscript and provided revisions. All authors contributed to discussions of the results
+    single-crystal optical cavity. Nat. Photon. 6, 687­692 (2012).                    and the manuscript.
+
+32. Matei, D. G. et al. 1.5m lasers with sub-10mHz linewidth. Phys. Rev. Lett.        Competing interests
+    118, 263202 (2017).
+                                                                                      The authors declare no competing interests.
+33. Musha, M., Nakagawa, K. & Ueda, K. Wideband and high frequency
+    stabilization of an injection-locked Nd:YAG laser to a high-finesse Fabry­        Additional information
+    Perot cavity. Opt. Lett. 22, 1177­1179 (1997).
+                                                                                      Extended data is available for this paper at https://doi.org/10.1038/s41567-020-0918-5.
+34. Endo, M. & Schibli, T. R. Residual phase noise suppression for Pound­             Supplementary information is available for this paper at https://doi.org/10.1038/
+    Drever­Hall cavity stabilization with an electro-optic modulator. OSA             s41567-020-0918-5.
+    Continuum 1, 116­123 (2018).                                                      Correspondence and requests for materials should be addressed to L.Z. or L.X.
+                                                                                      Reprints and permissions information is available at www.nature.com/reprints.
+Acknowledgements
+
+We acknowledge discussions with X. Liu, H. Pichler, A. Smerzi, H. Sheng, Y. Xiao and
+B. Vermersch. This research is funded by the National Key R&D Program of China
+
+                                                                                      Nature Physics | www.nature.com/naturephysics
+Nature Physics                                 Letters
+
+Extended Data Fig. 1 | Overview of the experimental setup. We have used the following notations: (1) DL PRO: external-cavity diode lasers, (2) CR: diode
+laser current, (3) PZT: piezo ceramic, (4) AOM: The double-pass acousto-optic modulators which shift the frequencies of the probe and coupling lights
+to atomic resonances, (5) INS: intensity noise server, (6) FNS: frequency noise server, (7) ULE: ultra-low expansion (ULE) glass cavity, (8) TA & SHG:
+tapered amplifier and second-harmonic generation, (9) HWP: half-wave plate, (10) PBS: polarizing beam splitter, (11) HR: dielectric mirror, (12) GPSDO:
+GPS disciplined oscillator with Rubidium timebase, (13) RPD: 2-way microwave resistive power divider, (14) FFT: fast Fourier transform, (15) DAO: digital
+acquisition oscilloscope, (16) SA: spectrum analyzer, (17) Lock-in: lock-in amplifier.
+
+Nature Physics | www.nature.com/naturephysics
+Letters  Nature Physics
+
+Extended Data Fig. 2 | Measurements of the same signal for various laser powers. In measuring the same signal, seven different choices of (Pp, Pc)
+
+for the powers of probe and control lasers are considered, indexed by i = 1, ..., 7 in the horizontal axis of a and b. They are respectively (120 W, 34 mW),
+(108 W, 30 mW), (120 W, 30 mW), (132 W, 34 mW), (120pWffiffiffi , 27 mW), (84 W, 30 mW), (180 W, 39 mW). Panel a presents measurements of
+P(s) and 0 by atomic superhet, and panel b shows Es ¼ ½_=ð 2 ÞjPðsÞj=j0j. In panel a, the dark blue circle denotes single-shot measurement of P(s).
+The light blue square depicts average P(s) from 10 sinIgle-shot measurements with error bar indicating the 1 standard error. All data of P(s) has been
+normalized by the median of P(s). The gray circle denotes single-shot measurement of 0. Average 0 from 3 measurements is shown (black square) with
+error bar denoting 1 standard error. Data of 0 has been normalized by its median. In panel b, the red circle represents single-shot measurement of Es by
+atomic superhet, and the blue square depicts average Es from 10 measurements with error bar indicating the 1 standard error. The same signal electric field is
+also measured using standard antenna method (dashed black line), and the light blue patch denotes measurement uncertainty in this method.
+
+         Nature Physics | www.nature.com/naturephysics
+Nature Physics                                 Letters
+
+Extended Data Fig. 3 | Sensitivity spectrum of the Rydberg-atom superhet. Measured sensitivity S as a function of relative signal frequency s is shown
+for various optical readout noises (red curve), the amplifier noise of photon detector (gray curve) and the spectrum analyzer noise (black curve). These
+
+optical readout noises include 1/f noise, transit noise of atoms, and laser frequency noise. The blue line represents the QPNL sensitivity of our setup
+
+(Methods). The dashed gray line indicates s = 150 kHz chosen in experiments in the main text. The sensitivity of our setup is limited by laser frequency
+noise to 55 nV cm-1 Hz-1/2.
+
+Nature Physics | www.nature.com/naturephysics
+

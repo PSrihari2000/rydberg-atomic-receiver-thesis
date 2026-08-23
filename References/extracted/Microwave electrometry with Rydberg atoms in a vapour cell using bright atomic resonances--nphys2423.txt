@@ -1,0 +1,493 @@
+                                                                                                 ARTICLES
+
+                                                                          PUBLISHED ONLINE: 16 SEPTEMBER 2012 | DOI: 10.1038/NPHYS2423
+
+Microwave electrometry with Rydberg atoms in a
+vapour cell using bright atomic resonances
+
+Jonathon A. Sedlacek1, Arne Schwettmann1, Harald Kübler1,2, Robert Löw2, Tilman Pfau2
+
+and James P. Shaffer1*
+
+Atom-based standards for length and time as well as other physical quantities such as magnetic fields show clear advantages
+by enabling stable and uniform measurements. Here we demonstrate a new method for measuring microwave (MW) electric
+fields based on quantum interference in a rubidium atom. Using a bright resonance prepared within an electromagnetically
+induced transparency window we could achieve a sensitivity of 30 µV cm-1 Hz-1/2 and demonstrate detection of MW electric
+fields as small as 8 µV cm-1 with a modest set-up. The sensitivity is limited, at present, by the stability of our lasers and can be
+significantly improved in the future. Our method can serve as a new atom-based traceable standard for MW electrometry, with
+its reproducibility, accuracy and stability promising advances towards levels comparable with those attained in magnetometry
+at present.
+
+The reproducibility, accuracy and stability of quantum objects,           out-of-band interference. The optical detection system is subject to
+       such as atoms, has made many of the standards and                  ageing and manufacturing variations.
+       measurement techniques established early in the past century
+relics. Most progress in adopting atoms for standards has been               The accurate measurement of electric fields is important for a
+made in measuring atomic transition frequencies that are now used         host of applications, especially at MW frequencies. Perhaps most
+for length and time standards. Atomic clocks have now realized            importantly, the ability to sensitively measure MW electric fields
+an accuracy of better than one part in 1014 (ref. 1). Concurrently,       can allow for the amplitude stabilization of a MW electric field
+tremendous progress has also been made in measuring magnetic              source and the determination of optical properties of materials at
+fields, where it is now possible to achieve an accuracy of fT Hz-1/2      these frequencies to high precision. Previous work in this direction
+(refs 2­5). Motivated by applications of these advances, such as          has been termed the development of an atomic candle16,17. The
+g -factor measurements6 and the global positioning system, it is          Ku-band MWs that we use in our experiments, and K-band MWs
+straightforward to conclude that quantum-system-based sensing             generally, are particularly useful for experimental high-resolution
+is relevant to pursue.                                                    weather radar and satellite communications. A portable traceable
+                                                                          standard is important for field calibrating systems such as these18.
+   In contrast to the successes already mentioned, comparatively
+little progress has been made in applying atoms to measure electric          We demonstrate a method for making a traceable MW electric
+fields, particularly using methods that are practical to take into        field sensor based on 87Rb Rydberg atoms excited in a glass vapour
+the field outside a laboratory, despite the clear advantages and the      cell. The working principle of the sensor is based on detecting how
+ubiquity of electric fields. The basic concepts used to measure a         MW electric fields affect the optical transitions of 87Rb Rydberg
+MW electric field and the traceable standards for calibrating those       atoms. Using electromagnetically induced transparency (EIT), the
+devices have changed little from the ones Hertz pioneered in the          MW electric field is detected as a bright resonance within the EIT
+1880s (ref. 7). The present traceable standards for MW electric field     signal. The minimum detected MW electric field and sensitivity
+measurement are referred to as the standard antenna and standard          are already superior to present traceable methods. Optical readout
+field methods8,9. For fields up to 40 GHz, these techniques use a         allows for spatial resolution in the micrometre regime and facilitates
+resistively loaded dipole antenna and a MW diode detector. Electric       near-field measurements. The basic concept can be scaled up to
+fields at a level of 1 mV cm-1 can be determined and used for             larger one- or two-dimensional arrays that include fibre optical
+calibration10­13. Modern variations on sensing MW electric fields         delivery of the light for readout. The set-up and detection scheme
+for traceable standards are based on optical measurements of the          is conducive for miniaturization and portability, particularly using
+electro-magnetic fields converted by an antenna. These set-ups can        microcells19. As such, it can become a practical traceable MW
+sense MW electric field strengths down to 30 µV cm-1 (refs 14,15)         electric field sensor. The technique presented here can also yield
+with a sensitivity of 1 mV cm-1 Hz-1/2 (ref. 10). In all of these         information about the polarization of the field but the details of this
+types of measurement, the voltage induced in the probe has to             aspect of the method lie outside the scope of this work.
+be used to back calculate the electric field. For MW electric field
+sensing, then, a major limitation is the antenna, as it is the converter  Approach
+of the MW electric field to some observable, for example voltage,
+and depends on geometry, can lead to perturbations of the MW              EIT is a quantum interference process in which two excitation
+electric field, particularly in the near field, and can suffer from       pathways of a three-level system interfere to produce transmission
+                                                                          on an atomic resonance20,21. The quantum interference produces
+                                                                          a dark state that does not absorb light under normal resonance
+
+1Homer L. Dodge Department of Physics and Astronomy, The University of Oklahoma, 440 West Brooks Street, Norman, Oklahoma 73019, USA,
+25. Physikalisches Institut, Universität Stuttgart, Pfaffenwaldring, 57 D-70550 Stuttgart, Germany. *e-mail: shaffer@nhn.ou.edu.
+
+NATURE PHYSICS | VOL 8 | NOVEMBER 2012 | www.nature.com/naturephysics                                                                  819
+
+© 2012 Macmillan Publishers Limited. All rights reserved.
+ARTICLES                                                                              b  NATURE PHYSICS DOI: 10.1038/NPHYS2423
+
+                        a 53D5/2                      MW electric field                       Rb vapour cell
+                                                           ~14 GHz                                                  Frequency
+                                Coupling laser                                                                         horn
+                                       ~480 nm   54P3/2
+
+                                5P3/2            Probe transmission (a.u.)
+
+                                    Probe laser
+                                       ~780 nm
+
+     5S1/2                                       ¬1.0 ¬0.5 0.0 0.5 1.0
+                                                   Probe detuning (MHz)
+
+Figure 1 | Level diagram and experimental set-up. a, The energy level diagram for the four-level system used for the experiments. The top part of the inset
+
+shows an example EIT feature associated the three-level system without a MW electric field. The bottom part of the inset shows an example of the bright
+resonance that is produced within the EIT window when a MW electric field is present. b, The experimental set-up used for the experiments.
+
+conditions. As EIT depends on quantum interference, it is                   and atomic beam methods used in the millimetre-wave regime.
+                                                                            These sensors require ultrahigh vacuum and even coupling of the
+exquisitely sensitive to phase disturbances, transitions out of the         radiation into a high-Q millimetre-wave cavity in the apparatus31,32.
+
+participating states and energy level shifts of the three-level system.        As each atom is identical in structure, our approach uses
+                                                                            each non-interacting, independent atom that participates as an
+The addition of a MW electric field that is resonant with a nearby          identical, stable atomic sensor of the MW electric field. The
+                                                                            device is traceable because its sensitivity is directly linked to the
+Rydberg transition, a fourth level, for the scheme shown in Fig. 1a,        properties of the atom, namely the atomic Rydberg wavefunctions
+                                                                            or dipole moments that are well known and can be determined
+breaks the symmetry of the EIT interference and can produce                 even more precisely with modern spectroscopy, for example using
+                                                                            frequency combs and ultracold atoms to better determine the
+a spectrally sharp bright resonance within the EIT line shape.              Rydberg atom quantum defects or using Stark shift measurements.
+                                                                            The properties of Rydberg atoms are readily calculated to high
+In a similar configuration, MW electric fields have been used               precision. Dipole moments can be determined to a level of 10-4 ea0
+                                                                            at present33, suggesting that the Rydberg atomic dipole moments
+to dress Rydberg atom transitions to enhance their sensitivity to           can be determined to one part in 108 using the present methods.
+d.c. electric fields and manipulate Rydberg atom interactions22,23.
+                                                                            Discussion
+The ability to detect a line-shape change of the EIT transmission
+                                                                            Measured probe laser transmission curves as a function of probe
+window is fundamentally limited by the laser linewidths, transit-           laser detuning for the four-level system found in Fig. 1a are shown
+                                                                            in Fig. 2. Traces for several different MW electric field amplitudes
+time broadening, shot noise and the decay and dephasing rates               are shown. At small MW electric field amplitudes (Fig. 2a) the
+                                                                            MW electric fields cause a broadening and reduction of the peak
+of the Rydberg states involved in the EIT process. The strength             EIT transmission signal. The linewidth of the EIT transmission
+                                                                            window is 4­5 MHz, whereas the relative drift of the coupling
+of the effect depends on the coupling to the MW electric field,             and probe lasers is 2 MHz h-1 determined from measurements
+                                                                            in the absence of a MW electric field. At intermediate MW
+which is determined by the Rabi frequency of the transition,                electric field amplitudes, an absorption dip corresponding to the
+MW = µMWE/h¯, where E is the amplitude of the MW electric field             bright resonance appears within the EIT transmission window. The
+and µMW is the transition dipole moment. Although technically               frequency for the transition is calculated to be 14.2318 GHz using
+challenging, it is possible, in principle, to make MW electric field        the quantum defects from refs 34,35, in agreement to 0.008% with
+measurements of 100 nV cm-1.                                                the experimentally observed frequency of 14.2330±0.0001 GHz. At
+                                                                            large MW electric field amplitudes (Fig. 2b) the EIT transmission
+   Rydberg atoms are atoms in highly excited states with large              peak is split by the MW electric field. In this case, the peak
+principal quantum numbers n, and long lifetimes24. The associated           splitting can be interpreted as Autler­Townes splitting of the 53D5/2
+                                                                            state and is relatively large because the calculated radial transition
+large polarizability of Rydberg atoms has been used by several              dipole moment is µMW = 3611 ea0. For comparison, µMW is more
+groups to measure d.c. electric fields at the level of 100 µV cm-1          than three orders of magnitude larger than the transition dipole
+using field ionization and atomic beams25,26 and EIT with ultracold         moments on the coupling and probe transitions.
+atomic gases27. A minimum d.c. electric field measurement of
+±20 µV cm-1 has been achieved28,29. Fluorescence imaging has                   Without Doppler averaging, the splitting of the peaks in Fig. 2b
+yielded d.c. electric field measurements around 10 V cm-1 (ref. 30).        is equal to the Autler­Townes splitting of the states, MW/2.
+                                                                            Doppler averaging changes the splitting of the peaks by the ratio
+In contrast, our MW electric field measurements rely on resonant            of the coupling laser to probe laser wavelength when the probe
+                                                                            laser is scanned and the coupling laser is locked on the unshifted
+transitions and the associated large transition dipole moment be-           resonance. The effect results from the fact that the 53D5/2 state is
+tween neighbouring Rydberg states that scales as n2, µMW  4000 ea0          split by MW, which detunes the coupling laser from resonance.
+(where e is the electron charge and a0 the Bohr radius) for n  65           The probe laser resonance condition is then shifted by the ratio of
+in 87Rb. The sensitivity to MW electric fields can be resonantly
+
+enhanced for frequencies in the range of 1­500 GHz, as there are
+
+many resonant electric dipole transitions between Rydberg states in
+
+this frequency band that can be Stark shifted to different frequencies
+
+with d.c. electric fields. As a consequence of the large transition
+
+dipole moment, the MW electric field coupling of two close-lying
+
+Rydberg states, MW, can be large when the MW electric field is
+weak. As an example, consider the 87Rb 55D  54F transition
+at a frequency of 13.9 GHz. A beam intensity of 5 fW cm-2
+corresponding to a MW electric field amplitude of 64 µV cm-1
+
+yields MW  1 MHz. A small MW electric field amplitude results in
+a signal that is straightforward to observe with present frequency-
+
+stabilized diode lasers and room-temperature vapour cells. Our
+
+all-optical, vapour cell method can achieve similar sensitivities and
+
+is technically much easier to realize than Rydberg atom masers
+
+820                                                                                      NATURE PHYSICS | VOL 8 | NOVEMBER 2012 | www.nature.com/naturephysics
+
+                                                 © 2012 Macmillan Publishers Limited. All rights reserved.
+NATURE PHYSICS DOI: 10.1038/NPHYS2423                                                                              ARTICLES
+
+      a                                                                                 a5
+                                                             MW = 0 MHz
+                                                                                        Percentage of increase in transmission  4
+Probe transmission (a.u.)
+                                                                                                                                3
+
+                                             MW = 2 × 4.20 MHz                                                                  2
+
+                                             MW = 2 × 6.65 MHz                                                                  1
+
+¬30                        ¬20      ¬10  0  10                           20  30                 0                                      200 400 600 800 1,000 1,200 1,400
+                                                                                                   0                                                     Electric field (V cm¬1)
+                                    Probe detuning (MHz)
+                                                                                        b
+b
+
+                                                                     MW = 2 × 19.0 MHz
+                                                                     MW = 2 × 39.1 MHz
+                                                                     MW = 2 × 62.7 MHz
+
+Probe transmission (a.u.)                                                               Probe transmission (a.u.)
+
+                           ¬30 ¬20  ¬10  0  10            20                 30                                                                                    MW = 0 MHz
+
+                                    Probe detuning (MHz)                                                                                                           MW = 2 × 1 MHz
+                                                                                                                                0
+
+                                                                                                                                   ­6  ­4  ­2  0                 2                 4  6
+
+Figure 2 | Three-level EIT and splitting from the MW electric fields. a, The                                                                   Velocity (m s¬1)
+
+experimental bright resonance dip and attenuation of the EIT transmission               Figure 3 | Enhanced transmission of the four-level EIT signal due to the
+signal for low MW electric field amplitudes (black) with theory curves
+(red). The differences in the theory and experiment in the lower curves are             MW electric field. a, Probe transmission on resonance due to the MW
+attributed to the fact that we are using a four-level theory in these plots             electric field. The experimental results show agreement with a four-level
+rather than the full 52-level theory and to uncertainties in the transit-time           density matrix calculation. The red line is the theory and the black line is
+broadening. b, Autler­Townes splitting of the 53D5/2  54P3/2 Rydberg                    the experimental data. The parameters for the measurements are provided
+transition that occurs for larger MW electric field strengths. The                      in Methods. The transmission at the line centre will continue to decrease as
+experimental parameters can be found in Methods. The peak splitting                     the electric field increases to the Autler­Townes regime. The MW electric
+corresponds to c/pMW/2. The uncertainties in MW are described in                        field is tuned 1 MHz off resonance. b, The enhancement of the EIT
+the text.                                                                               transmission when the MW electric field is applied for small MW electric
+                                                                                        field amplitudes. The MW electric field broadens the two-photon EIT
+the wavelengths. In our case, with p 780 nm and c 480 nm,                               transition in velocity space in a thermal vapour. This leads to enhanced
+the Doppler averaged peaks are separated by c/p × MW/2 =                                transmission of the probe laser.
+0.615 × MW/2. In a vapour cell, the ratio of these wavelengths
+needs to be known accurately to make precise measurements of the                        believe the difference between the calculated and measured MW
+MW electric field. The D2 transition wavelength is known to one                         electric fields is mainly due to the uncertainty associated with
+part in 1011 (ref. 36) and wavelengths can be determined to one                         the characterization of the horn antenna and the MW generator.
+part in 108 with commercial laboratory wave meters, so this effect                      The disagreement is constant to within 0.55% over the range of
+is not limiting at this point. The effect can, in principle, be used                    MW electric fields studied. In addition, at low MW electric fields,
+to amplify the observed Autler­Townes splitting if, for example, a                      there is an uncertainty in setting the output power of the MW
+set of transitions with a probe wavelength longer than the coupling                     generator of 4.4% (ref. 37).
+wavelength is used or the coupling laser is scanned.
+                                                                                           Density matrix calculations for the four-level system, described
+   Using the Autler­Townes splitting and the calculated transition                      in Methods, are also shown in Fig. 2. The agreement between
+dipole moment, the MW electric field inside the cell is known with                      the four-level theoretical calculations and the data shows that
+an uncertainty of 0.5%, determined, in our case, by the precision                       the system is modelled well. Our full 52-level density matrix
+with which the splitting can be measured at present. The MW                             calculations that include all of the hyperfine states, |F mF , of
+electric field strengths obtained in this way are in agreement within                   each of the participating levels show that the populations of states
+10% of those calculated using the parameters of the resonant horn                       53D5/2 and 54P3/2 get optically pumped into the stretched |4 ,4
+antenna, including its position relative to the Rb vapour cell. We                      and |3 ,3 states, respectively, consistent with other works38. Our
+
+NATURE PHYSICS | VOL 8 | NOVEMBER 2012 | www.nature.com/naturephysics                                                                                                                    821
+
+                                                          © 2012 Macmillan Publishers Limited. All rights reserved.
+ARTICLES                                                                                                                                       NATURE PHYSICS DOI: 10.1038/NPHYS2423
+
+                         a                                             b                                                               1.2
+
+                                83.3 V cm¬1                                                                                            1.0
+     Probe transmission (a.u.)
+                                                                                               Percentage of increase in transmission74.2 V cm¬10.8
+
+                                66.2 V cm¬1                                                                                            0.6
+
+                                59.0 V cm¬1
+
+                                46.8 V cm¬1                                                                                            0.4
+
+                                37.2 V cm¬1
+                                29.5 V cm¬1
+
+                            x3  18.6 V cm¬1                                                                                            0.2
+
+     x5                         8.33 V cm¬1
+
+                            ­10 ­8 ­6 ­4 ­2 0 2 4 6 8 10                                                                               0.0     10 20 30 40 50 60 70 80 90
+                                                   RF (MHz)                                                                                 0    Electric field amplitude (V cm¬1)
+
+Figure 4 | Four-level EIT transmission signal as a function of MW electric field amplitude. a, Transmission line shapes for different values of MW electric
+
+field amplitude as a function of MW electric field detuning (RF). The black curves are experimental data, and the red curves are Gaussian fits to the data.
+The graph shows the change in probe transmission as a function of MW electric field frequency. All of the data shown were taken under the same
+conditions as in Fig. 3, except the MW electric field was tuned to resonance. Each trace is the average of 9,000 scans. b, The on-resonance peak height
+taken from the traces in a as a function of MW electric field amplitude. The dashed red line is a theoretical four-level density matrix calculation. The
+vertical error bars in the figure represent the standard deviation of the fits to the peak heights. The horizontal axis is derived from the MW power applied to
+the horn antenna and the associated experimental geometry. The horizontal error bars are the uncertainty of calculating the MW electric field due to
+uncertainty in the output field of the MW generator, 5% accounting for both the calibration error to the Autler­Townes splitting at larger MW electric fields
+and the output setting error described in the text. The dashed blue (red) lines represent theoretical variation due to a change of ±10% in the coupling
+(probe) power.
+
+four-level model uses these states for calculating the angular part    The position of the peak transmission in Fig. 3a can be shifted by
+of the transition dipole moment. The deviation of the theory           changing either the probe or coupling Rabi frequency.
+from the experiment is a result of using a four-level theory to
+describe a multilevel system with different branching ratios to the       Figure 4 shows the central result of this paper. In Fig. 4a, a series
+transitions and the uncertainty in the beam shape, which influences    of traces of the change in probe laser transmission as a function
+the transit-time broadening. The attenuation and splitting of the      of MW frequency relative to the three-level EIT signal is presented
+EIT transmission peak shown in Fig. 2 is the signal we propose to      for various MW electric field amplitudes calculated from the MW
+use to precisely measure MW electric fields.                           generator and geometry. The probe and coupling lasers are locked
+                                                                       on the EIT transmission resonance. The increased transmission is
+   Figure 3a shows the peak height of the EIT transmission window      due to the resonant MW electric field and not an off-resonant a.c.
+as a function of MW electric field strength. In this experiment        Stark shift. A change in the EIT transmission is observed only when
+the lasers are locked to the EIT peak and the MW electric field        the MW electric field is near resonance. The EIT transmission does
+strength is swept in time while the transmission of the probe beam     not change when the MW electric field is tuned off resonance.
+is monitored. The red line shows the four-level density matrix         Off-resonant or multi-photon absorption can be an issue at larger
+calculation for this range of MW electric field strengths. For these   MW electric field strengths if they make a significant contribution
+MW electric fields, the probe transmission increases from the          to the probe absorption, but depend on the Rydberg states being
+three-level EIT value. A maximum increase of 4.5% is shown             used. When the MW power is held constant and the MW electric
+in Fig. 3a. For our experimental parameters and MW electric field      field frequency is scanned over the 53D5/2  54P3/2 resonance, the
+amplitudes less than 1,400 µV cm-1, the probe transmission is          maximum signal occurs at the experimental transition frequency,
+increased in the presence of the MW electric fields with a maximum     14.2330 ± 0.0001 GHz. The smallest detected MW electric field
+at 715 µV cm-1. The increase in probe transmission is also a           shown in Fig. 4 is 8.33 ± 0.37 µV cm-1, limited by the frequency
+result of the Doppler effect. When the MW electric field is small,     and intensity stability of the probe and coupling lasers. Figure 4b
+the coupling to 54P3/2 is small and there is little population in      shows the probe transmission peak heights as a function of MW
+this state. However, because the MW electric field wavelength is       electric field amplitude compiled for the data shown in Fig. 4a.
+comparatively long and therefore less sensitive to Doppler shifts,     The solid red curve shows our four-level density matrix calculation
+the dominant effect of the MW electric field is to shift, on average,  to be in excellent agreement with the data. For MW electric
+the atoms participating in the EIT to smaller two-photon detunings.    field amplitudes <100 µV cm-1, the maximum probe transmission
+This increases the EIT transmission signal on resonance. Figure 3b     signal decays smoothly, as seen in Fig. 4b. The purpose of Fig. 4b
+shows a plot of the calculated probe transmission as a function of     is to demonstrate that the data agree with the theory to within
+velocity for MW = 0 MHz and MW = 2 × 1 MHz to illustrate this          the statistical error of our knowledge of the test MW electric field
+effect. Although the probe transmission is suppressed for atoms        and experimental error.
+near zero velocity, the suppression is more than made up for
+by the increased participation of atoms in the wings of the line.         To obtain an estimate of the sensitivity of our present apparatus,
+                                                                       we measured the probe transmission on the EIT resonance and
+
+822                                                                    NATURE PHYSICS | VOL 8 | NOVEMBER 2012 | www.nature.com/naturephysics
+
+                                © 2012 Macmillan Publishers Limited. All rights reserved.
+NATURE PHYSICS DOI: 10.1038/NPHYS2423                                                                                 ARTICLES
+
+Table 1 | Principal error sources of the present measurements.
+
+Effect                     Description              Autler­Townes                  Error type Peak amplitude                               Error type
+                                                    splitting                                                                              Systematic
+Constant magnetic          Pollution of transition                                 Systematic 1%                                           Systematic
+field (0.5 G)              dipole (µBB/ Efs)        1%                                                                                     Systematic
+Constant electric field    Pollution of transition                                 Systematic 0.001%                                       ­
+(1 mV cm-1)                dipole (E2/ Efs)         0.001%                                                                                 Systematic
+Vapour pressure/density    Absorption changes                                      ­                           0.01%                       Statistical
+changes ( T  0.01 C)       (ref. 37)                NA (changes                                                                            Statistical
+                                                    absorption but does            Systematic                  NA (the MW
+Microwave source           Uncertainty in MW        not change splitting)          ­                           frequency was tuned
+frequency                  source frequency         0.55%                                                      to the EIT peak)
+                           (ref. 34)                                                                           4.4%
+Microwave source           Uncertainty in           NA (this was calibrated
+amplitude                  amplitude at low         to the Autler­Townes           ­                           0.4%
+                           MW fields (ref. 34)      splitting)
+Two-photon detuning        Relative detuning noise  NA (broadens spectral lines    Statistical                 1­7% for peaks in
+noise (200 kHz)            between coupling and     but does not change splitting                              Fig. 4, growing from
+                           probe lasers             at this level of noise)                                    largest to smallest signal
+Technical noise from       Statistical noise in     0.5%
+laser intensity noise and  fitting the peak
+detection                  separation or height
+
+This table lists the main sources of systematic error and statistical noise present in the Autler­Townes and peak amplitude measurements. The principal source of statistical noise in both experiments
+is technical noise associated with the laser frequency and amplitude stability. The principle source of systematic error is the change in dipole moment associated with the Earth's magnetic field and
+uncertainties associated with the frequency generator. Statistical fluctuations of the background electric and magnetic fields are negligible. The systematic error due to the Earth's magnetic field can be
+addressed by zeroing it with an external field or by shielding the cell so that the MW field can still be coupled into it. µB is the Bohr magneton, T is the change in temperature over a measurement,  is
+the polarizability of the Rydberg state and Efs is the fine-structure splitting of the Rydberg state. NA, not applicable.
+
+compared the signal in the cases where the MW electric field was         speculate that if the technique is pushed to the quantum limit it
+on and then off. The coupling laser was modulated at 22 kHz              may be possible to improve it by squeezing. These improvements
+while the MW electric field was modulated at 700 Hz. The signal          may push the limits of this technique to <100 nV cm-1, at least for
+was processed in two different lock-in amplifiers with an overall        some MW electric field frequencies. Now that a practical atomic
+detection system integration time of 1 s. For a signal-to-noise ratio    approach has been applied to MW electrometry, the outlook is
+of 1, we were able to measure a MW electric field amplitude of           promising for adopting such a method for future traceable MW
+20 ± 1 µV cm-1. The measurement corresponds to a sensitivity of          electric field standards.
+30 ± 2 µV cm-1 Hz-1/2.
+                                                                         Methods
+   Several sources of systematic error and statistical noise associated
+with our present experiments are shown in Table 1. The primary           The four-level energy level diagram for the atomic system is shown in Fig. 1a. The
+source of systematic error is due to the background magnetic field       probe and coupling laser beams counter-propagate through a room-temperature
+of the Earth. Future experiments will have to address this error         10-cm-long Rb vapour cell. The vapour pressure is 10-6 torr, yielding a total
+by either zeroing the magnetic field or shielding the atoms. The         ground-state atom density, g  3.5×1010 cm-3, that is constant to within ±0.05%.
+dominant source of statistical error at both small and large MW          The estimated temperature drifts during the measurements are <0.01 C. The
+electric fields is the technical noise arising from the frequency        vapour cell is not magnetically shielded. The Earth's magnetic field, 0.5 G, shifts
+and intensity instability of the coupling and probe lasers. These        the transition between the Rydberg states 1 MHz. The MW field was tuned to
+fluctuations determine both the sensitivity and the maximum              the Rydberg resonance, so the main affect of the magnetic field was to change the
+effective integration time. The detection is not shot-noise limited      dipole moment as the states are hybridized by the field. We observed no d.c. Stark
+at present and can be significantly improved in the future, first, by    shifts in our experiments and estimate the electric field to be 1 mV cm-1 given
+reducing the laser technical noise.                                      the vapour cell geometry and our previous work19. This field gives 1 kHz of shift
+                                                                         at our quantum numbers. The hybridization of the states due to the electric field is
+Conclusion                                                               smaller than that from the magnetic field (Table 1). Stray d.c. electric fields can be
+                                                                         minimized by heating the vapour cell. Background black-body radiation is expected
+We have demonstrated a new method for traceable MW electrom-             to yield a.c. Stark shifts of 2 kHz (ref. 24). To estimate non-resonant two-photon
+etry based on Rydberg atom EIT. The smallest detectable MW               excitation by the MW electric field, we assumed a coincidental detuning of 10-1n-3
+electric field amplitude and sensitivity demonstrated are below the      (in atomic units) for each step of the two-photon transition. Using this estimate,
+present antenna-based standards used for traceable MW electric           it would take an electric field of E = 500 mV cm-1 to yield a 1% excitation rate out
+field measurements by more than an order of magnitude. In                of the Rydberg state with the effective two-photon Rabi frequency scaling as E2.
+addition, our method minimally perturbs the MW electric field,           The Rydberg atom density is kept low, R  107 cm-3, so collisions do not play
+is a direct measure of the MW electric field linked to the Rydberg       a significant role. Rydberg atom interactions39 yield <100 Hz interaction for R
+atom transition dipole moments, and is resonantly enhanced to give       and collisions involving Rydberg atoms and ground state atoms give 2 Hz shifts
+some immunity to out-of-band interference. The present apparatus         in our case24. The average Rabi frequency on the probe (coupling) transition is
+can be improved in many ways, including the use of lasers with           p = 2 × 6.00 ± 0.05 MHz (c = 2 × 2.00 ± 0.04 MHz). The probe (coupling)
+a narrower spectral bandwidth and better amplitude stability, the        beam size is 750 ± 4 µm (100 ± 4 µm). The Gaussian focusing of the coupling laser
+use of frequency-modulated spectroscopy, the implementation of           gives an effective interaction length of 7.5 cm. The probe laser, 780 nm, is locked
+lower noise photo-detectors, and the use of the dispersive nature        to the 5S1/2(F = 2)  5P3/2(F = 3) 87Rb transition. The coupling laser, 480 nm,
+of the sharp resonances used in our experiments. In addition, we         is locked to a Fabry­Perot cavity. The 53D5/2  54P3/2 Rydberg transition is driven
+                                                                         with the MW electric field at 14.2330 ± 0.0001 GHz. A resonant horn antenna is
+                                                                         used to illuminate the Rb vapour cell, perpendicular to the propagation direction
+                                                                         of the probe and coupling laser beams (Fig. 1b). The probe and coupling laser
+                                                                         beams are circularly polarized with the same polarization, except in Fig. 2 where
+
+NATURE PHYSICS | VOL 8 | NOVEMBER 2012 | www.nature.com/naturephysics                                                                      823
+
+                                                    © 2012 Macmillan Publishers Limited. All rights reserved.
+ARTICLES                                                                                           NATURE PHYSICS DOI: 10.1038/NPHYS2423
+
+they are both linearly polarized parallel to the MW electric field. The MW electric                18. Gordon, J. A., Holloway, C. L., Jefferts, S. & Heavner, T. 2010 Int. Symp. on
+fields are linearly polarized perpendicular to the propagation direction of the laser                  Electromagnetic Compatibility 321­324 (2010).
+beams. The change in probe laser transmission is detected using a photodiode, and
+processed using a lock-in amplifier. The coupling beam intensity is modulated                      19. Kübler, H., Shaffer, J. P., Baluksian, T., Löw, R. & Pfau, T. Coherent excitation
+for the lock-in detection. The effective laser linewidths were measured to be                          of Rydberg atoms in micrometre-sized atomic vapour cells. Nature Photon. 4,
+700±200 kHz. The relative jitter of the two lasers is 200 kHz. The data are obtained                   112­116 (2010).
+in three ways. First, the EIT signal at maximum transmission, is monitored as a
+function of MW electric field strength (Fig. 3). Second, the change in the EIT line                20. Fleischhauer, M., Imamoglu, A. & Marangos, J. P. Electromagnetically
+shape is recorded as a function of MW frequency for different MW electric field                        induced transparency: Optics in coherent media. Rev. Mod. Phys. 77,
+strengths (Fig. 4). The MW electric field frequency is scanned at 20 MHz in 200 ms                     633­673 (2005).
+to acquire these traces. For determining the sensitivity, the probe transmission
+is monitored on resonance while modulating the MW electric field at a lower                        21. Mohapatra, A. K., Jackson, T. R. & Adams, C. S. Coherent optical detection of
+frequency. The signal is detected with a second lock-in with a total signal integration                highly excited Rydberg states using electromagnetically induced transparency.
+time of 1 s. The modulation negligibly improves the signal but is used to measure                      Phys. Rev. Lett. 98, 113003 (2007).
+the sensitivity by comparing the MW on and off signals.
+                                                                                                   22. Bason, M. G. et al. Enhanced electric field sensitivity of rf-dressed Rydberg
+     We use a density matrix approach for the four-level ladder system20 (Fig. 1a):                    dark states. New J. Phys. 12, 065015 (2010).
+
+                                   =  -  i   [H  ,    ]  +  Ld                         (1)         23. Tanasittikosol, M. et al. Microwave dressing of Rydberg dark states. J. Phys. B
+                                         h¯                                                            44, 184020 (2011).
+
+where H is the Hamiltonian in the interaction picture. Ld is the dephasing and                     24. Gallagher, T. F. Rydberg Atoms 1st edn (Cambridge Univ. Press, 1994).
+                                                                                                   25. Herrmann, P. P., Hoffnagle, J., Schlumpf, N., Telegdi, V. L. & Weis, A.
+decay operator. For the calculations, Ld includes spontaneous emission on the
+                                                                                                       Stark spectroscopy of forbidden two-photon transitions: A sensitive probe
+5S1/2(F = 2)  5P3/2(F = 3) transition, s = 2 × 6.1 MHz, and transit-time                               for the quantitative measurement of small electric fields. J. Phys. B 19,
+                                                                                                       1271­1280 (1986).
+broadening, tt = 2 × 270 kHz, (ref. 40), because these terms dominate.                             26. Schramm, A. et al. Laser photoelectron attachment to molecules in a skimmed
+                         53D5/2                              54P3/2                                    supersonic beam: Diagnostics of weak electric fields and attachment cross
+Spontaneous  emission,     R       2 ×   1   kHz    and        R       2 ×  0.5  kHz,  black-body      sections down to 20 µeV. Phys. Rev. Lett. 81, 778­781 (1998).
+                                                                                                   27. Tauschinsky, A., Thijssen, R. M. T., Whitlock, S., van Linden van den Heuvell,
+decay, BB  2 × 1 kHz, and collisional dephasing rates, coll  2 × 1 kHz, of                             H. B. & Spreeuw, R. J. C. Spatially resolved excitation of Rydberg atoms and
+                                                                                                       surface effects on an atom chip. Phys. Rev. A 81, 063411 (2010).
+the Rydberg states are small in comparison. The steady-state solutions are velocity                28. Frey, M. T., Ling, X., Lindsay, B. G., Smith, K. A. & Dunning, F. B. Use of the
+                                                                                                       Stark effect to minimize residual electric fields in an experimental volume.
+averaged using a Maxwell­Boltzmann distribution at room temperature.                                   Rev. Sci. Instum. 64, 3649­3650 (1993).
+                                                                                                   29. Osterwalder, A. & Merkt, F. Using high Rydberg states as electric field sensors.
+Received 16 May 2012; accepted 15 August 2012; published online                                        Phys. Rev. Lett. 82, 1831­1834 (1999).
+16 September 2012                                                                                  30. Auzinsh, M., Jayasinghe, L., Oelke, L., Ferber, R. & Shafer-Ray, N. Strobe
+                                                                                                       imaging of electric fields by depolarization of Rydberg states of Hg. J. Phys. D
+References                                                                                             34, 1933­1938 (2001).
+                                                                                                   31. Figger, H., Leuchs, G., Straubinger, R. & Walther, H. A photon detector
+1. Hall, J. L. Nobel lecture: Defining and measuring optical frequencies. Rev. Mod.                    for submillimetre wavelengths using Rydberg atoms. Opt. Commun. 33,
+    Phys. 78, 1279­1295 (2006).                                                                        37­41 (1980).
+                                                                                                   32. Goy, P. et al. Rydberg atom masers. II. Triggering by external radiation and
+2. Savukov, I. M., Seltzer, S. J., Romalis, M. V. & Sauer, K. L. Tunable atomic                        applications to millimeter-wave detectors. Phys. Rev. A 27, 2065­2081 (1983).
+    magnetometer for detection of radio-frequency magnetic fields. Phys. Rev. Lett.                33. Arora, B., Safronova, M. S. & Clark, C. W. Determination of electric dipole
+    95, 063004 (2005).                                                                                 matrix elements in K and Rb from Stark shift measurements. Phys. Rev. A 76,
+                                                                                                       052516 (2007).
+3. Balabas, M. V., Karaulanov, T., Ledbetter, M. P. & Budker, D. Polarized                         34. Li, W., Mourachko, I., Noel, M. W. & Gallagher, T. F. Millimeter-wave
+    alkali-metal vapor with minute-long transverse spin-relaxation time.                               spectroscopy of cold Rb Rydberg atoms in a magneto-optical trap: Quantum
+    Phys. Rev. Lett. 105, 070801 (2010).                                                               defects of the ns, np, and nd series. Phys. Rev. A 67, 052502 (2003).
+                                                                                                   35. Mack, M. et al. Measurement of absolute transition frequencies of 87Rb to nS
+4. Wasilewski, W. et al. Quantum noise limited and entanglement-assisted                               and nD Rydberg states by means of electromagnetically induced transparency.
+    magnetometry. Phys. Rev. Lett. 104, 133601 (2010).                                                 Phys. Rev. A 83, 052515 (2011).
+                                                                                                   36. Steck, D. A. Rubidium 87 D line data. available online at
+5. Koschorreck, M., Napolitano, M., Dubost, B. & Mitchell, M. W.                                       http://steck.us//alkalidata (Revision 2.1.4,23 December 2010).
+    Sub-projection-noise sensitivity in broadband atomic magnetometry.                             37. HP 8340B, HP 8341B Synthesized Sweepers, Hewlett-Packard Company, 1400
+    Phys. Rev. Lett. 104, 093602 (2010).                                                               Fountaingrove Parkway, Santa Rosa, CA (1986).
+                                                                                                   38. Piotrowicz, M. J. et al. Measurement of the electric dipole moments for
+6. Hanneke, D., Fogwell, S. & Gabrielse, G. New measurement of the electron                            transitions to Rubidium Rydberg states via Autler­Townes splitting. New J.
+    magnetic moment and the fine structure constant. Phys. Rev. Lett. 100,                             Phys. 13, 093012 (2011).
+    120801 (2008).                                                                                 39. Schwettmann, A., Crawford, J., Overstreet, K. R. & Shaffer, J. P. Cold Cs
+                                                                                                       Rydberg-gas interactions. Phys. Rev. A 74, 020701 (2006).
+7. Tishchenko, V. A., Tokatly, V. I. & Luk'yanov, V. I. The beginning of the                       40. Thomas, J. E. & Quivers, W. W. Transit-time effects in optically pumped
+    metrology of radio frequency electromagnetic fields and the first standards of                     coupled three-level systems. Phys. Rev. A 22, 2115­2121 (1980).
+    electric field strength. Meas. Tech. 46, 76­84 (2003).
+                                                                                                   Acknowledgements
+8. Kanda, M. & Orr, R. D. Generation of standard electromagnetic fields in a TEM
+    cell. NBS Technical note 1319 (1988).                                                          This work was supported by the DARPA Quasar programme through a grant through
+                                                                                                   ARO (60181-PH-DRP) and the NSF (PHY-1104424).
+9. Kanda, M. Standard probes for electromagnetic field measurements. IEEE
+    Trans. Antennas Propag. 41, 1349­1364 (1993).                                                  Author contributions
+
+10. Kanda, M. Standard antennas for electromagnetic interference measurements                      J.P.S. and T.P. conceived the idea. J.P.S. led the project and wrote the paper. J.A.S., A.S.
+    and methods to calibrate them. IEEE Trans. Electromagn. Compat. 36,                            and H.K. carried out the experiments and reduced the data. A.S. and J.A.S. wrote the
+    261­273 (1994).                                                                                simulation programs. R.L. contributed useful ideas to the analysis of the experiment. All
+                                                                                                   authors contributed extensively to the work.
+11. Mal'ter, I. G., Pavlovskii, O. P., Korshunov, V. A. & Voronov, V. L. Russian
+    and foreign millimeter band radio measuring instruments. Meas. Tech. 52,                       Additional information
+    997­1005 (2009).
+                                                                                                   Reprints and permissions information is available online at www.nature.com/reprints.
+12. Tishchenko, V. A., Tokalty, V. I. & Luk'yanov, V. I. Upgrading radio                           Correspondence and requests for materials should be addressed to J.P.S.
+    frequency electromagnetic field standards part I. Meas. Tech. 46,
+    796­801 (2003).                                                                                Competing financial interests
+
+13. Tishchenko, V. A., Tokalty, V. I. & Luk'yanov, V. I. Upgrading radio                           The authors declare no competing financial interests.
+    frequency electromagnetic field standards part II. Meas. Tech. 46,
+    903­911 (2003).
+
+14. Electro-optical Sensor for Detecting Electric Fields;
+    http://www.kyosemi.co.jp/en/.
+
+15. Sriram, S., Kingsley, S. A. & Boyd, J. T. Electro-optical sensor for detecting
+    electric fields. US patent 5,267,336 (1992).
+
+16. Camparo, J. C. Atomic stabilization of electromagnetic field strength using
+    Rabi resonances. Phys. Rev. Lett. 80, 222­225 (1998).
+
+17. Swan-Wood, T., Coffer, J. G. & Camparo, J. C. Precision measurements of
+    absorption and refractive index using an atomic candle. IEEE Trans. Inst. Meas.
+    50, 1229­1233 (2001).
+
+824                                                                                                NATURE PHYSICS | VOL 8 | NOVEMBER 2012 | www.nature.com/naturephysics
+
+                                                                       © 2012 Macmillan Publishers Limited. All rights reserved.
+

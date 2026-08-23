@@ -1,0 +1,1749 @@
+                                                                                                                                          1
+
+                                               Rydberg Atomic Quantum Receivers for
+                                          Classical Wireless Communications and Sensing:
+
+                                                     Their Models and Performance
+
+                                               Tierui Gong, Member, IEEE, Jiaming Sun, Chau Yuen, Fellow, IEEE, Guangwei Hu, Yufei Zhao,
+                                                       Yong Liang Guan, Senior Member, IEEE, Chong Meng Samson See, Member, IEEE,
+                                                                  Me´rouane Debbah, Fellow, IEEE, Lajos Hanzo, Life Fellow, IEEE
+
+arXiv:2412.05554v3 [eess.SP] 15 Jan 2026     Abstract--The significant progress of quantum sensing tech-              State-of-the-art RF receivers rely on well-calibrated anten-
+                                          nologies offer numerous radical solutions for measuring a multi-         nas, filters, amplifiers, and mixers [2]. The sensitivity of IC-
+                                          tude of physical quantities at an unprecedented precision. Among         based receivers is typically limited by the extrinsic noise
+                                          them, Rydberg atomic quantum receivers (RAQRs) emerge as an              background, the bandwidth, the noise figure of ICs, and
+                                          eminent solution for detecting the electric field of radio frequency     the signal-to-noise ratio (SNR) required for demodulation.
+                                          (RF) signals, exhibiting great potential in assisting classical          Therefore, designing high-quality ICs becomes an effective
+                                          wireless communications and sensing. So far, most experimental           technique of increasing the sensitivity of RF receivers. Fur-
+                                          studies have aimed for the proof of physical concepts to reveal          thermore, strong reception capability may be achieved by
+                                          its promise, while the practical signal model of RAQR-aided              harnessing multiple antennas, where multiple copies of an RF
+                                          wireless communications and sensing remained under-explored.             signal can be obtained for suppressing noise contamination
+                                          Furthermore, the performance of RAQR-based wireless receivers            and/or wireless channel fading. The emergence of multiple-
+                                          and their advantages over classical RF receivers have not been           input multiple-output (MIMO) systems relies on sophisticated
+                                          fully characterized. To fill these gaps, we introduce the RAQR           multiple-antenna technology. Their concept has evolved from
+                                          to the wireless community by presenting an end-to-end reception          the massive MIMO philosophy [3] to the development of
+                                          scheme. We then develop a corresponding equivalent baseband              holographic MIMO [4], [5]. For broadband signal reception
+                                          signal model relying on a realistic reception flow. Our scheme and       and processing, the RF receivers may be implemented by
+                                          model provide explicit design guidance to RAQR-aided wireless            relying on multiple IC channels, where each channel is re-
+                                          systems. We next study the performance of RAQR-aided wireless            sponsible for a specific frequency band. Such a naive IC
+                                          systems based on our model, and compare them to classical RF             stacking scheme is bulky, power-thirsty, and heavily relies on
+                                          receivers. The results show that Doppler broadening-free RAQRs           advanced IC manufacturing technologies, suffering from many
+                                          are capable of achieving a substantial received signal-to-noise          design challenges, particularly when designing complex high-
+                                          ratio (SNR) gain of over 27 decibel (dB) and 40 dB in the photon         frequency receivers.
+                                          shot limit and standard quantum limit regimes, respectively.
+                                                                                                                      The "second quantum revolution" [6] rests on three main
+                                             Index Terms--Rydberg atomic quantum receiver (RAQR),                  pillars of quantum technologies, which are quantum comput-
+                                          wireless communication and sensing, equivalent baseband signal           ing, quantum communications, and quantum sensing. Specifi-
+                                          model, photon shot limit (PSL), standard quantum limit (SQL)             cally, quantum sensing includes but it is not limited to quantum
+                                                                                                                   precision measurements and quantum metrology, which rely
+                                                                    I. INTRODUCTION                                on the use of quantum phenomena to perform a measurement
+                                                                                                                   of a physical quantity [7]. The physical quantity is asso-
+                                             The growing thirst for high data rate, large-scale connectiv-         ciated with the intrinsic properties of microscopic particles
+                                          ity, and ultra-reliable low latency are the distinctive features         that are capable of facilitating an unprecedented level of
+                                          of the next-generation (NG) wireless systems, in which a                 sensitivity. Based on this, a multitude of quantum sensing
+                                          multitude of upper-layer applications and a wide variety of              applications have emerged for measuring a wide variety of
+                                          functionalities over a large spatial distribution are expected           physical quantities, such as electric fields, magnetic fields,
+                                          to be supported [1]. To support these visions, developing                frequency, temperature, pressure, rotation, acceleration, and so
+                                          advanced high-sensitivity receivers and exploiting a wide                forth [8]. Among the various quantum sensing technologies,
+                                          range of untapped spectral resources becomes paramount. Both             those relying on Rydberg atoms exhibit an exceptional sen-
+                                          require the radio-frequency (RF) receivers capable of detecting          sitivity in detecting electric fields [9]­[11], paving the way
+                                          RF signals with extremely low strength and broadband spec-               for realizing Rydberg atomic quantum receiver (RAQR) aided
+                                          trum. To realize these visions, the conventional technology              wireless communications and sensing [12]. Additionally, the
+                                          road-map relies on the advances of integrated circuits (ICs)             ambition of using quantum-domain solutions for enhancing the
+                                          and antenna technologies.                                                performance of classical wireless systems was documented for
+                                                                                                                   example in [13], [14].
+                                             T. Gong, J. Sun, C. Yuen, G. Hu, Y. Zhao, and Y. L. Guan are
+                                          with School of Electrical and Electronics Engineering, Nanyang Tech-        Apart from their extremely high sensitivity, RAQRs have
+                                          nological University, Singapore 639798 (e-mail: trgTerry1113@gmail.com,  numerous compelling advantages, such as broadband tun-
+                                          n2308800l@e.ntu.edu.sg, chau.yuen@ntu.edu.sg, guangwei.hu@ntu.edu.sg,    ability, compact form factor, and International System of
+                                          yufei.zhao@ntu.edu.sg, eylguan@ntu.edu.sg). C. M. S. See is with DSO
+                                          National Laboratories, Singapore 118225 (e-mail: schongme@dso.org.sg).
+                                          M. Debbah is with the Center for 6G Technology, Khalifa University
+                                          of Science and Technology, Abu Dhabi, United Arab Emirates (e-mail:
+                                          merouane.debbah@ku.ac.ae). L. Hanzo is with School of Electronics and
+                                          Computer Science, University of Southampton, SO17 1BJ Southampton, U.K.
+                                          (e-mail: lh@ecs.soton.ac.uk).
+2
+
+Units (SI)-traceability [11], [12]. Hence they offer a radical       To fill this knowledge gap and unlock the full potential
+solution to those RF reception challenges. Firstly, the high      of RAQRs in classical wireless communications and sensing,
+sensitivity of RAQRs is a direct benefit of the highly-excited    we study the superheterodyne RAQR as a benefit of its
+state of Rydberg atoms, where their outermost electrons are       high sensitivity and capability in both amplitude and phase
+excited to a very high energy level. The highly-excited states    detection. Explicitly, we offer the following contributions.
+exhibit a remarkably large dipole moment that is extremely
+sensitive to the external coupling of RF signals. The high        · We study the typical four-level quantum scheme in depicting
+sensitivity of RAQRs has been experimentally shown to be            the realistic RAQRs, and derive a closed-form expression
+on the order of µV/cm/ Hz using a standard structure [11],          of the density coefficient related to the so-called |1|2
+[15], [16]. This has also been improved to 55 nV/cm/ Hz             transition under realistic assumptions. We associate the probe
+using a superheterodyne structure [17], [18], and can be            beam with this density coefficient for characterizing its
+further enhanced via repumping [19]. Another recent work            amplitude and phase. The expression derived offers a precise
+further enhanced the sensitivity to 3.98 nV/cm/ Hz [20].            evaluation on the transformation from the input RF signal to
+The sensitivity limit of RAQRs may even reach pV/cm/ Hz             the output probe beam (transfer function of RAQRs). It also
+obeying the standard quantum limit (SQL). Secondly, RAQRs           paves the way for jointly optimizing diverse parameters of
+are capable of receiving RF frequencies spanning from near          RAQRs, e.g., the detuning and power of laser beams.
+direct-current to Terahertz (THz) frequencies using a single
+vapor cell, exhibiting broadband tunability. One or more of       · We construct an end-to-end RAQR-aided wireless reception
+the RF signals to be processed may be at different but              scheme by detailing each of the functional blocks and derive
+specific discrete frequencies [21]­[23], or at any frequency        the corresponding input-output equivalent baseband signal
+of a specific continuous range [24]­[26]. Thirdly, RAQRs can        model of the overall system. The scheme follows a realistic
+directly down-convert RF signals to baseband without using          signal reception flow of RAQRs, offering an explicit design
+any complex processing, hence significantly simplifying the         guidance for RAQR-aided wireless systems. The proposed
+receiver's structure compared to that of the conventional RF        signal model reveals that the RAQR imposes a gain and
+receiver. More particularly, the size of RAQRs is independent       phase shift on the baseband transmit signal, where these
+of the wavelength of RF signals. Furthermore, RAQRs are ca-         factors are determined by both the atomic response and
+pable of acquiring precise measurements directly linked to SI       the specific photodetection scheme. The form of our signal
+without any calibration. Finally, RAQRs are omnidirectional,        model is consistent with that of classical RF receivers, paving
+capable of receiving RF signals from all angular directions.        the way for performing various signal processing tasks.
+
+   The above-mentioned prominent features and powerful ca-        · We further investigate the noise sources that contaminate
+pabilities of RAQRs make them appealing in assisting classical      an RAQR, where both extrinsic and intrinsic noises are
+wireless communications and sensing. However, the current           considered. The former includes the black-body radiation
+studies are essentially limited to an experimental perspective      (BBR) induced thermal noise [11], [43], while the latter
+from the physics community. They focused on improving the           encompasses the quantum projection noise (QPN) [16], [44],
+sensitivity [18]­[20], [27], [28], and on developing multi-         [45] due to the probabilistic collapse of superposition states,
+band [21]­[23] or continuous-band detection [24]­[26]. They         the photon shot noise (PSN) [46] due to the photodetec-
+also realize various functionalities, such as detection of am-      tion, and the intrinsic thermal noise (ITN) [47] due to
+plitude [11], [15], [16], phase [17]­[19], polarization [29]­       electronic components. Particularly, we quantifies the power
+[31], modulation [32]­[34], spatial direction [35], and spatial     of these noises at the receiver baseband, where the PSN
+displacement [36]. Furthermore, several initial applications        may dominate among all noise sources depending on the
+verifying the benefits of RAQRs in assisting communications         photodetection scheme employed, and the QPN offers an
+were experimentally presented in [37]­[40]. The above exper-        ultimate fundamental limit of RAQRs.
+imental studies have demonstrated the feasibility of RAQRs,
+but they fail to support theoretical studies due to the lack      · We next study the performance of RAQR-aided wireless
+of a complete end-to-end signal model. A pair of emerging           systems, where we present the received SNR of the system
+studies [41], [42] from the communication society, introduce        for two different photodetection schemes, namely the direct
+RAQRs to MIMO communications from signal processing                 incoherent optical detection and the balanced coherent opti-
+and electromagnetic (EM) modeling perspectives. The former          cal detection. We theoretically demonstrate that the latter
+mainly emphasize their algorithmic designs based on a system        scheme outperforms the former scheme in terms of the
+model abstracted from a two-level quantum system. However,          received SNR. We also provide deeper insights for the
+this model may be simple and inaccurate in describing a real-       received SNR in both the SQL and photon shot limit (PSL)
+istic RAQR. Moreover, a comprehensive overview of RAQRs             regimes, showcasing the ultimate fundamental limit and the
+designed for classical wireless communications and sensing          practical photodetection limit of RAQRs, respectively. We
+was presented in [12]. In summary, the study of RAQRs               note that the balanced coherent optical detection scheme is
+for classical wireless communications and sensing is in its         capable of approaching the PSL. Furthermore, we compare
+infancy. Clearly, a practical signal model, bridging physics and    RAQRs to classical RF receivers, where we derive concise
+communications/sensing, is urgently needed for system design        and useful expressions of the SNR ratio over the classical
+and signal processing.                                              counterparts. Particularly, Doppler broadening-free RAQRs
+                                                                    can outperform classical RF receivers in terms of the re-
+                                                                    ceived SNR, offering an extra SNR gain of 27 dB and 40
+                                                                                                                    3
+
+  dB in both the PSL and SQL regimes, respectively.                    Fig. 1: (a) The superheterodyne structure of RAQRs, and (b)
+· We finally perform diverse numerical simulations to validate         its corresponding four-level scheme.
+
+  the proposed signal models, optimize the system parameters,             Rydberg atom preparation: The electron transition between
+  characterize the performance of RAQR-aided wireless sys-             the ground state |1 and the excited state |2 is (near-)
+  tems, and to investigate the influence of several practical im-      resonantly coupled with the probe beam having its Rabi
+  pairments. Our results verify the effectiveness of our models        frequency1, angular frequency, and detuning frequency2 of
+  and parameter optimization, demonstrate the superiority of           {p, p, p}. This excited atom is further driven to a spe-
+  RAQRs in assisting classical wireless communications and             cific Rydberg state |3 by the coupling beam having its
+  sensing, as well as facilitate the understanding of perfor-          Rabi frequency, angular frequency, and detuning frequency of
+  mance mismatches between theory and practice.                        {c, c, c}. The probe/coupling beams are resonant when
+                                                                       p,c = 0 and are near resonant when p,c spanning a small
+Organization and Notations: The article is organized as                frequency range within the response range of the energy level.
+
+follows. In Section II, we construct the quantum response                 RF signal coupling: For the standard structure [12] (without
+                                                                       the LO) of RAQRs, the desired RF signal of {x, x, x}
+model of the RAQRs. In Section III, we propose an RAQR-                directly drives the so-called Rydberg states |3 and |4. By
+                                                                       contrast, for the superheterodyne structure of RAQRs, the
+aided wireless reception scheme and detail the corresponding           LO of {l, l, l} (near-) resonantly excites the transition
+                                                                       between |3 and |4. The impinging RF signal to be detected
+equivalent baseband signal model. In Section IV, we analyse            produces a coupling x cos (2ft + ), which has a fre-
+                                                                       quency offset of f and a phase offset of  relative to the
+the performance of RAQRs. We then proceed by presenting                LO. Furthermore, the RAQR requires x  l, implying that
+                                                                       the impinging RF is weak compared to the LO [18].
+our simulation results in Section V, promote helpful discus-
+                                                                          To elaborate a little further, typically, the Lindblad master
+sions in VI, and finally conclude the article in Section VII.          equation is applied for characterizing the dynamics of the four-
+                                                                       level transition scheme, which is given by [48]
+The  notations  d   represent  the  differential  of    with  respect
+                dt
+
+to time; [H, ] = H - H represents the commutator;
+
+{ , } =   +  stands for the anticommutator; R{·} and
+
+I {·} take the real and imaginary parts of a complex number;
+diag{·} denotes the diagonal of a matrix;  represents the
+derivative of ;  is the reduced Planck constant and 2 = 1;
+
+Z0 and c are the impedance and the speed of light in free space,
+respectively, 0 is the vacuum permittivity, and Z0 = 1/(c0);
+0 and 1 are the antenna efficiency and the quantum efficiency
+of the photodetector, respectively; q and a0 are the elementary
+
+charge and Bohr radius, respectively.
+
+     II. THE QUANTUM RESPONSE MODEL OF RAQRS
+
+   The architecture of RAQR is portrayed in Fig 1(a). Briefly,                 d                 1
+it consists of a vapor cell containing alkali atoms, namely                        = -[H, ] - { , } + ,             (1)
+Cesium (Cs) or Rubidium (Rb) atoms, and a pair of laser                        dt                2
+beams, termed as probe and coupling. These laser beams
+counter-propagate through the vapor cell to form a spatially           where H,  and  are the Hamiltonian, the relaxation matrix,
+overlapped receive area, in which Rydberg atoms are prepared.          and the decay matrix, respectively. They are given by [48]
+The RAQR serves as an RF to optical converter, which is
+facilitated by utilizing the EIT phenomenon [9]­[12]. When                   0     p   0            0          
+an RF signal impinging to the Rydberg atoms, a corresponding                        2
+spectroscopic signal generates as a consequence of the atom-                   p             c
+field interactions, which is further detected by a photodetector.                  p          2      0         
+                                                                       H  =    2                                 ,  (2)
+   When only the desired RF signal is received by Rydberg                          c   p + c        RF
+atoms, the structure is termed as the standard scheme [12].                  0      2                          
+Differently, when a superposition of the desired RF signal and                                      2
+a local oscillator (LO) alters the atomic response, the struc-                         RF
+ture is superheterodyne. We emphasize the superheterodyne                      00       2           p + c + l
+structure of RAQRs [18] in our receiver, as a benefit of its
+high sensitivity and powerful capability of receiving various           = diag{,  + 2,  + 3 + c,  + 4}, and  =
+modulated RF signals. We also note that our models of (3),             diag{ + 222 + 444, 333, 0, 0}, where i is the spon-
+(8), (9) in Section II-A and Section II-B are also applicable          taneous decay rate of the i-th level. In (2), RF  {x, l +
+to the standard structure (without the LO) that exploits the           x cos (2ft + )3} depending on the structure selected. To
+Autler­Townes splitting (ATS) for RF signal detection.                 elaborate a little further,  and c are the relaxation rates
+                                                                       related to the atomic transition effect and the atomic collision
+
+                                                                       effect, respectively. For simplicity, we assume  = c = 0.
+                                                                       We also assume that the decay rates of |3 and |4 are
+
+                                                                       comparatively low so that they can be reasonably ignored [18].
+
+A. The Electron Transition Model of RAQRs                                 1The Rabi frequency describes the frequency of an electron fluctuating
+
+   The electron transitions happening to Rydberg atoms in the          between two energy levels when imposing an oscillating EM field. It is directly
+receive area of the vapor cell may be described by a four-level
+ladder scheme, as shown in Fig. 1(b). It can be viewed in two          related to the amplitude of this EM field [11].
+processes: Rydberg atom preparation and RF signal coupling.               2The detuning frequency p,c represents the frequency difference between
+
+                                                                       the resonant angular frequency i-1,i, i = 2, 3 of two energy levels and the
+                                                                       actual angular frequency p,c of the EM field coupled to these energy levels.
+
+                                                                          3The linear form of this equation is discussed in Section III-A.
+4
+
+   Based on the above assumptions, we can formulate a closed-                Up(RF) and p(RF), respectively. They can be associated
+                                                                             with their input counterparts formulated as [48], [53]
+form   expression   of     the  steady-state  (when  d    =  0)  solution
+                                                     dt
+
+of the density matrix . More particularly, we are interested                        Up(RF)             =  U0   e-  d  I  {(RF )} ,           (5)
+                                                                                                                   p
+in 21 of , since it is associated with the probe beam to be
+
+measured. Specifically, we derive 21 as follows                                     p(RF)              =  0    +   d  R  {(RF  )},           (6)
+                                                                                                                   p
+
+   21(RF) = p×                                                               where p is the wavelength of the probe laser, d denotes the
+                                                                             length of the vapor cell, and (RF) is the susceptibility of
+   A1R4 F + A2R2 F + A3 -  B14RF + B22RF + B3                        ,  (3)  the atomic vapor medium. We note that (5) is known as the
+                      C1R4 F + C22RF + C3                                    Beer­Lambert law.
+
+where the coefficients A1, A2, A3, B1, B2, B3, C1, C2, C3 are                   In (5) and (6), the macroscopic susceptibility is associated
+presented in Appendix A. We note that these coefficients can                 with the microscopic coherence in (3) through
+be simplified in the following special cases:
+                                                                                            (RF)       =    -  2N0 µ212  21(RF),             (7)
+C1 The probe beam is near resonant, while the coupling beam                                                     0 p
+     and LO are perfectly resonant, i.e., p = 0, c/l = 0.
+                                                                             where N0 is the atomic density in the vapor cell and µ12 is
+C2 The coupling beam is near resonant, while the probe beam                  the dipole moment of transition of |1  |2. Therefore, the
+     and LO are perfectly resonant, i.e., c = 0, p/l = 0.                    output probe beam (passband) can be formulated as
+
+C3 The LO is near resonant, while the probe and coupling                            P (RF, t) =  2P1(RF) cos (2fpt + p(RF))
+     beams are perfectly resonant, i.e., l = 0, p/c = 0.                                    = 2R Pb(RF, t)e2fpt ,
+                                                                                                                                             (8)
+The corresponding coefficient expressions can be formulated
+by substituting zero into the corresponding location of p, c                 where  P1(RF)  =  c0      Fp2  |Up(RF)|2    represents  the     power  of
+and l, respectively, which are omitted here.                                                   8 ln 2
+                                                                             the output probe beam and Pb(RF, t) = P1(RF)ep(RF)
+   Remark 1:  The above three cases may become important
+when independently optimizing the three detuning frequencies                 is the equivalent baseband signal, specifying
+to obtain an enhanced sensitivity of the RAQRs, as studied in
+[49], [50]. It is worth noting that these studies are no longer                     Pb(RF, t) =        P1   (RF    )e0   e  d  R{(RF  )}  .  (9)
+relevant however, when the three detuning frequencies have                                                                  p
+to be jointly optimized. However, their joint optimization will
+potentially offer an improved sensitivity over those of [49],                Remark 2: We note that (8) and (9) are nonlinear functions
+[50] (as seen in Fig. 5(f) in Section V-B). Our expression                   due to the nonlinear susceptibility. Additionally, we emphasize
+(3) is more general than that of previous studies and can be                 that (8) and (9) are valid for both the standard and super-
+employed for jointly optimizing detuning frequencies. A simple               heterodyne structures [12] in numerical simulations. However,
+optimization of the RAQR parameters by exploiting (3) can be                 in practice, the ATS spectroscopic signal of the standard
+seen in Section V-B.                                                         structure is only obtained by scanning the frequency of the
+                                                                             coupling (or probe) beam in a specific range. This leads to
+    We also note that our model (3) does not rely on the                     a time-varying detuning c (or p), which increases the
+so-called weak probe beam assumption (p  c), as widely                       difficulty to obtain an explicit representation of (8) and (9)
+assumed in the physics community [51].                                       for the standard scheme. By contrast, the superheterodyne
+                                                                             structure can be configured with fixed p,c,l without requiring
+                                                                             any probe/coupling scanning.
+
+B. The RF-to-Optical Transformation Model of RAQR                            III. THE PROPOSED RAQR-AIDED WIRELESS SCHEME
+                                                                                                AND ITS SIGNAL MODEL
+   The RAQR realizes an RF-to-optical transformation that
+depends on the electron transition model presented in Section                   Upon incorporating the RAQR into classical wireless com-
+II-A. The desired RF signal serves as the input of the RAQR                  munications and sensing to form an RAQR-aided wireless sys-
+and the probe beam acts as its output. To begin with, we                     tem, we investigate the end-to-end system from an equivalent
+assume that the laser beams are Gaussian beams, and express                  baseband signal perspective. In the following contents, we first
+the probe beam at the access area of the atomic vapor cell as                present a detailed block diagram to illustrate the end-to-end
+                                                                             reception process of the RAQR-aided wireless system, and
+                                                                             then derive the corresponding end-to-end equivalent baseband
+ P0(t) = 2P0 cos(2fpt + 0) = 2R P0be2fpt , (4)                               signal model. The block diagram of the RAQR-aided wireless
+                                                                             system is presented in Fig. 2.
+where P0, fp, and 0 are the power, frequency, and phase
+
+of the input probe beam, respectively. The power is given by
+
+P0  =  c0      Fp2  |U0|2  [52],  where  Fp   represents  the  full  width   A. RF Signal to be Detected
+       8 ln 2
+                                                                                The RF signals to be detected may be constituted by a
+at half maximum (FWHM) of the probe beam and U0 is the                       modulated communication signal or a sensing signal (such as
+amplitude of this electric field. Furthermore, P0b = P0e0                    radar, sonar, and ultrasound signals). We assume that these
+                                                                             signals propagate in form of plane waves. Then we formulate
+denotes the equivalent baseband signal of the passband probe                 the unified mathematical model of the received RF signal as
+
+beam. After propagating through the vapor cell, the probe                                                              
+                                                                             x(t) = 2Px cos(2fct + x) = 2R xb(t)e2fct , (10)
+beam is influenced by Rydberg atoms both in terms of its
+
+amplitude and phase at the output of the vapor cell. Let us
+
+denote the amplitude and phase of the output probe beam by
+                                                                                                                                                          5
+
+                                                    Fig. 2: Illustration of the RAQR-aided wireless receiver.
+
+where Px and x are the power and phase of the RF signal.                                    1) Rydberg Atomic Quantum Sensing and Photodetection:
+
+The  power       is  given   by     Px   =       1  c0  Ae  |Ux  |2  ,  where      Ae  is   For the receiver block of Rydberg atomic quantum sensing, the
+                                                 2
+
+the effective receiver aperture of the RAQR and Ux is the                                   electron transition model has been constructed in (3) of Section
+amplitude of the RF signal. Furthermore, xb(t) = Pxex
+                                                                                            II-A and the RF-to-optical transformation model has been
+
+represents the equivalent baseband signal. The specific forms                               provided in (8) of Section II-B. In both equations, the RF is
+                                                                                            a linear superimposition of both the LO and desired RF signal
+of practical communication and sensing signals connecting the
+
+transmitter and the RAQR are detailed in Section III-C.                                     related components, namely RF = l + x cos (2ft + ),
+                                                                                            as proved in Section III-A.
+    Let us further denote the LO impinging to the RAQR as
+
+                                                                                            Based on these results, we study two typical photodetec-
+y(t) = 2Py cos(2flt + y) = 2R yb(t)e2flt , (11)
+                                                                                            tion schemes, namely the direct incoherent optical detection
+
+where Py and y represent the power and phase, and yb(t) =                                   (DIOD) and the balanced coherent optical detection (BCOD)
+
+    Pyey is the equivalent baseband signal. The power is given                              [54], and present their corresponding nonlinear outputs and
+
+by  Py  =   1  c0Ae     |Uy  |2  ,  where    Uy  is  the  amplitude         of  the  LO.    associated linear approximations.
+            2
+                                                                                            DIOD: In this scheme, the output probe beam is directly
+    Recall that f = fc - fl and  = x - y are the frequency
+                                                                                            received, integrated over a period, and then generates a pho-
+difference and phase difference between the desired RF signal
+                                                                                            tocurrent according to the incident beam power, as modeled
+and the LO. Then the superposition of the desired RF signal
+                                                                                            in the first scheme of "B2 : Photodetection" of Fig. 2. We first
+and the LO is received by Rydberg atoms and it is given by
+                                                                                            derive the power of the equivalent baseband signal relying on
+
+ z(t) = x(t) + y(t) = 2R xb(t)e2ft + yb(t) e2flt                                            (8), which is further transformed to an output photocurrent
+
+                           (a)                                                              according to the relationship Ip(Dh )(t) = |Pb(RF)|2, where
+                            2Pz cos(2flt + y),                                       (12)
+                                                                                                 1 q      denotes  the   photodetector  responsivity.  A  voltage
+                                                                                               2fp
+
+where   Pz  =    1   c0Ae    |Uz |2  represents      the    power       of  z(t).  In  the  is produced by the photocurrent across a load (we neglect it
+                 2
+                                                                                            by assuming a unit value), which is further amplified by a low
+expression of Pz, we have the amplitude Uz formulated as
+                                                                                            noise amplifier (LNA) (gain G). Consequently, the amplified
+
+        Uz = |Ux|2 + |Uy|2 + 2UxUy cos(2ft + )                                              voltage is expressed as
+
+            (b)                                                                             V  (D)(t)  =                 =              (c)  
+             Uy + Ux cos(2ft + ).                                                    (13)                   GIp(Dh )(t)       GP1(RF)          GP1(l)
+                                                                                                                                        
+
+See Appendix B for the proofs of (12) and (13).                                                × 1 - 21(l) cos 1(l)Ux cos (2ft + ) , (14)
+
+    Furthermore, we obey the linear relationship between the                                where we have
+
+Rabi frequency and amplitude of the RF signal in the form                                                  1(l)          =  dµ34  |I {(l)}| ,             (15)
+                                                                                                                             p 
+of  RF  =   µ34  Uz  ,  y    =      µ34  Uy  ,  and  x    =  µ34     Ux  ,  where      µ34
+                                                                                                                                    I   {(l)}
+                                                                                                                                    |I  {(l)}|
+represents the dipole moment corresponding to the electron                                                 1(l)          =  arccos              .         (16)
+
+transition between Rydberg states. The separation form of (13)
+
+enables the expression of the superimposed Rabi frequency                                   The approximation in (14) is derived using Taylor series
+                                                                                            expansion in the vicinity of a given value of RF = l.
+RF = l + x cos (2ft + ) of (2) for superheterodyne
+structures presented in Section II-A.                                                          BCOD: A strong local optical beam exists in this scheme,
+                                                                                            as portrayed in the second scheme of "B2 : Photodetection"
+B. Modeling of RAQR Based Wireless Receivers                                                of Fig. 2. Exploiting such a local optical source can help
+                                                                                            to suppress the thermal noise generated by the remaining
+   For the RAQR based wireless receiver, we characterize its                                electronic components. We assume that its carrier frequency
+four blocks as follows.
+6
+
+and FWHM are identical to those of the probe beam. Then because the approximation error may be further spread in
+
+we can express the local optical beam in the form of Pl(t) =                      the remaining stages, e.g. photodetection. Instead, we apply a
+   2Pl cos(2fpt + l) =                   2R Plb(t)e2fpt , where           Pl =    linear approximation to the output of the photodetector.
+                                           Plel . Furthermore, the        probe
+c0      Fp2  |Ul|2  and  Plb(t)       =                                              2) Down-conversion & Sampling: The output voltage of
+8 ln 2                                                                            the photodetector is forwarded to a homodyne receiver (HR)
+
+beam and the local optical beam are combined to form two
+
+distinct     optical  beams,       namely  P1  =     1    [Pl (t)  -P  (RF, t)]   to realize the down-conversion, as shown in "B3 : Down-
+                                                       2                          conversion & Sampling" of Fig. 2. After lowpass filtering,
+                    1                                                             the RF-independent DC is eliminated and the output of the
+and P2       =        2  [Pl  (t)  +  P  (RF,  t)].  They  are     detected  by
+
+two photodetectors, respectively. The photocurrents generated
+
+are subtracted to obtain an output photocurrent, given by HR only includes the RF-dependent AC.
+
+Ip(Bh)(t) =  [Plb (t) Pb (RF, t) + Plb (t) Pb (RF, t)] [54].                         Based on (14) and (17), we can extract the time-varying
+Upon using the same resistance and LNA as in DIOD, we                             component of V (D)(t) and V (B)(t) in a unified form as follows
+
+formulate the output voltage of the BCOD scheme as follows                                          
+                                                                                  V~ (t) = 2 GP(l) cos (l)Ux cos (2ft + )
+                                                                                                 
+V (B)(t) = GIp(Bh)(t) = 2 G PlP1(RF) cos (l - p(RF))
+                                                                                            = 2R V~b(t)e2ft ,                                    (23)
+
+        (d) 
+         2 G PlP1(l) cos (l - p(l))
+                                                                                  where we have P  {P1(l), PlP1(l)}, (l) 
+
+             - 2(l) cos 2(l)Ux cos (2ft + ) ,                             (17) {1(l), 2(l)}, and (l)  {1(l), 2(l)} associated
+                                                                                  with the DIOD and the BCOD, respectively. By exploiting the
+
+where we have                                                                     relationship of Ux =       , 2Px    the  equivalent  baseband  signal
+
+                                                                                                            c0 Ae
+
+   2(l)      =  dµ34          [I {(l)}]2 + [R{(l)}]2,                     (18)    in (23) is formulated as
+                 p 
+                                                                                                      
+                                                                                                    2 G
+   2(l) = l - p(l) + p(l),                                                (19)           V~b(t)  =          P  (l  )  cos  (l       )e-y   Pxex
+
+                                           I {(l)}                                                    c0Ae
+
+   p(l) = arccos                                                       ,  (20)                          
+                                                                                                  Ae xb(t),                                      (24)
+                              [I {(l)}]2 + [R{(l)}]2
+
+   R{        (l)}   =    - 4N0µ122    l        2A1l2 + A2                         where  and  denote the gain and phase of RAQR, respec-
+                                           C1l4 + C22l + C3                       tively, which are expressed as
+                                0 
+
+                -     A14l + A22l + A3 2C1l2 + C2                         , (21)          = 4Z02G         P12(l)21(l),              DIOD,        (25)
+                             (C14l + C2l2 + C3)2                          . (22)                          PlP1(l)22(l),             BCOD,        (26)
+
+                          4N0 µ212           2B1l2 + B2                                          + , e-(y -1(l))
+                                         C1l4 + C22l + C3
+                                                                                                           2
+   I { (l)}           =       0       l                                                  =                        e-(y +1(l))          DIOD,
+                                                                                                                            2          BCOD.
+                                                                                                 + , e-(y -2(l))
+
+                                                                                                           2
+                      B1l4 + B2l2 + B3 2C12l + C2                                                                 e-(y +2(l))
+                             (C1l4 + C2l2 + C3)2                                                                            2
+
+                -                                                                    Sampling both sides of (24) at multiples of 1/W as shown
+                                                                                  in "B3 : Down-conversion & Sampling" of Fig. 2, we have the
+
+See Appendix C for the proof of (d).                                              sampled output as
+
+   Remark 3:  As seen from both (14) and (17), each output                                              V~b(m) =                                 (27)
+signal contains a "direct current (DC)" independent of the                                                            Ae xb(m).
+RF signal and an "alternating current (AC)" influenced by
+
+the strength, frequency, and phase of the desired RF signal. Remark 4: We note that 1(l)  2(l), where the
+All information of the desired RF signal is embedded into the equality holds if and only if p,c,l = 0, representing the "no
+amplitude of the AC component, allowing both amplitude and detuning" case of both laser beams and the LO. Upon exploit-
+
+phase recovery of the desired RF signal.                                          ing Pl  P1(l), we arrive at the result of DIOD < BCOD.
+
+    We note that (14) and (17) are more generalized than the
+model of previous studies, e.g., [18]. Our models characterize C. Signal Model of RAQR-Aided Wireless Systems
+
+the phase (6) of the output probe beam in addition to the 1) Equivalent Baseband Signal Model for Communications:
+
+amplitude (5), which is not addressed previously. This restricts We consider a conventional RF transmitter that relies on
+
+previous models to the special case of p,c,l = 0 ((6) becomes an in-phase and quadrature-phase (IQ) modulation scheme
+zero). In other words, once p,c,l = 0 due to practical non- [55]. The digital baseband signal is interpolated to an ana-
+idealities or specific optimizations (seen in Section V-B), em- log baseband signal via the sinc function obeying the sam-
+
+ploying previous models may degrade the recovery accuracy pling theorem. The interpolated signal is thus expressed as
+
+without addressing the non-zero phase (6).                                        sb(t) = n sb(n)sinc(W t - n), where sb(n) denotes the
+
+    We further emphasize that the models of previous studies, n-th sample, W represents the sampling rate, and sinc(t) =
+
+e.g., [18], [49], [50], rely on their linear approximations of                    sin(t)/(t). The analog baseband signal is then upconverted
+either the nonlinear output probe beam P (RF, t) or of the                        to its passband counterpart s(t) = 2Ps cos(2fct + s) =
+nonlinear susceptibility (RF). Their linear approximations                        2R sb(t)e2fct , where Ps is the transmit power of
+may be prematurely harnessed for a holistic wireless receiver,
+                                                                                  s(t).  Specifically,  Ps  =  1  c0  As  |Us|2  ,  where  As  represents
+                                                                                                               2
+                                                                                                                                                                            7
+
+the effective transmit aperture and Us is the amplitude of                                 Upon replacing xb(m) in (27) by sb based on (32), we have
+the RF signal. Furthermore, sb(t) = Pses represents                                     the equivalent baseband signal model of RAQR-aided wireless
+the equivalent baseband signal. Similarly, Us, s and the                                sensing in the form of
+variables related to them are time-invariant during a sym-
+                                                                                              V~b(m)    =                           m - 2 (R0 - vpT )                   ,   (33)
+bol transmission period, we thus neglect the time index for                                                  hsen(m)sb                            c
+
+simplicity. Let us consider a linear time-varying wireless                              where hsen(m) = a(m). We assume that Us (t - pT - td) 
+
+channel h(, t) = i ai(t) [ - i(t)] having the i-th path                                 Us(t - pT ), implying that the amplitude of sb is constant
+gain ai(t) and delay i(t). Then the baseband signal xb(t)
+is connected to the transmitted baseband signal sb(t) in the                            over  the   round-trip      period    of  td    =  2(R0  -vpT      )  .  Then   we  have
+form of xb(t) = Ae i ai(t)e-2fci(t)sb [t - i(t)]. Upon                                                                                           c
+sampling xb(t) at multiples of 1/W , we formulate the sampled                                                                     4fc
+outputs as follows [55]                                                                 sb    m  -  2(R0-vpT )              e-       c  (R0  -vpT    )  sb  (m),  where     the
+                                                                                                            c
+
+                                                                                        phase    shift  e-    4fc   (R0  -vpT  )  can    be  integrated           into  hsen(m).
+                                                                                                                 c
+
+                                                                                        Therefore, we have the noisy form of (33) as follows
+
+              xb(m) = Ae h(m)sb(m - ),                                         (28)                     V~b(m) = h¯sen(m)sb (m) + w(m),                                     (34)
+
+                                   
+
+where we have h(m) =                           i ai  m     e-2fc      i  (  m  )  sinc  where    h¯ sen (m)  =  a(m)e-        4fc   (R0  -vpT  )  .
+                                                     W                      W                                                    c
+
+ - i      m       with  = m - n.                                                            Remark 5:  As seen from both (31) and (34) for communi-
+          W
+                                                                                        cations and sensing, the RAQR imposes a gain  and a phase
+Upon replacing xb(m) in (27) by sb based on (28), we
+                                                                                        shift  to the RF signal. These parameters are determined
+arrive at the equivalent baseband signal model of RAQR-
+                                                                                        by both the atomic response and the photodetection scheme
+aidded wireless communications in the form of
+                                                                                        selected. Particularly, the phase shift may be integrated into
+              V~b(m)     =                h(m)sb(m - ),                        (29)     h(m)  {hcom(m), hsen(m), h¯sen(m)} to form an equivalent
+                              
+
+                                                                                        wireless channel h(m). For communication purposes, upon
+
+where h(m) is shown as a complex Gaussian random variable                               exploiting the circular symmetry property, we have h(m) 
+
+exhibiting the circular symmetry property, namely, h(m)                                 CN (0, 2) for any given   {1, 2}.
+CN (0, 2) [55]. Furthermore, upon incorporating the additive                                We note that the equivalent baseband signal models of the
+noise (denoted by w(m)) to (29), we formulate the noisy
+                                                                                        holistic transceiver (both (31) and (34)) for communications
+discrete-time baseband signal model as follows
+                                                                                        and sensing are irrelevant to the receiver aperture area Ae.
+
+          V~b(m)     =          h(m)sb(m - ) + w(m).                           (30)     D. Noise Sources in RAQR-Aided Wireless Systems
+                          
+                                                                                           In this part, we focus our attention on the main noise sources
+                                                                                        that affect the RAQR both extrinsically and intrinsically [11],
+                                                                                        [57], as shown in Fig. 3(a).
+Even if (30) is capable of characterizing the wideband sys-
+tems, we emphasize that RAQRs have a narrow instantaneous                                  1) BBR-Induced Extrinsic Noise: The BBR is a source
+bandwidth of  10 MHz [33], where only a small frequency                                 of thermal noise that influences the total coherence time (or
+range around the resonant frequency can be closely coupled.                             dephasing rate) of Rydberg atoms [11], [58], [59]. Let us first
+Based on this situation, we provide the following equivalent                            denote the total dephasing rate by 2, which is obtained as
+baseband signal model for narrowband systems                                            follows [11], [57]
+
+              V~b(m)     =                              +  w(m),               (31)                             2 = nat + bbr + others,                                     (35)
+                              hcom(m)sb(m)
+
+where we have hcom(m) = h=0(m)  CN (0, 2=0).                                            where nat represents the natural dephasing rate of Rydberg
+   2) Equivalent Baseband Signal Model for Sensing: The
+                                                                                        states; furthermore, bbr denotes the dephasing rate caused by
+
+sensing signal x(t) received by the RAQR is an echo (a                                  the BBR. Specifically, for cold atoms, nat can be estimated
+
+decay and delayed replica) of the transmitted signal s(t).                              from the natural lifetime of the corresponding Rydberg state
+
+It has an equivalent baseband signal expressed as sb(t) =                               Tnat  =  0nu       through       nat   =     , 1   where        n     is  the   principal
+
+                                                                                                                                    Tnat
+                                                                                        quantum number, while the values of 0 and u can be seen
+As c0     Us  (t  -  pT  )e2fc  (t-pT  )  ,  where   p  and  T    are    the   index
+   2
+                                                                                        from TABLE 1 of [11]. Furthermore, bbr can be estimated
+of the p-th pulse and the pulse-repetition interval, respectively.                                                                               3hn2
+                                                                                        through bbr        =   , 1  where         Tbbr  =    43kB Troom           [11], [58]. A
+Let us consider line-of-sight propagation having a path loss of
+                                                                                                              Tbbr
+                                                                                        comprehensive evaluation of nat + bbr can be found in [59]
+a(t). Then the equivalent baseband signal of x(t) is given by
+                                                                                        for both cold and hot atoms, with their reference values seen
+xb(t)  =  a(t)sb(t - td),   where  td          2  (R0  -  vpT  )  is  the   round-
+                                               c                                        in TABLE VIII of [59]. In (35), others = 0 +t +r accounts
+
+trip time (R0 is the nominal range). Upon sampling this echo                            for the dephasing rates of other effects [57]. Specifically, 0
+
+at a time instant m, we formulate the sampled output as [56]                            represents the single-atom Rydberg-EIT dephasing rate caused
+
+                                     m - 2(R0 - vpT )                                   by finite laser linewidth, laser noise, etc. Furthermore, t is the
+                                                   c
+       xb(m) =          Aea(m)sb                                      ,        (32)     dephasing rate caused by the effect of thermal atoms passing
+
+                                                                                        through the beam; finally r accounts for Rydberg dipole-
+
+where v is the velocity of the moving target.                                           dipole interactions [60].
+8
+
+                                                                                      4) Intrinsic Thermal Noise (ITN): It is also known as the
+                                                                                   Johnson noise and it is induced by the random motions of
+                                                                                   conduction electrons. The ITN power across bandwidth B is
+
+                                                                                                           NITN = kBT BG.                    (39)
+
+                                                                                   Note that the ITN produced in the system comes from the
+
+                                                                                   LNA, HR, and the remaining electronic components (assume
+
+                                                                                   GB3 = 1 and TB3). Therefore, T becomes an equivalent noise
+
+                                                                                   temperature characterizing the combined effect of all these
+
+                                                                                   components,  namely  T  =  TLNA +  1   TB3  .  Based  on  [47],  the
+                                                                                                                      G
+
+                                                                                   noise temperature of the LNA dominates, yielding T  TLNA.
+
+                                                                                   5) Total Noise Power: We note that the BBR impacts finally
+
+                                                                                   appear as a portion of the QPN. Therefore, we model the base-
+
+                                                                                   band noise w(m) in (30), (31) and (34) as a complex additive
+                                                                                   white Gaussian noise process obeying w(m)  CN (0, w2 ),
+                                                                                   where we have
+
+                                                                                                    w2  =  NQPN  +  NPSN  + NITN .           (40)
+                                                                                                                      2
+
+                                                                                   We further provide the theoretical rationale of (40) as follows
+
+Fig. 3: Illustration of main noise sources: (a) RAQRs and (b)                      · QPN arises from the probabilistic nature of quantum-state
+classical RF receivers.
+                                                                                   measurements of atoms. Given a large atomic ensemble,
+
+                                                                                   the number of atoms found in a given state obeys a
+
+   2) Quantum Projection Noise (QPN): It is also known                             binomial distribution, which approaches a Gaussian one
+
+as the atomic shot noise, which is inevitably produced due                         when the ensemble size is large. As seen in IV-A, the
+                                                                                   number of atoms can be obtained as N = 1.1099 × 108,
+to the probabilistic collapse of the wavefunction during its
+
+measurements. Briefly, when measuring with N quantum-                              which is large enough to ensure the Gaussian distribution.
+
+mechanically uncorrelated atoms, the probabilistic collapse                        · PSN comes from the Poisson statistics of the random
+
+from a superposition state to either eigenstate of each atom                       arrival time of individual photons at the photodetector.
+
+wavefunction results in the limit of phase measurement, given                      When the number of detected photons is large, this Pois-
+
+by  = 1 [16], [44], [45]. This leads to the SQL Ux,SQL =                           son process can be well approximated by the Gaussian
+          N                                                               Hz
+                                      1                                            distribution. Given the probe beam power P0 = 20.7 µW
+          [57],        where  T2  =  2   is   the  coherence      time    of  the
+µ34 N T2                                                                           and the energy of one photon 2p with p = c/p, the
+EIT process. The SQL will impact the probe beam in the
+                                                                                   number       of  photons per  second   is  obtained as      P0   =
+form of a noise, which is finally imposed on the baseband                                                                                    2p
+                                                                                   8.8722 × 1013, also ensuring the Gaussian distribution.
+signal. According to (23), the baseband QPN (after LNA)
+
+across bandwidth B is derived with the following power                             Since these noise sources are statistically independent and the
+
+                                                   Ux,SQL              2           ITN is also Gaussian, w(m) obeys the Gaussian distribution.
+                       2 GP                                         B
+   NQPN =                         (l)    cos  (l)                                  Remark 6:  Different from the signal-independent char-
+
+                                                            Hz                     acteristic of the noise in conventional RF receivers, the noise
+
+              = c0 cos2 (l)              Ux,SQL             2                      of RAQRs is signal-dependent, which needs to be taken into
+
+                                              Hz             B.           (36)     account in RAQR-aided wireless designs.
+
+                                                                                    For typical RAQRs, these noise sources inevitably exist,
+
+   3) Photon Shot Noise (PSN): Consider a PIN photodiode.                          but the difference is that the noise proportion may be different
+
+Then two shot noise sources arise in the photodetector, namely,                    in different RAQR schemes, such as the DIOD and BCOD
+
+the PSN and the dark-current shot noise. Since the latter is                       schemes. As detailed in Section IV, different dominant noise
+
+relatively small, we thus focus our attention on the PSN only.                     contributions correspond to different performance regimes,
+
+For the DIOD scheme, upon denoting the average photocurrent                        e.g., SQL and PSL regimes. Notably, the PSL is achievable
+by I¯ph, where I¯ph = P1(l), we formulate the noise power
+of the PSN (after LNA) across the bandwidth B as [46]                              by the BCOD scheme, where PSN dominates and ITN can
+
+                                                                                   be effectively suppressed by exploiting a strong local optical
+
+                             NP(DSN) = 2qBI¯phG.                          (37)     source. However, due to the optical readout scheme employed
+
+                                                                                   in RAQRs, it is challenging to achieve the SQL by reducing the
+
+For the BCOD scheme, let us denote the average photocurrents                       PSN from the perspective of noise suppression. A promising
+
+generated by the two photodetectors by I¯p(1h) and I¯p(2h), respec-                research direction may be to develop new schemes harnessing
+
+tively. They correspond to P1 and P2, respectively, and are for-                   the many-body effect or squeezed states to approach or even
+
+mulated   as  I¯p(1h)  =     [Pl  + P1(l)]   and   I¯p(2h)  =     [Pl  + P1(l)],   surpass the SQL [12].
+                          2                                    2
+
+respectively. Therefore, we formulate the noise power of the                             IV. PERFORMANCE ANALYSIS AND COMPARISON
+
+PSN (after LNA) across bandwidth B as follows [46], [54]                              In this section, we study the received SNR of a narrowband
+                                                                                   RAQR-aided wireless system. One can further derive the
+                       NP(BSN) = 2qB I¯p(1h) + I¯p(2h) G.                 (38)
+                                                                                                                                                     9
+
+capacity (spectral efficiency) and/or study the bit-error-rate of               Further substituting N =  N0V , V = Fp2d/(2 ln 2), and
+
+an RAQR-aided communication system based on the received                    T2  =   1  into  (43),  we  arrive  at
+                                                                                   2
+SNR. Relying on (31), (34), and (40), we formulate the SNR
+                                      |h(m)|2                                                Z0Fp2       µ34 2       N¯0d        |h(m)|2Ps ,
+of  the  receive  signal  as  SNR  =       w2    Ps     ,  which  is            SNRSQL    =    ln 2                   2               B              (44)
+
+SNR =                     2 cos2 (l)|h(m)|2Ps                               where N¯0   N0 is defined as the effective atomic density.
+
+              c0 cos2 (l)     Ux,SQL      2                                 Remark 7: In the SQL regime, the SNR grows linearly with the
+                                  Hz                                        effective atomic density N¯0 and the length of the vapor cell d,
+                                            + 2qGP + kBT G B
+                                                                            while grows quadratically with the FWHM of the probe beam.
+-m-a-xi-m-um                  2|h(m)|2Ps                          , (41)
+
+              c0   Ux,SQL     2                            B                More particularly, the SNR theoretically grows unbounded as
+                       Hz                                                   these parameters increase infinitely. In practice, N¯0 may be
+                                + 2qGP + kBT G
+                                                                            restricted due to the so-called blockade sphere, where only
+where h(m)  {hcom(m), hsen(m)} and P  {P1(l), Pl +
+P1(l)} corresponding to the DIOD and BCOD, respectively.                    one atom can be excited to Rydberg state within the region of
+The maximum is achieved when cos2 (l) = 1. This
+                                                                            the blockade sphere.
+condition always holds for the DIOD scheme because of
+cos2 1(l) = 1. For the BCOD scheme, one may configure                       B. PSL Regime
+the phase of the local optical beam l to retain 2(l) = 0,
+±, so that cos2 2(l) = 1. The imperfect phase alignment                        In this regime, only the PSN is considered. This reveals
+of 2(l) is demonstrated in Section V-D.                                     the fundamental limit of employing different photodetection
+                                                                            schemes. This PSL is achievable for the BCOD scheme
+   According to (41), we compare DIOD and BCOD schemes                      because the ITN can be made relatively low compared to the
+                                                                            PSN by increasing the power of the local optical source Pl, as
+based on their SNR ratio Ratio = SNRBCOD/SNRDIOD.                           seen in (41). By contrast, this regime only holds for the DIOD
+                                                                            scheme when the detected power of the probe beam P1(l)
+Specifically, we obtain this ratio as follows                               is high so that the PSN becomes higher than that of the ITN.
+                                                                            Despite this, the PSL regime result of the DIOD scheme is still
+                   Ux,SQL     2    + + c0q                  kB T            meaningful. Specifically, we reformulate the received SNR as
+                        Hz                                 DIOD
+               c0                      2P1 (l )21 (l )
+    Ratio =        Ux,SQL
+                       Hz                       P1 (l   )
+               c0                                   Pl
+                              + + 2         1+
+                                      c0 q                     kB T
+
+                                      2P1 (l )22 (l )      BCOD                           4Z0       P1  (l  )21  (l  )  |h(m)|2  Ps  ,        DIOD,
+                                                                                            q                                 B               BCOD,
+              -P-1P-(l-l-)  -0 Ratio  1,                                    SNRPSL     =                                      |h(m)|2
+                                                                      (42)                           Pl P1 (l )  22  (l    )        B  Ps  ,
+                                                                                                    Pl +P1 (l )
+
+where Ratio  1 is due to 1(l)  2(l), DIOD < BCOD,                                       4Z0         P1  (l  )21  (l  )  |h(m)|2  Ps  ,     DIOD,
+and Pl  P1(l), suggesting that the BCOD scheme always                                        q                                B            BCOD,
+outperforms the DIOD scheme in terms of the received SNR.                                                               |h(m)|2
+                                                                                                    P1  (l  )22  (l  )        B  Ps  ,
+   To gain deeper insights, we investigate the following two
+specific regimes, which help us understanding the fundamental                          = 1Ap        Up2  (l  )21  (l    )  |h(m)|2  Ps  ,     DIOD,
+limit and gaining insights for practical optimizations.                                   2fp                                    B                       (45)
+                                                                                                                           |h(m)|2
+                                                                                                    Up2  (l  )22  (l    )        B  Ps  ,     BCOD,
+
+A. SQL Regime                                                               where the approximation is obtained by using Pl  P1(l).
+                                                                               Remark 8:  As seen from (45), given bandwidth B and
+   In the SQL regime, only the QPN remains and other noises
+are perfectly eliminated. This reveals the ultimate fundamental             channel h(m), SNRPSL is determined by the product of Up2(l)
+limit of RAQRs with respect to their quantum property. The                  and 2(l), (l)  {1(l), 2(l)} instead of determined
+SNR in this regime becomes                                                  by only the output probe beam. Therefore, to achieve higher
+
+                              µ34     2          |h(m)|2   Ps               received SNR, one may (jointly) optimize the power of the
+                                                      B
+              SNRSQL = 2Z0                N  T2                ,      (43)  output probe beam, the detuning frequency, and LO signal
+                                                                            strength to obtain an optimal product of Up2(l)2(l).
+which is the identical for both the DIOD and BCOD schemes.
+                                                                                We further note that 1(l) = 2(l) only when
+It is explicit to observe from (43) that larger atom number N               p,c,l = 0 without any detuning. This implies that both the
+                                                                            DIOD and BCOD schemes achieve the same SNR in the PSL
+and long coherence time T2 facilitate higher SNR.
+   We further note that N is determined by a combination of                 regime, as numerically verified in Fig. 5(a)(b) of Section V-B.
+
+the atomic density N0, the optical volume containing Rydberg                Otherwise, for the optimized p,c,l, the received SNR of the
+atoms V , and the population rate  to the Rydberg state,                    BCOD scheme is higher than that of the DIOD scheme, as
+
+namely N =  N0V . Assuming that the laser beams are                         numerically verified in Fig. 6 of Section V-C.
+Gaussian beams, we approximate the receiver volume, where
+                                                                            C. Comparison to Classical RF Receivers
+the probe/coupling beams are spatially-overlapped in the vapor
+                                                                               1) Performance Comparison: We present a typical single-
+cell, as a cylinder. Upon assuming that the FWHMs of the                    antenna reception scheme for classical RF receivers in Fig.
+                                                                            3(b). The system consists of an antenna (gain Gant and radi-
+probe and coupling beams are identical, and the radius of                   ation efficiency 0), an LNA (gain GLNA), and the remaining
+the cylinder is given by r0 = Fp/ 2 ln 2, and the volume                    components (equivalent gain GREC), such as mixers, lowpass
+containing Rydberg atoms is V = Apd, where Ap = r02 =                       filters and ADCs. Without loss of generality, we assume
+Fp2/(2 ln 2) is the cross-sectional area of the cylinder.
+10
+
+                             TABLE I: CONFIGURATION OF RAQR PARAMETERS IN SIMULATIONS.
+
+                   Electron transitions                 Laser beams and RF signals                            Antenna, LNA, and others
+
+Parameter             Value                       Unit  Parameter                Value       Unit  Parameter                                Value        Unit
+                                                  cm                                                                                                     /
+Vapor cell length     d = 10                      cm-3  Probe beam wavelength    p = 852     nm    Antenna efficiency                       0 = 0.7      dB
+                                                  /                                                                                                      dB
+Atomic density        N0 = 4.89 × 1010            C/m   Coupling beam wavelength c = 510     nm    BS antenna element gain (5G FR1 n104) Gant = 5.5      dB
+                                                  C/m                                                                                                    dB
+Population rate        = 1%                       C/m   Probe beam power         P0 = 20.7 µW      UE antenna element gain (5G FR1 n104) Gant = 0        K
+                                                  MHz                                                                                                    K
+Dipole moment of |1 |2 µ12 = 2.2327qa0            kHz   Coupling beam power      Pc = 17     mW    System noise figure of BS and UE         N F = 6, 9   /
+Dipole moment of |2 |3 µ23 = 0.0226qa0            kHz                                                                                                    dB
+Dipole moment of |3 |4 µ34 = 1443.45qa0           MHz   Local optical beam power Pl = 30     mW    LNA gain of classical RF receiver        GLNA = 60    K
+                                                  µs                                                                                                     Ohm
+                                                        Probe/coupling beam radius r0 = 1.7  mm    Noise temperature of LNA                 TLNA = 100
+                                                                                                   Room temperature                         Troom = 300
+Decay rate of |2      2 = 5.2                           LO signal amplitude      Uy = 0.0661 V/m
+
+Decay rate of |3      3 = 3.9                           Carrier frequency        fc = 6.9458 GHz   Quantum efficiency                       1 = 0.8
+
+Decay rate of |4      4 = 1.7                           Frequency difference     f = 150     kHz   Photodetector LNA gain                   G = 30
+                                                        between LO and RF
+Total dephasing rate  2 = 5                                                                        Photodetector LNA noise temperature      T = 100
+
+Coherence time        T2 = 0.2                          RF bandwidth             B = 100     kHz   Photodetector load resistance            R=1
+
+GREC = 1. Upon considering narrowband systems, we derive                         compactness, scalability, and bandwidth (typically kHz­MHz).
+the equivalent baseband input-output signal model as                             Compared to conventional RF receivers, RAQRs are still in the
+                                                                                 infancy of their engineering applications.
+            V~0(m) = Aiso0h(m)sb(m) + w0(m),                               (46)
+
+where 0 = 0GantGLNA represents the gain of the classical RF                                           V. SIMULATION RESULTS
+receiver, Aiso = 2/(4) is the effective receiver aperture of
+an isotropic antenna, and w0 is the AWGN of the RF receiver.                        Upon following the configurations in [18], we consider a
+Specifically, the noise includes the thermal noise due to the                    four-level electron transition scheme 6S1/2 6P3/2 47D5/2
+                                                                                 48P3/2. The corresponding parameters are presented in TA-
+background thermal noise, the LNA noise, and the noise of the                    BLE I. We note that the parameters of the antenna and
+remaining components, namely we have w(m)  CN (0, R2F),                          LNAs obey those in [43], [61]­[63]. We note that the re-
+where R2F = kBTBGBF GLNA, TBG is the temperature of the                          ceived RF signal of RAQR may be a consequence of the
+background (assume room temperature of TBG = 300 K), F                           signal propagated through various channel conditions while
+represents the noise factor of the holistic system. Here R2F can                 satisfying the narrowband condition due to the narrowband
+also be expressed in decibel as -174dBm/Hz + 10 log B +                          receiver property of RAQRs. Without loss of generality, we
+                                                                                 consider free space propagation having a large-scale fading
+N F + GLNA, where N F = 10 log(F ) represents the system                         of -30 + 10 log(1/L), where the distance is L = 1500 m
+noise figure. For example, N F is 6 dB and 9 dB for the                          and the pathloss exponent is  = 2.0. The amplitude of the
+                                                                                 received RF signal is thus -71.8 dBV/m. Unless otherwise
+base station (BS) and the user equipment (UE), respectively,                     stated, our simulations will follow the above configurations.
+                                                                                 We will first validate the correctness of our model, then show-
+at the frequency range of 5G FR1 n104 [61]. Based on these                       case a simple parameter optimization, and further simulate the
+                                                                                 effects of several critical parameters on the received SNRs
+discussions, we have                                                             (44), (45), SNR ratios (48), (49), and the receiver sensitivity
+                                                                                 (50). Finally, we investigate the influence of several practical
+    SNR0  =      Aiso0|h(m)|2Ps          =  0AisoGant|h(m)|2Ps .           (47)  impairments on the performance of RAQRs.
+                         R2F                      kBTBGBF
+
+   We compare RAQRs and classical RF receivers in terms                          A. Validation of the Proposed Signal Model
+of the SNR ratio, where the SQL and PSL regimes are
+characterized as follows. Based on (43) and (47), we formulate
+Ratio0 = SNRSQL/SNR0 in the SQL regime as
+
+    Ratio0 = 2Z0      µ34 2  N¯0            Apd         kBTBGF . (48)            We validate our signal model by showing the coincidence
+                             2              Aiso         0Gant
+                                                                                 of waveforms between the AC component in (23) constructed
+
+Additonally, based on (45) and (47), we formulate Ratio0 =                       by our model      =and GthIep(Dhe)x(ta)ctanAdCV  obtained  bGy Irp(eBhm)(ot)viinng(1th4e)
+SNRPSL/SNR0 in the PSL regime as                                                 DC of V (D)(t)                                   (B)(t) =
+
+                   1Up2(l)2(l)              Ap          kBTBGF . (49)            and (17), respectively. We select an observation window of
+                         2fp                Aiso         0Gant
+    Ratio0  =                                                                    0.02 ms to capture the waveforms, during which we keep
+
+                                                                                 the amplitude of the RF signal constant. Then, we quantify
+
+   2) Implementation-Oriented Comparison: Built upon ma-                         the normalized approximation error between the approximated
+ture semiconductor technologies, conventional RF receivers
+exhibit compact integration, low cost, and wide bandwidth                        AC and the exact AC. Finally, we compare the input-output
+(typically MHz­GHz), with their performance limited by
+thermal noise. By contrast, RAQRs exhibit significant differ-                    transfer function depicted by our models to exact ones. For
+ences and trade-offs in their architecture and implementation.
+Specifically, RAQRs exploit multi-level atomic coherence and                     all above simulations, we consider p,c,l = 0 without any
+precisely controlled laser excitation, offering intrinsically self-
+calibrated field measurements and continuous tunability across                   scanning. Their results obtained are shown in Fig. 4.
+an exceptionally broad frequency range (DC-THz). However,
+these benefits may come at the cost of increased system com-                     It is observed from Fig. 4(a) that the waveform characterized
+plexity due to the tight specifications of stable optical, thermal,
+and frequency-locking subsystems, which may presently limit                      by our linear approximation model well coincides with the
+
+                                                                                 waveform of the realistic nonlinear RAQR for both DIOD
+
+                                                                                 and BCOD schemes. The envelopes characterized by our
+
+                                                                                 linear approximation models can accurately trace the exact
+
+                                                                                 waveforms. We note that the envelope is constant because
+
+                                                                                 we fix the detunings without any scanning. Furthermore, we
+
+                                                                                 observe from Fig. 4(b) that the proximity of waveforms can
+                                                                                                                                                                                          11
+
+      10-5                                 10-7             100                                                  -23.6 dBV/m         50
+5                                                                 0.04175                                                              0
+                                     5
+0                                    0                                                                                              -50
+                                     -5                                                                                            -100
+-5                                                                                                                                 -150
+                    5                5           10                                                                                -200
+
+                                                                      0.0417                                                           -200
+
+                                                                      0.04165
+
+                                                            10-1               -160 -120 -80
+
+                                                                                                                                                                     -23.6 dBV/m
+
+                                10           15         20                     -150           -100               -50                         -150              -100     -50         0
+
+                           (a)                                                           (b)                                                                   (c)
+
+Fig. 4: (a) Waveform, (b) normalized approximation error, and (c) input-output transfer function characterized by our models.
+
+30                                                               30            20.7 W                                                   30
+20                                                               20                                                                35 20
+10                              -23.6 dBV/m                      10
+                                                                                                                                        10
+  0                                                                0                                                               30
+-10                                                             -10
+                                                        0                                                                                -0.92 -0.9
+   -80                                                                                                                             25
+
+                                                                                                                                   20
+
+                                                                                                                                   15
+
+                                                                                                                                   10
+
+                                                                                                                                    5
+
+            -60                 -40          -20                      20                 40         60           80           100        -3  -2            -1        0  1           2  3
+
+                   (a)                                                          (b)                                                40.5                        (c)
+
+40                                                          40                                                                       40                                 0.36 dB
+     40
+     20                                                     30                                                                     39.5
+                                                                                                                                               3.85 dB
+30                                                          20
+       0                                                                                                     40                      39
+
+20 -3 -2 -1 0                                                                                                                      38.5
+                   10-3
+
+10
+
+0                                                           10                                      20                             38
+
+                                                                                                        0                          37.5
+
+-10                                                                                                     -0.02 0 0.02
+
+                                                            0                                                                      37
+
+-3      -2             -1       0       1            2  3   -3        -2             -1       0         1        2            3          1              2            3           4     5
+
+                           (d)                                                           (e)                                                                   (f)
+
+Fig. 5: Optimization of parameters: (a) LO signal amplitude Uy, and (b) probe beam power P0, (c) probe beam detuning p,
+
+(d) coupling beam detuning c, and (e) LO detuning l. (f) Compare the joint optimization of p,c,l to their independent
+optimizations and to the case without detuning optimization of p,c,l = 0.
+
+be characterized by the normalized approximation error. When                                  improvement of the received SNR. We consider the received
+the RF signal's amplitude is small enough compared to LO's                                    SNR (45) in the PSL regime as an example in our simulations.
+amplitude, the errors of DIOD and BCOD schemes are quite                                      Since these parameters are coupled, their joint optimization is
+small. However, the errors gradually increase when the RF                                     highly intractable. To tackle this problem, we exploit the idea
+signal's amplitude is close to LO's amplitude. This is because                                of alternating optimization. Specifically, we first optimize the
+the condition Uy  Ux becomes invalid as the RF signal's am-                                   LO signal amplitude by fixing the probe beam power as 29.8
+plitude increases compared to a fixed-amplitude LO. Similar                                   µW and p,c,l = 0. Then we sequentially optimize P0, p,
+phenomenon can be observed from Fig. 4(c). The nonlinear                                      c, and l, where the pre-optimized values are substituted
+transfer function of RAQRs can be accurately characterized                                    into the current process. We optimize one round (only once)
+by our linear approximations only requiring Uy  Ux. It                                        for each parameter and acquire their maxima by exhaustive
+is noteworthy that the transfer functions have a large linear                                 search, where their results are portrayed in Fig. 5.
+dynamic range with a properly reconfigured LO, and the input-
+output curves of Fig. 4(c) are consistent with [18].                                             We observe from Fig. 5(a)(b) that the optimal values of the
+                                                                                              LO amplitude and the probe power, maximizing the received
+B. Optimization of Parameters                                                                 SNR (45), are -23.6 dBV/m (0.0661 V/m) and 20.7 µW,
+                                                                                              respectively. Improper configuration may lead to drastically
+   We then perform simple optimizations to diverse parame-                                    reduction of the received SNR. The trends of both figures
+ters, including the LO signal amplitude, probe beam power,                                    are consistent with physics experimental papers [18] and [64].
+and detuning frequencies of the probe beam, coupling beam,                                    Another observation from Fig. 5(a)(b) is that the received SNR
+and the LO signal. These optimized parameters facilitate an
+12
+
+    50                                                        50                                                                  50
+                40 dB 26.7 dB                                                  40 dB
+                                                                                                                                  40                        28 dB
+    40                                                        40
+
+    30                                                        30                                                                  30                                  41.5 dB
+
+                                                                                      27.7 dB                                     20
+
+    20                                                        20
+
+                                                                                                                                  10
+
+    10                                                        10                                                                                                   36.6 dB
+                                               35.2 dB                                                   36.2 dB
+
+                                                                                                                                  0
+
+        2  4                                            6  8      102                 103                         104  105                 8       10       12              14
+
+           (a)                                                                        (b)                                                              (c)
+
+    Fig. 6: The received SNR vs. (a) the atomic density N0, (b) local optical beam power Pl, and (c) carrier frequency fc.
+
+of the BCOD is similar to that of the DIOD. This is because                                    TABLE II: PARAMETER CONFIGURATIONS OF CS ATOMS
+1(l) = 2(l) due to p,c,l = 0, as discussed in Remark                                           FOR RECEIVING DIFFERENT CARRIER FREQUENCIES.
+4 of Section III-B and Remark 8 of Section IV.
+                                                                                               |3 |4 µ34                          fc          Uy   P0       p               c   l
+   We can see from Fig. 5(c)(d)(e) that the commonly used
+configurations p,c,l = 0 are usually not optimal, as indicated                                                    /    Cm         GHz V/m µW MHz (DIOD, BCOD)
+by the line marked as "Without detuning". Additionally, we
+observe that the optimal lines indicate the maximal received                                   47D5/2                  1443.4qa0  6.9458   0.0661  20.7     -0.9033,  -0.0025,  0.0125,
+SNR. The jointly optimized values for the DIOD and BCOD                                          48P3/2                                                     -0.9133   1.8090    -0.0075
+schemes are p,c,l = {-0.9033, -0.0025, 0.0125} MHz
+and p,c,l = {-0.9133, 1.8090, -0.0075} MHz, respectively.                                      45D5/2                  1316.6qa0  7.9752   0.0708  20.3     -0.8832,  -0.0025,  0.0125,
+Furthermore, in Fig. 5(f), we showcase the performance im-                                       46P3/2                                                     -0.8932   1.7690    -0.0025
+provement of our joint optimization of p,c,l compared to
+the independent optimization of p,c,l employed in [49], [50]                                   43D5/2                  1195.7qa0  9.2186   0.0794  20.6     -0.8982,  -0.0025,  0.0075,
+and to the case without detuning optimization of p,c,l = 0                                       44P3/2                                                     -0.9083   1.7990    -0.0025
+(as noted in Remark 1). In this comparison, we employ
+the optimal LO signal power and the optimal probe beam                                         40D5/2                  1025.1qa0  11.6187  0.0912  20.4     -0.8832,  -0.0025,  0.0075,
+power obtained in Fig. 5(a)(b) for all compared cases. From                                      41P3/2                                                     -0.8932   1.7740    -0.0075
+Fig. 5(f), we observe that our joint optimization yields an
+extra improvement of 0.36 dB over the best received SNR of                                     66S1/2                  2055.4qa0  13.4078  0.0501  20.4     -0.9883,  0.0025,   0.0325,
+the independent optimization, and improves the case without                                      66P3/2                                                     -0.9883   1.9291    -0.0225
+optimization by about 3.8 dB.
+                                                                                               63S1/2                  1862.7qa0  15.5513  0.0537  20.1     -0.9583,  0.0025,   0.0225,
+   We elaborate by mentioning that although the additional                                       63P3/2                                                     -0.9633   1.8791    -0.0125
+0.36 dB improvement attained by joint optimization appears
+modest, it highlights the conceptual value of parameter co-                                       · BCOD (PSL regime) -- The BCOD is used and only the
+design and represents the upper bound of the achievable                                              PSN is considered. The received SNR is given by (45).
+performance. Joint optimization also indicates a potential
+enhancement in robustness under parameter fluctuations thanks                                     · DIOD (Total noise) -- The DIOD is employed and all
+to the increased optimization degrees-of-freedom. The associ-                                        noises (QPN, PSN, ITN) are considered. The received
+ated computational overhead of joint optimization is minor, as                                       SNR is obtained by using (41).
+the analytical formulation allows efficient implementation at
+the cost of limited additional iterations.                                                        · BCOD (Total noise) -- The BCOD is employed and all
+                                                                                                     noises (QPN, PSN, ITN) are considered. The received
+C. Performance of the RAQR-Aided Wireless Systems                                                    SNR is obtained by using (41).
+
+   In this section, we presents our simulation results by follow-                                 Received SNR versus (vs.) atomic density (N0): Upon
+ing the optimized parameters. Since the operating frequency                                    fixing all other parameters and varying the atomic density with
+is 6.9458 GHz that is within the frequency range of 5G FR1                                     N0 = (1  9) × 1010 cm-3, we plot the results in Fig. 6(a).
+n104. Therefore, the classic RF receiver is chosen as the                                      It is observed that the received SNR of RAQR logarithmically
+5G-BS and 5G-UE, respectively, where their parameters are                                      increases in dB vs. the atomic density. All curves of the RAQR
+from the 3GPP specification [61] and are given in TABLE I.                                     in both the PSL and SQL regimes exhibit significant SNR
+Furthermore, we present several cases of the RAQR, namely                                      gains over the classical 5G-BS and 5G-UE. For example, when
+                                                                                               N0 = 5 × 1010 cm-3, the SNR gain over the 5G-BS can be
+   · RAQR (SQL regime) -- Only the QPN is considered                                           27 dB and 40 dB in the PSL and SQL regime, respectively,
+      and the received SNR is obtained by (44).                                                and becomes higher when compared to 5G-UE. It is noted
+                                                                                               from Fig. 6(a) that the "DIOD (Total noise)" has a huge SNR
+   · DIOD (PSL regime) -- The DIOD is used and only the                                        gap to the "DIOD (PSL regime)" and does not outperform
+      PSN is considered. The received SNR is given by (45).                                    the 5G-BS. However, this can be substantially improved by
+                                                                                               the "BCOD (Total noise)", which can approach the "BCOD
+                                                                                               (PSL regime)" and exhibits 26.7 dB (35.2 dB) over the 5G-BS
+                                                                                               (5G-UE), when the atomic density is 5 × 1010 cm-3.
+
+                                                                                                  Received SNR vs. local optical beam power (Pl): We
+                                                                                               fix other parameters and vary Pl from 30 µW to 300 mW.
+                                                                                               This influences the received SNR of "BCOD (Total noise)",
+                                                                                               as shown in Fig. 6(b). From the figure that the received SNRs
+                                                                                               except the "BCOD (Total noise)" remain constant across the
+                                                                                               entire range of Pl, once the other parameters are given. The
+                                                                                                                                                                                                                          13
+
+                           50                                                               40
+
+40      42 dB
+
+                           40                                                               20
+
+        33 dB
+
+30                                                                    40 dB
+                                                                      31.5 dB
+        24.6 dB            30                                                               0
+
+20
+
+        16 dB              20                                                               -20
+
+10
+
+                           10                                                               -40
+
+0
+
+                           0                                                                -60
+
+-10
+
+     2  4        6  8  10        0.5  1                                        1.5    2     10-5                                                                                  10-4     10-3       10-2     10-1  1
+
+        (a)                           (b)                                                                                                                                                  (c)
+
+Fig. 7: The SNR ratio vs. (a) the length of vapor cell d, (b) FWHM of laser beams Fp, and (c) population rate  .
+
+102                        102
+
+                                                                                            104
+
+101
+
+                           100                                                              102
+
+100
+
+                                                                                                                                                                             100
+10-1
+
+                           10-2                                                                  10-5                                                                             10-4     10-3       10-2     10-1  100
+
+     2  4        6  8  10        0.5                               1           1.5    2
+
+        (a)                           (b)                                                                                                                                                  (c)
+
+Fig. 8: The receiver sensitivity vs. (a) the length of vapor cell d, (b) FWHM of laser beams Fp, and (c) population rate  .
+
+"BCOD (Total noise)" exhibits a large SNR gap compared to             beams Fp, and population rate  : We further examine
+the "BCOD (PSL regime)" when Pl is small. The gap becomes             how the SNR ratios (48), (49) are influenced by these critical
+narrower as Pl increases, implying that the "BCOD (Total
+noise)" can approach the limit of the PSL regime thanks to            parameters. We only present the result of the BCOD scheme
+the suppression of the ITN due to large Pl.
+                                                                      as a benefit of its PSL achievable, as portrayed in Fig. 7.
+   Received SNR vs. carrier frequency (fc): It is note-
+worthy that RAQRs are limited to receiving RF signals at              Firstly, we observe from Fig. 7(a) that the SNR ratios in
+specific discrete frequencies that are coupled to different but
+specific transitions between two Rydberg states. We follow            both the SQL and PSL regimes gradually grow as the cell
+the configurations of Cs atoms in [65] for receiving different
+carrier frequencies. The transition from the ground state to          length increases and they become higher than 0 over a range
+the excited state is 6S1/2 6P3/2, which is realized obeying the
+same configurations of laser beams as stated above. The carrier       of 0.4  10 cm. This reveals that the RAQR outperforms the
+frequencies and several optimized parameters are provided
+in TABLE II. Based on these configurations, we present our            classical 5G-BS/5G-UE with a consistent increase of the SNR
+simulation results in Fig. 6(c).
+                                                                      gain. At 6.9458 GHz, the cell length of the half-wavelength
+   Let us observe the RAQR of all configurations in Fig. 6(c),
+the curves slightly decrease from 6.9458 GHz to 11.6187 GHz,          size is also marked in Fig. 7(a), where an extra SNR gain of 16
+then suddenly increase from 11.6187 GHz to 13.4078 GHz,
+and become flat at the rest of the frequency range. The trend is      dB (24.6 dB) can be achieved by the "BCOD (PSL regime)"
+mainly determined by the dipole moment, but is less related
+to the carrier frequency. The higher the dipole moment, the           over 5G-BS (5G-UE). This SNR gain is further augmented to
+higher the received SNR. By contrast, the received SNRs of
+classical 5G-BS and 5G-UE gradually drop vs. the carrier              33 dB (42 dB) in the SQL regime.
+frequency. This trend is essentially due to the reduction of its
+effective receiver aperture. The SNR difference between the           Then we observe from Fig. 7(b) that in the PSL regime, the
+"BCOD (Total noise)" and classical 5G-BS (5G-UE) exceeds
+28 dB (36 dB) and becomes larger with the increase of the             SNR ratio has a maximum of 31.5 dB (40 dB) at an optimal
+carrier frequency, as seen in Fig. 6(c). This trend holds for the
+RAQR in the SQL regime, but the SNR differences are further           FWHM of  1.4 mm. Both smaller and larger FWHMs
+augmented to 41.5 dB and 50 dB at the 11.6187 GHz.
+                                                                      degrade the SNR ratio. This is essentially due to the inherent
+   SNR ratio vs. length of vapor cell d, FWHM of laser
+                                                                      connection between the FWHM and the probe beam power.
+
+                                                                      By contrast, the SNR ratio in the SQL regime always increases
+
+                                                                      without FWHM restriction.
+
+                                                                      Lastly, we examine the critical impact of the population
+
+                                                                      rate  in Fig. 7(c). In both the SQL and PSL regimes, the
+
+                                                                      SNR ratio increases once we enlarge the population rate. To
+
+                                                                      elaborate more on the high impact of  , we consider different
+
+                                                                      configurations  of    =                                                                                     0.01% ×   1    and        =  0.1%  reported
+                                                                                                                                                                                           400
+
+                                                                      in [11], [16] and [66], respectively. They lead to widely
+
+                                                                      different conclusions, where the first configuration reveals the
+
+                                                                      RAQR is inferior to the classical 5G-BS (5G-UE) even in the
+
+                                                                      SQL regime, while the latter configurations illustrate that the
+
+                                                                      RAQR in both regimes outperforms the classical counterparts.
+
+                                                                      Therefore, improving  is the key to ensure the superiority of
+14
+
+                                                                 50
+
+    60                                                                                                                            40
+
+    50                                                           40
+
+    40                                                                                                                            20
+
+                                                                 30
+
+    30                                                                                                                            0
+
+                                                                 20
+
+    20
+
+                                                                 10                                                               -20
+
+    10
+
+       0                                                         0                                                                -40
+
+    -10                                                                                                                           10-2            100           102
+                                                                                         -10
+
+       260         280         300         320        340        -                                    - /2         0     /2
+
+                          (a)                                                        (b)                                                          (c)
+
+       104                                                       100                                                              104
+       102                                                       10-1                                                             102
+       100                                                                                                                        100
+
+    10-2                                                         10-2                                                                10-2
+
+          260      280            300      320        340                                     -       - /2         0     /2                       100           102
+
+                             (d)                                                                              (e)                                 (f)
+
+Fig. 9: The SNR ratio and receiver sensitivity vs. (a)(d) environmental temperature, (b)(e) phase shift, and (c)(f) atomic velocity.
+
+RAQRs. We also notice from [67] that   1% is achievable,                                                           the atomic motion velocity imposing Doppler broadening.
+                                                                                                                   This facilitates the understanding of performance mismatches
+which is what we applied in this article.                                                                          between theory and practice, as well as guide future improve-
+                                                                                                                   ments of realistic experiments.
+    Receiver sensitivity vs. length of vapor cell d, FWHM
+
+of laser beams Fp, and population rate  : In addition to
+
+the received SNR and the SNR ratio, we also showcase the                                                              SNR ratio and receiver sensitivity vs. the environmen-
+
+sensitivity vs. several critical parameters. Upon exploiting the                                                   tal temperature: In realistic applications, the environmental
+                   |h(m)|2 Ps           c0 |Ux |2     |Ux |2
+relationship   of        B        =         2B     =  2Z0 B   ,  we                              can  obtain       temperature may dynamically change, which further influences
+
+the sensitivity of the RAQR in different regimes by setting the                                                    the pressure inside the vapor cell according to the relationship
+
+received SNRs (44), (45), (41) to 0 dB, respectively, namely                                                       of P = 109.717-3999/T , as well as the atomic density via
+
+        = Ux,SQL                        ,                                                        SQL,              N0 =  0.7217P  [68]. Intuitively, the rise of the environmental
+                                                                                                 PSL, (50)                 kB T
+                                                                                                 Total.
+               Hz             µ34 NT2q                                                                             temperature increases both the cell's pressure and its atomic
+       
+        Ux,PSL
+Ux  =          Hz  =                       ,                                                                       density. Based on these relationships, we plot the SNR ratio
+                             (l) 2P1(l)
+    Hz                                                                                                             and receiver sensitivity with respect to the environmental
+                   + + , Ux,SQL 2
+           
+                       Hz
+                                       Ux,PSL 2    kBT GZ0                                                         temperature in Fig. 9(a),(d), respectively.
+                                           Hz           
+
+                                                                                                                      It can be observed from Fig. 9(a) that the SNR ratio (PSL
+
+Likewise, the sensitivity of the classical RF receivers can be                                                     regime) first increases to a maximum and then decreases when
+
+obtained as Ux =             2Z0 kB TBG F  by configuring the received                                             the environmental temperature varies from low to high. By
+                             0 Aiso Gant
+                         Hz
+                                                                                                                   contrast, the receiver sensitivity changes obeying the opposite
+SNR (47) to 0 dB. Based on all above formulas, we present
+
+our simulation results of the sensitivity in Fig. 8.                                                               trend, as seen in Fig. 9(d). Briefly, this phenomenon is
+
+    It is observed that the trend of the sensitivity shown in                                                      caused by the competition between signal enhancement due
+
+Fig. 8 is contrary to that of the SNR ratio portrayed in Fig.                                                      to increased atomic density and signal attenuation due to the
+
+(7). More particularly, the sensitivity of theclassical 5G-BS                                                      substantial absorption of the probe beam. We also note that
+(5G-UE) is 1.8 nV/cm/ Hz (4.88 nV/cm/ Hz), while the
+sensitivity of the RAQR can be as low as 86 pV/cm/ Hz and                                                          the large cell's pressure at high environmental temperatures
+18 pV/cm/ Hz in the PSL and SQL regimes, respectively, ex-
+                                                                                                                   will lead to intensified atomic collisions that cause high-
+
+                                                                                                                   temperature decoherence and hence degrade the performance.
+
+hibiting the extremely high sensitivity of RAQRs for detecting                                                     In practical applications, it is critical to retain a stable envi-
+
+RF signals. We also note that the proposed BCOD scheme is                                                          ronmental temperature for the vapor cell. Designing advanced
+
+capable of achieving the PSL.                                                                                      temperature-controlled systems and/or alternatively resorting
+
+                                                                                                                   to advanced fabrications of vapor cells [69] may become a
+
+D. Influence of Practical Impairments                                                                              promising research direction.
+
+   In this section, we investigate the performance of RAQRs                                                           SNR ratio and receiver sensitivity vs. the optical phase
+influenced by several practical impairments, such as the envi-
+ronmental temperature, mismatch of optical phase shift, and                                                        shift (l): As observed from (41), the maximum of the
+                                                                                                                   received SNR is achieved when cos2 (l) = 1. This con-
+                                                                               15
+
+dition always holds for the DIOD scheme according to (16),                     By contrast, the narrowband assumption becomes violated
+                                                                               when the wireless fading channel is frequency-selective. For
+while requiring fine-tuning l of the local optical beam to                     example, if the coherence time of the wireless fading channel
+guarantee 2(l) = 0, ± according to (19). To investigate                        is less than the atomic coherence time (Tc  T2), RAQRs
+the mismatch of this optical phase shift, we present the SNR                   would no longer reach the steady-state, and hence the steady-
+                                                                               state solution of the Lindblad master equation becomes invalid.
+ratio and receiver sensitivity with respect to this mismatch in                Instead, a time-dependent approach, addressing the differential
+                                                                               equation of the Lindblad master equation, should be employed,
+Fig. 9(b) and Fig. 9(e), respectively.                                         where the Hamiltonian explicitly accounts for the time-varying
+                                                                               RF amplitude corresponding to the channel fluctuations. This
+It can be seen in Fig. 9(b) that the SNR ratio of the                          transient solution represents the interplay between the chan-
+                                                                               nel dynamics and the atomic coherence evolution. Even so,
+BCOD scheme operating in the PSL regime gradually drops                        the maximal supported bandwidth related to each Rydberg
+                                                                               atomic transition is still restricted by the underlying physical
+as (l) moves away from 0, ±, while the worst case occurs                       properties. Given their narrowband but high-sensitivity char-
+at ±/2. This also applies to the receiver sensitivity, which                   acteristics, RAQRs may find their potential applications for
+                                                                               small payloads or long-distance communication and sensing.
+however exhibits the opposite trend, as portrayed in Fig. 9(e).                These applications are becoming increasingly important in the
+                                                                               context of future integrated space-air-ground-sea networks.
+Furthermore, it is robust across a wide mismatch region, where
+                                                                                  BBR modeling revisited: The BBR­induced noise may
+the RAQRs exhibit their performance advantages over the                        be modeled as an additive electric-field noise source, as
+                                                                               adopted in [57], which obeys the conventional paradigm of
+classical 5G-BS (5G-UE), as observed from both sub-figures.                    classical RF receivers. This treatment potentially provides a
+                                                                               practical engineering-oriented perspective for estimating the
+SNR ratio and receiver sensitivity vs. the atomic motion                       BBR­induced noise contribution. However, it may fail to
+                                                                               accurately represent the dissipative quantum nature of the
+velocity: The thermally induced motion of atoms causes                         BBR coupling. Alternatively, BBR may be described in terms
+                                                                               of radiation-induced transitions that affect both the decay
+Doppler broadening, which broadens the optical resonance                       rate and coherence time, thereby indirectly influencing the
+                                                                               RAQR's performance. This treatment is supported by pre-
+linewidth and significantly reduces both the SNR ratio and                     vious studies [11], [58], [59] and forms the basis of the
+                                                                               modeling framework employed in this article. To the best
+the receiver sensitivity. Higher atomic motion velocity further                of our knowledge, there is currently no rigorous evidence to
+                                                                               support which treatment is more appropriate, or whether the
+degrades the performance of RAQRs. This Doppler broad-                         two treatments are equivalent for RAQRs. Further investigation
+                                                                               of the BBR-induced noise remains an important direction for
+ening effect is typically included in the relationship 2D1 =                   future research, particularly toward establishing a rigorous
+                                  v2                                           connection between BBR-induced decoherence and classical
+1         21      p , c       e-  u2  dv  [70],  where  u  =   2kB T     is    additive-noise representations in RAQRs.
+  u    -                                                         m
+                                                                                  Experimental verifiability: Although this treatise is pri-
+the most likely atomic motion velocity at temperature T ;                      marily theoretical, the proposed models can be experimentally
+                                                                               validated using a four-level superheterodyne scheme. By ap-
+m = 2.206 × 10-25 kg is the mass of a single Cs atom;                          propriately tuning the laser and RF parameters, and matching
+                                                                               the parameters of this article to those employed in experiments,
+p   =  p  -       2  v  and   c   =   c   +  2   v  represent  the    modi-    one can obtain the beat note waveform, input-output response
+                  p                          c                                 curve, received SNR, and receiver sensitivity corresponding
+                                                                               to different model parameters. These measurements can be
+fied detuning of the counter-propagating probe and coupling                    directly compared to the theoretically predicted counterparts
+                                                                               of this article. Such comparisons would provide a solid basis
+beams. In practice, the integration range can be selected as                   for validating the theoretical framework presented in this
+                                                                               study. To arrive at a better consistency between theory and
+[-au, au], where a  3.                                                         experiments, the above-mentioned experimental measurements
+                                                                               may be performed block by block of the holistic RAQR-aided
+To explicitly show this effect, we plot the SNR ratio and                      wireless receiver. Furthermore, the RF signal's bandwidth is
+                                                                               limited within the 3 dB bandwidth of RAQRs, so the RF
+receiver sensitivity with respect to the atomic motion velocity                signal's waveform can be captured within the response period
+                                                                               of RAQRs. Indeed, we concur that there may exist discrep-
+in Fig. 9(c) and Fig. 9(f), respectively. It can be observed that              ancies between the theory and experiments due to practical
+
+the SNR ratio (in the PSL regime) and receiver sensitivity (in
+
+both the PSL and total noise regime) decreases and increases,
+
+respectively, as the atomic motion velocity varies from low
+
+to high. We also mark the most likely atomic motion velocity
+
+u=     2kB Troom  at    room  temperature,   where  the  RAQRs        exhibit
+           m
+
+inferior performance compared to classical 5G-BS and 5G-
+
+UE. This deleterious effect of Doppler broadening can be
+
+substantially mitigated by reducing the atomic motion velocity,
+
+as observed from the most likely atomic motion velocity
+
+u=     2kB Tcold  at  an  equivalent  low  temperature     of  Tcold  =  200
+           m
+
+µK marked in both sub-figures. Furthermore, we empha-
+
+size that optical cooling technologies, such as the magneto-
+
+optical trap (MOT) [57], may be employed for reducing the
+
+atomic kinetic energy to the µK­mK level without requiring
+
+a cryogenic environment, where the thermal velocity variation
+
+almost disappears and hence the Doppler broadening can be
+
+substantially mitigated.
+
+                          VI. DISCUSSIONS
+
+   Bandwidth adaptability: The proposed signal models are
+mainly valid for narrowband receptions, where the bandwidth
+of received RF signals should be within the 3 dB bandwidth
+of RAQRs. As such, the steady-state of the quantum response
+can be effectively achieved, and thereby the waveform of the
+RF signal can be captured to yield a less distorted probe
+output within the atomic coherence time (T2) of RAQRs.
+16
+
+impairments, but our theoretical framework can characterize          To exploit the potential of RAQRs, we foresee the following
+RAQRs by extracting their mathematical essence. Again, this       potent research directions for future RAQR-aided wireless
+is somewhat reminiscent of the role of Shannon's capacity,        communications and sensing.
+which reflects the essence of communications, despite its
+discrepancies compared to practical communication systems.        D1 Wideband RAQRs: The current study is limited to specific
+                                                                       discrete frequencies that are determined by the transitions
+   Practical challenges and potential solutions: To fully har-         of Rydberg states. The practical wireless communication
+ness the potential of RAQRs in real-world scenarios, several           and sensing applications prefer the wideband receiving
+practical challenges should be addressed before either large-          and processing capabilities of RAQRs.
+scale commercial implementations. Firstly, the requirement
+for narrow-linewidth, frequency-stabilized lasers and precise     D2 RAQ-MIMO: The current implementations are essentially
+optical alignment increases system complexity, cost, size,             restricted to a single pair of laser beams to form a SISO
+weight, and power (C-SWaP). Chip-scale vapor cells, photonic           system. The great potential of RAQRs is expected to be
+integration, and compact laser modules offer promising routes          further exploited to form an RAQ-MIMO system.
+towards miniaturization and robustness. Secondly, maintaining
+atomic coherence under realistic environmental conditions is      D3 Practical applications: The current study hinges on simpli-
+difficult due to thermal drift, laser noise, etc. Active tem-          fied assumptions and theoretical models. But the influence
+perature stabilization, laser frequency locking, and coherent          of practical impairments should be thoroughly investigated
+population trapping based stabilization may significantly im-          to explore the realistic boundaries and facilitate the prac-
+prove system stability. Finally, for practical applications such       tical deployments.
+as communication, radar, and field metrology, integration with
+compact optics, robust packaging, and automated calibration                          APPENDIX A
+become essential. Continued progress in atomic device en-                    THE COEFFICIENTS OF (3)
+gineering, integrated photonics, and quantum-domain control
+is expected to gradually bridge the gap between theoretical       A1 = -2p,                                    (51)
+demonstrations and real-world deployments of RAQRs.
+                                                                  A2 = 16c2p + 32cp2 + 16lcp - 2c2c
+              VII. CONCLUSIONS AND OUTLOOK
+                                                                  + 163p + 16l2p - 2pc2 - 2lc2,                (52)
+   In this article, we have proposed an end-to-end RAQR-
+aided wireless receiver scheme by presenting its functional       A3 = -324c p - 64c3lp - 1283c p2 + 83c c2
+blocks and constructed a corresponding equivalent baseband
+signal model. Our model follows a realistic signal reception      - 32c22l p - 1922c l2p + 16c2lc2 - 1922c 3p
+flow and takes into consideration the actual implementation of
+the RAQRs, which makes our model practical. The proposed          + 24c2p2c - 64cl2p2 + 8cl2c2 - 192cl3p
+scheme and model may be readily harnessed for system design
+and signal processing for future RAQR-aided wireless com-         + 32clp2c - 128cp4 + 24c2pc2 - 322l p3
+munications and sensing. We have further studied the DIOD
+and BCOD photodetection schemes, and have theoretically           + 8l2p2c - 64l4p + 16lp22c
+demonstrated that the BCOD scheme always outperforms the
+DIOD scheme. We have also compared the RAQRs to the               - 325p + 83p2c ,                             (53)
+classic RF receivers and shown the superiority of RAQRs in
+achieving a substantial received SNR gain of over 27 dB and       B1 = 2,                                      (54)
+40 dB in the PSL and SQL regimes, respectively.
+                                                                  B2 = 82 -c2 - 2cp - lc - p2 - lp , (55)
+   Our results unveil the great potential of RAQRs and offer an
+easy-to-handle framework for future studies. Our signal model     B3 = 162c4 + 3223c l + 642c3p + 1622c l2
+is expected to facilitate the following aspects                   + 962c2lp + 9622c p2 + 322cl2p
+
+A1 The current signal model is conceived for narrowband           + 962clp2 + 642cp3 + 162l2p2
+     single-input single-output (SISO) systems, which serves
+     as a basis to construct signal models for complex wireless   + 322l3p + 1624p,                            (56)
+     systems, e.g., wideband and MIMO systems.
+                                                                  C1 = 42p + 22p + 22,                         (57)
+A2 Based on the proposed signal model, theoretical studies
+     and system design are facilitated for RAQR-aided wireless    C2 = -32c22p - 16c22p - 8c222 - 64cp3
+     systems. Our model also allows system comparisons in a
+     convenient way.                                              - 32lc2p + 8cp2c - 32cpp2 - 16cp22
+
+A3 The proposed signal model facilitates the development of       - 16lcp2 - 8lc22 - 324p - 32l3p + 8p22c
+     advanced signal processing approaches and optimization
+     algorithms for realizing various upper-level objectives in   - 162pp2 - 82p22 + 8lp2c - 16lp2p
+     the RAQR-aided wireless systems.
+                                                                  - 8lp22 + 2c22p + 2p4,                       (58)
+
+                                                                  C3 = 64c4p2 + 32c4p2 + 164c 22 + 128c3lp2
+
+                                                                  + 64c3l2p + 32c3l22 + 2563c p3 - 323c pc2
+
+                                                                  + 1283c pp2 + 64c3p22 + 642c 2l p2 + 32c2l22p
+
+                                                                  + 16c2l222 + 384c2l3p - 64c2lp2c
+
+                                                                  + 1922c lpp2 + 962c lp22 + 384c2p4
+
+                                                                  - 962c 2p2c + 1922c 2p2p + 96c2p222 + 4c2c4
+
+                                                                  + 82c 2c p2 + 82c p4 + 128c2l 3p - 32cl2pc2
+
+                                                                  + 64cl2p2p + 32c2l p22 + 384clp4
+                                                                                                                                                17
+
+                             Py sin  2f t+x+y           cos  2f t+x-y                        Py cos      2f t+x+y           sin     2f t+x-y
+          (1) Px +                            2                       2         + Px -                            2                          2
+tan(z) = 
+                             Py cos  2f t+x+y           cos  2f t+x-y                           Py sin   2f t+x+y           sin     2f t+x-y
+                  Px +                        2                       2           - Px -                          2                          2
+
+          (2) sin   2f t+x+y         cos   2f t+x-y          - cos    2f t+x+y          sin  2f t+x-y             sin (y)
+                             2                      2                          2                      2           cos (y)
+                                                                                                           =                =  tan(y ).         (60)
+                    2f t+x+y               2f t+x-y                   2f t+x+y               2f t+x-y
+               cos           2       cos            2        + sin             2        sin           2
+
+- 128clp22c + 192cl2pp2 + 96cl2p22                                           We exploit l  x and express Pmix(RF) 
+                                                                                2P1(RF) cos (l - p(RF)) in the vicinity of a given
++ 8clc4 + 16cl2c p2 + 8cl4p + 256cp5
+                                                                             point RF = l using the Taylor series expansion. Upon
+- 96cp3c2 + 128c3p2p + 64cp322 + 8cpc4
+                                                                             retaining the first-order term and ignoring the high-order
++ 16cpc22p + 16cpp4 + 64l2p4 - 32l2p2c2                                      terms, we have Pmix(RF)  Pmix(l) + Pm ix(l) (RF - l).
+                                                                             Specifically, the first-order derivative is derived as
++ 322l p2p2 + 16l2p222 + 42l 4c + 8l22c 2p
+
++ 42l p4 + 128lp5 - 64l3pc2 + 64lp3p2                                        Pm ix(RF) RF=l =                                                                   
+
++ 32lp322 + 8lp4c + 16lpc2p2 + 8lp4p                                                                    2P1(RF) cos (l - p(RF))
+
+                                                                                                                                                                   RF =l
+
++ 64p6 - 324p2c + 324pp2 + 164p22 + 4p24c                                    =    -  d       2P1(l) cos (l - p(l)) I {(l)}
+                                                                                     p
+
++ 8p22c p2 + 82p4p.                                              (59)                                    - sin (l - p(l)) R{(l)} .
+
+                             APPENDIX B                                      Upon defining I {(l)} = A cos p(l) and R{(l)} =
+                  THE PROOFS OF (12) AND (13)
+                                                                             A sin p(l), where A  [I {(l)}]2 + [R{(l)}]2
+   The power of the superposition z(t) can be obtained by its
+equivalent baseband signal zb(t) = xb(t)e2ft + yb(t) as                      and  p(l)  =    arccos  I  { (l  )}  ,  we  have
+Pz = zb2 (t) = xb(t)e2ft + yb(t) xb(t)e2ft + yb(t)                                                         A
+
+     = Px + Py + PxPy e(2ft+) + e-(2ft+)                                          Pm ix(RF)  RF =l   =  -  d         2P1(l)
+                                                                                                           p
+
+                                                                                                     × A cos (l - p(l) + p(l)) .
+
+                                                                             Further  exploiting  the relationship   x   =     µ34  Ux  ,  and  defining
+                                                                             2(l)                 and 2(l)                      
+                                                                                        A dµ34
+    = Px + Py + 2 PxPy cos (2ft + ) .                                                                                l - p(l) + p(l), we
+                                                                                         p
+
+Therefore,  based   on  the  relationship  of  Pz  =    1  c0Ae  |Uz  |2  ,  have V (B)(t) approximated to
+                                                        2
+                                                                             V (B)(t)   
+
+the amplitude Uz is formulated as                                                            G    2PlPmix(l)
+                                                                                             
+                                                                                                     2PlPm ix(l) (RF - l)
+    Uz = |Ux|2 + |Uy|2 + 2UxUy cos (2ft + ).                                            + G
+                                                                                          
+
+                                 ex  e2f t      Pyey in the form                         2 G PlP1(l) cos (l - p(l)) - 2(l)
+                             Px
+We  then  write  zb(t)  =                   +
+
+of its real and imaginary parts as follows                                                   × cos 2(l)Ux cos (2ft + ) ,
+
+    zb (t) = Px cos (2ft + x) + Py cos (y)                                   which completes the proof.
+
+            +  Px sin (2ft + x) + Py sin (y) .                                                           REFERENCES
+
+Let us denote the phase of zb(t) by z. We then ob-                           [1] ITU, "Framework and overall objectives of the future development of
+                                                                                  IMT for 2030 and beyond," International Telecommunication Union
+tain tan(z)  tan(y) in (60). Therein, (1) holds using                             (ITU) Recommendation (ITU-R), 2023.
+                                           x+y          x-y
+A sin(x) + B sin(y) =      (A + B) sin       2  cos       2   + (A -         [2] J. Moghaddasi and K. Wu, "Multifunction, multiband, and multimode
+                                                             = (A +               wireless receivers: A path toward the future," IEEE Microw. Mag.,
+B) cos  x+y    sin  x-y      and A cos(x) + B cos(y)          , respec-           vol. 21, no. 12, pp. 104­125, Dec. 2020.
+B) cos  x+2 y  cos  x2-y
+                           -(A-B) sin      x+y     sin  x-y                  [3] E. G. Larsson et al., "Massive MIMO for next generation wireless
+          2           2                      2            2                       systems," IEEE Commun. Mag., vol. 52, no. 2, pp. 186­195, 2014.
+
+tively. The approximation (2) holds relying on Py  Px.                       [4] T. Gong, P. Gavriilidis et al., "Holographic MIMO communications:
+                                                                                  Theoretical foundations, enabling technologies, and future directions,"
+Further applying the Taylor series expansion to the above Uz,                     IEEE Commun. Surveys Tuts., vol. 26, no. 1, pp. 196­257, 2024.
+
+we have (13). The proofs are completed.                                      [5] T. Gong, L. Wei et al., "Near-field channel modeling for holographic
+                                                                                  MIMO communications," IEEE Wireless Commun., vol. 31, no. 3, pp.
+                            APPENDIX C                                            108­116, 2024.
+
+                       THE PROOF OF (17)                                     [6] J. P. Dowling and G. J. Milburn, "Quantum technology: the second
+ We first derive the expression of V (B)(t) = GIp(Bh)(t) as                       quantum revolution," Philos. Transact. A Math. Phys. Eng. Sci., vol.
+                                                                                  361, no. 1809, pp. 1655­1674, 2003.
+            
+V (B)(t) = G Plb (t) Pb (RF, t) + Plb (t) Pb (RF, t)                         [7] C. L. Degen, F. Reinhard, and P. Cappellaro, "Quantum sensing," Rev.
+                                                                                  Mod. Phys., vol. 89, no. 3, p. 035002, 2017.
+              
+         = 2 G PlP1(RF) cos (l - p(RF)) .                                    [8] M. Gschwendtner et al., "Quantum sensing can already make a differ-
+                                                                                  ence. but where?" J. Innov. Manag., vol. 12, no. 1, 2024.
+18
+
+ [9] N. Schlossberger et al., "Rydberg states of alkali atoms in atomic vapour   [35] A. K. Robinson et al., "Determining the angle-of-arrival of a radio-
+      as SI-traceable field probes and communications receivers," Nat. Rev.            frequency source with a Rydberg atom-based sensor," Appl. Phys. Lett.,
+      Phys., pp. 1­15, 2024.                                                           vol. 118, no. 11, Mar. 2021.
+
+[10] H. Zhang et al., "Rydberg atom electric field sensing for metrology,        [36] F. Zhang et al., "Quantum wireless sensing: Principle, design and
+      communication and hybrid quantum systems," Sci. Bull., vol. 69, no. 10,          implementation," in Proc. 29th Ann. Int. Conf. Mobile Comput. Netw.,
+      pp. 1515­1535, 2024.                                                             2023, pp. 1­15.
+
+[11] C. T. Fancher et al., "Rydberg atom electric field sensors for commu-       [37] D. H. Meyer, K. C. Cox, F. K. Fatemi, and P. D. Kunz, "Digital com-
+      nications and sensing," IEEE Trans. Quantum Eng., vol. 2, pp. 1­13,              munication with Rydberg atoms and amplitude-modulated microwave
+      2021.                                                                            fields," Appl. Phys. Lett., vol. 112, no. 21, 2018.
+
+[12] T. Gong, A. Chandra, C. Yuen, Y. L. Guan, R. Dumke, C. M. S. See,           [38] Y. Cai et al., "High-sensitivity Rydberg-atom-based phase-modulation
+      M. Debbah, and L. Hanzo, "Rydberg atomic quantum receivers for                   receiver for frequency-division-multiplexing communication," Phys. Rev.
+      classical wireless communication and sensing," IEEE Wireless Commun.,            Appl., vol. 19, no. 4, p. 044079, 2023.
+      vol. 32, no. 5, pp. 90­100, 2025.
+                                                                                 [39] J. Yuan et al., "A Rydberg atom-based receiver with amplitude modu-
+[13] P. Botsinis et al., "Quantum search algorithms, quantum wireless, and             lation technique for the fifth-generation millimeter-wave wireless com-
+      a low-complexity maximum likelihood iterative quantum multi-user                 munication," IEEE Antennas Wirel. Propag. Lett., 2023.
+      detector design," IEEE Access, vol. 1, pp. 94­122, 2013.
+                                                                                 [40] P. Zhang et al., "Image transmission utilizing amplitude modulation in
+[14] P. Botsinis, D. Alanis et al., "Quantum search algorithms for wireless            Rydberg atomic antenna," IEEE Photonics J., 2024.
+      communications," IEEE Commun. Surv. Tutor., vol. 21, no. 2, pp. 1209­
+      1242, 2019.                                                                [41] M. Cui, Q. Zeng, and K. Huang, "Towards atomic MIMO receivers,"
+                                                                                       IEEE J. Sel. Areas Commun., 2025.
+[15] J. A. Sedlacek et al., "Microwave electrometry with Rydberg atoms in a
+      vapour cell using bright atomic resonances," Nat. Phys., vol. 8, no. 11,   [42] S. S. Yuan, X. Y. Xu, J. Yuan, G. Xie, C. Huang, X. Chen, Z. Huang, and
+      pp. 819­824, Nov. 2012.                                                          W. E. Sha, "Electromagnetic modeling and capacity analysis of Rydberg
+                                                                                       atom-based MIMO system," IEEE Antennas Wirel. Propag. Lett., 2025.
+[16] H. Fan et al., "Atom based RF electric field sensing," J. Phys. B At.
+      Mol. Opt. Phys., vol. 48, no. 20, p. 202001, Sep. 2015.                    [43] G. Santamaria-Botello et al., "Comparison of noise temperature of
+                                                                                       Rydberg-atom and electronic microwave receivers," arXiv preprint
+[17] M. T. Simons et al., "A Rydberg atom-based mixer: Measuring the phase             arXiv:2209.00908, 2022.
+      of a radio frequency wave," Appl. Phys. Lett., vol. 114, no. 11, 2019.
+                                                                                 [44] J. Kitching, S. Knappe, and E. A. Donley, "Atomic sensors­a review,"
+[18] M. Jing et al., "Atomic superheterodyne receiver based on microwave-              IEEE Sens. J., vol. 11, no. 9, pp. 1749­1758, 2011.
+      dressed Rydberg spectroscopy," Nat. Phys., vol. 16, no. 9, pp. 911­915,
+      Sep. 2020.                                                                 [45] K. C. Cox, D. H. Meyer, F. K. Fatemi, and P. D. Kunz, "Quantum-limited
+                                                                                       atomic receiver in the electrically small regime," Phys. Rev. Lett., vol.
+[19] N. Prajapati et al., "Enhancement of electromagnetically induced trans-           121, no. 11, p. 110502, 2018.
+      parency based Rydberg-atom electrometry through population repump-
+      ing," Appl. Phys. Lett., vol. 119, no. 21, 2021.                           [46] S. O. Kasap, Optoelectronics and Photonics: Principles and Practices.
+                                                                                       Pearson Education UK, 2013.
+[20] S. Boro´wka et al., "Continuous wideband microwave-to-optical con-
+      verter based on room-temperature Rydberg atoms," Nat. Photon., vol. 18,    [47] S. J. Orfanidis, Electromagnetic waves and antennas. Rutgers Univer-
+      no. 1, pp. 32­38, 2024.                                                          sity New Brunswick, NJ, 2016.
+
+[21] C. L. Holloway et al., "Broadband Rydberg atom-based electric-field         [48] M. Auzinsh, D. Budker, and S. Rochester, Optically polarized atoms:
+      probe for SI-traceable, self-calibrated measurements," IEEE Trans. An-           understanding light-atom interactions. Oxford University Press, 2010.
+      tennas Propag., vol. 62, no. 12, pp. 6169­6182, Dec. 2014.
+                                                                                 [49] S. Wu, C. Gong et al., "Theoretical analysis of heterodyne Rydberg
+[22] Y. Zhou et al., "Theoretical investigation on the mechanism and law               atomic receiver sensitivity based on transit relaxation effect and fre-
+      of broadband terahertz wave detection using Rydberg quantum state,"              quency detuning," arXiv preprint arXiv:2306.17790, 2023.
+      IEEE Photonics J., vol. 14, no. 3, pp. 1­8, 2022.
+                                                                                 [50] S. Wu, R. Ni et al., "Atomic superheterodyne receiver sensitivity esti-
+[23] C. Holloway et al., "A multiple-band Rydberg atom-based receiver:                 mation based on homodyne readout," arXiv preprint arXiv:2309.16097,
+      AM/FM stereo reception," IEEE Antennas Propag. Mag., vol. 63, no. 3,             2023.
+      pp. 63­76, June 2021.
+                                                                                 [51] S. Boro´wka, U. Pylypenko, M. Mazelanik, and M. Parniak, "Sensitivity
+[24] M. T. Simons et al., "Continuous radio-frequency electric-field detection         of a Rydberg-atom receiver to frequency and amplitude modulation of
+      through adjacent Rydberg resonance tuning," Phys. Rev. A, vol. 104,              microwaves," Appl. Opt., vol. 61, no. 29, pp. 8806­8812, 2022.
+      no. 3, p. 032824, 2021.
+                                                                                 [52] A. K. Robinson et al., "Atomic spectra in a six-level scheme for
+[25] X.-H. Liu et al., "Continuous-frequency microwave heterodyne detection            electromagnetically induced transparency and Autler-Townes splitting
+      in an atomic vapor cell," Phys. Rev. Appl., vol. 18, no. 5, p. 054003,           in Rydberg atoms," Phy. Rev. A, vol. 103, no. 2, p. 023704, 2021.
+      2022.
+                                                                                 [53] D. H. Meyer et al., "Optimal atomic quantum sensing using
+[26] S. Berweger et al., "Rydberg-state engineering: investigations of tuning          electromagnetically-induced-transparency readout," Phys. Rev. A, vol.
+      schemes for continuous frequency sensing," Phys. Rev. Appl., vol. 19,            104, no. 4, p. 043103, Oct. 2021.
+      no. 4, p. 044049, 2023.
+                                                                                 [54] H. A. Haus, Electromagnetic noise and quantum optical measurements.
+[27] B. Wu, D. Liao, D. Sang, Y. Liu, and Y. Fu, "Enhancing sensitivity                Springer Science & Business Media, 2012.
+      of an atomic microwave receiver via a fabry-perot cavity," IEEE Trans.
+      Antennas Propag., vol. 73, no. 2, pp. 863­872, 2025.                       [55] D. Tse and P. Viswanath, Fundamentals of wireless communication.
+                                                                                       Cambridge university press, 2005.
+[28] B. Wu et al., "Enhancing sensitivity of atomic microwave receivers based
+      on optimal laser arrays," IEEE Trans. Antennas Propag., vol. 73, no. 2,    [56] M. A. Richards, Fundamentals of radar signal processing. Mcgraw-hill
+      pp. 793­806, 2025.                                                               New York, 2005, vol. 1.
+
+[29] J. Sedlacek, A. Schwettmann, H. Ku¨bler, and J. Shaffer, "Atom-based        [57] H.-T. Tu et al., "Approaching the standard quantum limit of a Rydberg-
+      vector microwave electrometry using rubidium Rydberg atoms in a vapor            atom microwave electrometer," Sci. Adv., vol. 10, no. 51, p. eads0683,
+      cell," Phys. Rev. Lett., vol. 111, no. 6, p. 063001, 2013.                       2024.
+
+[30] D. A. Anderson, E. G. Paradis, and G. Raithel, "A vapor-cell atomic         [58] T. F. Gallagher, Rydberg atoms. Cambridge University Press, 1994.
+      sensor for radio-frequency field detection using a polarization-selective  [59] I. Beterov et al., "Quasiclassical calculations of blackbody-radiation-
+      field enhancement resonator," Appl. Phys. Lett., vol. 113, no. 7, 2018.
+                                                                                       induced depopulation rates and effective lifetimes of Rydberg nS, nP,
+[31] D. A. Anderson et al., "A self-calibrated SI-traceable Rydberg atom-              and nD alkali-metal atoms with n  80," Phys. Rev. A: At. Mol. Opt.
+      based radio frequency electric field probe and measurement instrument,"          Phys., vol. 79, no. 5, p. 052504, 2009.
+      IEEE Trans. Antennas Propag., vol. 69, no. 9, pp. 5931­5941, Sep. 2021.    [60] X. Y. Xu, G. Xie, J. Ma, L. Ying, J. Yuan, Z. Huang, and W. E.
+                                                                                       Sha, "Fast simulation for interacting four-level Rydberg atoms: electro-
+[32] D. A. Anderson, R. E. Sapiro, and G. Raithel, "An atomic receiver                 magnetically induced transparency and Autler-Townes splitting," Opt.
+      for AM and FM radio communication," IEEE Trans. Antennas Propag.,                Express, vol. 32, no. 12, pp. 21 755­21 766, 2024.
+      vol. 69, no. 5, pp. 2455­2462, 2020.                                       [61] 3GPP, "Study on International Mobile Telecommunications (IMT) pa-
+                                                                                       rameters for 6.425 - 7.025 GHz, 7.025 - 7.125 GHz and 10.0 - 10.5
+[33] C. L. Holloway et al., "Detecting and receiving phase-modulated signals           GHz," 3GPP, Tech. Rep. 3GPP TR 38.921 version 17.1.0 Release 17,
+      with a Rydberg atom-based receiver," IEEE Antennas Wirel. Propag.                2022.
+      Lett., vol. 18, no. 9, pp. 1853­1857, Sep. 2019.                           [62] C. A. Balanis, Antenna theory: analysis and design. John wiley &
+                                                                                       sons, 2016.
+[34] J. Nowosielski et al., "Warm Rydberg atom-based quadrature amplitude-
+      modulated receiver," Opt. Express, vol. 32, no. 17, pp. 30 027­30 039,
+      Aug. 2024.
+                                                                                                                                                                                                                            19
+
+[63] L. Belostotski and S. Jagtap, "Down with noise: An introduction to a
+      low-noise amplifier survey," IEEE Solid-State Circuits Mag., vol. 12,
+      no. 2, pp. 23­29, 2020.
+
+[64] B.-H. Wu et al., "Enhanced spectral profile in the study of Doppler-
+      broadened Rydberg ensembles," Sci. Rep., vol. 7, no. 1, p. 9726, 2017.
+
+[65] M. T. Simons, J. A. Gordon, and C. L. Holloway, "Simultaneous use of
+      Cs and Rb Rydberg atoms for dipole moment assessment and RF electric
+      field measurements via electromagnetically induced transparency," J.
+      Appl. Phys., vol. 120, no. 12, 2016.
+
+[66] S. M. Bohaichuk et al., "Origins of Rydberg-atom electrometer transient
+      response and its impact on radio-frequency pulse sensing," Phys. Rev.
+      Appl., vol. 18, no. 3, p. 034030, 2022.
+
+[67] R. C. Brown et al., "Very-high-and ultrahigh-frequency electric-field
+      detection using high angular momentum Rydberg states," Phys. Rev. A,
+      vol. 107, no. 5, p. 052605, 2023.
+
+[68] A. P. Rotunno et al., "Investigating electromagnetically induced trans-
+      parency spectral lineshape distortion due to non-uniform fields in
+      Rydberg-atom electrometry," J. Appl. Phys., vol. 134, no. 8, 2023.
+
+[69] Y. Li et al., "Wafer-scale fabrication of temperature-compensated alkali
+      vapor cells," Appl. Phys. Lett., vol. 126, no. 22, 2025.
+
+[70] C. L. Holloway et al., "Electric field metrology for SI traceability:
+      Systematic measurement uncertainties in electromagnetically induced
+      transparency in atomic vapor," J. Appl. Phys., vol. 121, no. 23, 2017.
+

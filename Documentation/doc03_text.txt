@@ -1,0 +1,700 @@
+        Rydberg Atomic Receiver Simulation
+
+               Complete Numerical Parameter Sheet
+
+                          Parameters used for Fig. 3­Fig. 7 simulations
+Paper values, physical constants, derived values, and implementation-specific quantities
+
+How to Use This Sheet
+
+This document is intended as a quick-reference sheet for the M.Tech. thesis simulation.
+    Three categories are used throughout:
+
+        · PAPER-STATED: directly reported in the reference paper or supplementary material.
+        · DERIVED: calculated directly from paper-stated quantities using the stated equations.
+        · IMPLEMENTATION / CALIBRATION: a numerical choice made in the present re-
+
+           production code because the paper does not completely specify the corresponding numerical
+           procedure.
+        · UNRESOLVED: a quantity for which the paper does not provide enough information for a
+           unique reconstruction.
+
+    Important: values labelled implementation/calibration must not be presented to the guide as if they
+were explicitly printed in the paper.
+
+1 1. Physical Constants
+
+Table 1: Physical constants used in the numerical implementation.
+
+Quantity              Symbol Value                                              Unit
+
+Boltzmann constant    kB                                 1.380649 × 10-23       J/K
+                                                         1.054571817 × 10-34    Js
+Reduced Planck constant                                  1.602176634 × 10-19    C
+                                                         5.29177210903 × 10-11  m
+Elementary charge     e                                  8.854 × 10-12          F/m
+                                                                                
+Bohr radius           a0                                 377                    m/s
+                                                         2.99792458 × 108
+Vacuum permittivity   0
+
+Free-space impedance  0
+
+Speed of light        c
+
+    Note: the frozen Fig. 3 implementation currently retains rounded values
+                                       e = 1.6 × 10-19 C, a0 = 5.2 × 10-11 m,
+
+whereas the reference parameter sheet gives the standard precise values above. These should not be
+mixed silently between simulations.
+
+2 2. Atomic System
+
+The receiver is modelled as a four-level cesium system,
+
+                      |1  |2  |3  |4,
+
+corresponding to
+
+                          1
+                             Table 2: Atomic-system parameters.
+
+Parameter                      Symbol Value                                  Unit
+
+Vapor-cell length              L              1 cm                           m
+Atomic density                                1 × 1015                       m-3
+State |1 decay                 N0             0                              rad/s
+State |2 decay                 1              5.2                            MHz
+State |3 decay                 2/(2)          3.9                            kHz
+State |4 decay                 3/(2)          1.7                            kHz
+RF transition dipole           4/(2)          -1443.459 ea0                  Cm
+Probe transition dipole        RF             2.5 ea0                        Cm
+RF carrier frequency           12             3.5                            GHz
+Probe wavelength               fRF            852                            nm
+Coupling wavelength            p              510                            nm
+Probe Rabi frequency           c              8                              MHz
+Coupling Rabi frequency        p/(2)          1                              MHz
+                               c/(2)
+
+                                        6S1/2  6P3/2  47D5/2  48P3/2.
+For the numerical implementation,
+
+                             2 = 2(5.2 × 106),                                      (1)
+
+                             3 = 2(3.9 × 103),                                      (2)
+
+                             4 = 2(1.7 × 103),                                      (3)
+
+                             p = 2(8 × 106),                                        (4)
+
+                             c = 2(1 × 106).                                        (5)
+
+The RF transition dipole is
+
+                             RF = -1443.459 e a0.                                   (6)
+
+The probe dipole quantity used by the frozen Fig. 3 code is
+
+                             12 = (2.5ea0)2.                                        (7)
+
+3 3. Probe Optical Parameters
+
+          Table 3: Probe laser and optical parameters.
+
+Quantity                                      Symbol Value Unit
+
+Probe wavelength                              p                        852   nm
+                                                                             nm
+Coupling wavelength                           c                        510   MHz
+                                                                             MHz
+Probe Rabi frequency                          p/(2) 8                        mm
+                                                                             mm
+Coupling Rabi frequency                       c/(2) 1                        mm
+                                                                             cm
+Probe beam diameter                           d                        0.76
+
+Probe beam radius used by frozen code dcode                            0.38
+
+Coupling beam diameter                        ­                        1.95
+
+Cell length                                   L                        1
+
+The paper explicitly calls 0.76 mm the 1/e2 beam diameter.
+However, the frozen Fig. 3 code uses
+
+                               2
+                                     dcode = 0.38 mm                   (8)
+
+as an empirical calibration choice.
+
+This is not a paper-stated radius interpretation.
+
+4 4. Probe Input Power
+
+The paper's Eq. (3) is
+
+                                                   dp    2             (9)
+                                     Pin = 20      2 12
+                                                          .
+
+Using the frozen Fig. 3 calibration
+
+                                     d = 0.38 mm,
+
+gives
+
+                                     Pin = 9.7690 µW.                  (10)
+
+For comparison, using the paper's literal stated diameter,
+
+                                     d = 0.76 mm,
+
+gives
+
+                                     Pin = 39.0761 µW.                 (11)
+
+Therefore,
+
+                                     39.0761        4.                 (12)
+
+                                     9.7690
+
+The factor of four follows directly from the squared dependence on d.
+
+5 5. Susceptibility and Optical Transmission
+
+The susceptibility coefficient is
+
+                                     C0  =   - 2N012 .                 (13)
+                                                0p
+
+Using the rounded constants in the frozen Fig. 3 implementation,
+
+                                     C0  -1.84362 × 10-5.              (14)
+
+The susceptibility is
+
+                                     (t) = C021(t).                    (15)
+
+The probe output power is
+
+                                   Pout(t) = Pin exp[-kpL Im{(t)}]     (16)
+
+where
+
+                                         kp     =  2                   (17)
+                                                      .
+                                                   p
+
+For p = 852 nm,
+
+                                     kp  7.37463 × 106 rad/m.          (18)
+
+No additional plotting normalization or scaling factor is used.
+
+                                                3
+6 6. Four-Level Hamiltonian
+
+All master-equation frequencies are angular frequencies in rad/s.
+    The Hamiltonian used in the numerical model is
+
+                               H = - p|22| - (p + c)|33|                           (19)
+
+                               - (p + c + RF)|44|                                  (20)
+
+                               + p (|12| + |21|)                                   (21)
+                                       2
+
+                               + c (|23| + |32|)                                   (22)
+                                       2
+
+                               + RF (|34| + |43|) .                                (23)
+                                       2
+
+The steady-state density matrix is obtained from
+
+                               ss = steadystate(H, {Ci}).                          (24)
+
+The optical response is obtained from
+
+                                       21 = 2|ss|1.                                (25)
+
+7 7. Decay / Collapse Operators
+
+The cascade decay model uses
+
+                                          
+                                       C2 = 2|12|,                                 (26)
+                                          
+                                       C3 = 3|23|,                                 (27)
+                                          
+                                       C4 = 4|34|.                                 (28)
+
+Thus,
+
+                                       2/(2) = 5.2 MHz,                            (29)
+
+                                       3/(2) = 3.9 kHz,                            (30)
+
+                                       4/(2) = 1.7 kHz.                            (31)
+
+8 8. LO-Free Receiver Parameters
+
+                               Table 4: LO-free receiver parameters.
+
+       Quantity                           Symbol     Value Unit
+
+       RF Rabi frequency                  RF/(2)     6             MHz
+       Observation uncertainty            ~          0.5%          ­
+       QPN variance                       Q2 PN      0             implementation
+       AT threshold                       RF,th/(2)  5.500         MHz
+
+The LO-free noise variance is
+
+                               R2 y = B2 GN + Q2 PN + ~2PRx.                       (32)
+
+The corresponding SNR is
+
+                                          4
+                            SNRRy    =  B2 GN   PRx|h|2         .                (33)
+                                               + Q2 PN + ~2PRx
+
+The current implementation uses
+
+                                        Q2 PN = 0                                (34)
+
+as a paper-licensed simplification.
+
+9 9. LO-Dressed Receiver Parameters
+
+                       Table 5: LO-dressed receiver parameters.
+
+           Quantity                                Symbol Value Unit
+
+           LO Rabi frequency                       LO/(2) 4.23           MHz
+                                                                         kHz
+           RF Rabi frequency                       RF/(2) 20             kHz
+                                                                         MHz
+           RF­LO frequency difference              f               150   dB
+                                                                         ­
+           Coupling detuning                       c               0     
+                                                                         A/W
+           LNA gain                                GLNA            20    K
+                                                                         ­
+           LNA gain, linear                        GLNA            100   rad
+
+           Load resistance                         RL              50
+
+           Photodiode responsivity                 D               0.55
+
+           Temperature                             T               290
+
+           Photon efficiency                       eff             0.8
+
+           Phase used in current implementation                    0
+
+The phase
+
+                                         = 0                                     (35)
+
+is an implementation assumption, not a paper-stated parameter.
+
+10 10. Wireless / Communication Parameters
+
+                       Table 6: Wireless communication parameters.
+
+           Quantity                     Symbol Value               Unit
+
+           Transmit antenna gain        GTx        2.15            dBi
+           Transmit gain, linear        GTx        1.640590        ­
+           Receive antenna gain         GRx        2.15            dBi
+           Receive gain, linear         GRx        1.640590        ­
+           RF carrier frequency         fRF        3.5             GHz
+           RF wavelength                RF         0.0856550       m
+           Background noise power       B2 GN      -90 dBm         W-equivalent
+           Background noise in watts    B2 GN      1.0 × 10-12     W
+           Bandwidth                    B          1               MHz
+           Temperature                             290             K
+                                        T
+
+The dBm conversion is
+
+                                     PW = 10(PdBm-30)/10.                        (36)
+
+                                               5
+The gain conversion is
+
+                                       Glinear = 10GdB/10.          (37)
+
+11 11. Received RF Power and RF Rabi Frequency
+
+The Rydberg receiver uses
+
+                                       PRx  =  PTxGTx0  .           (38)
+                                                  4d2
+
+The RF field magnitude is related to the received quantity through
+
+                                       |ERF| = PRx,                 (39)
+
+under the paper's adopted convention.
+The RF Rabi frequency is
+
+                                    RF = |RF| PRx.                  (40)
+
+                                               
+
+12 12. Conventional Receiver
+
+The effective received power used in the present implementation is
+
+                                Pc(d) =     PTxGTx    2RF .         (41)
+                                              4d2     4
+
+The conventional noise variance is
+
+                                C2 onv = GRxGLNAB2 GN + 4kBT B.     (42)
+
+For the current parameter set,
+
+                                4kBT B = 1.601553 × 10-14 W         (43)
+
+and
+
+                                C2 onv = 1.640750 × 10-10 W.        (44)
+
+13 13. Fig. 5 Static QuTiP Simulation
+
+The LO-dressed operating point is
+
+                                       LO = 4.23 MHz,               (45)
+                                       2
+
+                                       RF = 20 kHz,                 (46)
+                                       2
+
+                                       f = 150 kHz,                 (47)
+
+                                       c = 0.                       (48)
+
+The static quantum response is generated by sweeping
+
+                                    0  total  16 MHz                (49)
+                                            2
+
+with
+
+                                               6
+                                               801                                        (50)
+
+QuTiP points in the Fig. 5 static-response implementation.
+The response is
+
+                                total - 21 -  - Pout.                                     (51)
+
+14 14. Linear Dynamic Range and 
+
+The linear dynamic range is determined using an operating-point-anchored linear fit with
+
+                                       R2  0.995.                                         (52)
+
+The wider Fig. 6 QuTiP sweep uses
+
+                                      0  total/(2)  25 MHz,                               (53)
+
+                                Nsweep = 641.                                             (54)
+
+The resulting linear region is approximately
+
+                                0.4688  total  7.9688 MHz.                                (55)
+                                       2
+
+The fitted slope is
+
+                      = -2.269728 × 10-7 W/MHz.                                           (56)
+
+In Eq. (37) angular-frequency units,
+
+                      = -3.612384 × 10-14 W/(rad/s).                                      (57)
+
+The real QuTiP output at the LO operating point is
+
+                                P 0 = Pout(LO)  8.8508 µW.                                (58)
+
+15 15. LO-Dressed Noise Quantities
+
+The coefficient multiplying PRx in the LO-dressed signal term is
+
+                                ALO = GLNARLD22     RF            2                       (59)
+
+                                                                   .
+
+                                                    
+
+The current implementation gives
+
+                                      ALO = 2.559684 × 10-8.                              (60)
+
+The thermal-noise contribution is
+
+                     T2 N = 4kBT B = 1.601553 × 10-14 W.                                  (61)
+
+The photon-shot-noise contribution is
+
+                                   P2 SN = 1.554911 × 10-18 W.                            (62)
+
+The BGN-driven contribution is
+
+                     ALOB2 GN = 2.559684 × 10-20 W.                                       (63)
+
+                                               7
+After multiplication by the photodiode/LNA/load factors,
+
+                                    GLNARLD2 = 1512.5.                (64)
+
+Therefore,
+
+                          BGN contribution = 2.559684 × 10-20 W,      (65)
+
+                          PSN contribution = 2.351286 × 10-15 W,      (66)
+
+                          thermal contribution = 1.601553 × 10-14 W.  (67)
+
+The total LO-dressed noise variance is
+
+                          R2 y,LO = 1.836736 × 10-14 W.               (68)
+
+16 16. Fig. 6 Checkpoint
+
+For
+
+                                        PTx = -10 dBm                 (69)
+
+and
+
+                                        dTx-Rx = 100 m,               (70)
+
+the transmitted power is
+
+                                        PTx = 10-4 W.                 (71)
+
+The conventional received power is
+
+                          Pc(100 m) = 7.622292 × 10-13 W.             (72)
+
+The conventional SNR is
+
+                          SNRConv = -23.329568 dB.                    (73)
+
+The theoretical LO-dressed signal term is
+
+                                        1.259847 × 10-14.             (74)
+
+Hence,
+
+                          SNRLO,theory = -1.637288 dB.                (75)
+
+The difference is
+
+                                    SNR = 21.692280 dB.               (76)
+
+    The paper claims approximately 44 dB for this comparison. Therefore, the current independent
+reproduction does not reproduce the paper's claimed absolute SNR advantage.
+
+                                           8
+17 17. Fig. 4 LO-Free AT-Splitting Simulation
+
+The LO-free atomic characterization sweeps
+
+                                 RF = 1 MHz to 10 MHz                       (77)
+                                    2
+
+using
+
+                                                181                         (78)
+
+RF points in the characterization procedure.
+For each RF Rabi frequency, the coupling detuning is swept over
+
+                                    -10 MHz  c  10 MHz                      (79)
+                                                2
+
+using
+
+                                            2001                            (80)
+
+points.
+The theoretical AT splitting is
+
+                                            AT     |RF| .                   (81)
+                                                    2
+
+The current validated threshold is
+
+                                       RF,th = 5.500 MHz.                   (82)
+                                       2
+
+18 18. Fig. 6 Distance / Transmit-Power Sweeps
+
+The current implementation uses the following plotted transmit-power sets:
+
+       Table 7: Transmit powers used by the Fig. 6 implementation.
+
+       Receiver         PTx values Status
+
+       Conventional -10, 10 dBm -10 dBm prose-stated; 10 dBm legend-based
+
+       LO-free          10, 20 dBm implementation from figure legend
+
+       LO-dressed -10, 10 dBm -10 dBm prose-stated; 10 dBm legend-based
+
+The distance vector is
+
+                                       d = 100, . . . , 106 m               (83)
+
+with
+
+                                                241                         (84)
+
+logarithmically spaced points.
+
+                                                9
+19 19. Fig. 7 Mutual Information
+
+The conventional curve uses the standard AWGN expression
+
+                          IConv = log2(1 + SNR).                                   (85)
+
+    This formula is an implementation inference from the conventional complex-AWGN channel model; it
+is not explicitly written as a mutual-information equation in the paper.
+
+    The theoretical LO-dressed curve uses the paper's Eq. (38),
+
+                   ILO = e1/SNRRy,LO E1               1             ln 2.          (86)
+                                                 SNRRy,LO
+
+The LO-free mutual information uses the paper's Eq. (22),
+
+                                1    (r + 1)     -  ln  I0  (r)  +  r  I1(r)  .    (87)
+                   I(z; x) = ln          2                             I0(r)
+
+                                2
+
+The paper relates
+
+                                     r  SNRRy.                                     (88)
+
+20 20. Fig. 7 Monte-Carlo Settings
+
+The current Monte-Carlo reconstruction used:
+
+     Table 8: Monte-Carlo settings used in the Fig. 7 reconstruction.
+
+     Quantity                        Symbol / setting Value
+
+     SNR range                       ­                           -20 to 40 dB
+                                                                 81
+     Number of SNR points ­                                      20 000
+                                                                 42
+     Trials per point                N                           CN (0, 1)
+                                                                 complex Gaussian
+     Random seed                     ­                           1
+                                                                 5.500 MHz
+     Input symbols                   xi
+
+     Noise                           ni
+
+     Channel coefficient             h
+
+     AT threshold                    ­
+
+The Monte-Carlo generative model is
+
+                                     xi  CN (0, 1)                                 (89)
+
+and
+
+                                     ni  CN (0, R2 y).                             (90)
+
+The per-trial RF Rabi frequency is obtained from the RF-field amplitude through
+
+                                     RF = |RF| |ERF|.                              (91)
+
+                                             
+
+The current implementation applies the gate
+
+                                     RF  5.500 MHz                                 (92)
+                                     2
+
+    for AT-splitting resolvability.
+    Important: the exact behaviour of the receiver when the AT splitting is unresolved is not specified
+by the paper. The noise-only unresolved branch used in the current Monte-Carlo code is therefore an
+implementation decision, not a paper equation.
+
+                                             10
+21 21. Fig. 7 Important Current Results
+
+The first implementation produced the following checkpoint values:
+
+  Table 9: Fig. 7 checkpoint values from the current implementation.
+SNR (dB) Conventional Theoretical LO Practical LO LO-free
+
+-20                             0.0144               0.0069         0.0088  unresolved
+                                                     0.4134         0.4878  unresolved
+0                               1.0000               2.8270         2.9939  unresolved
+                                                     5.9847         6.1012  unresolved
+20                              6.6582
+
+40                              13.2879
+
+The LO-free AT threshold maps to approximately
+
+                                         SNR  46.02 dB                                      (93)
+
+in the current parameterization, which is outside the original -20 to 40 dB Fig. 7 window.
+
+22 22. Main Numerical Warnings to Remember
+
+1. The paper states a probe beam diameter of 0.76 mm, but the frozen Fig. 3 code uses 0.38 mm as
+   an empirical calibration.
+
+2. The resulting calibrated probe input power is Pin = 9.7690 µW.
+3. The paper's literal diameter interpretation gives Pin = 39.0761 µW.
+
+4. The current Fig. 6 theoretical LO-dressed SNR at PTx = -10 dBm and d = 100 m is -1.6373 dB.
+5. The conventional SNR at the same point is -23.3296 dB.
+
+6. The resulting advantage is 21.6923 dB, not the paper's claimed approximately 44 dB.
+
+7. The fitted  is not printed numerically in the paper. The current value is obtained from the real
+   QuTiP static response.
+
+8. The current fitted value is
+
+                                 = -3.612384 × 10-14 W/(rad/s).
+
+9. The AT-splitting threshold used downstream is 5.500 MHz.
+
+10. The paper does not fully specify how the Practical LO-dressed and LO-free Fig. 7 curves were
+     generated from the phrase "QuTiP and Monte-Carlo simulations."
+
+11. The current Monte-Carlo unresolved-AT branch is therefore an implementation choice and must
+     not be described as an equation explicitly supplied by the paper.
+
+23. One-Line Physical Picture
+
+The entire numerical chain can be remembered as
+
+PTx  PRx  ERF  RF  H  ss  21    Pout  , noise  SNR  Mutual Information.
+                                                                                                                                  (94)
+
+   For the quantum part:
+
+QuTiP atomic characterization  response lookup table  communication / Monte-Carlo simulation.
+                                                                                                                                   (95)
+
+                                            End of simulation parameter sheet
+
+                                                 11
+

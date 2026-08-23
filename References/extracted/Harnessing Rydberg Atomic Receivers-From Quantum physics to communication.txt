@@ -1,0 +1,1212 @@
+                                                                                                                                                                                                                                                         1
+
+                                        Harnessing Rydberg Atomic Receivers: From
+                                        Quantum Physics to Wireless Communications
+
+                                        Yuanbin Chen, Xufeng Guo, Chau Yuen, Fellow, IEEE, Yufei Zhao, Yong Liang Guan, Senior Mem-
+                                                ber, IEEE, Chong Meng Samson See, Member, IEEE, Me´rouane Debbah, Fellow, IEEE,
+                                                                                 and Lajos Hanzo, Life Fellow, IEEE
+
+arXiv:2501.11842v1 [cs.IT] 21 Jan 2025     Abstract--The intrinsic integration of Rydberg atomic re-               evolving research frontier, quantum sensing might rely on
+                                        ceivers into wireless communication systems is proposed, by har-           spin qubits, trapped ions, and flux qubits, positioning itself
+                                        nessing the principles of quantum physics in wireless communi-             as a game changer in unlocking new possibilities for applied
+                                        cations. More particularly, we conceive a pair of Rydberg atomic           physics and wireless communications. As quantum sensing
+                                        receivers, one incorporates a local oscillator (LO), referred to           continues to evolve, it promises to redefine the boundaries
+                                        as an LO-dressed receiver, while the other operates without an             of measurement precision, paving the way for breakthroughs
+                                        LO and is termed an LO-free receiver. The appropriate wireless             that will significantly enhance the performance of the next-
+                                        model is developed for each configuration, elaborating on the              generation wireless communications.
+                                        receiver's responses to the radio frequency (RF) signal, on the
+                                        potential noise sources, and on the system performance. Next,              A. Fundamentals of Rydberg Atoms
+                                        we investigate the association distortion effects that might occur,
+                                        specifically demonstrating the boundaries of linear dynamic                   Rydberg atoms are characterized by their excitation to
+                                        regions, which provides critical insights into its practical imple-        certain energy states with large principal atomic numbers,
+                                        mentations in wireless systems. Extensive simulation results are           having at least one electron in a highly excited state. This
+                                        provided for characterizing the performance of wireless systems,           excitation results in having the outer electron far from the
+                                        harnessing this pair of Rydberg atomic receivers. Our results              ionic core of the Rydberg atom, with the associated dipole
+                                        demonstrate that they deliver complementary benefits: LO-free              moment roughly scaling with its principal atomic number.
+                                        systems excel in proximity operations, while LO-dressed systems            Having a high electric dipole moment enables Rydberg atoms
+                                        are eminently suitable for long-distance sensing at extremely              to engage in strong coupling with even extremely weak
+                                        low power levels. More specifically, LO-dressed systems achieve            radio frequency (RF) fields, making them high-sensitivity
+                                        a significant signal-to-noise ratio (SNR) gain of approximately            sensors for electric fields, particularly for detecting time-
+                                        44 dB over conventional RF receivers, exhibiting an effective cov-         varying signals. Specifically, in response to an external RF
+                                        erage range extension over conventional RF receivers by a factor           electric field, a Rydberg atom becomes coupled with this RF
+                                        of 150. Furthermore, LO-dressed systems support higher-order               field through its high electric dipole moment, and hence the
+                                        quadrature amplitude modulation (QAM) at reduced symbol                    state of the Rydberg atom changes. This event triggers atomic
+                                        error rates (SER) compared to conventional RF receivers, hence             energy level transitions and causes fluctuations in population
+                                        significantly enhancing wireless communication performance.                distribution among these states. These perturbations are pre-
+                                                                                                                   cisely monitored by the so-called electromagnetically induced
+                                           Index Terms--Quantum sensing, quantum radios, Rydberg                   transparency (EIT), which is an all-optical readout technique
+                                        atomic receivers, wireless communications.                                 that probes the Rydberg atomic state [4], [7]. Briefly, the
+                                                                                                                   atomic energy levels variations caused by the interaction with
+                                                                  I. INTRODUCTION                                  the RF field results in EIT spectrum changes, allowing for the
+                                                                                                                   accurate extraction of the information conveyed by the electric
+                                           Quantum mechanics, emerging in the early 20th century,                  field. This intricate interplay between the intrinsic properties
+                                        constitute one of the foundational pillars of modern physics,              of Rydberg atoms and EIT-based detection constitutes the
+                                        reshaping our understanding of the nanoscale world. By                     fundamental principle that enables Rydberg atoms to function
+                                        harnessing the alluring principles of quantum theory, quantum              as high-sensitivity quantum sensors.
+                                        technology has revolutionized our ability to manipulate and
+                                        control subatomic particles with unprecedented precision,                  B. State-of-the-Art in Rydberg Atomic Receivers
+                                        catalyzing advances in communications, computing, and es-
+                                        pecially precision measurement [1]­[4]. One of most pivotal                   For over four decades, Rydberg atoms have captivated
+                                        branches of quantum technology is quantum sensing capable                  researchers as promising candidates for electric field sens-
+                                        of measuring physical quantities with extraordinary sensitiv-              ing applications [8]­[10]. The realm of Rydberg atom-based
+                                        ity and accuracy [5], [6]. Rapidly establishing itself as an               electrometry, dedicated to the precise metrology of electric
+                                                                                                                   fields, witnessed a period of rapid development between 2010-
+                                           Yuanbin Chen, Xufeng Guo, Chau Yuen, Yufei Zhao, and Yong               2014, underscored by several important studies [11]­[13].
+                                        Liang Guan are with the School of Electrical and Electronics Engi-         Specifically, in [11], the idea of employing Rydberg atoms for
+                                        neering, Nanyang Technological University, Singapore 639798 (emails:       electric field measurements was proposed, paving the way for
+                                        yuanbin.chen@ntu.edu.sg; n2308905j@e.ntu.edu.sg; chau.yuen@ntu.edu.sg;     establishing the linkage between the optical response charac-
+                                        yufei.zhao@ntu.edu.sg; eylguan@ntu.edu.sg).                                teristics and the International System of Units (SI) [14]. This
+
+                                           Chong Meng Samson See is with DSO National Laboratories, Singapore
+                                        639798 (e-mail: schongme@dso.org.sg).
+
+                                           Me´rouane Debbah is with the Center for 6G Technology, Khalifa Univer-
+                                        sity of Science and Technology, Abu Dhabi, United Arab Emirates (e-mail:
+                                        merouane.debbah@ku.ac.ae).
+
+                                           Lajos Hanzo is with School of Electronics and Computer Sci-
+                                        ence, University of Southampton, SO17 1BJ Southampton, U.K. (e-mail:
+                                        lh@ecs.soton.ac.uk).
+                                                                   2
+
+direct linkage eliminated the need for additional calibration      inherently wavelength-independent [31], unlike traditional an-
+and hence facilitated absolute measurements. This theoretical      tennas that must be comparable in size to the wavelength
+innovation was experimentally verified in [12], while the          of the RF signal. This feature enables the fabrication of
+authors of [13] further demonstrated the associated self-          highly efficient electrically small antennas using Rydberg
+calibrated traceability over a broad frequency range. Based        atoms. Thirdly, while conventional high-frequency antennas
+on these inspirational achievements, numerous academic and         are inherently directional, Rydberg atomic receivers maintain
+industrial research initiatives have launched Rydberg atomic       an omni-directional profile across all wavelengths [32]. Last
+sensor programs across the globe, highlighting the benefits of     but not least, Rydberg atomic receivers embrace a broad de-
+their sensitivity and versatility, thus positioning them at the    tection frequency range. The extensive energy level structure
+forefront of next-generation quantum sensing research.             of Rydberg atoms allows for their coupling with electromag-
+                                                                   netic waves spanning from direct current to Terahertz (THz)
+   At the heart of Rydberg atomic receivers lies (i) the ability   frequencies by merely adjusting these energy levels. This
+to diagnose the phase and frequency of weak RF electric            tunability facilitates the sensing of various RF bands without
+fields, and (ii) the enhancement of detection sensitivity. Based   necessitating reconfiguration of the hardware platform, which
+on their different responses to RF fields, Rydberg atomic re-      is a significant challenge for traditional RF receivers.
+ceivers can be categorized into local oscillator (LO)-free [12],
+[13], [15]­[18] and LO-dressed contexts [19]­[23]. To be           D. Motivation and Our Contributions
+specific, LO-free Rydberg atomic receivers, also referred
+to as the electrometry, measure the amplitude of the RF               Despite the significant advances concerning Rydberg
+field by exploring the so-called Autler-Townes (AT) splitting      atomic receivers in the context of quantum sensing, their ap-
+effect [12], [13], [15]­[18]. By measuring the interval of the     plication in wireless communications is still in its infancy [1],
+two split peaks of the EIT spectrum, the Rabi frequency            [33]­[36]. Initial efforts in [33], [34] investigate atomic
+of the RF field can be inferred, thereby allowing for the          multiple-input multiple-output (MIMO) systems, employing
+identification of the RF electric field strength with a high       multiple vapor cells to construct an equivalent receiver array.
+sensitivity approaching the standard quantum limit (SQL).          In their framework, an LO introduces reference signals, and
+Quantatively, this is on the order of µV/cm/ Hz [24], [25].        a phase retrieval process is employed for recovering the
+However, this method is limited to probing the amplitude and       phase information of signals arriving from the transmitter
+polarization of the electric field through optical readout, but    (Tx). However, this model might present a departure from
+fails to measure the phase of the RF signal [12], [17].            the core nature of the LO-dressed Rydberg atomic receivers,
+                                                                   whose essence lies in functioning as atomic mixers [20], [22],
+   By contrast, the LO-dressed Rydberg atomic receiver in-         [23], [36]. These LO-dressed receivers are capable of directly
+corporates an additional RF field that serves as an LO, which      capturing both the amplitude and phase of the incident RF
+is on-resonance with the Rydberg transition. This setup relies     signals at a high precision, without the need for any complex
+on both the EIT and AT effects in Rydberg atoms in order           phase retrieval procedures. Therefore, our goal in this treatise
+to demodulate a secondary, co-polarized RF field, hence            is to bridge the gap between quantum physics and wireless
+facilitating precise phase measurements by treating the atomic     communications by developing bespoke mathematical models
+system as a Rydberg atomic mixer [19], [21], [22]. These are       for both LO-free and LO-dressed Rydberg atomic receivers,
+also referred to as atomic superheterodyne receivers [20], [23].   in order to unveil their great potential and provide a solid
+The resultant LO-dressed entities achieve an unparalleled          foundation for their potent applications in wireless systems.
+sensitivity, capable of detecting RF electric fields on the order
+of nV/cm/ Hz. Consequently, the Rydberg atomic receiver               To address the challenges stated, this very first study aims
+behaves like an integrated compact high-sensitivity antenna,       for filling the knowledge gap in the-state-of-the-art through
+adept at the detection and reception of both amplitude-            the following contributions.
+modulated (AM) [26]­[28], frequency-modulated (FM) [26],
+[28], and phase-modulated (PM) signals [29], [30].                    · We develop appropriate wireless models tailored for
+                                                                         both LO-free and LO-dressed Rydberg atomic receivers,
+C. The Advantages                                                        specifically focusing on the receivers' responses to the
+                                                                         RF signal. Given their different operating mechanisms,
+   Compared to conventional RF receivers, which rely on                  the potential noise sources inherent in each receiver
+traditional antennas and complex electronic front-end com-               type are examined. Furthermore, we derive expressions
+ponents, Rydberg atomic receivers exhibit several remarkable             for their respective signal-to-noise ratios (SNR) and
+advantages. Firstly, traditional RF receivers utilize antennas           calculate their theoretical capacities through mutual in-
+to absorb the impinging electromagnetic energy, converting               formation, providing an intuitive understanding of their
+free-space modes into guided currents that are subsequently              performance in practical implementations.
+amplified, filtered, and rectified by front-end circuits before
+being processed in the analog or digital domains. By contrast,        · We investigate the potential distortion effects that might
+Rydberg atomic receivers do not require any net absorption of            occur when deploying both in LO-free and in LO-
+the incoming RF field. Instead, the incident RF field alters the         dressed Rydberg atomic receivers. For LO-free systems,
+energy levels of Rydberg atoms through coherent interactions,            the distortion is induced by the ambiguous observation
+which is then imparted to an optical field as amplitude                  in AT splitting owing to the weak Rabi frequency of the
+or phase modulations and detected spectroscopically [24].                RF field. By contrast, as regards LO-dressed systems,
+This eliminates the need for complex and bulky front-end                 we explore the limits of their linear dynamic range
+electronic circuits. Secondly, Rydberg atomic receivers are              and demonstrate that having strong RF Rabi frequencies
+                                                                                                                                             3
+
+      may push the system beyond this range, resulting in           transition from |2 to a highly excited Rydberg state |3. When
+      significant distortion effects. As a result, our findings     both lasers are precisely resonant, the atoms are coherently
+      indicate that LO-free systems are more applicable for         pumped into a superposition of |1 and |3, rendering this
+      operation in close proximities, enabling precise detection    state transparent to the probe laser - a phenomenon known
+      of signal amplitudes. By contrast, LO-dressed systems         as EIT [7]. This reduction in probe absorption under resonant
+      are applicable for long-distance scenarios, facilitating the  conditions is the hallmark of EIT. By scanning the coupling
+      precise measurement of both the amplitude and phase of        laser and monitoring the resultant probe absorption, the EIT
+      weak signals transmitted at extremely low power levels.       signal effectively spectroscopically probes the energy of the
+   · By leveraging the QuTiP toolkit [37], we design quantum        Rydberg state |3, as the probe absorption decreases when the
+      systems for supporting both LO-free and LO-dressed            coupling laser is aligned with the transition energy.
+      Rydberg atomic receivers. Specifically, three key met-
+      rics are adopted for performance evaluations, namely             Upon excitation to the Rydberg state |3, the atoms become
+      the SNR, capacity, and symbol error rate (SER). Our           highly sensitive to RF fields that are resonant or nearly
+      numerical results demonstrate that the LO-dressed sys-        resonant with transitions to adjacent Rydberg states, such as
+      tem achieves a significant SNR gain of approximately          |4. When an RF field induces a resonant coupling between |3
+      44 dB over conventional RF receivers, particularly un-        and |4, the resultant AT effect manifests itself as a splitting
+      der conditions of extremely low transmit power (e.g.,         of the energy levels, which in turn results in the bifurcation of
+      -10 dBm). Furthermore, the LO-dressed configuration           the EIT signal peak, as depicted in Fig. 1(c). The frequency
+      extends the effective coverage range by a factor of 150       difference between these two AT-split resonances, denoted by
+      compared to its conventional counterparts. Additionally,      , directly corresponds to the energy difference introduced
+      LO-dressed systems can support higher-order quadrature        by the RF field, which is given by
+      amplitude modulation (QAM) schemes at a lower SER.
+      These promising results demonstrate that by harnessing                               RF  ,  scanning  the  coupling    laser,
+      the complimentary benefits of LO-free and LO-dressed                              
+      designs, Rydberg atomic receivers are capable of ac-
+      commodating diverse transmission ranges, resulting in                       =        2   fp                                            (1)
+      both improved data rates and reduced SER in wireless                                 RF
+      systems.                                                                                      ,  scanning  the  probe  laser,
+                                                                                           2 fc
+   The structure of this paper is organized as follows. In
+Sec. II, we present the preliminaries, detailing the fundamen-      where RF denotes the Rabi frequency of the RF signal, fp
+tal operating principles of Rydberg atomic receivers to estab-      and fc represent the frequency of the probe and coupling laser,
+lish the necessary groundwork for the subsequent discussions.       respectively. Scanning the coupling laser is often preferred,
+In Sec. III, a pair of models tailored specifically for LO-         since this way provides a direct measurement of the energy
+free and LO-dressed Rydberg atomic receivers are developed,         of the Rydberg state |3 without any underlying absorption
+designed for integration into wireless communication systems.       background.
+In Sec. IV, we investigate the distortion effects that may
+occur when these receivers are employed in practical wire-          B. Probe Laser Transmission
+less systems, elucidating the distinct challenges associated
+with each receiver type. Sec. V provides numerical results,             Given the above foundational understanding of the EIT
+demonstrating some interesting findings and illustrating the
+performance of these receivers in various wireless scenarios.       phenomenon, we proceed to the mathematical portrayal of
+Finally, Sec. VI concludes this paper.
+                                                                    the EIT signal to unveil its defining characteristics. Under
+                         II. PRELIMINARIES
+                                                                    the adiabatic approximation of the probe laser transmission,
+   To provide an intuitive grasp of the Rydberg atomic receiver
+concept, this section commences by discussing a key physical        which is in essence given by the intensity Pout (t) of the
+phenomenon, namely EIT, which drives its operating principle        probe laser measured on the photodetector (PD), it can be
+and facilitates an accurate readout for RF field measurements.
+                                                                    characterized through the imaginary part of the susceptibility
+A. Electromagnetically Induced Transparency
+                                                                    as [38]
+   Fig. 1 illustrates the excitation of atoms to Rydberg states
+within a vapor cell. The vapor cell is populated with Rydberg                     Pout (t) = Pin exp {-kpL ( (t))} ,                         (2)
+atoms such as Rubidium (Rb) or Cesium (Cs), which serve
+as the receiver medium. Within this setup, two counter-             where Pin denotes the intensity of the probe laser associated
+propagating laser, namely the probe laser and the coupling          with its Rabi frequency p
+laser, are harnessed for manipulating the atomic states. The
+probe laser facilitates the coupling of the atomic ground                                              2dp12          2                      (3)
+state |1 to a low-lying excited state |2 (also referred to                                 Pin = 20
+as the first excited state), while the coupling laser drives the                                                       .
+
+                                                                    In  (2)  and  (3),  L  is  the  length  of   the  vapor  cell,  kp  =    2
+                                                                                                                                             p
+
+                                                                    is the wavenumber (wavevector) of the probe laser having a
+
+                                                                    wavelength of p, 0 denotes the impedance in the free space,
+                                                                    d is the 1/e2 diameter of the probe laser, 12 characterizes
+
+                                                                    the dipole moment associated with the |1 - |2 transition,
+
+                                                                    and  (t) represents the susceptibility, which is given by
+
+                                                                                                (t) = C021 (t) ,                             (4)
+
+                                                                    where    C0   =  . -2N0 12    Furthermore,   21 (t)      denotes    the  in-
+
+                                                                                       0 p
+
+                                                                    stantaneous steady-state density matrix component associated
+
+                                                                    with the |1 - |2 transition, 0 is the permittivity in vacuum,
+
+                                                                    and N0 represents the total density of atoms in the cell.
+                                                                                                                                                                4
+
+                                 3                 c           LO-free                       RF signal                   Coupling laser
+                                                      RF                                                                                    Photodetector
+                                      c                                  Dichromic
+                                                4                        mirror
+
+                                                          RF
+
+                                 2                 p
+
+                                    p                                                                        Vapor cell  Dichromic
+                                                                                                                         mirror
+                                 1                                 (a) (b) Probe laser       Local oscillator RF signal
+                                                                                             (LO)                                            Rydberg atom
+   EIT signal transmission Pout         RF / 2                     (c) (d) LO-dressed                                                        Ground-state atom
+
+                                                              RF off
+                                                              RF on
+
+           Coupling laser detuning c (MHz)
+
+Fig. 1. Illustration of the Rydberg atomic receivers and measurement principles. (a) Energy level diagram. (b) EIT and
+AT-splitting based measurement. (c) LO-free Rydberg atomic receiver. (d) LO-dressed Rydberg atomic receiver.
+
+   Taking into account the associated spontaneous emission,                                  both cases result in different forms of the density matrix
+the dynamics of the atomic system are characterized by the                                   component 21 (t). Thus, in the following sections, we present
+master equation for the four-level density matrix  [16]                                      how 21 (t) can be effectively harnessed for each scenario.
+
+                                                                                             III. MODELING FROM QUANTUM PHYSICS TO WIRELESS
+                                            = = - [H, ] + L.                       (5)                                      SYSTEMS
+                                                   t 
+                                                                                                This section presents the transitory solution of the Ryd-
+In the master equation (5), H represents the Hamiltonian of                                  berg atomic receiver from its physical fundamentals to its
+                                                                                             application in a wireless system, relying on both LO-free
+the atomic system of interest, which is given by                                             and LO-dressed solutions. We commence by considering the
+                                                                                             transmitter (Tx) as a point source, i.e., by constructing a
+                                 0         p               0             0                   single-input and single-output (SISO) system. Then, we will
+                                         -2p              c                                  methodically extend it to a Rydberg atomic MIMO system.
+H=                                  p              -2 (p + c)  0                          ,
+      2                              0     c                                            
+                                            0
+                                                                                        
+
+                                    0                          -2 (p + c + RF)
+
+                                                                                   (6)
+
+where p,c and p,c indicate the Rabi frequencies and                                          A. LO-Free Rydberg Atomic Receiver
+detunings associated with the probe laser and coupling laser,
+respectively, as well as RF represents the detuning of the                                      1) Receiver's Response to the RF Signal: The LO-free Ry-
+RF signal. Note that the Rabi frequency  in (6) differs                                      dberg atomic receiver is capable of measuring the amplitude
+for LO-free and LO-dressed Rydberg atomic receivers, which                                   of RF signals, denoted by |ERF|. When the EIT resonance
+will be elaborated upon later. Still referring to (5), L denotes                             splits into two peaks, these new transmission maxima are
+the Lindblad operator that encompasses the decay processes,                                  separated by the Rabi frequency of the RF signal associated
+which is given by                                                                            with the |3  |4 transition. One may refer to Appendix A
+                                                                                             for verifying this, which is included in the supplementary
+       222                                    -1212              -1313      -1414            material of this paper [39]. Then, the Rabi frequency RF
+                                           333 - 222             -2323                       is given explicitly by [20]
+L  =                                -2121                     444 - 333     -2424         .
+                                    -3131     -3232              -4242      -3434       
+                                              -4242
+                                                                                        
+
+                                    -4141                                   -444
+
+                                                                                   (7)       RF = |ERF| RF ,
+
+                                                                                                                                                                (8)
+
+In (7), we have ij = (i + j) /2, where i (i = 1, 2, 3, 4)                                                                
+is the transition decay rate.
+                                                                                             where RF represents the dipole moment associated with the
+   The master equation in (5) is intractable, hence it does not                              |3  |4 transition. Eq. (8) delineates the core principle
+have an analytical solution. Therefore, there is no closed-
+form expression for 21 (t). We herein focus on its steady-                                   of the LO-free Rydberg atomic receiver, indicating that the
+state solution, achievable by constructing a matrix with the
+system of equations for  = 0. The AT splitting curve can be                                  amplitude of the RF signal can be determined by reading out
+obtained once we acquire 21 (t). However, slight adjustments
+are required depending on the specifics of the Rydberg atomic                                the separation of the AT splitting associated with the Rabi
+regimes - regardless of LO-free or LO-dressed. Hence, the                                    frequency RF.
+technique of measuring the signal's amplitude and phase using
+21 (t) also varies accordingly. The distinct Hamiltonians in                                    Next, we turn our attention to the modeling of wireless
+
+                                                                                             systems. We consider a single Tx serving as a point source,
+                                                                                             transmitting a unit complex Gaussian signal x of transmit
+
+                                                                                             power PTx, obeying x  CN (0, 1). After propagating through
+                                                                                             a complex Gaussian channel h  CN (0, 1), the signal arrives
+                                                                                                                                                   5
+
+LO-free Rydberg atomic receiver                                                                               z = RF PRx hx + nRy
+
+Tx                                   ERF + nBGN  ERF + nBGN (+nQSN ) ERF + nBGN + nUN (+nQPN )                   Lock-in
+                                                                                                                amplifier
+    ERF = ARF cos (2 fRFt + RF )   RF signal to
+                                   be measured
+                                                 Vapor                        Rabi frequency:
+                                                  cell                          AT splitting
+
+        Background noise nBGN                    Quantum projection          Observation                      Thermal noise nTN
+                                                       noise nQPN          uncertainty noise nUN
+
+LO-dressed Rydberg atomic receiver                                            zLO = PRxGLNA RL D  RF hx + nRy,LO
+
+Tx                                 ERF + nBGN    Atomic mixer                                        ( ) ( ) P f =  RF PRx + nBGN
+
+    ERF = ARF cos (2 fRFt + RF )
+
+                                   RF signal to     Fluctuation of RF                                         Fluctuation of
+                                                 signal's Rabi frequency                                        EIT signal
+                                   be measured
+                                                                                                                       Photon shot
+        Background noise nBGN                    total         =  LO      +e   (2ft+ )                                 noise nPSN
+                                                                                                 RF
+                                                                                                                     P (f ) + nPSN
+        Thermal noise nTN
+
+Lock-in                                          PeAC  =       I  2   RL   Fluctuation of
+amplifier                                                         AC       photocurrent
+
+                                        LNA
+                                      GLNA
+
+                                                                          ( ) IAC = D P (f ) + nPSN
+
+                                                                              = D  RF PRx + D  RF nBGN + DnPSN
+
+Conventional RF receiver                                                                                      y = PRx hx + nConv
+
+Tx                                 ERF + nBGN    Rx Receiver antenna gain GRx
+
+     ERF = ARF cos (2 fRFt + RF )  RF signal to                                                               nConv ~          ( ) 0,2
+                                   be measured                                                                                   Conv
+                                                                                      Post-processing
+                                                                  LNA                      circuits             = G G 2
+                                                                     GLNA                                        Conv
+                                                                              Thermal noise nTN                                                 2
+                                                                                                                               Rx LNA BGN
+
+        Background noise nBGN                                                                                          + 4kBTB
+
+Fig. 2. Noise models for the LO-free Rydberg atomic receiver, the LO-dressed rydberg atomic receiver, and the
+conventional RF receiver.
+
+at the vapor cell for measurement, and this process can be        where nRy represents the noise encompassing all relevant
+modeled as                                                        noise sources.
+
+y = PRxhx + nBGN,                                (9)                 Note that the limitations imposed on the sensitivity of the
+                                                                  Rydberg atomic receiver arise from having a finite signal
+where PRx = |ERF|2 represents the received power, while           strength in the presence of the noise nRy. The noise can
+nBGN is the background noise. Given the antenna gain at the       be informally classified as extrinsic and intrinsic noise. As
+Tx, denoted by GTx, and the distance between the Tx and           illustrated in Fig. 2, the detailed models of these noise sources
+receiver (Rx), denoted by dTx-Rx, the received power PRx is       are listed as follows.
+given by
+                                                                      · (Extrinsic noise) Background noise nRF: The background
+PRx  =  PTxGTx                     0  .          (10)                   noise corresponds to the wide-band incoherent back-
+        4dT2x-Rx                                                        ground signal imposed by environmental blackbody ra-
+                                                                        diation, whose power is given by B2GN. The background
+The RF signal incident upon the vapor cell energizes the                noise can be classified as the extrinsic noise.
+Rydberg atoms, facilitating the state transition |3  |4. As
+a result, the AT splitting corresponding to the probe beam            · (Intrinsic noise) Quantum projection noise (QPN) nQPN:
+can be observed in the PD, determining the splitting interval           The QPN represents a fundamental limit to the precision
+and the Rabi frequency. Therefore, if we let z denote our               of quantum sensing, arising from the inherent uncertainty
+observations from the PD in the face of uncertainty, the                in quantifying the associated energy transition probabil-
+signaling process in (9) can be recast as                               ities. This noise is determined by the standard quantum
+                                                                        limit and can be modeled as [5, Eq. (38)], [25]
+
+z = RF PRxhx + nRy ,                             (11)                                                Q2 PN          1                              (12)
+                                                                                                                            ,
+
+                                                                                                              4CeffNatoms
+                                                                                                                                                          6
+
+  where Natoms denotes the number of quantum-
+  mechanically uncorrelated atoms. Furthermore, Ceff is
+  an efficiency parameter, where Ceff  1 characterizes
+  the accuracy reduction of the readout compared to an
+  ideal readout (Ceff = 1). Generally speaking, nQPN has
+  a low magnitude and can be reasonably ignored, when
+  applying an extremely large value of Natoms [5], [25].
+· (Intrinsic noise) Thermal noise nTN: The thermal noise is
+  introduced by the classical post-processing circuits, and
+
+  the noise power is modeled as
+
+                    T2N = 4kBT B,                   (13)
+
+  where kB denotes the Boltzmann constant and T is the             Fig. 3. The probe laser transmission Pout versus the coupling
+  temperature.                                                     detuning c and RF Rabi frequency RF.
+· (Intrinsic noise) Observation uncertainty noise nUN: The
+  performance of the LO-free Rydberg atomic receiver
+
+is dependent on the accuracy of the Rabi frequency
+
+readout. However, the accuracy of this readout process is          The p.d.f. of the Rayleigh distribution considered is given by
+
+often eroded by the noise associated with the observation
+
+uncertainty nUN. To be specific, when the Rabi frequency                                            z                  z2
+RF of the RF field decreases, the resultant AT splitting                                 p (z) = z2 exp - 2z2 ,                                    (19)
+effect becomes less well-defined, as illustrated in Fig. 3.
+                                                                   while the marginal entropy H (z) is formulated as
+The subtle splitting phenomenon is rather difficult to
+
+identify owing to having a blurred interval between the            H (z) = 1 + ln              
+                                                                           = 1 + ln      z 2
+split peaks. This significantly hinders the observation                                                       1        PRx|h|2 + R2y
+of . As stated in [12], the electric field of the RF                                                       + ln
+                                                                                         RF 
+signal inside the vapor cell can be measured with an                                                          2                                 .  (20)
+                                                                                            2
+uncertainty of ~ = 0.5%. This uncertainty level may
+                                                                   Let us now turn to the conditional entropy H (z|x). Given
+increase, when considering lower transmit power PTx and
+higher distances dTx-Rx. Then, the power of nUN, denoted           x, the observation z         fpoallroawmsetaerRicRiFan PdRisxtr|hib|u|xtio| nanadssosccaialitnegd
+by U2N, can be calculated by                                       with the non-central
+
+                    U2N = (~ERF)2 .                 (14)           parameter RF          . R2y  In  light  of  [40],   given   the   Rician        factor
+
+                                                                                          2
+                                                                   r = PRx|h|2|x|2/R2y, the conditional entropy H (z|x) can be
+Therefore, nRy can be modeled as the sum of these noise
+sources, represented as an additive complex Gaussian variable      formulated as
+with zero mean and variance of
+                                                                                      1         R2y        +   ln  I0  (r)  -  r I1  (r)  +  ln    RF  ,
+                                                                   H (z|x) = 1 + ln              2                              I0   (r)            
+          R2y = U2N + Q2PN + B2GN,                  (15)
+                                                                                      2
+
+                                                                                                                                                   (21)
+
+thus yielding that nRy  CN 0, R2y . Furthermore, upon              where I0 (r) and I1 (r) are the modified Bessel function of
+combining (11) and (15), the SNR can be explicitly formu-          the first kind of zero and first orders, respectively. For the
+lated by                                                           sake of calculating the average MI, we can approximate the
+                                                                   Rician factor by the SNR, i.e., r  SNRRy, as shown in
+SNRRy  =  PRx |h|2  =  B2GN   ER2F |h|2  ~2ER2F  .  (16)           (16). Therefore, upon combining (20) and (21), the mutual
+            R2y              + Q2PN +                              information I (z; x) is expressed as
+
+   2) Mutual Information: To characterize the capacity bound                    1               (r + 1)        -   ln  I0(r)   +  r  I1(r)   .     (22)
+of the Rydberg atomic system considered, the mutual infor-         I (z; x) = ln                    2                                I0(r)
+mation is employed as the key metric, which is associated
+with (11), formulated as                                                        2
+
+          I (z; x) = H (z) - H (z|x) .              (17)           B. LO-Dressed Rydberg Atomic Receiver
+
+To this end, both the marginal entropy H (z) and the condi-           In contrast to the LO-free regime that is only capable
+tional entropy H (z|x) are required. We first focus on the         of measuring the amplitude of the signal, the LO-dressed
+marginal entropy H (z). Specifically, the model presented          Rydberg atomic receiver can measure both the amplitude and
+in (11) reflects that the observation variable z actually follows  the phase of an RF signal. Again, this technique relies on
+a Rayleigh distribution with its scale parameter z given by        the concept of a Rydberg atom-based mixer [20], [22], [23].
+                                                                   Briefly, an additional reference signal, also known as an LO
+          z = RF       PRx|h|2 + R2y .              (18)           being on-resonance with the Rydberg transition, is introduced
+                              2                                    into the vapor cell to control the down-conversion dynamics
+                                                                   of the Rydberg atoms. This exposes the Rydberg atoms to
+                                                                   the EIT/AT effect in order to demodulate the RF signal to be
+                                                                                                                       7
+
+measured. The frequency difference and the phase difference                 matrix component 21 simplifies to (the time index "t" is
+between the RF signal and the LO can be optically traced.                   dropped for notational conciseness)
+In what follows, we first elaborate on the underlying physical
+principles, and subsequently examine their compatibility with               21 |(p ,c ,LO ,3 ,4 )=0
+wireless communication systems.
+                                                                            =                 2p|total|2            .  (26)
+   1) Receiver's Response to the RF Signal: As regards to
+the LO-dressed Rydberg atomic receiver, we specify the RF                      22|total|2 + 22p c2 + p2 + |total|2
+signal ERF and the LO signal ELO respectively as
+                                                                            Upon substituting (26) into (2), we obtain
+               ELO = ALO cos (2fLOt + LO) ,        (23a)
+               ERF = ARF cos (2fRFt + RF) ,        (23b)                               Pout (t) = P¯0 + RF cos (2f t + ) , (27)
+
+where A, f , and  denote their own amplitudes (where we                     where P¯0 = Pine-e(LO,) represents the average in-
+                                                                            tensity of the probe laser. Furthermore,  = kpLC0A¯
+define ARF(LO) = ERF(LO) ), frequencies, and phases, with                   models the absorption coefficient of the probe laser, A¯ =
+the frequency and phase differences given by f = fLO -fRF                   2p/ 22 + 2p2 can be understood as the amplitude of the
+and  = LO - RF, respectively. The superposition field                       three-level EIT spectrum,  = P¯0 is a key intrinsic coeffi-
+Etotal can be formulated as                                                 cient characterizing the slope induced when the AT splitting of
+                                                                            the EIT peak shifts the on-resonance point to the slope of each
+     Etotal =ELO + ERF                                                      EIT line,  =  (LO, )/LO represents the intrinsic
+            =ALO cos (2fLOt + LO)                                           gain coefficient associated with the density matrix component
+               + ARF cos (2 (fLO - f ) t + LO - )                           21,  = p 2 2c + p2 /2 p2 + 22 represents the half-
+                                                                            width at half-maxima (HWHM) of a four-level system, as
+         = A2LO + AR2F + 2ALOARF cos (2f t + )                              well as the function  (a, b) = b2/ b2 + a2 is a normalized
+                                                                            Lorentzian function with a as the variable and b representing
+         × cos (2fLOt + LO) ,                      (24)                     the HWHM, where 2b corresponds to the full-width at half-
+                                                                            maxima (FWHM). For detailed derivations, please refer to
+which indicates that the non-linear response of the Rydberg                 Appendix B in the supplementary material accompanying this
+                                                                            paper [39].
+atoms to the superposition field Etotal can be treated as an
+envelope-detection process. When we have ARF/ALO  1,                           Then, the LO-dressed Rydberg atomic receiver measures
+                                                                            an RF signal in form of an optical readout, represented by
+the main frequency component of the superposition field's
+                                                                                       Preadout (t) = Pout (t) - P¯0
+envelope is determined by the difference f , where the
+                                                                                                    = |P (f )| cos (2f t + ) , (28)
+upper harmonics may be deemed negligible [22], [23]. By
+
+performing the second-order Taylor expansion of (24) at point               where |P (f )| is the amplitude of the single-sided Fourier
+
+ARF  =0  with  respect  to  , ARF  we  arrive  at                           spectrum at the frequency f when performing the Fourier
+ALO
+                            ALO
+
+                                                                            transform over Pout (t). The Rabi frequency of the RF signal
+
+Etotal  [ALO + ARF cos (2f t + )] cos (2fLOt + LO) .                        is then given by
+                                                                      (25)
+                                                                                                    |P (f )|
+In (25), the resonant term, i.e., cos (2fLOt + LO), in-                                       RF =          ,          (29)
+duces an AT splitting effect, hence reducing the peak                                                ||
+of the EIT line, and the lower frequency term, i.e.,
+ALO + ARF cos (2f t + ), modulates the amplitude of                         which thus provides us with an RF signal amplitude of ARF =
+the resonance.                                                              RF/RF.
+
+   Furthermore, to provide a closed-form expression for Pout,                  Eqs. (28) and (29) are at the heart of the LO-dressed
+we have to obtain 21 (t) by solving the master equation                     Rydberg atomic receiver. In sharp contrast to the LO-free
+in (5). Accordingly,  in (6) is further refined as total =                  context, the LO-dressed one concentrates on measuring the
+ LO + e(2ft+)RF , and |total|2 = totaltotal. How-                           amplitude of the single-side Fourier spectrum of Pout, i.e.,
+ever, the density matrix component 21 is excessively complex                |P (f )|, at the frequency f . Then, the phase difference 
+and, as such, only lends itself to numerical simulations, for ex-           can be extracted from Pout by employing a homodyne detec-
+ample, by using QuTip [37]. To unveil its underlying physics                tor [20], [41], [42], retrieving the RF signal phase according
+model more intuitively, we derive an analytical approximation.              to RF =  - LO. Thus, the RF signal can be accurately
+In particular, the states |3 and |4 are metastable, exhibit-                recovered. Additionally, both |P (f )| and || can be directly
+ing significantly extended lifetimes, resulting in spontaneous              attained from the optical spectrum. This technique efficiently
+emission rates that are markedly lower than those of state                  reduces the electric-field measurement to an optical-frequency
+|2 (3  4  2). Therefore, within this approximation,                         readout, while ensuring its International System of Units (SI)
+it is reasonable to set 3 = 4 = 0 [20]. Additionally, we                    traceability [4]. Furthermore, the probe laser transmission is
+consider only the resonant case where the probe laser, cou-                 received by a PD and converted into an output photocurrent
+pling laser, and LO are in resonance with the corresponding                 signal. The relationship between the alternating current (AC)
+atomic energy levels. This implies that their detunings are                 component of the probe laser power, i.e., || RF, and the
+p = c = LO = 0. Under these circumstances, the density                      photocurrent IAC is given by IAC = D || RF, where D
+                                                                            is the photodiode's responsivity, with units of A/W. The
+                                                                            carrier of the RF signal is transferred from the probe laser
+                                                                                                                                 8
+
+to the photocurrent generated by the PD. Consequently, the          Then, the output power of the LNA is given by
+instantaneous power associated with the AC component in the
+photocurrent output from the PD is given by PeAC = IA2CRL,          PLNA =GLNAPeAC + T2N
+where RL is the output impedance of the PD.
+                                                                    =GLNA  RLD22    2RF   PRx
+   Next, we consider the application of the LO-dressed Ry-                          2
+dberg atomic receiver in a wireless communication system.
+Specifically, given a complex Gaussian transmitted signal, the      +  GLNARLD22          2RF  B2GN  +  GLNARLD2P2SN          +  T2N  .
+observation zLO at the PD after encountering the channel h                                2
+is given by
+                                                                                                   R2y,LO
+          zLO = PRxGLNARLD || RF hx + nRy,LO, (30)
+                                                                                                                                 (36)
+
+where GLNA denotes the gain of the photocurrent after               Therefore, in the LO-dressed context, the noise nRy,LO can be
+processing by the subsequent circuits (such as a low-noise          modeled by an additive complex random variable with zero
+amplifier, LNA), and nRy,LO models the noise encompassing           mean and variance R2y,LO, namely nRy,LO  CN 0, R2y,LO .
+all relevant noise sources. For the LO-dressed Rydberg atomic       According to (36), the SNR can be formulated by
+receiver illustrated in Fig. 2, the noise comes primarily from
+the extrinsic background noise nBGN, and from the intrinsic            SNRRy,LO     =  GLNA    RL  D2  2   R2F  PRx  |h|2  .     (37)
+noise. The intrinsic noise sources encompass the QPN nQPN,                                                 2
+the photon shot noise (PSN) nPSN generated during the
+transformation of the RF signal to photocurrent, and from                                          R2y,LO
+the thermal noise nTN introduced by post-processing circuits.
+However, the QPN nQPN can be neglected in this case [5],               2) Mutual Information: The analysis is similar to that of
+[25].                                                               conventional systems, but relies on different coefficients. The
+                                                                    mutual information of the LO-dressed system, denoted by
+   · (Extrinsic noise) Background noise nBGN: After contam-         I zLO; x , is calculated by
+      ination by the background noise, the RF signal incident
+      upon the vapor cell can be represented as ERF + nBGN.         I zLO; x = e1/SNRRy,LO E1 (1/SNRRy,LO) ln 2,                 (38)
+      After being mixed, |P (f )| is refined as
+                                                                    where E1 (x) =   e-t  dt   denotes  the     exponential   integral
+                |P (f )| = || RF PRx + nBGN . (31)                                  xt
+                                   
+                                                                    function [43].
+      Note that herein we use PRx instead of ARF for consis-
+      tency with (30), since it more closely reflects the received                       IV. DISTORTION EFFECT
+      power; both terms represent the signal amplitude.
+   · (Intrinsic noise) Photon shot noise nPSN: In the transfor-        Rydberg atomic receivers - both the LO-free and LO-
+      mation of the RF signal to photocurrent, the PSN nPSN         dressed schemes - benefit from the large dipole moment of
+      is introduced, which thus yields [23]                         Rydberg atoms, endowing them with the ability to measure
+                                                                    extremely weak RF signals; yet, each can only achieve its full
+IAC = D (|P (f )| + nPSN)                                           potential when configured within its appropriate range. Given
+                                                                    their distinct atomic responses to the RF field, their operating
+= D || RF PRx + D || RF nBGN + DnPSN.                               conditions in wireless communication systems also differ.
+                                                                    This section aims for characterizing the distortion effects
+                                                    (32)            associated with these two types of Rydberg atomic receivers
+                                                                    by simulation results, thereby highlighting their respective
+The photocurrent power PeAC is written explicitly as [23]           operating conditions, when used for wireless systems. Before
+                                                                    we proceed, it is essential to clarify some critical parameters
+PeAC  =RLD2      2   2RF  PRx                                       related to our simulation results. Unless otherwise specified
+                     2                                              for a particular type of Rydberg atomic receiver, these param-
+                                                                    eters apply to both types of receivers.
+      +        RLD22    R2 F  B2GN  +    RLD2P2SN,  (33)
+                        2                                              We employ the QuTiP toolkit [37] for simulating the
+                                                                    quantum system considered, where the parameters are taken
+where P2SN represents the power of nPSN, modeled as                 from [12], [20], [23] to ensure their rationale. To be specific,
+                                                                    the vapor cell is L = 1 cm long and comprises ground state
+                     P2SN = 2eBI¯,                  (34)            atoms at a total density of N0 = 1 × 10-15 m-3. The four-
+                                                                    level energy system illustrated in Fig. 1(a) is realized by
+where I¯ is the average photocurrent, which can be                  taking into account the following four states |1  |2 
+                                                                    |3  |4 in a Cs atom: 6S1/2  6P3/2  47D5/2 
+calculated by                                                       48P3/2, in which the Rydberg state 47D5/2 has an inverse
+                                                                    lifetime of 3/ (2) = 3.9 kHz, and the Rydberg state
+                 I¯  =  eff  |P  (f )|2  e.         (35)            48P3/2 has an inverse lifetime of 4/ (2) = 1.7 kHz.
+                                 fp                                 For the two lowest states of |1 and |2, the lifetimes
+                                                                    are 1 = 0 and 2/ (2) = 5.2 MHz, respectively. The
+  In (35), eff  [0, 1] denotes the photon efficiency with           dipole moment associated with a |3  |4 transition is
+  no units and fp gives the frequency of the probe laser.           RF = -1443.459ea0, and 12 = (2.5ea0)2 for |1  |2
+· (Intrinsic noise) Thermal noise nTN: The thermal noise            transition, with e = 1.6 × 1019 C representing the elementary
+  is introduced by the LNA and by the post-processing               charge and a0 = 5.2 × 10-11 m for the Bohr radius. The
+  circuits, which can be modeled in the same way as
+  in (13).
+                                                                 9
+
+16                                                               atomic receiver is capable of detecting relatively strong RF
+                                                                 signals (`strong' is relative to the LO-dressed system, and
+14                              Obtained by QuTiP                compared to traditional receivers, it can still detect weak sig-
+                                                                 nals); however, the detection of extremely weak signals may
+                                Theoretical                      push the-LO-free system into its distortion region, leading to
+                                                                 degraded performance. Furthermore, the boundary between
+12                                                               strong and weak signal detection may be related to the
+                                                                 HWHM of the EIT spectrum. The HWHM may be difficult
+10                                                               to formulate analytically, as it is dependent upon the specific
+                                                                 configuration of the quantum system and can be determined
+8                                                                experimentally [20].
+
+6                                                                B. LO-Dressed Rydberg Atomic Receiver
+      Distortion region
+                                                                    When the coupling laser is locked at the transmission
+4                                                                frequency between states |2 and |3, i.e., when c = 0,
+                                                                 Fig. 5(a) illustrates the probe laser transmission Pout versus
+2                                                                the total Rabi frequency total, as formulated in (2). When
+                                                                 total varies versus the time t, as seen in Fig. 5(c), the temporal
+0   -8  -6  -4           -2  0  2            4     6  8          relationship between Pout and total is depicted in Fig. 5(b).
+                                                                 Specifically, as observed in Fig. 5(a), Pout decreases upon
+Fig. 4. Distortion of the LO-free Rydberg atomic receiver.       increasing total. Within the range where the orange line
+                                                                 coincides with the black curve, a near-linear relationship is
+carrier frequency of the RF signal is fRF = 3.5 GHz. For the     observed between Pout and total. This range of the Rabi
+probe laser, the wavelength is p = 852 nm, and the 1/e2          frequency can therefore be considered as the linear dynamic
+beam diameter is 0.76 mm, yielding the Rabi frequency of         range of the LO-dressed framework. Conversely, when total
+p/ (2) = 8 MHz. For the coupling laser, the wavelength           is either too strong or too weak, Pout exhibits a non-linear
+is c = 510 nm, the 1/e2 beam diameter is 1.95 mm, and            relationship with total. The significance of this for wireless
+the Rabi frequency is c/ (2) = 1 MHz. The bandwidth              communication is that when the RF signal intensity is too
+of the atomic system is B = 1 MHz. The permittivity in           high (for instance, if the transmission power is very high),
+vacuum is 0 = 8.854 × 10-12 F/m, and the impedance in            the LO-dressed receiver may not function well. This will be
+free space is given by 0 = 377 Ohm. Regarding the LO-            examined thoroughly in Sec. V.
+free Rydberg atomic receiver, the Rabi frequency of the RF
+field is RF/ (2) = 6 MHz. For the LO-dressed system,                Typically, we aim for designing the LO-dressed system
+the Rabi frequency of the RF field is RF/ (2) = 20 kHz           for allowing it to operate within linear region, i.e., within
+and LO/ (2) = 4.23 MHz for the LO field. The frequency           the orange square of Fig. 5(a). This also aligns with the
+difference is given by f = 150 kHz. The remaining param-         fundamental design objective of the LO-dressed Rydberg
+eters are specified as follows: GLNA = 20 dB, RL = 50 Ohm,       receiver: to maximize the slope ||, thereby extending the
+D = 0.55 A/W, T = 290 Kelvin, and eff = 0.8.                     linear dynamic range. The slope || serves as an approximate
+                                                                 fit for the relationship between Pout and total. However, the
+A. LO-Free Rydberg Atomic Receiver                               closed-form analyses of the bounds of the linear dynamic
+                                                                 range proves challenging due to the intractability of the master
+   As regards to the LO-free Rydberg atomic receiver, the        equation in (5). This is caused by the uncertainties in the
+distortion may arise from ambiguous observations caused by       quantum system, such as their decay constants, transition
+a high level of uncertainty when the Rabi frequency of the       probabilities, and atomic responses. While the exact range
+RF field is weak, and hence the AT splitting interval cannot     limits may be elusive, one viable approach is to simulate this
+be accurately identified. If we fix Pout in Fig. 3 and scan      quantum system using the QuTiP toolkit [37], allowing us
+c, we obtain the trend of the AT splitting interval upon         to plot their curves and infer an approximate linear dynamic
+varying the Rabi frequency RF, as shown in Fig. 4 (actually      range.
+a top-down view of Fig. 3). Specifically, in Fig. 4, the dashed
+gray line represents the theoretical interval between a pair                          V. NUMERICAL RESULTS
+of AT splitting peaks, while the jagged solid red curves are
+obtained using the QuTiP toolkit [37]. The jagged profile of     A. Simulation Setup
+the curves is due to perturbations in the quantum system
+during the solution of the master equation (5), reflecting          This section provides numerical results for characterizing
+the step-wise process involved in locating the EIT spectrum      the performance of a wireless system relying on both LO-free
+peaks. Intuitively, we observe that as the Rabi frequency        and LO-dressed receivers. In addition to the quantum param-
+decreases, the interval between the two AT splitting peaks       eters presented in Sec. IV, some other parameters associated
+gradually narrows. However, this interval does not reduce to     with wireless systems are specified as follows. We assume that
+zero; instead, it saturates at a certain Rabi frequency, around  the Tx is equipped with a dipole antenna having an antenna
+5.5 MHz. Below this threshold, the EIT spectrum no longer        gain of GTx = 2.15 dBi. The RF signal is transmitted at a
+exhibits two peaks, when scanning c, indicating that the         power of PTx = 0 dBm, and arrives at the Rydberg atomic
+LO-free system has entered its distortion region. Within this    receiver over a distance of dTx-Rx = 10 m. The background
+distortion region, only a single-peaked EIT line is observed.
+
+   The simulation results in Fig. 3 and Fig. 4 provide insights
+for wireless system implementations: the LO-free Rydberg
+                                                                                                                                                10
+
+10.5 10-6                        (a)                                              10.5 10-6                (c)
+
+10 Linear dynamic range                                                           10
+
+9.5                                                                               9.5
+
+9                                                                                 9
+
+8.5                                                                               8.5
+
+8                             ( ) LO opt                                          8
+
+7.50       2               4  6           8  10  12                        14     7.50       0.5   1       1.5      2         2.5       3
+
+3 10-10                                                                                                                            10-10
+
+                                 (b)
+
+2.5                                                                                     (a) Quantum
+                                                                                            procedure
+                                                                                                                    (c) Output
+
+2
+
+1.5
+
+1
+
+0.5                                                                                     (b) Input
+
+0  0       2               4  6           8  10  12                        14
+
+Fig. 5. Distortion of the LO-dressed Rydberg atomic receiver. (a) The probe transmission Pout versus the Rabi frequency of
+the superposition field total. (b) The Rabi frequency of the superposition field total versus time t. (c) The probe
+transmission Pout versus time t.
+
+noise power is BGN = -90 dBm. For comparison with
+
+conventional RF receivers, the receiver antenna gain shown
+
+in Fig. 2 is given by GRx = 2.15 dBi, and its effective area               100
+
+is calculated by R2F/(4).
+
+B. SNR Performance                                                         50
+
+   Fig. 6 portrays the SNR performance versus distance dTx-Rx    SNR (dB)      0                           ~ 44 dB
+of both the LO-free and LO-dressed Rydberg atomic receivers,
+which are compared to conventional RF receivers for different                                              (100 m)
+transmit powers PTx. The "Theoretical LO-dressed" curve
+represents the theoretical SNR specified in (37), whereas the              -50
+"LO-free" and "Practical LO-dressed" curves are obtained
+through simulations using the QuTiP toolkit [37]. Some                                       Conventional    ~ 1500 m    LO-dressed
+intriguing phenomena may be observed. Firstly, the SNR per-                                                (SNR = 0 dB)
+formance curve of the LO-free receiver discontinues beyond
+about 10 meters. This can be attributed to the increased free-             -100
+space path loss versus distance, which is due to attenuating
+the RF Rabi frequency RF. Accordingly, as indicated by the                                   100   101     102           103       104     105  106
+SNR expression in (16), the uncertainty level ~ is increased
+for an attenuated RF, leading to a significant degradation       Fig. 6. SNR performance versus distance dTx-Rx at different
+in SNR. As RF continues to decay, the system enters its          transmit powers PTx.
+distortion region, as shown in Fig. 4, leading to the LO-
+free Rydberg atomic receiver's inability to read out any AT      RF receivers in terms of the SNR required. For instance,
+splitting interval. Secondly, the LO-dressed system exhibits     at a transmit power of PTx = -10 dBm and a distance of
+poor SNR performance at short distances (e.g., within a few      dTx-Rx = 100 m, the LO-dressed atomic receiver achieves
+meters). This degradation, although counterintuitive, occurs     an SNR that is approximately 44 dB higher than that of a
+because the strong RF Rabi frequency pushes the system           conventional receiver. Additionally, the LO-dressed receiver
+beyond its linear dynamic range, as illustrated in Fig. 5.       extends the effective coverage by approximately 1,500 meters
+Thirdly, it is evident that both the LO-free and LO-dressed Ry-  in comparison to conventional RF receivers.
+dberg atomic receivers consistently outperform conventional
+                                                                    Fig. 6 also highlights their amazing capabilities of detecting
+                                                                 weaker RF signals over extended ranges, while achieving
+                                                                 higher SNR at a reduced transmit power as a benefit of their
+                                                                                                                                                                                              11
+
+30
+
+     Conventional                                                                                                                  3
+
+25   Theoretical LO-dressed
+
+Mutual information (bits/s/Hz)Practical LO-dressed                                                                                 2.5
+                                                                                                  Achievable capacity (bits/s/Hz)
+     LO-Free
+
+20                                                                                                                                                                     Step into LO-dressed
+
+                                                                                                                                   2                                   distortion region
+
+15                                                                                                                                 1.5  Conventional, 8-QAM
+
+                                                                                                                                        Theoretical LO-Dressed, 8-QAM
+
+                                                                                                                                        Practical LO-Dressed, 8-QAM
+
+10                                                                                                                                 1    LO-Free, 8-PAM
+
+5                                                                                                                                  0.5
+
+     LO-free distortion region                                                                                                          LO-free distortion region
+
+0    -10           0         10             30  40                                                                                 0
+-20                                     20
+                                                                                                                                   -20  -10  0                     10  20                 30  40
+                             SNR (dB)
+                                                                                                                                                             SNR (dB)
+
+Fig. 7. Mutual information versus SNR.                            Fig. 8. Achievable capacity versus SNR.
+
+increased sensitivity. Specifically, the LO-free and LO-dressed   for both 8-QAM and 8-PAM is log2 8 = 3 bits/s/Hz, it is
+systems exhibit complementary strengths: in close proxim-         evident that all systems approach saturation at this level,
+ity (e.g., dTx-Rx < 10 m), the LO-free system overcomes           as the transmit power PTx increases. Firstly, the LO-dressed
+the performance erosion of LO-dressed systems experienced         systems exhibit a non-negligible capacity at low SNR levels.
+beyond their linear dynamic range, achieving an SNR ad-           As the SNR increases, the capacity of LO-dressed systems
+vantage of up to  25 dB compared to conventional RF               declines, corroborating the findings seen in Fig. 7, as expected
+receivers. Therefore, we conclude that LO-dressed systems         outside the linear dynamic range. Secondly, although LO-
+outperform their LO-free counterparts at larger distances (e.g.,  free systems exhibit superior SNR performance compared to
+dTx-Rx > 10 m), revealing outstanding detection capabilities in   conventional RF receivers (shown in Fig. 6), their capacities
+the distance-range, where LO-free systems are less effective.     achieved for constant-amplitude 8-PAM are lower than for
+This complementary functionality is crucial for optimizing        8-QAM. This is because LO-free systems measure only the
+the performance of wireless communication systems relying         amplitude of the RF field, precluding the utilization of phase
+on Rydberg atomic receivers, enabling robust signal detection     information. By contrast, at a higher SNR, the LO-free system
+across diverse coverage distances.                                achieves significant capacity enhancements. These observa-
+                                                                  tions underscore the complementary potential of LO-dressed
+C. Achievable Capacity                                            and LO-free configurations in optimizing wireless systems
+                                                                  across different power levels, leveraging their distinct atomic
+   Fig. 7 illustrates the theoretical mutual information versus   response characteristics for maximizing the system capacity.
+the received SNR. The LO-free system follows the mutual
+information formulated in (22), while the LO-dressed sys-            Additionally, the results obtained in Fig. 7 and Fig. 8
+tem obeys the result presented in (38). Given the distortion      convey more promising insights: To achieve the same rate,
+present in both LO-free and LO-dressed scenarios, their           the LO-dressed configuration requires a much lower received
+quantum parameters are obtained via QuTiP and Monte Carlo         SNR compared to the conventional RF receiver. Physicists
+simulations. As expected, an increase in the received SNR         have long demonstrated that Rydberg atomic receivers exhibit
+leads to a significant enhancement in mutual information.         exceptional sensitivity to RF signals, and this sensitivity
+More specifically, the practical LO-dressed configuration is      translates into practical engineering advantages ­ the reduced
+closely aligned with the theoretical LO-dressed capacity at       SNR requirement. This implies that in practical implementa-
+low SNR levels. However, as the SNR increases, the practical      tions we can either reduce the transmit power or extend the
+LO-dressed capacity precipitously declines beyond a certain       transmission distance.
+threshold, entering its distortion region. By contrast, the LO-
+free system initially operates within the distortion region at a  D. SER Performance
+low SNR level, but exhibits substantial capacity improvement
+beyond this region. These behaviors stem from the distinct           Fig. 9 illustrates the SER performance versus the SNR
+atomic responses of LO-free and LO-dressed systems when           for different modulation orders M . The SER of PAM is
+exposed to varying RF fields. Different transmit power levels     calculated according to [44, Pg. 266, Eq. (5.246)], and the
+yield varying RF Rabi frequencies, which in turn results in       SER of the QAM can be evaluated based on [44, Pg. 278,
+specific operating or distortion regions at an identical SNR.     Eq. (5.279)]. Firstly, the three subplots clearly illustrate that,
+                                                                  regardless of the receiver type, higher modulation orders
+   In Fig. 8, we examine the influence of modulation schemes      result in an increased SER. This aligns with conventional
+on the achievable capacity. More specifically, the LO-dressed     expectations. Both the LO-dressed and LO-free configurations
+and the conventional systems utilize 8-order quadrature ampli-    require a lower SNR to achieve a SER of 1% compared
+tude modulation (8-QAM), while the LO-free systems employ         to conventional RF receivers, while also supporting higher
+8-order pulse amplitude modulation (8-PAM) due to its fixed-      modulation orders, such as the QAM order of M = 210 for the
+amplitude nature. Given that the theoretical performance limit
+                                                                                                                                        12
+
+100   (a) Conventional  100   (b) LO-dressed                                                     100   (c) LO-free
+
+10-1                    10-1                                                                     10-1
+
+10-2                    10-2  SER  1%                                                            10-2              SER  1%
+
+SER                                                                                              10-3
+                                              SER
+                                                                                            SER
+10-3                    10-3
+
+10-4                    10-4                                                                     10-4                 Operating region
+
+                                                                  Operating                            Distortion
+
+10-5                    10-5                                      region                         10-5  region
+
+10-6                    10-6                                                                     10-6              0
+-40 -20 0 20 40         -40 -20 0 20 40                                                          -40   -20            20
+
+      SNR (dB)                SNR (dB)                                                                 SNR (dB)
+
+Fig. 9. SER performance versus the SNR. (a) Conventional RF receiver. (b) LO-dressed Rydberg atomic receiver. (c)
+LO-free Rydberg atomic receiver.
+
+LO-dressed system. Once the SER is below 1%, the residual         focusing on the linear dynamic range and distortion effects.
+errors may be readily cleaned up by powerful error correction     Through extensive numerical simulations, we characterized
+codes [45]. More intriguingly, their own performance as           our models by evaluating their key performance metrics,
+functions of the SNR differ. To be specific, as depicted in       including their SNR, system capacities, and SER. Accord-
+Fig. 9(b), the SER performance of the LO-dressed receiver         ingly, a few valuable insights were drawn in terms of their
+initially improves with an increased SNR, but subsequently        deployment strategies in wireless communication systems.
+deteriorates as SNR continues to rise. This degradation occurs
+because a high received SNR drives the LO-dressed system             Despite these contributions, the current convenient frame-
+beyond its linear dynamic range into a distortion region. This    work proposed in this paper represents only the beginning
+superior performance experienced in the linear dynamic range      of a broader exploration into quantum sensing aided wireless
+is attributed to the high sensitivity of LO-dressed systems,      communications. Some unresolved issues remain, warranting
+which facilitates accurate discrimination of the constellation    further investigations, and we list a few of them below.
+points and exhibits remarkable robustness against noise. By
+contrast, as shown in Fig. 9(c), the LO-free system enters its      1) Wideband Designs for Rydberg Atomic Receivers: While
+operating region at a specific SNR threshold, where it exhibits         this study considered Rydberg atomic receivers operating
+a favorable SER performance level. It is also evident that              within a bandwidth of 1 MHz, expanding to broader
+the SER of the LO-free receiver is substantially better than            bandwidths may push these systems beyond their linear
+that of conventional RF receivers. Additionally, when the SER           dynamic range. Therefore, developing wideband designs,
+of Rydberg atomic receivers approaches 1, this is primarily             along with bespoke signal processing techniques for
+attributed to the challenges in identifying constellation points        distortion elimination, are essential for their practical
+at higher modulation orders M , and owing to mismatches                 implementations.
+in quantum parameters that prevent the operation within the
+operating region. Thus, careful parameter tuning is crucial for     2) Rydberg Atomic MIMO: Although similar concepts have
+fully exploiting the benefits of the quantum sensing system.            been explored in [33], the practical deployment of mul-
+                                                                        tiple vapor cells poses significant challenges. Future re-
+   In the design of wireless communication systems, there is a          search should concentrate on more efficient yet compact
+perpetual quest for increased data rates a reduced SER. How-            implementations of Rydberg Atomic MIMO systems, for
+ever, this pursuit is hindered by the inherent trade-off where          example, through the use of multiple probe lasers and a
+higher-order modulations inevitably lead to increased SER,              single coupling laser within a single vapor cell [18].
+since "we cannot have the best of both worlds". Fortunately,
+the advent of Rydberg atomic receivers presents a promising         3) The current study is based on standard configurations
+way forward.                                                            established by the physics community. For the wireless
+                                                                        research community, further sophisticated designs are
+                         VI. CONCLUSIONS                                required for mitigating the hardware impairments, for ex-
+                                                                        ample, stabilization and calibration of the probe/coupling
+   An avenue of realizing true quantum-aided wireless systems           laser, and accurate transmit power control, so that the
+has been proposed by developing customized models for                   system can operate within its linear domain.
+Rydberg atomic receivers. We investigated the characteristics
+of both LO-free and LO-dressed Rydberg atomic receivers,                                       REFERENCES
+
+                                                                   [1] L. Hanzo, Z. Babar, Z. Cai, D. Chandra, I. B. Djordjevic, B. Koczor,
+                                                                        S. X. Ng, M. Razavi, and O. Simeone, "Quantum information
+                                                                                 13
+
+      processing, sensing and communications: Their myths, realities and         [23] F. Wu, Q. An, Z. Sun, and Y. Fu, "Linear dynamic range of a Rydberg-
+      futures," arXiv preprint: 2412.00987, 2024. [Online]. Available:                 atom microwave superheterodyne receiver," Phys. Rev. A, vol. 107, p.
+      https://arxiv.org/abs/2412.00987                                                 043108, Apr. 2023.
+ [2] X. Zhou, A. Shen, S. Hu, W. Ni, X. Wang, E. Hossain, and L. Hanzo,
+      "Towards quantum-native communication systems: New developments,           [24] C. T. Fancher, D. R. Scherer, M. C. S. John, and B. L. S. Marlow,
+      trends, and challenges," arXiv preprint: 2311.05239, 2023. [Online].             "Rydberg atom electric field sensors for communications and sensing,"
+      Available: https://arxiv.org/abs/2311.05239                                      IEEE Trans. Quantum Eng., vol. 2, pp. 1­13, Mar. 2021.
+ [3] A. G. J. MacFarlane, J. P. Dowling, and G. J. Milburn, "Quantum
+      technology: the second quantum revolution," Philos. Transact. A Math.      [25] K. C. Cox, D. H. Meyer, F. K. Fatemi, and P. D. Kunz, "Quantum-
+      Phys. Eng. Sci., vol. 361, no. 1809, pp. 1655­1674, Jun. 2003.                   limited atomic receiver in the electrically small regime," Phys. Rev.
+ [4] N. Schlossberger, N. Prajapati, S. Berweger, A. P. Rotunno, A. B.                 Lett., vol. 121, p. 110502, Sep. 2018.
+      Artusio-Glimpse, M. T. Simons, A. A. Sheikh, E. B. Norrgard, S. P.
+      Eckel, and C. L. Holloway, "Rydberg states of alkali atoms in atomic       [26] C. Holloway, M. Simons, A. H. Haddab, J. A. Gordon, D. A. Ander-
+      vapour as SI-traceable field probes and communications receivers," Nat.          son, G. Raithel, and S. Voran, "A multiple-band Rydberg atom-based
+      Rev. Phys., Sep. 2024.                                                           receiver: AM/FM stereo reception," IEEE Antennas Propag. Mag.,
+ [5] C. L. Degen, F. Reinhard, and P. Cappellaro, "Quantum sensing," Rev.              vol. 63, no. 3, pp. 63­76, Jun. 2021.
+      Mod. Phys., vol. 89, p. 035002, Jul. 2017.
+ [6] S. Pirandola, B. R. Bardhan, T. Gehring, C. Weedbrook, and S. Lloyd,        [27] D. H. Meyer, K. C. Cox, F. K. Fatemi, and P. D. Kunz, "Digital com-
+      "Advances in photonic quantum sensing," Nat. Photonics, vol. 12,                 munication with Rydberg atoms and amplitude-modulated microwave
+      no. 12, pp. 724­733, Nov. 2018.                                                  fields," Appl. Phys. Lett., vol. 112, no. 21, p. 211108, May 2018.
+ [7] M. Fleischhauer, A. Imamoglu, and J. P. Marangos, "Electromagneti-
+      cally induced transparency: Optics in coherent media," Rev. Mod. Phys.,    [28] D. A. Anderson, R. E. Sapiro, and G. Raithel, "An atomic receiver for
+      vol. 77, pp. 633­673, Jul. 2005.                                                 AM and FM radio communication," IEEE Trans. Antennas Propag.,
+ [8] T. W. Ducas, W. P. Spencer, A. G. Vaidyanathan, W. H. Hamilton, and               vol. 69, no. 5, pp. 2455­2462, May 2021.
+      D. Kleppner, "Detection of far-infrared radiation using Rydberg atoms,"
+      Appl. Phys. Lett., vol. 35, no. 5, pp. 382­384, Sep. 1979.                 [29] C. L. Holloway, M. T. Simons, J. A. Gordon, and D. Novotny,
+ [9] H. Figger, G. Leuchs, R. Straubinger, and H. Walther, "A photon                   "Detecting and receiving phase-modulated signals with a Rydberg atom-
+      detector for submillimetre wavelengths using Rydberg atoms," Opt.                based receiver," IEEE Antennas Wirel. Propag. Lett., vol. 18, no. 9, pp.
+      Commun., vol. 33, no. 1, pp. 37­41, Apr. 1980.                                   1853­1857, Sep. 2019.
+[10] A. Osterwalder and F. Merkt, "Using high Rydberg states as electric
+      field sensors," Phys. Rev. Lett., vol. 82, pp. 1831­1834, Mar. 1999.       [30] Y. Cai, S. Shi, Y. Zhou, Y. Li, J. Yu, W. Li, and L. Li, "High-sensitivity
+      [Online]. Available: https://link.aps.org/doi/10.1103/PhysRevLett.82.            Rydberg-atom-based phase-modulation receiver for frequency-division-
+      1831                                                                             multiplexing communication," Phys. Rev. Appl., vol. 19, p. 044079, Apr.
+[11] J. A. Gordon, C. L. Holloway, S. Jefferts, and T. Heavner, "Quantum-              2023.
+      based SI traceable electric-field probe," in Proc. IEEE Int. Symp.
+      Electromagn. Compat., Fort Lauderdale, FL, USA, Jul. 2010, pp. 321­        [31] D. H. Meyer, Z. A. Castillo, K. C. Cox, and P. D. Kunz, "Assessment
+      324.                                                                             of Rydberg atoms for wideband electric field sensing," J. Phys. B: At.
+[12] J. A. Sedlacek, A. Schwettmann, H. Ku¨bler, R. Lo¨w, T. Pfau, and J. P.           Mol. Opt. Phys., vol. 53, no. 3, p. 034001, Jan. 2020.
+      Shaffer, "Microwave electrometry with Rydberg atoms in a vapour cell
+      using bright atomic resonances," Nat. Phys., vol. 8, no. 11, pp. 819­824,  [32] S. Yuan, M. Jing, H. Zhang, L. Zhang, L. Xiao, and S. Jia, "Isotropic
+      Nov. 2012.                                                                       antenna based on Rydberg atoms," Opt. Express, vol. 32, no. 5, pp.
+[13] C. L. Holloway, J. A. Gordon, S. Jefferts, A. Schwarzkopf, D. A.                  8379­8388, Feb. 2024.
+      Anderson, S. A. Miller, N. Thaicharoen, and G. Raithel, "Broadband
+      Rydberg atom-based electric-field probe for SI-traceable, self-calibrated  [33] M. Cui, Q. Zeng, and K. Huang, "Towards atomic MIMO
+      measurements," IEEE Trans. Antennas Propag., vol. 62, no. 12, pp.                receivers," arXiv preprint: 2404.04864, 2024. [Online]. Available:
+      6169­6182, Dec. 2014.                                                            https://arxiv.org/abs/2404.04864
+[14] M. Stock, "The revision of the SI­towards an international system of
+      units based on defining constants," Meas. Tech., vol. 60, pp. 1169­1177,   [34] ----, "IQ-aware precoding for atomic MIMO receivers," arXiv
+      Mar. 2018.                                                                       preprint: 2408.14366, 2024. [Online]. Available: https://arxiv.org/abs/
+[15] A. K. Robinson, N. Prajapati, D. Senic, M. T. Simons, and C. L.                   2408.14366
+      Holloway, "Determining the angle-of-arrival of a radio-frequency source
+      with a Rydberg atom-based sensor," Appl. Phys. Lett., vol. 118, no. 11,    [35] T. Gong, A. Chandra, C. Yuen, Y. L. Guan, R. Dumke, C. M. S.
+      p. 114001, Mar. 2021.                                                            See, M. Debbah, and L. Hanzo, "Rydberg atomic quantum receivers
+[16] A. P. Rotunno, C. L. Holloway, N. Prajapati, S. Berweger, A. B. Artusio-          for classical wireless communication and sensing," arXiv preprint:
+      Glimpse, R. Brown, M. Simons, A. K. Robinson, B. N. Kayim, M. A.                 2409.14501, 2024. [Online]. Available: https://arxiv.org/abs/2409.14501
+      Viray, J. F. Jones, B. C. Sawyer, R. Wyllie, T. Walker, R. W. Ziolkowski,
+      S. R. Jefferts, S. Geibel, J. Wheeler, and E. Imhof, "Investigating        [36] T. Gong, J. Sun, C. Yuen, G. Hu, Y. Zhao, Y. L. Guan, C. M. S.
+      electromagnetically induced transparency spectral lineshape distortion           See, M. Debbah, and L. Hanzo, "Rydberg atomic quantum receivers
+      due to non-uniform fields in Rydberg-atom electrometry," J. Appl. Phys.,         for classical wireless communications and sensing: Their models and
+      vol. 134, no. 8, p. 084401, Aug. 2023.                                           performance," arXiv preprint: 2412.05554, 2024. [Online]. Available:
+[17] J. A. Sedlacek, A. Schwettmann, H. Ku¨bler, and J. P. Shaffer, "Atom-             https://arxiv.org/abs/2412.05554
+      based vector microwave electrometry using Rubidium Rydberg atoms
+      in a vapor cell," Phys. Rev. Lett., vol. 111, p. 063001, Aug 2013.         [37] J. R. Johansson, P. D. Nation, and F. Nori, "QuTiP: An open-source
+[18] J. S. Otto, M. K. Hunter, N. Kjærgaard, and A. B. Deb, "Data capacity             Python framework for the dynamics of open quantum systems," Comp.
+      scaling of a distributed Rydberg atomic receiver array," J. Appl. Phys.,         Phys. Comm., vol. 183, no. 8, pp. 1760­1772, Apr. 2012.
+      vol. 129, no. 15, p. 154503, Apr. 2021.
+[19] R. Mao, Y. Lin, Y. Fu, Y. Ma, and K. Yang, "Digital beamforming and         [38] M. Fleischhauer, A. Imamoglu, and J. P. Marangos, "Electromagneti-
+      receiving array research based on Rydberg field probes," IEEE Trans.             cally induced transparency: Optics in coherent media," Rev. Mod. Phys.,
+      Antennas Propag., vol. 72, no. 2, pp. 2025­2029, Feb. 2024.                      vol. 77, pp. 633­673, Jul. 2005.
+[20] M. Jing, Y. Hu, J. Ma, H. Zhang, L. Zhang, L. Xiao, and S. Jia, "Atomic
+      superheterodyne receiver based on microwave-dressed Rydberg spec-          [39] Y. Chen, X. Guo, C. Yuen, Y. Zhao, Y. L. Guan, C. M. S.
+      troscopy," Nat. Phys., vol. 16, no. 9, pp. 911­915, Jun. 2020.                   See, M. Debbah, and L. Hanzo, "Supplementary materials
+[21] Y. Wang, F. Jia, J. Hao, Y. Cui, F. Zhou, X. Liu, J. Mei, Y. Yu, Y. Liu,          for paper entitled `Harnessing Rydberg Atomic Receivers:
+      J. Zhang, F. Xie, and Z. Zhong, "Precise measurement of microwave                From Quantum Physics to Wireless Communications'," Jan.
+      polarization using a Rydberg atom-based mixer," Opt. Express, vol. 31,           2025, doi: 10.13140/RG.2.2.34567.10406. [Online]. Available:
+      no. 6, pp. 10 449­10 457, Mar. 2023.                                             https://www.researchgate.net/publication/387953553 Supplementary
+[22] M. T. Simons, A. H. Haddab, J. A. Gordon, and C. L. Holloway, "A                  Materials for Paper Entitled Harnessing Rydberg Atomic
+      Rydberg atom-based mixer: Measuring the phase of a radio frequency               Receivers From Quantum Physics to Wireless Communications
+      wave," Appl. Phys. Lett., vol. 114, no. 11, p. 114101, Mar. 2019.
+                                                                                 [40] M. Thomas and A. T. Joy, Elements of information theory. Wiley-
+                                                                                       Interscience, 2006.
+
+                                                                                 [41] J. H. Scofield, "Frequency-domain description of a lock-in amplifier,"
+                                                                                       Am. J. Phys., vol. 62, no. 2, pp. 129­132, Feb. 1994.
+
+                                                                                 [42] M. Fuwa, S. Takeda, M. Zwierz, H. M. Wiseman, and A. Furusawa,
+                                                                                       "Experimental proof of nonlocal wavefunction collapse for a single
+                                                                                       particle using homodyne measurements," Nat. Commun., vol. 6, no. 1,
+                                                                                       p. 6665, Mar. 2015.
+
+                                                                                 [43] I. S. Gradshteyn and I. M. Ryzhik, Table of integrals, series, and
+                                                                                       products. Academic press, 2014.
+
+                                                                                 [44] J. G. Proakis, Digital communication - 4th edition. McGraw-hill, 2001.
+                                                                                 [45] L. Hanzo, T. H. Liew, and B. L. Yeap, Turbo coding, turbo equalisation
+
+                                                                                       and space-time coding. John Wiley & Sons, 2002.
+                                                                                                                                                                                                                           1
+
+                Supplementary Materials for Paper Entitled
+  "Harnessing Rydberg Atomic Receivers: From Quantum Physics to
+
+                            Wireless Communications"
+
+Yuanbin Chen1, Xufeng Guo1, Chau Yuen1, Fellow, IEEE, Yufei Zhao1, Yong Liang Guan1, Senior Mem-
+          ber, IEEE, Chong Meng Samson See2, Member, IEEE, Me´rouane Debbah3, Fellow, IEEE,
+                                         and Lajos Hanzo4, Life Fellow, IEEE
+
+            1School of Electrical and Electronics Engineering, Nanyang Technological University, Singapore 639798
+                                               2DSO National Laboratories, Singapore 639798
+
+        3Center for 6G Technology, Khalifa University of Science and Technology, Abu Dhabi, United Arab Emirates
+           4School of Electronics and Computer Science, University of Southampton, SO17 1BJ Southampton, U.K
+
+                         APPENDIX A                                         Then, by substituting (43) into (42a), we obtain (44), shown at
+       SOLUTION TO MASTER EQUATION IN (5)                                   the top of the next page. Upon letting 11  1 and 22  0,
+                                                                            we thus obtain a steady-state solution for 21 given by
+To obtain an analytical form of 21, we first determine
+
+the commutator [H, ]21. For a        4 × 4 Hamiltonian matrix,                                                       -  p
+[H, ]ij is given by [H, ]ij =                                                                                            2
+                                       4    Hik kj    -  ikHkj ,     and    21    =                                                                          .  (45)
+                                       k=1                                                                                     ( ) c 2
+                                                                                                                                   2
+thus [H, ]21 is formulated as                                                        21 - p        -
+                                                                                                                                           ( ) RF 2
+                                                                                                      31  -(p        +c        )-                 2
+               p                                     c                                                                             41                +RF  )
+[H, ]21     =   2    (11    -  22)  -  p21        +   2   31  .      (39)                                                              -(p +c
+
+                                                                            Under typical resonant conditions, we assume p = RF =
+
+According to (5), we have                                                   0, along with decay transition rates 41 = 31 = 0. Thus, we
+
+21  = - p      (11   -   22) + p21     -  c       31  - 2121.        (40)   have                                          p21
+            2                               2
+                                                                                            (21) = -                    4c                 2221  .              (46)
+
+Similarly, we can obtain the evolution equations for 31 and                                                       8  2RF           2  +
+41, which are respectively given by                                                                                  4c
+                                                                                                                          +c
+
+              c                                                             Due to the monotonicity of (2), the extrema distribution for
+               2
+31     =  -       (21    -  32)  +   (p     +  c)    31                     Pout and 21 with respect to c is identical. Consequently,
+
+               RF                                                           our  analysis  can  focus  exclusively             on     the  zeroes    of   d(21  )  .
+                2                                                                                                                                           dc
+          -          41  -  3131,                                (41a)
+                                                                            We now proceed by examining the extrema of (46) through
+
+41     =  -   RF     (31  -  42)  +    (p   +  c     +  RF)   41            differentiation with respect to c
+                2
+                                                                                                  cc4p21 42c +2RF 42c -2RF
+                                                                                                16c4221+2c c4+8c22RF221+R4F221 2
+          - 4141.                                                (41b)      ( )( ) d(21)
+                                                                              = - ( ) . dc
+
+The steady-state condition pushes 21 = 0, 31 = 0, and                                                                                                           (47)
+41 = 0. Next, we proceed by eliminating 31 and 41 for sim-
+plification, and the following approximations are made [20]:                From (47), it is not hard to obtain the following three extrema
+i) given that the population probability of the ground state is
+approximately 1, i.e., 11  1, the density components 22,                             c,1        =  0, c,2  =         RF     ,  c,3     =   - RF ,               (48)
+33, and 44 are relatively small and hence can be neglected;                                                           2                        2
+ii) the non-diagonal density components, such as the influence
+of 42 and 32 on 21, are supposed to be negligible due to                    which results in an observable splitting interval of
+their marginal impact. Upon letting 32  0 and 42  0,
+(41a) and (41b) can be recast to                                            |c,2 - c,3| = RF.
+
+(21    -  p) 21      =   - p     (11   -  22)  -   c     31,     (42a)                                   APPENDIX B
+                             2                      2            (42b)                            DERIVATIONS FOR (27)
+                                                                 (42c)
+[31    -    (p    +  c)]  31   =  - c     21   -   RF    41,                   To make the density matrix component 21 presented in
+                                      2              2                      (26) more intuitive and to expose its underlying physical
+                                                                            essence, we restructure it as
+[41    -    (p    +  c   +  RF)]  41   =  - RF       31.
+                                               2                                [21 (RF)]
+                                                                               = A¯ [1 -  (LO, ) - RF cos (2f t + )] , (49)
+Upon inserting (42c) into (42b) for eliminating 41, we have
+                                                                            where the function  (a, b) = b2/ b2 + a2 is a normalized
+31  -   (p     +  c)  -          ( ) RF 2         31     =  -    c   21  .  Lorentzian function with a as the variable and b repre-
+                                              2                   2         senting the HWHM, where 2b corresponds to the FWHM,
+                                                                            and  =  (LO, )/LO represents the intrinsic gain
+                          41 -(p +c +RF )                                   coefficient associated with the density matrix component 21.
+
+                                                                     (43)
+                                                                                                                                  2
+
+                                                                                                                      
+
+             (21        -  p) 21    =  - p       (11  -  22)  -   c                     -   c                         21  .       (44)
+                                           2                       2                         2
+
+                                                                         31  -   (p  +  c)  -         ( ) RF 2
+                                                                                                                   2
+
+                                                                                               41 -(p +c +RF )
+
+As regards to A¯ = 2p/ 22 + 22p , it can be interpreted                  where P¯0 = Pine-e(LO,) and  = P¯0 characterizes
+as the amplitude of the three-level EIT spectrum, and  =                 the total intrinsic gain coefficient. Additionally, taking into
+
+p 2 2c + p2 /2 2p + 22 represents the HWHM of a                          account the practical probe laser transmission in (56), the
+four-level system, which is related to the HWHM of the three-
+level EIT spectrum, denoted by EIT. When the probe light is              optimal condition in (53) can be slightly adjusted according
+in resonance with the atomic transition and the electric field
+of the RF signal is zero, we may arrive at                               to                         P¯0     2P¯0
+                                                                                               =            2LO
+                                                                                                         =            =   0.      (57)
+
+                                                                                        LO          LO
+
+ [21 (c)] |(p,LO,3,4,RF,LO)=0                                            which leads to a single, physically meaningful solution given
+
+            2p                           2c                              by                                               
+          22 + 2p2            2c + 2p / 2
+=                                                                2              LO =           A¯ - 1 +  A¯2 - 2A¯ + 4        3   (58)
+                                                                                                                               .
+                                                                  (50)                                                       3
+                    2c     +                     22 + 2p2
+
+= A¯ - A¯ (c, EIT) ,
+
+where the HWHM of the three-level EIT spectrum EIT is
+given by
+
+             EIT = 2c + 2p / 2 22 + 22p ,                        (51)
+
+and may be readily shown that
+
+                              
+                         = 2 2p EIT.
+                                                                 (52)
+
+                              2c + p2
+
+It can be observed from (49) that the essence of the LO-
+
+dressed Rydberg atomic receiver lies in the measurement of
+
+the Rydberg spectrum. The intrinsic gain coefficient  rep-
+resents the first-order derivative of the Lorentzian spectrum,
+
+reaching its maximum when LO satisfies
+
+                           2 (LO, )       =  0.                  (53)
+                                L2O
+
+Eq. (53) provides the criterion for determining the optimal
+
+operating condition of the LO-dressed model, notably yielding
+
+a single, physically meaningful solution given by
+
+                                       3
+
+                              LO =        ,                      (54)
+                                       3
+
+                                                                 
+                                                                 33
+which  thus  leads  to  a  maxima  of     given  by  ()max    =   8   .
+
+Subsequently, we arrive at the practical probe laser trans-
+
+mission Pout (t) represented by
+
+Pout (t)
+
+= Pine-kpLC0(21)
+
+= Pine-kpLC0A¯[1-(LO,)-RF cos(2f t+)]
+
+= Pine-kpLC0A¯ekpLC0A¯(LO,)ekpLC0A¯RF cos(2f t+)
+
+= Pine-e(LO,)eRF cos(2f t+),                                     (55)
+
+where  = kpLC0A¯ models the absorption coefficient of
+the probe laser. Given that RF  LO, it holds true that
+RF cos (2f t + )  1, thus yielding
+
+Pout (t)  Pine-e(LO,) (1 + RF cos (2f t + ))
+
+          = P¯0 + P¯0RF cos (2f t + )
+
+          = P¯0 + RF cos (2f t + ) ,                             (56)
+

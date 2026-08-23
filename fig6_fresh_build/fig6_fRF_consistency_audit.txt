@@ -1,0 +1,28 @@
+FIG. 6 -- fRF / dipole-moment consistency audit
+======================================================================
+
+SCOPE: targeted, read-only forensic check. Does not modify fig6_snr_distance.py or its outputs.
+
+FINDING (PAPER-STATED, both halves verified against paper_text.txt):
+  - Main paper Sec.IV states its atomic parameters (transition scheme 6S1/2->6P3/2->47D5/2->48P3/2, decay rates gamma3/(2pi)=3.9kHz, gamma4/(2pi)=1.7kHz, dipole moment wp_RF=-1443.459*e*a0) are "taken from [12],[20],[23]" (paper_text.txt line 615).
+  - Reference [20] is confirmed (paper_text.txt line 996) to be Jing et al. 2020, Nat. Phys. 16, 911 -- the ORIGIN of this exact dipole moment value (their Methods: radial matrix element 2946.512*e*a0, dipole moment 1443.450*e*a0 for the 47D5/2->48P3/2 transition, matching the main paper's -1443.459*e*a0 to 4 sig figs).
+  - Jing et al. 2020's own Methods section states this transition is driven by "a local MW field at 6.94GHz" (i.e. this dipole moment/decay-rate set is SPECIFIC to a transition resonant at 6.9458GHz, not an arbitrary/generic number).
+  - Separately, the main paper's Sec.IV Fig.4 caption paragraph states (paper_text.txt line 657): "carrier frequency of the RF signal is fRF = 3.5 GHz."
+
+CLASSIFICATION: this is a genuine PAPER-INTERNAL parameter inconsistency (borrowed atomic parameters specific to a real 6.9458GHz transition, reused for a separately-declared 3.5GHz RF carrier) -- not an error introduced by this reproduction. Both numbers are independently paper-stated; the inconsistency is between them, verified via ref [20]'s own source paper.
+
+WHY IT MATTERS FOR THE 44dB GAP: fRF enters fig6_snr_distance.py's pipeline in exactly one place -- the Conventional receiver's effective aperture A_eff=lambda_RF^2/(4*pi) -- and nowhere in the LO-free/LO-dressed SNR formulas (Eq.8-37 depend on wp_RF/hbar only, never fRF). So substituting the transition-consistent fRF=6.9458GHz changes ONLY the Conventional receiver's SNR (smaller wavelength -> smaller effective aperture -> worse classical SNR), which WIDENS the gap.
+
+RESULTS (PTx=-10dBm, d=100m checkpoint, diameter-corrected d=0.76mm baseline -- same real fig4/fig5 data as the frozen fig6_snr_distance.py):
+
+  A) paper-literal fRF=3.5GHz (CURRENT frozen baseline)
+    fRF=3.5000GHz, Conventional SNR@100m=-23.3296dB, gap=32.7095dB, 0dB-coverage=287.62m
+
+  B) transition-consistent fRF=6.9458GHz (Jing 2020's real resonance for the SAME dipole moment/transition the paper borrows)
+    fRF=6.9458GHz, Conventional SNR@100m=-29.2827dB, gap=38.6626dB, 0dB-coverage=291.00m
+
+NET EFFECT: correcting fRF widens the gap by +5.9531dB (from 32.7095dB to 38.6626dB), closing the previously-unresolved portion of the paper's 44dB claim from ~11.29dB down to ~5.34dB.
+
+EFFECT ON THE ~1500m COVERAGE CLAIM: negligible. The Theoretical LO-dressed 0dB-crossing distance does not depend on fRF at all (fixed at 294.44m by the real fig4/fig5 data, unchanged in both cases above). The Conventional receiver's own crossing point moves from 6.82m to 3.43m, which barely affects the 294m-scale 'extended coverage' number. The 1500m claim remains genuinely unresolved by this correction -- closing it would require a ~14dB improvement in the LO-dressed receiver's OWN noise floor / A_LO gain, which this audit does not attempt to justify from the paper's text.
+
+STATUS: this correction is offered as a documented, provenance-verified lead, not adopted into the frozen fig6_snr_distance.py baseline. Adopting fRF=6.9458GHz project-wide (it would also affect any other figure that independently uses fRF=3.5GHz, if any) is a decision for the user, not applied silently here.

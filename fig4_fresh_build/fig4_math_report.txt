@@ -1,0 +1,93 @@
+FIG. 4 MATH REPORT -- INDEPENDENT FRESH QUTIP SIMULATION
+======================================================================
+
+1. HAMILTONIAN (rotating frame, rad/s units, same as Fig.3)
+
+   H = -Delta_p |2><2| - (Delta_p+Delta_c) |3><3| - (Delta_p+Delta_c+Delta_RF) |4><4|
+       + (Omega_p/2)(|1><2| + |2><1|)
+       + (Omega_c/2)(|2><3| + |3><2|)
+       + (Omega_RF/2)(|3><4| + |4><3|)
+
+   Delta_p = Delta_RF = 0 fixed throughout (same assumption as Fig.3).
+
+2. MASTER EQUATION
+
+   d(rho)/dt = -i[H, rho] + sum_n D[C_n](rho),  D[C]rho = C rho C^dag - 1/2{C^dag C, rho}
+   Solved via qutip.steadystate(H, c_ops, method="direct") for each (Omega_RF, Delta_c).
+
+3. ATOMIC STATES
+   |1> ground, |2> intermediate excited, |3> Rydberg, |4> nearby Rydberg (paper Sec. IV).
+
+4. PROBE TRANSITION: |1> <-> |2>, Omega_p = 2pi x 8.0 MHz (fixed)
+5. COUPLING TRANSITION: |2> <-> |3>, Omega_c = 2pi x 1.0 MHz (fixed)
+6. RF TRANSITION: |3> <-> |4>, Omega_RF swept (this is Fig.4's x-independent variable)
+
+7. ALL PARAMETER VALUES
+   gamma2 = 2pi x 5.2 MHz, gamma3 = 2pi x 3.9 kHz, gamma4 = 2pi x 1.7 kHz
+   L = 1.0 cm, N0 = 1e15 m^-3, d_probe = 0.76 mm
+   Pin = 39.076088 microW, C0 = -1.843619e-05, kp = 7.374631e+06 rad/m
+
+8. OMEGA_RF SWEEP: [0, 20] MHz, 161 points, step 0.1250 MHz
+9. DELTA_C SWEEP: [-10, 10] MHz, 201 points, step 0.1000 MHz
+   (independent, fresh sweep -- NOT loaded from fig3_quantum_response.npz)
+
+10. RHO_21 CALCULATION: rho21 = rho_ss[1,0] (steady-state coherence, states indexed 0-3)
+
+11. POUT CALCULATION (Beer-Lambert, same as Fig.3):
+    chi = C0 * rho21
+    exponent = -kp * L * Im(chi)
+    Pout = Pin * exp(exponent)
+
+12. PEAK-FINDING METHOD: scipy.signal.find_peaks() on the real, computed Pout(Delta_c)
+    row, no amplitude/prominence filter. Top 2 peaks by height taken as candidate AT
+    doublet when >=2 peaks exist.
+
+13. VALLEY CRITERION: the minimum of Pout between the two candidate peak indices must
+    be STRICTLY INTERIOR (not equal to either peak's own index) -- i.e. a genuine dip,
+    not a monotonic shoulder or flat top.
+
+14. RESOLVED/UNRESOLVED DEFINITION:
+    resolved = (interior valley exists) AND (peak separation >= 2.0 x Gamma_EIT)
+    This multiplier (2.0x = 1 FWHM, standard Rayleigh two-peak criterion) was fixed
+    before comparing the resulting threshold to the paper's stated value. Sensitivity
+    check (reported, does not change the criterion used):
+      1.5x Gamma_EIT = 3.9152 MHz
+      2.0x Gamma_EIT = 5.2203 MHz
+      2.5x Gamma_EIT = 6.5253 MHz
+
+15. CALCULATED AT SEPARATION: see fig4_classification.csv, column separation_MHz,
+    for every simulated Omega_RF row.
+
+16. CALCULATED THRESHOLD: 5.3750 MHz (lowest Omega_RF row classified as
+    resolved). Grid spacing on the Omega_RF axis is 0.1250 MHz,
+    so this value is only accurate to within one grid step, not stated as exact.
+    This number was NOT chosen or tuned -- it is whatever the classification loop
+    produced from the independently-simulated data above.
+
+17. EIT LINEWIDTH (diagnostic only, paper Appendix B Eq.51):
+    Gamma_EIT = (Omega_c_mhz^2 + Omega_p_mhz^2) / (2*sqrt(gamma2_mhz^2 + 2*Omega_p_mhz^2))
+              = 2.610126 MHz (a HWHM, per the paper's own definition)
+    This is the ONLY linewidth-type quantity in this model -- the model does not define
+    a separate "natural linewidth" distinct from gamma2 (spontaneous decay of |2>) or a
+    distinct "effective halfwidth" beyond Gamma_EIT itself, so no third quantity is
+    reported (there is nothing to distinguish it from).
+
+18. THEORETICAL AT EQUATION (reference only, never used to generate the red curves):
+    Delta_c/2pi = +/- (Omega_RF/2) / 2pi,  i.e. Delta_c_MHz = +/- Omega_RF_MHz / 2
+
+19. COMPARISON WITH THE PAPER:
+    Paper's stated saturation threshold: ~5.5 MHz
+    This run's calculated threshold: 5.3750 MHz
+    MATCH (within one Omega_RF grid step)
+
+20. DISCREPANCY NOTE:
+    This threshold (5.3750 MHz) reflects the 2.0x-Gamma_EIT
+    Rayleigh resolvability CRITERION applied on top of the raw simulated spectra -- it is
+    a classification choice, not a property the data hands you unconditionally. A
+    separate, criterion-free check (counting raw find_peaks() results with zero
+    threshold gating) shows the two peaks are already mathematically distinct local
+    maxima starting around Omega_RF/2pi ~ 1.3 MHz -- i.e. the literal peak-merge point
+    is much lower than the ~5.5 MHz "practically resolvable" threshold reported above.
+    Both numbers are genuine and data-derived; they answer different questions
+    (literal peak count vs. linewidth-based distinguishability) and should not be
+    conflated.

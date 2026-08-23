@@ -1,0 +1,1787 @@
+     Mathematical Derivation of
+                 SER­SNR
+
+Relationships for Rydberg Atomic
+                  Receivers
+
+      Conventional, LO-Free and LO-Dressed Receivers
+
+                               Based on the paper
+"Harnessing Rydberg Atomic Receivers: From Quantum Physics to
+
+                           Wireless Communications"
+           and Proakis, Digital Communications, 4th Edition
+
+                    M.Tech Thesis Simulation Reference
+                                       Srihari
+
+                                          August 17, 2026
+Contents
+
+1 Purpose and Overall Mathematical Structure   4
+
+2 Common Wireless Model                        4
+
+3 Classical SER Equations from Proakis         5
+
+3.1 M-PAM SER . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+3.2 Square M-QAM SER . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+4 PART A ­ Conventional RF Receiver            6
+
+4.1 Conventional Received Signal . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+4.2 Conventional Noise Model . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+4.3 Conventional Received Signal Power . . . . . . . . . . . . . . . . . . . . . 7
+
+4.4 Conventional Signal Power . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+4.5 Conventional SNR . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+4.6 Conventional Modulation . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+4.7 Direct SER­SNR Relationship . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+4.8 Behavior of the Conventional Curve . . . . . . . . . . . . . . . . . . . . . 8
+
+5 PART B ­ LO-Free Rydberg Atomic Receiver     8
+
+5.1 LO-Free Receiver Signal Model . . . . . . . . . . . . . . . . . . . . . . . 8
+
+5.2 RF Electric Field . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+5.3 RF Rabi Frequency . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+5.4 Autler­Townes Splitting . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+5.5 LO-Free Noise Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+5.6 Quantum Projection Noise . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+5.7 Observation Uncertainty . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+5.8 LO-Free SNR . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+5.9 LO-Free Modulation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
+5.10 Complete Analytical LO-Free SER Equation . . . . . . . . . . . . . . . . 11
+
+5.11 LO-Free SER Versus SNR . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
+5.12 LO-Free Distortion Region . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
+5.13 Piecewise LO-Free SER Model . . . . . . . . . . . . . . . . . . . . . . . . 12
+
+5.14 Complete LO-Free Mathematical Chain . . . . . . . . . . . . . . . . . . . 12
+
+6 PART C ­ LO-Dressed Rydberg Atomic Receiver  12
+
+6.1 LO-Dressed Receiver Principle . . . . . . . . . . . . . . . . . . . . . . . . 12
+
+6.2 LO-Dressed Atomic Response . . . . . . . . . . . . . . . . . . . . . . . . 13
+
+6.3 RF Rabi Frequency . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+6.4 Amplitude and Phase Recovery . . . . . . . . . . . . . . . . . . . . . . . 15
+
+6.5 Photodetection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+
+6.6 Photocurrent Power . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+
+6.7 LO-Dressed Communication Signal Model . . . . . . . . . . . . . . . . . 15
+
+6.8 LO-Dressed Noise Sources . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+
+6.9 Background Noise Contribution . . . . . . . . . . . . . . . . . . . . . . . 16
+
+6.10 Photon Shot Noise . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+
+6.11 Thermal Noise . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+
+6.12 Photocurrent and LNA Output Power . . . . . . . . . . . . . . . . . . . 17
+
+                         1
+6.13 LO-Dressed SNR . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+6.14 LO-Dressed QAM SER . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+6.15 Complete Analytical LO-Dressed SER Equation . . . . . . . . . . . . . . 18
+6.16 LO-Dressed Linear Dynamic Range . . . . . . . . . . . . . . . . . . . . . 18
+6.17 Why QuTiP Is Required . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+6.18 High-SNR Distortion Mechanism . . . . . . . . . . . . . . . . . . . . . . 19
+6.19 Piecewise LO-Dressed SER Model . . . . . . . . . . . . . . . . . . . . . . 19
+6.20 Complete LO-Dressed Mathematical Chain . . . . . . . . . . . . . . . . . 19
+
+7 Comparison of the Three Receiver Models                    19
+
+7.1 Conventional RF Receiver . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+
+7.2 LO-Free Receiver . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+
+7.3 LO-Dressed Receiver . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+
+8 Final Mathematical Relationship for Fig. 9                 21
+
+9 Important Interpretation of Fig. 9                         21
+
+9.1 Conventional Curve . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+
+9.2 LO-Free Curve . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+
+9.3 LO-Dressed Curve . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+
+10 Why the Three Curves Are Not Simply Three Proakis Curves  22
+
+11 Numerical Parameters From the Paper                       22
+
+11.1 Wireless-System Parameters . . . . . . . . . . . . . . . . . . . . . . . . . 22
+
+11.2 Atomic-System Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+
+11.3 LO-Free Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+
+11.4 LO-Dressed Parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+
+12 Modulation Orders Used in Fig. 9                          24
+
+13 Constants Required for Numerical Simulation               25
+
+14 Important Source-Verification Notes                       25
+
+14.1 Atomic Density . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+
+14.2 Units of Rabi Frequency . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+
+14.3 Transition Dipole Moment . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+
+15 Important SNR-Definition Note for Fig. 9                  26
+
+16 What Can and Cannot Be Derived Analytically               27
+
+16.1 Conventional Receiver . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+
+16.2 LO-Free Receiver . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+
+16.3 LO-Dressed Receiver . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+
+17 Final Master Equations for the Thesis                     28
+
+17.1 Conventional . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+
+17.2 LO-Free . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+
+17.3 LO-Dressed . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+
+                                      2
+18 Final Simulation Flow     29
+
+19 Final Summary             30
+
+                          3
+1 Purpose and Overall Mathematical Structure
+
+The objective is to establish the mathematical framework required to reproduce the
+Symbol Error Rate (SER) versus Signal-to-Noise Ratio (SNR) curves associated with
+Fig. 9 of the reference paper.
+
+    The paper considers three receiver configurations:
+
+   1. Conventional RF receiver,
+
+   2. LO-free Rydberg atomic receiver,
+
+   3. LO-dressed Rydberg atomic receiver.
+
+    The paper states that the SER of PAM is calculated according to Proakis, 4th Edition,
+p. 266. The equivalent Proakis expression used here corresponds to Eq. (5-2-45) (with
+ = Es/N0); the paper's citation is conventionally written as Eq. (5.246). The QAM SER
+is evaluated according to Proakis, p. 278, Eq. (5.279).
+
+    The fundamental communication-theoretic structure is
+
+Receiver model - effective SNR - Proakis SER.                                  (1)
+
+For the Rydberg receivers, an additional receiver-response layer is required:
+
+RF signal - ERF - RF - Rydberg response - effective SNR - SER. (2)
+Thus,
+
+                           Conventional: SN R  M -QAM  SER
+          LO-free: SN R  ERF  RF  AT condition  M -PAM  SER
+LO-dressed: SN R  ERF  RF  linear/nonlinear response  M -QAM  SER
+
+    The classical SER equations are supplied by Proakis. The receiver-specific Rydberg
+operating and distortion behavior is supplied by the atomic receiver model and, where
+necessary, by the QuTiP quantum-system simulation.
+
+2 Common Wireless Model
+
+The received RF signal at the vapor-cell location is modeled as
+
+y = PRx hx + nBGN.                                                             (3)
+
+Here x is the transmitted complex symbol, h is the complex wireless channel coefficient,
+
+PRx is the received RF power, and nBGN is the background noise.
+    The paper defines
+
+PRx = |ERF|2.                                                                  (4)
+
+Therefore, in terms of field magnitude,
+
+|ERF| = PRx.                                                                   (5)
+
+                                         4
+The free-space received-power expression used in the paper is
+
+                                PRx  =   PTxGTx   0.                           (6)
+                                        4dT2x-Rx
+
+For the numerical reconstruction, all quantities must be expressed in consistent SI
+
+units. In particular, antenna gains quoted in dBi must be converted to linear gain before
+
+numerical substitution:
+
+                                Glinear = 10GdBi/10.                           (7)
+
+The communication chain is therefore
+
+                         PTx - PRx - |ERF| - RF.                               (8)
+
+3 Classical SER Equations from Proakis
+
+3.1 M-PAM SER
+
+For M -ary PAM, the SER expression used for the Fig. 9 reconstruction is
+
+                                        2(M - 1)      6 Es .                   (9)
+                         SERPAM = M Q             M 2 - 1 N0
+
+Define
+
+                                      = Es .                                   (10)
+                                        N0
+
+Then
+
+                                     2(M - 1)             6
+                 SERPAM(, M ) =                Q                  .            (11)
+                                        M             M2 - 1
+
+The Gaussian Q-function is
+
+                             1        e-t2/2 dt = 1 erfc   x    .              (12)
+                 Q(x) =                           2       
+                            2 x                              2
+
+3.2 Square M-QAM SER
+
+For square M -QAM,
+
+                                                                      2
+
+                                               1          3Es            .     (13)
+        SERQAM = 1 - 1 - 2 1 -  Q                     (M - 1)N0
+
+                                                M
+
+Using  = Es/N0,
+
+                                                  1             3        2
+
+        SERQAM(, M ) = 1 -      1-2        1-         Q         M -1        .  (14)
+                                                   M
+
+                                        5
+For square QAM, the I and Q components have the same probability of correct
+
+detection. If Pc,I = Pc,Q, then
+
+                                 Pc = Pc,I Pc,Q = Pc2,I
+
+and
+                                               SER = 1 - Pc,
+
+which gives Eq. (12).
+    For a plotted SNR axis expressed in dB,
+
+                                        = 10SNRdB/10.               (15)
+
+    This mapping is the standard conversion used when the plotted SNR is identified with
+the Es/N0-type argument of the Proakis expression.
+
+4 PART A ­ Conventional RF Receiver
+
+4.1 Conventional Received Signal
+
+The conventional receiver is modeled as
+
+                                 y = Pc hx + nConv.                 (16)
+
+The aggregate receiver noise is modeled as circularly symmetric complex Gaussian
+
+noise:
+
+                                 nConv  CN 0, C2 onv .              (17)
+
+Therefore,
+
+                      E[nConv] = 0,          E[|nConv|2] = C2 onv.  (18)
+
+For
+                                         nConv = nI + jnQ,
+
+the real and imaginary components satisfy
+
+                                 nI , nQ  N     0, C2 onv     .
+                                                     2
+
+4.2 Conventional Noise Model
+
+The conventional receiver noise variance is modeled using the literal noise expression of
+
+the reference model:
+
+                      C2 onv = GRxGLNAB2 GN + 4kBT B.               (19)
+
+    Here GRx is the receiver antenna gain, GLNA is the LNA gain, B2 GN is the background-
+noise power, kB is Boltzmann's constant, T is temperature, and B is bandwidth.
+
+    For the conventional receiver, the received signal power is written using the effective
+
+receive-aperture expression
+
+                                 Pc =   PTxGTx   2RF .              (20)
+                                       4dT2x-Rx  4
+
+                                             6
+    The first factor is the incident RF power flux density at the receiver location, while
+the second factor is the effective aperture associated with the receive antenna. The
+conventional SNR is therefore
+
+Conv                  =              Pc|h|2                    4kB  T  B  .        (21)
+                         GRxGLNAB2 GN +
+
+    This is the literal gain/noise form used for the conventional receiver. No input-referred
+rewrite is introduced here, because the signal and noise expressions are retained in the
+same receiver-output convention.
+
+4.3 Conventional Received Signal Power
+
+The conventional receiver uses the incident power flux density multiplied by the receive
+antenna effective aperture:
+
+Pc =                      PTxGTx                               2RF .               (22)
+                         4dT2x-Rx                              4
+
+The RF wavelength used in the effective-aperture term is
+
+                                                        c
+                         RF                          =      .                      (23)
+                                                        fRF
+
+    Thus Pc is the received conventional RF signal power used in the conventional SNR
+calculation.
+
+4.4 Conventional Signal Power
+
+The conventional received signal is modeled as
+
+                         ys = Pc hx.                                               (24)
+
+    For                                                 E[|h|2] = 1,
+                                       E[|x|2] = 1,
+
+the average received signal power is
+
+                         Psignal = Pc.                                             (25)
+
+The channel realization |h|2 is retained explicitly in the instantaneous SNR expression.
+
+4.5 Conventional SNR
+
+Using the conventional received power Pc and the literal receiver noise variance,
+
+Conv                  =              Pc|h|2                    4kB  T  B  .        (26)
+                         GRxGLNAB2 GN +
+
+For the unit-average channel convention,
+
+                                                 E[|h|2] = 1,
+the average SNR is obtained by setting |h|2 to its mean value.
+
+                                                     7
+4.6 Conventional Modulation
+
+For Fig. 9(a), the conventional receiver uses QAM:
+
+               Conventional - M -QAM.                                        (27)
+
+Hence
+
+                                                      1     3Conv  2
+               SERConv = 1 - 1 - 2 1 -  Q                   M -1
+                                                                      .      (28)
+                                                       M
+
+4.7 Direct SER­SNR Relationship
+
+If the horizontal axis is SN RdB,
+                                            Conv = 10SNRdB/10,
+
+when the plotted SNR is treated directly as the Proakis SNR argument.
+    Therefore,
+
+                                                                          2
+
+                                         1                  3 10SNRdB/10
+SERConv(SN RdB, M ) = 1 - 1 - 2 1 -  Q                      M - 1  .         (29)
+                                                        M
+
+4.8 Behavior of the Conventional Curve
+
+At fixed M ,
+
+               SN R =  = Q(·) = SER  .
+
+At fixed SNR,
+                        M = constellation spacing = SER  .
+
+Thus,
+
+               SN R  SER , M  SER  .                                         (30)
+
+5 PART B ­ LO-Free Rydberg Atomic Receiver
+
+5.1 LO-Free Receiver Signal Model
+
+The LO-free receiver is modeled as
+
+               z = RF PRx hx + nRy .                                         (31)
+
+                                    
+
+    The RF transition dipole moment is retained as RF, without an absolute-value
+operator, following the notation of the reference paper.
+
+The magnitude operation is fundamental because the LO-free architecture reads the
+
+amplitude associated with the AT splitting rather than directly recovering the RF phase.
+
+Consequently,
+
+               LO-free - M -PAM.                                             (32)
+
+                                      8
+5.2 RF Electric Field
+
+The received RF power is
+
+                                 PRx = |ERF|2.                                    (33)
+
+Hence the RF-field magnitude is
+
+                                 |ERF| = PRx.                                     (34)
+
+5.3 RF Rabi Frequency
+
+The RF field couples the Rydberg states through the RF transition dipole moment:
+
+                                 RF = RFERF .                                     (35)
+                                              
+
+In magnitude,
+
+                          |RF| = |RF| |ERF| .
+                                           
+
+Using the received-power relation,
+
+                          RF = RF PRx                                             (36)
+                                     
+
+up to the field-sign convention.
+    Thus,
+                                        PRx - |ERF| - |RF|.
+
+    The quantity RF is an angular frequency. The frequency plotted in MHz is RF/(2).
+
+5.4 Autler­Townes Splitting
+
+When the coupling laser is scanned, the paper gives the AT splitting as
+
+                                 AT    =  RF .                                    (37)
+                                          2
+
+The supplementary derivation gives the extrema at
+
+               c,1 = 0,   c,2       =  RF ,     c,3  =     - RF   .               (38)
+                                        2                      2
+
+Therefore the observable splitting interval is
+
+                          |c,2 - c,3| = RF.                                       (39)
+
+This establishes the physical basis of LO-free detection:
+
+                          |RF| - AT peak separation.
+
+                                       9
+5.5 LO-Free Noise Model
+
+The total LO-free noise is modeled as
+
+                              nRy  CN (0, R2 y).                        (40)
+
+with
+
+                             R2 y = U2 N + Q2 PN + B2 GN.               (41)
+
+The three modeled contributions are:
+
+1. background noise,
+
+2. quantum projection noise,
+
+3. observation uncertainty.
+
+5.6 Quantum Projection Noise
+
+The paper models the QPN approximately as
+
+                              Q2 PN              1                      (42)
+                                                         .
+
+                                           4Ceff Natoms
+
+    Here Ceff is the effective readout contrast/efficiency and Natoms is the number of
+quantum-mechanically uncorrelated atoms.
+
+5.7 Observation Uncertainty
+
+The observation uncertainty is modeled as
+
+                             U2 N = (~ERF)2 = ~2|ERF|2.                 (43)
+
+Using PRx = |ERF|2,
+
+                                 U2 N = ~2PRx.                          (44)
+
+The reference value is
+
+                                       ~ = 0.5%.                        (45)
+
+    The paper also notes that observation uncertainty can increase when the RF field is
+attenuated and the AT peaks become more difficult to resolve.
+
+5.8 LO-Free SNR
+
+From the receiver model,
+
+                      LF  =  SN RRy    =  B2 GN    PRx|h|2  ~2PRx    .  (46)
+                                                 + Q2 PN +
+
+Equivalently,
+
+                          LF  =  B2 GN      ER2 F|h|2  ~2  ER2 F  .     (47)
+                                          + Q2 PN +
+
+    The transition dipole moment RF/ is a common multiplicative factor in the observa-
+tion amplitude and therefore cancels from this SNR ratio when the noise is expressed in
+the same observation units.
+
+                                           10
+5.9 LO-Free Modulation
+
+The LO-free receiver measures amplitude and therefore uses PAM:
+
+                           LO-free - M -PAM.                                        (48)
+
+Using the PAM expression,
+
+                               2(M - 1)               6LF .                         (49)
+                  SERLF = M Q                        M2 - 1
+
+5.10 Complete Analytical LO-Free SER Equation
+
+Substituting the LO-free SNR,
+
+                          2(M - 1)         6            PRx|h|2          .          (50)
+             SERLF = M Q
+                                    M 2 - 1 B2 GN + Q2 PN + ~2PRx
+
+Using the QPN expression,
+
+                                                                            
+
+     SERLF     =  2(M -  1) Q           6                 PRx|h|2                .  (51)
+                      M             M2 -                      1             
+
+                                           1  B2 GN  +  4Ceff Natoms  +  ~2PRx 
+
+5.11 LO-Free SER Versus SNR
+
+Inside the valid operating region, if the plotted SNR is directly identified with the Proakis
+
+SNR argument,
+
+                                 = 10SNRdB/10,                                      (52)
+
+and
+
+                                                              
+
+                           2(M - 1)             6 10SNRdB/10                        (53)
+                  SERLF = M Q                        M2 - 1 .
+
+    This is the classical PAM SER branch. It does not by itself describe the low-SNR
+distortion shown in the complete LO-free Fig. 9 curve.
+
+5.12 LO-Free Distortion Region
+
+The quantum receiver introduces an additional operating condition:
+
+               |RF|  RF, th = AT-splitting operating region.                        (54)
+
+Conversely,
+
+               |RF| < RF, th = LO-free distortion region.                           (55)
+
+    The paper's numerical characterization shows a transition around
+
+                                               RF  5.5 MHz
+                                                2
+for the particular quantum configuration shown in the distortion study. This threshold is
+configuration-dependent and should not be treated as a universal constant.
+
+                                    11
+5.13 Piecewise LO-Free SER Model
+
+The complete communication model is therefore
+
+                       
+
+                       2(M -     1)           6LF    ,      |RF|  RF, th,
+                                   Q         M2 - 1
+
+                              M
+                       
+
+             SERLF  =                                                       (56)
+
+                                                            |RF| < RF, th.
+                       
+                       S E Rdistortion,LF ,
+
+    The first branch is analytically obtained from the receiver SNR and Proakis PAM
+SER. The second branch is determined by the quantum AT-splitting response and is not
+supplied by the paper as a universal closed-form SER expression.
+
+5.14 Complete LO-Free Mathematical Chain
+
+                       SN R - PRx - |ERF| - |RF|                            (57)
+
+followed by
+
+                                 AT operating region,                       (58)
+                       |RF| - AT distortion region.
+
+Inside the operating region,
+
+                       ERF - R2 y - LF - SERPAM.                            (59)
+
+6 PART C ­ LO-Dressed Rydberg Atomic Receiver
+
+6.1 LO-Dressed Receiver Principle
+
+The LO-dressed receiver uses an RF signal and a local oscillator.
+
+The RF field is
+
+                       ERF(t) = ARF cos(2fRFt + RF).                        (60)
+
+The LO field is
+
+                       ELO(t) = ALO cos(2fLOt + LO).                        (61)
+
+The frequency and phase differences are
+
+                                 f = fLO - fRF,                             (62)
+
+                                  = LO - RF.                                (63)
+
+The total field is
+
+                                 Etotal = ELO + ERF.                        (64)
+
+    For
+                                                   ARF  1,
+                                                   ALO
+
+the rotating-wave/small-signal representation becomes
+
+             Etotal  [ALO + ARF cos(2f t + )] cos(2fLOt + LO).              (65)
+
+                                      12
+6.2 LO-Dressed Atomic Response
+
+For implementation, the probe-transmission model is first written in its explicit form. The
+adiabatic probe transmission is
+
+       Pout(t) = Pin exp[-kpL Im{(t)}] ,                          (P2)
+
+where
+
+                                                dp     2          (P3)
+       Pin = 20                         2 2 12
+                                                        ,
+
+and
+
+       (t) = C021(t),                           C0  =  - 2N012 .  (P4)
+                                                          0p
+
+    Here kp = 2/p, L is the vapor-cell length, d is the 1/e2 probe-beam diameter,
+0 is the free-space impedance, N0 is the atomic density, and 21 is the steady-state
+density-matrix component of the |1  |2 transition.
+
+    For the LO-dressed small-signal model, define
+
+       A¯                          =      2p        ,             (P5)
+                                        22 + 2p2
+
+and the effective probe absorption coefficient
+
+          = kpLC0A¯.                                              (P6)
+
+The DC probe output power is then
+
+                                      P¯0 = Pine-e(LO,).          (P7)
+The overall atomic response slope is                              (P8)
+
+                                              = P¯0.
+
+    The tags (P2)­(P8) identify the source-paper equations/definitions and do not alter
+the equation numbering of this document.
+
+    The supplementary derivation introduces the normalized Lorentzian
+
+                                                b2
+       (a, b) = b2 + a2 .                                         (66)
+
+The intrinsic atomic-response slope is
+
+                                   =  (LO, ) .                    (67)
+                                         LO
+
+The EIT half-width quantities are
+
+       EIT = 2c + p2 ,                                            (68)
+                 2 22 + 22p
+
+                                        13
+and                                     
+
+                                  =     2 2p     EIT.                              (69)
+                                        c2 + 2p
+
+The intrinsic optimum is obtained from
+
+                                  2(LO, )      =  0,                               (70)
+                                      L2 O
+
+giving                                    
+
+                                            3                                      (71)
+                                  LO =         .
+                                            3
+
+When the practical probe-transmission factor is included, the optimum local-oscillator
+
+Rabi frequency can be adjusted from the intrinsic value. The supplementary derivation
+
+gives                                                                          3
+                                                                                ,
+                                        A¯2 - 2A¯ + 4 1/2
+        L(oOpt) = A¯ - 1 +                                 3                       (72)
+
+where A¯ is the zero-RF EIT response parameter used in the supplementary derivation.
+
+The intrinsic optimum is the simpler form obtained directly from the Lorentzian slope.
+    The corresponding maximum intrinsic slope is
+
+                                            
+                                            33
+                                  ()max =       .                                  (73)
+                                            8
+
+The practical probe transmission before the small-signal expansion is represented as
+
+                             Pout(t) = P¯0eRF cos(2f t+).                          (74)
+
+The practical probe transmission is represented in the small-signal linear region by
+
+        Pout(t)  P¯0 + RF cos(2f t + ).                                            (75)
+
+Here P¯0 is the DC probe output power and  is the overall atomic response slope.
+The full small-signal condition is
+
+                                  |RF|  1,                                         (76)
+
+together with the physical requirement
+
+                                               |RF|  |LO|
+for the RF perturbation to remain small relative to the LO dressing.
+
+6.3 RF Rabi Frequency
+
+As in the LO-free receiver,
+
+                                  RF = RF|ERF| .                                   (77)
+
+                                            
+
+Hence,
+
+                                  RF = RF PRx                                      (78)
+                                             
+
+up to the field-sign convention.
+
+                                        14
+6.4 Amplitude and Phase Recovery
+
+The amplitude of the Fourier component at f satisfies
+
+                                    |P (f )|
+                          RF =                 .                 (79)
+                                        ||
+
+The LO provides a phase reference, so both RF amplitude and phase can be recovered.
+
+Consequently,
+
+                          LO-dressed - M -QAM.                   (80)
+
+6.5 Photodetection
+
+The AC photocurrent is
+
+                          IAC = D||RF.                           (81)
+
+Substituting the RF Rabi-frequency relation,
+
+                          IAC = D|| RF ERF.                      (82)
+
+                                        
+
+               
+Using |ERF| = PRx,
+
+                          IAC = D|| RF PRx.                      (83)
+
+                                        
+
+6.6 Photocurrent Power
+
+The electrical power associated with the AC photocurrent is
+
+                          Pe,AC = IA2CRL.                        (84)
+
+Therefore,
+
+                          Pe,AC  =  RLD22  2RF  PRx  .           (85)
+                                            2
+
+Thus the useful LO-dressed signal power is proportional to PRx.
+
+6.7 LO-Dressed Communication Signal Model
+
+The observation model is
+
+                 zLO = PRxGLNARLD2|| RF hx + nRy,LO.             (86)
+                                                     
+
+Equivalently, defining
+
+                          KLO = GLNARLD2 || RF ,                 (87)
+                                                           
+
+we have
+
+                          zLO = KLO PRx hx + nRy,LO.             (88)
+
+                                    15
+6.8 LO-Dressed Noise Sources
+
+The modeled LO-dressed noise sources are:
+
+    1. background noise,
+
+    2. photon shot noise,
+
+    3. thermal noise.
+
+    The QPN contribution is neglected in the LO-dressed model.
+
+    Thus,
+
+                               nRy,LO  CN (0, R2 y,LO).              (89)
+
+6.9 Background Noise Contribution
+
+The paper models the Fourier-component amplitude in the presence of background noise
+
+as                         |P (f )| = || RF PRx + nBGN .
+
+                                                                     (90)
+
+                                            
+
+    After photodetection and LNA processing, the background-noise contribution to the
+electrical noise variance is
+
+                           B2 GN,LO  =  GLNARLD22       2RF  B2 GN.  (91)
+                                                         2
+
+6.10 Photon Shot Noise
+
+The photon shot-noise variance is
+
+                                        P2 SN = 2eBI¯.               (92)
+
+    For the numerical model, the average optical power reaching the photodiode is explicitly
+identified with the same DC probe output power P¯0 introduced in Eq. (P7):
+
+                                         P¯opt = P¯0.                (93)
+
+    Hence the average photocurrent is
+
+                           I¯  =  eff  P¯0  e,    p = 2fp.           (94)
+                                       p
+
+    Therefore,
+
+                                  P2 SN  =  2eff e2BP¯0 .            (95)
+                                                p
+
+    This explicitly ties the photon-flux calculation to the already-derived P¯0, rather than
+using the instantaneous communication sideband |P (f )| as the average optical power.
+
+                                              16
+6.11 Thermal Noise
+
+The thermal-noise variance is
+
+                                        T2 N = 4kBT B.                             (96)
+
+6.12 Photocurrent and LNA Output Power
+
+The complete electrical AC power relation is
+
+                 Pe,AC  =      RL  D22   2RF  PRx  +  RLD22     2RF   B2 GN
+                                          2                      2
+
+                               + RLD2P2 SN.                                        (97)
+
+After the LNA,
+
+                        PLNA      =   GLNARLD22       2RF  PRx
+                                                       2
+
+                                      +  GLNARLD22       R2 F  B2 GN               (98)
+                                                          2
+
+                                      + GLNARLD2P2 SN + T2 N.
+
+The first term is the useful signal power and the remaining terms form the modeled
+
+noise variance:
+
+                 R2 y,LO           =  GLNARLD22       R2 F  B2 GN                  (99)
+                                                       2
+
+                                      + GLNARLD2P2 SN + T2 N.
+
+6.13 LO-Dressed SNR
+
+The useful signal power is
+
+                 Psignal,LO          =  GLNARL    D2  2  2RF  PRx|h|2.             (100)
+                                                          2                        (101)
+
+Hence,
+
+                                  GLNARLD22           2RF   PRx|h|2
+                                                       2             .
+                 LO            =
+                                              R2 y,LO
+
+6.14 LO-Dressed QAM SER
+
+The LO-dressed receiver supports amplitude and phase:
+
+                               LO-dressed - M -QAM.                                (102)
+                                                                                   (103)
+Therefore,
+
+                                                      1            3LO       2
+                 SERLO = 1 - 1 - 2 1 -  Q
+                                                                M -1            .
+                                                       M
+
+                                              17
+6.15 Complete Analytical LO-Dressed SER Equation
+
+Substitution of the LO-dressed SNR into the QAM expression gives
+
+                                                                          R2 F           2
+                                                                           2
+                         1                       3             GLNARLD22        PRx|h|2
+                                         Q                                               
+SERLO  =  1  -  1  -  2  1-                  M -1              R2 y,LO                    .
+                                 M                                                       
+                                                                                         
+                
+
+                                                                                      (104)
+
+Using the total LO-dressed noise variance,
+
+                                     1       3                 GLNARLD22        R2 F  PRx|h|2
+SERLO = 1 - 1 - 2 1 -  Q                                                         2
+
+                                      M      M - 1 GLNARLD22              2RF   B2 GN + GLNARLD2P2 SN + T2 N
+                                                                           2
+
+                                                                                      (105)
+
+6.16 LO-Dressed Linear Dynamic Range
+
+The analytical LO-dressed SNR and SER model assumes
+
+                                             Pout  RF.
+
+This relation is valid only inside the approximately linear dynamic range.
+Define the upper RF-Rabi-frequency boundary as
+
+                |RF|  RF, max = linear operating region.                              (106)
+
+For                                                                                   (107)
+                                        |RF| > RF, max,
+
+the atomic response becomes nonlinear and distortion appears.
+    The exact boundary is configuration-dependent and is obtained from the quantum
+
+response rather than from a universal closed-form equation.
+
+6.17 Why QuTiP Is Required
+
+The atomic master equation determines the nonlinear probe transmission through the
+total Rabi frequency. Because the exact linear-dynamic-range boundary depends on the
+quantum-system parameters, a numerical quantum simulation is used to evaluate
+
+                                                  Pout(total)
+
+and identify the approximately linear interval.
+    Thus,
+
+master equation - QuTiP - Pout(total) - linear dynamic range.                         (108)
+
+                                             18
+6.18 High-SNR Distortion Mechanism
+
+At moderate signal strength,
+
+                                 SN R  SER  .
+
+However,
+
+                       SN R  PRx  |ERF|  |RF|  .
+
+Eventually,
+
+                                 |RF| > RF, max,
+
+so the atomic response becomes nonlinear.
+    Hence,
+
+          strong RF field - nonlinear atomic response - distortion.        (109)
+
+    Thus the practical LO-dressed SER may decrease initially and deteriorate again when
+the RF Rabi frequency becomes too large.
+
+6.19 Piecewise LO-Dressed SER Model
+
+The complete model is
+
+                              
+                                S  E  RQAM  (LO,  M  ),  |RF|  RF, max,
+                                                         |RF| > RF, max .
+
+          SERLO-dressed =                                                  (110)
+
+                              S E Rdistortion,LO ,
+
+    The first branch is analytically obtained from the receiver SNR and Proakis QAM
+equation. The second branch must be characterized from the nonlinear quantum response.
+
+6.20 Complete LO-Dressed Mathematical Chain
+
+followed by                SN R - PRx - |ERF| - |RF|                       (111)
+                                      linear operating region,             (112)
+                                                                           (113)
+                       |RF| - nonlinear distortion region.
+
+Inside the linear region,
+                RF - Pout - IAC - R2 y,LO - LO - SERQAM.
+
+7 Comparison of the Three Receiver Models
+
+7.1 Conventional RF Receiver
+
+             y = Pc hx + nConv,                 nConv  CN (0, C2 onv).     (114)
+                                                                           (115)
+The literal conventional SNR is                                            (116)
+
+                       Conv   =                Pc|h|2    4kB  T  B  .
+                                   GRxGLNAB2 GN +
+
+The modulation is QAM:
+
+                              SERConv = SERQAM(Conv).
+
+                                            19
+7.2 LO-Free Receiver
+
+                           z = RF         PRx hx + nRy .         (117)
+                                                                 (118)
+                                                                 (119)
+The noise variance is                                            (120)
+                                                                 (121)
+                           R2 y = B2 GN + Q2 PN + ~2PRx.
+                                                                 (122)
+The SNR is                                                       (123)
+
+                           LF   =  B2 GN    PRx|h|2         .    (124)
+                                          + Q2 PN +  ~2PRx       (125)
+                                                                 (126)
+The modulation is PAM:
+
+                                    SERLF = SERPAM(LF).
+The additional quantum condition is
+
+                                   |RF|  RF, th.
+
+7.3 LO-Dressed Receiver
+
+The signal model is
+
+            zLO = PRxGLNARLD2 || RF hx + nRy,LO.
+                                                
+
+The noise variance is
+
+                       R2 y,LO  =  GLNARLD22  2RF    B2 GN
+                                               2
+
+                                   + GLNARLD2P2 SN + T2 N.
+
+The SNR is
+
+                              GLNARLD22       2RF    PRx|h|2
+                                               2              .
+                       LO  =
+                                          R2 y,LO
+
+The modulation is QAM:
+
+                           SERLO = SERQAM(LO).
+
+The additional quantum condition is
+
+                                |RF|  RF, max .
+
+                                          20
+8 Final Mathematical Relationship for Fig. 9
+
+The common physical chain is
+
+RF signal - PRx - |ERF| - |RF|.                                    (127)
+
+For the conventional receiver,
+
+Conventional: SN R - SERQAM.                                       (128)
+
+For the LO-free receiver,
+
+LO-free: SN R - PRx - |ERF| - |RF| - AT condition - SERPAM.
+                                                                                                       (129)
+
+For the LO-dressed receiver,
+
+LO-dressed: SN R - PRx - |ERF| - |RF| - linear/nonlinear condition - SERQAM.
+                                                                                                           (130)
+
+   The essential reconstruction principle is
+
+quantum receiver model - effective SNR - Proakis SER.              (131)
+
+9 Important Interpretation of Fig. 9
+
+9.1 Conventional Curve
+
+The conventional curve is monotonic:
+
+                                SN R  SER  .                       (132)
+
+    It is an ordinary AWGN QAM SER relationship and does not require a quantum-system
+simulation for its basic analytical form.
+
+9.2 LO-Free Curve
+
+The LO-free receiver has a low-RF limitation:
+
+PRx  |ERF|  |RF|  AT  .
+
+Eventually the AT peaks become difficult to resolve:
+
+weak RF field - unresolved AT splitting - observation distortion.  (133)
+
+    Therefore a single textbook PAM curve cannot reproduce the entire LO-free distortion
+behavior without an additional quantum operating condition.
+
+9.3 LO-Dressed Curve
+
+The LO-dressed receiver has the opposite limitation:
+
+                                   PRx  |ERF|  |RF|  .
+Eventually the atomic system leaves its linear dynamic range:
+
+strong RF field - nonlinear atomic response - distortion.          (134)
+
+    Thus the practical LO-dressed SER may decrease initially and deteriorate again when
+the RF Rabi frequency becomes too large.
+
+                                      21
+10 Why the Three Curves Are Not Simply Three
+      Proakis Curves
+
+The Proakis expressions establish
+
+                                   SN R - SER.
+
+For the conventional receiver this is essentially the complete analytical relationship.
+
+For the Rydberg receivers, however, the effective SNR is generated by the receiver
+
+architecture:
+
+                     LF = fLF (PRx, ERF, RF, BGN, QPN, ~) ,            (135)
+
+and
+
+               LO = fLO (PRx, , RF, GLNA, RL, D, BGN, PSN, TN) .       (136)
+
+Therefore the complete Fig. 9 reconstruction requires
+
+               receiver physics - effective SNR - Proakis SER.         (137)
+
+    The analytical equations determine the SER inside the valid receiver operating regions.
+The non-monotonic distortion portions require the atomic response characterization.
+
+11 Numerical Parameters From the Paper
+
+11.1 Wireless-System Parameters
+
+     Table 1: Wireless-system parameters used in the reference study.
+
+               Parameter               Symbol Value
+
+               Transmit antenna gain   GTx      2.15 dBi
+               Transmit power          PTx      0 dBm
+               Tx­Rx distance          dTx-Rx   10 m
+               Background-noise power  B2 GN    -90 dBm
+               Receiver antenna gain   GRx      2.15 dBi
+               RF carrier frequency    fRF      3.5 GHz
+               Bandwidth               B        1 MHz
+               Temperature                      290 K
+               Free-space impedance    T        377 
+               Vacuum permittivity              8.854 × 10-12 F/m
+                                       0
+                                       0
+
+For numerical work,
+
+                                   PdBm  PW
+
+must be performed using
+
+                                   PW = 10(PdBm-30)/10.                (138)
+
+A gain in dBi is converted using Eq. (5).
+
+                                       22
+11.2 Atomic-System Parameters
+
+The paper considers the four-level Cs system
+
+                          |1  |2  |3  |4                                      (139)
+                                                                              (140)
+with
+
+                          6S1/2  6P3/2  47D5/2  48P3/2.
+
+      Table 2: Atomic-system parameters reported for the quantum simulation.
+
+      Parameter                               Symbol Value
+
+      Vapor-cell length                       L          1 cm
+      Atomic density                                     1 × 1015 m-3
+      State-|1 decay                          N0         0
+      State-|2 decay                          1          5.2 MHz
+      State-|3 decay                          2/(2)      3.9 kHz
+      State-|4 decay                          3/(2)      1.7 kHz
+      RF transition dipole                    4/(2)      -1443.459 ea0
+      Probe transition dipole                 RF         (2.5 ea0)2
+      RF carrier frequency                    12         3.5 GHz
+      Probe wavelength                        fRF        852 nm
+      Coupling wavelength                     p          510 nm
+      Probe Rabi frequency                    c          8 MHz
+      Coupling Rabi frequency                 p/(2)      1 MHz
+                                              c/(2)
+
+    The atomic density and other quantum parameters should be taken from the original
+PDF rendering when constructing the final QuTiP model.
+
+11.3 LO-Free Parameters
+
+The reference study uses
+
+                          RF = 6 MHz                                          (141)
+                          2                                                   (142)
+                                                                              (143)
+for the LO-free numerical configuration.                                      (144)
+    The reference observation uncertainty is
+
+                                 ~ = 0.5%.
+
+The QPN model is
+
+                          Q2 PN               1
+                                                      .
+
+                                        4Ceff Natoms
+
+The complete LO-free noise variance is
+
+                          R2 y = B2 GN + Q2 PN + ~2PRx.
+
+                                        23
+11.4 LO-Dressed Parameters                                                      (145)
+                                                                                (146)
+The reference configuration specifies                                           (147)
+
+                                               RF = 20 kHz,
+                                                2
+
+                                             LO = 4.23 MHz,
+                                              2
+and
+                                               f = 150 kHz.
+
+Table 3: LO-dressed receiver parameters.
+
+Parameter                   Symbol Value
+
+LNA gain                    GLNA                             20 dB
+Load resistance             RL                               50 
+Photodiode responsivity     D                                0.55 A/W
+Temperature                 T                                290 K
+Photon efficiency           eff                              0.8
+RF Rabi frequency           RF/2                             20 kHz
+LO Rabi frequency           LO/2                             4.23 MHz
+RF­LO frequency difference  f                                150 kHz
+
+The LNA gain in the equations must be converted from dB to linear gain:         (148)
+                                    GLNA,lin = 1020/10 = 100.
+
+12 Modulation Orders Used in Fig. 9
+
+The modulation orders in Fig. 9 are represented by their binary order log2 M .
+
+Table 4: Modulation orders corresponding to the Fig. 9 curves.
+
+Receiver   log2 M values Modulation
+
+Conventional 2, 4, 6, 8                                      Square QAM
+                                                             Square QAM
+LO-dressed 4, 6, 8, 10                                       PAM
+
+LO-free    2, 4, 6, 8
+
+    For the QAM curves, the analytical expression in Eq. (12) is the square- QAM
+expression. The values M = 4, 16, 64, 256 satisfy this condition.
+
+           24
+13 Constants Required for Numerical Simulation
+
+             Table 5: Physical constants.
+
+Constant              Symbol Value
+
+Boltzmann constant    kB                 1.380649 × 10-23 J/K
+                                         1.054571817 × 10-34 J s
+Reduced Planck constant                  1.602176634 × 10-19 C
+                                         5.29177210903 × 10-11 m
+Elementary charge     e                  8.854 × 10-12 F/m
+
+Bohr radius           a0                 377 
+
+Vacuum permittivity   0
+
+Free-space impedance  0
+
+The elementary charge must be used with the correct SI exponent:
+
+             e = 1.602176634 × 10-19 C.
+
+The transition dipole moment is evaluated from
+
+                    RF = -1443.459 ea0.                           (149)
+
+    No absolute-value operator is inserted into the definition of RF. When a power or
+variance is formed, the square naturally produces 2RF > 0.
+
+14 Important Source-Verification Notes
+
+14.1 Atomic Density
+
+The atomic density used in the quantum simulation must be read from the original PDF
+rendering rather than from OCR text alone. The physically consistent value used for the
+present reference is
+
+                                            N0 = 1 × 1015 m-3.
+    This value should be retained consistently in the QuTiP implementation after checking
+the original source.
+
+14.2 Units of Rabi Frequency
+
+All master-equation calculations use angular frequency:
+
+                      RF [rad/s].
+
+The experimentally plotted frequency is
+
+                      RF [Hz].
+                      2
+
+Therefore,
+
+                      RF = 2             RF     .                 (150)
+                                         2
+
+                          25
+14.3 Transition Dipole Moment
+
+The reference notation is
+
+                           RF = -1443.459 ea0.
+
+The field magnitude is represented separately by
+
+                                      |ERF| = PRx.
+
+Thus the Rabi-frequency relation is retained as
+
+                               RF = RFERF/,
+
+with the physical magnitude used when comparing RF strengths.
+
+15 Important SNR-Definition Note for Fig. 9
+
+Two related but distinct concepts must be separated:
+
+   1. the physical receiver SNR obtained from the receiver noise model;
+
+   2. the Es/N0 argument used by the Proakis SER expression.
+
+    For the closed-form SNR-to-received-power mapping used in the Fig. 9 reconstruction,
+the observation uncertainty branch of the LO-free model is written as
+
+                                        =  B2  Pr ,                  (SNR-LF)
+                                               + 2Pr
+
+where Pr  PRx, B2  B2 GN, and the unit-average channel convention is used. Solving
+directly for received power gives
+
+                           Pr  =        B2 ,                 1       (INV-LF)
+                                      1 - 2            < .
+
+                                                            2
+
+The denominator shows the finite SNR ceiling of this simplified LO-free model:
+
+                                        max       1
+                                               =    .
+                                                  2
+
+For  = 0.5% = 0.005, this ceiling is
+
+                                          1
+                           10 log10 0.0052  46.02 dB.
+
+    For the LO-dressed receiver, after the photon-shot-noise correction above, P¯0 is inde-
+pendent of Pr in the adopted small-signal model. Consequently the LO-dressed SNR is
+linear in received RF power:
+
+                                        LO  =  APr ,                 (SNR-LO)
+                                                B
+
+where
+
+       A = GLNARLD22                        RF    2    B = R2 y,LO.  (AB-LO)
+
+                                                   ,
+
+                                             
+
+                                            26
+Therefore the closed-form inversion is
+
+                                    Pr =   B                                (INV-LO)
+                                                  .
+                                               A
+
+No numerical root solver is required for either inversion.
+The receiver models provide quantities such as
+
+           Conv                  =              Pc|h|2  4kB  T  B  ,        (150)
+                                    GRxGLNAB2 GN +
+
+                             LF  =  B2 GN    PRx|h|2         ,              (151)
+                                           + Q2 PN +  ~2PRx
+
+and                                            2RF
+                                                2
+                                GLNARLD22               PRx|h|2
+                                                                 .
+           LO                =             R2 y,LO                          (152)
+
+For the closed-form Fig. 9 power mappings, the simplified LO-free observation-
+
+uncertainty branch and the linear LO-dressed branch are the ones inverted in Eqs. (INV-LF)
+
+and (INV-LO), respectively.
+
+The Proakis equations use the normalized symbol-energy SNR
+
+                                     = Es .
+                                         N0
+
+For the first analytical reconstruction of Fig. 9, the plotted SNR in dB is therefore
+
+mapped to
+
+                                     = 10SNRdB/10.                          (153)
+
+    This is the appropriate mathematical bridge for the classical SER curves. However,
+the exact numerical-generation procedure used by the authors for the full Fig. 9 Rydberg
+curves is not completely specified in the paper. Therefore the non-monotonic distortion
+portions cannot be claimed to follow from the analytical SER equation alone.
+
+16 What Can and Cannot Be Derived Analytically
+
+16.1 Conventional Receiver                                                  (154)
+
+The conventional curve is analytically determined by
+                                            SN R - SERQAM.
+
+    No quantum simulation is required for the basic curve.
+
+16.2 LO-Free Receiver                                                       (155)
+                                                                            (156)
+Inside the valid AT-splitting region,
+                                          SN RLF - SERPAM.
+
+    However, the transition into the distortion region requires
+                         RF - AT splitting - resolvability threshold.
+
+    Hence the complete model is
+                 analytical PAM SER + quantum-derived operating threshold.
+
+                                           27
+16.3 LO-Dressed Receiver
+
+Inside the linear dynamic range,
+
+                         SN RLO - SERQAM.                                   (157)
+
+The high-RF distortion region requires                                      (158)
+
+       RF - Pout(total) - linear-dynamic-range boundary.                    (159)
+                                                                            (160)
+Hence                                                                       (161)
+                                                                            (162)
+       analytical QAM SER + quantum-derived nonlinear response.             (163)
+                                                                            (164)
+17 Final Master Equations for the Thesis
+                                                                            (165)
+17.1 Conventional                                                           (166)
+                                                                            (167)
+                         y = Pc hx + nConv                                  (168)
+                                                                            (169)
+                         nConv  CN (0, C2 onv)
+
+                   Pc =            PTxGTx   R2 F
+                                  4dT2x-Rx  4
+
+                   C2 onv = GRxGLNAB2 GN + 4kBT B
+
+                   Conv  =              Pc|h|2
+                            GRxGLNAB2 GN + 4kBT B
+
+                                              1                          2
+       SERConv = 1 - 1 - 2 1 -  Q
+                                                      3Conv
+                                               M      M -1
+
+17.2 LO-Free
+
+                   z = RF               PRx hx + nRy
+                          
+
+                   R2 y = B2 GN + Q2 PN + ~2PRx
+
+                         Q2 PN                1
+                                        4Ceff Natoms
+
+                            U2 N = ~2PRx
+
+                   LF    =  B2 GN     PRx|h|2
+                                    + Q2 PN + ~2PRx
+
+                                        28
+                         2(M - 1)            6LF                           (170)
+            SERLF = M Q                     M2 - 1                         (171)
+                                                                           (172)
+subject to                                                                 (173)
+                                                                           (174)
+                        |RF|  RF, th.                                      (175)
+                                                                           (176)
+17.3 LO-Dressed                                                            (177)
+
+                                Pout(t)  P¯0 + RF cos(2f t + )             (178)
+                                                                           (179)
+                        IAC = D||RF                                        (180)
+
+                        I¯  =  eff  P¯0  e                                 (181)
+                                    p                                      (182)
+                                                                           (183)
+                        P2 SN = 2eBI¯
+
+                        T2 N = 4kBT B
+
+            R2 y,LO  =  GLNARLD22        R2 F  B2 GN
+                                          2
+
+                        + GLNARLD2P2 SN + T2 N
+
+                   GLNARLD22        R2 F             PRx|h|2
+                                     2
+            LO  =
+                               R2 y,LO
+
+                                                 1                      2
+            SERLO = 1 - 1 - 2 1 -  Q
+                                                      3LO
+                                                  M  M -1
+
+subject to
+
+                     |RF|  RF, max .
+
+18 Final Simulation Flow
+
+The common SNR conversion is
+                                       SN RdB -  = 10SNRdB/10.
+
+    For the conventional receiver,
+                                               - SERQAM.
+
+    For the LO-free receiver,
+        - PRx - |ERF| - |RF| - AT condition - LF - SERPAM.
+
+                                                       29
+For the LO-dressed receiver,
+
+ - PRx - |ERF| - |RF| - linear dynamic range - LO - SERQAM.
+                                                                                                       (184)
+
+The implementation should therefore be separated into two stages:
+
+                                      Stage 1: classical SER
+                                          SERPAM/QAM
+
+                             Stage 2: Rydberg receiver response
+                 PRx  ERF  RF  operating/distortion condition.
+
+19 Final Summary
+
+The three receiver models are summarized by
+
+     Table 6: Mathematical summary of the three receiver architectures.
+
+     Receiver       Mathematical relationship
+
+     Conventional   SN R  Conv  SERQAM
+     LO-free
+                    SN R  PRx  ERF  RF  AT condition  LF 
+     LO-dressed     S E RPAM
+                    SN R  PRx  ERF  RF 
+                    linear/nonlinear condition  LO  SERQAM
+
+The two central communication-theory expressions are
+
+                    SERPAM =       2(M - 1)          6                           (185)
+                                          Q       M2 - 1                         (186)
+                                   M                                             (187)
+                                                                                 (188)
+and                                                                              (189)
+
+                                                      1                       2
+               SERQAM = 1 - 1 - 2 1 -  Q
+                                                             3
+                                                       M                 .
+
+                                                           M -1
+
+The principal Rydberg relation is
+
+                               RF = RFERF .
+                                            
+
+The LO-free SNR is
+
+                        LF  =  B2 GN    PRx|h|2         .
+                                      + Q2 PN +  ~2PRx
+
+The LO-dressed SNR is
+
+                           GLNARLD22         2RF  PRx|h|2
+                                              2            .
+                    LO  =
+                                      R2 y,LO
+
+                                      30
+Finally,
+
+          Rydberg receiver response - effective SNR - Proakis SER.  (190)
+
+    The analytical SER equations determine the communication-theory performance
+within the valid operating region. The low-RF LO-free distortion and high-RF LO-dressed
+distortion require the corresponding quantum response characterization.
+
+          31
+

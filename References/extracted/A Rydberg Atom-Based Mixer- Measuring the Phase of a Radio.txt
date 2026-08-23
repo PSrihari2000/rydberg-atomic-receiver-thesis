@@ -1,0 +1,256 @@
+A Rydberg Atom-Based Mixer: Measuring the Phase of a Radio
+
+Frequency Wave
+
+              Matthew T. Simons,1 Abdulaziz H. Haddab,2 Joshua A. Gordon,3 and Christopher L. Holloway3
+
+            1)Department of Physics, University of Colorado, Boulder, Colorado 80302, USA a)
+            2)Department of Electrical Engineering, University of Colorado, Boulder, Colorado 80302,
+            USA
+            3)National Institute of Standards and Technology (NIST), RF Technology Division, U.S. Department of Commerce,
+            Boulder Laboratories, Boulder, Colorado 80305, USA
+
+            (Dated: 9 March 2019)
+
+          Rydberg atoms have been shown to be very useful in performing absolute measurements of the magnitude of a radio
+          frequency (RF) field using electromagnetically-induced transparency (EIT). However, there has been less success in
+          using Rydberg atoms for the measurement of the phase of an RF field. Measuring the phase of a RF field is a necessary
+          component for many important applications, including antenna metrology, communications, and radar. We demonstrate
+          a scheme for measuring the phase of an RF field by using Rydberg atoms as a mixer to down-convert an RF field at
+          20 GHz to an intermediate frequency on the order of kHz. The phase of the intermediate frequency corresponds
+          directly to the phase of the RF field. We use this approach to measure the phase shift on an electromagnetic wave from
+          a horn antenna as the antenna is placed at different distances from the Rydberg atom sensor. The atom-based RF phase
+          measurements allow us to measure the propagation constant of the RF wave to within 0.1 % of the theoretical value.
+
+   Recently, great progress has been achieved in the develop-      FIG. 1. Block diagram of the Rydberg atom `mixer'. The Rydberg
+ment of a spectroscopic approach for radio-frequency (RF)          atoms separate the difference frequency (IF) from two RF signals
+electric (E) field measurements1­7. This approach utilizes         (LO and SIG). This demodulated signal is carried in the probe laser.
+electromagnetically induced transparency (EIT) and Autler-
+Townes (AT) splitting to create a direct International System      the Rydberg atoms to demodulate a second, co-polarized RF
+of Units (SI) traceable, self-calibrated measurement of an RF      field (labeled `SIG' in Fig 1). The difference frequency, or
+E-field amplitude. Rydberg atoms are very sensitive to RF          intermediate frequency (IF), is detected by optically probing
+fields due to their large dipole moments over a broad fre-         the Rydberg atoms (Fig 1). The phase of the IF signal cor-
+quency range, from MHz to THz5,8,9. Thus far Rydberg atoms         responds directly to the relative phase between the LO and
+have been used to extend the frequency range and sensitiv-         RF signals. This technique can be applied over the same fre-
+ity of RF electric field amplitude3,10 and polarization mea-       quency range as E-field amplitude measurements, resulting in
+surements7, but have not been used for RF phase measure-           an atom-based sensor that can measure amplitude, polariza-
+ments. This Rydberg-atom based sensor can act as a com-            tion, and now phase for fields from 500 MHz to 1 THz in a
+pact receiver/antenna for detecting modulated signals, which       single setup.
+allows for communications applications. The first demonstra-
+tion of this was presented in 11, and later by others 12­18. This     Rydberg atoms can detect and measure RF E-fields through
+has led to the new term "atom-radio"15,16. The work in Refs.       the use of two related optical phenomena. EIT occurs when
+11­18 have demonstrated the detection and reception of am-         a laser field (probe field) that is on-resonance with an atomic
+plitude modulated (AM) and frequency modulated (FM) sig-           transition would normally be absorbed by an atomic vapor, is
+nals, where the AM and FM detection is based on the mea-           instead transmitted in the presence of a second laser field (cou-
+surement of the amplitude of the carrier. To detect and re-        pling field), which is tuned to another atomic transition. This
+ceive BPSK/QPSK/QAM digital communication signals re-              occurs over a very narrow frequency range. When a third elec-
+quires the ability to measure the phase of an RF field. Other      tromagnetic field, tuned to another linked atomic transition, is
+applications such as near-field antenna metrology and radar        present, the original transparency region is split into two re-
+also require a phase measurement.                                  gions separated in frequency (AT-splitting). The frequency
+                                                                   separation is directly related to the strength of the third RF
+   The motivation of this work is to advance quantum-based         field (typically an RF field). More detail on this process can
+E-field sensor technology. To this end, we demonstrate the
+ability of Rydberg atoms to measure the phase of an RF field.
+Including phase measurements allows the Rydberg atom sys-
+tem to fully characterize an RF E-field in a single quantum-
+based sensor. This technique relies on using the atom system
+as a Rydberg atom-based mixer. Applying an RF field that is
+on-resonance with the Rydberg transition acts as a local os-
+cillator (`LO' in Fig 1), which causes the EIT/AT effect in
+
+a)Electronic mail: matthew.t.simons@colorado.edu.
+                                                                                                           2
+
+                                                                       sum of the LO and SIG fields (E1 and E2). For two co-
+                                                                       polarized fields, this is the scalar total Eatoms = E1 + E2. We
+                                                                       define the LO and SIG fields as E1 = ELO cos (LOt + LO)
+                                                                       and E2 = ESIG cos (SIG t + SIG). Assuming that the differ-
+                                                                       ence between the two frequencies  = LO - SIG is much
+                                                                       less than average frequency ¯ = (LO + SIG)/2, such that
+                                                                        ¯ , then we can express total field Eatoms as
+
+                                                                       Eatoms = E1 + E2                    (1)
+
+                                                                       = cos (LO + LO) ·
+
+                                                                       EL2O + ES2IG + 2ELOESIG cos ( t +  ) (2)
+
+FIG. 2. A probe and coupling laser are overlapped through a Cs         where LO = 2 fLO, SIG = 2 fSIG, and  = LO - SIG.
+vapor cell using two dichroic mirrors. Two RF fields (E1 and E2) are   Equation 2 can be written to separate the term on resonance
+applied using two horn antennas fed by two signal generators (LO
+and SIG). The SIG horn is placed on a micrometer translation stage.    with the Rydberg transition Eres(LO) from the low frequency
+Transmission of the probe through the 133Cs vapor is monitored by      term Emod() as Eatoms = Eres · Emod, where
+a balanced photodetector. Part of the probe beam is split and sent to
+the second port of the balanced photodetector without sampling the     Eres = cos (LO + LO) ,              (3)
+Cs (not pictured).
+                                                                       Emod = EL2O + ES2IG + 2ELOESIG cos ( t +  ) . (4)
+be found in 1­6.
+                                                                       The resonant term Eres causes an Autler-Townes effect as de-
+   In this work, the atomic vapor cell is filled with cesium           scribed above, reducing the peak of the EIT line. The low
+(133Cs) atoms. Fig. 2 shows a diagram of the experimental
+setup. The probe laser is tuned to a wavelength of 852 nm to           frequency term Emod modulates the amplitude of the resonant
+excite the 133Cs from the ground state to the first excited state      effect.
+(6S1/2  6P3/2). The coupling laser is counter-propagated
+through the probe laser and tuned to 511.148 nm, coupling the             The probe transmission is a function of the absorption of
+excited state to the Rydberg state 34D5/2, and creating EIT in         the atomic vapor 19:
+the probe laser, increasing the transmission through the va-
+por cell. The probe laser has a full-width at half-maximum             Tprobe  exp - 2L Im[] ,             (5)
+(FWHM) of 425 µm and a power of 49 µW. The coupling                                            p
+laser has a FWHM of 620 µm and a power of 60.6 mW.
+Applying an RF field of 19.626 GHz causes a transition of              where L is the length of the cell, p is the wavelength of the
+34D5/2  35P3/2, producing AT-splitting.                                probe laser, and  is the susceptibility. The susceptibility is a
+                                                                       function of the E-field strength |Eatoms| at LO, thus the probe
+   With the probe laser frequency fixed at the first excited state     transmission is a function of the magnitude of the E-field on
+transition frequency, the transmission through the vapor cell
+is reduced. The interference of two RF fields can then be de-          resonance with the Rydberg transition. The magnitude of the
+tected by the effect on the EIT/AT splitting. By setting the           resonant term |Eres| = 1, so |Eatoms| = |Eres · Emod| = |Emod|.
+probe laser frequency to the center of the EIT peak, the probe         For a SIG field that is small compared to the LO field (ESIG
+laser transmission is modulated by the interference between            ELO), the magnitude of the field can be written as
+the two RF fields. If one of the RF fields is detuned from the
+other, the beat note can be observed in time in the transmis-          |Eatoms| ELO + ESIG cos ( t +  ) .  (6)
+sion. This effect is demonstrated by placing two standard gain
+horn antennas 12 cm from the Cs vapor cell (Fig. 2). One an-           The atoms demodulate the high-frequency LO field, and the
+tenna is fed by a signal generator set at fLO = 19.626000 GHz          probe transmission as a function of time is given by:
+to act as the LO. Another signal generator feeds the second
+antenna to provide the second RF signal, fSIG. The two signal          Tprobe  |Eatoms| ELO + ESIG cos ( t +  ) . (7)
+generators are connected to a rubidium (Rb) clock 10 MHz
+signal. Note that this synchronization signal need not be              The term Eres causes AT-splitting through the resonant interac-
+physically connected if each signal generator is connected to          tion which reduces the probe transmission (Tprobe) below the
+atomic clocks that were previously synchronized, allowing the          EIT peak. This reduction is then modulated in time by the
+LO and Rydberg atom system to be physically separated from             low-frequency beat note, Emod. In effect, the probe laser trans-
+the SIG signal.                                                        mission varies in time by the difference frequency , with a
+                                                                       phase given by the difference between the LO and SIG phases
+   The total electric field at the vapor cell (Eatoms) is the           .
+
+                                                                          The observation of a signal at  f = /2 in the de-
+                                                                       tected probe transmission indicates the presence of an RF field
+                                                                       at either fSIG = fLO ±  f . This is demonstrated in Fig. 3,
+                                                                       where a discrete Fourier transform (DFT) of the probe signal
+                                                                       is plotted as the SIG is varied from fSIG = 19.626001 GHz to
+                                                                                                        3
+
+                                                                    FIG. 4. Signal detected on photodetector for different SIG horn dis-
+                                                                    tances d. The IF frequency is  f = 30 kHz.
+
+FIG. 3. DFT of the probe transmission for different values of  f ,  translate the source. We demonstrate the ability of the Ry-
+keeping the LO frequency fixed. Each plot a) - c) has a different   dberg atoms to detect RF phase by translating the SIG horn
+y-scale. a) shows values of  f from bottom to top of 1 kHz, 3 kHz,  linearly away from the atoms (in the z-direction), as shown
+5 kHz, 7 kHz, 9 kHz and 11 kHz, b) shows values of 10 kHz, 50 kHz,  in Fig. 2. The SIG horn is translated by a motorized linear
+90 kHz, 130 kHz, 170 kHz and 210 kHz, and c) shows values of        stage, with a step size of d = RF /8 = 1.91 mm. The LO
+500 kHz, 1 MHz, 1.5 MHz, 2 MHz, and 2.5 MHz.                        frequency is set to fLO = 19.626000 GHz, and the SIG is set
+                                                                    at fSIG = 19.626030 GHz, for a difference in frequency of
+19.628500 GHz. Each subfigure shows a different frequency            f = 30 kHz. A function generator is set to 30 kHz for a
+range. The  f signal gets weaker the further the frequency of       reference signal to serve as the trigger for the oscilloscope.
+SIG is detuned from the frequency of SIG (the different fre-        The two signal generators and the function generator are con-
+quency ranges were plotted on different scales for illustration;    nected to a Rb clock 10 MHz signal. The LO horn antenna
+the magnitude of the low-frequency noise gives some indica-         generates an electric field of |E| = 2.97 V/m at the vapor cell,
+tion of the change in scale). The detuning is limited by the        and the SIG horn a field of |E| = 1.22 V/m.
+response rate of the EIT/AT effect. The minimum time for
+the EIT/AT to develop is on the order of  0.1 µs 12,13,17,19,          By translating the SIG horn antenna while leaving the LO
+which limits the modulation frequencies that are observable to      horn antenna fixed, we shift the relative phase between the
+ f 10 MHz.                                                          SIG and LO fields at the vapor cell. We measure the change in
+                                                                    phase ( ) of our detected signal as a function of the distance
+   From eq. (7), we see that if we measure the phase ( ) of         traveled by the RF horn antenna d, giving us the propagation
+the intermediate frequency signal in the probe transmission,        constant20  :
+we directly measure the phase between LO and SIG. A direct
+method for varying the phase of an RF field is to physically                    =        .              (8)
+                                                                                   d
+
+                                                                       Four sample traces corresponding to different distances of
+
+                                                                    the SIG horn relative to the Rydberg atoms are shown in
+
+                                                                    Fig. 4. We track the phase of the signal relative to the first
+
+                                                                    trace as the SIG horn is moved, keeping track of the accumu-
+
+                                                                    lated phase. Fig. 5 shows the measured phase difference vs.
+
+                                                                    distance. This measurement was repeated 5 times and aver-
+                                                                    aged. The fit to the data in Fig. 5 gives a  = 409.3 rad/m.
+                                                                    The theoretical value for propagation constant for a wave
+                                                                    propagating in free space is given by20  = RF /c. In this
+                                                                    experimental setup (Fig. 2), the horn antenna for the SIG is at
+                                                                    an angle of   5o from the orthogonal of the two laser beams.
+                                                                    As such, the propagation constant measured in this setup must
+                                                                    be corrected 20 by cos( ), giving:
+
+                                                                      =  SIG  cos( )  =  409.7  rad  .  (9)
+                                                                           c                    m
+                                                                                                                                                 4
+
+                                                                        the use of atomic clocks. This would be necessary to use Ryd-
+                                                                        berg atom receivers in high-frequency communications. Ryd-
+                                                                        berg atoms have been shown to measure RF E-field amplitude
+                                                                        1­6 and polarization 7. This work shows that Rydberg atoms
+                                                                        can also be used to measure RF phase, previously a missing
+                                                                        link for complete E-field metrology with Rydberg atom-based
+                                                                        quantum sensors.
+
+FIG. 5. Measured phase shift vs. distance SIG horn was moved. Er-        1C. Holloway, J. Gordon, S. Jefferts, A. Schwarzkopf, D. Anderson,
+rorbars are the standard deviation from 5 measurements Line shows
+predicted phase shift, with slope from eq. (9) of 409.7 rad/m. The fit    S. Miller, N. Thaicharoen, and G. Raithel, Antennas and Propagation, IEEE
+to the data gives a measured slope of 409.3 rad/m.                        Transactions on 62, 6169 (2014).
+
+After correcting for the angle, the measured propagation con-            2M. Tanasittikosol, J. D. Pritchard, D. Maxwell, A. Gauguet, K. J. Weath-
+stant is within 0.1% of the theoretical value. This shows that
+the phase of the SIG field was measured relative to the phase             erill, R. M. Potvliege, and C. S. Adams, Journal of Physics B: Atomic,
+of LO.                                                                    Molecular and Optical Physics 44, 184020 (2011).
+                                                                         3J. Sedlacek, A. Schwettmann, H. Kubler, R. Low, T. Pfau, and J. Shaffer,
+   This work demonstrates a Rydberg atom-based RF mixer,                  Nature Physics 8, 819 (2012).
+and the ability of Rydberg atoms to directly measure the phase           4J. A. Gordon, C. L. Holloway, A. Schwarzkopf, D. A. Anderson, S. Miller,
+of an RF field. The Rydberg atoms demodulate the RF field,                N. Thaicharoen, and G. Raithel, Applied Physics Letters 105, 024104
+and transfer the IF frequency directly to an optical field. The
+presence of a second RF field (analogous to an LO) creates a              (2014), http://dx.doi.org/10.1063/1.4890094.
+beat note that the Rydberg atoms can demodulate. The phase               5C. L. Holloway, M. T. Simons, J. A. Gordon, P. F. Wilson, C. M. Cooke,
+of the demodulated signal in the optical field is directly re-
+lated to the phase of the incident RF field. The uncertainties            D. A. Anderson, and G. Raithel, IEEE Transactions on Electromagnetic
+of this type of phase measurement technique are currently be-             Compatibility 59, 717 (2017).
+ing investigated. However, the results in this paper show that           6H. Fan, S. Kumar, J. Sedlacek, H. Kübler, S. Karimkashi, and J. Shaffer, J.
+the phase can be determined to at least 0.1 % when compared               Phys. B: At. Mol. Opt. Phys. 48, 202001 (2015).
+to theoretical values. The ability to measure phase allows a             7J. A. Sedlacek, A. Schwettmann, H. Kübler, and J. P. Shaffer, Phys. Rev.
+single quantum sensor to fully characterize an RF field, at fre-          Lett. 111, 063001 (2013).
+quencies from MHz to THz. This allows atomic receivers to                8T. F. Gallagher, Rydberg Atoms, Cambridge Monographs on Atomic,
+be competitive with current technologies and opens up a wide
+range of possible applications for Rydberg atom-based sen-                Molecular and Chemical Physics (Cambridge University Press, 1994).
+sors. The Rydberg atom-based mixer can be used to open                   9A. K. Mohapatra, T. R. Jackson, and C. S. Adams, Phys. Rev. Lett. 98,
+up several different avenues for quantum-based RF field de-
+tection, including communications applications, near-field an-            113003 (2007).
+tenna measurements, and radar. It is not necessary for the inci-        10M. T. Simons, J. A. Gordon, C. L. Holloway, D. A. Anderson, S. A.
+dent RF source to be physically connected to the LO source as
+long as the phases can be synchronized, for instance through              Miller, and G. Raithel, Applied Physics Letters 108, 174101 (2016),
+
+                                                                          http://dx.doi.org/10.1063/1.4947231.
+                                                                        11D. Stack, B. Rodenburg, S. Pappas, W. Su, M. S. John, P. Kunz, M. Simons,
+
+                                                                          J. Gordon, and C. Holloway, in APS DAMOP (2017).
+                                                                        12D. Meyer, K. Cox, F. Fatemi, and P. Kunz, Applied Physics Letters 12,
+
+                                                                          211108 (2018).
+                                                                        13K. C. Cox, D. H. Meyer, F. K. Fatemi, and P. D. Kunz, Phys. Rev. Lett.
+
+                                                                          121, 110502 (2018).
+                                                                        14Z. Song, W. Zhang, H. Liu, X. Liu, H. Zou, J. Zhang, and J. Qu,
+
+                                                                          arXiv:1808.10839 [physics.atom-ph] (2018).
+                                                                        15D. Anderson, R. E. Sapiro, and G. Raithel, arXiv:1808.08589
+
+                                                                          [physics.atom-ph] (2018).
+                                                                        16"Get ready for atom radio," (MIT Technology Review, 2018)
+
+                                                                          https://www.technologyreview.com/s/611977/get-ready-for-atomicradio/.
+                                                                        17C. L. Holloway, M. T. Simons, A. H. Haddab, J. A. Gordon, and S. D. Vo-
+
+                                                                          ran, "A multiple-band rydberg-atom based receiver/antenna: Am/fm stereo
+
+                                                                          reception," (2019), IEEE Antennas and Propagation Magazine (submitted).
+                                                                        18M. T. Simons, A. H. Haddab, R. Horansky, and C. L. Holloway, "Atom-
+
+                                                                          based receiver: a pseudo-random bit sequence in the presence of noise,"
+
+                                                                          (2019), IEEE Antennas and Propagation Letters (in progress).
+                                                                        19Y. qing Li and M. Xiao, Opt. Lett. 20, 1489 (1995).
+                                                                        20C. A. Balanis, "Advanced engineering electromagnetics," (Wiley, 1989)
+
+                                                                          Chap. 4.
+

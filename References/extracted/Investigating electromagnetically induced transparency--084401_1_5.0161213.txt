@@ -1,0 +1,812 @@
+RESEARCH ARTICLE | AUGUST 25 2023
+
+Investigating electromagnetically induced transparency
+spectral lineshape distortion due to non-uniform fields in
+Rydberg-atom electrometry
+
+Andrew P. Rotunno ; Christopher L. Holloway  ; Nikunjkumar Prajapati ; Samuel Berweger ;
+Alexandra B. Artusio-Glimpse ; Roger Brown ; Matthew Simons ; Amy K. Robinson ;
+Baran N. Kayim ; Michael A. Viray ; Jasmine F. Jones ; Brian C. Sawyer ; Robert Wyllie ;
+Thad Walker ; Richard W. Ziolkowski ; Steven R. Jefferts ; Steven Geibel ; Jonathan Wheeler ;
+Eric Imhof
+
+J. Appl. Phys. 134, 084401 (2023)
+https://doi.org/10.1063/5.0161213
+
+                                   
+
+                                    View Export
+                                   Online Citation
+
+Articles You May Be Interested In                                                                 20 August 2026 15:32:09
+
+High angular momentum coupling for enhanced Rydberg-atom sensing in the very-high frequency band
+
+J. Appl. Phys. (February 2024)
+
+Continuously tunable radio frequency electrometry with Rydberg atoms
+
+Appl. Phys. Lett. (July 2022)
+
+Enhancement of electromagnetically induced transparency based Rydberg-atom electrometry through
+population repumping
+
+Appl. Phys. Lett. (November 2021)
+Journal of                                                            ARTICLE       pubs.aip.org/aip/jap
+Applied Physics
+
+Investigating electromagnetically induced
+transparency spectral lineshape distortion due to
+non-uniform fields in Rydberg-atom electrometry
+
+Cite as: J. Appl. Phys. 134, 084401 (2023); doi: 10.1063/5.0161213                  View Online  Export Citation  CrossMark
+Submitted: 8 June 2023 · Accepted: 4 August 2023 ·
+Published Online: 25 August 2023
+
+Andrew P. Rotunno,1 Christopher L. Holloway,1,a) Nikunjkumar Prajapati,1 Samuel Berweger,1                                                       20 August 2026 15:32:09
+Alexandra B. Artusio-Glimpse,1 Roger Brown,1 Matthew Simons,1 Amy K. Robinson,2
+Baran N. Kayim,3 Michael A. Viray,3 Jasmine F. Jones,3 Brian C. Sawyer,3 Robert Wyllie,3
+Thad Walker,4 Richard W. Ziolkowski,5 Steven R. Jefferts,6 Steven Geibel,6 Jonathan Wheeler,6
+and Eric Imhof6
+
+AFFILIATIONS
+
+1National Institute of Standards and Technology, Boulder, Colorado 80305, USA
+2ANSYS, Inc., Boulder, Colorado 80301, USA
+3Georgia Tech Research Institute, Atlanta, Georgia 30332, USA
+4Department of Physics, University of Madison-Wisconsin, Madison, Wisconsin 53706, USA
+5Department of Electrical and Computer Engineering, University of Arizona, Tucson, Arizona 85721, USA
+6Northrop Grumman, Woodland Hills, California 91361, USA
+
+a)Author to whom correspondence should be addressed: christopher.holloway@nist.gov
+
+ABSTRACT
+
+We investigate the effects of spatially non-uniform radio-frequency electric (E) field amplitudes on the spectral line shapes of electromagnet-
+ically induced transparency (EIT) signals in Rydberg atomic systems used in electrometry (i.e., the metrology of E-field strengths). Spatially
+non-uniform fields distort the EIT spectra from that of an ideal case, and understanding this distortion is important in the development of
+Rydberg atom-based sensors, as these distortions can limit accuracy and sensitivity. To characterize this distortion, we present a model that
+approximates the atom vapor as multi-layered media and then uses Beer's law to combine the absorption through its many discrete thin seg-
+ments. We present a set of expected line distortions caused by various RF electric-field distributions found in practice. This provides an
+intuitive diagnostic tool for experiments. We compare this model to measured experimental atomic spectra in both two-photon and three-
+photon excitation schemes in the presence of non-uniform radio-frequency fields. We show that we can accurately model and reproduce the
+EIT lineshape distortion observed in these experimental data.
+
+Published by AIP Publishing. https://doi.org/10.1063/5.0161213
+
+I. INTRODUCTION                                                       amplitude2­8 can be measured traceable to the International System
+                                                                      of Units (SI),9 as well as polarization,10,11 and phase12,13 of an RF
+      In recent years, Rydberg-atom spectroscopy has been a fruitful  field, yielding numerous applications.1
+method for making traceable measurements of radio-frequency
+(RF) electric (E) field amplitudes.1 In these sensors, Rydberg-atom         Because of their large dipole moments, Rydberg atoms
+energies are observed via electromagnetically induced transparency    respond sensitively to an incident RF E-field. The typical method
+(EIT). With on-resonance RF fields, spectral lines can be split with  in Rydberg-atom electrometry is to utilize EIT/AT schemes to read
+applied resonant electric fields via the Autler­Townes (AT) effect,   out the response of the atoms. There are various EIT schemes that
+and with off-resonance ones, lines are shifted in energy by AC        have been used. In this paper, we experimentally and theoretically
+Stark effects. By measuring these effects carefully, the RF field
+                                                                      study spatially inhomogeneous RF field sensing to comprehensively
+                                                                      understand the RF field variations that frequently occur in
+
+J. Appl. Phys. 134, 084401 (2023); doi: 10.1063/5.0161213                                                         134, 084401-1
+Published by AIP Publishing
+Journal of                                                                         ARTICLE  pubs.aip.org/aip/jap
+Applied Physics
+
+  FIG. 1. EIT schemes: (a) a two-photon 133Cs excitation scheme and (b) a          propagating EIT schemes, where the cylinder has a diameter that is      20 August 2026 15:32:09
+  three-photon 87Rb excitation scheme. We use co-linear laser propagation          the laser beam size, and the length is the region where the beam
+  arrangements in both these systems.                                              encounters the atomic vapor. The data shown in Fig. 2 (labeled
+                                                                                   "Uniform field") correspond to the case when the RF field is
+experimental efforts. We examine both the two-optical photon and                   uniform across the laser beam propagation path (the atom-
+three-optical photon schemes shown in Fig. 1, where (a) corre-                     interaction region); as such, we see symmetric Gaussian/Lorentzian
+sponds to a cesium 133Cs system and (b) corresponds to a rubidium                  line shapes. When the RF field is non-uniform across the atom-
+87Rb system.                                                                       interaction region, the EIT spectra become distorted. Figure 2 (the
+                                                                                   trace labeled as "Standing wave") shows the spectra for a RF stand-
+      An example of an experimental EIT signal when no RF E-field                  ing wave across the laser propagation path (i.e., a non-uniform
+is applied as a function of coupling laser detuning (c) is illustrated             E-field across the atom-interaction region). This standing-wave dis-
+in Fig. 2 (black trace with a peak at c ¼ 0). These experimental                   tribution is a result of how the RF is applied; see Sec. IV. For the
+data are for the three-photon scheme shown in Fig. 1(b), and                       non-uniform field case, the spectrum is distorted; i.e., it is broad-
+details on this experiment are given in Sec. IV. When an                           ened with additional peaks. These non-ideal line shapes affect the
+on-resonant RF field is applied, AT splitting of the EIT signal                    ability to make accurate E-field measurements. In fact, RF tuners
+occurs; see Fig. 2 (green trace with well defined peaks at                         (i.e., matching devices) have been used to remove standing-wave
+c=2 % +160 MHz). In these types of measurements, the                               effects in waveguides for the purpose of improving and/or correct-
+atom-interaction region (i.e., the region where the RF field is mea-               ing the lineshape distortion of EIT signals for accurate RF power
+sured) is typically a long cylinder for the case of counter-                       measurements in Rydberg sensors.14
+
+  FIG. 2. Measured EIT spectra for the three-photon scheme shown in Fig. 1(b).           The sensitivity and accuracy of an E-field measurement are
+  We compare three cases: No RF field, the uniform applied field, or the "uniform  directly related to the ability to precisely determine the AT split-
+  field" case, and an anti-optimized case with a significant standing-wave non-    ting9 or the beat-note strength when a local oscillator is used in a
+  uniformity present.                                                              Rydberg mixer scheme;8 for example, the difficulty in determining
+                                                                                   the AT peak location is part of the uncertainty budget in E-field
+                                                                                   measurements.15 The standing-wave result (red trace in Fig. 2)
+                                                                                   clearly indicates the difficulty in determining the AT splitting of an
+                                                                                   E-field measurement when compared to the uniform field case
+                                                                                   (green trace in Fig. 2). In particular, the applied E-field strength
+                                                                                   cannot be determined accurately with AT splitting when the
+                                                                                   two-peak structure is present as the RF standing-wave case
+                                                                                   illustrates.
+
+                                                                                         A major thrust in Rydberg-atom electrometry is the develop-
+                                                                                   ment of deployable sensors with fundamental limits on accuracy
+                                                                                   and sensitivity for applications, such as metrology-grade measure-
+                                                                                   ments and for atom-based receivers. To achieve this, it is imperative
+                                                                                   to understand the sources of distortion of the EIT line shape under
+                                                                                   different operational conditions. While atomic spectra distortions
+                                                                                   can be caused from various sources, in this paper, we focus on the
+                                                                                   effects from non-uniform fields.
+
+                                                                                         The non-uniformity in the E-field can manifest from several
+                                                                                   sources, ranging from the RF field interactions with the dielectric
+                                                                                   vapor cells to internal surface charges in the vapor cells. The RF
+                                                                                   fields can scatter off of local environmental features and even
+                                                                                   reflect within an atom vapor cell,16,17 causing the RF field to be
+                                                                                   non-uniform over the measurement volume. This non-uniformity
+                                                                                   generally leads to frequency broadening and additional peaks in the
+                                                                                   spectrum, which results in a loss of accuracy and signal amplitude.
+                                                                                   Surface charges are a result of some manufacturing practices and
+                                                                                   materials and/or are caused by ionization of the atomic vapor
+                                                                                   inside the cell. While one would like to remove these sources of
+                                                                                   non-uniformity, this is not always possible. Consequently, under-
+                                                                                   standing their effects on the EIT spectra is important. To this end,
+                                                                                   we develop a model to understand these effects and investigate
+                                                                                   some of the more common field non-uniformities experienced in
+                                                                                   practice; for example, we show results for (1) a linear gradient in
+                                                                                   the field across the laser beam propagation path (this type of non-
+                                                                                   uniformity is present when plate electrodes are used in voltage
+
+J. Appl. Phys. 134, 084401 (2023); doi: 10.1063/5.0161213                                   134, 084401-2
+Published by AIP Publishing
+Journal of                                                               ARTICLE                pubs.aip.org/aip/jap
+Applied Physics
+
+measurements18 and other applications19­21), (2) an RF standing-         FIG. 3. Diagram of the laser beam propagation direction and the orientation of
+wave distribution of the E-field (this type of non-uniformity results    the E-field amplitude variation inside the vapor cell for all the cases in Fig. 5.
+from vapor cell effects and for some non-ideal applied fields14,17),     The optical field is propagating along the x axis, and the E-field amplitude
+and (3) a stepwise distribution in the RF field across the beam          varies along the x axis inside the vapor cell. The optical and RF fields are
+propagation path,22 as well as a few others.                             assumed to be linearly polarized along the y axis.
+
+      We present a model for calculating EIT spectra through spa-        (modeling and experiments) for both a two- and three-photon                         20 August 2026 15:32:09
+tially varying electric-field amplitudes along the longitudinal beam
+propagation path by discretizing those changing fields and combin-       scheme because we have sensors that utilize both types. These two
+ing the consequent local transmission values into an aggregate spec-
+trum. This discretization method can generally be applied to any         sensors exhibit different types of E-field non-uniformities due to
+optical parameter; it appears implicitly in many spectral curves and
+associated with various applications. In this paper, we consider spec-   their geometries and, as such, give us two different and indepen-
+tral line broadening due to spatial non-uniformity in an RF electric-
+field amplitude as measured by the EIT/AT method. Our work               dent types of data to compare our model against.
+suggests that prior works where EIT/AT broadening was
+observed7,15­18,23­29 might be reinterpreted in terms of spectral              The system we consider is the two-photon scheme shown in
+broadening caused by a spatially non-uniform E-field amplitude. In       Fig. 1(a), where the "probe" transmission on the D2 line (j6S1=2i to
+fact, the anomalies observed in Ref. 30 are attributed to non-uniform    j6P3=2i) through a 133Cs vapor cell is monitored with a photodiode,
+field effects. Here, we summarize several characteristic types of dis-   while the detuning c of a visible "coupling" laser is scanned across
+tortion and broadening of the EIT signals, each associated with a dis-   the resonance from the intermediate P state to a highly excited
+tinct electric-field inhomogeneity. These distorted spectra provide a    Rydberg state j56D5=2i. In the two-photon scheme, the probe and
+diagnostic tool that can be used to quantify novel field sources or      coupling lasers are counter-propagating throughout the vapor cell;
+eliminate experimental imperfections. In particular, rather than         see Fig. 3. When a radio frequency signal is resonant (RF ¼ 0)
+losing precision due to EIT lineshape distortions, this technique can    with a strong Rydberg­Rydberg transition (in our case j56D5=2i to
+yield more information about a particular field's spatial distribution.  j53F7=2i) with the large dipole moment `3,4, the Rabi frequency
+                                                                         RF gives the frequency-space "AT splitting" of the new observed
+      In Sec. II, we present the background of typical absorption cal-   line(s),3,9
+culations and our modifications to account for a spatially varying
+field. In Sec. III, we illustrate the principle with a number of                RF    ¼  `3,4jE(x)j   ;               (1)
+example spectra calculated for various field arrangements using this                         h
+method. In Sec. IV, we compare the model to measured data
+observed in different vapor cell arrangements, i.e., a vapor cell        i.e., the line splitting is directly proportional to the applied E-field
+embedded in a transmission-line feed and in a vapor embedded in
+a rectangular waveguide. These comparisons demonstrate the               amplitude.
+model's ability to characterize field distributions and its accurate
+prediction of the EIT line shapes in non-uniform fields. We con-               Using the model presented in the Appendix, we calculate the
+clude in Sec. V. Furthermore, in the Appendix, we describe the           expected spectrum using Beer's power absorption law of the probe
+master equation underlying the optical calculations.                     laser with wavelength p, over the extent of the vapor cell length L,
+                                                                         where the probe laser transition is given by the imaginary part of
+II. MODELING EIT SIGNALS IN NON-UNIFORM FIELDS                           the susceptibility ,
+
+      The Rydberg resonant field measurement scheme has been                    Pout               2     
+used previously to give traceable measurements of electric-field                Pin                p
+amplitudes.3,9,15 The corresponding simulation of transmission for       Tp  ¼        ¼  exp    À     Im()L  :        (2)
+a four-level system is well-documented,31,32 and more recently,
+five- and six-level systems23,33­38 have been developed. Precision
+measurements using spectroscopy are often limited by the line-
+widths observed, which can become broadened by non-uniform
+energy shifts over the observation volume. Here, we focus on the
+adverse effects on the EIT line shapes due to variations of the RF
+electric-field amplitude jE(x)j along the laser propagation path, i.e.,
+the x axis in our case as shown in Fig. 3.
+
+      To illustrate the model for both the two-photon 133Cs scheme
+and the three-photon 87Rb schemes shown in Fig. 1, we first con-
+centrate on the former. The three-photon scheme follows very sim-
+ilarly. In principle, the effect of the E-field non-uniformity of the
+EIT line shape would be no different when utilizing either two-
+photon or three-photon schemes. Nevertheless, we show results
+
+J. Appl. Phys. 134, 084401 (2023); doi: 10.1063/5.0161213                                                       134, 084401-3
+Published by AIP Publishing
+Journal of                                                                  ARTICLE  pubs.aip.org/aip/jap
+Applied Physics
+
+As shown in the Appendix,  is related to the density matrix com-              FIG. 4. Example of a linear gradient field and the calculated EIT signal.        20 August 2026 15:32:09
+                                                                              (a) E(x) is linearly varying from 5 to 15 V/m, and sampling occurs every 5 mm
+ponent (referred to as the coherence) of the two-photon or                    of a 75 mm cell. (b) Probe transmission spectra (EIT signal) calculations over
+three-photon system given in Fig. 1. This density matrix compo-               space for the linearly varying E(x). The different traces correspond to the EIT
+nent, 21, is obtained from the solution of the master equation. The           signal for different RF field amplitudes inside the vapor cell at the position
+coherence is a function of the laser detunings and the Rabi fre-              indicated on the right vertical axis.
+quencies of the optical and RF fields.
+                                                                                  We note that this broadening gives some additional information
+      All of the parameters in this single-medium Beer's law absorp-        about the field non-uniformity experienced by the atoms, i.e., giving
+tion model are assumed fixed over the entire length L. When they            many local measurements of the Rabi frequency.39 These types of
+vary across the sample region (such as the variability in the applied       measurements might be especially useful as field monitors within
+RF field), further analysis is required to capture the distortion in the    other systems, such as our motivating case of low-loss power monitor-
+EIT line shape: like the distorted EIT line shown in Fig. 2 for the         ing within a traditional waveguide. These new peak features can be fit
+standing-wave case. To model a non-uniform jE(x)j field across the          for parameters, such as standing-wave amplitude, field gradient, etc.,
+laser beam propagation path, e.g., as depicted in Fig. 3, we use a          by fitting observed line shapes to ansatz functions. We also note that
+multi-layer media approach. In this approach, we have discretized           one potential optimized calculation would be to pre-calculate the spec-
+space along the laser propagation path (the x axis) into NS segments        tral curves across a range of jEj values (even interpolating curves). One
+of length dL ¼ L=NS, and we calculated the transmission profile (the        can then invoke these ansatz functions to combine curves with varying
+EIT signal) for the local jE(xi)j amplitude over each of them.              weights rather than calculating an arbitrary function E(x) each time.
+
+      We investigate different E-field distributions along the x axis.      III. MODEL RESULTS FOR DIFFERENT FIELD
+An example of the EIT signal for each segment for a linear gradient         DISTRIBUTIONS
+in the field is shown in Fig. 4. In this example, the optical fields are
+propagating along the x axis, and the E-field amplitude has a linear              We now provide samples of some common field distributions
+                                                                            found in practice and use our simulation method outlined in
+variation inside the vapor cell (as would be indicative for the case
+of non-parallel-plate electrodes placed across a vapor cell) along
+the x axis as well. These results are for a linearly increasing jE(x)j
+from 5 to 15 V/m over the laser propagation length of 75 mm, i.e.,
+
+the length of the vapor cell. Such a linear variation can occur in
+some situations and could be produced by non-parallel plates when
+Rydberg sensors are being used for voltage measurements18 or
+when parallel-plate electrodes are used in other applications.19­21
+
+      Having generated  across a scan of c for many samples of
+E(x) or RF(x), one must then combine them into an aggregate
+spectrum. The transmission through each segment can be calcu-
+lated using Beer's law with the local susceptibility (xi) over length
+dL. To combine transmission spectra, we multiply the sequential
+transmissions over each of the NS segments for each value of c. To
+simplify multiplying many exponential functions, we simply sum
+inside the exponential as
+
+                              X NS                              !
+
+Tp  ¼  Pout  ¼   exp  À  2L   i¼1   Imð                    (xi  )Þ  ,  (3)
+       Pin               pNS
+
+where we have taken the constant dL ¼ L=NS out of the sum.
+In essence, we "average" over NS different susceptibility curves,
+assuming each sampled field is held constant over L, as plotted in
+Fig. 4(b). In this form, (x) can depend on any number of parame-
+ter changes and gives the total phase delay as well. The EIT signals
+(i.e., Tp) obtained from Eq. (3) for different E-field distributions are
+shown in Sec. III.
+
+      It is important for the sampling density to converge to a
+
+smooth physical curve, particularly since sparse sampling leads to
+large jumps in the peak position from RF(x) to RF(x þ dL) (i.e.,
+the changes in the E-field strength across the vapor cell) will lead
+to errors in the calculated resultant curves. The sampling number
+
+NS can be raised to an arbitrary spatial resolution, which is useful
+for the narrow linewidths typically used in precision experiments.
+
+J. Appl. Phys. 134, 084401 (2023); doi: 10.1063/5.0161213                            134, 084401-4
+Published by AIP Publishing
+Journal of                                                               ARTICLE  pubs.aip.org/aip/jap
+Applied Physics
+
+FIG. 5. Simulated total transmission profiles for a variety of cases (a)­(f ) as labeled and described in Sec. III. For each case, we plot the total transmission spectrum (top      20 August 2026 15:32:09
+left), the local transmission spectra over space (bottom left), and the electric field over position (bottom right). While jE(x)j sampling is varied between parts, all simulations
+use T ¼ 293 K, p=2 % 18 MHz, c=2 % 2:6 MHz, p ¼ RF ¼ 0, and `3,4=h % 17:5 MHz/(V/m).
+
+Sec. II to illustrate the expected probe transmission curves, i.e., the  and after the central waveguide region in which a constant field is
+EIT signals. As indicated in Fig. 3, the laser beams are propagating     present. We see a large unperturbed peak at the center from the
+along the x axis. The E-field amplitude has a prescribed variation       section with no RF field, as well as the expected split AT peaks,
+along the x axis inside the vapor cell over its length: x ¼ 0 to         with roughly half the height of the center peak (at 1/3 and 2/3 of
+x ¼ L. The modeled results are shown in Fig. 5. Each sub-figure of       the total length L).
+Figs. 5(a)­5(f ) shows the total transmission plot (top left) aggre-
+gated over the entire cell length. Its horizontal axis is the coupling         The linear gradient case is given in Fig. 5(c), with the net
+detuning c, and the vertical axis is the probe transmission after        transmission spectrum of the model and curves being shown in
+propagating across a prescribed E-field amplitude variation inside       Fig. 4(b). This linear field gradient case represents a first-order
+the vapor cell. The heatmap surface plot (bottom left) gives the         modification of the line broadening. It demonstrates that the loss in
+transmission spectrum as a function of the detuning (horizontal          peak transmission, as well as broadening, characterizes effects from
+heatmap axis) and position along the axis of the vapor cell (vertical    field non-uniformity. For experimental sources, which cause a
+heatmap axis). The E-field amplitude along the cell is plotted as        slight field gradient, the gradient usually grows in proportion to the
+well (bottom right), where the horizontal axis is the E-field ampli-     field amplitude. This effect causes the linewidths to grow with the
+tude and the vertical axis specifies the x-axis position it is acquired  applied power. This case illustrates, to a first-order approximation
+in the vapor cell. Each field distribution has a maximum of 15 V/m       of a gradient in the field, that the total FWHM observed is approxi-
+for direct comparison.                                                   mately the sum of the total range of RF(x) induced by jE(x)j, plus
+                                                                         the non-broadened EIT linewidth.
+      The uniform or "ideal" case is shown in Fig. 5(a). This is syn-
+onymous with the single-segment Beer's law approach; it is used as             The 1=x case is shown in Fig. 5(d). It represents the typical
+the reference linewidth for the other line shapes. The stepwise case     E-field falloff from a generic antenna, which is typically employed
+is shown in Fig. 5(b). This case is physically realized in transverse    transverse to the sampling path, not along it. Note that the
+waveguide probing,22 where atoms are observed in pinholes before         asymmetric peak shape is weighted to the lower end of the field
+                                                                         range.
+
+J. Appl. Phys. 134, 084401 (2023); doi: 10.1063/5.0161213                         134, 084401-5
+Published by AIP Publishing
+Journal of                                                              ARTICLE  pubs.aip.org/aip/jap
+Applied Physics
+
+      The sine- or standing-wave case is shown in Fig. 5(e). This       the choices of model parameters used in Fig. 5 are motivated by
+field motivated the present investigation. It accounts for the line     the experimental observed line shapes given in Sec. IV.
+broadening as the E-field is measured longitudinally within an
+un-matched waveguide. This EIT signal is similar to that observed       IV. COMPARISON TO EXPERIMENTAL DATA
+in the experimental data shown in Fig. 2. Note the outside "devil
+horn" characteristic; it is a result of the sine's sampling density           In order to validate the application of our theoretical model to
+near the extrema.                                                       experimental results, we show a few different experimental exam-
+                                                                        ples compared to EIT line shapes predicted by it.
+      The case of an arbitrary standing-wave pattern is shown in
+Fig. 5(f ). This type of field distribution occurs, for instance, in a  A. Twin-lead waveguide
+rectangular waveguide closed with two glass slab ends, which cause
+poor matching between the interior and exterior regions.14,22                 As the first example, we investigate the effects of longitudinal
+Significantly higher sampling density is required, owing to the         (along the laser propagation direction) field non-uniformity in a
+spatial gradients involved.                                             vapor cell placed in a twin-lead waveguide, as depicted in Fig. 6(a).
+                                                                        The vapor cell and waveguide are taped to a block of styrofoam in
+      The simulated EIT curves given in Fig. 5 can be used to           order to hold the device during the experiments. Note that this
+understand what types of field non-uniformity are present when          type of waveguide structure is one method in which a local
+observing distorted EIT line shapes in experimental data. In fact,
+
+                                                                                                                                                                                 20 August 2026 15:32:09
+
+FIG. 6. (a) Vapor cell placed between a twin-lead waveguide. The wires have a diameter of 1.29 mm. The vapor cell is filled with 87Rb, and is 75 mm long, and has an
+outside diameter of 25 mm. (b) Laser orientation and detection scheme of the three-photon experiments. (c) Reflection along the twin-lead vapor cell structure due to the
+tapering of the two wires, the vapor cell, the terminations, and the curved wires. Also shown is the E-field standing-wave distribution caused by all of the reflections on the
+twin-line structure.
+
+J. Appl. Phys. 134, 084401 (2023); doi: 10.1063/5.0161213                        134, 084401-6
+Published by AIP Publishing
+Journal of                                                              ARTICLE  pubs.aip.org/aip/jap
+Applied Physics
+
+oscillator field (LO) can be applied to the atoms.11 This LO            E-field vectors pointing from one wire to the other. The schematic                              20 August 2026 15:32:09
+approach is a typical method used for the detection of the phase of     in Fig. 6(c) illustrates the interfaces that can give rise to RF reflec-
+an incident RF field and has been used for weak field detection via     tions that contribute to field inhomogeneities.
+a Rydberg atom-mixer.8,12,13 The twin-lead wires are attached at
+each end (defined as port 1 and port 2) to two channels of a single           As discussed previously, Fig. 2 shows the EIT signal as a func-
+RF source through custom-designed baluns, which convert the             tion of the coupling laser's detuning (c) for the case of no RF signal
+twin-lead waveguide to an unbalanced 50  impedance. If the exci-        (black curve) on either port of the twin-lead waveguide. The effects
+tation of the twin-lead waveguide is imperfect, RF standing waves       of longitudinal field non-uniformity resulting from the RF standing
+can develop along the vapor cell, which then cause a non-uniform        wave on the line can be seen readily by applying an RF signal to
+field along the vapor cell. These effects are measured and described    ports 1 and 2. We apply V1 ¼ A sin(t) and V2 ¼ B sin(t þ f) to
+in detail next.                                                         ports 1 and 2, respectively, where  ¼ 2 Á 1:906 GHz is at the
+                                                                        35F7=2()35G9=2 resonant transition in 87Rb.
+      We use the three-photon scheme shown in Fig. 1(b) to gener-
+ate EIT in the cell and to demonstrate the RF standing-wave effects           We begin by considering the RF signal applied only at port 1,
+on the EIT line shape. Figure 6(b) shows the diagram of the mea-        with V1 chosen to produce an E1 across the vapor cell to be large
+surement setup. It indicates the propagation directions of its three    enough to well-resolve the resulting EIT/AT features. The measured
+lasers, which consist of a 780 nm (probe) laser beam counter-           EIT signal for this case is shown in Fig. 7(a) [the blue curve]. We
+propagating with respect to the 776 nm (dressing) and 1266 nm           observe cusped features, i.e., two peaks on both EIT lines, and attri-
+(coupling) laser beams. We use a differential detection scheme to       bute them to longitudinal field non-uniformity in the cell. In fact,
+measure the transmission (the EIT signal) of the probe laser, where     upon comparing the shape to the modeled data in Fig. 5(e), we see
+the difference measurement [from two photodiodes (PD)] is made          that a sinusoidal field distribution gives similar EIT line shapes as
+between the signal 780 nm and a reference is separated in the cell      those observed experimentally. The sinusoidal field distribution
+as depicted in Fig. 6(b); further details can be found in Ref. 40. In   results from a standing wave within the twin-lead waveguide. The
+this experiment, the full-width at half maximum (FWHM) beam             standing wave is caused by several factors as illustrated in Fig. 6(c).
+diameters for the probe, dressing, and coupling lasers, respectively,   First, since the vapor cell is made of a dielectric, it will cause reflec-
+are 1.38, 1.32, and 1.39 mm. The corresponding powers of the three      tions of the V1 signal as it propagates alone the waveguide and
+lasers are 129.95 W, 12.67 mW, and 214.73 mW. These values cor-         interacts with the vapor cell. Second, the impedance mismatches
+respond to Rabi frequencies of the probe, dress, and coupling lasers    due to the termination of the twin-lead at the two ports will also
+of p ¼ 2 Á 10:02 MHz, d ¼ 2 Á 32:52 MHz, and                            cause reflections. Third, as seen in Fig. 6(a), the twin-leads are not
+c ¼ 2 Á 7:28 MHz, respectively. In these experiments, the RF            parallel along the propagation path, and they are curved around the
+E-field and all three optical fields are co-linear polarized, with the  foam block. This leads to impedance mismatches along the
+                                                                        transmission-line propagation path and results in additional
+
+FIG. 7. (a) Experimental (solid traces) and modeled (dashed trace) EIT spectra for different standing waves (graph on left) for the experimental three-photon geometry
+shown in Fig. 6. (b) Also shown are the spatially varying E-field amplitude distributions.
+
+J. Appl. Phys. 134, 084401 (2023); doi: 10.1063/5.0161213                        134, 084401-7
+Published by AIP Publishing
+Journal of                                                               ARTICLE  pubs.aip.org/aip/jap
+Applied Physics
+
+reflections. All these sources of reflections and impedance mis-               The E-field distribution inside the vapor obtained from the        20 August 2026 15:32:09
+matches cause a standing-wave voltage waveform and, more impor-          magnitude of Eqs. (4) and (5) forms a standing wave, shown in
+tantly, a corresponding E-field (E1) standing-wave distribution          Fig. 7(b). These field distributions were used in the model pre-
+inside the vapor cell (i.e., the magnitude of the E-field seen by the    sented in Sec. II, and the resultant EIT/AT signals are shown in
+atomic vapor). Furthermore, since the 75 mm vapor cell is near the       Fig. 7(a). Upon comparing the modeled and experimental data, we
+=2 length for this RF-frequency (79 mm at 1.906 GHz), we attri-          see that the model predicts the EIT/AT lineshape distortion very
+bute an element of these features as arising from the longitudinal       well and indicates that the distortion of the measured EIT line is
+non-uniformity due to partial backreflection(s) inside the vapor         due to the standing wave present in the twin-lead structure.
+cell.
+                                                                         B. Power measurements in a rectangular waveguide
+      This standing-wave feature can be minimized by injecting a
+signal into port 2 (i.e., V2) in order to cancel the reflections of V1.        The second example is related to using a Rydberg atom-
+This idea is similar to using the RF tuner to cancel the reflections     based sensor to perform SI traceable measurements of RF power
+in the Rydberg-atom waveguide-power measurements,14 where it is          in a rectangular waveguide.14,22 This waveguide used here was
+shown that RF tuners can cancel out standing-wave effects and            designed to allow laser propagation either along the x axis or
+eliminate the EIT lineshape distortion. As such, we find that by         the z axis; see Fig. 8. Details about the measurements described
+applying V2 , V1 and varying f, we can dramatically modify the           here are given in Ref. 22. The rectangular waveguide shown in
+line shape to the extent that the standing-wave effects are elimi-       Fig. 8(a) is filled with 133Cs. The first set of data is obtained
+nated. By iteratively tuning V2 and the inserted phase (fi) of           with the probe and coupling lasers propagating along the x axis,
+the RF signal at port 2, we found that we are able to minimize the       and the E-field is measured along the x axis inside the wave-
+AT lineshape distortion as illustrated by the solid green trace in       guide via windows on the top and bottom of the waveguide.
+Fig. 7(a). These optimal values correspond to V2 ¼ V1=5:54 and           This configuration is illustrated in Fig. 8(b). The laser beams are
+f ¼ 290. For this case, we see that the EIT/AT peaks are non-            propagating orthogonal to the RF field propagation direction.
+distorted and have nearly the Gaussian/Lorentzian line shapes we         For this case, the RF E-field is polarized along the x axis, and
+expect in a uniform RF field. At this optimized V2, we found             both optical fields are polarized along the z axis. Due to this
+maximal distortion is obtained when a 180 phase shift is added,          configuration, we see from Fig. 8(b) that the atoms have a
+i.e., when fi þ 180. This effect is illustrated with the solid red       region that is exposed to a nearly constant RF field and two
+trace in Fig. 7(a). In effect, the added 180 phase induces a larger      regions that are not exposed to the RF field. Thus, the atoms are
+standing wave of the field by coherently adding to V1's reflection.      exposed to a field distribution similar to the step-function distri-
+These results show that we can constructively or destructively           bution given in Fig. 5(b).
+cancel backreflections by introducing a smaller V2(t) at port 2 and,
+in effect, cause a non-uniform field to become uniform across the              We use the two-photon 133Cs scheme shown in Fig. 1(a) to
+Rydberg sensor.                                                          generate EIT in the waveguide and to measure the RF field distribu-
+                                                                         tion effects on the EIT line shape. A 852 nm (probe) laser beam is
+      In order for the model to predict the EIT line shapes from         counter-propagating with the 511 nm (coupling) laser beam.
+this experiment, we need to first determine the E-field distribution
+inside the vapor cell, which can then be the input to the multi-layer          In these waveguide experiments, the nominal beam parame-
+model. For the RF signal from port 1, we assume that the E-field         ters are FWHM beam diameters for the probe and coupling lasers
+standing wave inside the vapor cell is approximated by                   are 80­120 m and 400­600 m, respectively. The powers in the
+                                                                         lasers are 20­100 W and 50­100 mW for probe and coupling,
+E1model  ¼       CÂeÀi k x  þ  R  eþi  (k  xþfr            )  Ã   (4)    respectively. These values correspond to Rabi frequencies for the
+                                                               ,         probe laser in the few MHz range and for the coupling laser on the
+                                                                         order of 10's of MHz.
+where k ¼ 2= and C is the amplitude of the E-field resulting
+                                                                               Figure 9 shows the measured EIT/AT signal. Some percentage
+from V1. The first term in the bracket is the forward traveling wave     of the atoms remain unaffected by the field in this case (caused by
+(propagation in the þx direction). The second term accounts for          the zero-field region) and, thus, exhibit the resonant EIT peak at
+                                                                         c ¼ 0. On the other hand, a portion of the atoms in the field are
+all the possible reflections, which cause the standing-wave distribu-    AT-split as usual. A stepwise field distribution is used with the
+                                                                         model in Sec. II, and its predicted results are also given in Fig. 9. A
+tion inside the vapor cell. The parameter R is the magnitude of the      good correlation between the two is observed. There are additional
+reflection coefficient and fR the reflection's relative phase. We set    asymmetric effects that distort the spectrum beyond the non-
+R ¼ 0:18 and fr ¼ 290, i.e., the values of V2=V1 and f that gave         uniformity in the E-field, including spurious EIT peaks resulting
+the optimal line shape in the above experiments. For the signal          from optical reflections off of the viewports, i.e., the optical
+                                                                         windows at the end of the vapor cell.
+from port 2, we assume that it is modeled as
+                                                                               The last example considers a longitudinal standing wave along
+E2model ¼ C Reþi (k xþfrþ):                                       (5)    the z axis in the waveguide shown in Fig. 8(c). In this case, the RF
+                                                                         E-field and both optical fields are co-linear polarized along the x
+When E1model and E2model are added together, a pure traveling wave       axis, and the RF and optical fields are propagating along the z axis.
+in the þx direction is obtained; i.e., the standing wave is no longer    A comparison between experimental and modeled data for this
+
+present.
+
+J. Appl. Phys. 134, 084401 (2023); doi: 10.1063/5.0161213                         134, 084401-8
+Published by AIP Publishing
+Journal of                                                 ARTICLE  pubs.aip.org/aip/jap
+Applied Physics
+
+                                                                                                                                                                      20 August 2026 15:32:09
+
+FIG. 8. Rectangular waveguide with laser beams propagating transverse to the RF field propagation: (a) photo of a waveguide device, (b) diagram of laser propagation
+along the x axis (also shown are the two regions where the laser beams interact with the atoms in the absence of the RF field), and (c) diagram of laser propagation
+along the z axis. Shown in parts (b) and (c) are the two different RF field distributions seen by the lasers: stepwise in (a) and standing wave in (b).
+
+J. Appl. Phys. 134, 084401 (2023); doi: 10.1063/5.0161213           134, 084401-9
+Published by AIP Publishing
+Journal of                                                                            ARTICLE  pubs.aip.org/aip/jap
+Applied Physics
+
+  FIG. 9. Comparison of the measured data and corresponding simulated results         demonstrated that these distortions of the EIT signals due to the        20 August 2026 15:32:09
+  for a transverse measurement through a waveguide, which exhibit stepwise field      standing wave caused by the end windows can be eliminated, or at
+  behavior. Optical reflections created the additional spectral features in the mea-  least reduced, with RF stub-like tuners.
+  sured data.
+                                                                                      V. CONCLUSION
+case is shown in Fig. 10. The presence of the inserted glass
+windows in the waveguide structure holds the atoms and induces a                            We have presented a computational method to approximate
+standing wave in the traveling microwave signal. We simulate the                      the distortions of Rydberg-EIT line shapes due to spatially non-
+field inside of the waveguide using an EM solver for three different                  uniform E-field amplitudes inside a vapor cell. We have segmented
+power values, each exhibiting varying levels of broadening. We                        the optical path, calculated the local transmission values, and then
+note that a constant offset of % 11 dB between the measured and                       combined these into a composite transmission spectrum. The cal-
+modeled curves accounts for the significant insertion loss into the                   culation method is generic and applicable to any alteration in the
+waveguide when directional couplers were used in the laboratory.                      electric susceptibility parameters when the total transmission or
+In contrast, the model was fed by an appropriate waveguide mode.                      phase delay is monitored. It can, therefore, help bridge the gap
+Again, we see a good correlation between the experimental and                         between observed line shapes and fitting theory curves. We validate
+modeled data. Consequently, the distortions in the EIT signals are                    our modeling method by demonstrating good agreement between
+indeed due to an RF standing wave. Holloway et al.14 have                             the simulated and experimental atomic spectra in several well
+                                                                                      defined RF environments. Rather than losing information from
+  FIG. 10. Comparison of the measured data and corresponding simulated                broadening, this method enables extracting additional information
+  results for a transverse measurement through a waveguide, which exhibit             about the spatial field variations that can be fit to observed trans-
+  standing-wave behavior. The field distribution in the waveguide was obtained        mission spectra. The importance of the simulated EIT curves given
+  with a commercial electromagnetic field numerical solver.                           in Fig. 5 is that they reveal characteristic lineshape effects based on
+                                                                                      the type of underlying field inhomogeneity present in the experi-
+                                                                                      mental EIT data. Understanding these observed types of distorted
+                                                                                      EIT line shapes can facilitate the ability to control and correct
+                                                                                      effects arising from such nonuniformities. Figure 5, thus, acts as a
+                                                                                      "Rosetta stone," translating spatial RF field distributions to EIT/AT
+                                                                                      atomic spectra. Those results give us a means to understand the
+                                                                                      effect of different non-uniformities and in turn to achieve funda-
+                                                                                      mental limits on the accuracy and sensitivity for applications, such
+                                                                                      as metrology-grade measurements and for atom-based sensors and
+                                                                                      receivers.
+
+                                                                                      ACKNOWLEDGMENTS
+
+                                                                                            This work was partially funded by the NIST-on-a-Chip
+                                                                                      (NOAC) Program and was developed with funding from the
+                                                                                      Defense Advanced Research Projects Agency (DARPA). The views,
+                                                                                      opinions, and/or findings expressed are those of the authors and
+                                                                                      should not be interpreted as representing the official views or poli-
+                                                                                      cies of the Department of Defense or the U.S. Government. This
+                                                                                      work is a contribution of the U.S. Government and is not subject
+                                                                                      to copyright in the United States.
+
+                                                                                      AUTHOR DECLARATIONS
+
+                                                                                      Conflict of Interest
+
+                                                                                            The authors have no conflicts to disclose.
+
+                                                                                      Author Contributions
+
+                                                                                      Andrew P. Rotunno: Conceptualization (equal); Data curation
+                                                                                      (equal); Formal analysis (equal); Investigation (equal);
+                                                                                      Methodology (equal); Software (equal); Validation (equal);
+                                                                                      Visualization (equal); Writing ­ original draft (equal); Writing ­
+                                                                                      review & editing (equal). Christopher L. Holloway:
+                                                                                      Conceptualization (lead); Data curation (equal); Formal analysis
+                                                                                      (equal); Funding acquisition (equal); Investigation (equal);
+
+J. Appl. Phys. 134, 084401 (2023); doi: 10.1063/5.0161213                                      134, 084401-10
+Published by AIP Publishing
+Journal of                                                                             ARTICLE                  pubs.aip.org/aip/jap
+Applied Physics
+
+Methodology (equal); Project administration (equal); Resources        level EIT model is easily extended from two to three optical
+(equal); Supervision (equal); Validation (equal); Visualization
+(equal); Writing ­ original draft (equal); Writing ­ review &         photons to examine both of the optical systems considered in this
+editing (equal). Nikunjkumar Prajapati: Data curation (equal);
+Formal analysis (equal); Investigation (equal); Methodology           work. The power of the probe beam measured on the detector (the
+(equal); Software (equal); Validation (equal); Visualization
+(equal); Writing ­ review & editing (equal). Samuel Berweger:         EIT signal, i.e., the probe transmission through the vapor cell) is
+Data curation (equal); Formal analysis (equal); Investigation         given by41
+(equal); Validation (equal); Writing ­ review & editing (equal).
+Alexandra B. Artusio-Glimpse: Data curation (equal); Formal                                            2L  Im½       
+analysis (equal); Methodology (equal); Visualization (equal);                                              p
+Writing ­ review & editing (equal). Roger Brown: Data curation        Pout ¼ Pin exp               À                    ¼ Pin expðÀLÞ,        (A1)
+(equal); Formal analysis (equal); Investigation (equal); Validation
+(equal); Writing ­ review & editing (equal). Matthew Simons:          where Pin is the power of the probe beam at the input of the cell,
+Conceptualization (equal); Data curation (equal); Formal analysis     L is the length of the cell, p is the wavelength of the probe laser,
+(equal); Investigation (equal); Validation (equal); Writing ­          is the susceptibility of the medium seen by the probe laser, and
+review & editing (equal). Amy K. Robinson: Data curation
+(equal); Formal analysis (equal); Investigation (equal);               ¼ 2Im½=p is Beer's absorption coefficient for the probe laser.
+Methodology (equal); Validation (equal); Visualization (equal);
+Writing ­ review & editing (equal). Baran N. Kayim: Data cura-        The susceptibility for the probe laser is related to the density
+tion (equal); Investigation (equal); Validation (equal);              matrix component (21) by the following expression:31
+Visualization (equal); Writing ­ review & editing (equal).
+Michael A. Viray: Data curation (equal); Formal analysis (equal);                      ¼  2  N0`12  21D    ¼    2 N0    (d  e a0  )2  21D  ,  (A2)
+Methodology (equal); Validation (equal); Visualization (equal);                              Ep0                 0h         p
+Writing ­ review & editing (equal). Jasmine F. Jones: Data cura-
+tion (equal); Formal analysis (equal); Investigation (equal);         where d ¼ 2:0 is the normalized transition-dipole moment42,43 for
+Validation (equal); Writing ­ review & editing (equal). Brian         the probe laser and p is the Rabi frequency for the probe laser in
+C. Sawyer: Data curation (equal); Formal analysis (equal);            units of rad/s. The subscript D on 21 represents a Doppler aver-
+Investigation (equal); Methodology (equal); Visualization (equal);    aged value. N0 is the total density of atoms in the cell and is given
+Writing ­ review & editing (equal). Robert Wyllie: Data curation      by
+(equal); Formal analysis (equal); Investigation (equal);
+Methodology (equal); Validation (equal); Visualization (equal);                                     N0     ¼     p   ,                        (A3)  20 August 2026 15:32:09
+Writing ­ review & editing (equal). Thad Walker: Data curation                                                  kBT
+(equal); Formal analysis (equal); Investigation (equal);
+Methodology (equal); Writing ­ review & editing (equal).              where kB is the Boltzmann constant, T is the temperature in
+Richard W. Ziolkowski: Data curation (equal); Formal analysis         Kelvin, and the pressure p (in units of Pa) is given by42,43
+(equal); Investigation (equal); Methodology (equal); Writing ­
+review & editing (equal). Steven R. Jefferts: Data curation                                        p ¼ 109:717À39T99                          (A4)
+(equal); Formal analysis (equal); Investigation (equal);
+Methodology (equal); Writing ­ review & editing (equal). Steven       for 133Cs and
+Geibel: Data curation (equal); Formal analysis (equal);
+Investigation (equal); Validation (equal); Writing ­ review &                                      p ¼ 109:8630À42T15                         (A5)
+editing (equal). Jonathan Wheeler: Data curation (equal); Formal
+analysis (equal); Investigation (equal); Methodology (equal);         for 87Rb.
+Writing ­ review & editing (equal). Eric Imhof: Data curation
+(equal); Formal analysis (equal); Investigation (equal);                    In Eq. (A2), `12 is the transition-dipole moment for the
+Methodology (equal); Supervision (supporting); Visualization          j1i­j2i transition, 0 is the vacuum permittivity, and Ep is the
+(equal); Writing ­ review & editing (equal).
+                                                                      amplitude of the probe laser E-field. The density matrix component
+DATA AVAILABILITY                                                     (21) is obtained from the master equation,31
+
+      The data that support the findings of this study are available                         _  ¼  @   ¼  À  i  ½H,     þ   L,                (A6)
+from the corresponding author upon reasonable request.                                             @t        h
+
+APPENDIX: A MASTER-EQUATION MODEL                                     where H is the Hamiltonian of the atomic system under consider-
+                                                                      ation and L is the Lindblad operator that accounts for the decay
+      We use a master-equation model of the EIT signals for the
+atomic transition schemes used here, shown in Fig. 1. This multi-     processes in the atomic system.
+
+                                                                            We numerically solve these equations to find the steady-state
+                                                                      solution for 21 for various values of Rabi frequencies (i) and
+                                                                      detunings (i). This process is accomplished by forming a matrix
+                                                                      with the system of equations for _ ij ¼ 0. The null-space of the
+                                                                      resulting system matrix is the steady-state solution. The steady-state
+
+J. Appl. Phys. 134, 084401 (2023); doi: 10.1063/5.0161213                                                                                     134, 084401-11
+Published by AIP Publishing
+Journal of                                                                                           ARTICLE                       pubs.aip.org/aip/jap
+Applied Physics
+
+solution for 21 is then Doppler averaged,31                                          p,c,RF  ¼    jE p,c,RF j  , ` p,c,RF  where  jE p,c,RF j  are  the  magnitudes  of      the
+
+                                                                                                                  h
+
+                                            ð 3u                                    E-field of the probe laser, the coupling laser, and the RF source,
+                                                 R
+                     21D  ¼  pffi1ffiffi                 Àv2  dv,             (A7)  respectively. Finally, `p, `c, and `RF are the atomic dipole
+                                          u À3u
+                                                       e u2                         moments corresponding to the probe, coupling, and RF transitions.
+
+             pffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi                         For the four-level system, the L matrix is given by
+where u ¼ 2kBT=m and m is the mass of the atom. For a two-
+photon 133Cs system,                                                                         2     222               À 12 12              À 13 13                À 14 14  3
+                                                                                                  À 21 21         333 À 222               À 23 23                À 24 24
+                                                                                    L  ¼     466  À 31 31                              444 À 333                 À 34 34  577,
+                           R ¼ 21 0p, c0                                                                             À 32 32              À 43 43
+                                                                                                  À 41 41            À 42 42                                     À444
+
+and for a three-photon 87Rb system,                                                                                                                                    (A12)
+
+                                                                                    where ij ¼ (i þ j)=2 and i,j are the transition decay rates. Since
+                        R ¼ 21 p0 , 0d, 0c :                                        the purpose of this study is to explore the non-uniform field limita-
+                                                                                    tions of Rydberg-EIT sensing in vapor cells, no collision terms or
+For the 133Cs system, the probe and coupling beams are counter-                     dephasing terms are added. While decoherence effects are generally
+propagating, and as such, the detunings are modified by the follow-                 present, we have found that the non-uniform field effects are domi-
+ing values:                                                                         nant for the cases shown here. Consequently, the collision and
+                                                                                    dephasing terms were not included in this analysis. While
+              p0  ¼  p  À  2   v          and      0c  ¼      c  þ  2  v:     (A8)  Rydberg-atom collisions, Penning ionization, and ion electric fields
+                           p                                        c               can, in principle, cause dephasing, such effects can, for instance, be
+                                                                                    alleviated by reducing the beam intensities, lowering the vapor
+For the 87Rb system, the probe beam is counter-propagating to                       pressure, or limiting the atom-field interaction time. In this analy-
+both the dressing and coupling beams, and as such, the detunings                    sis, we set 1 ¼ 0, 2 ¼ 2Â(4.56 MHz), 3 ¼ 2Â(1.3 kHz),
+are modified by the following values:                                               and 4 ¼ 2Â(2.6 kHz). Note that 2 is for the D2 line in
+                                                                                    133Cs,42,45 and 3 and 4 are typical Rydberg decay rates.
+                           0p     ¼          p  À  2   v,
+                                                   p
+
+                           0d     ¼          d  þ  2   v,                     (A9)                                                                                                20 August 2026 15:32:09
+                                                   d
+
+                           c0             ¼  c  þ  2   v:                           2. Three-photon scheme
+                                                   c
+
+We use the technique presented in Ref. 44 to decrease the compu-                          The three-photon system shown in Fig. 1(b) is a five-level
+tational time of the Doppler averaging procedure.                                   system, and the Hamiltonian can be expressed as
+
+1. Two-photon scheme                                                                                              2        0 P 0 0 0                     3
+
+      The two-photon system shown in Fig. 1(a) is a four-level                                    H  ¼         h  66646    P   A   D           0     0   77775,        (A13)
+system, and the Hamiltonian can be expressed as                                                                2            0  D    B          c     0
+                                                                                                                            0   0  c           C    RF
+         2                                                                 3
+            0      p               0                                0                                                      0 0 0 RF D
+                  À2p
+H  ¼  h  646  p                    c                                 0     577,     where P, D, c, and RF are the Rabi frequencies of the probe
+      2       0    c         À2(p þ c)                              RF              laser, the dressing laser, the coupling laser, and the RF field, respec-
+                                                                                    tively. Also, the constants
+              0     0             RF                   À2(p þ c þ RF)
+
+                                                                           (A10)
+
+where p, c, and RF are the detunings of the probe laser, the cou-                                                          A ¼ À2P,                                    (A14)
+pling laser, and the RF source, respectively. The terms p, c, and                                                     B ¼ À2(P þ D),
+RF are the Rabi frequencies associated, respectively, with the                                                     C ¼ À2(P þ D þ C),
+probe laser, the coupling laser, and the RF source. The detuning for                                           D ¼ À2(P þ D þ C þ RF),
+
+each fields is defined as                                                           where P, D, C, and RF are the detunings of the probe laser, the
+                                                                                    dressing laser, the coupling laser, and the RF field, respectively,
+                      p,c,RF ¼  p,c,RF À  , o p,c,RF                       (A11)    defined as
+
+where op,c,RF are the on-resonance angular frequencies of transi-                                               p,d,c,RF ¼  p,d,c,RF À 12,23,34,45,                    (A15)
+tions j1i­j2i, j2i­j3i, and j3i­j4i, respectively; and  p,c,RF are the
+angular frequencies of the probe laser, the coupling laser, and the                 where 12,23,34,45 are the on-resonance angular frequencies for the
+RF source, respectively. The Rabi frequencies are defined as                        probe, dressing, coupling, and RF fields, respectively.
+
+J. Appl. Phys. 134, 084401 (2023); doi: 10.1063/5.0161213                                                                                                        134, 084401-12
+Published by AIP Publishing
+Journal of                                                                        ARTICLE  pubs.aip.org/aip/jap
+Applied Physics
+
+      For the five-level system, the L matrix is given by                         14C. Holloway, M. Simons, M. Kautz, A. Haddab, J. Gordon, and T. P. Crowley,
+                                                                                  "A quantum-based power standard: Using Rydberg atoms for a SI-traceable
+      2       222        À 12 12  À 13 13     À 14 14      À  15 15  3            radio-frequency power measurement technique in rectangular waveguides,"
+             À 21 21  333 À 222   À 23 23     À 24 24      À  25 25
+L  ¼  46666  À 31 31              À333        À 34 34      À  35 35  57777,       Appl. Phys. Lett. 113, 094101 (2018).
+             À 41 41     À 32 32  À 43 43  333 À 444       À  45 45               15M. T. Simons, M. D. Kautz, J. A. Gordon, and C. L. Holloway, "Uncertainties
+                         À 42 42  À 53 53     À 45 45                             in Rydberg atom-based RF e-field measurements," in 2018 International
+             À 51 51     À 52 52                           À555
+                                                                                  Symposium on Electromagnetic Compatibility (EMC EUROPE) (IEEE, 2018),
+                                                              (A16)               pp. 376­380.
+                                                                                  16C. Holloway, J. Gordon, A. Schwarzkopf, D. Anderson, S. Miller,
+where ij ¼ (i þ j)=2 and i,j are the transition decay rates. In                   N. Thaicharoen, and G. Raithel, "Sub-wavelength imaging and field mapping via
+this analysis, we set 1 ¼ 0, 2 ¼ 2 Â 6:065 MHz,
+                                                                                  electromagnetically induced transparency and Autler-Townes splitting in
+3 ¼ 2 Â 1 MHz, and 4,5 ¼ 2Â(1.3, 2.6) kHz. Note that 2 is the                     Rydberg atoms," Appl. Phys. Lett. 104, 244102 (2014).
+decay rate for the D2 line in 87Rb, and 4, 5 are typical Rydberg                  17H. Fan, S. Kumar, J. Sheng, J. P. Shaffer, C. L. Holloway, and J. A. Gordon,
+decay rates.43,45                                                                 "Effect of vapor-cell geometry on Rydberg-atom-based measurements of radio-
+                                                                                  frequency electric fields," Phys. Rev. Appl. 4, 044015 (2015).
+REFERENCES                                                                        18C. L. Holloway, N. Prajapati, J. A. Sherman, A. Rüfenacht,                       20 August 2026 15:32:09
+
+1A. Artusio-Glimpse, M. T. Simons, N. Prajapati, and C. L. Holloway, "Modern      A. B. Artusio-Glimpse, M. T. Simons, A. K. Robinson, D. S. La Mantia, and
+                                                                                  E. B. Norrgard, "Electromagnetically induced transparency based Rydberg-atom
+RF measurements with hot atoms: A technology review of Rydberg atom-based         sensor for traceable voltage measurements," AVS Quantum Sci. 4, 034401
+radio frequency field sensors," IEEE Microw. Mag. 23, 44­56 (2022).
+2J. Gordon, C. Holloway, S. Jefferts, and T. Heavner, "Quantum-based Si trace-    (2022).
+able electric-field probe," in 2010 IEEE International Symposium on               19D. Meyer, P. Kunz, and K. Cox, "Waveguide-coupled Rydberg spectrum ana-
+Electromagnetic Compatibility, 25­30 July (IEEE, 2010), pp. 321­324.              lyzer from 0 to 20 GHz," Phys. Rev. Appl. 15, 014053 (2021).
+3J. Sedlacek, A. Schwettmann, H. Kubler, R. Low, and P. T. J. Shaffer,            20B. Liu, L.-H. Zhang, Z.-K. Liu, Z.-Y. Zhang, Z.-H. Zhu, W. Gao, G.-C. Guo,
+"Microwave electrometry with Rydberg atoms in a vapour cell using bright          D.-S. Ding, and B.-S. Shi, "Highly sensitive measurement of a megahertz RF elec-
+atomic resonances," Nat. Phys. 8, 816­824 (2012).                                 tric field with a Rydberg-atom sensor," Phys. Rev. Appl. 18, 014045 (2022).
+4C. Holloway, M. Simons, J. Gordon, P. Wilson, C. Cooke, D. Anderson, and         21L. Chai and R. R. Jones, "Demonstration of an RF electrometer based on EIT
+G. Raithel, "Atom-based RF electric field metrology: From self-calibrated mea-    spectroscopy of non-resonantly dressed Rydberg atoms," in Conference on Lasers
+surements to subwavelength and near-field imaging," IEEE Trans. Electromagn.
+Compat. 59, 717­728 (2017).                                                       and Electro-Optics (Optica Publishing Group, 2021), p. STu2A.1.
+5M. Tanasittikosol, J. Pritchard, D. Maxwell, A. Gauguet, K. Weatherill,          22A. Robinson, "Microwave measurements using Rydberg atoms," Ph.D. thesis
+R. Potvliege, and C. Adams, "Microwave dressing of Rydberg dark states,"
+                                                                                  (University of Colorado Boulder, 2022).
+J. Phys. B 44, 184020 (2011).                                                     23A. K. Robinson, A. B. Artusio-Glimpse, M. T. Simons, and C. L. Holloway,
+6C. L. Holloway, J. A. Gordon, A. Schwarzkopf, D. A. Anderson, S. A. Miller,      "Atomic spectra in a six-level scheme for electromagnetically induced transpar-
+N. Thaicharoen, and G. Raithel, "Sub-wavelength imaging and field mapping via     ency and Autler-Townes splitting in Rydberg atoms," Phys. Rev. A 103, 023704
+
+electromagnetically induced transparency and Autler-Townes splitting in           (2021).
+Rydberg atoms," Appl. Phys. Lett. 104, 244102 (2014).                             24A. K. Robinson, N. Prajapati, D. Senic, M. T. Simons, and C. L. Holloway,
+7J. Gordon, C. Holloway, A. Schwarzkopf, D. Anderson, S. Miller,                  "Determining the angle-of-arrival of a radio-frequency source with a Rydberg
+N. Thaicharoen, and G. Raithel, "Millimeter wave detection via Autler-Townes      atom-based sensor," Appl. Phys. Lett. 118, 114001 (2021).
+splitting in rubidium Rydberg atoms," Appl. Phys. Lett. 105, 024104 (2014).       25H. Fan, S. Kumar, R. Daschner, H. Kübler, and J. Shaffer, "Subwavelength
+8J. Gordon, M. Simons, A. Haddab, and C. Holloway, "Weak electric-field detec-    microwave electric-field imaging using Rydberg atoms inside atomic vapor cells,"
+                                                                                  Opt. Lett. 39, 3030­3033 (2014).
+tion with sub-1 Hz resolution at radio frequencies using a Rydberg atom-based     26D. T. Stack, P. D. Kunz, D. H. Meyer, and N. Solmeyer, "Microwave electric
+mixer," AIP Adv. 9, 045030 (2019).                                                field sensing with Rydberg atoms," Proc. SPIE 9873, 987306 (2016).
+9C. Holloway, J. Gordon, A. Schwarzkopf, D. Anderson, S. Miller,                  27D. A. Anderson, S. A. Miller, G. Raithel, J. Gordon, M. Butler, and
+N. Thaicharoen, and G. Raithel, "Broadband Rydberg atom-based electric-field      C. Holloway, "Optical measurements of strong microwave fields with Rydberg
+probe for SI-traceable, self-calibrated measurements," IEEE Trans. Antenna        atoms in a vapor cell," Phys. Rev. Appl. 5, 034003 (2016).
+Propag. 62, 6169­6182 (2014).                                                     28A. Chopinaud and J. D. Pritchard, "Optimal state choice for Rydberg-atom
+10J. A. Sedlacek, A. Schwettmann, H. Kübler, and J. P. Shaffer, "Atom-based       microwave sensors," Phys. Rev. Appl. 16, 024008 (2021).
+vector microwave electrometry using rubidium Rydberg atoms in a vapor cell,"      29M. T. Simons, J. A. Gordon, and C. L. Holloway, "Fiber-coupled vapor cell for
+                                                                                  a portable Rydberg atom-based radio frequency electric field sensor," Appl. Opt.
+Phys. Rev. Lett. 111, 063001 (2013).                                              57, 6456­6460 (2018).
+11M. Simons, A. Haddab, J. Gordon, D. Novotny, and C. Holloway, "Embedding        30M. G. Bason, M. Tanasittikosol, A. Sargsyan, A. Mohapatra, D. Sarkisyan,
+                                                                                  R. Potvliege, and C. Adams, "Enhanced electric field sensitivity of RF-dressed
+a Rydberg atom-based sensor into an antenna for phase and amplitude detection     Rydberg dark states," New J. Phys. 12, 065015 (2010).
+of radio-frequency fields and modulated signals," IEEE Access 7, 164975­164985    31P. R. Berman and V. S. Malinovsky, Principles of Laser Spectroscopy and
+
+(2019).                                                                           Quantum Optics (Princeton University Press, Princeton, NJ, 2011).
+12M. Simons, A. Haddab, J. Gordon, and C. Holloway, "A Rydberg atom-based         32C. Holloway, M. Simons, J. Gordon, A. Dienstfrey, D. Anderson, and
+mixer: Measuring the phase of a radio frequency wave," Appl. Phys. Lett. 114,     G. Raithel, "Electric field metrology for SI traceability: Systematic measurement
+                                                                                  uncertainties in electromagnetically induced transparency in atomic vapor,"
+114101 (2019).
+13M. Jing, Y. Hu, J. Ma, H. Zhang, L. Zhang, L. Xiao, and S. Jia, "Atomic super-  J. Appl. Phys. 121, 233106 (2017).
+heterodyne receiver based on microwave-dressed Rydberg spectroscopy," Nat.        33N. Thaicharoen, K. R. Moore, D. A. Anderson, R. C. Powel, E. Peterson, and
+Phys. 16, 911­915 (2020).                                                         G. Raithel, "Electromagnetically induced transparency, absorption, and
+
+                                                                                  microwave-field sensing in a Rb vapor cell with a three-color all-infrared laser
+                                                                                  system," Phys. Rev. A 100, 063427 (2019).
+
+J. Appl. Phys. 134, 084401 (2023); doi: 10.1063/5.0161213                                  134, 084401-13
+Published by AIP Publishing
+Journal of                                                                         ARTICLE  pubs.aip.org/aip/jap
+Applied Physics
+
+34J. P. Shaffer and H. Kübler, "A read-out enhancement for microwave electric      39M. Sahrai, M. Mahmoudi, and R. Kheradmand, "Atom localization of a two-level
+field sensing with Rydberg atoms," Proc. SPIE 10674, 106740C (2018).
+35C. Carr, M. Tanasittikosol, A. Sargsyan, D. Sarkisyan, C. S. Adams, and          pump-probe system via the absorption spectrum," Laser Phys. 17, 40­44 (2007).
+K. J. Weatherill, "Three-photon electromagnetically induced transparency using     40R. C. Brown, B. Kayim, M. A. Viray, A. R. Perry, B. C. Sawyer, and R. Wyllie,
+Rydberg states," Opt. Lett. 37, 3858­3860 (2012).
+36N. Prajapati, N. Bhusal, A. P. Rotunno, S. Berweger, M. T. Simons,               "Very-high- and ultrahigh-frequency electric-field detection using high angular
+
+A. B. Artusio-Glimpse, Y. J. Wang, E. Bottomley, H. Fan, and C. L. Holloway,       momentum Rydberg states," Phys. Rev. A 107, 052605 (2023).
+"Sensitivity comparison of two-photon vs three-photon Rydberg electrometry,"       41A. Yarin, Optical Electronics,4th ed. (CBS College Publishing, New York, 1995).
+                                                                                   42D. A. Steck, "Cesium D line data," (1998); see http://steck.us/alkalidata
+arXiv:2211.11848 (2022).
+37M. Simons, A. Artusio-Glimpse, C. Holloway, E. Imhof, S. Jefferts, R. Wyllie,    (revision 2.2.1, accessed 21 November 2019).
+B. Sawyer, and T. Walker, "Continuous radio frequency electric-field detection     43D. Steck, "Rubidium 87 D line data," (2001); see http://steck.us/alkalidata
+through adjacent Rydberg resonance tuning," Phys. Rev. A 104(3), 032824 (2021).
+38S. Berweger, N. Prajapati, A. B. Artusio-Glimpse, A. P. Rotunno, R. Brown,       (revision 2.1.6, accessed 20 September 2013).
+                                                                                   44A. P. Rotunno, A. K. Robinson, N. Prajapati, S. Berweger, M. T. Simons,
+C. L. Holloway, M. T. Simons, E. Imhof, S. R. Jefferts, B. N. Kayim, M. A. Viray,
+R. Wyllie, B. C. Sawyer, and T. G. Walker, "Rydberg state engineering: A com-      A. B. Artusio-Glimpse, and C. L. Holloway, "Inverse transform sampling for
+parison of tuning schemes for continuous frequency sensing," arXiv:2209.14407
+                                                                                   efficient Doppler-averaged spectroscopy simulations," AIP Adv. 13, 075218
+(2022).
+                                                                                   (2023).
+                                                                                   45N. Sibali, J. D. Pritchard, C. S. Adams, and K. J. Weatherill, "ARC: An open-
+
+                                                                                   source library for calculating properties of alkali Rydberg atoms," Comput. Phys.
+
+                                                                                   Commun. 220, 319­331 (2017).
+
+                                                                                                                                                                      20 August 2026 15:32:09
+
+J. Appl. Phys. 134, 084401 (2023); doi: 10.1063/5.0161213                                   134, 084401-14
+Published by AIP Publishing
+

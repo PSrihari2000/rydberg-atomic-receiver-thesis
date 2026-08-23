@@ -1,0 +1,589 @@
+                                 PHYSICAL REVIEW A 107, 043108 (2023)
+
+  Linear dynamic range of a Rydberg-atom microwave superheterodyne receiver
+
+                            Fengchuan Wu , Qiang An,* Zhanshan Sun, and Yunqi Fu
+College of Electronic Science and Engineering, National University of Defense Technology, Changsha 410073, China
+
+          (Received 16 December 2022; revised 6 March 2023; accepted 31 March 2023; published 10 April 2023)
+
+      In recent years, electric field measurement techniques based on Rydberg atoms have shown unique advantages
+   in high sensitivity and wideband applications and miniaturization. The Rydberg atom receiver senses the
+   electromagnetic signal using the quantum coherence effect, which overcomes the inherent defects of traditional
+   electronic receivers in terms of thermal noise, insertion loss of microwave devices, and the use of wavelength-
+   dependent antennas, thus providing the Rydberg atomic receivers the potential to become the next generation of
+   microwave receivers. For some particular application scenarios such as radar and communication, superhetero-
+   dyne reception is a critical technical approach, and the linear dynamic range is an essential factor in evaluating the
+   performance of the superheterodyne receivers. It is challenging to promote the Rydberg atomic receiver without
+   figuring out the influence of system parameters on the linear dynamic range. This paper starts with the response
+   mechanism of the Rydberg atomic superheterodyne receiver, and a theoretical model is established to simulate
+   the atom-microwave responses. Then the harmonics' generation mechanism is discussed, and the atomic linear
+   dynamic range under different probe light Rabi frequencies is studied further. Furthermore, a method to evaluate
+   the antiblocking performance of the system is proposed. This work is expected to provide theoretical guidance
+   for the design and performance optimization of the Rydberg atomic superheterodyne receiver.
+
+   DOI: 10.1103/PhysRevA.107.043108
+
+                           I. INTRODUCTION                          the electric field to be measured, which can achieve all-optical
+                                                                    nondestructive detection [27,28]. Consequently, the study of
+   In recent years, with the further development of quan-           electromagnetic resonance structures has emerged to improve
+tum microwave measurement technology, Rydberg atoms'                the electric field sensitivity of the Rydberg atomic receiver
+electromagnetic-induced transparency (EIT) effect has at-           [29­31]. Based on the in-depth study of the physical response
+tracted much attention in microwave applications. The Ryd-          mechanism of the Rydberg atom superheterodyne reception
+berg atom can construct a superheterodyne receiver by locking       [32­40], the complete Rydberg atom superheterodyne recep-
+laser frequencies and adding a microwave local oscillator           tion link model can be established [41]. Hence, the Rydberg
+(LO) signal. It has been studied in amplitude modulation            atom has excellent potential as a new generation of wireless
+(AM), frequency modulation (FM), quad phase shift keyed             receivers.
+(QPSK), quadrature amplitude modulation (QAM), and other
+modulated signal reception [1­6], spectrum analysis [7], the           In a superheterodyne receiving system, linear dynamic
+direction of arrival estimation [8], pulse ranging [9], and other   range (LDR) also plays a decisive role in receiving system
+applications. Compared with traditional electronic antennas,        performance besides sensitivity. However, it has yet to be
+one of the advantages of using Rydberg atoms is that the            thoroughly discussed in current research. LDR refers to the
+responsiveness is independent of the sensor size, which can         strength range of the input signal that enables the receiver to
+break through the limitation of the Chu limit [10­15]. Second,      detect the received signal without distortion. When the super-
+the Rydberg atom has an ultra-wideband working band, which          heterodyne receiver with poor linear response characteristics
+can theoretically realize the responsibility of the electric field  receives a strong signal, it will show prominent high-order
+in the ultralow to infrared frequency band [7,16­18]. Without       harmonic components, usually considered interference in the
+changing the hardware, the electric field frequency response        receiving system. They can be filtered by adding a low-
+to the Rydberg atom can be changed by tuning the laser              pass filter in the subsequent electronic information-processing
+frequency. In addition, the Rydberg atomic sensor can achieve       module. However, when the microwave signal under test
+sensitivity on the order of V m-1 Hz-1/2 [19­26], which is          (MSUT) is a modulated signal with a specific bandwidth, the
+better than the traditional electronic receivers. Furthermore,      frequency bands of the harmonic components may overlap
+there is no metal structure in the sensor, and the EIT effect       with that of the valid intermediate frequency signal (VIFS),
+of the Rydberg atom does not respond to the space electric          and the harmonic components cannot be filtered. Therefore,
+field by strongly absorbing the space electromagnetic wave          the design of LDR is crucial. Also, the antiblocking perfor-
+energy. Therefore, this kind of sensor has little disturbance on    mance is decided by LDR, and its evaluation method has yet to
+                                                                    be thoroughly discussed. When space interference signals in
+  *Corresponding author: anqiang18@nudt.edu.cn                      the operating frequency band enter the receiver, in addition to
+                                                                    distorting the received signal, they may also cause saturation
+                                                                    of the receiver, blocking the reception of MSUT. Therefore,
+
+2469-9926/2023/107(4)/043108(9)  043108-1                              ©2023 American Physical Society
+WU, AN, SUN, AND FU                                               PHYSICAL REVIEW A 107, 043108 (2023)
+
+if the LDR is small or the antiblocking performance is poor,
+it is challenging to popularize the application scenario of the
+Rydberg atomic microwave superheterodyne receiver.
+
+   The work of this paper is arranged into the following
+parts: in Sec. II the principle of the Rydberg atomic super-
+heterodyne receiver is briefly described, and the theoretical
+analysis model is established by introducing the atomic linear
+expansion coefficient (ALEC). In Sec. III the line shape of the
+Rydberg atom's EIT-AT (Autler-Townes) spectrum by adjust-
+ing the incident probe light Rabi frequency is discussed first.
+Then the harmonics' generation mechanism and the linear
+response characteristic are analyzed through the transmittance
+spectral line shape. Finally, the LDR under different probe
+Rabi frequencies is analyzed in cold and thermal atomic mod-
+els. In Sec. IV the influence of the interference signal on VIFS
+is studied. A method to evaluate the antiblocking probability
+is promoted, and the antiblocking performance under different
+probe light Rabi frequencies is discussed. The work in this
+paper is summarized in Sec. V.
+
+II. PRINCIPLE OF RYDBERG ATOMIC
+   SUPERHETERODYNE RECEIVER
+
+   The Rydberg atom is usually prepared by two-photon                 FIG. 1. (a) The Rydberg atomic four-level system; (b) EIT spec-
+                                                                  tra obtained by scanning c under different MW; (c) the relationship
+transition excitation. Cesium atoms are used to prepare Ry-       curve between PT and MW (solid red line) at c = 0, and the dotted
+dberg atoms in this work. The four-level scheme is 6S1/2          blue line is the linear fitting result of the solid red line. When MW
+6P3/2  nD5/2  (n + 1)P3/2 (n 15), which is shown in               changes with time t (dotted purple line), the relationship of PT and
+Fig. 1(a). The probe light with a wavelength of p = 852 nm        t (dotted orange line) can be obtained through the red solid line
+and Rabi frequency p excites the cesium atom from the             mapping.
+ground state |1 to the intermediate excited state |2 ; the
+frequency of the probe light is at the transition frequency be-   (solid red line) between the transmission probe light power PT
+tween energy levels |1 and |2 throughout. Then the coupling       and the microwave Rabi frequency MW can be obtained, as
+light with a wavelength of c = 510 nm and Rabi frequency          shown by the solid red line in Fig. 1(c). The dotted blue line is
+                                                                  the linear fitting result of the solid red line. According to the
+  c enables the transition from the intermediate excited state    Beer-Lambert law, the expression of the solid red curve is
+|2 to the Rydberg state |3 and simultaneously enhances the
+transmissivity of the probe light from atomic vapor. c( p)
+is the detuning of the coupling (probe) light deviating from
+transition frequency between state |2 (|1 ) and |3 (|2 ), and
+the EIT peak can be observed by scanning c or p. Then a
+microwave field with Rabi frequency MW is added to couple
+the Rydberg state |3 and |4 , and the single EIT peak splits
+into two peaks, resulting in AT splitting; in this scheme, the
+
+microwave frequency is at transition frequency between state
+|1 and |2 throughout.
+
+   While scanning c, according to the semiclassical theory
+of quantum optics [37], the theoretical results of EIT spectra
+
+under different electric field intensities E are calculated, as
+
+shown in the series of curves with double peaks in Fig. 1(b).
+
+The distance between the two peaks is the Rabi frequency
+
+  MW of the microwave field, which increases with the mi-
+crowave strength E. The relationship between MW and E can
+be expressed as
+
+                         =  MWE    ,                              PT = Pie-PpLC0 Im[21],  (2)
+                               h¯
+                     MW               (1)
+
+where h¯ is the reduced Planck constant, and MW is the            where Pi is the incident probe light power, kp = 2 /P is
+transition dipole moment of the microwave field.
+                                                                  the wave number of the probe light, and L is the propaga-
+   When the coupling light frequency is locked at the transi-
+tion frequency between state |2 and |3 [ c = 0, shown as the      tion distance of the probe light in the atomic vapor. C0 =
+vertical dashed black line in Fig. 1(b)], the relationship curve  -2N02p/(0h¯ p) is the constant determined by the system,
+                                                                  where N0 is the total atomic number density, p = -2.58a0q
+                                                                  is the transition dipole moment between states |1 and |2
+
+                                      043108-2
+LINEAR DYNAMIC RANGE OF A RYDBERG-ATOM ...                                             PHYSICAL REVIEW A 107, 043108 (2023)
+
+(a0 = 5.3 × 10-11 m is the Bohr radius, and q = 1.6 ×                  small or too large, the relationship between MW and PT will
+10-19 C is the unit charge), and 0 = 8.854 × 10-12 F/m is              be nonlinear.
+the vacuum dielectric constant. Im[21] is the imaginary part
+of the density matrix element 21 and can be expressed as [25]             On the other hand, suppose there are microwave LO signal
+                                                                       ELO and MSUT Es in free space. The time domain expressions
+                       MW|2 p                                          of their electric field are expressed as
+
+21 = 22|     -i2|                             ,          (3)                           ELO = ALO cos(2 fLOt + LO ),     (4)
+
+          MW|2 + 2  2     2  +  |  MW|2 +   2
+                    p     c                 p
+
+where 2 is the decay rate from 6S1/2 to 6P3/2. It can be seen                          Es = As cos(2 fst + s),          (5)
+in Fig. 1(c) that PT decreases with the increase of MW. In the
+interval in which the dotted blue line coincides with the solid        where ALO and As are the electric field strengths of ELO and
+red line (the microwave Rabi frequency range corresponding             Es, respectively. fLO and fs represent the frequencies of ELO
+to this condition is defined as the linear interval in this work),     and Es while LO and s are phases of ELO and Es. The super-
+PT has a linear relationship with MW. When MW is too                   position field EMW can be expressed as follows (the derivation
+                                                                       details are given in the Appendix):
+
+EMW = ELO + Es
+
+          = ALO2 + B2 + 2ALOAs cos(2 f1t + ) cos(2 fLOt + LO)
+
+          =  ALO  1+   1  x2  + ALOx cos(2       f1t  )  -          1  ALO x2 cos2 (2  f1t ) + O(x)3 cos(2 fLOt + LO),  (6)
+                       2                                            2
+
+where x = As/ALO, 1 = LO - s, and f1 = fLO - fs;                       responsiveness of the Rydberg atom to the weak microwave
+the nonlinear response of the Rydberg atom to the superpo-             electric field, and thus the better sensitivity performance.
+sition field EMW can be equivalent to envelop detection. When
+x 1, the main frequency component of the superposition                 III. OPTIMAL ALEC AND THE LINEAR RESPONSE
+field envelope is f1, and the higher harmonic component                                      CHARACTERISTIC
+can be ignored. Substitute (6) into (1), and the relationship
+curve between MW and time t can be obtained, as shown by                  Optimal ALEC determines the response ability of the Ry-
+the dashed purple line in the rectangular coordinate system in         dberg atom to the weak electric field signal, and the linear
+Fig. 1(c). When x 1, MW can be expressed as                            response characteristic determines the signal fidelity when
+                                                                       detecting MSUT. Optimal ALEC and the linear response char-
+          MWALO     + As  cos(     f1t +  1 )                          acteristics can be analyzed by the relationship curve of MW
+                          h¯                                           and PT, and the EIT spectrum determines the relationship
+MW                                                                     curve of MW and PT. Before analyzing the optimal ALEC
+                                                                       and the linear response characteristic, the influence of p on
+    = DC + AC,                                           (7)           the EIT spectrum has been analyzed, and the influences on
+                                                                       optimal ALEC and the linear response characteristics of the
+where DC and AC contain the electric field strength infor-             Rydberg atom have been analyzed subsequently.
+mation of ELO and Es, respectively, and their expressions are
+shown as                                                                  The EIT-AT spectra of the atomic four-level system model
+                                                                       under different p are studied. For simplicity, we use the cold
+             DC  =  MWALO ,                              (8)           atomic model for analysis (the thermal atom model needs to
+                      2 h¯                                             consider the spectral broadening caused by the atomic thermal
+                                                                       motion, but the analysis basis remains unchanged), and the
+          =  MWALO cos( f1t        +  1) .               (9)           calculated spectrum is shown in Fig. 2(a). Here c = 1 MHz,
+                          2 h¯
+AC                                                                       MW = 40 MHz, N0 = 1 × 1015 m-3, L = 0.02 m. Further,
+                                                                       consider the relationship between Pi and p,
+   Substitute (6), (1), and (3) into (2), and the relationship
+                                                                                               d ph¯  2
+between PT and t can be obtained, as shown by the dashed or-                           Pi =     2p
+ange line in Fig. 1(c). When MW is in the linear interval. The                                         ,
+relationship between PT and DC and AC can be expressed                                         2
+as
+
+PT = PTDC + PTAC = a DC +  AC,                        (10)                                                              (11)
+
+where (a) is the ratio of the AC (DC) component of the                 where impedance of free space  = 377 , and the 1/e2
+                                                                       diameter of the laser beam d = 0.76 mm; according to (11),
+transmitted probe light power PTAC (PTDC) to AC ( DC), and             Pi can be calculated from p. The series of EIT-AT spectra
+|| can be defined as ALEC, which describes the variation rate          obtained by scanning c under different p are shown in
+                                                                       Fig. 2(a). When the Rabi frequency of the probe light grad-
+of PTAC with AC [25]. To keep MW in the linear interval,               ually increases, the profile height of the single transmission
+  DC should be carefully selected and one should keep x 1.             peak increases, as the solid blue line in Fig. 2(b). Moreover,
+
+Therefore, || can be regarded as constantly equal to ALEC.
+According to (10), the greater the value of ||, the stronger
+
+                                                         043108-3
+WU, AN, SUN, AND FU                                                      PHYSICAL REVIEW A 107, 043108 (2023)
+
+                                                                       sensitive to the small changes in the electric field envelope
+                                                                       when getting ||max.
+
+                                                                          To obtain ||max, substitute (3) into (2) and set its second-
+                                                                       order partial derivative result to 0, which can be expressed as
+
+                                                                        2 PT  = Pie-kpLC0 Im[21]  =  0.  (12)
+
+                                                                         2
+                                                                         MW
+
+    FIG. 2. (a) The EIT-AT spectra under different p; (b) the re-         By solving (12), the microwave Rabi frequency opt,
+lationships of the spectral profile height (solid blue line) and the   which achieves the optimal ALEC, can be obtained. The
+FWHM linewidth (dashed red line) vs p.
+                                                                       dashed red line in Fig. 3(b) shows that opt is proportional
+the full width half maximum (FWHM) linewidth of the sin-               to p. If we substitute (3) into (2) and find its first-order
+gle transmission peak broadens with the increase of p, as
+shown in the dashed red line in Fig. 2(b). Therefore, the line         partial derivative for MW, and substitute opt into the first
+shape of the EIT-AT spectra can be adjusted by altering p.             partial derivative, then ||max can be obtained. The solid blue
+Similarly, fixing p and increasing c can also broaden the              line shows the curve of ||max vs p in Fig. 3(b). With the
+FWHM linewidth and raise the profile height , which is not             increase of p, ||max first increases and then decreases, with
+as obvious as increasing p.                                            a maximum value of ||max between 2 MHz and 3 MHz. The
+                                                                       broader the FWHM line width, the smaller ||max. The higher
+              A. The influence of p on optimal ALEC                    the EIT peak's profile height, the greater the value of ||max.
+   The series curves of MW vs PT under different p can be              When p increases from being infinitesimal gradually, the
+obtained by locking c = 0, as shown in Fig. 3(a). With the
+increase of MW, PT decreases for all curves, and there is a            EIT spectral linewidth is not broadened significantly, while
+maximum rate ||max in the middle. The Rydberg atom is most             the EIT peak's profile height increases rapidly, making ||max
+                                                                       increase; when p is further increased, power broadening of
+    FIG. 3. (a) The relation curves of MW vs PT under different p;     the EIT spectra is obvious, making ||max decrease.
+(b) the relation curves of opt (dashed red line) and ||max(solid blue
+line) vs p.                                                                         B. The influence of p on the atomic linear
+
+                                                                                                 response characteristic
+
+                                                                          Further, if we let LO = opt, the responsiveness of the
+                                                                       Rydberg atom to the weak microwave electric field can be the
+                                                                       best. Under this condition, the linear response characteristics
+                                                                       are studied. Substitute (6), (1), and (3) into (2) to obtain
+                                                                       the relationship between PT and t. The relation curves of the
+                                                                       VIFS's power spectrum density PTFF and its second harmonic
+                                                                       component PTSH vs s have been obtained by performing the
+                                                                       Fourier transform on PT(t ), as shown in Figs. 4(a) and 4(b).
+
+                                                                          The curve of PTFF vs s is shown in Fig. 4(a). When s is
+                                                                       small, the Rydberg atom works in the linear interval. Accord-
+                                                                       ing to (10), PTFF (PTAC) is proportional to s ( AC). When s
+                                                                       increases to a certain extent and we keep LO = opt, DC
+                                                                       shifts, and || decreases, and the increasing rate of PTFF with
+
+                                                                         s will be slowed. With s further increasing, || cannot be
+                                                                       regarded as a constant, and the average value of || decreases.
+                                                                       Thus, MW is outside the linear interval, and PTFF decreases
+                                                                       gradually.
+
+                                                                          On the other hand, harmonics are always present in the
+                                                                       IF signal obtained by the Rydberg atomic superheterodyne
+                                                                       receiver. There are two factors for harmonics generation: (1)
+                                                                       || is not an absolute constant and varies with MW. The
+                                                                       linear relationship between PT and MW is not ideal. (2) The
+                                                                       response of the Rydberg atom to the microwave electric field
+                                                                       can be regarded as envelope detection, which is a nonlin-
+                                                                       ear response. According to (6), when x 1 is not satisfied,
+                                                                       the second and higher harmonic components will become
+                                                                       apparent.
+
+                                                                          The curve of PTSH vs s is shown in Fig. 4(b). When s
+                                                                       increases from being infinitesimal, PTSH will become obvious
+                                                                       gradually. With s further increasing, || changes signifi-
+                                                                       cantly with the shift of MW, further deteriorating the linear
+                                                                       response characteristics of the Rydberg atomic receiving sys-
+                                                                       tem and promoting the growth of PTSH. When s keeps
+
+                     043108-4
+LINEAR DYNAMIC RANGE OF A RYDBERG-ATOM ...                                PHYSICAL REVIEW A 107, 043108 (2023)
+
+                                                                  differs from that of traditional electronic receivers. When a
+                                                                  Rydberg atomic superheterodyne receiver responds to elec-
+                                                                  tromagnetic waves from space, the signal carrier is converted
+                                                                  from microwave to probe light. For the low-noise amplifier
+                                                                  and mixer in traditional electronic receivers, the carriers of
+                                                                  the input and output signals are both electrical signals. Refer
+                                                                  to the definition of the LDR of the Rydberg atomic super-
+                                                                  heterodyne receiving system in the work of the CCDC U.S.
+                                                                  Army Research Laboratory [7]. The 1 dB compression point
+                                                                  of the Rydberg atomic superheterodyne receiving system in
+                                                                  1 Hz bandwidth can be defined as the value of s or the
+                                                                  electric field of MSUT when the power spectral density of
+                                                                  PTFF generates 1 dB compression compared to Plinear. When
+
+                                                                    LO = opt, Plinear can be defined as
+
+                                                                          Plinear = ||max s.                     (13)
+
+    FIG. 4. The relationship curve of (a) PTFF, (b) PTSH, and        According to the PTFF obtained in Fig. 4(a), compared with
+(c) PTSH/PTFF vs s under different p when LO = opt.               (13), the relationship between the 1 dB compression point
+
+increasing and we get s > LO, the proportion of the second          1 dB of the system and p can be obtained, shown by the
+harmonic component in (6) decreases. Also, || decreases           solid blue line in Fig. 5(a), and 1 dB increases with p. On
+with the increase of s, and PTSH decreases. Similarly, the        the other hand, PT also has an intensity noise, specifying its
+variation of higher harmonic components with s is similar         RMS (root-mean-square)amplitude Pnf with an approximate
+to that of PTSH. In addition, with the increase of p, the         range from 1 to 20 pW/ Hz [41]. Substitute Pnf into (13),
+spectral peak's profile height and FWHM line width increase.      the minimum detectable MSUT Rabi frequency min, and the
+The maximum values of PTFF, PTSH, and the corresponding           relationship between min and p can be obtained, as shown
+microwave Rabi frequency increase.                                by the red shaded area in Fig. 5(a). Further, the relationship
+                                                                  between LDR and p can be obtained from ( 1 dB/ min)2, as
+   When the proportion of PTSH and higher harmonic compo-         shown by the blue shaded area in Fig. 5(b). With the increase
+nents is high, the linear response characteristics are poor, so
+the ratio of PTSH to PTFF can be used to measure the linear       of p, LDR increases, and the increase rate slows.
+response characteristics of the system qualitatively. Using the      On the other hand, the thermal atom is widely used in
+calculation results in Figs. 4(a) and 4(b), a series of curves
+of PTSH/PTFF vs s can be obtained under different p, as           the measurement, and the case of the thermal atom model is
+shown in Fig. 4(c). With the increase of s, the linear response
+characteristics deteriorate. In addition, when s takes a fixed    further considered. In this model, the EIT spectrum produces
+minimum value, the linear response characteristic becomes
+better as p increases.                                            a variety of broadening due to the atomic thermal motion,
+
+   In summary, the linear response characteristics can be         and the most significant among various factors is the Doppler
+improved by increasing p while keeping other parameters
+unchanged. However, when p is large, the value of ||max           effect caused by the atomic thermal motion. The Doppler
+is small, and thus the response ability of the Rydberg atom       averaged 21 can be expressed as [37]
+to the weak electric field signal becomes poor. Therefore, the
+Rydberg atomic linear response characteristics and sensitivity    21D  =  1     3u       p,            -v2  dv,  (14)
+need to be further studied.                                                 u
+                                                                                   21 (         c )e u2
+C. The influence of p on 1 dB compression point and the LDR
+                                                                               3u
+   It is hard to describe the linear response characteristics of
+the atomic superheterodyne receiver strictly using PTSH/PTFF.     where u = kBT /m, m is the atom's mass, kB is Boltzmann
+In a conventional electronic receiver, the linear response
+characteristics can be characterized by a 1 dB compression        constant, and T is the thermodynamic temperature. At normal
+point. A similar concept can also be constructed for the Ryd-
+berg atomic superheterodyne receiver. However, the response       temperature, T = 290 K. Due to the atomic thermal motion,
+mechanism of Rydberg atoms to electromagnetic waves
+                                                                  the probe and coupling light detuning p c should be modi-
+                                                                  fied by the following:
+
+                                                                                         2
+                                                                          p=   p-           v,
+                                                                                         p
+                                                                                                                 (15)
+                                                                                         2
+                                                                          c=   c  +      c  v.
+
+                                                                     Similar to the calculation method of the cold atomic model,
+
+                                                                  the curves of 1dB, min and LDR vs p can be calculated
+                                                                  under the condition of LO = opt. The curve of 1 dB vs p
+                                                                  in the Rydberg atomic superheterodyne receiving system is
+
+                                                                  shown by the solid blue line in Fig. 5(c). Compared with the
+
+                                                                  case of the cold atomic model, 1dB also increases with p.
+                                                                  Due to the spectral broadening caused by atomic thermal mo-
+
+                                                                  tion, the value of 1dB is uplifted. On the other hand, with the
+                                                                  same range of Pnf in the cold atom model, the relationship of
+
+                                                                    min between p can be obtained, as shown by the red shaded
+
+                                            043108-5
+WU, AN, SUN, AND FU                                                                 PHYSICAL REVIEW A 107, 043108 (2023)
+
+    FIG. 5. The LDR vs p in (a) cold atomic model and (c) thermal  FIG. 6. (a) Spectrum of PT with interference, where d =
+atomic model; 1 dB compression point 1dB and minimum detectable
+MSUT Rabi frequency min vs p in (b) cold atomic model and          0.76 mm, LO = opt, p = 6 MHz, int = s = 500 kHz  opt ,
+(d) thermal atomic model.
+                                                                   f1 = 100 kHz, f2 = 250 kHz; (b) PTFF vs int under different p
+
+                                                                   when s = 1 kHz.
+
+area in Fig. 5(c), quite different from that in cold atomic model  of poor noise performance, the LDR can exceed 80 dB by
+                                                                   optimizing system parameters.
+conditions. In the thermal atomic model, with the increase of
+                                                                   IV. ANTIBLOCKING PERFORMANCE OF THE RYDBERG
+  p, the profile height of the EIT peak increases, and the power             ATOMIC SUPERHETERODYNE RECEIVER
+broadening caused by the increase of p is weakened by
+Doppler broadening, making ||max monotonically increase               In most application scenarios, spatial interference is un-
+with p in a larger range. Due to the spectrum broadening           avoidable. The antiblocking performance of the Rydberg
+in the thermal atomic model, which is more obvious than in         atomic superheterodyne receiving system under different p
+the cold atomic model, there is a difference of ||max between      is studied in this section. A spatial interference is introduced
+the thermal and cold atomic models, and min increased as a         to evaluate the antiblocking performance, which usually has
+whole.                                                             a certain bandwidth. However, in the steady-state analysis
+                                                                   model, the Rydberg atom has no selectivity for the interfer-
+   Further, the relationship between LDR and p can be              ence frequency. For simplicity, an undesired single-frequency
+obtained according to ( 1dB/ min)2, as shown by the blue           signal can be used as interference and act on the Rydberg
+shaded area in Fig. 5(d). Similar to the case of the cold atomic   atom. An interference electric field Eint has an amplitude of
+                                                                   Aint, in which the frequency and phase difference with mi-
+model, with the increase of p, the LDR increases at a faster       crowave LO signal is f2( f2 = f1), 2, respectively.
+rate at first and then slows.                                      The interference electric field Eint can be expressed as
+
+   In summary, the cold Rydberg atoms have a higher LDR                 Eint = Aint cos[2 fLO( fLO - f2 )t + LO - 2]. (16)
+
+due to better sensitivity than in the thermal atomic model
+
+with the same parameters. Better LDR can be obtained by
+
+increasing p in a proper range in both models. In the case
+
+                     043108-6
+LINEAR DYNAMIC RANGE OF A RYDBERG-ATOM ...                            PHYSICAL REVIEW A 107, 043108 (2023)
+
+FIG. 7. int3 vs p under the cold and thermal atomic model.     exhibits undesired IF components caused by the interference,
+                                                               which includes n f2, n f2 + f1, and n f2- f1 (n =
+   Add (16) to (6), and the envelope term Em of EMW can be     1, 2, 3, . . .), where f2 has the most significant impact.
+described as
+                                                                  Besides distorting the signal, in most cases, strong interfer-
+Em = {ALO2 + As2 + Aint2               1 -  2  ]}  1  .        ence in free space can block the signal reception by affecting
+       + 2ALOAs cos(2 f1t + 1)                     2           the value of DC. In the cold atomic model, set s = 1 kHz,
+       + 2ALOAint cos(2 f2t + 2 )                              varying int while keeping the other parameters unchanged.
+       + 2AsAint cos[2 ( f1 - f2 )t +                          The relationship curves of PTFF vs int under different p can
+                                                               be obtained, as shown in Fig. 6(b). With the increase of int,
+                                                   (17)        PTFF decreases gradually, and the decreasing speed slows with
+                                                               the increase of p. The solid blue line in Fig. 7 shows the
+   The relation between PT and t can be obtained by com-       variation of int3 with p in the cold atomic model, where
+bining with (16), (1), (2), and (3), and the influence of
+                                                                 int3 corresponds to int when PTFF decreases 2 times as
+Eint on VIFS can be analyzed from the spectrum of PT.          PTFF| . int=0 With the increase of p, the value of int3 grad-
+Set d = 0.76 mm, LO = opt, p = 6 MHz, int = s =                ually increases, which means that the interference strength
+500 kHz opt, f1 = 100 kHz, and f2 = 250 kHz, and               needs to be enhanced to get the same suppression effect for
+keep other system parameters unchanged. Without consider-      the VIFS. Therefore, the Rydberg atom's antiblocking perfor-
+                                                               mance can be improved by increasing p. int3 can be used
+ing the instantaneous bandwidth of the Rydberg atom, the       as a parameter to evaluate the antiblocking performance of the
+                                                               system. In the thermal atomic model, with the same value of
+spectrum results of PT (filtered DC component) are shown in
+Fig. 6(a) in the cold atom model. In addition to PTFF and its    p, int3 has a greater value than in the cold atomic model,
+harmonic components n f1 (n = 2, 3, 4, . . .), the spectrum    shown as the dashed red line in Fig. 7. Thus, the system has
+                                                               better antiblocking performance in the thermal atomic model,
+                                                               which can be improved by increasing p in an acceptable
+                                                               range.
+
+                                                                                            V. CONCLUSION
+
+                                                                  In summary, the LDR, the antiblocking performance, and
+                                                               ALEC can be adjusted by controlling the laser Rabi frequency.
+                                                               The cold atomic model has a larger LDR than the thermal
+                                                               atomic model due to higher sensitivity than the thermal atomic
+                                                               model. But the thermal atomic model has a larger 1 dB com-
+                                                               pression point and better antiblocking performance. Using a
+                                                               larger probe light Rabi frequency in a proper range is con-
+                                                               ducive to improving the LDR and antiblocking performance.
+                                                               In case of poor noise performance, the LDR can exceed 80 dB
+                                                               by optimizing system parameters to meet certain applications.
+
+                                                                                                 APPENDIX
+
+                                                                  The derivation process of (6) is as follows:
+
+EMW = ELO + Es
+
+= ALO cos(2 fLOt + LO) + As cos[2 fLO( fLO - f )t + LO - ]            f t+ ) ) sin(2 fLOt + LO )]
+= Re[(ALO + Ase- j(2 f t+ ) )e j(2 fLOt+LO )]
+= Re[(ALO + Ase- j(2 f t+ ) ) cos(2 fLOt + LO ) + j(ALO + Ase- j(2
+= |ALO + Ase- j(2 f t+ )| cos(2 fLOt + LO )
+
+= |ALO + As cos(2 f t + ) + jALO sin(2 f t + )| cos(2 fLOt + LO)
+
+= cos(2 fLOt + LO) A2LO + As2 + 2ALOAs cos(2 f t + )                                               (A1)
+= Em × Ec,                                                                                         (A2)
+
+where carrier term Ec is
+
+                                            Ec = cos(2 fLOt + LO)
+
+                                                            043108-7
+WU, AN, SUN, AND FU                                                   PHYSICAL REVIEW A 107, 043108 (2023)
+
+and the Envelope term Em is
+
+                             Em = A2LO + As2 + 2ALOAs cos(2 f t + ).                      (A3)
+
+Let x = As/ALO, and through Taylor series expansion of Ec at x = 0, (6) can be obtained.
+
+ [1] D. A. Anderson, R. E. Sapiro, and G. Raithel, An atomic          [15] R. F. Harrington, Effect of antenna size on gain, bandwidth, and
+      receiver for AM and FM radio communication, IEEE Trans.               efficiency, J. Res. Natl. Bur. Stand. Sect. D 64 (1960).
+      Antennas Propag. 69, 2455 (2020).
+                                                                      [16] C. L. Holloway, J. A. Gordon, S. Jefferts, A. Schwarzkopf,
+ [2] C. Holloway, M. Simons, A. H. Haddab, J. A. Gordon, D. A.              D. A. Anderson, S. A. Miller, N. Thaicharoen, and G. Raithel,
+      Anderson, G. Raithel, and S. Voran, A multiple-band Rydberg           Broadband Rydberg atom-based electric-field probe for SI-
+      atom-based receiver: AM/FM stereo reception, IEEE Antennas            traceable, self-calibrated measurements, IEEE Trans. Antennas
+      Propag. Mag. 63, 63 (2020).                                           Propag. 62, 6169 (2014).
+
+ [3] Z. Song, H. Liu, X. Liu, W. Zhang, H. Zou, J. Zhang, and J.      [17] K. Yang, Q. An, J. Yao, R. Mao, Y. Lin, Y. Liu, and Y.
+      Qu, Rydberg-atom-based digital communication using a contin-          Fu, Rydberg atom-based ultra-broadband radio frequency sen-
+      uously tunable radio-frequency carrier, Opt. Express 27, 8848         sor from 100 kHz to 40 GHz, Acta Opt. Sin. 42, 1528002
+      (2019).                                                               (2022).
+
+ [4] C. L. Holloway, M. T. Simons, A. H. Haddab, C. J. Williams,      [18] N. Thaicharoen, K. R. Moore, D. A. Anderson, R. C. Powel,
+      and M. W. Holloway, A "real-time" guitar recording using              E. Peterson, and G. Raithel, Electromagnetically induced trans-
+      Rydberg atoms and electromagnetically induced transparency:           parency, absorption, and microwave-field sensing in a Rb vapor
+      Quantum physics meets music, AIP Adv. 9, 065110 (2019).               cell with a three-color all-infrared laser system, Phys. Rev. A
+                                                                            100, 063427 (2019).
+ [5] M. T. Simons, A. H. Haddab, J. A. Gordon, D. Novotny,
+      and C. L. Holloway, Embedding a Rydberg atom-based sensor       [19] J. Shaffer and H. Kübler, A read-out enhancement for mi-
+      into an antenna for phase and amplitude detection of radio-           crowave electric field sensing with Rydberg atoms, in Proceed-
+      frequency fields and modulated signals, IEEE Access 7, 164975         ings of the 2018 Quantum Technologies Conference, Strasbourg,
+      (2019).                                                               France, 2018 (SPIE, Bellingham, 2018).
+
+ [6] C. L. Holloway, M. T. Simons, J. A. Gordon, and D. Novotny,      [20] J. S. Cabral, J. M. Kondo, L. F. Gonçalves, L. G. Marcassa, D.
+      Detecting and receiving phase-modulated signals with a Ry-            Booth, J. Tallant, and J. P. Shaffer, Manipulation of quantum
+      dberg atom-based receiver, Antennas Wirel. Propag. Lett. 18,          state transfer in cold Rydberg atom collisions, New J. Phys. 12,
+      1853 (2019).                                                          093023 (2010).
+
+ [7] D. H. Meyer, P. D. Kunz, and K. C. Cox, Waveguide-Coupled        [21] S. Kumar, H. Fan, H. Kübler, J. Sheng, and J. P. Shaffer, Atom-
+      Rydberg Spectrum Analyzer from 0 to 20 GHz, Phys. Rev.                based sensing of weak radio frequency electric fields using
+      Appl. 15, 014053 (2021).                                              homodyne readout, Sci. Rep. 7, 42981 (2017).
+
+ [8] A. K. Robinson, N. Prajapati, D. Senic, M. T. Simons, and        [22] M. T. Simons, J. A. Gordon, C. L. Holloway, D. A. Anderson,
+      C. L. Holloway, Determining the angle-of-arrival of a radio-          S. A. Miller, and G. Raithel, Using frequency detuning to
+      frequency source with a Rydberg atom-based sensor, Appl.              improve the sensitivity of electric field measurements via
+      Phys. Lett. 118, 114001 (2021).                                       electromagnetically induced transparency and Autler-Townes
+                                                                            splitting in Rydberg atoms, Appl. Phys. Lett. 108, 174101
+ [9] F. Wu, Y. Lin, B. Wu, and Y. Fu, Response characteristics of           (2016).
+      radio frequency pulse of Rydberg atoms, Acta Phys. Sin. 71,
+      207402 (2022).                                                  [23] S. Kumar, H. Fan, H. Kübler, A. J. Jahangiri, and J. P. Shaffer,
+                                                                            Rydberg-atom based radio-frequency electrometry using fre-
+[10] M. T. Simons, J. A. Gordon, and C. L. Holloway, Fiber-coupled          quency modulation spectroscopy in room temperature vapor
+      vapor cell for a portable Rydberg atom-based radio frequency          cells, Opt. Express 25, 8625 (2017).
+      electric field sensor, Appl. Opt. 57, 6456 (2018).
+                                                                      [24] M. Cai, Z. Xu, S. You, and H. Liu, Sensitivity improvement
+[11] K. C. Cox, D. H. Meyer, F. K. Fatemi, and P. D. Kunz,                  and determination of Rydberg atom-based microwave sensor,
+      Quantum-Limited Atomic Receiver in the Electrically Small             Photon. 9, 250 (2022).
+      Regime, Phys. Rev. Lett. 121, 110502 (2018).
+                                                                      [25] M. Jing, Y. Hu, J. Ma, H. Zhang, L. Zhang, L. Xiao, and S. Jia,
+[12] R. Mao, Y. Lin, K. Yang, Q. An, and Y. Fu, A high-efficiency           Atomic superheterodyne receiver based on microwave-dressed
+      fiber-coupled Rydberg-atom integrated probe and its imaging           Rydberg spectroscopy, Nat. Phys. 16, 911 (2020).
+      applications, IEEE Antennas Wireless Propag. Lett. 22, 352
+      (2023).                                                         [26] N. Prajapati, A. K. Robinson, S. Berweger, M. T. Simons,
+                                                                            A. B. Artusio-Glimpse, and C. L. Holloway, Enhancement of
+[13] L. Yi, W. Feng-Chuan, M. Rui-Qi, Y. Jia-Wei, L. Yi, A. Qiang,          electromagnetically induced transparency based Rydberg-atom
+      and F. Yun-Qi, Development of three-port fiber-coupled vapor          electrometry through population repumping, Appl. Phys. Lett.
+      cell probe and its application in microwave digital communica-        119, 214001 (2021).
+      tion, Acta Phys. Sin. 71, 170702 (2022).
+                                                                      [27] C. L. Holloway, M. T. Simons, J. A. Gordon, P. F. Wilson,
+[14] L. J. Chu, Physical limitations of omni-directional antennas,          C. M. Cooke, D. A. Anderson, and G. Raithel, Atom-based RF
+      J. Appl. Phys. 19, 1163 (1948).
+
+                             043108-8
+LINEAR DYNAMIC RANGE OF A RYDBERG-ATOM ...                               PHYSICAL REVIEW A 107, 043108 (2023)
+
+      electric field metrology: From self-calibrated measurements to           Rydberg Atoms in a Vapor Cell, Phys. Rev. Lett. 111, 063001
+      subwavelength and near-field imaging, IEEE Trans.                        (2013).
+      Electromag. Compat. 59, 717 (2017).                                [35] J. A. Sedlacek, A. Schwettmann, H. Kübler, R. Löw, T. Pfau,
+[28] H. Fan, S. Kumar, J. Sheng, J. P. Shaffer, C. L. Holloway,                and J. P. Shaffer, Microwave electrometry with Rydberg atoms
+      and J. A. Gordon, Effect of Vapor-Cell Geometry on                       in a vapour cell using bright atomic resonances, Nat. Phys. 8,
+      Rydberg-Atom-Based Measurements of Radio-Frequency Elec-                 819 (2012).
+      tric Fields, Phys. Rev. Appl. 4, 044015 (2015).                    [36] H. Fan, S. Kumar, J. Sedlacek, H. Kübler, S. Karimkashi, and
+[29] B. Wu, Y. Lin, D. Liao, Y. Liu, Q. An, and Y. Fu, Design of               J. P. Shaffer, Atom based RF electric field sensing, J. Phys. B:
+      locally enhanced electric field in dielectric loaded rectangu-           At. Mol. Opt. Phys. 48, 202001 (2015).
+      lar resonator for quantum microwave measurements, Electron.        [37] C. L. Holloway, M. T. Simons, J. A. Gordon, A. Dienstfrey,
+      Lett. 58, 914 (2022).                                                    D. A. Anderson, and G. Raithel, Electric field metrology for
+[30] D. Anderson, E. Paradis, and G. Raithel, A vapor-cell atomic              SI traceability: Systematic measurement uncertainties in elec-
+      sensor for radio-frequency field detection using a polarization-         tromagnetically induced transparency in atomic vapor, J. Appl.
+      selective field enhancement resonator, Appl. Phys. Lett. 113,            Phys. 121, 233106 (2017).
+      073501 (2018).                                                     [38] D. A. Anderson, R. E. Sapiro, and G. Raithel, A self-calibrated
+[31] C. L. Holloway, N. Prajapati, A. B. Artusio-Glimpse, S.                   SI-traceable Rydberg atom-based radio frequency electric field
+      Berweger, M. T. Simons, Y. Kasahara, A. Alù, and R. W.                   probe and measurement instrument, IEEE Trans. Antennas
+      Ziolkowski, Rydberg atom-based field sensing enhancement us-             Propag. 69, 5931 (2021).
+      ing a split-ring resonator, Appl. Phys. Lett. 120, 204001 (2022).  [39] M. T. Simons, A. H. Haddab, J. A. Gordon, and C. L. Holloway,
+[32] J. A. Gordon, M. T. Simons, A. H. Haddab, and C. L. Holloway,             A Rydberg atom-based mixer: Measuring the phase of a radio
+      Weak electric-field detection with sub-1 Hz resolution at radio          frequency wave, Appl. Phys. Lett. 114, 114101 (2019).
+      frequencies using a Rydberg atom-based mixer, AIP Adv. 9,          [40] M. G. Bason, M. Tanasittikosol, A. Sargsyan, A. Mohapatra, D.
+      045030 (2019).                                                           Sarkisyan, R. Potvliege, and C. Adams, Enhanced electric field
+[33] C. T. Fancher, D. R. Scherer, M. C. S. John, and B. L. S.                 sensitivity of RF-dressed Rydberg dark states, New J. Phys. 12,
+      Marlow, Rydberg atom electric field sensors for communica-               065015 (2010).
+      tions and sensing, IEEE Trans. Quantum Eng. 2, 1 (2021).           [41] F. Wu, Q. An, Z. Sun, and Y. Fu, Research on intrinsic expan-
+[34] J. A. Sedlacek, A. Schwettmann, H. Kübler, and J. P. Shaffer,             sion coefficients in Rydberg atomic heterodyne receiving link,
+      Atom-Based Vector Microwave Electrometry Using Rubidium                  Acta Phys. Sin. 72, 047401 (2023).
+
+                                            043108-9
+

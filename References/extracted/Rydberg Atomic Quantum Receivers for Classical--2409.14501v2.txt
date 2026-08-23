@@ -1,0 +1,603 @@
+                                                                                                                                    1
+
+                                          Rydberg Atomic Quantum Receivers for Classical
+                                                 Wireless Communication and Sensing
+
+                                                           Tierui Gong, Member, IEEE, Aveek Chandra, Chau Yuen, Fellow, IEEE,
+                                          Yong Liang Guan, Senior Member, IEEE, Rainer Dumke, Chong Meng Samson See, Member, IEEE,
+
+                                                               Me´rouane Debbah, Fellow, IEEE, Lajos Hanzo, Life Fellow, IEEE
+
+arXiv:2409.14501v2 [eess.SP] 18 Jan 2025     Abstract--Rydberg atomic quantum receivers (RAQRs) are                      fading and noise contamination. To receive wideband RF
+                                          emerging quantum precision sensing platforms designed for                      signals at different frequencies, both broadband tunability and
+                                          receiving radio frequency (RF) signals. It relies on creation of Ry-           wideband processing capability may be realized by stacking
+                                          dberg atoms from normal atoms by exciting one or more electrons                several IC branches along with extra metallic components,
+                                          to a very high energy level, thereby making the atom sensitive                 where each branch is responsible for a specific frequency band.
+                                          to RF signals. RAQRs realize RF-to-optical conversions based on                Such RF systems are however band-limited and bulky, power-
+                                          atom-light interactions relying on the so called electromagnet-                thirsty, and suffer from numerous design challenges, especially
+                                          ically induced transparency (EIT) and Autler­Townes splitting                  for large-scale, high-frequency receivers.
+                                          (ATS), so that the desired RF signal can be read out optically.
+                                          The large dipole moments of Rydberg atoms associated with rich                    The Rydberg atomic quantum receiver (RAQR) concept
+                                          choicesof Rydberg states facilitate an ultra-high sensitivity (                emerges as a radical solution to these RF reception challenges
+                                          nV/cm/ Hz) and an ultra-broadband tunability (direct-current                   [2]­[5]. It relies on the creation of Rydberg states (excitation),
+                                          to Terahertz). RAQRs also exhibit compelling scalability and lend              which have remarkably high dipole moment and hence are
+                                          themselves to the construction of innovative, compact receivers.               eminently suitable for sensing the impinging RF signals. The
+                                          Initial experimental studies have demonstrated their capabilities              response to an RF signal in RAQR is detected optically via
+                                          in classical wireless communications and sensing. To fully harness             change in the atomic spectroscopy signal. The RF field's am-
+                                          their potential in a wide variety of applications, we commence                 plitude measurements are directly linked to the International
+                                          by outlining the underlying fundamentals of Rydberg atoms,                     System of Units (SI) and they set absolute (atomic) standards
+                                          followed by the principles and schemes of RAQRs. Then, we                      for the RF electric fields from a metrology standpoint. Ad-
+                                          overview the state-of-the-art studies from both physics and com-               ditionally, they are capable of directly down-converting RF
+                                          munication societies. Furthermore, we conceive Rydberg atomic                  signals, spanning from direct-current (DC) to Terahertz (THz),
+                                          quantum single-input single-output (RAQ-SISO) and multiple-                    to the baseband without using any mixer, hence significantly
+                                          input multiple-output (RAQ-MIMO) schemes for facilitating the                  simplifying the receiver's structure and yielding a compact
+                                          integration of RAQRs with classical wireless systems. Finally, we              form-factor relative to conventional counterparts.
+                                          conclude with a set of potent research directions.
+                                                                                                                            To fully unlock the potential of RAQRs in communication
+                                                                    I. INTRODUCTION                                      and sensing, we offer a panoramic overview of RAQRs. We
+                                                                                                                         commence by highlighting the fundamentals of Rydberg atoms
+                                             Next-generation wireless systems are expected to support a                  and proceed to powerful receivers, including their princi-
+                                          variety of functionalities and applications. Integrated commu-                 ples, schemes, impairments, and their critical comparisons to
+                                          nication and sensing functionalities of next-generation wireless               antenna-based receivers. We then summarize their capabilities
+                                          require particularly high sensitivity and data rates, while sup-               and distinctive features, surveying typical studies from diverse
+                                          porting large-scale connectivity and ultra-low latency. There-                 research communities. Furthermore, we conceive the Rydberg
+                                          fore, the radio frequency (RF) receivers should possess broad-                 atomic quantum single-input single-output (RAQ-SISO) and
+                                          band tunability and wideband processing capability. Based                      RAQ-MIMO schemes to facilitate the integration of RAQRs
+                                          upon advanced antennas and integrated circuit (IC), cutting-                   with existing classical wireless systems. We finally forecast
+                                          edge RF receivers support signal receptions by well-calibrated                 several promising future directions in this very first article
+                                          antennas, filters, amplifiers, and mixers [1]. The sensitivity                 on RAQRs in wireless communication and sensing from an
+                                          is limited by the receiver's bandwidth, noise figure, and the                  engineering perspective.
+                                          minimum signal-to-noise ratio (SNR) required to demodulate
+                                          the desired signal. Given a specific sensitivity, strong RF                             II. RYDBERG ATOMIC QUANTUM RECEIVER
+                                          reception capability can be attained by using multi-antenna
+                                          based multiple-input multiple-output (MIMO) schemes and                           RAQRs exploit the properties of Rydberg atoms, hence we
+                                          sophisticated signal processing methods to combat channel                      commence by their brief overview, followed by their principles
+                                                                                                                         and schemes. Finally, we present the impairments of RAQRs,
+                                             T. Gong, C. Yuen and Y. Guan are with School of Electrical and Electronics  and compare them to classical RF receivers.
+                                          Engineering, Nanyang Technological University, Singapore 639798 (e-mail:
+                                          trgTerry1113@gmail.com, chau.yuen@ntu.edu.sg, eylguan@ntu.edu.sg). A.          A. Fundamentals of Rydberg Atoms
+                                          Chandra and R. Dumke are with School of Physical and Mathematical
+                                          Sciences, Nanyang Technological University, 637371, Singapore (e-mails:           1) Atomic Structure [6]: Quantum mechanics provides a
+                                          cqtavee@nus.edu.sg, rdumke@ntu.edu.sg). C. M. S. See is with DSO Na-           comprehensive description of the structure, properties and
+                                          tional Laboratories, Singapore 118225 (e-mail: schongme@dso.org.sg). M.        behavior of atoms. Each atom has a nucleus at its core and
+                                          Debbah is with the Center for 6G Technology, Khalifa University of Sci-
+                                          ence and Technology, Abu Dhabi, United Arab Emirates (e-mail: mer-
+                                          ouane.debbah@ku.ac.ae). L. Hanzo is with School of Electronics and Com-
+                                          puter Science, University of Southampton, SO17 1BJ Southampton, U.K. (e-
+                                          mail: lh@ecs.soton.ac.uk).
+2
+
+Fig. 1: (a) A simplified diagram of atomic structure for ground-state and Rydberg atoms. (b) Scaling of the relevant properties
+
+of Rydberg states with the alkali atom principal number (n). (c) Radial probability distribution of Rydberg states of Cs atoms
+for n = 5, 90 (l = 2). (d) The electron probability distribution |nlm|2 for an atom excited to a state n = 5, l = 2, m = 1 and
+for a Rydberg atom in state n = 90, l = 2, m = 1, respectively.
+
+there are electrons that orbit around the nucleus. The energy                 l = ±1,  m = 0, ±1, and  the initial and final states
+                                                                              must have opposite parities.
+of electrons in these orbits is quantized, i.e., they occupy
+                                                                                 2) Properties of Rydberg State: Alkali atoms have single
+only certain discrete energy-levels and cannot be traced in                   valence electrons in their ground state in the outermost orbital.
+                                                                              This represents a relatively loose bound and therefore it can be
+between these levels. However, electrons can transition from                  excited to a high energy level associated with a high principal
+                                                                              quantum number, of say n > 10 for atomic systems. When
+one energy level to another by absorbing or emitting a photon                 such an excitation is created, the atom and its corresponding
+                                                                              state are Rydberg ones. The atomic structures of the ground-
+with energy equal to the difference between the energy levels.                state and Rydberg-state atoms are schematically shown in Fig.
+                                                                              1(a). The Rydberg states of any alkali atom and a hydrogen
+Electrons have a wave-particle dual nature. In the quantum                    atom have essentially similar structures and properties. In both
+                                                                              cases, a single electron occupies a high-n state and has an
+mechanical description, the state of an electron is described                 effective core of unit positive charge at the center. The only
+by a wavefunction , which contains all information about the                  difference lies in the finite size of the positively charged
+                                                                              core, which is larger for alkali atoms relative to hydrogen
+electron's position, energy, spin, orientation, etc. The square               atoms. This leads to a small correction (via quantum the
+of the wavefunction, ||2 gives the probability density (i.e.                  defect parameter l) to the energies for non-hydrogenic atoms
+                                                                              in particular for low l states. But again, one can say that
+probability per unit volume) of finding the electron in a certain             the general properties of all Rydberg atoms are quite similar.
+                                                                              The scaling of the relevant properties of Rydberg states with
+spatial region around the nucleus. These regions are termed as                n is shown in Fig. 1(b). The n-dependence arises from the
+                                                                              Rydberg atom wavefunction characteristics. For RAQRs, the
+orbitals. The unique quantum state of an electron is described                typical choice of alkali atoms falls on either Caesium (Cs)
+                                                                              or Rubidium (Rb) due to the availability of commercial laser
+by four quantum numbers:                                                      systems for the transition wavelengths of these species.
+
+   · Principal quantum number n (positive integer n): It                         The Rydberg atoms are large, since the average distance
+                                                                              from the nucleus r scales with n2, resulting in large dipole
+      indicates the energy level or shell which the electron                  matrix elements. This point is illustrated in Fig. 1(c), where
+      occupies. A higher n implies that the electron resides                  the radial probability distribution |rRnl(r)|2 for state nS of
+                                                                              Cs atoms is plotted against r (distance from nucleus) for
+     further away from the nucleus.                                           increasing n. The atomic size increases dramatically with n
+   · Azimuthal or orbital angular momentum quantum                            and its value approaches 1 µm for n  100, while it is
+                                                                              about 0.1 nm for the ground-state atom. Since Rydberg atoms
+     number l (non-negative integer l  n - 1): It accounts                    are hydrogen-like, the analytical solution of Schro¨dinger's
+                                                                              equation for the hydrogen atom can help us to visualize the
+      for the sub-shell (sub-level) that the electron occupies,
+
+     with each sub-shell having unique characteristic shapes.
+   · Magnetic quantum number m (integer -l  m  l):
+
+      It indicates the specific orbital that an electron occupies,
+
+      which corresponds to a certain spatial orientation.
+
+   ·  Spin  quantum  number  s  (s  =  ±  1  ):  It  denotes  the  ori-
+                                          2
+
+      entation of an electron's intrinsic spin. Following Pauli's
+
+      exclusion principle, two electrons in an identical orbital
+
+      must have opposite spin orientations.
+
+   If mediated by photons of electromagnetic (EM) field, the
+
+transition of an electron from one quantum state to another is
+
+called an electric dipole transition. Based on the conservation
+of angular momentum and parity1, only those (electric dipole)
+
+transitions are allowed which satisfy the selection rules: 
+
+   1Parity refers to the symmetry of a wavefunction under spatial inversion.
+                                                                                                   3
+
+State energy, E/(hc) (cm 1)  135 31D 32P                                                           B. Principles and Schemes of RAQRs
+
+                                 28I, 28G                                                             1) Rydberg-Electromagnetically Induced Transparency
+                             140 28F, 32S                                                          (EIT) Spectroscopy and the Standard Scheme [5]: EIT is
+                                                                                                   a quantum interference phenomenon, where two excitation
+                                  30D                                                              pathways of a three-level system interfere to open a
+                             145 31P                                                               transmission window in the absorption spectrum of atomic
+                                                                                                   resonance. This is typically fulfilled by counter-propagating
+                                  27I, 27G                                                         a pair of laser beams, each of which corresponds to an
+                                                                                                   excitation pathway. Since this is a coherent process, it is
+                             150                                                                   ultra-sensitive to phase perturbations and energy level shifts
+                                                                                                   of the three-level system.
+                                  27F, 31S
+                                                                                                      Rydberg excitation is prepared via a two-photon excitation
+                             155 29D                                                               process, where a pair of counter-propagating laser beams
+                                                                                                   of different wavelengths, namely the `probe' and `coupling
+                             0              25  50  75  100                    125  150  175  200  (control)', are overlapped inside an alkali vapor cell, as shown
+                                                                                                   in Fig. 3(a). This is accomplished via Rydberg-EIT in a ladder-
+                                                        Electric field (V/cm)                      type configuration, namely |1|2|3|4 (`standard') in
+                                                                                                   Fig. 3(h). The probe beam excites the atom from its ground
+Fig. 2: Stark map of Cs atoms, in the vicinity of the 30D state,                                   state to an intermediate excited state, while the coupling beam
+showing the energy shifts experienced by different states in the                                   takes it to a high-energy (principal number n) state, namely
+presence of electric field. The energy level 30D in the absence                                    the Rydberg state. When an external RF signal's frequency is
+of electric field is marked by red dashed line                                                     (near) resonant with two adjacent Rydberg states, changes can
+                                                                                                   be observed in the optical spectroscopic signal in the following
+Rydberg atom wavefunctions in space. In Fig. 1(d), the spatial                                     three scenarios, namely (i) probe beam only, (ii) probe &
+extent and characteristic shape of the electron probability                                        coupling beams, and (iii) probe & coupling beams plus RF
+distribution |nlm|2 for an atom excited to a state n = 5,                                          signal, as illustrated in Fig. 3(b) using realistic experimental
+l = 2, m = 1, has been compared to a Rydberg atom in state                                         parameters. With a further increase in the RF field strength, the
+n = 90, l = 2, m = 1. The non-zero probability of finding                                          Rydberg-EIT peak splits into two, known as the Autler-Townes
+the electron at few hundred nanometers away is evident for                                         splitting (ATS). The RF signal strength can be determined by
+a Rydberg atom, while this probability is zero for a normal                                        measuring the frequency splitting of the two peaks of ATS.
+excited-state atom.
+                                                                                                      This is the standard scheme (structure) used in RAQRs. The
+   3) Rydberg Atoms in Electric Fields: The sensitivity of                                         electron transitions take place among the four energy levels
+Rydberg atoms to electric fields arises due to the high po-                                        (quantum states) |1, |2, |3, and |4 with resonant transition
+larizability of Rydberg states. In the presence of electric field,                                 frequencies (P,C,s) and detunings (P,C), as shown in Fig.
+the energy levels shift for different states in a way similar                                      3(h). Each quantum state has its own decay rate, denoted by
+to the energy-level splitting of a hydrogen atom. This is                                          . The transition |1  |2 is typically chosen to be D2
+called the Stark effect and the associated Stark shifts can be                                     transition of Cs (Rb). |3 could be any Rydberg state, and the
+calculated by direct diagonalization of the Hamiltonian matrix.                                    excitation is created by tuning the coupling laser wavelength
+The plot of atomic energy levels as a function of the electric                                     to the appropriate value. Finally, |4 in the `standard' box
+field strength applied is termed as the Stark map and such                                         of Fig. 3(h) is the neighboring Rydberg state and its choice
+a map is shown in Fig. 2 for Cs atoms in the vicinity of                                           is governed by the particular RF frequency that the RAQR
+the 30D state. The red dashed line shows the energy level in                                       would be set up to receive. In this scheme, the measurement
+the absence of electric field. The low-l (l = 0, 1, 2) Rydberg                                     sensitivity approaches  µV/cm/ Hz [2].
+states are non-degenerate and experience a second-order Stark
+shift, i.e., a quadratic scaling with electric field amplitude E                                      2) Superheterodyne Scheme for Enhanced Sensitivity and
+given by EDC = E2/2, where  is the DC polarizability                                               Phase Extraction [7], [8]: RAQR's measurement sensitivity
+of the Rydberg state. For l > 3, the states are degenerate and                                     can be further improved by exploiting the superheterodyne
+therefore experience a linear Stark shift similar to the hydrogen                                  principle, where a local oscillator (LO) as a reference is added
+Stark spectrum.                                                                                    to the structure for detecting relatively weak RF signals. This
+                                                                                                   scheme is presented in Fig. 3(c). The RF signal to be detected
+   When the electric field interacting with atoms is constant                                      can be at intermediate frequency within the instantaneous
+or fluctuates at a low frequency, it is called DC Stark shift,                                     bandwidth of RAQRs. The LO facilitates the creating of
+as mentioned above. When a high-frequency electric field                                           microwave-dressed Rydberg states and the frequency splitting
+interacts with the atoms, it results in AC Stark shift, which has                                  measurement applied in the standard scheme is converted into
+quadratic scaling with the field amplitude E. The magnitude                                        an amplitude-modulated measurement in the presence of these
+and sign of the AC Stark shift depends on the detuning  of                                         two RF signals. As such, Rydberg atoms serve as the role of a
+the electric field from the resonant transition frequency and                                      conventional RF mixer. In this scheme, the phase of the desired
+scales as EAC  1/. This implies that the magnitude                                                 RF signal can be measured relative to that of the LO from the
+of the shift is larger when the electric field is closer to
+resonance, while its sign is positive (negative) for blue-detuned
+(red-detuned) electric fields. The Stark effect causes coupling
+between closely-spaced energy levels leading to the mixing of
+energy eigenstates. As a result of mixing the of wavefunctions
+of two states anti-crossings appear in the Stark map, as a gap
+between two energy curves where they would otherwise cross
+each other. This has been explained in detail in [6].
+4
+
+Fig. 3: (a) The standard scheme, and (b) Rydberg-EIT spectroscopy signal and ATS. (c) The superheterodyne scheme, (d)
+OLA-based scheme, (e) PSS scheme, (f) continuous-band detection scheme, and (g) multiband detection schemes. (h) The
+ladder-type scheme for showing the electron transition of the above schemes.
+
+modulated amplitude of the probe beam. The sensitivity has        longer resonant with the Rydberg state and the ATS cannot
+been improved to 55 nV/cm/ Hz [8].                                be observed. Extending the instantaneous bandwidth is feasible
+                                                                  by exploiting the ARRT scheme of [11], where an auxiliary RF
+   3) Optical Laser Array (OLA) for Enhanced Sensitivity [9]:     signal is employed to couple another Rydberg state adjacent to
+The sensitivity of the superheterodyne scheme can be further      that coupled with the desired RF signal, as shown in Fig. 3(f)
+enhanced by exploiting the OLA structure (Fig. 3(d)), where       and the `ARRT' box of Fig. 3(h). The instantaneous bandwidth
+multiple laser beams are generated in parallel by employing       can be up to 100 MHz [3] and reference [39] of [3]. This
+well-designed gratings (split-beam and collimator gratings).      scheme facilitates the detection of RF signals distributed across
+Therefore, multiple parallel Rydberg atomic regions are cre-      a continuous frequency range (e.g.,  1 GHz [12]).
+ated for simultaneously receiving RF signals. The multiple
+laser beams are combined and detected by the photodetector           6) Cascade Rydberg States (CRS) [13], Different Rydberg
+(PD) for realizing high-sensitivity detectors. Moreparticularly,  Final States (DRFS) [14], and Mixed Atomic Species (MAS)
+the sensitivity has been enhanced to 19 nV/cm/ Hz [9]. By         [15] for Simultaneous Multiband Detection: RAQRs are ca-
+employing the OLA scheme to the most advanced Rydberg             pable of simultaneously detecting multiple RF signals hav-
+sensor, the sensitivity of < 1 nV/cm/ Hz is achievable [9].       ing different carrier frequencies by exploiting three different
+                                                                  schemes, as shown in Fig. 3(g) and the `CRS', `DRFS', `MAS'
+   4) Polarization-Sensitive Scheme (PSS) for Vector Field        boxes of Fig. 3(h). Specifically, the CRS scheme [13] exploits
+Sensing [10]: The polarization of RF signals can be de-           a series of high-orbital-angular-momentum states that are
+termined by RAQRs by exploiting three independent and             simultaneously cascaded by multiple RF signals having their
+orthogonally-polarized LOs. Specifically, these LOs are x-,       carrier frequencies in descending order (from THz to MHz).
+y-, and z-polarized, respectively, as seen in Fig. 3(e). The      Furthermore, the DRFS scheme [14] simultaneously harnesses
+ladder-type scheme is presented in the `PSS' box of Fig. 3(h).    multiple transitions from an identical Rydberg state to multiple
+The RF signal to be detected is mixed with these LO signals       different Rydberg states, where each transition corresponds to
+and thus three signal beats are created for extracting their      the RF signal having a specific frequency. Lastly, the MAS
+relative phases. Notably, these relative phases facilitate the    scheme [15] realizes the simultaneous detection by exploiting
+determination of the signal polarization.                         mixed alkali atomic species (Cs and Rb). Each atom species
+                                                                  is excited relying on a pair of laser beams having specific
+   5) Adjacent Rydberg Resonance Tuning (ARRT) for En-            wavelengths and hence detecting the corresponding RF signal
+hanced Instantaneous Bandwidth and Continuous-Band De-            having a specific frequency.
+tection [11], [12]: The RF signal to be detected is typically
+limited to a narrow instantaneous bandwidth ( 10 MHz [5])            7) Other Promising Schemes: Beyond the above schemes,
+around the transition frequency of coupled Rydberg states. The    a suite of more sophisticated schemes emerge. For instance,
+reason for this is that a wide bandwidth leads to substantial     by exploiting the machine learning models [16], the RAQRs
+RF detuning, creating asymmetric ATS peaks. Once the RF           can be trained to better receive RF signals than those schemes
+detuning exceeds some narrow range, the RF signal is no
+                                                                     5
+
+relying on the master equation. Additionally, the scheme ex-         of uncorrelated Rydberg atoms participating in RF reception,
+ploiting the many-body effect exhibits an enhanced sensitivity,      Ti is the integration time and Tr is the coherence time of
+as seen in [3] and reference [124] therein, paving the way for       the RAQR. The typical SQL sensitivity is on the order of
+approaching the standard quantum limit (SQL). Furthermore,           pV/cm/ Hz [8].
+other advanced schemes exploiting Schrodinger cat states and
+squeezed states may potentially allow RAQRs to surpass the              5) Noise from RF Background: RAQRs cannot differentiate
+SQL, as discussed in [4] and references [101], [103] therein.        between an RF target signal and the background electromag-
+                                                                     netic noise. The change in the response of RAQR in the
+C. Sources of Impairments                                            presence of bandwidth-limited white Gaussian RF noise has
+                                                                     been theoretically modelled and verified experimentally, as
+   The performance of RAQRs in communication and sensing             seen from [3] and reference [98] of [3].
+is influenced by several impairments, as detailed below.
+                                                                     D. Comparison to Conventional RF Receivers
+   1) RAQR Noise Sources: Several factors contribute to the
+noise of RAQRs. Among them, the photon shot noise and the               1) Operating Principle: Traditional RF receivers capture
+electrical noise from the photodetector (PD) may increase the        incident electric fields by using antennas and generate the
+noise floor. The laser noise plays a crucial role in determining     corresponding currents. The size of antennas requires to match
+the sensitivity of RAQR. The frequency noise of lasers can           the wavelength of the detected electric field. By contrast,
+be minimized by frequency stabilization techniques, where            RAQRs realize RF reception via Rydberg atoms created by
+the laser is locked to the mode of a high-finesse ultra-             driving laser beams in a vapor cell. The size of RAQRs is
+low expansion cavity. The intensity noise of lasers can be           independent to the wavelength.
+reduced similarly by implementing a servo feedback loop and
+a balanced photodetection scheme. The vibrational instability           2) SI-Traceability and Calibration: Conventional antennas
+of mirrors may contribute to the mechanical noise. All these         need fine calibration for high-integrity reception. The cali-
+can be mitigated by innovative engineering techniques.               brations are performed by placing uncalibrated antennas in a
+                                                                     known EM environment that is measured via a well-calibrated
+   2) Transit Time and Doppler Broadening [2]: The atoms             antenna, leading to a `chicken-or-egg' dilemma. However,
+in the vapor cell only interact with laser beams during the so       RAQRs allow precise measurements of RF signals which
+called transit time. They will leave the interaction region due      is directly related to Planck's constant and hence can self-
+to their thermal motion (kinetic energy) at room temperature.        calibrate by relying on SI-traceable atomic standards.
+This leads to the broadening of spectral lines termed as
+transit time broadening. An atom moving in (against) the                3) Passband-Baseband Conversion: Classical RF receivers,
+direction of light beam will experience an energy level shift        exploiting the popular homodyne/heterodyne/superheterodyne
+i.e., redshifted (blueshifted) with respect to the light frequency.  RF structures, require tightly-integrated RF front-end compo-
+When this frequency is resonant to an atomic transition, light       nents (e.g., mixers, amplifiers, filters) for down-converting the
+gets absorbed by the atoms obeying the same (Gaussian)               passband RF signal to baseband, requiring complex integrated
+velocity distribution of the atoms. These different velocities       circuits, especially for large-scale systems [1]. By contrast, the
+result in the broadening of spectral lines, termed as Doppler        measurement scheme of RAQRs allow direct down-conversion
+broadening. In RAQRs, there is a mismatch in wavelengths for         of RF signals [15], bypassing the complex integrated circuitry,
+the counter-propagating probe and coupling laser beams which         thus facilitating a simple, compact structure.
+accounts for the Doppler-broadened Rydberg-EIT peak. The
+broadening is proportional to the residual Doppler mismatch.            4) Receiver Impairments: Classical antenna-based re-
+                                                                     ceivers suffer from Gaussian thermal noise and electronic
+   3) Collisional Effects [2]: The interaction or collision of       hardware impairments, while RAQRs suffer from several
+Rydberg atoms with the vapor-cell wall becomes significant           different impairments, ranging from the noise of lasers and
+at roughly micron-scale distances, since there are boundary          PDs to noise arising from broadening and dephasing effects
+conditions imposed on the atomic dipoles, as they approach           in atomic systems, as explained in Section II-C. The sensitivity
+the wall. There are other collisions in this system, like Rydberg    of RAQRs is set by the SQL [2]­[5], whereas the sensitivity
+atom - Rydberg atom collisions and ground-state - Rydberg            of their counterparts is determined by the thermal noise limit,
+atom collisions, that play an important role. All of these           as discussed in [2] and reference [39] of [2].
+collisions cause dephasing of the quantum states and reduce
+the coherence time Tr of the RAQR receiver. It has been                 5) Angular Reception Ranges: Antenna (array-) based re-
+shown in [2] that when all these dephasing effects are taken         ceivers can only receive impinging RF signals from a restricted
+into account, the coherence time Tr and hence the sensitivity        spatial angle, e.g., half-plane range to the greatest extent for
+reaches the maximum value for Rydberg states in the range            antenna arrays. By contrast, RAQRs are capable of receiving
+of n = 45, · · · , 60.                                               signals from wider spatial angles with lesser restrictions,
+                                                                     facilitating the reduction of sensor deployments.
+   4) Quantum Projection Noise [5]: It is also known as the
+quantum shot noise and often referred to as SQL, since it               6) Mutual Coupling Effects: Conventional antenna arrays
+sets a lower limit to RAQRs' sensitivity. This noise arises          typically face negative mutual coupling effects, which become
+from the quantum fluctuations of the measurement process.            more serious as antenna arrays become dense and large. The
+The SQL scales as  1/ N TrTi, where N is the number                  mutual coupling effects may cause considerable challenges
+                                                                     for receiver designs. Fortunately, RAQRs are less susceptible
+                                                                     to mutual coupling as Rydberg sensors do not re-emit the
+                                                                     impinging RF signal, facilitating simplified receiver designs.
+6
+
+                                                       TABLE I: STATE-OF-THE-ART IN RAQRS.
+
+                                                       Theoretical and experimental studies from the physics community
+
+   Ref. Structure          Capability         Features Atom    Energy levels               Laser (probe/coupling)   RF frequency         Main Contributions
+                                                                                           Power Wavelength
+
+   [7] Superheterodyne     C1, C2, C4         F1, F3 133Cs     6S1/2 6P3/2                 41.2 µW /  850.53 nm /   LO: 19.629 GHz, The BPSK, QPSK, and QAM modulated
+                                                               34D5/2 35P3/2               48.7 mW    511.148 nm
+                           (BPSK, QPSK, QAM)                   6S1/2 6P3/2                 120 µW /                 IF: 500 kHz & 1 MHz signals are able to be received by RAQRs.
+                                                               47D5/2 48P3/2                34 mW      852 nm /
+   [8] Superheterodyne     C1, C2             F1       133 Cs  6S1/2 6P3/2                  30 µW /     510 nm      LO: 6.94 GHz,        Experimentally illustrate a sensitivity of
+                                                               44D5/2 45P3/2               135 mW      852 nm /      IF: 150 kHz         55 nV/cm/ Hz by superheterodyne.
+                                                                                                        509 nm
+                OLA,       C1, C2             F1       133 Cs                                                       LO: 8.57 GHz         Experimentally illustrate a sensitivity of
+   [9] superheterodyne                                                                                                                   19 nV/cm/ Hz by proposing the OLA.
+
+                                                       85 Rb         5S1/2 5P3/2                      780 nm /      LOx 10.6633 GHz, Experimentally illustrate a sensitivity of
+   [10]  PAS               C1, C2, C3         F1, F6                 60D5/2 59F7/2         N/A                      LOy 10.66327 GHz, 57 µV/m/ Hz and 66 µV/m/ Hz for
+                                                       133 Cs                                         480 nm
+                                              F1, F2,                6S1/2 6P3/2                                    LOz 10.6628 GHz the horizontal and vertical polarizations.
+                                              F4, F6   87 Rb    68S1/2 67P3/2 (68P3/2)
+   [11]  ARRT                    C1, C5                                                    N/A        850 nm /      11.25 GHz -          The ARRT scheme was demonstrated for
+                           (continuous-band)  F1, F2,  133 Cs       65D5/2 (66D5/2)                                  13.9 GHz            detecting continuous-band signals.
+                                              F4, F6                 5S1/2 5P3/2                      509 nm
+                              C1, C2, C4               87 Rb         70D5/2 71P3/2
+                ARRT,         (QPSK), C5      F1, F2,  133 Cs                              3.8 µW / 780 nm /              100 MHz -      Detect over 1 GHz continuous-band with
+   [12]                    (continuous-band)    F6                       71S1/2            60.4 mW 480 nm                   1.4 GHz      best sensitivity of 1.5 µV/cm/ Hz and
+                                                         +     6S1/2 6P3/2 19D5/2                                                        80 dB linear dynamic range.
+          superheterodyne                     F1, F2,  85 Rb   17F7/2 17G9/2 17H11/2                                      0.607 THz,
+                                                F6                                                                        34.9 GHz,      The CRS scheme was shown for simul-
+   [13]  CRS                 C1, C5                              17I13/2 17K15/2           20 µW /    852 nm /      6.01 GHz, 1.85 GHz,  taneously detecting multiband signals.
+                           (multiband)        F1, F2,               17L17/2 17M19/2        21 mW      519 nm         700, 310, 128 MHz
+                                              F3, F6                 5S1/2 5P3/2                                      1.72, 12.11 GHz,   The DRFS scheme was shown for simul-
+                DRFS,      C1, C2, C4                                56D5/2 57P3/2          3.8 µW / 780 nm /        27.42, 65.11 GHz,   taneously detecting five RF tones from
+   [14]                    (QPSK), C5                                                       60.4 mW 480 nm               115.75 GHz      1.7 GHz to 116 GHz.
+                           (multiband)                           (54F7/2, 59P3/2, 52F7/2)
+          superheterodyne                                           (6S1/2 6P3/2           (41.2 µW / (850.53 nm /       19.626 GHz,     A multiband Rydberg atomic receiver is
+                                                                    34D5/2 35P3/2),        48.7 mW), 511.148 nm),        20.644 GHz      achieved using the combination of two
+   [15]  MAS               C1, C4 (AM, FM),                         (5S1/2 5P3/2           (22.3 µW / (780.24 nm /                       different atomic species.
+                             C5 (multiband)                         47D5/2 48P3/2)         43.8 mW) 480.27 nm)
+
+                                              Wireless communication and sensing applications from the communication community
+
+   [17] Superheterodyne     C1, C2, C6        F1, F2   133 Cs         6S1/2 6P3/2             N/A     852 nm /          2.4 GHz,         Improve sensing granularity by an order
+                               (spatial       F1, F2   133 Cs         66D5/2 67P3/2,                  510 nm            5.0 GHz,         of magnitude for WIFI signals and the
+                                                                     (52D5/2 53P3/2),      29.8 µW                      28 GHz           28 GHz millimeter wave.
+                           displacement)                             (61D5/2 63P3/2)       (9.4 µW)
+                                                                  6S1/2 6P3/2 47D5/2       / 17 mW
+   [18] Superheterodyne    C1, C2, C4                          48P3/2 (45D5/2 46P3/2),                852 nm /          6.9458, 7.9752, Propose a RAQR-SISO scheme, signal
+                                                                (43D5/2 44P3/2), (40D5/2              510 nm           9.2186, 11.6187, models, and provide performance analysis
+                                                               41P3/2), (66S1/2 66P3/2),                            13.4078, 15.5513 GHz for wireless communication and sensing.
+                                                                      (63S1/2 63P3/2)
+
+   [19] Superheterodyne C1, C2, C6 (DOA) F1, F2 133Cs          6S1/2 6P3/2                 29.8 µW    852 nm /      6.9458 GHz           Propose a RAQ-MIMO wireless sensing
+                                                               47D5/2 48P3/2               / 17 mW    510 nm                             scheme, signal model, and a multi-target
+                                                                                                                                         DOA estimation algorithm.
+
+    III. RAQR ENABLED QUANTUM-AIDED WIRELESS                                                  · C5: Multiband/Continuous-Band Detection. Simulta-
+                 COMMUNICATION AND SENSING                                                       neously detecting multiband RF signals becomes feasible
+                                                                                                 using a single RAQR. This can be realized by the CRS
+   The application of RAQRs to classical wireless communi-                                       [13], DRFS [14], and MAS [15] schemes of Section
+cation and sensing is promising, as indicated by representa-                                     II-B6. The multiple bands can span over a continuous
+tive studies from diverse research communities that promote                                      frequency range through the ARRT scheme of Section
+quantum-aided classical wireless communication and sensing.                                      II-B5.
+
+A. Verified Capabilities                                                                      · C6: Spatial Displacement and Direction Detection. The
+                                                                                                 spatial displacement and direction-of-arrival (DOA) of a
+   · C1: Amplitude Detection. RAQRs are capable of mea-                                          moving target can be detected by RAQRs. By recording
+      suring the amplitude of an RF signal using the standard                                    the RF signal phase-change caused by target movements,
+      scheme discussed in Section II-B1.                                                         one can deduce spatial displacement [17]. By acquiring
+                                                                                                 the phase-differences of the RF signal between different
+   · C2: Phase Detection. It can also retrieve the phase of an                                   locations, DOA estimation can be realized [19].
+      RF signal by harnessing the superheterodyne principle of
+      Section II-B2.                                                                       B. Distinctive Features
+
+   · C3: Polarization Detection. The polarization of an RF                                    · F1: Extremely-High Sensitivity. Compared to traditional
+      signal can be detected from the spectroscopic EIT signal                                   RF receivers, RAQRs exhibit ultra-high sensitivity in
+      by exploiting the PSS scheme of Section II-B4.                                             detecting RF signals, as discussed in Section II-B1, II-B2,
+                                                                                                 and II-B3. The sensitivity can be on the order of <
+   · C4: Modulation Identification. The amplitude and phase                                      nV/cm/ Hz [3], [9], surpassing the 1.5 nV/cm/ Hz
+      extraction capabilities allow RAQRs to identify RF signal                                  sensitivity of metal antennas [3].
+      waveforms relying on different modulations, such as
+      analog modulation schemes: amplitude/frequency mod-                                     · F2: Broadband Tunability. RAQRs allow a multitude
+      ulation (AM/FM) [15], and digital modulation schemes:                                      of options in choosing different atomic energy levels
+      phase shift keying (PSK) (BPSK, QPSK [7], [12]) as well
+      as quadrature amplitude modulation (QAM) [7].
+                                                                                                     7
+
+Fig. 4: Superheterodyne RAQR based wireless reception scheme, signal model, and simulation results.
+
+      combined with different electron transitions to realize the   realizing powerful RF receivers, which paves the way for more
+      detection of RF signals across a broad frequency range        complex upper-layer communication and sensing applications.
+      (DC to THz) using a single receiver [5].
+   · F3: Narrowband Selectivity. For a standard RAQR                   2) Wireless Communication and Sensing Applications From
+      scheme, the atomic response has a narrowband selectivity      the Communication Community: Inspired by recent advances
+      ( 10 MHz [5]), where only a narrow instantaneous              of RAQRs, wireless communication and sensing applications
+      bandwidth around the carrier frequency can be realized        started to emerge. Reference [17] experimentally demonstrated
+      for coupling between adjacent Rydberg states [2], [5].        RAQRs' superiority in sensing moving objects. Then, the work
+   · F4: Enhanced Instantaneous Bandwidth. The instan-              [18] took the lead in constructing useful signal models and
+      taneous bandwidth can be significantly extended by ex-        analysing the superior performance of RAQR-aided wireless
+      ploiting the ARRT scheme [11], which can be up to 100         systems. Furthermore, the work [19] exploited a Rydberg
+      MHz [3] and reference [39] of [3], as discussed in II-B5.     receiver array for realizing multi-target DOA estimation by
+      This facilitates RAQRs in receiving RF signals having a       proposing a corresponding DOA estimation algorithm.
+      large continuous bandwidth.
+   · F5: Ultra-Wide Input Power Range. RAQRs are capa-                       IV. RAQ-SISO AND RAQ-MIMO SCHEMES
+      ble of receiving not only very weak signals, but also very
+      strong signals up to several kV/m [5]. This ensures the          In this section, we introduce the RAQRs into classical
+      receiver's operation in high-intensity RF environments.       wireless systems by detailing the receiver structure of RAQ-
+   · F6: Ultra-High Scalability. RAQRs exhibit an ultra-high        SISO systems, and presenting potential RAQ-MIMO schemes
+      scalability to form advanced receivers (e.g., arrays, multi-  in both centralized and distributed applications.
+      band, continuous-band, and PSS receivers) using a single
+      vapor cell based on the schemes discussed in Section II-B.    A. Reception Scheme of RAQ-SISO Systems
+      These functionalities can be potentially integrated with a
+      single vapor cell to realize multi-functional receivers.         Fig. 4 shows each stage of the holistic RAQ-SISO system
+                                                                    and its corresponding signal model from an equivalent base-
+C. State-of-the-Art in RAQRs                                        band communication perspective. The received input signal of
+                                                                    the RAQR may be a communication signal from a classical
+   Next, we review several representative works from both the       wireless transmitter or a sensing signal reflected from some
+physics and communication communities (seen in TABLE I).            moving target. The received signal is assumed to have a carrier
+                                                                    frequency of fc, which is processed by the following blocks.
+   1) Theoretical and Experimental Studies From the Physics         B1 Rydberg atomic quantum sensing: It realizes RF re-
+Community: The studies on RAQRs from the physics com-
+munity can be classified into two branches. The first branch             ception using superheterodyne RAQRs. Its optical output
+is from a theoretical perspective, aiming to analyse the funda-          is modulated and can be approximated by an amplified
+mental performance limit of SQL and practical impairments                cosine wave of frequency fc - fl [8], [18].
+on RAQRs [2], [5], and to construct specific quantum response       B2 Photodetection: The optical signal is detected by a PD,
+models for novel RAQR concepts, such as many-body Rydberg                which can be realized by direct incoherent optical de-
+atom [3]. Another branch is experimentally designing novel               tection (DIOD) or balanced coherent optical detection
+atomic structures to support new capabilities, demonstrate spe-          (BCOD) schemes [18]. Both schemes generate an output
+cific features, explore new sensitivity limits, and so forth [7]­        that is approximated by a cosine wave of frequency fc-fl.
+[15]. The advances of RAQRs have confirmed the feasibility of       B3 Down-conversion: To obtain a continuous-time baseband
+                                                                         signal of the PD's output, down-conversion is realized
+8
+
+Fig. 5: (a) Centralized RAQ-MIMO, (b) distributed RAQ-MIMO, and (c) simulation results of the centralized RAQ-MIMO.
+
+     by a homodyne receiver (HR), which requires IQ mixers         receiver apertures. For both schemes, their parallel optical
+     having a mixing frequency of fc - fl and lowpass filters      outputs are forwarded to the corresponding photodetector
+     having a bandwidth of W (nearly the same as the signal        array (PDA), HRs, and ADCs. Therefore, all samples can be
+     bandwidth). We emphasize that this functionality can be       jointly modelled to obey a corresponding signal model. These
+     implemented in either RF or digital domains.                  samples are then appropriately combined to realize the desired
+B4 Signal sampling: The continuous-time baseband signal is         communication/sensing tasks by using specific algorithms, as
+     sampled by analog-to-digital converters (ADCs) and then       seen in the `Signal model' and `Performance analysis & signal
+     the complex baseband samples are obtained. The sampling       processing' boxes of Fig. 5(a).
+     rate obeys Nyquist's sampling theorem.
+B5 Baseband signal processing: The baseband samples em-               For both of the above schemes, the optical array signals
+     body both the intensity and phase of the desired RF signal,   experience diversity gains owing to their different locations.
+     which are utilized for recovering the transmitted baseband    Compared to the OLA scheme [9], these centralized RAQ-
+     signal or for estimating the information of the target using  MIMO schemes combine all branch signals in the digital
+     specific signal processing algorithms.                        domain instead of directly combining all the output optical sig-
+   The equivalent baseband signal model of the holistic wire-      nals. This retains higher degrees-of-freedom for the informa-
+less system constructed in [18] is briefly summarized at the       tion of signal and facilitates better performance. Furthermore,
+bottom of Fig. 4, where the parameters are explained in the        we present simulation results of a single vapor cell having
+box at the bottom. It is seen that the RAQR imposes a gain         a uniform linear array of 5 laser beams (5 receive regions),
+ and a phase shift  on the received RF signal. These               where each region is identically configured as that of the RAQ-
+parameters are determined by both the quantum response             SISO. The achievable rate of wireless communication and the
+and the photodetection scheme selected. The accuracy of this       Crame´r­Rao bound (CRB) of DOA estimation are showcased
+signal model has been verified in [18]. In our simulations of      for a single user/target at a distance of 200 meters. As observed
+this article, we follow the same parameter configurations of the   from the simulation results of Fig. 5(a), the achievable rate
+unoptimized RAQR and of the conventional RF receiver as in         of RAQ-MIMO is  7.2 bits/s/Hz higher than that of the
+[18] and showcase the received SNR and bit-error-rate (BER)        conventional MIMO systems under Rayleigh fading channels.
+versus the transmit power under Rayleigh fading channels. The      Additionally, the CRB achieved by the RAR-MIMO improves
+transmission distance is 200 meters having a path loss factor of   that achieved by the conventional MIMO by as much as two
+3.8. The results reveal that the RAQ-SISO system significantly     orders of magnitude.
+outperforms the conventional SISO systems under the same
+transmit power, as seen in the simulation results of Fig. 4.          2) Distributed RAQ-MIMO: To further enhance the spatial
+                                                                   diversity and improve the coverage, we present the distributed
+B. Centralized and Distributed RAQ-MIMO Schemes                    RAQ-MIMO scheme, where the system consists of multiple
+                                                                   vapor cells and a single data center. Specifically, the vapor
+   1) Centralized RAQ-MIMO: The most straightforward way           cells are spatially distributed across a long distance range,
+to form a co-located array is using multiple vapor cells,          so that each vapor cell is capable of receiving RF signals
+where each vapor cell is penetrated using a probe-coupling         having larger spatial diversity or covering more users/targets.
+beam pair to form the receive region, as seen at the top of        The data center consists of laser generators, the PDA/multiple
+Fig. 5(a). Furthermore, we introduce a more compact one            PDs (responsible for receiving long-distant optical signal), the
+shown at the bottom of this figure, which is implemented           HRs, ADCs, and the distributed signal processing unit.
+by penetrating a single vapor cell using a laser beam array.
+The former scheme has the advantage of constructing large             The data center and vapor cells are connected in two ways,
+receiver apertures, while the latter scheme facilitates compact    namely the fiber-coupled and optically-linked schemes of Fig.
+                                                                   5(b). These schemes are based on the recent advances of fiber-
+                                                                   coupled vapor cells [2] (references [117], [119] therein) and
+                                                                   9
+
+of passive RAQRs at long distances [20]. The two schemes           wireless systems, we have advocated the RAQ-SISO and RAQ-
+have their own advantages and shortcomings. Specifically, the
+fiber-coupled scheme appear to be more robust to environment       MIMO schemes. Finally, we have concluded by proposing
+uncertainty than the opticall-linked scheme due to the higher
+reliability of fibers, while the latter exhibits higher mobility   promising research directions.
+and is easier to be deployed.
+                                                                                                REFERENCES
+       V. OPEN PROBLEMS AND FUTURE DIRECTIONS
+                                                                    [1] J. Moghaddasi and K. Wu, "Multifunction, multiband, and multimode
+   Advanced designs of RAQRs have the potential of ap-                   wireless receivers: A path toward the future," IEEE Microw. Mag.,
+proaching or even exceeding the SQL, thereby outperforming               vol. 21, no. 12, pp. 104­125, Dec. 2020.
+the Shannon-limit of the current RF receivers. Even though
+significant advances have been achieved in the evolution of         [2] N. Schlossberger, N. Prajapati, S. Berweger, A. P. Rotunno, A. B.
+RAQRs, the answers to several open problems remain to                    Artusio-Glimpse, M. T. Simons, A. A. Sheikh, E. B. Norrgard, S. P.
+be further explored. Therefore, we list a number of future               Eckel, and C. L. Holloway, "Rydberg states of alkali atoms in atomic
+directions of significant interest as follows.                           vapour as SI-traceable field probes and communications receivers," Nat.
+                                                                         Rev. Phys., pp. 1­15, 2024.
+   Improvements of Receiver Metrics and Commercializa-
+tion of RAQRs: Albeit the basic capabilities of RAQRs have          [3] H. Zhang, Y. Ma, K. Liao, W. Yang, Z. Liu, D. Ding, H. Yan, W. Li,
+been explored and verified. Future studies are required to be            and L. Zhang, "Rydberg atom electric field sensing for metrology,
+continued for pushing forward the receiver performance, such             communication and hybrid quantum systems," Sci. Bull., 2024.
+as the sensitivity, bandwidth, and robustness, etc. Furthermore,
+to commercialize RAQRs, mature cost-saving, miniaturization,        [4] J. Yuan, W. Yang, M. Jing, H. Zhang, Y. Jiao, W. Li, L. Zhang, L. Xiao,
+and power-conserving technologies are required.                          and S. Jia, "Quantum sensing of microwave electric fields based on
+                                                                         Rydberg atoms," Rep. Prog. Phys., 2023.
+   Applications of RAQRs to Next-Generation Wireless
+Communication and Sensing: To fully harness the benefits            [5] C. T. Fancher, D. R. Scherer, M. C. S. John, and B. L. S. Marlow,
+of RAQRs, their integration into wireless communication and              "Rydberg atom electric field sensors for communications and sensing,"
+sensing is high of significance. At the time of writing, the             IEEE Trans. Quantum Eng., vol. 2, pp. 1­13, 2021.
+integration is in its infancy. More particularly, we expect three
+main directions to be explored.                                     [6] T. F. Gallagher, "Rydberg atoms," in Springer Handbook of Atomic,
+D1 Theoretical Modelling of RAQR-Aided Wireless Sys-                     Molecular, and Optical Physics. Springer, 1994, pp. 231­240, note:
+                                                                         more on quantum mechanics can be found in book `Introduction to
+     tems: The currently available theoretical modelling is              Quantum Mechnics' by D.J Griffiths and D.F. Schroeter, 2018.
+     mainly dedicated to the input-output relationship of the
+     vapor cell. However, the holistic baseband equivalent          [7] C. L. Holloway, M. T. Simons, J. A. Gordon, and D. Novotny, "Detecting
+     models have to be developed for various wireless systems            and receiving phase-modulated signals with a Rydberg atom-based
+     (e.g., wideband, MIMO).                                             receiver," IEEE Antennas Wirel. Propag. Lett., vol. 18, no. 9, pp. 1853­
+D2 Signal Processing of RAQR-Aided Wireless Systems:                     1857, Sep. 2019.
+     With the aid of mathematical models constructed, compu-
+     tationally efficient signal processing algorithms must be      [8] M. Jing, Y. Hu, J. Ma, H. Zhang, L. Zhang, L. Xiao, and S. Jia,
+     conceived for communication-/sensing-oriented function-             "Atomic superheterodyne receiver based on microwave-dressed Rydberg
+     alities, including signal detection, channel estimation, and        spectroscopy," Nat. Phys., vol. 16, no. 9, pp. 911­915, Sep. 2020.
+     spatial displacement/direction detection etc.
+D3 Interplay between RAQRs and Classical Transmitters:              [9] B. Wu, R. Mao, D. Sang, Z. Sun, Y. Liu, Y. Lin, Q. An, and Y. Fu,
+     In RAQR-aided wireless systems, classical antenna-based             "Enhancing sensitivity of atomic microwave receiver based on optimal
+     transmitters are still needed. The interesting interplay            laser array," IEEE Trans. Antennas Propag., 2024.
+     between RAQRs and classical transmitters opens a new
+     research direction on the design of novel transceivers.       [10] P. K. Elgee, K. C. Cox, J. C. Hill, P. D. Kunz, and D. H. Meyer,
+D4 System-Level Experimental Implementations and Val-                    "Complete three-dimensional vector polarimetry with a Rydberg-atom
+     idations: Previous efforts have shown the great potential           rf electrometer," Phys. Rev. Appl., vol. 22, no. 6, p. 064012, 2024.
+     of RAQRs, but substantive future efforts are required for
+     experimentally investigating their practical system-level     [11] M. T. Simons, A. B. Artusio-Glimpse, C. L. Holloway, E. Imhof, S. R.
+     capabilities and benefits.                                          Jefferts, R. Wyllie, B. C. Sawyer, and T. G. Walker, "Continuous radio-
+                                                                         frequency electric-field detection through adjacent Rydberg resonance
+                         VI. CONCLUSIONS                                 tuning," Phys. Rev. A, vol. 104, no. 3, p. 032824, 2021.
+
+   In this article, RAQRs and their integration into wireless      [12] X.-H. Liu, K.-Y. Liao, Z.-X. Zhang, H.-T. Tu, W. Bian, Z.-Q. Li, S.-
+communication and sensing have been considered. We have                  Y. Zheng, H.-H. Li, W. Huang, H. Yan et al., "Continuous-frequency
+briefly introduced the fundamentals of Rydberg atoms and                 microwave heterodyne detection in an atomic vapor cell," Phys. Rev.
+discussed the RAQRs' capabilities as well as distinctive fea-            Appl., vol. 18, no. 5, p. 054003, 2022.
+tures, followed by a contemporary survey of the state-of-the-
+art studies. To support the integration of RAQRs with classical    [13] G. Allinson, M. J. Jamieson, A. R. Mackellar, L. Downes, C. S.
+                                                                         Adams, and K. J. Weatherill, "Simultaneous multiband radio-frequency
+                                                                         detection using high-orbital-angular-momentum states in a Rydberg-
+                                                                         atom receiver," Phys. Rev. Res., vol. 6, no. 2, p. 023317, 2024.
+
+                                                                   [14] D. H. Meyer, J. C. Hill, P. D. Kunz, and K. C. Cox, "Simultaneous
+                                                                         multiband demodulation using a Rydberg atomic sensor," Phys. Rev.
+                                                                         Appl., vol. 19, no. 1, p. 014025, 2023.
+
+                                                                   [15] C. Holloway, M. Simons, A. H. Haddab, J. A. Gordon, D. A. Anderson,
+                                                                         G. Raithel, and S. Voran, "A multiple-band Rydberg atom-based re-
+                                                                         ceiver: AM/FM stereo reception," IEEE Antennas Propag. Mag., vol. 63,
+                                                                         no. 3, pp. 63­76, June 2021.
+
+                                                                   [16] Z.-K. Liu, L.-H. Zhang, B. Liu, Z.-Y. Zhang, G.-C. Guo, D.-S. Ding, and
+                                                                         B.-S. Shi, "Deep learning enhanced Rydberg multifrequency microwave
+                                                                         recognition," Nat. Commun., vol. 13, no. 1, p. 1997, 2022.
+
+                                                                   [17] F. Zhang, B. Jin, Z. Lan, Z. Chang, D. Zhang, Y. Jiao, M. Shi, and
+                                                                         J. Xiong, "Quantum wireless sensing: Principle, design and implemen-
+                                                                         tation," in Proc. 29th Ann. Int. Conf. Mobile Comput. Netw., 2023, pp.
+                                                                         1­15.
+
+                                                                   [18] T. Gong, J. Sun, C. Yuen, G. Hu, Y. Zhao, Y. L. Guan, C. M. S.
+                                                                         See, M. Debbah, and L. Hanzo, "Rydberg atomic quantum receivers
+                                                                         for classical wireless communications and sensing: Their models and
+                                                                         performance," arXiv preprint arXiv:2412.05554, 2024.
+
+                                                                   [19] T. Gong, C. Yuen, C. M. S. See, M. Debbah, and L. Hanzo, "Rydberg
+                                                                         atomic quantum receivers for multi-target DOA estimation," arXiv
+                                                                         preprint arXiv:2501.02820, 2025.
+
+                                                                   [20] J. S. Otto, M. Chilcott, A. B. Deb, and N. Kjærgaard, "Distant RF field
+                                                                         sensing with a passive Rydberg-atomic transducer," Appl. Phys. Lett.,
+                                                                         vol. 123, no. 14, 2023.
+
