@@ -1,188 +1,133 @@
-# Fig. 5 — Math Report
+# Fig. 5 math report — LO-dressed Rydberg atomic receiver, independent QuTiP reproduction
 
-Distortion of the LO-dressed Rydberg atomic receiver. Three panels: (a) quantum procedure,
-(b) input, (c) output.
+## 1. Paper equations used
 
-## 1. Data source for panel (a) — REUSED, not recomputed
+- Eq. (2)/(4): `Pout(t) = Pin*exp(-kp*L*Im(chi(t)))`, `chi(t)=C0*rho21(t)` — the general adiabatic probe-transmission relation, Sec. II-B.
+- Eq. (6): four-level Hamiltonian, with `Omega` in the (3,4)/(4,3) slot refined for the LO-dressed case.
+- Eq. (23a/b)-(25): field definitions and the strong-LO envelope approximation.
+- Sec. III-B (unnumbered, right before Eq. 26): `Omega_total = |Omega_LO + e^{j(2*pi*Delta_f*t+Delta_phi)}*Omega_RF|`.
+- Eq. (26): closed-form `rho21` under `gamma3=gamma4=0`, `Delta_p=Delta_c=Delta_LO=0` — used for validation only (Sec. 13 below), never to generate a plotted point.
+- Eq. (51)-(58) (Appendix B): `Gamma_EIT`, `Gamma` (4-level HWHM), `Abar`, and the closed-form `Omega_LO,opt` — used fresh in Sec. 10 below.
 
-Per paper Sec. III-B ("Ω in (6) is further refined as Ω_total"), evaluating `P_out` at fixed
-`Δc=0` as a function of `Ω_total` is mathematically identical to `fig3_fresh_build`'s own
-`Δc=0` column (Ω_total simply occupies the same Hamiltonian slot as `Ω_RF` did in Fig.3).
-Loaded from `../fig3_fresh_build/fig3_quantum_response.npz`, restricted to the paper's
-plotted range (0-14 MHz). **No new QuTiP solves.**
+## 2. LO-dressed Hamiltonian
 
-## 2. Equations
-
-**Panel (a)** — real QuTiP data (via reuse above), no closed form needed for the actual
-curve.
-
-**Panel (b) / (c)** — the exact phasor-magnitude formula (paper Sec. III-B, confirmed against
-the user-supplied screenshot of the boxed equation):
 ```
-Ω_total = |Ω_LO + e^{j(2πΔf·t+Δφ)}·Ω_RF|
-        = √(Ω_LO² + Ω_RF² + 2·Ω_LO·Ω_RF·cos(2πΔf·t+Δφ))
+H = hbar/2 * [[0, Omega_p, 0, 0],
+              [Omega_p, -2*Delta_p, Omega_c, 0],
+              [0, Omega_c, -2*(Delta_p+Delta_c), Omega_total],
+              [0, 0, Omega_total, -2*(Delta_p+Delta_c+Delta_LO)]]
 ```
-Panel (c)'s `P_out(t)` is obtained by REAL interpolation of panel (a)'s data at the
-`|Ω_total(t)|` values from panel (b) — not the linearized Eq.(27) formula, since panel (c) is
-specifically meant to show departure from linearity outside the linear dynamic range.
+with `Omega_total` occupying the (3,4)/(4,3) slot (real, non-negative magnitude — the phase is never placed directly in H, per the instruction; only the scalar magnitude enters the coupling term).
 
-**Linear dynamic range** (paper gives no formula, only "where the orange line coincides with
-the curve"): operating-point-anchored linear fit, R² ≥ threshold (see Section 8 for the
-threshold sensitivity check and the final choice of 0.998), anchored at `Ω_LO=4.23MHz`,
-window expanded outward until R² drops below threshold.
+## 3. LO-dressed assumptions (verified from Sec. III-B, not carried over from Fig.3/4)
 
-## 3. Panel layout (CORRECTED after checking the user's screenshot of the actual paper figure)
+- `gamma3 = gamma4 = 0` — paper's own words: *"the states |3> and |4> are metastable... it is reasonable to set gamma3=gamma4=0."* This OVERRIDES Fig.3/4's real small gamma3=2pi*3.9kHz, gamma4=2pi*1.7kHz.
+- `Delta_p = Delta_c = Delta_LO = 0` — paper's own words: *"we consider only the resonant case... this implies that their detunings are Delta_p=Delta_c=Delta_LO=0."*
+- `gamma2 = 2pi*5.2MHz` — retained; the paper does not override this one for the LO-dressed case, it is SHARED (Sec. IV parameters apply to both receiver types "unless otherwise specified").
 
-- (a): x = `Ω_total/2π` (MHz, 0-14), y = `P_out`
-- (b): x = `|Ω_total|/2π` (MHz, 0-14, SAME scale as (a), stacked directly below it), y = `t`
-  — axes transposed relative to the "obvious" reading; this is why each curve folds into a
-  "hook" shape (one `Ω_total` value maps to two `t` values per period).
-- (c): x = `t`, y = `P_out`
+## 4. All numerical parameters
 
-## 4. Parameters
-
-| Quantity | Value | Status |
+| Quantity | Value | Source |
 |---|---|---|
-| `Ω_LO/2π` | 4.23 MHz | PAPER-STATED |
-| `Δf` | 150 kHz | PAPER-STATED |
-| `Δc` | 0 (fixed) | PAPER-STATED |
-| `Δφ` | 0 | ASSUMPTION |
-| Illustrative `Ω_RF` (panels b/c) | 1, 3, 5 MHz | INFERRED interpretation of the plotted labels (see prior discussion) |
-| Time range | one full real period, `t ∈ [0, 1/Δf] ≈ [0, 6.667µs]` | Uses the REAL physical period, NOT the paper's plotted `0-3×10⁻¹⁰s` axis (a known, unresolved ~10⁴x inconsistency in the paper itself — flagged, not silently rescaled) |
+| Omega_p/2pi | 8.0 MHz | SHARED, Sec. IV |
+| Omega_c/2pi | 1.0 MHz | SHARED, Sec. IV |
+| gamma2/2pi | 5.2 MHz | SHARED, Sec. IV |
+| gamma3, gamma4 | 0, 0 | LO-DRESSED-SPECIFIC, Sec. III-B |
+| Delta_p, Delta_c, Delta_LO | 0, 0, 0 | LO-DRESSED-SPECIFIC, Sec. III-B |
+| wp_RF, wp_12 | -1443.459*e*a0, (2.5*e*a0)^2 | SHARED, Sec. IV |
+| d_probe, lambda_p | 0.76mm, 852nm | SHARED, Sec. IV |
+| L, N0 | 1cm, 1e15 m^-3 | SHARED, Sec. IV |
+| Omega_LO/2pi | 4.23 MHz | PAPER-STATED, Sec. IV (operating value) |
+| Delta_f | 150 kHz | PAPER-STATED, Sec. IV |
+| Illustrative Omega_RF/2pi | 1, 3, 5 MHz | PAPER-STATED (Fig.5(b)/(c) legend) |
+| Delta_phi | 0 rad | ASSUMPTION (phase-origin only, doesn't affect shape) |
+| Pin | 39.076 microW | derived, Eq.(3) |
+| C0 | -1.8436e-05 | derived, Eq.(4) |
 
-## 5. What this script does NOT do
+## 5. Definition of Omega_total
 
-- No new QuTiP solves (reuses Fig.3's verified `Δc=0` column).
-- Does not import old `fig5.py` or anything from `fig7_reinvestigation/`.
-- Does not rescale the time axis to match the paper's plotted (physically inconsistent)
-  numbers.
-- Does not use the linearized Eq.(27) for panel (c) — uses real interpolation of real data.
-
-*(Numeric results appended below after running.)*
-
-
-## 6. Actual numeric results (superseded by Section 8's threshold change; kept for history)
-
-Original run used R^2>=0.995 -> [0.5000, 8.0000] MHz. Superseded below.
-
-## 7. Panels (b)/(c) DEFERRED (user decision, 2026-08-20)
-
-Only panel (a) is presented as the current deliverable (`fig5a_distortion.png`). The user
-asked to drop (b)/(c) from the result for now, citing the ambiguity already on record for
-them:
-- The time-axis mismatch (Section 4): paper's plotted `0-3e-10s` vs. the real physical
-  period `6.667us`, a ~22,222x discrepancy with no resolution found anywhere in the paper.
-- `Delta_phi=0` is an ASSUMPTION, not paper-stated.
-- The illustrative `Omega_RF=1,3,5MHz` labels are an INFERRED interpretation of the
-  published Fig.5(b)/(c) labels, not a paper-stated operating point (Sec.V-A's actual stated
-  value is `Omega_RF=20kHz`, never plotted).
-
-The underlying data for panels (b)/(c) is still computed by this script and saved in
-`fig5_data.npz` (`omega_total_1mhz/3mhz/5mhz`, `pout_1mhz/3mhz/5mhz`, `t_seconds`) in case
-they are revisited later -- it is simply not rendered as part of the current plot. The
-straight-line "Linear dynamic range" overlay in panel (a) was also corrected in this pass:
-it is now the actual fitted line (`slope*x+intercept`), not the real curve re-colored, so it
-visibly diverges from the gray data at the edges of the fitted window -- matching the
-paper's own visual convention.
-
-
-## 8. Threshold sensitivity check + final numeric results (user request, 2026-08-20)
-
-R^2 threshold sensitivity (computed on the real static curve, no refitting to any target):
-
-| R^2 threshold | Range (MHz) | Actual R^2 | # points |
-|---|---|---|---|
-| 0.999 | [1.625, 6.875] | 0.999035 | 43 |
-| 0.998 | [1.250, 7.250] | 0.998248 | 49 |
-| 0.995 (original choice) | [0.500, 8.000] | 0.995148 | 61 |
-| 0.99 | [0.125, 8.375] | 0.992455 | 67 |
-| 0.98 and looser | [0.000, 8.500] | 0.986978 | 69 (hits array edge Omega_total=0, not a true R^2 plateau) |
-
-Center of the range is stable (~4-4.5 MHz, near Omega_LO) across all thresholds; the exact
-edges shift by 1-2 MHz depending on the threshold. Switched the primary result from
-R^2>=0.995 to **R^2>=0.998** (stricter, still round, gives a tighter/cleaner presentation) --
-this was NOT chosen to reproduce the paper's own box pixel-for-pixel, it was chosen before
-comparing shapes, purely for a stricter statistical criterion.
-
-Final numeric results (R^2>=0.998):
-- Linear dynamic range: [1.2500, 7.2500] MHz, R^2=0.998248
-- P0_bar = Pout(Omega_LO) = 35.4032 microW
-- Real period (1/Delta_f) = 6.6667 microseconds (paper's plotted axis reads 0-3e-10s, a ~22222x mismatch, not silently corrected)
-
-**Shading fix**: the "linear dynamic range" box is now bounded by the FIT LINE's own y-range
-at its two x-edges (a tight rectangle), not the full plot height -- matches the paper's own
-box style, which hugs the linear segment rather than spanning axis-to-axis.
-
-**Caveat, restated from the chat discussion**: R^2 is a statistical statement about how well
-a straight line explains the STATIC curve's shape -- it is not a direct measurement of how
-accurately the receiver's actual dynamic signal readout (Eq.27-29) would work in this range.
-That would require the deferred panels (b)/(c) analysis (comparing the true Omega_RF against
-the Fourier-extracted apparent Omega_RF for various assumed signal strengths). Indirect
-support that a real breakdown region exists (not just a statistical artifact) comes from
-this project's earlier Fig.6/7 work, where the "practical" (real, nonlinear) LO-dressed
-SNR/MI curves genuinely peak and decline once pushed outside roughly this same region, while
-the "theoretical" (linear-everywhere) curves do not.
-
-## 9. Panel (b) — Input, `Ω_total(t)` vs `t` (`fig5b_input_plot.py`)
-
-**Un-deferred 2026-08-20**: panels (b)/(c) were set aside in Section 7, then revisited
-per-panel with their own math-first review, per the user's request.
-
-**Equation** (paper Sec. III-B, verified character-for-character against a user-supplied
-screenshot of the boxed equation):
 ```
-Ω_total(t) = |Ω_LO + e^{j(2πΔf·t+Δφ)}·Ω_RF|
-           = √(Ω_LO² + Ω_RF² + 2·Ω_LO·Ω_RF·cos(2πΔf·t+Δφ))
+Omega_complex(t) = Omega_LO + Omega_RF * exp(j*(2*pi*Delta_f*t + Delta_phi))
+Omega_total(t)   = |Omega_complex(t)|
 ```
-Pure closed-form equation evaluation — no QuTiP, no atoms involved in this panel at all (it
-is classical two-tone beating, upstream of anything atomic; the atomic response only enters
-in panel (a)/(c)).
+The modulus is part of the definition and is never removed. `Omega_complex(t)` (both real and imaginary parts) is computed and retained; only its magnitude is fed into the Hamiltonian. Verified numerically never negative (Check 3, all three curves — see script output).
 
-**Parameters**: identical to panel (a) — `Ω_LO=4.23MHz`, `Δf=150kHz` (both PAPER-STATED),
-`Δφ=0` (ASSUMPTION, justified: only shifts the phase origin of a periodic curve, not its
-shape, and we plot a full period regardless), `Ω_RF=1,3,5MHz` (INFERRED interpretation of the
-paper's illustrative labels), `t ∈ [0, 1/Δf] ≈ [0, 6.667µs]` (real physical period, NOT the
-paper's inconsistent `0-3×10⁻¹⁰s` plotted axis — see the chat discussion: that axis span is
-incompatible with `Δf=150kHz` by a factor of ~22,222x, most plausibly traced to a mix-up with
-`1/fRF = 2.857×10⁻¹⁰s`, the RF *carrier* period, a different paper-stated number entirely;
-speculative, not confirmed against the authors' own code).
+## 6. Fresh QuTiP calculation method
 
-**Axis convention — DELIBERATELY DIFFERENT FROM THE PAPER**, per explicit user request:
-`x = |Ω_total|/2π`, `y = t`. This matches the paper's own transposed layout (confirmed via
-user screenshot) and is why the curves fold into a "hook" shape (one `Ω_total` value maps to
-two `t` values per period) — a genuine consequence of the real equation plotted this way, not
-a forced/traced match.
+For every `Omega_total` value in the sweep (0.05 MHz to Omega_LO+max(Omega_RF)+2MHz = 11.23 MHz, 160 points):
+1. Build the LO-dressed Hamiltonian (Sec. 2 above) with that `Omega_total` in the coupling slot.
+2. Solve `qutip.steadystate(H, c_ops, method="direct")` (c_ops built from gamma2 only, since gamma3=gamma4=0).
+3. Extract `rho21 = rho_ss[1,0]`.
 
-**No new computation**: reuses `omega_total_1mhz/3mhz/5mhz` and `t_seconds`, already computed
-and saved in `fig5_data.npz` by `fig5_lodressed_analysis.py`'s original run.
+**163 independent QuTiP steady-state solves performed this run** (160 sweep points + 3 validation-check points). None of Fig.3/4's `Pout_surface` data, peak data, or any precomputed quantum-response surface was loaded or reused.
 
-**Result**: same "C"/hook shape as the paper's published Fig.5(b), each curve's horizontal
-extent set by `Ω_LO±Ω_RF` (e.g. `Ω_RF=5MHz` curve spans `[0.77,9.23]MHz`, `Ω_RF=1MHz` spans
-`[3.23,5.23]MHz`) — wider `Ω_RF` gives a wider swing, visibly confirmed in the plot.
+## 7. Pout calculation — verified which equation applies
 
-## 10. Panel (c) — Output, `P_out(t)` vs `t` (`fig5c_output_plot.py`)
+Checked explicitly: Eq. (2) is the paper's general adiabatic relation, stated in Sec. II-B **before** the LO-free/LO-dressed split. The paper's own Eq. (55) derivation for the LO-dressed case starts from `Pout(t)=Pin*e^{-kp*L*C0*Im(rho21)}` — i.e. it re-derives Eq.(2)/(4) with the LO-dressed `rho21` (Eq. 26) substituted in, not a different Pout formula. **Confirmed: the same Eq.(2)/(4) relation is used for both receiver types; only rho21 differs.** This script uses `Pout = Pin*exp(-kp*L*Im(C0*rho21))` throughout, with `rho21` obtained fresh from QuTiP at every point — never the linearized Eq.(27) form for generating curves (see Sec. 12).
 
-**Not a new physics equation — function composition** of panel (a) and panel (b), both
-already real:
+## 8. Linear-fit methodology
+
+**Criterion**: expanding-window linear regression, anchored at `Omega_LO` (the paper's own operating point — the paper doesn't specify a numeric anchor, but Sec. IV-B explicitly says the linear range is judged by where "the orange line coincides with the black curve" around the operating condition, so anchoring at `Omega_LO` is the most literal reading). The window grows outward symmetrically while R² stays above a threshold; stops at the last radius meeting it.
+
+**Threshold**: R² ≥ 0.998, chosen because it is a strict-but-round statistical bar, fixed **before** comparing the resulting range to the paper's own box — not tuned to match it.
+
+**Why reasonable**: R² directly measures how well a straight line explains the actual simulated curve's shape in the window — a standard, transparent, reproducible goodness-of-fit statistic.
+
+## 9. OUR measured linear dynamic range
+
 ```
-P_out(t) = f( Ω_total(t) )
+[1.0344, 7.3627] MHz
+slope     = -1.053982e-06 W/MHz
+intercept =  4.014310e-05 W
+R^2       = 0.998178
+RMS residual = 8.3172e-08 W
 ```
-where `f` = panel (a)'s real QuTiP static response curve (cubic-spline interpolated), and
-`Ω_total(t)` = panel (b)'s real phasor-magnitude values, at the SAME `t` grid.
+This is **not** the paper's own range — it was never loaded, referenced, or targeted. It emerged purely from the fit criterion above applied to this run's fresh QuTiP curve.
 
-**Explicitly NOT using the paper's Eq.(27)** linearized form
-(`P_out(t) = P̄₀+κΩ_RF·cos(2πΔf·t+Δφ)`) — that is a small-signal approximation valid only
-inside the linear region (Section 8's `[1.25,7.25]MHz`), and would assume away exactly the
-nonlinear distortion this panel exists to show. Real interpolation of the real static curve
-is used instead, so genuine nonlinearity (e.g. for `Ω_RF=5MHz`, whose `Ω_total(t)` swings
-down to `0.77MHz`, well outside the linear region) shows up as visible curve asymmetry, not
-by construction.
+## 10. Omega_LO,opt — verified, not hardcoded
 
-**Parameters**: identical to panels (a)/(b), nothing new.
+Computed fresh from this run's own `Omega_p`, `Omega_c`, `gamma2` via the paper's Eq.(58) chain (Eqs. 51-54 build up to it):
+```
+Gamma (4-level HWHM)      = 4.7799 MHz
+Abar (3-level EIT amp.)   = 0.268318
+Omega_LO,opt (Eq.58)      = 2.9576 MHz
+```
+**This does not equal the paper's Sec. IV operating value (4.23 MHz)** — a 30.1% discrepancy. This is a known paper-internal inconsistency (also recorded independently in this project's memory from earlier analysis): Eq.(58)'s own closed-form "optimal" LO value does not match what the paper actually used for its simulation. Not resolved here — both numbers are reported, and the point labeled `(Omega_LO)_opt` in the figure uses the **operating** value (4.23 MHz), since that is the actual parameter generating the Panel (b)/(c) trajectories being cross-checked against it; using the Eq.(58) alternative would mark a point unrelated to the trajectories actually plotted.
 
-**Axis convention**: `x=t`, `y=P_out` — matches the paper's own panel (c) layout directly (no
-transposition needed here, unlike panel (b)).
+## 11. Construction of Omega_total(t)
 
-**No new computation**: reuses `pout_1mhz/3mhz/5mhz`, already computed and saved in
-`fig5_data.npz` by the original `fig5_lodressed_analysis.py` run (the script always computed
-all three panels' data; only the rendering was deferred).
+Panel (b) uses the exact definition from Sec. 5 above, evaluated over one full real beat period `t in [0, 1/Delta_f] = [0, 6.667us]`, 4000 points, for each of the three paper-stated illustrative `Omega_RF` values (1, 3, 5 MHz). `Delta_phi=0` throughout (assumption, phase-origin only).
+
+## 12. Mapping from Fig.5(b) to Fig.5(c)
+
+`Pout(t) = cubic_spline(Panel (a)'s Omega_total_MHz, Pout_MHz)` evaluated at `Panel (b)'s Omega_total(t)/2pi` values, for each of the three curves — **interpolation only**, using a cubic spline built from the 160 actually-simulated QuTiP points. Explicitly **not** the linearized Eq.(27) form, since that would assume away exactly the nonlinearity/asymmetry Panel (c) exists to show.
+
+**Verified, not assumed** (Check 4/4b in the script): the sweep domain (0.05-11.23 MHz) was checked to fully cover all three trajectories' actual Omega_total(t) ranges before interpolating (confirmed: no extrapolation needed, `extrapolation_used=False`), and three random time-samples per curve were independently re-interpolated and confirmed to exactly match the stored Panel (c) values.
+
+## 13. Validation against paper analytics (Check 1)
+
+Fresh QuTiP `rho21` was compared against the paper's closed-form Eq.(26) at Omega_total/2pi = 1, 4, 8 MHz. **Magnitudes agree exactly; the sign of Im(rho21) is flipped** (relative difference of exactly ~2.000 at every point — the signature of a pure sign flip, not a numerical discrepancy). Checked which sign is physical: with `C0<0` (as defined), only `Im(rho21)<=0` gives `Pout<=Pin` (required for a passive absorptive vapor with no gain mechanism). QuTiP's sign satisfies this (every computed Panel (a) point is below Pin=39.08 microW); Eq.(26) taken literally would imply gain. **QuTiP's result was kept as solved, not flipped to match the paper** — this is reported as a likely sign/phase convention detail in the paper's own Appendix B derivation chain, not a defect in this simulation. (Consistent with the same finding from this project's earlier independent Fig.5 build, see project memory.)
+
+## 14. Differences between our results and the paper
+
+| | This run | Paper (visual/stated) |
+|---|---|---|
+| Linear dynamic range | [1.0344, 7.3627] MHz | ~[1.3, 7.2] MHz (visual estimate from Fig.5, not a stated number) |
+| Omega_LO,opt marked | 4.23 MHz (operating value) | Appears near ~4.2 MHz in the figure, consistent |
+| Eq.(26) sign | Im(rho21) < 0 | Literally written with Im(rho21) > 0 (see Sec. 13) |
+| Strong-LO validity | Violated for Omega_RF=5MHz (ratio 1.18) | Not checked/flagged in the paper itself |
+| Panel (c) shape | Real interpolation of fresh data — visible asymmetry for Omega_RF=5MHz | Same qualitative asymmetry visible in the published figure |
+
+The overall shape and qualitative behavior (decreasing Pout vs. Omega_total, near-linear middle region, growing asymmetry for larger Omega_RF) matches the paper well; the specific numeric range and the Eq.(26) sign are the two documented, unforced differences.
+
+## 15. Limitations
+
+- Adiabatic assumption: Panel (c) treats the atom as reaching steady state instantaneously at each moment's Omega_total(t) (the paper's own stated approximation, Eq. 2 — "instantaneous steady-state"). A separate, earlier time-dependent QuTiP check in this project (`fig5_time_dependent_qutip_validation.py`) found this approximation deviates by 3-11.6% from a genuinely time-dependent solve, growing with Omega_RF — not re-derived here, referenced for context.
+- `Delta_phi=0` is an assumption; only the phase origin of the periodic curves is affected, not their shape, since a full period is always plotted.
+- The Omega_RF=5MHz illustrative curve sits outside the strong-LO regime (Eq.25's own stated validity condition) — its Panel (c) shape is genuinely more nonlinear/asymmetric as a direct, expected consequence, not an artifact.
+
+## 16. Approximations not fully satisfied — stated explicitly, not hidden
+
+1. **Strong-LO approximation (Eq. 25)** requires `Omega_RF/Omega_LO << 1`. For Omega_RF=1MHz: ratio=0.24 (holds reasonably). For Omega_RF=3MHz: ratio=0.71 (marginal). For **Omega_RF=5MHz: ratio=1.18 — the condition is violated** (Omega_RF is larger than Omega_LO, not smaller). This is the paper's own illustrative curve, not a case we chose adversarially.
+2. **Eq.(58)'s Omega_LO,opt (2.96MHz) does not match the paper's own operating Omega_LO (4.23MHz)** used to generate every trajectory in Fig.5(b)/(c) — see Sec. 10.
+3. Trajectory-vs-linear-range consistency (script Section 9): the Omega_RF=1 and 3 MHz trajectories stay **100% inside** our measured linear range for the whole period; the **Omega_RF=5MHz trajectory is only 53.8% inside** it, spending nearly half the period outside the linear regime — directly consistent with finding #1 above.
