@@ -215,8 +215,12 @@ ax.set_ylabel(r"RF Rabi frequency, $\Omega_{RF}/2\pi$ (MHz)")
 ax.set_zlabel("")  # set_zlabel gets clipped with the juggled axis pane -- use fig.text instead
 ax.set_xticks(np.arange(-20, 21, 10))
 ax.set_yticks(np.arange(0, 13, 4))
+ax.set_xlim(-20, 20)
+ax.set_ylim(0, 12)
+ax.set_zticks(np.arange(0, 0.81, 0.2))
 ax.view_init(elev=23, azim=-230)
 ax.zaxis._axinfo["juggled"] = (1, 2, 0)   # force the z (Pout) axis pane onto the left side
+ax.invert_xaxis()   # match paper's Delta_c axis direction: negative on left, positive on right
 fig.colorbar(surf, ax=ax, shrink=0.6, pad=0.1, label=r"$P_{out}$ (x$10^{-5}$ W)")
 ax.legend(fontsize=9, loc="upper left")
 fig.subplots_adjust(left=0.15)

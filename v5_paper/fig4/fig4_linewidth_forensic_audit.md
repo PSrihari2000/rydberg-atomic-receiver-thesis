@@ -1,5 +1,40 @@
 # Fig. 4 (v5 paper) — Linewidth Forensic Audit
 
+## FINAL DECISION (2026-08-29, confirmed with user)
+
+**Adopted: Γ_ref = 1.2231 MHz (measured, from our own real ΩRF=0 Pout(Δc)
+row), as the standing project-wide convention for ΓFWHM**, used
+consistently in Fig.4 and Fig.5. Reasoning, in order of weight:
+
+1. **Empirically validated against the paper's own stated behavior.**
+   Tested robustly across 4 dip-depth thresholds (2/5/10/20%): the
+   measured value gives splitting resolving at R≈1.2-1.6, just above 1 —
+   matching the paper's own claim "below R=1 unresolvable, beyond R=1
+   splitting disappears." The best analytic candidate (Γ⁽³⁾_FWHM=5.22MHz)
+   failed this test decisively — real splitting was already visible at
+   R≈0.3-0.4, well below the paper's own claimed threshold. Matching a
+   stated *behavior* outweighs matching a single descriptive word
+   ("intrinsic") in the text.
+2. **The best analytic candidate has a hidden 3-level-vs-4-level mismatch.**
+   Γ⁽³⁾_HWHM=(Ωc²+Ωp²)/(2√(γ2²+2Ωp²)) contains no γ3 or γ4 at all — it's
+   derived for an idealized 3-level system, not the real 4-level system
+   (with real, nonzero γ3=3.9kHz, γ4=1.7kHz) that both our simulation and
+   the paper's own QuTiP-based figures actually use. Same category of
+   mismatch already found and rejected in this project's earlier v1 work.
+   The measured value has no such gap — it comes directly from the real
+   4-level QuTiP output.
+3. **Consistency**: one ΓFWHM value used everywhere it appears (Fig.4's
+   R-axis, Fig.5's Aeff and Lorentzian half-width), rather than switching
+   definitions per figure.
+
+**Standing caveat, not resolved, just accepted**: Γ_ref is a
+post-absorption (measured-from-Pout) quantity, while Eq.48 calls ΓFWHM
+"intrinsic" — suggesting the authors may have meant a pre-absorption
+(χ-space) quantity. This tension is real; the decision above chooses
+behavioral/model fidelity over the literal word "intrinsic."
+
+---
+
 Purpose: determine, before choosing/freezing a ΓFWHM value for Fig.4's R-axis,
 what "ΓFWHM" in Eq.48 (R ≡ ΩRF/ΓFWHM) scientifically and mathematically refers
 to in the v5 paper. No conclusion here is used to modify the Fig.4 plot.
