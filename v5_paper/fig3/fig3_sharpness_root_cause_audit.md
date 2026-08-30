@@ -84,12 +84,24 @@ increases in the opposite screen direction.
 **Corrected result**: the paper's own reference curve decreases
 monotonically from ~14.6µW (small Ω_RF) down to ~2.7µW (Ω_RF≈12MHz) —
 the SAME direction as our real QuTiP Pout(Δc=0,Ω_RF) slice (7.68µW down
-to ~0). The only gap is magnitude (~14.6 vs 7.68µW, ~1.9x), which lands
-right in the range of the already-documented Pin/diameter peak-scale
-inconsistency (found independently in the main audit above) —
-this is a fourth/fifth independent confirmation of that same one root
-cause, not a new or separate problem. No qualitative sign or trend
-error exists in our physics.
+to ~0). No qualitative sign or trend error exists in our physics.
+
+**Further refinement (same session): the red curve is not the right
+thing to compare 1:1 against our numbers.** Separately digitizing the
+actual 3D SURFACE's own topmost pixel (excluding the red annotation
+entirely, using strict warm-colormap-color detection) gives a real
+surface peak of **~10.72µW** — matching almost exactly the original
+visual estimate already on record ("paper's own plotted peak ~10-11µW",
+`fig3_v5_math_report.md`). This is measurably lower than the red curve's
+own endpoint (14.6µW) and the labeled "Ω_RF/2π=1MHz" trace's peak
+(12.4µW), confirming the red curve sits visibly ABOVE the real surface
+in the image — most likely a deliberately-elevated illustrative
+annotation (raised for visibility against the busy colored surface),
+not literal data. **The defensible peak-scale comparison is 7.68µW
+(ours) vs 10.72µW (real surface peak, pixel-confirmed) = ~1.4x**,
+consistent with, and a tighter confirmation of, the already-documented
+Pin/diameter peak-scale inconsistency — smaller than the ~1.9x implied
+by over-reading the red annotation curve's precision.
 
 **Also verified in this pass** (rendered PDF pages 2-4 precisely):
 Eq.2, Eq.4, Eq.6 (Hamiltonian), Eq.7 (Lindblad cascade decay) all match
