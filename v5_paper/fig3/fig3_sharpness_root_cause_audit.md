@@ -63,3 +63,46 @@ This audit does not change any existing frozen result. It's a negative
 finding: it rules out a candidate explanation, and confirms the
 existing recurring-sharpness note (see [[feedback_deviation_metrics_and_recurring_sharpening]])
 is the correct level of explanation to keep using in later figures.
+
+## Addendum (2026-08-31): digitizing the paper's own Fig.3 reference curve
+
+The real Fig.3 image includes a red dashed reference curve labeled
+"Pout vs ΩRF (Δc=0)" floating above the 3D surface. Digitized it via
+pixel analysis of a high-res PDF render (not a screenshot) —
+locating the red marker centroids and calibrating against the Pout
+z-axis tick labels (1,0.8,0.6,0.4,0.2 ×10⁻⁵, linear fit, R² essentially
+exact from 4 reference points).
+
+**First pass got the Ω_RF axis direction backward** (assumed left-to-right
+= increasing Ω_RF) and concluded the paper's curve INCREASES with Ω_RF
+while ours decreases — a dramatic apparent contradiction. **Caught and
+corrected** by cross-referencing the "Ω_RF/2π=1 MHz" and "Ω_RF/2π=4 MHz"
+surface labels' screen positions: the barely-split (small Ω_RF) trace
+sits where the red curve's HIGH end is, confirming Ω_RF actually
+increases in the opposite screen direction.
+
+**Corrected result**: the paper's own reference curve decreases
+monotonically from ~14.6µW (small Ω_RF) down to ~2.7µW (Ω_RF≈12MHz) —
+the SAME direction as our real QuTiP Pout(Δc=0,Ω_RF) slice (7.68µW down
+to ~0). The only gap is magnitude (~14.6 vs 7.68µW, ~1.9x), which lands
+right in the range of the already-documented Pin/diameter peak-scale
+inconsistency (found independently in the main audit above) —
+this is a fourth/fifth independent confirmation of that same one root
+cause, not a new or separate problem. No qualitative sign or trend
+error exists in our physics.
+
+**Also verified in this pass** (rendered PDF pages 2-4 precisely):
+Eq.2, Eq.4, Eq.6 (Hamiltonian), Eq.7 (Lindblad cascade decay) all match
+our implementation exactly, term-by-term. Eq.6's matrix literally
+writes the (3,4) coupling as unsubscripted "Ω" with an explicit paper
+note that it "differs for LO-free and LO-dressed" contexts — confirmed
+via Sec.III-A and Eq.8's own usage that Ω=Ω_RF for the LO-free case
+(Fig.3), so our usage is correct. Eq.8 (the weak-probe closed-form
+ρ21) was tested numerically at Δc=0 across Ω_RF/2π=0-12MHz under three
+different sign conventions — all three give unphysical results (either
+gain exceeding Pin, or an near-instant collapse to zero within a
+fraction of a kHz of Ω_RF=0, due to the very small γ4=1.7kHz making the
+perturbative formula saturate immediately). This confirms Eq.8 is
+genuinely inapplicable in Fig.3's strongly-driven regime, explaining
+(not contradicting) this project's earlier decision to abandon it in
+favor of full QuTiP steady-state solves.
