@@ -140,6 +140,37 @@ all downstream of this one cause, not separate bugs:
   oscillations) all differ from the paper — all explained by this same
   mechanism, not four independent unexplained gaps.
 
+## G. Presentation additions (2026-08-30): cross-panel markers, shared axes, pipeline schematic
+
+Following the same cross-referencing style used in this project's v1
+Fig.5 presentation, and the paper's own Fig.6 layout:
+
+- **Cross-panel colored markers**: for each Ω_RF trace (0.5/1.5/3.0MHz),
+  the phasor Ω_total(t) swings between Ω_LO−Ω_RF (at t=period/2, the
+  curve's HIGHEST Pout point) and Ω_LO+Ω_RF (at t=0 and t=period, the
+  LOWEST Pout point). These two real, already-computed extremes are
+  marked with matching colored dots in all three panels, connected by
+  thin dotted horizontal/vertical guide lines — no new computation, just
+  re-reading points already on the real curves.
+- **Shared axes across panels (important fix, caught by inspection
+  against the real paper figure)**: initially each panel auto-scaled
+  independently, so panel (b)'s Ω_total axis and panel (c)'s Pout axis
+  drifted away from panel (a)'s ranges — this breaks the whole point of
+  the guide lines, since a line at a given Ω_total or Pout value no
+  longer lands at the same visual position across panels. Fixed by
+  explicitly forcing panel (b)'s x-axis = panel (a)'s x-axis (0-10MHz),
+  panel (c)'s y-axis = panel (a)'s y-axis (0-9µW), and panel (b)'s
+  y-axis = panel (c)'s x-axis (0 to one real period) — matching exactly
+  how the paper's own Fig.6 shares axes between its three panels.
+- **Panel (d) — pipeline schematic**: reproduces the paper's own small
+  Input→Quantum procedure→Output diagram (the L-shaped arrow figure
+  next to the paper's real Fig.6), placed in the previously-empty
+  bottom-right slot. This is a static annotation, not a data plot — it
+  restates Eq. for Ω_total(t) and labels which panel is which stage.
+
+None of this changes any computed value — it only fixes how the same
+real numbers are displayed and cross-referenced.
+
 ## Files
 
 - `fig6_v5_qutip.py` — build script (real QuTiP throughout)

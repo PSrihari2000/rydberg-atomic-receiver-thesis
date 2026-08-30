@@ -243,6 +243,23 @@ print(f"\nPanel (b)/(c): Delta_f={Delta_f/1e3:.0f}kHz (paper-stated), "
       f"time-axis inconsistency, not corrected here, see math report)")
 
 # ------------------------------------------------------------
+# CROSS-PANEL MARKERS -- same style as v1's Fig.5 presentation:
+# for each Omega_RF trace, the phasor Omega_total(t) swings between
+# Omega_LO-Omega_RF (at t=period/2) and Omega_LO+Omega_RF (at t=0 and
+# t=period). Marking these two extremes with matching colored dots +
+# thin dotted guide lines in all three panels visually ties the panels
+# together (real values, no new computation -- just re-reading points
+# already on the real curves).
+# ------------------------------------------------------------
+cross_ref = {}
+for ORF_mhz in ORF_list_mhz:
+    Ot_min = Omega_LO_for_time - ORF_mhz  # reached at t=period/2 -> HIGHER Pout
+    Ot_max = Omega_LO_for_time + ORF_mhz  # reached at t=0 and t=period -> LOWER Pout
+    Pout_high = np.interp(Ot_min, omega_total_mhz, Pout_vals)
+    Pout_low = np.interp(Ot_max, omega_total_mhz, Pout_vals)
+    cross_ref[ORF_mhz] = dict(Ot_min=Ot_min, Ot_max=Ot_max, Pout_high=Pout_high, Pout_low=Pout_low)
+
+# ------------------------------------------------------------
 # Save data
 # ------------------------------------------------------------
 import csv
@@ -271,15 +288,22 @@ np.savez(
 )
 
 # ------------------------------------------------------------
-# PLOT -- 3-panel layout matching the paper's own arrangement:
+# PLOT -- 3-panel layout matching the paper's own arrangement, plus a
+# 4th panel reproducing the paper's own Input/Quantum-procedure/Output
+# schematic (Fig.6's own small diagram, not a data plot):
 #   (a) top-left      : Pout vs Omega_total
 #   (c) top-right      : Pout vs t
 #   (b) bottom-left     : t vs Omega_total (transposed, matches paper)
+#   (d) bottom-right    : pipeline schematic
 # ------------------------------------------------------------
+colors = {0.5: "orange", 1.5: "green", 3.0: "red"}
+styles = {0.5: ":", 1.5: "--", 3.0: "-."}
+
 fig = plt.figure(figsize=(12, 9))
 ax_a = fig.add_subplot(2, 2, 1)
 ax_c = fig.add_subplot(2, 2, 2)
 ax_b = fig.add_subplot(2, 2, 3)
+ax_d = fig.add_subplot(2, 2, 4)
 
 # Panel (a)
 ax_a.plot(omega_total_mhz, Pout_vals * 1e6, color="purple", linewidth=2, label="EIT (real QuTiP)")
@@ -298,31 +322,91 @@ for eps in sorted(EPSILON_ILLUSTRATIVE, reverse=True):
     ax_a.axvspan(Omega_LO_opt_numeric_mhz - half_width, Omega_LO_opt_numeric_mhz + half_width,
                  color="lightblue", alpha=_ldr_alphas[eps],
                  label=rf"Eq.58 LDR, $\epsilon$={eps*100:.0f}% (illustrative): $\pm${half_width:.2f} MHz")
+# Bias marker (Omega_LO used for panels b/c) + cross-panel reference
+# dots/guide lines, same visual style as v1's Fig.5 presentation.
+ax_a.axvline(Omega_LO_for_time, color="cyan", linestyle="--", linewidth=1.2, zorder=1)
+ax_a.annotate(r"$(\Omega_{LO})_{opt}$", xy=(Omega_LO_for_time, 0.6), xytext=(Omega_LO_for_time + 1.3, 0.15),
+              color="darkcyan", fontsize=9, arrowprops=dict(arrowstyle="->", color="darkcyan"))
+
+for ORF_mhz in ORF_list_mhz:
+    c = colors[ORF_mhz]
+    ref = cross_ref[ORF_mhz]
+    for Ot_val, P_val in [(ref["Ot_min"], ref["Pout_high"]), (ref["Ot_max"], ref["Pout_low"])]:
+        ax_a.plot(Ot_val, P_val * 1e6, "o", color=c, markersize=6, zorder=5)
+        ax_a.axhline(P_val * 1e6, color=c, linestyle=":", linewidth=0.7, alpha=0.5, zorder=1)
+        ax_a.axvline(Ot_val, color=c, linestyle=":", linewidth=0.7, alpha=0.5, zorder=1)
+
 ax_a.set_xlabel(r"$\Omega_{total}/2\pi$ (MHz)")
 ax_a.set_ylabel(r"$P_{out}$ ($\mu$W)")
 ax_a.set_title("(a) Pout vs Omega_total -- real QuTiP")
+ax_a.set_xlim(0, 10)
 ax_a.set_ylim(0, 9)
 ax_a.legend(fontsize=7, loc="upper right")
 
 # Panel (c): Pout vs t
-colors = {0.5: "orange", 1.5: "green", 3.0: "red"}
-styles = {0.5: ":", 1.5: "--", 3.0: "-."}
 for ORF_mhz, (Ot, Pt) in panel_bc_data.items():
     ax_c.plot(t_vals * 1e6, Pt * 1e6, color=colors[ORF_mhz], linestyle=styles[ORF_mhz], linewidth=1.6,
               label=rf"$\Omega_{{RF}}$={ORF_mhz} MHz")
+for ORF_mhz in ORF_list_mhz:
+    c = colors[ORF_mhz]
+    ref = cross_ref[ORF_mhz]
+    ax_c.plot([0.0, period * 1e6 / 2, period * 1e6], np.array([ref["Pout_low"], ref["Pout_high"], ref["Pout_low"]]) * 1e6,
+               "o", color=c, markersize=6, zorder=5)
+    ax_c.axhline(ref["Pout_high"] * 1e6, color=c, linestyle=":", linewidth=0.7, alpha=0.5, zorder=1)
+    ax_c.axhline(ref["Pout_low"] * 1e6, color=c, linestyle=":", linewidth=0.7, alpha=0.5, zorder=1)
 ax_c.set_xlabel(r"$t$ ($\mu$s)")
 ax_c.set_ylabel(r"$P_{out}$ ($\mu$W)")
 ax_c.set_title("(c) Pout vs t -- real period 1/Delta_f (see note)")
+# Shared axes, matching the paper's own layout: panel (c)'s y-axis
+# (Pout) matches panel (a)'s exactly, and its x-axis (t) matches panel
+# (b)'s y-axis exactly -- this is what makes the colored guide lines
+# actually line up across panels, instead of drifting apart under
+# independent auto-scaling.
+ax_c.set_xlim(0, period * 1e6)
+ax_c.set_ylim(ax_a.get_ylim())
 ax_c.legend(fontsize=8)
 
 # Panel (b): t vs Omega_total (transposed, matches paper's own layout)
 for ORF_mhz, (Ot, Pt) in panel_bc_data.items():
     ax_b.plot(Ot, t_vals * 1e6, color=colors[ORF_mhz], linestyle=styles[ORF_mhz], linewidth=1.6,
               label=rf"$\Omega_{{RF}}$={ORF_mhz} MHz")
+for ORF_mhz in ORF_list_mhz:
+    c = colors[ORF_mhz]
+    ref = cross_ref[ORF_mhz]
+    ax_b.plot([ref["Ot_min"], ref["Ot_max"], ref["Ot_max"]], [period * 1e6 / 2, 0.0, period * 1e6],
+               "o", color=c, markersize=6, zorder=5)
+    ax_b.axvline(ref["Ot_min"], color=c, linestyle=":", linewidth=0.7, alpha=0.5, zorder=1)
+    ax_b.axvline(ref["Ot_max"], color=c, linestyle=":", linewidth=0.7, alpha=0.5, zorder=1)
+ax_b.axvline(Omega_LO_for_time, color="cyan", linestyle="--", linewidth=1.2, zorder=1)
 ax_b.set_xlabel(r"$\Omega_{total}/2\pi$ (MHz)")
 ax_b.set_ylabel(r"$t$ ($\mu$s)")
 ax_b.set_title("(b) Omega_total vs t (transposed, matches paper layout)")
+# Shared axes: panel (b)'s x-axis matches panel (a)'s exactly, and its
+# y-axis matches panel (c)'s x-axis exactly (same reasoning as above).
+ax_b.set_xlim(ax_a.get_xlim())
+ax_b.set_ylim(0, period * 1e6)
 ax_b.legend(fontsize=8)
+
+# Panel (d): the paper's own Input / Quantum procedure / Output
+# schematic (Fig.6's own small diagram) -- not a data plot, an
+# annotated reproduction of the paper's own layout.
+ax_d.axis("off")
+ax_d.set_xlim(0, 10)
+ax_d.set_ylim(0, 10)
+ax_d.annotate("", xy=(9.0, 8.3), xytext=(1.2, 8.3),
+              arrowprops=dict(arrowstyle="-|>", color="mediumpurple", linewidth=10, alpha=0.55,
+                               mutation_scale=25, shrinkA=0, shrinkB=0))
+ax_d.annotate("", xy=(1.2, 8.3), xytext=(1.2, 1.5),
+              arrowprops=dict(arrowstyle="-", color="mediumpurple", linewidth=10, alpha=0.55,
+                               shrinkA=0, shrinkB=0))
+ax_d.text(1.2, 9.1, "(a) Quantum procedure", fontsize=10, ha="center", va="bottom")
+ax_d.text(1.2, 8.7, r"$P_{out}$ v.s. $\Omega_{total}$", fontsize=10, ha="center", va="bottom")
+ax_d.text(9.0, 9.1, "(c) Output", fontsize=10, ha="center", va="bottom")
+ax_d.text(9.0, 8.7, r"$P_{out}$", fontsize=10, ha="center", va="bottom")
+ax_d.text(1.2, 1.1, "(b) Input", fontsize=10, ha="center", va="top")
+ax_d.text(1.2, 0.5, r"$\Omega_{total}=\Omega_{LO}+e^{j(2\pi\Delta f\,t+\Delta\phi)}\Omega_{RF}$",
+          fontsize=10, ha="center", va="top")
+ax_d.set_title("(d) Pipeline (paper's own schematic)")
 
 fig.tight_layout()
 fig.savefig(OUTPUT_DIR / "fig6_v5_qutip_ldr.png", dpi=200, bbox_inches="tight")
