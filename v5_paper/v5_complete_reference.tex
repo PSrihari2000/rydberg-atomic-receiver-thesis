@@ -4,116 +4,172 @@
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage{hyperref}
-\title{Harnessing Rydberg Atomic Receivers (v5, accepted) --- Complete Equation, Model, and Parameter Reference}
+\title{Harnessing Rydberg Atomic Receivers (v5, accepted) --- Complete Equation-by-Equation Reference}
 \author{Compiled from the accepted v5 manuscript (arXiv:2501.11842)}
 \date{}
 \begin{document}
 \maketitle
-
 \tableofcontents
 
 \section{The three receiver types --- overview}
 
-The paper compares \textbf{three} receiver architectures throughout. Every
-figure and every equation belongs to one (or a comparison) of these:
-
+The paper compares \textbf{three} receiver architectures throughout.
 \begin{enumerate}
-  \item \textbf{Conventional RF receiver}: a classical dipole-antenna +
-  LNA superheterodyne receiver. Used only as a performance baseline
-  (Fig.~2 bottom row, Fig.~8, Fig.~9, Fig.~10(a)). It has no Rydberg
-  physics at all --- just antenna gain, LNA gain, and thermal noise.
-  \item \textbf{LO-free Rydberg atomic receiver}: reads the RF field by
-  directly observing the Autler--Townes (AT) splitting of the EIT peak.
-  No extra RF tone is injected; the receiver only measures the
-  \emph{amplitude} of the incident field via the splitting interval.
-  Simple to build, but coarse (one scalar Rabi-frequency estimate per
-  scan window) and only measures amplitude, not phase.
-  \item \textbf{LO-dressed Rydberg atomic receiver}: an additional
-  strong ``local oscillator'' (LO) RF tone is deliberately injected
-  on-resonance with the same Rydberg transition, turning the atoms into
-  a coherent RF mixer/heterodyne receiver. It measures \emph{both}
-  amplitude and phase, and (per the paper's own numerical results) is
-  the most sensitive of the three.
+  \item \textbf{Conventional RF receiver}: classical dipole antenna + LNA
+  superheterodyne chain. Pure baseline, no Rydberg physics.
+  \item \textbf{LO-free Rydberg atomic receiver}: reads the RF field from
+  the Autler--Townes (AT) splitting of the EIT peak directly. Measures
+  amplitude only.
+  \item \textbf{LO-dressed Rydberg atomic receiver}: a strong extra LO RF
+  tone is injected on-resonance with the same Rydberg transition, turning
+  the atoms into a coherent mixer. Measures amplitude \emph{and} phase,
+  and is the most sensitive of the three.
 \end{enumerate}
-
-\textbf{Figure ownership summary} (which figure belongs to which model):
 
 \begin{center}
 \begin{tabular}{@{}ll@{}}
 \toprule
 Figure & What it shows / which receiver(s) \\
 \midrule
-Fig.~1 & Schematic: energy levels, LO-free vs LO-dressed setups (no data) \\
-Fig.~2 & Noise-chain schematic for all three receivers (no new data, just block diagrams) \\
+Fig.~1 & Schematic only (energy levels, LO-free vs LO-dressed setups) \\
+Fig.~2 & Noise-chain schematic, all three receivers (block diagram only) \\
 Fig.~3 & $P_\text{out}$ vs $\Delta_c,\Omega_\text{RF}$ --- LO-free, no link budget yet \\
-Fig.~4 & $P_\text{out}$ heatmap vs $\Delta_c,\mathcal{R}$ --- LO-free distortion/resolvability \\
+Fig.~4 & $P_\text{out}$ heatmap vs $\Delta_c,\mathcal{R}$ --- LO-free resolvability \\
 Fig.~5 & $P_\text{out}$ vs $\Delta_c, d_\text{Tx-Rx}$ + SNR --- LO-free, full link budget \\
-Fig.~6 & Linear dynamic range (LDR) of the LO-dressed receiver (3 sub-panels) \\
+Fig.~6 & Linear dynamic range (LDR) of the LO-dressed receiver \\
 Fig.~7 & LDR translated into $P_\text{Rx}$ bounds vs $\Omega_\text{LO}$ --- LO-dressed \\
 Fig.~8 & SNR vs distance --- all three receivers compared \\
 Fig.~9 & Mutual information vs $P_\text{Rx}$ --- all three receivers \\
-Fig.~10 & SER vs $P_\text{Rx}$ --- all three receivers, 3 sub-panels \\
+Fig.~10 & SER vs $P_\text{Rx}$ --- all three receivers \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\section{Section II: Preliminaries --- EIT, the master equation, Doppler}
+\section{Section II: Preliminaries}
 
-\subsection{Autler--Townes splitting readout (Eq.~1)}
+\subsection*{Eq.~(1) --- the AT-splitting readout relation}
 \begin{equation}
 \Delta\nu =
 \begin{cases}
 \dfrac{\Omega_\text{RF}}{2\pi}, & \text{scanning the coupling laser},\\[2mm]
-\dfrac{\Omega_\text{RF}}{2\pi}\dfrac{f_p}{f_c}, & \text{scanning the probe laser},
+\dfrac{\Omega_\text{RF}}{2\pi}\dfrac{f_p}{f_c}, & \text{scanning the probe laser}.
 \end{cases}
 \tag{1}
 \end{equation}
-\textbf{What it means:} $\Delta\nu$ is the frequency separation you
-actually observe between the two split EIT peaks. $\Omega_\text{RF}$ is
-the RF Rabi frequency you are trying to measure; $f_p,f_c$ are the probe
-and coupling laser frequencies. \textbf{Significance:} this is the
-foundational ``readout equation'' of the LO-free receiver --- it says the
-splitting you see on the photodetector directly encodes $\Omega_\text{RF}$,
-which is why scanning the coupling laser (giving the clean $\Delta\nu=\Omega_\text{RF}/2\pi$
-form) is preferred.
+\textbf{Terms:} $\Delta\nu$ is the frequency separation between the two
+split EIT peaks that you actually observe on the photodetector.
+$\Omega_\text{RF}$ is the RF Rabi frequency (what you are trying to
+measure). $f_p,f_c$ are the probe and coupling laser optical
+frequencies.
+\textbf{Significance:} this is the foundational readout equation of the
+whole LO-free concept: it says the splitting you literally see encodes
+$\Omega_\text{RF}$ directly. Scanning the coupling laser gives the
+clean, calibration-free form $\Delta\nu=\Omega_\text{RF}/2\pi$ (no probe
+absorption background), which is why it's preferred experimentally.
+\textbf{Not used for Fig.~3 itself} (Fig.~3 plots $P_\text{out}$ directly
+against $\Delta_c$, not $\Delta\nu$) --- but it is the conceptual
+justification for why Fig.~3's $x$-axis is $\Delta_c$ at all.
 
-\subsection{Beer--Lambert probe transmission (Eq.~2--4)}
+\subsection*{Eq.~(2) --- Beer--Lambert probe transmission}
 \begin{equation}
-P_\text{out}(t) = P_\text{in}\exp\{-k_pL\,\Im(\chi(t))\}, \tag{2}
+P_\text{out}(t) = P_\text{in}\exp\{-k_pL\,\Im(\chi(t))\}. \tag{2}
 \end{equation}
+\textbf{Terms:} $P_\text{out}(t)$ = transmitted probe laser intensity
+measured on the photodetector --- \emph{this is the quantity plotted on
+the $z$-axis of Fig.~3, and of every other $P_\text{out}$ figure in the
+paper}. $P_\text{in}$ = incident probe laser intensity (before the vapor
+cell). $k_p=2\pi/\lambda_p$ = probe wavenumber. $L$ = vapor-cell length.
+$\chi(t)$ = complex electric susceptibility of the atomic medium at time
+$t$; only its imaginary part matters here because $\Im(\chi)$ is what
+controls absorption (the real part would control dispersion/phase
+shift, not amplitude loss).
+\textbf{Significance:} this is a literal, standard Beer--Lambert
+absorption law, with the medium's absorption coefficient written as
+$k_p\Im(\chi)$. \textbf{This is the single formula that turns the
+quantum-mechanical coherence into the number plotted in Fig.~3} ---
+every value in our 3D surface is computed by plugging a value of
+$\Im(\chi)$ into this exact exponential. If Fig.~3 doesn't match the
+paper, the error must live either (a) upstream, in what $\chi(t)$ or
+$\Im(\chi)$ actually evaluates to (wrong Hamiltonian, wrong steady
+state, wrong parameters), or (b) in the constants $k_p$, $L$, $P_\text{in}$
+fed into this exact exponential. There is no other place for a bug to
+hide in this equation itself --- it's a one-line formula.
+
+\subsection*{Eq.~(3) --- $P_\text{in}$ in terms of the probe Rabi frequency}
 \begin{equation}
-P_\text{in} = \frac{\pi}{2Z_0}\left(\frac{d\,\Omega_p\hbar}{2\sqrt{\wp_{12}}}\right)^2, \tag{3}
+P_\text{in} = \frac{\pi}{2Z_0}\left(\frac{d\,\Omega_p\hbar}{2\sqrt{\wp_{12}}}\right)^2. \tag{3}
 \end{equation}
+\textbf{Terms:} $d$ = probe beam $1/e^2$ diameter. $\Omega_p$ = probe
+Rabi frequency. $\hbar$ = reduced Planck's constant. $\wp_{12}$ = dipole
+moment of the $|1\rangle$--$|2\rangle$ transition (\textbf{note}: as
+written, $\wp_{12}$ is used \emph{under a square root} here --- confirms
+$\wp_{12}$ is defined as an already-squared quantity, i.e.
+$\wp_{12}=(2.5ea_0)^2$ as stated later in the paper, not
+$\wp_{12}=2.5ea_0$). $Z_0$ = free-space impedance.
+\textbf{Significance:} this equation is the physical link between the
+probe beam's intensity/power and its Rabi frequency (via the beam
+diameter $d$, which sets the field's spatial concentration). \textbf{This
+is the exact equation at the center of the known Pin/diameter
+inconsistency}: plugging in the paper's own stated $d=0.76$~mm and
+$\Omega_p/2\pi=8$~MHz gives $P_\text{in}=39.08\,\mu$W, not the
+$20.7\,\mu$W the paper also states directly in the same parameter list.
+\textbf{This equation is not directly used to compute Fig.~3's
+$P_\text{out}$ surface} (we use the stated $P_\text{in}=20.7\,\mu$W
+directly in Eq.~2, and the stated $\Omega_p/2\pi=8$~MHz directly in the
+Hamiltonian, Eq.~6) --- but it is the reason those two paper-stated
+numbers can never both be exactly self-consistent, which is one
+confirmed, real source of an overall multiplicative scale mismatch
+(though NOT of any shape/sharpness mismatch, since Eq.~3 only sets an
+overall constant, not how $P_\text{out}$ depends on $\Delta_c$ or
+$\Omega_\text{RF}$).
+
+\subsection*{Eq.~(4) --- susceptibility in terms of the coherence}
 \begin{equation}
 \chi(t) = C_0\,\rho_{21}(t), \qquad C_0 = \frac{-2N_0\wp_{12}}{\epsilon_0\hbar\Omega_p}. \tag{4}
 \end{equation}
-\textbf{Terms:} $P_\text{in}$ = incident probe laser intensity;
-$P_\text{out}(t)$ = transmitted probe intensity measured on the
-photodetector (PD) --- \emph{this is the quantity every $P_\text{out}$
-figure in the paper plots}; $k_p=2\pi/\lambda_p$ = probe wavenumber; $L$
-= vapor-cell length; $\chi(t)$ = complex susceptibility of the medium;
-$\rho_{21}(t)$ = the $|1\rangle$--$|2\rangle$ coherence (off-diagonal
-density-matrix element) --- \emph{the single quantity every other
-formula in the paper ultimately reduces to}; $N_0$ = total atomic
-number density; $\wp_{12}$ = dipole moment of the $|1\rangle$--$|2\rangle$
-transition; $d$ = probe beam $1/e^2$ diameter; $\Omega_p$ = probe Rabi
-frequency; $Z_0$ = free-space impedance; $\epsilon_0$ = vacuum
-permittivity.
-\textbf{Significance:} Eq.~2 is literally the Beer--Lambert absorption
-law with the absorption coefficient written in terms of the imaginary
-part of the atomic susceptibility --- \emph{this is the master formula
-used to generate every single $P_\text{out}$ curve/surface in the whole
-paper (Fig.~3, 4, 5, 6)}. Eq.~3 tells you how $P_\text{in}$ and
-$\Omega_p$ are tied together through the beam diameter $d$ --- this is
-the equation whose self-consistency with the stated $P_\text{in}=20.7\,\mu$W
-and $d=0.76$~mm is the known internal inconsistency in the paper (using
-Eq.~3 with $d=0.76$~mm and $\Omega_p/2\pi=8$~MHz gives
-$P_\text{in}=39.08\,\mu$W, not 20.7~$\mu$W).
+\textbf{Terms:} $\rho_{21}(t)$ = the $|1\rangle$--$|2\rangle$ coherence,
+an off-diagonal element of the atomic density matrix --- \emph{the
+single quantity that the entire quantum-mechanical part of the model
+(Hamiltonian + Lindblad + steady state) exists to compute}. $C_0$ = a
+real, negative constant bundling $N_0$ (atomic density), $\wp_{12}$
+(dipole moment), $\epsilon_0$ (vacuum permittivity), $\hbar$, and
+$\Omega_p$. $N_0$ = total atomic number density in the vapor cell.
+\textbf{Significance:} this equation is the direct bridge between
+``quantum physics'' ($\rho_{21}$, computed via QuTiP) and ``classical
+optics'' ($\chi$, fed into Beer--Lambert, Eq.~2). \textbf{$C_0$ is
+exactly where $N_0=4.89\times10^{16}\,\text{m}^{-3}$ enters the whole
+calculation} --- since $C_0$ is a simple linear prefactor, doubling
+$N_0$ exactly doubles $\Im(\chi)$ for the same $\rho_{21}$, which (through
+Eq.~2's exponential) can massively change $P_\text{out}$'s absolute
+scale and apparent sharpness. This is the equation responsible for the
+already-confirmed ``high-$N_0$ compression'' effect: because $N_0$ is
+large, small physically-correct changes in $\rho_{21}$ (from changing
+$\Delta_c$ or $\Omega_\text{RF}$ by a little) get amplified into large
+changes in $\Im(\chi)$, and then further amplified exponentially by
+Eq.~2 --- producing a sharper, narrower-looking $P_\text{out}$ curve than
+a naive linear intuition would suggest.
 
-\subsection{Master equation and Hamiltonian (Eq.~5--7)}
+\subsection*{Eq.~(5) --- the master equation}
 \begin{equation}
 \dot{\boldsymbol\rho} = \frac{\partial\boldsymbol\rho}{\partial t} = -\frac{j}{\hbar}[\mathbf H,\boldsymbol\rho] + \mathcal L. \tag{5}
 \end{equation}
+\textbf{Terms:} $\boldsymbol\rho$ = the full $4\times4$ density matrix of
+the 4-level atomic system. $\mathbf H$ = the system Hamiltonian
+(Eq.~6). $[\mathbf H,\boldsymbol\rho]=\mathbf H\boldsymbol\rho-\boldsymbol\rho\mathbf H$
+= the commutator, generating coherent (unitary) evolution. $\mathcal L$
+= the Lindblad dissipator (Eq.~7), generating incoherent
+(spontaneous-emission) evolution. $j=\sqrt{-1}$ (engineering notation
+for the imaginary unit, used throughout the paper instead of $i$).
+\textbf{Significance:} this is the standard Lindblad master equation for
+an open quantum system --- the general-purpose equation that
+\texttt{qutip.steadystate()} solves (by construction) when you pass it
+$\mathbf H$ and the collapse operators. \textbf{There is no ambiguity or
+possible bug in this equation itself} --- QuTiP's steady-state solver
+implements exactly this, given a correct $\mathbf H$ and a correct set
+of collapse operators. Any discrepancy must trace back to $\mathbf H$
+(Eq.~6) or the collapse operators (Eq.~7), not to this equation.
+
+\subsection*{Eq.~(6) --- the 4-level Hamiltonian}
 \begin{equation}
 \mathbf H = \frac{\hbar}{2}
 \begin{bmatrix}
@@ -123,20 +179,36 @@ $P_\text{in}=39.08\,\mu$W, not 20.7~$\mu$W).
 0 & 0 & \Omega & -2(\Delta_p+\Delta_c+\Delta_\text{RF})
 \end{bmatrix}. \tag{6}
 \end{equation}
-\textbf{Terms:} 4-level ladder system $|1\rangle\!\to\!|2\rangle\!\to\!|3\rangle\!\to\!|4\rangle$
-(Cs: $6S_{1/2}\to 6P_{3/2}\to 47D_{5/2}\to 48P_{3/2}$). $\Omega_p,\Omega_c$
-= probe/coupling Rabi frequencies (fixed, always present). $\Omega$ (the
-bare, unsubscripted symbol in row/col 3--4) is the $|3\rangle$--$|4\rangle$
-coupling --- \textbf{the paper explicitly states this ``differs for
-LO-free and LO-dressed receivers''}: for the LO-free receiver
-$\Omega=\Omega_\text{RF}$ (confirmed by its use in Eq.~8, Sec.~III-A);
-for the LO-dressed receiver $\Omega=\Omega_\text{total}$ (Eq.~26/28, a
-complex-phasor combination of the LO and RF fields). $\Delta_p,\Delta_c,\Delta_\text{RF}$
-= probe/coupling/RF detunings. \textbf{Significance:} this is \emph{the}
-Hamiltonian used for every QuTiP steady-state solve in the whole
-project (Fig.~3--7 all reuse this exact 4-level structure, only
-changing which detunings are swept and what goes in the $\Omega$ slot).
+\textbf{Terms:} basis states $|1\rangle,|2\rangle,|3\rangle,|4\rangle$
+correspond to Cs levels $6S_{1/2}, 6P_{3/2}, 47D_{5/2}, 48P_{3/2}$.
+$\Omega_p$ = probe Rabi frequency (couples $|1\rangle\leftrightarrow|2\rangle$).
+$\Omega_c$ = coupling Rabi frequency (couples
+$|2\rangle\leftrightarrow|3\rangle$). $\Omega$ (bare, unsubscripted) =
+the $|3\rangle\leftrightarrow|4\rangle$ coupling --- \textbf{the paper
+explicitly states in the text immediately after this equation that
+``the Rabi frequency $\Omega$ in (6) differs for LO-free and LO-dressed
+Rydberg atomic receivers.''} For the LO-free receiver (Fig.~3, 4, 5),
+$\Omega=\Omega_\text{RF}$ directly (confirmed by Eq.~8's own use of
+$\Omega_\text{RF}$ in exactly this matrix slot). For the LO-dressed
+receiver (Fig.~6, 7), $\Omega=\Omega_\text{total}=\Omega_\text{LO}+e^{j(2\pi\Delta f\,t+\Delta\phi)}\Omega_\text{RF}$
+(a complex phasor, defined later at Eq.~26/28 context). $\Delta_p,\Delta_c,\Delta_\text{RF}$
+= detunings of the probe, coupling, and RF fields from their respective
+transitions.
+\textbf{Significance:} this is \emph{the} Hamiltonian used for every
+single QuTiP steady-state solve in this whole reproduction (Fig.~3
+through Fig.~7 all reuse this exact 4-level structure, changing only
+which detunings are swept and what value goes in the $\Omega$ slot).
+\textbf{For debugging Fig.~3 specifically}: confirm your code's matrix
+uses $-\Delta_p$ (not $-2\Delta_p$) on the diagonal if your Hamiltonian
+is defined directly in angular-frequency units without an explicit
+$\hbar/2$ prefactor (i.e., if you write \texttt{H = ...} without
+dividing by $\hbar$ afterward) --- dividing the paper's $\frac{\hbar}{2}\times(-2\Delta_p)$
+by $\hbar$ gives exactly $-\Delta_p$, which is what a
+Hamiltonian-in-frequency-units convention (the usual QuTiP convention
+for a Hermitian generator with $\hbar=1$) should use. This has already
+been verified correct in this project's code.
 
+\subsection*{Eq.~(7) --- the Lindblad dissipator}
 \begin{equation}
 \mathcal L =
 \begin{bmatrix}
@@ -144,449 +216,1050 @@ changing which detunings are swept and what goes in the $\Omega$ slot).
 -\gamma_{21}\rho_{21} & \gamma_3\rho_{33}-\gamma_2\rho_{22} & -\gamma_{23}\rho_{23} & -\gamma_{24}\rho_{24}\\
 -\gamma_{31}\rho_{31} & -\gamma_{32}\rho_{32} & \gamma_4\rho_{44}-\gamma_3\rho_{33} & -\gamma_{34}\rho_{34}\\
 -\gamma_{41}\rho_{41} & -\gamma_{42}\rho_{42} & -\gamma_{43}\rho_{43} & -\gamma_4\rho_{44}
-\end{bmatrix},\quad \gamma_{ij}=\frac{\gamma_i+\gamma_j}{2}. \tag{7}
+\end{bmatrix},\qquad \gamma_{ij}=\frac{\gamma_i+\gamma_j}{2}. \tag{7}
 \end{equation}
 \textbf{Terms:} $\gamma_2,\gamma_3,\gamma_4$ = spontaneous-emission
-(population decay) rates of levels 2,3,4 ($\gamma_1=0$, ground state).
-$\gamma_{ij}$ = coherence dephasing rate between levels $i,j$.
-\textbf{Significance:} this is a standard \emph{cascade decay} Lindblad
-superoperator --- equivalent to QuTiP collapse operators
-$\sqrt{\gamma_2}|1\rangle\langle2|,\ \sqrt{\gamma_3}|2\rangle\langle3|,\ \sqrt{\gamma_4}|3\rangle\langle4|$.
-This is exactly what should be passed to \texttt{qutip.steadystate()}.
+(population decay) rates out of levels 2, 3, 4 respectively ($\gamma_1=0$
+since $|1\rangle$ is the ground state and cannot decay further).
+$\gamma_{ij}=(\gamma_i+\gamma_j)/2$ = the dephasing rate of coherence
+$\rho_{ij}$, a standard relation for decay-induced dephasing.
+\textbf{Significance:} this matrix describes a simple \emph{cascade
+decay} chain: $|2\rangle\to|1\rangle$ at rate $\gamma_2$,
+$|3\rangle\to|2\rangle$ at rate $\gamma_3$, $|4\rangle\to|3\rangle$ at
+rate $\gamma_4$ --- population only ever flows \emph{downward}. This
+exact structure is generated automatically by three QuTiP collapse
+operators $\sqrt{\gamma_2}|1\rangle\langle2|$,
+$\sqrt{\gamma_3}|2\rangle\langle3|$, $\sqrt{\gamma_4}|3\rangle\langle4|$
+--- if your code's collapse operators are anything other than exactly
+these three (e.g., missing one, wrong ket/bra order, or an extra
+spurious dephasing-only operator), the resulting steady state will
+differ from the paper's model, silently. \textbf{This has already been
+verified correct} in this project's Fig.~3 code by direct comparison of
+the collapse-operator list against this matrix structure.
 
-\subsection{Closed-form steady state (Eq.~8) --- weak-probe approximation}
+\subsection*{Eq.~(8) --- closed-form steady-state coherence (weak-probe limit)}
 \begin{equation}
 \rho_{21} = \cfrac{-j(\Omega_p/2)}{\gamma_{21}-j\Delta_p-\cfrac{(\Omega_c/2)^2}{\gamma_{31}-j(\Delta_p+\Delta_c)-\cfrac{(\Omega_\text{RF}/2)^2}{\gamma_{41}-j(\Delta_p+\Delta_c+\Delta_\text{RF})}}}. \tag{8}
 \end{equation}
+\textbf{Terms:} a nested continued fraction in $\Omega_p,\Omega_c,\Omega_\text{RF}$
+and the three detunings, using the same $\gamma_{ij}$ dephasing rates as
+Eq.~7.
 \textbf{Significance:} this is the paper's own \emph{analytic}
-(non-QuTiP) steady-state solution, derived in Appendix~A under the
-weak-probe assumption $\rho_{11}\approx1$. \textbf{Caution (verified
-this session):} this formula is only well-behaved for small
-$\Omega_\text{RF}$ --- because $\gamma_4/2\pi=1.7$~kHz is so tiny, the
-nested term $(\Omega_\text{RF}/2)^2/\gamma_{41}$ blows up almost
-immediately, making Eq.~8 give unphysical results (gain $>1$, or an
-instant collapse to zero) once $\Omega_\text{RF}$ is more than a
-fraction of a kHz. \textbf{Do not use Eq.~8 to generate Fig.~3--type
-data} --- the paper itself only uses full QuTiP for those figures; Eq.~8
-is presented for physical intuition/derivation purposes only.
+alternative to a full QuTiP steady-state solve, derived (Appendix A)
+under the weak-probe approximation $\rho_{11}\approx1$,
+$\rho_{22},\rho_{33},\rho_{44}\approx0$. \textbf{Verified this session
+to be numerically pathological in Fig.~3's actual operating regime}: at
+$\Delta_c=0$ and $\Omega_\text{RF}=0$ it gives unphysical gain
+($P_\text{out}>P_\text{in}$), and for any $\Omega_\text{RF}\gtrsim0.5$~MHz
+it collapses to numerically zero and stays flat --- because
+$\gamma_4/2\pi=1.7$~kHz is so tiny that the innermost term
+$(\Omega_\text{RF}/2)^2/\gamma_{41}$ explodes almost immediately. Tried
+three different sign conventions (flip the outer $j$, flip all $j$'s,
+flip only the detuning signs) --- none produce a sane curve. \textbf{Do
+not use Eq.~8 to try to reproduce or debug Fig.~3} --- the paper's own
+Fig.~3 was generated with full QuTiP (stated directly in Sec.~V-A: ``We
+employ the QuTiP toolkit for simulating the quantum system''), not this
+closed form. This equation is only useful for physical intuition and
+for deriving other analytic results elsewhere in the paper (e.g., the
+LO-dressed Appendix~C derivations).
 
-\subsection{Doppler broadening (Eq.~9--11)}
+\subsection*{Eq.~(9) --- Maxwell--Boltzmann velocity distribution}
 \begin{equation}
-g(v_z) = \frac{1}{\sqrt{2\pi}\sigma_v}e^{-v_z^2/(2\sigma_v^2)}, \tag{9}
+g(v_z) = \frac{1}{\sqrt{2\pi}\sigma_v}e^{-v_z^2/(2\sigma_v^2)}. \tag{9}
 \end{equation}
+\textbf{Terms:} $v_z$ = atomic velocity component along the laser
+propagation axis. $\sigma_v=\sqrt{k_BT/m_\text{Rb}}$ = the thermal
+velocity spread (standard deviation), with $k_B$ = Boltzmann constant,
+$T$ = vapor temperature, $m_\text{Rb}$ = atomic mass.
+\textbf{Significance:} standard 1-D thermal velocity distribution for a
+room-temperature atomic vapor --- the starting point for modeling
+Doppler broadening.
+
+\subsection*{Eq.~(10) --- Doppler-shifted detunings}
 \begin{equation}
 \Delta_p(v_z)=\Delta_p-\frac{2\pi}{\lambda_p}v_z,\qquad
-\Delta_c(v_z)=\Delta_c+\frac{2\pi}{\lambda_c}v_z, \tag{10}
+\Delta_c(v_z)=\Delta_c+\frac{2\pi}{\lambda_c}v_z. \tag{10}
 \end{equation}
+\textbf{Terms:} $\lambda_p,\lambda_c$ = probe/coupling laser
+wavelengths. The opposite signs on the two Doppler-shift terms come
+directly from the probe and coupling lasers being
+\textbf{counter-propagating} (stated explicitly in the text) --- an
+atom moving toward one beam is moving away from the other.
+\textbf{Significance:} this is how a single atomic velocity $v_z$ maps
+onto an \emph{effective}, atom-specific pair of detunings that then get
+substituted into Eq.~8 (or the full Hamiltonian) before averaging.
+\textbf{Directly relevant to the Fig.~3 debugging question}: this
+project deliberately does \emph{not} apply Eq.~10/11 to Fig.~3, because
+a real convergence test showed that properly-converged Doppler
+averaging completely erases the AT splitting (a $\sim$0\% dip at
+$\Delta_c=0$), which contradicts the real published Fig.~3 (which
+clearly shows resolved splitting). The paper's own cited source for
+this exact kind of EIT-AT spectrum plot explicitly states it uses a
+\textbf{cold-atom model} (no Doppler averaging) for its own analogous
+figure. If you want to re-litigate this decision as part of your deep
+dive, this is the equation pair to revisit --- but the convergence-test
+evidence against including it is strong.
+
+\subsection*{Eq.~(11) --- Doppler-averaged coherence}
 \begin{equation}
 \bar\rho_{21}(\Delta_p)=\int_{-\infty}^{+\infty}\rho_{21}(v_z)\,g(v_z)\,dv_z. \tag{11}
 \end{equation}
-\textbf{Terms:} $v_z$ = atomic velocity along the beam axis;
-$\sigma_v=\sqrt{k_BT/m_\text{Rb}}$ = thermal velocity spread; $g(v_z)$ =
-Maxwell--Boltzmann velocity distribution. \textbf{Significance:} this
-models thermal (room-temperature vapor) Doppler broadening from
-counter-propagating probe/coupling beams. \textbf{Important
-project-specific finding:} this project deliberately does \emph{not}
-use Eq.~9--11 for Fig.~3, because (a) the text never applies it near the
-actual Sec.~V-A simulation parameters, and (b) a real convergence test
-showed the AT splitting is completely erased once Doppler averaging is
-properly converged --- inconsistent with the real published Fig.~3.
-The paper's own cited source for the cold-atom EIT-AT spectrum
-explicitly uses a cold-atom (no-Doppler) model for exactly this kind of
-plot.
+\textbf{Terms:} $\rho_{21}(v_z)$ = the coherence computed (via Eq.~8, or
+a full solve) using the velocity-shifted detunings from Eq.~10, for one
+specific atomic velocity class $v_z$. The integral averages over the
+full thermal velocity distribution $g(v_z)$ from Eq.~9.
+\textbf{Significance:} this is the final Doppler-averaging step ---
+in principle, the ``correct'' $\rho_{21}$ to feed into Eq.~4/2 for a
+warm vapor. As noted under Eq.~10, this project's convergence testing
+showed this integral needs $\gtrsim400$ velocity-class samples to
+converge (given the single-photon Doppler width is $\sim$158~MHz versus
+the $\sim$MHz-scale EIT features), and a properly-converged version
+erases the AT splitting entirely --- which is why Fig.~3 in this
+project uses the \emph{unaveraged}, single-velocity-class ($v_z=0$,
+i.e. cold-atom) result instead.
 
 \section{Section III-A: LO-free Rydberg atomic receiver model}
 
-\subsection{RF Rabi frequency definition (Eq.~12)}
+\subsection*{Eq.~(12) --- RF Rabi frequency from the field}
 \begin{equation}
 \Omega_\text{RF} = \frac{|E_\text{RF}|\wp_\text{RF}}{\hbar}. \tag{12}
 \end{equation}
-\textbf{Terms:} $E_\text{RF}$ = incident RF electric field amplitude;
+\textbf{Terms:} $E_\text{RF}$ = incident RF electric field amplitude.
 $\wp_\text{RF}$ = dipole moment of the $|3\rangle$--$|4\rangle$
-(Rydberg--Rydberg) transition ($\wp_\text{RF}=-1443.459\,ea_0$, paper-stated).
-\textbf{Significance:} this is the fundamental
-field$\to$Rabi-frequency conversion used everywhere a distance or
-transmit power needs to be turned into $\Omega_\text{RF}$ (Fig.~5, Fig.~7).
+(Rydberg--Rydberg) transition, stated as $\wp_\text{RF}=-1443.459\,ea_0$.
+\textbf{Significance:} the fundamental field-to-Rabi-frequency
+conversion, used any time a distance or transmit power needs to become
+an $\Omega_\text{RF}$ value to feed into the quantum model (Fig.~5,
+Fig.~7). Not used by Fig.~3 itself (Fig.~3 sweeps $\Omega_\text{RF}$
+directly as an independent axis, with no link budget involved).
 
-\subsection{Signal model and link budget (Eq.~13--18)}
-\begin{align}
-y &= \sqrt{P_\text{Rx}}\,hx+n_\text{ex}, \qquad P_\text{Rx}=\frac{|E_\text{RF}|^2}{2Z_0}, \tag{13}\\
-P_\text{Rx} &= P_\text{Tx}G_\text{Tx}G_\text{Rx}\left(\frac{\lambda}{4\pi d_\text{Tx-Rx}}\right)^2 \quad\text{(Friis, classical antennas)}, \tag{14}\\
-S_\text{Rx} &= \frac{P_\text{Tx}G_\text{Tx}}{4\pi d_\text{Tx-Rx}^2} \quad\text{(power flux density at the Rydberg receiver)}, \tag{15}\\
-P_\text{Rx} &= S_\text{Rx}A_\text{eff} \quad\text{(Rydberg receiver has no metallic antenna/gain, only an effective aperture)}, \tag{16}\\
-A_\text{eff} &= \frac{2Z_0N_\text{atoms}\wp_\text{RF}^2\omega_\text{RF}}{\hbar\Gamma_\text{FWHM}}, \qquad \omega_\text{RF}=2\pi f_\text{RF}, \tag{17}\\
-z &\triangleq \Omega_\text{RF}[k] = \frac{\wp_\text{RF}}{\hbar}|E_\text{RF}hx+n_\text{Ry}|. \tag{18}
-\end{align}
-\textbf{Terms:} $P_\text{Tx},G_\text{Tx}$ = Tx power/antenna gain;
-$G_\text{Rx}$ = classical Rx antenna gain (\emph{does not apply} to the
-Rydberg receiver, which has no metallic antenna --- Eq.~14 is quoted
-only for the conventional-receiver comparison); $d_\text{Tx-Rx}$ = link
-distance; $N_\text{atoms}$ = number of atoms effectively contributing
-(\textbf{note: the paper never gives a numeric value or formula for
-$N_\text{atoms}$ anywhere} --- this is a genuine, confirmed gap, not an
-oversight on the reader's part); $\Gamma_\text{FWHM}$ = the ``intrinsic
-EIT linewidth'' (also never given a single unambiguous closed-form
-value usable across all figures --- see the per-figure notes below).
-\textbf{Significance:} this whole chain (Eq.~14$\to$15$\to$16$\to$17$\to$12)
-is exactly how a physical link distance becomes an $\Omega_\text{RF}$
-value to feed into the quantum-optical model --- it is the backbone of
-Fig.~5 and Fig.~7's distance/power axes. $A_\text{eff}$ (Eq.~17) is the
-single most important LO-free link-budget quantity: notice it scales
-with $N_\text{atoms}$ and the transition properties, \emph{not} the
-physical cross-sectional area of the vapor cell (explicitly stated,
-Appendix~B) --- a deliberate departure from classical antenna theory.
+\subsection*{Eq.~(13) --- LO-free signal model and received power definition}
+\begin{equation}
+y = \sqrt{P_\text{Rx}}\,hx+n_\text{ex}, \qquad P_\text{Rx}=\frac{|E_\text{RF}|^2}{2Z_0}. \tag{13}
+\end{equation}
+\textbf{Terms:} $x\sim\mathcal{CN}(0,1)$ = unit-power complex Gaussian
+transmitted symbol. $h\sim\mathcal{CN}(0,1)$ = complex Gaussian channel
+gain. $n_\text{ex}$ = extrinsic (BBR) noise. $P_\text{Rx}$ = received RF
+power, defined here directly from the field amplitude.
+\textbf{Significance:} sets up the standard wireless-communications
+signal model wrapping around the Rydberg physics --- not used for
+Fig.~3 (a pure physics figure with no wireless-link elements).
 
-\subsection{Discrete-time observation model (Eq.~19--23)}
-\begin{align}
-x(t) &\approx x[k],\ t\in[kT_m,(k+1)T_m], \tag{19}\\
-\Delta_c(t) &= \Delta_{c,\min}+\frac{\Delta_{c,\max}-\Delta_{c,\min}}{T_m}(t-kT_m), \tag{20}\\
-v_k(t) &= R_\text{PD}P_\text{out}(\Delta_c(t))+n_{\text{Ry},k}(t), \tag{21}\\
-v_k[m] &= R_\text{PD}P_\text{out}(\Delta_c[m])+n_{\text{Ry},k}[m], \tag{22}\\
-z[k] &\triangleq \Omega_\text{RF}[k] = \mathcal E\left(v_k[m]_{m=0}^{M-1}\right). \tag{23}
-\end{align}
-\textbf{Significance:} formalizes the LO-free receiver as a
-``scan-and-estimate'' architecture --- the coupling laser is swept
-across a detuning window once per measurement window $T_m$, the PD
-trace is sampled at $M$ points, and an AT-splitting extraction
-procedure $\mathcal E(\cdot)$ (peak-separation detection or model-based
-fitting) turns the whole trace into a single scalar estimate of
-$\Omega_\text{RF}$. This directly explains why the LO-free receiver's
-symbol rate is capped at $R_s\le1/T_m$ --- it fundamentally needs a
-whole scan to produce one number.
+\subsection*{Eq.~(14) --- Friis transmission equation}
+\begin{equation}
+P_\text{Rx} = P_\text{Tx}G_\text{Tx}G_\text{Rx}\left(\frac{\lambda}{4\pi d_\text{Tx-Rx}}\right)^2. \tag{14}
+\end{equation}
+\textbf{Terms:} $P_\text{Tx},G_\text{Tx}$ = transmit power and Tx
+antenna gain. $G_\text{Rx}$ = classical receive antenna gain.
+$d_\text{Tx-Rx}$ = link distance. $\lambda$ = RF wavelength.
+\textbf{Significance:} the standard classical link-budget formula,
+quoted here explicitly as \emph{not directly applicable} to the Rydberg
+receiver, since ``there is no metallic antenna and hence no meaningful
+classical gain $G_\text{Rx}$'' --- this sets up why Eq.~15--17 are needed
+instead.
+
+\subsection*{Eq.~(15) --- received power flux density}
+\begin{equation}
+S_\text{Rx} = \frac{P_\text{Tx}G_\text{Tx}}{4\pi d_\text{Tx-Rx}^2}. \tag{15}
+\end{equation}
+\textbf{Terms:} $S_\text{Rx}$ = power flux density (units W/m$^2$) at
+the receiver location.
+\textbf{Significance:} this is Eq.~14 with the $G_\text{Rx}$ and
+wavelength-squared factor stripped out --- i.e. just the raw
+free-space power density arriving at the receiver's location,
+independent of what kind of receiver sits there.
+
+\subsection*{Eq.~(16) --- power via effective aperture}
+\begin{equation}
+P_\text{Rx} = S_\text{Rx}A_\text{eff}. \tag{16}
+\end{equation}
+\textbf{Terms:} $A_\text{eff}$ = the Rydberg receiver's effective
+aperture (Eq.~17).
+\textbf{Significance:} replaces the classical antenna-gain-based
+power-capture picture with an aperture-based one --- appropriate since
+the Rydberg atoms ``sense'' the field via dipole coupling rather than
+guiding currents through a metallic structure.
+
+\subsection*{Eq.~(17) --- effective aperture}
+\begin{equation}
+A_\text{eff} = \frac{2Z_0N_\text{atoms}\wp_\text{RF}^2\omega_\text{RF}}{\hbar\Gamma_\text{FWHM}}, \qquad \omega_\text{RF}=2\pi f_\text{RF}. \tag{17}
+\end{equation}
+\textbf{Terms:} $N_\text{atoms}$ = number of atoms effectively
+contributing to the reception (\textbf{the paper never gives this a
+numeric value or an explicit formula anywhere} --- confirmed by
+exhaustive search of the paper and its three cited references; this is
+a genuine, real gap, not something you're missing in your reading).
+$\Gamma_\text{FWHM}$ = the ``intrinsic EIT linewidth'' (also never given
+one single, unambiguous closed-form value that's consistent across
+every figure that uses it --- see the per-figure notes near the end of
+this document).
+\textbf{Significance:} derived in Appendix~B from first principles
+(scattering-rate $\times$ energy-per-photon arguments) --- confirms
+$A_\text{eff}$ scales with $N_\text{atoms}$ and the transition's own
+properties, explicitly \emph{not} the physical cross-sectional area of
+the vapor cell. Not used by Fig.~3 (no link budget there).
+
+\subsection*{Eq.~(18) --- LO-free observation model, recast}
+\begin{equation}
+z = \frac{\wp_\text{RF}}{\hbar}\left|E_\text{RF}hx+n_\text{Ry}\right|. \tag{18}
+\end{equation}
+\textbf{Terms:} $z$ = the scalar LO-free observation (physically, an
+estimated Rabi frequency). $n_\text{Ry}$ = the lumped noise term
+covering all relevant noise sources (detailed later in Eq.~46).
+\textbf{Significance:} recasts Eq.~13's signal model into the actual
+physical quantity the LO-free receiver outputs --- a magnitude
+(Rabi-frequency) estimate, not a complex baseband voltage like a
+conventional receiver would produce.
+
+\subsection*{Eq.~(19) --- piecewise-constant RF amplitude assumption}
+\begin{equation}
+x(t) \approx x[k],\quad t\in[kT_m,(k+1)T_m]. \tag{19}
+\end{equation}
+\textbf{Terms:} $T_m$ = one measurement/scan window duration.
+\textbf{Significance:} formalizes the assumption that the incident RF
+amplitude doesn't change appreciably during one full coupling-laser
+scan --- needed to justify treating one scan as producing one valid
+observation.
+
+\subsection*{Eq.~(20) --- coupling-laser scan trajectory}
+\begin{equation}
+\Delta_c(t) = \Delta_{c,\min}+\frac{\Delta_{c,\max}-\Delta_{c,\min}}{T_m}(t-kT_m),\qquad t\in[kT_m,(k+1)T_m]. \tag{20}
+\end{equation}
+\textbf{Terms:} $\Delta_{c,\min},\Delta_{c,\max}$ = the scanned detuning
+range's endpoints.
+\textbf{Significance:} describes the coupling laser being linearly
+swept (a ramp) across a fixed detuning window once per measurement
+window --- this is exactly the kind of sweep Fig.~3's $\Delta_c$-axis
+represents conceptually, though Fig.~3 itself just plots the
+steady-state result at each $\Delta_c$, not a literal time-domain scan.
+
+\subsection*{Eq.~(21) --- continuous-time photodetector output}
+\begin{equation}
+v_k(t) = R_\text{PD}P_\text{out}(\Delta_c(t))+n_{\text{Ry},k}(t),\quad t\in[kT_m,(k+1)T_m]. \tag{21}
+\end{equation}
+\textbf{Terms:} $R_\text{PD}$ = photodetector responsivity.
+$n_{\text{Ry},k}(t)$ = the relevant noise contributions during scan $k$.
+\textbf{Significance:} what the PD literally outputs during one scan
+--- the real $P_\text{out}(\Delta_c)$ trace (exactly what Fig.~3 plots,
+one $\Omega_\text{RF}$ slice at a time) plus noise.
+
+\subsection*{Eq.~(22) --- sampled photodetector output}
+\begin{equation}
+v_k[m] = R_\text{PD}P_\text{out}(\Delta_c[m])+n_{\text{Ry},k}[m]. \tag{22}
+\end{equation}
+\textbf{Terms:} $m=0,\dots,M-1$ indexes $M$ discrete detuning sample
+points within one scan.
+\textbf{Significance:} the discrete-time version of Eq.~21 --- this is
+literally what one column of a digitized Fig.~3-style sweep looks like
+in practice.
+
+\subsection*{Eq.~(23) --- the LO-free discrete observation}
+\begin{equation}
+z[k] \triangleq \Omega_\text{RF}[k] = \mathcal E\left(v_k[m]_{m=0}^{M-1}\right). \tag{23}
+\end{equation}
+\textbf{Terms:} $\mathcal E(\cdot)$ = an AT-splitting extraction
+procedure (e.g. peak-separation detection, or model-based fitting).
+\textbf{Significance:} formalizes the LO-free receiver's whole job as a
+function $\mathcal E$ that turns one entire scan trace (i.e., one
+Fig.~3-style curve) into a single scalar $\Omega_\text{RF}$ estimate.
+This is also why the LO-free symbol rate is capped at $R_s\le1/T_m$
+--- fundamentally, it needs one whole scan per observation.
 
 \section{Section III-B: LO-dressed Rydberg atomic receiver model}
 
-\subsection{Field superposition and envelope detection (Eq.~24--26)}
-\begin{align}
-E_\text{LO} &= A_\text{LO}\cos(2\pi f_\text{LO}t+\phi_\text{LO}), \tag{24a}\\
-E_\text{RF} &= A_\text{RF}\cos(2\pi f_\text{RF}t+\phi_\text{RF}), \tag{24b}\\
-E_\text{total} &= E_\text{LO}+E_\text{RF} \notag\\
-&=\sqrt{A_\text{LO}^2+A_\text{RF}^2+2A_\text{LO}A_\text{RF}\cos(2\pi\Delta f\,t+\Delta\phi)}\cos(2\pi f_\text{LO}t+\phi_\text{LO}), \tag{25}\\
-E_\text{total} &\approx [A_\text{LO}+A_\text{RF}\cos(2\pi\Delta f\,t+\Delta\phi)]\cos(2\pi f_\text{LO}t+\phi_\text{LO}) \quad (A_\text{RF}/A_\text{LO}\ll1). \tag{26}
-\end{align}
-\textbf{Terms:} $\Delta f=f_\text{LO}-f_\text{RF}$, $\Delta\phi=\phi_\text{LO}-\phi_\text{RF}$.
-\textbf{Significance:} the LO and RF fields beat together; Eq.~26 is a
-second-order Taylor expansion in the small ratio $A_\text{RF}/A_\text{LO}$
-showing the beat envelope is (to good approximation) a slow cosine at
-frequency $\Delta f$ riding on top of the fast carrier at $f_\text{LO}$.
-This is the physical origin of the LO-dressed receiver's demodulation.
+\subsection*{Eq.~(24) --- LO and RF field definitions}
+\begin{equation}
+E_\text{LO} = A_\text{LO}\cos(2\pi f_\text{LO}t+\phi_\text{LO}), \qquad
+E_\text{RF} = A_\text{RF}\cos(2\pi f_\text{RF}t+\phi_\text{RF}). \tag{24a, 24b}
+\end{equation}
+\textbf{Terms:} $A_\text{LO},A_\text{RF}$ = amplitudes ($A_{(\cdot)}=|E_{(\cdot)}|$).
+$f_\text{LO},f_\text{RF}$ = frequencies. $\phi_\text{LO},\phi_\text{RF}$
+= phases. Define $\Delta f=f_\text{LO}-f_\text{RF}$,
+$\Delta\phi=\phi_\text{LO}-\phi_\text{RF}$.
+\textbf{Significance:} simply defines the two real physical RF tones
+(the deliberately-injected LO, and the actual signal to be measured)
+that get superposed in the LO-dressed architecture.
 
-\subsection{Complex Rabi-frequency phasor and closed-form $\rho_{21}$ (Eq.~27)}
-The Hamiltonian's coupling becomes
-$\Omega_\text{total}=\Omega_\text{LO}+e^{j(2\pi\Delta f\,t+\Delta\phi)}\Omega_\text{RF}$
-(a \textbf{complex phasor}, not a plain real cosine --- confirmed and
-used exactly this way in this project's Fig.~6 build). Under the
-simplifying assumptions $\gamma_3=\gamma_4=0$ (states 3,4 are
-long-lived/metastable relative to state 2) and full resonance
-$\Delta_p=\Delta_c=\Delta_\text{LO}=0$:
+\subsection*{Eq.~(25) --- exact field superposition}
+\begin{align}
+E_\text{total} &=E_\text{LO}+E_\text{RF} \notag\\
+&=\sqrt{A_\text{LO}^2+A_\text{RF}^2+2A_\text{LO}A_\text{RF}\cos(2\pi\Delta f\,t+\Delta\phi)}\,\cos(2\pi f_\text{LO}t+\phi_\text{LO}). \tag{25}
+\end{align}
+\textbf{Significance:} the exact sum of the two cosines, rewritten as a
+single carrier at $f_\text{LO}$ with a slowly-time-varying \emph{envelope}
+amplitude that depends on $\Delta f$ and $\Delta\phi$. This is a pure
+trigonometric identity, not an approximation, and shows the physical
+origin of envelope/beat detection in the LO-dressed scheme.
+
+\subsection*{Eq.~(26) --- small-signal (Taylor) approximation}
+\begin{equation}
+E_\text{total} \approx [A_\text{LO}+A_\text{RF}\cos(2\pi\Delta f\,t+\Delta\phi)]\cos(2\pi f_\text{LO}t+\phi_\text{LO}), \qquad (A_\text{RF}/A_\text{LO}\ll1). \tag{26}
+\end{equation}
+\textbf{Significance:} a second-order Taylor expansion of Eq.~25 around
+$A_\text{RF}/A_\text{LO}=0$, valid whenever the RF signal is much weaker
+than the injected LO (the intended operating regime). Physically: the
+carrier at $f_\text{LO}$ has its amplitude modulated by a slow cosine at
+$\Delta f$ --- this is literally amplitude-modulation-style envelope
+detection, and is the direct justification for approximating
+$\Omega_\text{total}$'s magnitude the way Fig.~6/7's build does.
+
+\subsection*{Eq.~(27) --- closed-form $\rho_{21}$ at resonance, metastable approximation}
 \begin{equation}
 \rho_{21}\big|_{(\Delta_p,\Delta_c,\Delta_\text{LO},\gamma_3,\gamma_4)=0}
 = \frac{j\gamma_2\Omega_p|\Omega_\text{total}|^2}{\gamma_2^2|\Omega_\text{total}|^2+2\Omega_p^2\left(\Omega_c^2+\Omega_p^2+|\Omega_\text{total}|^2\right)}. \tag{27}
 \end{equation}
-\textbf{Significance:} this is the LO-dressed analogue of Eq.~8 ---
-another closed-form, but this time valid specifically at exact
-resonance and with the metastable-state approximation, and it is what
-Eq.~28 onward is built from.
+\textbf{Terms:} evaluated at full resonance
+($\Delta_p=\Delta_c=\Delta_\text{LO}=0$) and under the approximation
+$\gamma_3=\gamma_4=0$ (justified since states 3, 4 are metastable
+Rydberg states with much longer lifetimes than state 2, i.e.
+$\gamma_3,\gamma_4\ll\gamma_2$). $\Omega_\text{total}=\Omega_\text{LO}+e^{j(2\pi\Delta f\,t+\Delta\phi)}\Omega_\text{RF}$
+(complex phasor, defined just before this equation in the text).
+\textbf{Significance:} the LO-dressed analogue of Eq.~8 --- another
+closed-form steady state, but valid specifically at exact resonance
+with the two shortest-lived-state decay rates dropped. This is the
+starting point for the entire LDR/distortion derivation in Appendix~C
+(Eq.~75--83) and Sec.~IV-B (Eq.~53--58).
 
-\subsection{Practical output and the intrinsic gain coefficient (Eq.~28--30)}
+\subsection*{Eq.~(28) --- practical LO-dressed output}
 \begin{equation}
-P_\text{out}(t) = \bar P_0 + \kappa\Omega_\text{RF}\cos(2\pi\Delta f\,t+\Delta\phi), \tag{28}
+P_\text{out}(t) = \bar P_0 + \kappa\Omega_\text{RF}\cos(2\pi\Delta f\,t+\Delta\phi). \tag{28}
 \end{equation}
-where $\bar P_0=P_\text{in}e^{-\alpha}e^{\alpha\Lambda(\Omega_\text{LO},\Gamma)}$,
-$\alpha=k_pLC_0\bar A$, $\bar A=\gamma_2\Omega_p/(\gamma_2^2+2\Omega_p^2)$,
-$\kappa=\alpha\bar P_0\kappa_\rho$, $\kappa_\rho=\partial\Lambda(\Omega_\text{LO},\Gamma)/\partial\Omega_\text{LO}$,
-$\Gamma=\Omega_p\sqrt{2(\Omega_c^2+\Omega_p^2)/(2\Omega_p^2+\gamma_2^2)}$,
-and $\Lambda(a,b)=b^2/(b^2+a^2)$ (a normalized Lorentzian, HWHM $=b$,
-FWHM $=2b$).
+\textbf{Terms:} $\bar P_0=P_\text{in}e^{-\alpha}e^{\alpha\Lambda(\Omega_\text{LO},\Gamma)}$
+= the average (DC) probe transmission, set purely by the LO bias
+$\Omega_\text{LO}$. $\alpha=k_pLC_0\bar A$ = the absorption coefficient
+of the probe laser, with $\bar A=\gamma_2\Omega_p/(\gamma_2^2+2\Omega_p^2)$
+= the amplitude of the (simplified, three-level) EIT spectrum.
+$\Lambda(a,b)=b^2/(b^2+a^2)$ = a normalized Lorentzian function of
+variable $a$ with HWHM $b$. $\Gamma=\Omega_p\sqrt{2(\Omega_c^2+\Omega_p^2)/(2\Omega_p^2+\gamma_2^2)}$
+= the HWHM of a four-level Lorentzian (defined again, identically, at
+Eq.~78). $\kappa=\alpha\bar P_0\kappa_\rho$ = the \textbf{intrinsic gain
+coefficient}, with $\kappa_\rho=\partial\Lambda(\Omega_\text{LO},\Gamma)/\partial\Omega_\text{LO}$.
+\textbf{Significance:} this is the central result of the LO-dressed
+model --- it says $P_\text{out}(t)$ oscillates \emph{linearly} in
+$\Omega_\text{RF}$ around a DC bias set entirely by $\Omega_\text{LO}$.
+$\kappa$ is the single most important LO-dressed design figure of
+merit: the whole point of choosing a good $\Omega_\text{LO}$ is to
+maximize $|\kappa|$ (done at Eq.~79). \textbf{Not used by Fig.~3}
+(Fig.~3 is LO-free, no $\Omega_\text{LO}$ involved at all).
+
+\subsection*{Eq.~(29) --- AC-coupled readout}
 \begin{equation}
-P_\text{readout}(t)=P_\text{out}(t)-\bar P_0 = |P(\Delta f)|\cos(2\pi\Delta f\,t+\Delta\phi), \tag{29}
+P_\text{readout}(t)=P_\text{out}(t)-\bar P_0 = |P(\Delta f)|\cos(2\pi\Delta f\,t+\Delta\phi). \tag{29}
 \end{equation}
+\textbf{Terms:} $|P(\Delta f)|$ = the amplitude of the single-sided
+Fourier spectrum of $P_\text{out}(t)$ evaluated at $\Delta f$ --- i.e.
+literally what a spectrum analyzer or lock-in amplifier reads out.
+\textbf{Significance:} subtracting off the DC bias $\bar P_0$ isolates
+the useful oscillating signal, whose amplitude directly encodes
+$\Omega_\text{RF}$ via Eq.~30.
+
+\subsection*{Eq.~(30) --- RF Rabi frequency from the Fourier amplitude}
 \begin{equation}
 \Omega_\text{RF} = \frac{|P(\Delta f)|}{|\kappa|}. \tag{30}
 \end{equation}
-\textbf{Terms:} $\bar P_0$ = average (DC) probe transmission set purely
-by the LO bias $\Omega_\text{LO}$; $\kappa$ = the \textbf{intrinsic gain
-coefficient} --- the single most important LO-dressed design
-parameter, since the whole point of dressing with an LO is to maximize
-$|\kappa|$; $|P(\Delta f)|$ = amplitude of the single-sided Fourier
-spectrum of $P_\text{out}(t)$ at $\Delta f$, i.e., what you actually
-measure with a spectrum analyzer/lock-in. \textbf{Significance:} Eq.~28
-says $P_\text{out}(t)$ oscillates \emph{linearly} with $\Omega_\text{RF}$
-around a bias set by $\Omega_\text{LO}$ --- exactly the ``linearized
-sensor'' behavior a heterodyne receiver needs. Eq.~30 is the actual
-measurement recipe: measure the Fourier peak at $\Delta f$, divide by
-the known $\kappa$, and you have $\Omega_\text{RF}$ (and hence, via
-Eq.~12, the field amplitude). \textbf{Note carefully:} $\Gamma$ here is
-a \emph{different} quantity from the ``$\Gamma_\text{FWHM}$'' used in the
-LO-free Eq.~17/48 --- see the Fig.~4-vs-Fig.~6 linewidth-convention
-warning below.
+\textbf{Significance:} the actual measurement recipe for the
+LO-dressed receiver --- measure the Fourier-spectrum peak at $\Delta f$,
+divide by the known/calibrated $\kappa$, and you have $\Omega_\text{RF}$
+(and hence, via Eq.~12, the RF field amplitude $A_\text{RF}=\hbar\Omega_\text{RF}/\wp_\text{RF}$).
+Both $|P(\Delta f)|$ and $|\kappa|$ can be obtained directly from the
+optical spectrum, which is why this technique reduces electric-field
+measurement to a purely optical-frequency readout.
 
-\subsection{Noise chain, NEF, QPN/PSN/TN (Eq.~31--47, Fig.~2)}
-Fig.~2 gives the explicit block diagram (Tx $\to$ RF signal $\to$ vapor
-cell $\to$ PD $\to$ LNA $\to$ LIA $\to$ observation) for all three
-receivers side by side, annotating exactly which noise term
-(extrinsic/QPN/PSN/TN) enters at which stage and with what
-multiplicative gain factor. Key formulas:
-\begin{align}
-I_\text{AC} &= D\left(|\kappa|\frac{\wp_\text{RF}}{\hbar}\sqrt{P_\text{Rx}}+D|\kappa|\frac{\wp_\text{RF}}{\hbar}n_\text{ex}+Dn_\text{PSN}\right), \tag{31}\\
-P_\text{eAC} &= I_\text{AC}^2R_L, \tag{32}\\
-P_\text{LNA} &= G_\text{LNA}P_\text{eAC}+\sigma_\text{TN}^2, \tag{33}\\
-z^\text{LO} &= \sqrt{P_\text{Rx}G_\text{LNA}R_L}\,D|\kappa|\frac{\wp_\text{RF}}{\hbar}hx+n_{\text{Ry,LO}}. \tag{34}
-\end{align}
+\section{Section III-C: Noise modeling}
+
+Fig.~2 provides an explicit block-diagram (Tx $\to$ RF signal $\to$
+vapor cell $\to$ PD $\to$ LNA $\to$ LIA $\to$ observation) for all three
+receivers side by side, labeling exactly where each noise term enters
+and with what multiplicative gain. The equations below are the formulas
+behind each labeled block.
+
+\subsection*{Eq.~(31) --- AC photocurrent}
 \begin{equation}
-\text{NEF}=\frac{|E_\text{RF}|_\text{min}}{\sqrt{B}} \tag{35}
+I_\text{AC} = D\left(|\kappa|\frac{\wp_\text{RF}}{\hbar}\sqrt{P_\text{Rx}}+D|\kappa|\frac{\wp_\text{RF}}{\hbar}n_\text{ex}+Dn_\text{PSN}\right). \tag{31}
 \end{equation}
-(bandwidth-normalized noise-floor field --- smaller is better).
-\begin{align}
-\text{NEF}_\text{ex} &= \sqrt{\frac{16\pi f_\text{RF}^2}{3\epsilon_0c^3}\Theta(f_\text{RF},T)}, \tag{36}\\
-\Theta(f_\text{RF},T) &= \hbar f_\text{RF}
+\textbf{Terms:} $D$ = photodiode responsivity (A/W). $n_\text{PSN}$ =
+photon shot noise contribution.
+\textbf{Significance:} converts the optical AC signal (amplitude
+$|\kappa|\Omega_\text{RF}$, per Eq.~28) into an electrical photocurrent,
+carrying both the useful signal and the extrinsic + shot-noise
+contributions through the same responsivity $D$.
+
+\subsection*{Eq.~(32) --- electrical AC power}
+\begin{equation}
+P_\text{eAC} = I_\text{AC}^2R_L. \tag{32}
+\end{equation}
+\textbf{Terms:} $R_L$ = PD output load impedance.
+\textbf{Significance:} simple $I^2R$ conversion from photocurrent to
+electrical power, at the point right after the photodetector.
+
+\subsection*{Eq.~(33) --- LNA output power}
+\begin{equation}
+P_\text{LNA} = G_\text{LNA}P_\text{eAC}+\sigma_\text{TN}^2. \tag{33}
+\end{equation}
+\textbf{Terms:} $G_\text{LNA}$ = low-noise-amplifier gain.
+$\sigma_\text{TN}^2$ = thermal (Johnson--Nyquist) noise power, added at
+this stage.
+\textbf{Significance:} amplifies the PD's electrical output and adds
+the amplifier's own thermal noise floor.
+
+\subsection*{Eq.~(34) --- full LO-dressed observation, with channel}
+\begin{equation}
+z^\text{LO} = \sqrt{P_\text{Rx}G_\text{LNA}R_L}\,D|\kappa|\frac{\wp_\text{RF}}{\hbar}hx+n_{\text{Ry,LO}}. \tag{34}
+\end{equation}
+\textbf{Significance:} the complete end-to-end LO-dressed observation
+model, folding the wireless channel $h$, the transmitted symbol $x$, and
+every gain stage (PD responsivity, LNA gain, load resistance) into one
+expression, with $n_{\text{Ry,LO}}$ collecting all noise (detailed at
+Eq.~47). This is the LO-dressed counterpart of Eq.~18.
+
+\subsection*{Eq.~(35) --- noise-equivalent field (NEF)}
+\begin{equation}
+\text{NEF}=\frac{|E_\text{RF}|_\text{min}}{\sqrt{B}}. \tag{35}
+\end{equation}
+\textbf{Terms:} $|E_\text{RF}|_\text{min}$ = minimum detectable field
+amplitude. $B$ = measurement bandwidth.
+\textbf{Significance:} a bandwidth-normalized noise floor expressed in
+the receiver's natural ``field'' units (V/m/$\sqrt{\text{Hz}}$) --- a
+smaller NEF means a more sensitive receiver. This is the standard
+figure of merit quoted throughout the Rydberg-sensor literature.
+
+\subsection*{Eq.~(36) --- extrinsic NEF}
+\begin{equation}
+\text{NEF}_\text{ex} = \sqrt{\frac{16\pi f_\text{RF}^2}{3\epsilon_0c^3}\Theta(f_\text{RF},T)}. \tag{36}
+\end{equation}
+\textbf{Terms:} $c$ = speed of light.
+\textbf{Significance:} the external (BBR + vacuum-fluctuation) noise
+floor, expressed as an NEF --- this is a fundamental limit that no
+free-space receiver, Rydberg or classical, can beat.
+
+\subsection*{Eq.~(37) --- modified Callen--Welton spectral factor}
+\begin{equation}
+\Theta(f_\text{RF},T) = \hbar f_\text{RF}
 \begin{cases}
 \tfrac12 n_\text{th}(f_\text{RF},T)+\tfrac12, & \text{homodyne},\\
-2n_\text{th}(f_\text{RF},T)+1, & \text{heterodyne},
-\end{cases} \tag{37}\\
-n_\text{th}(f_\text{RF},T) &= \frac{1}{\exp(\hbar f_\text{RF}/k_BT)-1}, \tag{38}\\
-\sigma_\text{ex}^2 &= \frac{\text{NEF}_\text{ex}^2}{2Z_0}A_\text{eff}B. \tag{39}
-\end{align}
-\textbf{Significance:} this is the black-body-radiation (BBR) +
-vacuum-fluctuation noise floor that \emph{no free-space receiver can
-beat}, expressed via a modified Callen--Welton thermal-noise law.
-\begin{align}
-\frac{E_\text{SQL}}{\sqrt{\text{Hz}}} &= \frac{\hbar}{\wp_\text{RF}\sqrt{N_\text{atoms}T_2}}, \tag{40}\\
-\sigma_\text{QPN}^2 &= \left(\frac{E_\text{SQL}}{\sqrt{\text{Hz}}}\right)^2\frac{A_\text{eff}B}{2Z_0}, \tag{41}\\
-\bar I &= \frac{\eta_\text{eff}e}{2\pi\hbar f_p}|P_\text{out}|, \tag{42}\\
-\sigma_\text{PSN}^2 &= 2eB\bar I, \tag{43}\\
-\sigma_\text{TN}^2 &=
+2n_\text{th}(f_\text{RF},T)+1, & \text{heterodyne}.
+\end{cases} \tag{37}
+\end{equation}
+\textbf{Significance:} distinguishes the noise contribution depending
+on whether the detection is homodyne or heterodyne --- this factor
+folds both the thermal (BBR) and quantum vacuum contributions into one
+expression via $n_\text{th}$ (Eq.~38).
+
+\subsection*{Eq.~(38) --- thermal photon occupation number}
+\begin{equation}
+n_\text{th}(f_\text{RF},T) = \frac{1}{\exp(\hbar f_\text{RF}/k_BT)-1}. \tag{38}
+\end{equation}
+\textbf{Significance:} the standard Bose--Einstein thermal occupation
+number at frequency $f_\text{RF}$ and temperature $T$ --- the number of
+thermal photons per mode.
+
+\subsection*{Eq.~(39) --- extrinsic noise power}
+\begin{equation}
+\sigma_\text{ex}^2 = \frac{\text{NEF}_\text{ex}^2}{2Z_0}A_\text{eff}B. \tag{39}
+\end{equation}
+\textbf{Significance:} converts the extrinsic NEF (a field-domain
+quantity) into an actual noise \emph{power} at the receiver, using the
+effective aperture $A_\text{eff}$ (Eq.~17) to do the field$\to$power
+conversion and $B$ to set the bandwidth.
+
+\subsection*{Eq.~(40) --- standard quantum limit (SQL) field}
+\begin{equation}
+\frac{E_\text{SQL}}{\sqrt{\text{Hz}}} = \frac{\hbar}{\wp_\text{RF}\sqrt{N_\text{atoms}T_2}}. \tag{40}
+\end{equation}
+\textbf{Terms:} $T_2$ = the EIT coherence time.
+\textbf{Significance:} the fundamental atomic-shot-noise-limited
+sensitivity floor --- scales down as $1/\sqrt{N_\text{atoms}}$, the
+standard quantum-limit scaling for $N_\text{atoms}$ independent quantum
+probes.
+
+\subsection*{Eq.~(41) --- quantum-projection-noise (QPN) power}
+\begin{equation}
+\sigma_\text{QPN}^2 = \left(\frac{E_\text{SQL}}{\sqrt{\text{Hz}}}\right)^2\frac{A_\text{eff}B}{2Z_0}. \tag{41}
+\end{equation}
+\textbf{Significance:} same field-to-power conversion pattern as
+Eq.~39, but starting from the SQL field instead of the extrinsic NEF ---
+this is the fundamental atomic-physics noise contribution (as opposed
+to the BBR-driven extrinsic noise).
+
+\subsection*{Eq.~(42) --- average photocurrent from probe power}
+\begin{equation}
+\bar I = \frac{\eta_\text{eff}e}{2\pi\hbar f_p}|P_\text{out}|. \tag{42}
+\end{equation}
+\textbf{Terms:} $\eta_\text{eff}\in[0,1]$ = PD quantum efficiency.
+$e$ = elementary charge. $f_p$ = probe laser frequency.
+\textbf{Significance:} standard photodiode relation --- converts
+incident optical power $|P_\text{out}|$ into average photocurrent via
+the quantum efficiency and photon energy $\hbar f_p$.
+
+\subsection*{Eq.~(43) --- photon shot noise (PSN) power}
+\begin{equation}
+\sigma_\text{PSN}^2 = 2eB\bar I. \tag{43}
+\end{equation}
+\textbf{Significance:} the standard shot-noise formula for a
+photocurrent $\bar I$ over bandwidth $B$ --- an intrinsic, unavoidable
+consequence of the discreteness of photon detection.
+
+\subsection*{Eq.~(44) --- thermal (Johnson--Nyquist) noise power}
+\begin{equation}
+\sigma_\text{TN}^2 =
 \begin{cases}
 4k_BTB, & \text{TIA front-end},\\
-Fk_BTB, & \text{LNA front-end},
-\end{cases} \tag{44}\\
-G_\text{Ry} &= \frac{\partial P_\text{out}}{\partial E_\text{RF}}, \tag{45}\\
-\sigma_\text{Ry}^2 &= G_\text{Ry}^2D^2G_\text{LNA}^2\sigma_\text{ex}^2+D^2G_\text{LNA}^2\sigma_\text{QPN}^2+G_\text{LNA}^2\sigma_\text{PSN}^2+\sigma_\text{TN}^2, \tag{46}\\
-\sigma_\text{Ry,LO}^2 &= \kappa^2D^2G_\text{LNA}^2\sigma_\text{ex}^2+D^2G_\text{LNA}^2\sigma_\text{QPN}^2+G_\text{LNA}^2\sigma_\text{PSN}^2+\sigma_\text{TN}^2. \tag{47}
-\end{align}
-\textbf{Terms:} $T_2$ = EIT coherence time; $\eta_\text{eff}$ = PD
-quantum efficiency; $D$ = PD responsivity (A/W); $F$ = LNA noise
-factor; $R_L$ = TIA/output load resistance. \textbf{Significance:}
-Eq.~46 vs Eq.~47 is the single most important noise-comparison result
-in the paper --- \emph{same four noise terms, same structure}, but the
-LO-free version scales the extrinsic noise by $G_\text{Ry}^2$ (a small
-number, since the LO-free receiver ``operates on the natural slope of
-an EIT doublet'') while the LO-dressed version scales it by $\kappa^2$,
-which \textbf{can be 1--2 orders of magnitude larger} --- this
-single fact is the quantitative origin of the LO-dressed receiver's SNR
-advantage seen in Fig.~8/9/10. The conventional receiver's noise is
-$\sigma_\text{Conv}^2=G_\text{LNA}^2\sigma_\text{ex}^2+\sigma_\text{TN}^2$
-(Fig.~2 bottom row, page 12) --- notice it has \emph{no} QPN or PSN term
-at all, since it has no atomic/optical stage.
+Fk_BTB, & \text{LNA front-end}.
+\end{cases} \tag{44}
+\end{equation}
+\textbf{Terms:} $F$ = LNA noise factor.
+\textbf{Significance:} the electronic thermal noise floor, with two
+different forms depending on whether the front end is a
+transimpedance amplifier (dominated by feedback-resistor Johnson noise)
+or a matched LNA (dominated by the noise factor $F$).
+
+\subsection*{Eq.~(45) --- LO-free small-signal transduction gain}
+\begin{equation}
+G_\text{Ry} = \frac{\partial P_\text{out}}{\partial E_\text{RF}}. \tag{45}
+\end{equation}
+\textbf{Significance:} defines the LO-free receiver's own intrinsic
+gain --- the local slope of the probe transmission with respect to the
+incident RF field. This is deliberately analogous to $\kappa$
+(Eq.~28) for the LO-dressed case, letting the two architectures be
+compared apples-to-apples in the noise formulas below.
+
+\subsection*{Eq.~(46) --- total LO-free noise power}
+\begin{equation}
+\sigma_\text{Ry}^2 = G_\text{Ry}^2D^2G_\text{LNA}^2\sigma_\text{ex}^2+D^2G_\text{LNA}^2\sigma_\text{QPN}^2+G_\text{LNA}^2\sigma_\text{PSN}^2+\sigma_\text{TN}^2. \tag{46}
+\end{equation}
+\textbf{Significance:} sums all four noise contributions (extrinsic,
+QPN, PSN, TN), each referred forward through the correct chain of gains
+up to the final observation point. Note the extrinsic term is scaled
+by $G_\text{Ry}^2$, which the text calls ``modest,'' since the LO-free
+architecture ``operates on the natural slope of an EIT doublet.''
+
+\subsection*{Eq.~(47) --- total LO-dressed noise power}
+\begin{equation}
+\sigma_\text{Ry,LO}^2 = \kappa^2D^2G_\text{LNA}^2\sigma_\text{ex}^2+D^2G_\text{LNA}^2\sigma_\text{QPN}^2+G_\text{LNA}^2\sigma_\text{PSN}^2+\sigma_\text{TN}^2. \tag{47}
+\end{equation}
+\textbf{Significance:} \textbf{the single most important
+noise-comparison equation in the paper} --- structurally identical to
+Eq.~46, but the extrinsic term is scaled by $\kappa^2$ instead of
+$G_\text{Ry}^2$. Since $\kappa$ can be one to two orders of magnitude
+larger than $G_\text{Ry}$ (stated directly in the text right after
+Eq.~47), this single substitution is the quantitative origin of the
+LO-dressed receiver's SNR advantage seen later in Fig.~8/9/10.
 
 \section{Section IV-A: SNR performance}
 
-\subsection{LO-free SNR (Eq.~48--51)}
+\subsection*{Eq.~(48) --- the dimensionless resolvability ratio}
 \begin{equation}
-\mathcal R \equiv \frac{\Omega_\text{RF}}{\Gamma_\text{FWHM}}, \tag{48}
+\mathcal R \equiv \frac{\Omega_\text{RF}}{\Gamma_\text{FWHM}}. \tag{48}
 \end{equation}
+\textbf{Significance:} the single dimensionless figure of merit for
+LO-free AT-splitting resolvability --- how large the RF coupling is
+relative to the intrinsic linewidth. \textbf{This is exactly Fig.~4's
+$y$-axis.} Achieving $\mathcal R\gg1$ is stated as a necessary condition
+for clear splitting and high-fidelity LO-free sensing.
+
+\subsection*{Eq.~(49) --- Fisher-information penalty}
 \begin{equation}
-G(\mathcal R) = \frac{\mathcal R^2}{1+\frac{1}{2\mathcal R^2}}, \tag{49}
+G(\mathcal R) = \frac{\mathcal R^2}{1+\frac{1}{2\mathcal R^2}}. \tag{49}
 \end{equation}
+\textbf{Significance:} derived rigorously in Appendix~D from Poisson
+statistics and the Cram\'er--Rao bound (not an ad-hoc fudge factor) ---
+quantifies the information penalty/resolvability loss of trying to
+estimate $\Omega_\text{RF}$ from an AT-split spectrum. Collapses toward
+0 as $\mathcal R\to0$ (matching the qualitative statement that below
+$\mathcal R=1$ the splitting is unobservable), approaches $\mathcal R^2$
+for $\mathcal R\gg1$.
+
+\subsection*{Eq.~(50) --- LO-free SNR}
 \begin{equation}
-\text{SNR}_\text{Ry} = \frac{P_\text{Rx}|h|^2}{\sigma_\text{Ry}^2}\left(\frac{\wp_\text{RF}}{\hbar\Gamma_\text{FWHM}}\right)^2G(\mathcal R), \tag{50}
+\text{SNR}_\text{Ry} = \frac{P_\text{Rx}|h|^2}{\sigma_\text{Ry}^2}\left(\frac{\wp_\text{RF}}{\hbar\Gamma_\text{FWHM}}\right)^2G(\mathcal R). \tag{50}
 \end{equation}
+\textbf{Significance:} integrates the classical wireless link budget
+($P_\text{Rx}|h|^2/\sigma_\text{Ry}^2$) with the RF-to-atomic conversion
+gain $(\wp_\text{RF}/\hbar\Gamma_\text{FWHM})^2$ and the resolvability
+penalty $G(\mathcal R)$ --- these three multiplicative factors are
+individually dimensionless-consistent, so $G(\mathcal R)$ only reshapes
+the numerical value, not the physical units.
+
+\subsection*{Eq.~(51) --- LO-free sensitivity floor}
 \begin{equation}
 E_\text{min}^\text{strong} = \frac{\hbar\Gamma_\text{EIT}}{\wp_\text{RF}}\left(\frac{2Z_0\sigma_\text{Ry}^2}{A_\text{eff}|h|^2}\right)^{1/4}. \tag{51}
 \end{equation}
-\textbf{Terms:} $\mathcal R$ = the single dimensionless figure of merit
-for LO-free resolvability (RF coupling strength measured in units of
-the intrinsic linewidth). $G(\mathcal R)$ = an information-theoretic
-penalty (derived from Fisher information in Appendix~D) that punishes
-small $\mathcal R$ --- it collapses toward 0 as $\mathcal R\to0$ and
-approaches $\mathcal R^2$ for $\mathcal R\gg1$. $E_\text{min}^\text{strong}$
-= the receiver's sensitivity floor (minimum detectable field),
-obtained by setting $\text{SNR}_\text{Ry}=1$. \textbf{Significance:}
-Eq.~48 is exactly the $x$-axis of Fig.~4, and Eq.~49's threshold
-behavior (near $\mathcal R=1$) is exactly what Fig.~4's white dashed
-lines/yellow $\mathcal R=1$ line illustrate. The paper reports a
-computed sensitivity of $38.15\,\mu\text{V/cm}/\sqrt{\text{Hz}}$ from
-Eq.~51, cross-checked against the literature.
+\textbf{Significance:} obtained by setting $\text{SNR}_\text{Ry}=1$ in
+Eq.~50 and solving for the minimum detectable field --- the paper
+reports a computed value of $38.15\,\mu\text{V/cm}/\sqrt{\text{Hz}}$,
+cross-checked as consistent with existing literature.
 
-\subsection{LO-dressed SNR (Eq.~52, 61)}
+\subsection*{Eq.~(52) --- LO-dressed SNR}
 \begin{equation}
 \text{SNR}_\text{Ry,LO} = \frac{G_\text{LNA}R_LD^2\kappa^2\frac{\wp_\text{RF}^2}{\hbar^2}P_\text{Rx}|h|^2}{\sigma_\text{Ry,LO}^2}. \tag{52}
 \end{equation}
-Restructured, more intuitive form:
-\begin{equation}
-\text{SNR}_\text{Ry,LO} = \cfrac{R_L\frac{\wp_\text{RF}^2}{\hbar^2}P_\text{Rx}|h|^2}{G_\text{LNA}\sigma_\text{ex}^2+\frac{G_\text{LNA}\sigma_\text{QPN}^2}{\kappa^2}+\frac{G_\text{LNA}\sigma_\text{PSN}^2}{D^2\kappa^2}+\frac{\sigma_\text{TN}^2}{D^2\kappa^2G_\text{LNA}}}. \tag{61}
-\end{equation}
-\textbf{Significance:} Eq.~61 makes explicit \emph{why} the LO-dressed
-receiver wins: the useful signal and the extrinsic (BBR) noise both
-scale the same way, so $\kappa$ does not help against extrinsic noise
---- but QPN, PSN, and TN are all \emph{divided} by $\kappa^2$, i.e.,
-suppressed. The SNR advantage is therefore concentrated in
-non-BBR-limited regimes, not a violation of any fundamental noise floor.
+\textbf{Significance:} the LO-dressed SNR expression, built from the
+signal model (Eq.~34) and total noise (Eq.~47) --- note $\kappa^2$
+appears explicitly in the numerator (signal power) as well as inside
+$\sigma_\text{Ry,LO}^2$'s extrinsic term (Eq.~47), which is why Eq.~61
+below is a more physically revealing rearrangement.
 
-\subsection{Conventional receiver SNR (page 12)}
-\begin{equation}
-\sigma_\text{Conv}^2 = G_\text{LNA}^2\sigma_\text{ex}^2+\sigma_\text{TN}^2, \qquad
-\text{SNR}_\text{Conv} = \frac{G_\text{LNA}P_\text{Rx}|h|^2}{\sigma_\text{Conv}^2}.
-\end{equation}
-Effective aperture used for the conventional receiver: $\lambda_\text{RF}^2/(4\pi)$
-(standard dipole-antenna formula, \emph{not} Eq.~17).
+\section{Section IV-B: Distortion effect / linear dynamic range}
 
-\section{Section IV-B: Distortion effect / linear dynamic range (LDR)}
-
-\subsection{LO-free distortion (Fig.~3, Fig.~4 --- already covered by $\mathcal R$, Eq.~48--49)}
-Below $\mathcal R=1$ the two AT peaks merge and the splitting cannot be
-read at all --- a hard, qualitative failure mode distinct from a smooth
-SNR degradation.
-
-\subsection{LO-dressed distortion --- Taylor expansion of $\Lambda$ (Eq.~53--60)}
+\subsection*{Eq.~(53) --- restructured probe transmission}
 \begin{equation}
-P_\text{out} = P_\text{in}e^{-\alpha}e^{\alpha\Lambda(\Omega_\text{total},\Gamma)}. \tag{53}
+P_\text{out} = P_\text{in}e^{-\alpha}e^{\alpha\Lambda(\Omega_\text{total},\Lambda)}. \tag{53}
 \end{equation}
+\textbf{Significance:} rewrites $P_\text{out}$ (same physical quantity
+as Eq.~2/28) explicitly as a function of the Lorentzian $\Lambda$
+evaluated at the \emph{total} Rabi frequency $\Omega_\text{total}$ ---
+the starting point for the Taylor-expansion-based distortion analysis
+that follows.
+
+\subsection*{Eq.~(54) --- Taylor expansion of the Lorentzian}
 \begin{equation}
-\Lambda(\Omega_\text{total},\Gamma) = \Lambda_0+\Lambda_0'\delta\Omega+\frac12\Lambda_0''\delta\Omega^2+\frac16\Lambda_0'''\delta\Omega^3+\dots, \tag{54}
+\Lambda(\Omega_\text{total},\Lambda) = \Lambda_0+\Lambda_0'\delta\Omega+\frac12\Lambda_0''\delta\Omega^2+\frac16\Lambda_0'''\delta\Omega^3+\dots \tag{54}
 \end{equation}
-where $\delta\Omega=\Omega_\text{total}-\Omega_\text{LO}$,
+\textbf{Terms:} $\delta\Omega=\Omega_\text{total}-\Omega_\text{LO}$.
 $\Lambda_0'=\dfrac{-2\Gamma^2\Omega_\text{LO}}{(\Gamma^2+\Omega_\text{LO}^2)^2}$,
-$\Lambda_0''=\dfrac{-2\Gamma^2(\Gamma^2-3\Omega_\text{LO}^2)}{(\Gamma^2+\Omega_\text{LO}^2)^3}$.
+$\Lambda_0''=\dfrac{-2\Gamma^2(\Gamma^2-3\Omega_\text{LO}^2)}{(\Gamma^2+\Omega_\text{LO}^2)^3}$
+(explicit derivative formulas, evaluated at the bias point
+$\Omega_\text{LO}$).
+\textbf{Significance:} a standard Taylor expansion around the LO bias
+point --- this is exactly the mathematical machinery used to separate
+$P_\text{out}$ into a desired linear term plus 2nd- and 3rd-order
+distortion terms in Eq.~55.
+
+\subsection*{Eq.~(55) --- $P_\text{out}$ split into desired + distortion terms}
 \begin{equation}
-P_\text{out} = \bar P_0 + \underbrace{\kappa\Omega_\text{RF}\cos\theta}_{\text{desired}}
+P_\text{out} =\bar P_0 + \underbrace{\kappa\Omega_\text{RF}\cos\theta}_{\text{desired}}
 + \underbrace{\tfrac14\alpha\bar P_0\Lambda_0''\Omega_\text{RF}^2(1+\cos2\theta)}_{\text{2nd-order distortion}}
 + \underbrace{\tfrac16\alpha\bar P_0\Lambda_0'''\Omega_\text{RF}^3\cos^3\theta}_{\text{3rd-order distortion}}. \tag{55}
 \end{equation}
+\textbf{Terms:} $\theta=2\pi\Delta f\,t+\Delta\phi$.
+\textbf{Significance:} substituting Eq.~54 into $P_\text{out}$ and
+retaining terms up to third order in $\Omega_\text{RF}$ produces exactly
+three physically distinct terms: the wanted linear signal (oscillating
+at $\Delta f$, amplitude $\propto\kappa$), a second-harmonic distortion
+term (oscillating at $2\Delta f$, amplitude $\propto\Lambda_0''$), and a
+third-harmonic distortion term (oscillating at $3\Delta f$, amplitude
+$\propto\Lambda_0'''$). This is the direct mathematical origin of the
+``linear dynamic range'' concept: as $\Omega_\text{RF}$ grows, the
+distortion terms (which grow as $\Omega_\text{RF}^2,\Omega_\text{RF}^3$)
+eventually catch up to and overwhelm the desired term (which only grows
+as $\Omega_\text{RF}^1$).
+
+\subsection*{Eq.~(56) --- total-harmonic-distortion (THD) ratio}
 \begin{equation}
-\frac{P(\Delta f)}{P(2\Delta f)} = \frac{\kappa\Omega_\text{RF}}{\tfrac14\alpha\bar P_0\Lambda_0''\Omega_\text{RF}^2} \le \epsilon
-\;\;\Longrightarrow\;\;
-\Omega_\text{RF,max}'' = \frac{4\epsilon|\Lambda_0'|}{|\Lambda_0''|}. \tag{56, 57}
+\frac{P(\Delta f)}{P(2\Delta f)} = \frac{\kappa\Omega_\text{RF}}{\tfrac14\alpha\bar P_0\Lambda_0''\Omega_\text{RF}^2} \le \epsilon. \tag{56}
 \end{equation}
-\textbf{IMPORTANT --- verified this session, corrects an earlier
-implementation error in this project:} Eq.~57 \textbf{does include}
-$\epsilon$. (An earlier build of Fig.~6 in this project mistakenly
-treated Eq.~57 as $\epsilon$-free; that must be corrected.) At the true
-optimum $\Omega_\text{LO,opt}=\tfrac{\sqrt3}{3}\Gamma$, $\Lambda_0''=0$
-exactly (2nd-order distortion vanishes), so Eq.~57 is not usable there
-and the 3rd-order bound governs instead:
+\textbf{Terms:} $\epsilon$ = the total harmonic distortion (THD)
+tolerance. \textbf{Note:} the paper's own equation number/label here
+reads ``$P(\Delta f)/P(3\Delta f)$'' in one place, which appears to be a
+typo, since the actual formula shown uses the second-harmonic term
+$P(2\Delta f)=\frac14\alpha\bar P_0\Lambda_0''\Omega_\text{RF}^2$
+defined in the sentence immediately preceding it --- treat this as
+comparing fundamental to \emph{second}-harmonic power, consistent with
+Eq.~55's ``2nd-order distortion'' label.
+\textbf{Significance:} defines the design criterion --- keep the
+second-harmonic-to-fundamental power ratio below some tolerance
+$\epsilon$ --- that Eq.~57 directly solves for $\Omega_\text{RF}$.
+
+\subsection*{Eq.~(57) --- second-order LDR upper bound (VERIFY: contains $\epsilon$)}
+\begin{equation}
+\Omega_\text{RF,max}'' = \frac{4\epsilon|\Lambda_0'|}{|\Lambda_0''|}. \tag{57}
+\end{equation}
+\textbf{Terms:} $\epsilon$ = the same THD tolerance from Eq.~56 ---
+\textbf{confirmed by directly re-reading the rendered paper page: this
+equation DOES contain $\epsilon$.} It is not simply
+$4|\Lambda_0'/\Lambda_0''|$ --- that ratio is only the coefficient that
+$\epsilon$ multiplies.
+\textbf{Significance:} solving Eq.~56 for $\Omega_\text{RF}$ gives the
+maximum RF Rabi frequency you can apply before second-order distortion
+exceeds your chosen tolerance $\epsilon$. \textbf{Practical caveat}:
+$\Lambda_0''\to0$ exactly at the true optimal bias point
+$\Omega_\text{LO,opt}$ (Eq.~79), which makes this bound blow up
+(divide by zero) there --- this is not a flaw in the equation, it's the
+direct mathematical statement that ``second-order distortion vanishes
+at the optimum,'' which is precisely why Eq.~58 (third-order) is needed
+at that specific bias point.
+
+\subsection*{Eq.~(58) --- third-order LDR upper bound (used at the true optimum)}
 \begin{equation}
 \Omega_\text{RF,max}''' = \sqrt{\frac{6\epsilon|\Lambda_0'|}{|\Lambda_0'''|}}. \tag{58}
 \end{equation}
-\textbf{Terms:} $\theta=2\pi\Delta f\,t+\Delta\phi$; $\epsilon$ = total
-harmonic distortion (THD) tolerance --- \textbf{the paper explicitly
-calls this ``the designer-specified tolerance''; no numeric value is
-given anywhere in the paper.} Both Eq.~57 and Eq.~58 are therefore
-\emph{families of bounds parametrized by $\epsilon$}, not single fixed
-numbers, unless you choose an $\epsilon$ yourself (and label it as your
-own choice). \textbf{Significance:} this is the complete derivation
-behind Fig.~6's shaded ``linear dynamic range'' band and Fig.~7's
-upper/lower $P_\text{Rx}$ envelopes --- the LDR is fundamentally a
-THD-based (distortion-budget) definition, not a curve-fit or
-visual-straightness criterion.
+\textbf{Terms:} $\Lambda_0'''$ = the third derivative of $\Lambda$ with
+respect to $\Omega_\text{LO}$ at the bias point (not given an explicit
+closed form in the paper text shown, but obtainable by differentiating
+$\Lambda_0''$'s formula once more, or numerically from real data).
+\textbf{Significance:} the governing LDR bound specifically \emph{at}
+the optimal bias $\Omega_\text{LO,opt}$, where second-order distortion
+has vanished and third-order distortion becomes the limiting factor.
+\textbf{The paper never assigns $\epsilon$ a numeric value anywhere} ---
+it calls $\epsilon$ ``the designer-specified tolerance,'' explicitly
+framing it as a free engineering choice, not a physical constant. Any
+numeric LDR width computed from Eq.~57 or Eq.~58 therefore requires
+choosing your own $\epsilon$ and labeling it as such.
 
-\section{Appendices --- key derivations}
+\section{Section IV-C / V-B: mutual information}
 
-\subsection{Appendix A --- solving the master equation (Eq.~62--67)}
-Shows the direct route from the commutator $[\mathbf H,\boldsymbol\rho]_{21}$
-(Eq.~62) through the coupled steady-state equations for
-$\rho_{21},\rho_{31},\rho_{41}$ (Eq.~63--66) to the closed form in
-Eq.~8/67, using the approximations $\rho_{11}\approx1$,
-$\rho_{22},\rho_{33},\rho_{44}\approx0$, and $\rho_{32},\rho_{42}\to0$
-(``independent-atom'', weak-probe limit).
+\subsection*{Eq.~(59) --- LO-free mutual information}
+\begin{equation}
+\mathcal I(z;x) = \frac12\ln\left(\frac{\pi(\mathfrak r+1)}{2}\right)-\ln I_0(\mathfrak r)+\mathfrak r\frac{I_1(\mathfrak r)}{I_0(\mathfrak r)}. \tag{59}
+\end{equation}
+\textbf{Terms:} $I_0,I_1$ = modified Bessel functions of the first
+kind, orders 0 and 1. $\mathfrak r$ = the Rician factor, approximated by
+$\mathfrak r\approx\text{SNR}_\text{Ry}$.
+\textbf{Significance:} the theoretical mutual information for the
+LO-free receiver's signal model (Eq.~18), which behaves like a
+Rician-distributed amplitude observation --- this is exactly what
+Fig.~9's green ``LO-free'' curve plots.
 
-\subsection{Appendix B --- deriving $A_\text{eff}$ (Eq.~68--74)}
+\subsection*{Eq.~(60) --- LO-dressed mutual information}
 \begin{equation}
-\rho_{ee} = \frac{(\Omega_\text{RF}/\Gamma_\text{FWHM})^2}{1+4(\Delta_c/\Gamma_\text{FWHM})^2+2(\Omega_\text{RF}/\Gamma_\text{FWHM})^2}, \qquad \bar R=\Gamma_\text{FWHM}\rho_{ee}. \tag{68,69}
+\mathcal I(z^\text{LO};x) = e^{1/\text{SNR}_\text{Ry,LO}}E_1(1/\text{SNR}_\text{Ry,LO})\ln2. \tag{60}
 \end{equation}
-Near-resonant, weak-limit scaling ($\Delta_c\approx0,\ \Omega_\text{RF}\ll\Gamma_\text{FWHM}$):
+\textbf{Terms:} $E_1(x)=\int_x^\infty\frac{e^{-t}}{t}dt$ = the
+exponential integral function.
+\textbf{Significance:} the LO-dressed mutual information, based on the
+signal model in Eq.~34 (a complex Gaussian observation, unlike the
+LO-free receiver's real-amplitude-only observation) --- this is what
+Fig.~9's orange ``LO-dressed'' curves plot.
+
+\subsection*{Eq.~(61) --- restructured LO-dressed SNR}
 \begin{equation}
-\bar R = \frac{\Omega_\text{RF}^2}{\Gamma_\text{FWHM}} = \frac{\wp_\text{RF}^2E_\text{RF}^2}{\hbar^2\Gamma_\text{FWHM}}. \tag{70}
+\text{SNR}_\text{Ry,LO} = \cfrac{R_L\frac{\wp_\text{RF}^2}{\hbar^2}P_\text{Rx}|h|^2}{G_\text{LNA}\sigma_\text{ex}^2+\frac{G_\text{LNA}\sigma_\text{QPN}^2}{\kappa^2}+\frac{G_\text{LNA}\sigma_\text{PSN}^2}{D^2\kappa^2}+\frac{\sigma_\text{TN}^2}{D^2\kappa^2G_\text{LNA}}}. \tag{61}
 \end{equation}
-Each absorption--re-emission event removes energy $\hbar\omega_\text{RF}$:
+\textbf{Significance:} algebraically identical to Eq.~52, but
+rearranged to make the mechanism explicit: the common extrinsic
+(BBR) noise $\sigma_\text{ex}^2$ is \emph{not} divided by $\kappa^2$
+(same $\kappa$-dependence as the signal itself, so it doesn't help),
+while QPN, PSN, and TN all \emph{are} divided by $\kappa^2$ ---
+explaining precisely why the LO-dressed advantage is concentrated in
+non-BBR-limited operating regimes, not a violation of any shared noise
+floor.
+
+\section{Appendix A: solving the master equation}
+
+\subsection*{Eq.~(62) --- the $\rho_{21}$ commutator element}
 \begin{equation}
-P_\text{atom}=\hbar\omega_\text{RF}\bar R=\frac{\wp_\text{RF}^2E_\text{RF}^2\omega_\text{RF}}{\hbar\Gamma_\text{FWHM}},\qquad
-P_\text{total}=N_\text{atoms}P_\text{atom}. \tag{71,72}
+[\mathbf H,\boldsymbol\rho]_{21} = \frac{\hbar\Omega_p}{2}(\rho_{11}-\rho_{22})-\hbar\Delta_p\rho_{21}+\frac{\hbar\Omega_c}{2}\rho_{31}. \tag{62}
 \end{equation}
-Matching to a flux-times-aperture form
-$\frac{E_\text{RF}^2}{2Z_0}A_\text{eff}=P_\text{total}$ gives back
-exactly Eq.~17/74:
+\textbf{Significance:} the explicit $(2,1)$ matrix element of the
+commutator $[\mathbf H,\boldsymbol\rho]$, computed directly from
+Eq.~6's Hamiltonian using the general rule
+$[\mathbf H,\boldsymbol\rho]_{ij}=\sum_k H_{ik}\rho_{kj}-\rho_{ik}H_{kj}$
+--- this is the first concrete step toward deriving Eq.~8.
+
+\subsection*{Eq.~(63) --- $\rho_{21}$ evolution equation}
+\begin{equation}
+\dot\rho_{21} = -j\frac{\Omega_p}{2}(\rho_{11}-\rho_{22})+j\Delta_p\rho_{21}-j\frac{\Omega_c}{2}\rho_{31}-\gamma_{21}\rho_{21}. \tag{63}
+\end{equation}
+\textbf{Significance:} substitutes Eq.~62 into the master equation
+(Eq.~5) and adds the dephasing term $-\gamma_{21}\rho_{21}$ from the
+Lindblad part (Eq.~7) --- the first of three coupled differential
+equations (with Eq.~64a/b) needed to solve for the full steady state.
+
+\subsection*{Eq.~(64) --- $\rho_{31}$ and $\rho_{41}$ evolution equations}
+\begin{align}
+\dot\rho_{31} &= -j\frac{\Omega_c}{2}(\rho_{21}-\rho_{32})+j(\Delta_p+\Delta_c)\rho_{31}-j\frac{\Omega_\text{RF}}{2}\rho_{41}-\gamma_{31}\rho_{31}, \tag{64a}\\
+\dot\rho_{41} &= -j\frac{\Omega_\text{RF}}{2}(\rho_{31}-\rho_{42})+j(\Delta_p+\Delta_c+\Delta_\text{RF})\rho_{41}-\gamma_{41}\rho_{41}. \tag{64b}
+\end{align}
+\textbf{Significance:} the analogous evolution equations for the two
+other relevant coherences $\rho_{31},\rho_{41}$, obtained the same way
+as Eq.~63 --- together, Eq.~63/64a/64b form the full coupled system that
+needs to be solved (at steady state) to get $\rho_{21}$.
+
+\subsection*{Eq.~(65) --- steady-state equations after approximations}
+\begin{align}
+(\gamma_{21}-j\Delta_p)\rho_{21} &= -j\frac{\Omega_p}{2}(\rho_{11}-\rho_{22})-j\frac{\Omega_c}{2}\rho_{31}, \tag{65a}\\
+[\gamma_{31}-j(\Delta_p+\Delta_c)]\rho_{31} &= -j\frac{\Omega_c}{2}\rho_{21}-j\frac{\Omega_\text{RF}}{2}\rho_{41}, \tag{65b}\\
+[\gamma_{41}-j(\Delta_p+\Delta_c+\Delta_\text{RF})]\rho_{41} &= -j\frac{\Omega_\text{RF}}{2}\rho_{31}. \tag{65c}
+\end{align}
+\textbf{Significance:} sets $\dot\rho_{21}=\dot\rho_{31}=\dot\rho_{41}=0$
+(the steady-state condition) in Eq.~63/64a/64b, and applies two stated
+approximations: (i) $\rho_{11}\approx1$ (ground-state population
+probability), so $\rho_{22},\rho_{33},\rho_{44}$ are small and neglected;
+(ii) $\rho_{32},\rho_{42}\to0$ (their influence on $\rho_{21}$ is
+assumed marginal). This produces a clean, linear, coupled 3-equation
+system.
+
+\subsection*{Eq.~(66) --- $\rho_{31}$ eliminated}
+\begin{equation}
+\left[\gamma_{31}-j(\Delta_p+\Delta_c)-\frac{(\Omega_\text{RF}/2)^2}{\gamma_{41}-j(\Delta_p+\Delta_c+\Delta_\text{RF})}\right]\rho_{31} = -j\frac{\Omega_c}{2}\rho_{21}. \tag{66}
+\end{equation}
+\textbf{Significance:} substitutes Eq.~65c into Eq.~65b to eliminate
+$\rho_{41}$, leaving a single equation relating $\rho_{31}$ to
+$\rho_{21}$ --- the ``innermost'' layer of the continued fraction that
+will appear in Eq.~8.
+
+\subsection*{Eq.~(67) --- $\rho_{21}$ fully resolved (immediately gives Eq.~8)}
+\begin{equation}
+(\gamma_{21}-j\Delta_p)\rho_{21} = -j\frac{\Omega_p}{2}(\rho_{11}-\rho_{22})-j\frac{\Omega_c}{2}\left(\cfrac{-j\frac{\Omega_c}{2}}{\gamma_{31}-j(\Delta_p+\Delta_c)-\cfrac{(\Omega_\text{RF}/2)^2}{\gamma_{41}-j(\Delta_p+\Delta_c+\Delta_\text{RF})}}\rho_{21}\right). \tag{67}
+\end{equation}
+\textbf{Significance:} substitutes Eq.~66 into Eq.~65a. Letting
+$\rho_{11}\to1,\rho_{22}\to0$ (weak-probe limit) and solving for
+$\rho_{21}$ produces exactly Eq.~8 --- this equation is the last
+algebraic step of that derivation, shown explicitly so the full chain
+from the Hamiltonian to the closed form is traceable.
+
+\section{Appendix B: deriving the effective aperture $A_\text{eff}$}
+
+\subsection*{Eq.~(68) --- steady-state excited-state population}
+\begin{equation}
+\rho_{ee} = \frac{(\Omega_\text{RF}/\Gamma_\text{FWHM})^2}{1+4(\Delta_c/\Gamma_\text{FWHM})^2+2(\Omega_\text{RF}/\Gamma_\text{FWHM})^2}. \tag{68}
+\end{equation}
+\textbf{Terms:} $\rho_{ee}$ = the excited-state (Rydberg) population
+fraction, cited from a standard two-level-atom saturation formula
+[Steck, Rb87 D-line data].
+\textbf{Significance:} models how strongly the atoms are driven by the
+RF field, in a simplified two-level picture, as a function of the ratio
+$\Omega_\text{RF}/\Gamma_\text{FWHM}$ and detuning $\Delta_c/\Gamma_\text{FWHM}$
+--- the starting point for computing a scattering rate.
+
+\subsection*{Eq.~(69) --- total scattering rate}
+\begin{equation}
+\bar R = \Gamma_\text{FWHM}\rho_{ee}. \tag{69}
+\end{equation}
+\textbf{Significance:} the rate at which the atom absorbs and
+re-emits RF photons --- population fraction times the natural
+linewidth (standard two-level scattering-rate relation).
+
+\subsection*{Eq.~(70) --- near-resonant, weak-drive scaling}
+\begin{equation}
+\bar R = \frac{\Omega_\text{RF}^2}{\Gamma_\text{FWHM}} = \frac{\wp_\text{RF}^2E_\text{RF}^2}{\hbar^2\Gamma_\text{FWHM}}, \qquad (\Delta_c\approx0,\ \Omega_\text{RF}\ll\Gamma_\text{FWHM}). \tag{70}
+\end{equation}
+\textbf{Significance:} simplifies Eq.~68/69 in the specific limit
+relevant to weak RF fields at line center, and substitutes
+$\Omega_\text{RF}=\wp_\text{RF}E_\text{RF}/\hbar$ (Eq.~12) to express the
+scattering rate directly in terms of the field.
+
+\subsection*{Eq.~(71) --- power absorbed per atom}
+\begin{equation}
+P_\text{atom} = \hbar\omega_\text{RF}\bar R = \frac{\wp_\text{RF}^2E_\text{RF}^2\omega_\text{RF}}{\hbar\Gamma_\text{FWHM}}. \tag{71}
+\end{equation}
+\textbf{Significance:} each absorption--re-emission event removes one
+photon's worth of energy $\hbar\omega_\text{RF}$ from the field ---
+multiplying by the scattering rate $\bar R$ gives the power drawn from
+the field by a single atom.
+
+\subsection*{Eq.~(72) --- total power absorbed by all atoms}
+\begin{equation}
+P_\text{total} = N_\text{atoms}P_\text{atom} = \frac{N_\text{atoms}\wp_\text{RF}^2E_\text{RF}^2\omega_\text{RF}}{\hbar\Gamma_\text{FWHM}}. \tag{72}
+\end{equation}
+\textbf{Significance:} simply scales the single-atom result by
+$N_\text{atoms}$, assuming independent, non-interacting atoms (already
+justified via the blockade/Rydberg-fraction argument discussed under
+Fig.~4/Sec.~V-A).
+
+\subsection*{Eq.~(73) --- matching to a flux $\times$ aperture form}
+\begin{equation}
+\frac{E_\text{RF}^2}{2Z_0}A_\text{eff} = \frac{N_\text{atoms}\wp_\text{RF}^2E_\text{RF}^2\omega_\text{RF}}{\hbar\Gamma_\text{FWHM}}. \tag{73}
+\end{equation}
+\textbf{Significance:} defines the effective aperture $A_\text{eff}$
+implicitly, by demanding that (power flux density) $\times$
+$A_\text{eff}$ reproduce the total absorbed power computed in Eq.~72 ---
+the standard way an ``aperture'' is defined for any receiver.
+
+\subsection*{Eq.~(74) --- effective aperture, final form}
 \begin{equation}
 A_\text{eff} = \frac{2Z_0N_\text{atoms}\wp_\text{RF}^2\omega_\text{RF}}{\hbar\Gamma_\text{FWHM}}. \tag{74}
 \end{equation}
-\textbf{Significance:} explicitly confirms $A_\text{eff}$ scales with
-$N_\text{atoms}$ and the transition dipole moment/frequency --- ``rather
-than the physical cross-section of the vapor cell,'' stated directly in
-the text. This is why a geometric fallback for $N_\text{atoms}$ (e.g.,
-$N_0\times$beam volume) is explicitly \emph{not} what the authors
-intend, even though it's the only practical substitute available.
+\textbf{Significance:} solving Eq.~73 for $A_\text{eff}$ reproduces
+Eq.~17 exactly --- confirms the two are the same formula, one derived
+from first principles here, one just stated earlier in the main text.
 
-\subsection{Appendix C --- deriving the LO-dressed optimum (Eq.~75--83)}
+\section{Appendix C: deriving the LO-dressed optimum}
+
+\subsection*{Eq.~(75) --- restructured $\Im[\rho_{21}]$}
 \begin{equation}
 \Im[\rho_{21}(\Omega_\text{RF})] = \bar A[1-\Lambda(\Omega_\text{LO},\Gamma)-\kappa_\rho\Omega_\text{RF}\cos(2\pi\Delta f\,t+\Delta\phi)]. \tag{75}
 \end{equation}
+\textbf{Significance:} rewrites Eq.~27's $\Im[\rho_{21}]$ using the
+Lorentzian $\Lambda$ notation, exposing $\kappa_\rho=\partial\Lambda(\Omega_\text{LO},\Gamma)/\partial\Omega_\text{LO}$
+(the intrinsic gain coefficient associated with the coherence itself,
+before the Beer--Lambert exponential is applied) as a clean, separate
+factor.
+
+\subsection*{Eq.~(76) --- $\Im[\rho_{21}]$ at $\Omega_\text{RF}=0$, versus $\Delta_c$}
 \begin{equation}
-\Gamma_\text{HWHM}^{(3)} = \frac{\Omega_c^2+\Omega_p^2}{2\sqrt{\gamma_2^2+2\Omega_p^2}} \quad\text{(three-level HWHM)}, \tag{77}
+\Im[\rho_{21}(\Delta_c)]\big|_{(\Delta_p,\Delta_\text{LO},\gamma_3,\gamma_4,\Omega_\text{RF},\Omega_\text{LO})=0}
+= \bar A-\bar A\,\Lambda\!\left(\Delta_c,\Gamma_\text{HWHM}^{(3)}\right). \tag{76}
 \end{equation}
+\textbf{Significance:} the special case with no RF/LO field at all ---
+recovers the plain three-level EIT lineshape as a function of $\Delta_c$
+alone, expressed via the three-level HWHM $\Gamma_\text{HWHM}^{(3)}$
+(Eq.~77). This is a useful cross-check: it is a completely independent
+derivation of the basic (no-RF) EIT peak shape, separate from the
+4-level Fig.~3 machinery.
+
+\subsection*{Eq.~(77) --- three-level HWHM}
 \begin{equation}
-\Gamma = \frac{2\sqrt2\,\Omega_p}{\sqrt{\Omega_c^2+\Omega_p^2}}\,\Gamma_\text{HWHM}^{(3)} \quad\text{(four-level $\Gamma$, used in Eq.~27--30, 53--58, 79)}. \tag{78}
+\Gamma_\text{HWHM}^{(3)} = \frac{\Omega_c^2+\Omega_p^2}{2\sqrt{\gamma_2^2+2\Omega_p^2}}. \tag{77}
 \end{equation}
+\textbf{Significance:} the half-width at half-maximum of the
+\emph{three}-level (no RF/Rydberg-coupling) EIT spectrum --- purely a
+function of the two laser Rabi frequencies and the intermediate-state
+decay rate $\gamma_2$. \textbf{Caution, already established in this
+project}: this quantity, used alone, is \emph{not} the correct
+$\Gamma_\text{FWHM}$ for Fig.~4/Eq.~48's LO-free normalization (that
+candidate was tested and found to predict AT splitting at $\mathcal
+R\approx0.3$--0.4, well below the paper's own stated $\mathcal R=1$
+threshold).
+
+\subsection*{Eq.~(78) --- four-level $\Gamma$}
+\begin{equation}
+\Gamma = \frac{2\sqrt2\,\Omega_p}{\sqrt{\Omega_c^2+\Omega_p^2}}\,\Gamma_\text{HWHM}^{(3)}. \tag{78}
+\end{equation}
+\textbf{Significance:} rescales the three-level HWHM into the
+\emph{four}-level $\Gamma$ that appears throughout the LO-dressed
+Lorentzian $\Lambda(\Omega_\text{LO},\Gamma)$ (Eq.~28, 53, 54). This is
+the $\Gamma$ used for Fig.~6/7's $\Omega_\text{LO,opt}$ (Eq.~79) ---
+numerically, with the paper's stated $\Omega_p/2\pi=8$~MHz,
+$\Omega_c/2\pi=1$~MHz, $\gamma_2/2\pi=5.2$~MHz, this evaluates to
+$\Gamma=7.3255$~MHz, giving $\Omega_\text{LO,opt}=4.2294$~MHz ---
+matching the paper's stated 4.23~MHz almost exactly. \textbf{This
+$\Gamma$ is a structurally different quantity from
+$\Gamma_\text{FWHM}$} used in the LO-free Eq.~17/48/50 --- do not
+conflate the two across figures.
+
+\subsection*{Eq.~(79) --- the optimal LO bias}
 \begin{equation}
 \Omega_\text{LO,opt} = \frac{\sqrt3}{3}\Gamma, \qquad (\kappa_\rho)_\text{max}=\frac{3\sqrt3}{8\Gamma}. \tag{79}
 \end{equation}
-\textbf{CRITICAL, project-verified distinction:} $\Gamma$ (Eq.~78) is
-\textbf{NOT} the same quantity as $\Gamma_\text{FWHM}$ used in Eq.~17/48/50
-(the LO-free link-budget linewidth). They are two structurally different
-quantities used in two different contexts:
-\begin{itemize}
-\item $\Gamma_\text{FWHM}$ (LO-free, Eq.~48): appears as a normalizer
-for $\Omega_\text{RF}$ in the $\Delta_c$-domain (Fig.~4/5 context); the
-paper never gives it an unambiguous closed form usable across figures
---- this project settled on a \emph{measured} value from real QuTiP data
-(1.2231~MHz) as the standing project convention, after finding the
-``obvious'' analytic candidate ($\Gamma_\text{HWHM}^{(3)}$ alone) fails
-to reproduce the paper's stated $\mathcal R=1$ threshold behavior.
-\item $\Gamma$ (Eq.~78, LO-dressed): the HWHM of the LO-dressed
-Lorentzian $\Lambda(\Omega_\text{LO},\Gamma)$ as a function of
-$\Omega_\text{LO}$ itself --- purely analytic, $N_0$-independent, and
-\emph{does} closely reproduce the paper's stated $\Omega_\text{LO,opt}=4.23$~MHz
-when computed from Eq.~78 (this project got 4.2294~MHz).
-\end{itemize}
-A refined optimum accounting for the $\Omega_\text{LO}$-dependence of
-$\bar P_0$ itself (Eq.~80--83):
-\begin{equation}
-P_\text{out}(t)\approx \bar P_0+\kappa\Omega_\text{RF}\cos(2\pi\Delta f\,t+\Delta\phi), \tag{81}
-\end{equation}
-\begin{equation}
-\frac{\partial\kappa}{\partial\Omega_\text{LO}}=\frac{\partial^2\bar P_0}{\partial\Omega_\text{LO}^2}=0
-\;\;\Longrightarrow\;\;
-\Omega_\text{LO} = \sqrt{\bar A-1+\sqrt{\bar A^2-2\bar A+4}}\cdot\frac{\sqrt3}{3}\Gamma. \tag{82,83}
-\end{equation}
-\textbf{Significance:} Eq.~83 is a small $\bar A$-dependent correction
-to the simple Eq.~79 result --- worth checking numerically against 4.23~MHz
-if pursuing extra precision on $\Omega_\text{LO,opt}$.
+\textbf{Significance:} found by solving
+$\partial^2\Lambda(\Omega_\text{LO},\Gamma)/\partial\Omega_\text{LO}^2=0$
+--- the single, physically meaningful bias point that simultaneously
+maximizes the intrinsic gain coefficient $\kappa_\rho$ and (by
+definition of being a stationary point of the second derivative)
+eliminates second-order distortion. This is the vertical line plotted
+in Fig.~6(a) and the basis for Fig.~7's ``fixed $\kappa$'' curve.
 
-\subsection{Appendix D --- Fisher information / SNR derivation (Eq.~84--90)}
+\subsection*{Eq.~(80) --- practical $P_\text{out}(t)$, full derivation chain}
+\begin{align}
+P_\text{out}(t)
+&= P_\text{in}e^{-k_pLC_0\Im(\rho_{21})} \notag\\
+&= P_\text{in}e^{-k_pLC_0\bar A[1-\Lambda(\Omega_\text{LO},\Gamma)-\kappa_\rho\Omega_\text{RF}\cos(2\pi\Delta f\,t+\Delta\phi)]} \notag\\
+&= P_\text{in}e^{-\alpha}e^{\alpha\Lambda(\Omega_\text{LO},\Gamma)}e^{\alpha\kappa_\rho\Omega_\text{RF}\cos(2\pi\Delta f\,t+\Delta\phi)} \notag\\
+&= P_\text{in}e^{-\alpha}e^{\alpha\Lambda(\Omega_\text{LO},\Gamma)}e^{\kappa\Omega_\text{RF}\cos(2\pi\Delta f\,t+\Delta\phi)}. \tag{80}
+\end{align}
+\textbf{Significance:} shows step-by-step how substituting Eq.~75 into
+the Beer--Lambert law (Eq.~2, with $\chi=C_0\rho_{21}$) and factoring
+out constants leads to the exponential form used just before the final
+linearization (Eq.~81). Each line is an exact algebraic rearrangement,
+no approximation yet.
+
+\subsection*{Eq.~(81) --- linearized practical output}
+\begin{equation}
+P_\text{out}(t) \approx P_\text{in}e^{-\alpha}e^{\alpha\Lambda(\Omega_\text{LO},\Gamma)}(1+\alpha\kappa_\rho\Omega_\text{RF}\cos(2\pi\Delta f\,t+\Delta\phi)) = \bar P_0+\kappa\Omega_\text{RF}\cos(2\pi\Delta f\,t+\Delta\phi). \tag{81}
+\end{equation}
+\textbf{Significance:} the final approximation step --- since
+$\Omega_\text{RF}\ll\Omega_\text{LO}$ is assumed,
+$\alpha\kappa_\rho\Omega_\text{RF}\cos(\cdot)\ll1$, so
+$e^{(\text{small})}\approx1+(\text{small})$. This reproduces Eq.~28
+exactly, completing the derivation.
+
+\subsection*{Eq.~(82) --- refined optimality condition}
+\begin{equation}
+\frac{\partial\kappa}{\partial\Omega_\text{LO}} = \frac{\partial(\bar P_0\kappa_\rho)}{\partial\Omega_\text{LO}} = \frac{\partial^2\bar P_0}{\partial\Omega_\text{LO}^2} = 0. \tag{82}
+\end{equation}
+\textbf{Significance:} a more refined optimality condition than
+Eq.~79's, which only maximized $\kappa_\rho$ alone --- this one
+maximizes the full intrinsic gain $\kappa=\alpha\bar P_0\kappa_\rho$
+directly (i.e., accounts for how $\bar P_0$ itself changes with
+$\Omega_\text{LO}$, not just $\kappa_\rho$).
+
+\subsection*{Eq.~(83) --- refined optimal LO bias}
+\begin{equation}
+\Omega_\text{LO} = \sqrt{\bar A-1+\sqrt{\bar A^2-2\bar A+4}}\cdot\frac{\sqrt3}{3}\Gamma. \tag{83}
+\end{equation}
+\textbf{Significance:} solving Eq.~82 gives this $\bar A$-dependent
+correction factor multiplying the simple Eq.~79 result. \textbf{Not yet
+numerically checked in this project} against the simple
+$\Omega_\text{LO,opt}=4.2294$~MHz from Eq.~79 --- worth computing if you
+want to see whether it changes the match to the paper's stated 4.23~MHz
+at all (likely a small correction, since $\bar A$ is typically not far
+from a value that makes the correction factor close to 1, but this
+should be verified numerically, not assumed).
+
+\section{Appendix D: Fisher information / SNR derivation}
+
+\subsection*{Eq.~(84) --- two-Lorentzian transmission model}
 \begin{equation}
 \mathcal T(\Delta_c;\Omega_\text{RF}) = 1-\mathcal C\sum_{i=\pm1}\frac{(\Gamma_\text{FWHM}/2)^2}{(\Delta_c-\frac{\Omega_\text{RF}}{2}i)^2+(\Gamma_\text{FWHM}/2)^2}, \qquad \mathcal C\in(0,1). \tag{84}
 \end{equation}
-\textbf{This is the two-Lorentzian model used for Fig.~5} --- note it
-is a \emph{transmission dip} model ($1-\mathcal C\sum\dots$), i.e.,
-subtracting two Lorentzian \emph{peaks} from a background of 1, not
-adding them --- worth double-checking against how this project's Fig.~5
-implementation adds two Lorentzian peaks directly (an equivalent
-description when $\mathcal C$ absorbs the sign/normalization, but check
-the constant-background piece if revisiting Fig.~5).
-\begin{align}
-\mathcal I(\Omega_\text{RF}) &= \frac{N_\text{ph}}{2\Gamma_\text{FWHM}}\int_{-\infty}^{+\infty}\frac{[\partial_{\mathcal R}\mathcal T]^2}{\mathcal T}\,d\left(\frac{2\Delta_c}{\Gamma_\text{FWHM}}\right), \tag{85}\\
-\mathcal I_0(\mathcal R) &\le \mathcal I(\Omega_\text{RF}) \le \frac{1}{1-2\mathcal C}\mathcal I_0(\mathcal R), \qquad \mathcal I_0(\mathcal R)=\frac{8N_\text{ph}\mathcal C^2}{\Gamma_\text{FWHM}^2}\frac{1}{1+\frac{1}{2\mathcal R^2}}, \tag{86,87}\\
-\mathcal I(\Omega_\text{RF}) &= \frac{8N_\text{ph}\mathcal C^2}{\Gamma_\text{FWHM}^2}\frac{1}{1+\frac{1}{2\mathcal R^2}}\beta(\mathcal C), \qquad \beta(\mathcal C)\in\left[1,\tfrac{1}{1-2\mathcal C}\right], \tag{88}\\
-\sigma_{\Omega_\text{RF}}^2 &\ge \mathcal I^{-1}(\Omega_\text{RF}) = \frac{\Gamma_\text{FWHM}^2}{8N_\text{ph}\mathcal C^2}\left(1+\frac{1}{2\mathcal R^2}\right), \tag{89}\\
-\frac{\Omega_\text{RF}^2}{\sigma_{\Omega_\text{RF}}^2} &= \frac{\mathcal R^2}{1+\frac1{2\mathcal R^2}} \equiv G(\mathcal R). \tag{90}
-\end{align}
-\textbf{Significance:} this is a rigorous, first-principles
-(Poisson-statistics + Cram\'er--Rao) derivation proving $G(\mathcal R)$
-is not an ad-hoc fudge factor but the actual information-theoretic
-resolvability penalty for estimating $\Omega_\text{RF}$ from a
-two-Lorentzian AT-split spectrum. $N_\text{ph}$ = expected photon count
-per detection window; $\mathcal C$ = a contrast parameter (paper uses
-$\mathcal C\lesssim0.2$ for its weak-probe simulations, giving
-$\beta(\mathcal C)\le1.67$, i.e. $\le2.22$~dB of contrast-only slack).
+\textbf{Terms:} $\mathcal C$ = a contrast parameter controlling how deep
+the two Lorentzian dips are. $i=\pm1$ sums over the two AT-split peak
+locations $\Delta_c=\pm\Omega_\text{RF}/2$.
+\textbf{Significance:} \textbf{this is the exact model used for
+Fig.~5} (``use QuTip toolkit to generate the EIT-AT spectrum as two
+Lorentzian peaks''). \textbf{Important detail to verify if revisiting
+Fig.~5}: this is written as a \emph{transmission-dip} model --- 1 minus
+a sum of two Lorentzian \emph{peaks} in the dip/absorption sense --- not
+a plain additive sum of two Lorentzian \emph{peaks} rising from a zero
+baseline. If your own Fig.~5 implementation adds two Lorentzians
+directly (peak-additive form) rather than subtracting them from a
+constant background, double-check the two forms are actually
+equivalent for your chosen normalization, since they are not
+automatically the same thing outside of special cases.
+
+\subsection*{Eq.~(85) --- Fisher information integral}
+\begin{equation}
+\mathcal I(\Omega_\text{RF}) = \frac{N_\text{ph}}{2\Gamma_\text{FWHM}}\int_{-\infty}^{+\infty}\frac{[\partial_{\mathcal R}\mathcal T(2\Delta_c/\Gamma_\text{FWHM};\mathcal R)]^2}{\mathcal T(2\Delta_c/\Gamma_\text{FWHM};\mathcal R)}\,d\left(\frac{2\Delta_c}{\Gamma_\text{FWHM}}\right). \tag{85}
+\end{equation}
+\textbf{Terms:} $N_\text{ph}$ = expected photon count within the
+detection bandwidth (from a Poisson-distributed photon count model at
+each detuning point).
+\textbf{Significance:} the classical Fisher information for estimating
+$\Omega_\text{RF}$ (via $\mathcal R$) from a full scan of the two-peak
+transmission spectrum, treating each detuning-point measurement as
+Poisson-distributed --- a rigorous information-theoretic starting point,
+not a heuristic.
+
+\subsection*{Eq.~(86) --- Fisher information bounds}
+\begin{equation}
+\mathcal I_0(\mathcal R) \le \mathcal I(\Omega_\text{RF}) \le \frac{1}{1-2\mathcal C}\mathcal I_0(\mathcal R). \tag{86}
+\end{equation}
+\textbf{Significance:} bounds the (generally intractable) exact
+integral Eq.~85 between a computable closed form $\mathcal I_0(\mathcal
+R)$ (Eq.~87) and a constant multiple of it --- lets the analysis
+proceed without solving Eq.~85 exactly.
+
+\subsection*{Eq.~(87) --- closed-form Fisher information lower bound}
+\begin{equation}
+\mathcal I_0(\mathcal R) = \frac{8N_\text{ph}\mathcal C^2}{\Gamma_\text{FWHM}^2}\frac{1}{1+\frac{1}{2\mathcal R^2}}. \tag{87}
+\end{equation}
+\textbf{Significance:} the explicit closed form of the lower bound
+introduced in Eq.~86 --- already has exactly the same
+$1/(1+\frac{1}{2\mathcal R^2})$ structure that will become $G(\mathcal
+R)$ (Eq.~49/90).
+
+\subsection*{Eq.~(88) --- exact Fisher information with contrast factor}
+\begin{equation}
+\mathcal I(\Omega_\text{RF}) = \frac{8N_\text{ph}\mathcal C^2}{\Gamma_\text{FWHM}^2}\frac{1}{1+\frac{1}{2\mathcal R^2}}\beta(\mathcal C), \qquad \beta(\mathcal C)\in\left[1,\tfrac{1}{1-2\mathcal C}\right]. \tag{88}
+\end{equation}
+\textbf{Terms:} $\beta(\mathcal C)$ = a contrast-only correction factor,
+independent of $\mathcal R$.
+\textbf{Significance:} the exact Fisher information, shown to differ
+from the lower-bound Eq.~87 only by the $\mathcal R$-independent factor
+$\beta(\mathcal C)$ --- for the paper's typical weak-probe simulations
+($\mathcal C\lesssim0.2$), $\beta(\mathcal C)\le1.67$ ($\le2.22$~dB), a
+small, absorbable correction.
+
+\subsection*{Eq.~(89) --- Cram\'er--Rao bound}
+\begin{equation}
+\sigma_{\Omega_\text{RF}}^2 \ge \mathcal I^{-1}(\Omega_\text{RF}) = \frac{\Gamma_\text{FWHM}^2}{8N_\text{ph}\mathcal C^2}\left(1+\frac{1}{2\mathcal R^2}\right). \tag{89}
+\end{equation}
+\textbf{Significance:} the standard Cram\'er--Rao inequality applied to
+Eq.~88 --- gives a lower bound on the variance of any unbiased
+estimator of $\Omega_\text{RF}$ from the two-Lorentzian spectrum.
+
+\subsection*{Eq.~(90) --- $G(\mathcal R)$, derived (not assumed)}
+\begin{equation}
+\frac{\Omega_\text{RF}^2}{\sigma_{\Omega_\text{RF}}^2} = \frac{\mathcal R^2}{1+\frac{1}{2\mathcal R^2}} \equiv G(\mathcal R). \tag{90}
+\end{equation}
+\textbf{Significance:} multiplying the classical link SNR term
+$P_\text{Rx}|h|^2/\sigma_\text{Ry}^2$ by the RF-to-atomic conversion
+gain $(\wp_\text{RF}/\hbar\Gamma_\text{FWHM})^2$ and this Fisher-derived
+factor $G(\mathcal R)$ yields exactly Eq.~50 --- the whole point of
+Appendix~D is to prove $G(\mathcal R)$ is a rigorous consequence of
+information theory applied to AT-splitting estimation, not a
+prescribed/arbitrary term.
 
 \section{Full parameter table (Sec. V-A, as stated in the paper)}
 \begin{center}
@@ -605,17 +1278,17 @@ $\wp_{12}$ & $(2.5\,e a_0)^2$ & $|1\rangle$--$|2\rangle$ dipole moment (already 
 $\wp_\text{RF}$ & $-1443.459\,ea_0$ & $|3\rangle$--$|4\rangle$ dipole moment\\
 $f_\text{RF}$ & 6.9~GHz & RF carrier frequency\\
 $\lambda_p$ & 852~nm & probe wavelength\\
-$P_\text{in}$ (probe intensity) & $20.7\,\mu$W & stated directly (inconsistent with Eq.~3 given $d$ below)\\
-$d$ (probe beam diam.) & 0.76~mm & 1/e$^2$ diameter\\
+$P_\text{in}$ & $20.7\,\mu$W & stated directly (inconsistent with Eq.~3 given $d$ below)\\
+$d$ & 0.76~mm & probe 1/e$^2$ beam diameter\\
 $\Omega_p/2\pi$ & 8~MHz & probe Rabi frequency\\
 $\lambda_c$ & 510~nm & coupling wavelength\\
 Coupling intensity & 17~mW & \\
-$d_c$ (coupling beam diam.) & 1.95~mm & \\
+$d_c$ & 1.95~mm & coupling 1/e$^2$ beam diameter\\
 $\Omega_c/2\pi$ & 1~MHz & coupling Rabi frequency\\
 $\epsilon_0$ & $8.854\times10^{-12}$~F/m & vacuum permittivity\\
 $Z_0$ & 377~$\Omega$ & free-space impedance\\
-$\Omega_\text{RF}/2\pi$ (LO-free case) & 6~MHz & example RF field used in LO-free figures\\
-$\Omega_\text{RF}/2\pi$ (LO-dressed case) & 20~kHz & example RF field used in LO-dressed figures\\
+$\Omega_\text{RF}/2\pi$ (LO-free) & 6~MHz & example RF field, LO-free figures\\
+$\Omega_\text{RF}/2\pi$ (LO-dressed) & 20~kHz & example RF field, LO-dressed figures\\
 $\Omega_\text{LO}/2\pi$ & 4.23~MHz & stated LO-dressed optimum\\
 $B$ & 100~kHz & system bandwidth\\
 $\Delta f$ & 15~kHz & LO/RF frequency difference\\
@@ -627,135 +1300,71 @@ $\eta_\text{eff}$ & 0.5 & PD quantum efficiency\\
 $G_\text{Tx}$ & 2.15~dBi & Tx dipole antenna gain\\
 $P_\text{Tx}$ & 30~dBm (1~W) & Tx power\\
 $G_\text{Rx}$ (conventional only) & 2.15~dBi & Rx dipole antenna gain\\
-$G_\text{LNA}$ (conventional) & 20~dB & same LNA assumed for fair comparison\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\section{Figure-by-figure: what you need and in what order}
+\section{Figure-by-figure equation chains}
 
-\subsection*{Fig.~1 --- schematic only}
-No computation. Energy-level diagram + LO-free/LO-dressed setup
-cartoons + a small illustrative EIT/AT sketch.
-
-\subsection*{Fig.~2 --- schematic only}
-No computation. Block-diagram of the noise chain for all three
-receivers; the actual formulas behind each labeled box are Eq.~31--47
-(Sec.~3.4/3.5 above) plus the conventional-receiver noise formula.
+\subsection*{Fig.~1, Fig.~2 --- schematic only}
+No computation involved.
 
 \subsection*{Fig.~3 --- $P_\text{out}(\Delta_c,\Omega_\text{RF})$, LO-free}
-\textbf{Chain:} Eq.~6 (Hamiltonian, $\Omega=\Omega_\text{RF}$, sweep
-$\Delta_c,\Omega_\text{RF}$, $\Delta_p=\Delta_\text{RF}=0$) $\to$ Eq.~7
-(Lindblad) $\to$ solve $\dot{\boldsymbol\rho}=0$ (QuTiP steady state, \emph{not}
-Eq.~8, which is unstable in this strongly-driven regime) $\to$ Eq.~4
-($\chi=C_0\rho_{21}$) $\to$ Eq.~2 (Beer--Lambert $P_\text{out}$). Uses
-$P_\text{in}=20.7\,\mu$W directly (not re-derived via Eq.~3). No
-Doppler averaging (Eq.~9--11 deliberately not applied --- see notes
-above).
+Eq.~6 ($\Omega=\Omega_\text{RF}$, sweep $\Delta_c,\Omega_\text{RF}$,
+$\Delta_p=\Delta_\text{RF}=0$) $\to$ Eq.~7 $\to$ QuTiP steady state (NOT
+Eq.~8) $\to$ Eq.~4 $\to$ Eq.~2. $P_\text{in}=20.7\,\mu$W used directly.
+No Doppler averaging (Eq.~9--11 deliberately excluded).
 
-\subsection*{Fig.~4 --- $P_\text{out}(\Delta_c,\mathcal R)$ heatmap, LO-free}
-\textbf{Chain:} reuses Fig.~3's real $(\Delta_c,\Omega_\text{RF})$ grid
-directly $\to$ Eq.~48 ($\mathcal R=\Omega_\text{RF}/\Gamma_\text{FWHM}$)
-to relabel the $\Omega_\text{RF}$ axis as $\mathcal R$ $\to$ compare
-against the $\mathcal R=1$ threshold (Eq.~49's behavior). \textbf{Open
-question, unresolved in the paper:} what exact numeric
-$\Gamma_\text{FWHM}$ makes the caption's claimed peak-locus slope
-$\Delta_c/2\pi=\pm\mathcal R$ come out to slope 1 --- no candidate
-($\Gamma_\text{HWHM}^{(3)}$, four-level $\Gamma$, or measured linewidth)
-reproduces this exactly; this project settled on the measured value
-(1.2231~MHz) as the best-justified standing choice.
+\subsection*{Fig.~4 --- $P_\text{out}(\Delta_c,\mathcal R)$, LO-free}
+Reuses Fig.~3's grid $\to$ Eq.~48 to relabel the axis as $\mathcal R$.
+$\Gamma_\text{FWHM}$ choice unresolved analytically (see Eq.~77 caution
+above); this project uses a measured value.
 
 \subsection*{Fig.~5 --- $P_\text{out}(\Delta_c,d_\text{Tx-Rx})$ + SNR, LO-free}
-\textbf{Chain:} pick $d_\text{Tx-Rx}$ $\to$ Eq.~15 ($S_\text{Rx}$) $\to$
-Eq.~16/17 ($P_\text{Rx}$, needs $N_\text{atoms}$ --- \emph{not given
-numerically anywhere in the paper}, and Eq.~84's two-Lorentzian model
-needs $\Gamma_\text{FWHM}$ too) $\to$ Eq.~13 ($E_\text{RF}$ from
-$P_\text{Rx}$) $\to$ Eq.~12 ($\Omega_\text{RF}$) $\to$ Eq.~84
-(two-Lorentzian spectrum centered at $\Delta_c=\pm\Omega_\text{RF}/2$,
-half-width $\Gamma_\text{FWHM}/2$, amplitude from real QuTiP data per
-the paper's own stated method: ``use QuTip toolkit to generate the
-EIT-AT spectrum'') $\to$ Eq.~50 (SNR$_\text{Ry}$) for the accompanying
-SNR curve.
+Eq.~15 $\to$ Eq.~16/17 (needs $N_\text{atoms}$, not given) $\to$ Eq.~13
+$\to$ Eq.~12 $\to$ Eq.~84 (two-Lorentzian, check dip-vs-peak form) $\to$
+Eq.~50 for the SNR curve.
 
-\subsection*{Fig.~6 --- LDR of LO-dressed receiver, 3 panels}
-\textbf{Chain:} panel (a): Eq.~6 (Hamiltonian, $\Omega=\Omega_\text{total}$,
-sweep $\Omega_\text{total}$, all detunings 0) $\to$ QuTiP steady state
-$\to$ Eq.~2/4 $\to$ real $P_\text{out}(\Omega_\text{total})$ curve.
-Overlay Eq.~78/79 ($\Gamma$, $\Omega_\text{LO,opt}$ analytic) and the
-numeric optimum (steepest real $|\partial P_\text{out}/\partial\Omega_\text{RF}|$
-at $\Omega_\text{RF}=0$). Shade the LDR using Eq.~57 \textbf{(with a
-chosen $\epsilon$ --- do not treat it as $\epsilon$-free)} at a bias
-away from the true optimum, or Eq.~58 (also needs $\epsilon$) at the
-true optimum where $\Lambda_0''=0$. Panel (b): $\Omega_\text{total}(t)=
-\Omega_\text{LO}+e^{j(2\pi\Delta f\,t+\Delta\phi)}\Omega_\text{RF}$
-(complex phasor, $\Delta f=15$~kHz paper-stated, $\Delta\phi$ not given
-by the paper). Panel (c): interpolate panel (a)'s real curve at
-$\Omega_\text{total}(t)$ from panel (b) --- no fresh QuTiP solve needed
-per time point.
+\subsection*{Fig.~6 --- LDR of LO-dressed receiver}
+Eq.~6 ($\Omega=\Omega_\text{total}$) $\to$ QuTiP steady state $\to$
+Eq.~2/4 $\to$ real $P_\text{out}(\Omega_\text{total})$. Overlay Eq.~78/79.
+Shade LDR using Eq.~57 or Eq.~58 (BOTH need a chosen $\epsilon$).
+Panel (b): $\Omega_\text{total}(t)$ phasor. Panel (c): interpolate
+panel (a).
 
 \subsection*{Fig.~7 --- received-power map, LO-dressed}
-\textbf{Chain:} same LDR machinery as Fig.~6, translated from
-$\Omega_\text{RF}$ bounds into $P_\text{Rx}$ bounds via Eq.~12/13 (i.e.
-$P_\text{Rx}=|E_\text{RF}|^2/2Z_0$ with $E_\text{RF}=\hbar\Omega_\text{RF}/\wp_\text{RF}$),
-plotted \textbf{against $\Omega_\text{LO}/2\pi$ on a log $x$-axis}
-(\emph{not} against distance --- verified directly from the real
-figure image). Two curves: `fixed $\kappa$' (always driven at
-$\Omega_\text{LO,opt}$, best-possible/widest LDR) and `adaptive
-$\kappa$' (driven at whatever $\Omega_\text{LO}$ the distance-dependent
-link actually produces). The shaded region is the linear dynamic range
-in $P_\text{Rx}$-space; it is narrowest away from $\Omega_\text{LO,opt}$
-and widest exactly at it.
+Same LDR machinery as Fig.~6, translated to $P_\text{Rx}$ via
+Eq.~12/13, plotted against $\Omega_\text{LO}/2\pi$ (log axis, verified
+directly from the real figure).
 
-\subsection*{Fig.~8 --- SNR vs distance, all three receivers}
-\textbf{Chain:} for each $d_\text{Tx-Rx}$: Eq.~14/15/16/17 $\to P_\text{Rx}$
-$\to$ Eq.~50 (LO-free SNR) / Eq.~52 or 61 (LO-dressed SNR) /
-$\text{SNR}_\text{Conv}$ (conventional, using $\lambda_\text{RF}^2/4\pi$
-as its aperture, not Eq.~17). Also plot the SQL-limited versions using
-Eq.~40/41 substituted into the noise terms.
+\subsection*{Fig.~8 --- SNR vs distance}
+Eq.~14/15/16/17 $\to P_\text{Rx}$ $\to$ Eq.~50 / Eq.~52 (or 61) /
+conventional SNR (using $\lambda_\text{RF}^2/4\pi$ as aperture).
 
 \subsection*{Fig.~9 --- mutual information vs $P_\text{Rx}$}
-\textbf{Chain:} take the SNR values from the Fig.~8-style chain at each
-$P_\text{Rx}$ $\to$ Eq.~59 (LO-free MI, Rician-form with modified Bessel
-functions $I_0,I_1$, Rician factor $\mathfrak r\approx\text{SNR}_\text{Ry}$)
-or Eq.~60 (LO-dressed MI, using the exponential-integral function
-$E_1(x)$) $\to$ plot bits/s/Hz vs $P_\text{Rx}$ (dBm).
+SNR from the Fig.~8 chain $\to$ Eq.~59 (LO-free) or Eq.~60 (LO-dressed).
 
-\subsection*{Fig.~10 --- SER vs $P_\text{Rx}$, 3 panels}
-\textbf{Chain:} same SNR chain as Fig.~8/9, then plug the effective SNR
-into standard modulation-specific SER formulas: \textbf{$M$-QAM}
-(conventional + LO-dressed, since both produce a continuous
-complex-valued baseband via coherent/heterodyne demodulation) using
-[59, Eq.~5.279]; \textbf{$M$-PAM} (LO-free, since it only ever produces
-a single scalar amplitude observation per scan window, no phase) using
-[59, Eq.~5.246]. Both `practical'/`adaptive $\kappa$' and `SQL' noise
-variants are shown per receiver.
+\subsection*{Fig.~10 --- SER vs $P_\text{Rx}$}
+SNR from the Fig.~8 chain $\to$ standard $M$-QAM (conventional,
+LO-dressed) or $M$-PAM (LO-free) SER formulas [59].
 
-\section{Standing conventions/decisions already made in this project (do not re-litigate without new evidence)}
+\section{Standing conventions already established in this project}
 \begin{itemize}
-\item $\Gamma_\text{FWHM}$ (LO-free, Fig.~4/5) = 1.2231~MHz, \emph{measured}
-from real QuTiP $P_\text{out}(\Delta_c)$ data at $\Omega_\text{RF}=0$,
-not any analytic candidate.
-\item $\Gamma$ (LO-dressed, Fig.~6/7, Eq.~78) = 7.3255~MHz, computed
-analytically from $\Omega_p,\Omega_c,\gamma_2$ --- gives
-$\Omega_\text{LO,opt}=4.2294$~MHz, matching the paper's stated 4.23~MHz.
-\item $N_\text{atoms}$: never given a value or formula anywhere in the
-paper or its three cited references --- any numeric use is a labeled
-reference/illustrative choice, not a paper-confirmed number.
-\item $\epsilon$ (THD tolerance, Eq.~56--58): never given a numeric
-value --- the paper calls it ``the designer-specified tolerance.''
-\textbf{Both} Eq.~57 and Eq.~58 need it (correcting an earlier
-project assumption that Eq.~57 was $\epsilon$-free).
-\item The paper's own Pin/diameter values (20.7~$\mu$W vs 0.76~mm) are
-mutually inconsistent under Eq.~3 (which would require 39.08~$\mu$W)
---- introduced when the paper was rewritten from v1/v2 to v3, confirmed
-by direct version comparison.
-\item Real N$_0$ ($4.89\times10^{16}\,\text{m}^{-3}$) makes every
-QuTiP-computed curve sharper/narrower than the paper's own plotted
-curves (an exponential Beer--Lambert compression effect) --- confirmed
-recurring across Fig.~3, 4, 5, and 6, and confirmed \emph{not} fixable
-via any alternative parameter choice (a dedicated forensic audit ruled
-out Rydberg-blockade correction, Eq.~2/4 form errors, and N$_0$/L
-inconsistency as explanations).
+\item $\Gamma_\text{FWHM}$ (LO-free, Fig.~4/5) = 1.2231~MHz, measured
+from real QuTiP data, not an analytic candidate.
+\item $\Gamma$ (LO-dressed, Fig.~6/7, Eq.~78) = 7.3255~MHz, analytic,
+gives $\Omega_\text{LO,opt}=4.2294$~MHz (paper: 4.23~MHz).
+\item $N_\text{atoms}$: never given anywhere in the paper or its three
+cited references.
+\item $\epsilon$ (Eq.~56--58): never given a numeric value. \textbf{Both}
+Eq.~57 and Eq.~58 need it.
+\item $P_\text{in}$/$d$ (20.7~$\mu$W / 0.76~mm) are mutually
+inconsistent under Eq.~3 (would need 39.08~$\mu$W) --- a real,
+version-confirmed paper-internal inconsistency, introduced in v3.
+\item Real $N_0$ makes every QuTiP-computed curve sharper than the
+paper's own plots (confirmed recurring across Fig.~3--6; a dedicated
+audit ruled out Rydberg blockade, Eq.~2/4 form errors, and N$_0$/L
+inconsistency as fixable explanations).
 \end{itemize}
 
 \end{document}
