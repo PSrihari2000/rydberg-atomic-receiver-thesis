@@ -55,16 +55,26 @@ zero, both the true curve and the tangent are tiny numbers and trivially
 anything there. Caught directly by the user pointing out the band didn't
 make sense.
 
-**Second attempt**: used the paper's own **Eq.57**, Ω″RF,max=4|κ₀'/κ₀''|,
-computed from real numeric first/second derivatives. At the analytic bias
-(4.23MHz): κ₀'=−0.2363, κ₀''=0.3287 → Ω″RF,max=2.8755MHz, a real,
-ε-free, paper-formula number. But plotting this as a band centered at
-4.23MHz was ALSO wrong, caught by inspecting the real paper figure
-side-by-side: on our curve, 4.23MHz already sits deep in the decayed
-tail (Section F), so the shaded band mostly covered flat, near-zero
-curve — visibly not a "linear dynamic range" the way the paper's own
-Fig.6(a) shows one (there, the curve is still clearly declining across
-the whole shaded band).
+**Second attempt**: used what was believed to be the paper's **Eq.57**,
+Ω″RF,max=4|κ₀'/κ₀''|, computed from real numeric first/second
+derivatives. At the analytic bias (4.23MHz): κ₀'=−0.2363, κ₀''=0.3287 →
+"Ω″RF,max"=2.8755MHz, treated at the time as a real, ε-free,
+paper-formula number. But plotting this as a band centered at 4.23MHz
+was ALSO wrong, caught by inspecting the real paper figure side-by-side:
+on our curve, 4.23MHz already sits deep in the decayed tail (Section F),
+so the shaded band mostly covered flat, near-zero curve — visibly not a
+"linear dynamic range" the way the paper's own Fig.6(a) shows one (there,
+the curve is still clearly declining across the whole shaded band).
+
+**Correction (2026-09-01)**: re-reading the actual rendered paper page
+(not memory) shows Eq.57 is literally
+Ω″RF,max = **4ε**|Λ₀'|/|Λ₀''| — it DOES contain ε. The "2.8755MHz"
+number above is only the coefficient 4|Λ₀'/Λ₀''| that ε multiplies, not
+a complete, ε-free bound as this report previously claimed. This does
+not change which build decision was correct (Eq.57's coefficient still
+blows up at the numeric optimum since Λ₀''≈0 there, so Eq.58 is still
+the governing bound at the point that matters — see below), but it
+corrects a real error in how Eq.57 was characterized and reported.
 
 **Third attempt, also considered**: at our own numeric optimum
 (1.31MHz — where the curve is actually steep/quasi-linear), κ₀''≈0 (an

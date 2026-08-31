@@ -11,14 +11,17 @@
 # audit this build follows. Key points carried over:
 #   - Gamma = four-level Gamma (Eq.78, Appendix C), NOT Fig.4/5's
 #     measured Gamma_ref -- confirmed correct context in the audit.
-#   - epsilon (THD tolerance, Eq.58) has NO paper-stated value --
-#     the paper itself calls it "the designer-specified tolerance".
+#   - epsilon (THD tolerance) has NO paper-stated value -- the paper
+#     itself calls it "the designer-specified tolerance". BOTH Eq.57
+#     and Eq.58 need it (2026-09-01 correction: an earlier version of
+#     this script wrongly treated Eq.57 as epsilon-free -- the actual
+#     printed equation is Omega_RF,max''=4*epsilon*|Lambda_0'/Lambda_0''|).
 #     The shaded LDR band below therefore uses a few explicitly
 #     labeled ILLUSTRATIVE epsilon values, not one false-confident
-#     paper-confirmed band. (2026-08-30 fix: the band is now centered
-#     at our OWN numeric optimum, 1.31MHz -- see the LDR section below
-#     for why the earlier version, centered at the analytic 4.23MHz
-#     bias, was wrong.)
+#     paper-confirmed band. (2026-08-30 fix: the band is centered
+#     at our OWN numeric optimum, 1.31MHz, using Eq.58 -- see the LDR
+#     section below for why the earlier version, centered at the
+#     analytic 4.23MHz bias, was wrong.)
 #   - Omega_RF,min has no closed-form equation in the paper at all
 #     (only "corresponds to the intrinsic sensitivity", no formula)
 #     -- shown here only via the same illustrative-epsilon approach
@@ -161,48 +164,56 @@ tangent_numeric = tangent_line(Omega_LO_opt_numeric_mhz)
 # ------------------------------------------------------------
 # LINEAR DYNAMIC RANGE
 #
-# Eq.57 (Omega_RF,max = 4|kappa0'/kappa0''|) needs NO epsilon, but
-# it is only meaningful where the curve is genuinely quasi-linear.
-# At our OWN numeric optimum (1.31MHz) kappa0''~0 (an inflection
-# point -- mathematically the same thing as "point of maximum
-# |slope|"), so Eq.57 is undefined there, for the same structural
-# reason the paper's own optimum needs Eq.58 instead of Eq.57.
-# Eq.57 DOES give a real, finite number at the analytic bias
-# (4.23MHz) -- but that number is NOT usable as an LDR band on our
-# own curve: 4.23MHz already sits deep in our curve's decayed tail
-# (the recurring high-N0 sharpening effect, see math report), so a
-# band centered there mostly shades flat, near-zero curve -- visibly
-# NOT a "linear dynamic range" the way the paper's own Fig.6(a) shows
-# it (caught by inspection against the real paper figure, 2026-08-30).
+# CORRECTED 2026-09-01: re-reading the actual rendered paper page
+# (not memory/pdftotext) shows Eq.57 is
+#     Omega_RF,max'' = 4*epsilon*|Lambda_0'| / |Lambda_0''|
+# i.e. it DOES contain epsilon -- an earlier version of this script
+# wrongly treated Eq.57 as epsilon-free (using just 4|Lambda_0'/Lambda_0''|
+# as if that were the complete bound). That 4|Lambda_0'/Lambda_0''|
+# term is only the COEFFICIENT that epsilon multiplies; both Eq.57
+# and Eq.58 are families of bounds parametrized by the paper's
+# undefined "designer-specified tolerance" epsilon, not one epsilon-free
+# and one epsilon-dependent as previously assumed.
 #
-# FIX: shade the LDR around our OWN numeric optimum (1.31MHz)
-# instead -- that is where our curve is actually quasi-linear/
-# steepest, the true analogue of the paper's Omega_LO,opt. Since
-# kappa0''~0 there, the governing bound is Eq.58 (THIRD-order term),
-# Omega_RF,max = sqrt(6*epsilon*|kappa0'/kappa0'''|), which needs
-# epsilon -- genuinely undefined by the paper ("designer-specified
-# tolerance"). Shown here for a few explicitly labeled ILLUSTRATIVE
-# epsilon values, not a false-confident single paper-derived band.
+# This does not change which equation governs where: at our own
+# numeric optimum (1.31MHz), Lambda_0''~0 (an inflection point --
+# mathematically the same thing as "point of maximum |slope|"), so
+# Eq.57's coefficient blows up there regardless of epsilon, and Eq.58
+# (the third-order bound) is what actually governs -- same structural
+# reason the paper's own optimum needs Eq.58 instead of Eq.57. The LDR
+# shading below is therefore still centered at the numeric optimum
+# using Eq.58, exactly as before; only the Eq.57 diagnostic printed
+# for the analytic bias point is corrected to show it also needs
+# epsilon.
 # ------------------------------------------------------------
 d2Pout = np.gradient(dPout, omega_total_mhz)
 d3Pout = np.gradient(d2Pout, omega_total_mhz)
 
-def eq57_bound(bias_mhz):
+def eq57_coefficient(bias_mhz):
+    """4|Lambda_0'/Lambda_0''| -- the coefficient Eq.57 multiplies by epsilon."""
     k1 = np.interp(bias_mhz, omega_total_mhz, dPout)
     k2 = np.interp(bias_mhz, omega_total_mhz, d2Pout)
     return 4 * abs(k1 / k2) if abs(k2) > 1e-9 else float("inf")
+
+def eq57_bound(bias_mhz, epsilon):
+    return epsilon * eq57_coefficient(bias_mhz)
 
 def eq58_bound(bias_mhz, epsilon):
     k1 = np.interp(bias_mhz, omega_total_mhz, dPout)
     k3 = np.interp(bias_mhz, omega_total_mhz, d3Pout)
     return np.sqrt(6 * epsilon * abs(k1 / k3)) if abs(k3) > 1e-9 else float("inf")
 
-ORF_max_eq57_at_analytic = eq57_bound(Omega_LO_opt_analytic_mhz)
-print(f"Eq.57 Omega_RF,max (epsilon-free) at analytic bias (4.23MHz) = {ORF_max_eq57_at_analytic:.4f} MHz "
-      f"(real number, but NOT used for shading -- see note above: this bias point sits in our curve's "
-      f"decayed tail, so the resulting band doesn't visually behave like a linear dynamic range)")
-
 EPSILON_ILLUSTRATIVE = [0.01, 0.05, 0.10]  # OUR CHOICE -- paper gives no value ("designer-specified")
+
+eq57_coeff_at_analytic = eq57_coefficient(Omega_LO_opt_analytic_mhz)
+print(f"Eq.57 coefficient 4|Lambda_0'/Lambda_0''| at analytic bias (4.23MHz) = {eq57_coeff_at_analytic:.4f} "
+      f"(this is NOT the bound itself -- Eq.57 = epsilon x this coefficient)")
+for eps in EPSILON_ILLUSTRATIVE:
+    print(f"  Eq.57 Omega_RF,max at analytic bias, epsilon={eps*100:.0f}% (illustrative) = "
+          f"{eq57_bound(Omega_LO_opt_analytic_mhz, eps):.4f} MHz "
+          f"(diagnostic only -- NOT used for shading: this bias point sits in our curve's decayed "
+          f"tail, so a band centered there doesn't visually behave like a linear dynamic range)")
+
 ORF_max_eq58_at_numeric = {
     eps: eq58_bound(Omega_LO_opt_numeric_mhz, eps) for eps in EPSILON_ILLUSTRATIVE
 }
@@ -281,7 +292,7 @@ np.savez(
     tangent_analytic=tangent_analytic, tangent_numeric=tangent_numeric,
     Gamma4_mhz=Gamma4_mhz, Omega_LO_opt_analytic_mhz=Omega_LO_opt_analytic_mhz,
     Omega_LO_opt_numeric_mhz=Omega_LO_opt_numeric_mhz,
-    ORF_max_eq57_at_analytic=ORF_max_eq57_at_analytic,
+    eq57_coefficient_at_analytic=eq57_coeff_at_analytic,
     eq58_epsilons=np.array(EPSILON_ILLUSTRATIVE),
     eq58_bounds_at_numeric=np.array([ORF_max_eq58_at_numeric[e] for e in EPSILON_ILLUSTRATIVE]),
     t_vals=t_vals, Delta_f=Delta_f, Delta_phi=Delta_phi,
