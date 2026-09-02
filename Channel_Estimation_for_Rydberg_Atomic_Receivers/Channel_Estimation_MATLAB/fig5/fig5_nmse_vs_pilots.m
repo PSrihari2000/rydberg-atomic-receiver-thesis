@@ -23,9 +23,33 @@ numTrials   = 200;
 maxIter_PGD = 2000;
 reltol_PGD  = 1e-10;
 
-% Same margin/anchor assumptions as fig4 -- see that script's ASSUMPTION 1/2
-% comments for the full reasoning; reused verbatim here for consistency.
-marginDB       = 60;
+% ASSUMPTION 1 (marginDB): NOT reused from fig4 anymore -- diagnostic scan
+% (2026-09-02) swept marginDB=[20 25 30 35 45 60] for fig5's own P=5:5:50
+% sweep and measured the PGD-CRLB gap specifically at large P (35-50), where
+% the paper's own Fig.5 crop shows PGD/CRLB visibly close but NOT fully
+% coincident even at P=50 (a small persistent gap). Result: at marginDB=60
+% (fig4's value) the gap closes to ~0.05dB by P=50 -- curves fully merge,
+% which does NOT match the paper's crop. At marginDB=25, the gap plateaus
+% around 0.8-1.3dB from P=20 onward instead of continuing to close -- this
+% DOES match the paper's qualitative "close but not coincident" shape (and
+% is in the right ballpark of a rough pixel-read of the paper's own P=50 gap,
+% ~1dB). Mechanism: lower margin leaves a small, genuine Eq.10 Taylor-
+% truncation bias that (unlike random noise variance) does not vanish as P
+% grows, producing a floor on the gap rather than letting it shrink to 0.
+% This is a much smaller, disclosed effect than fig4's still-unresolved
+% dramatic P=10 floor (that mechanism was ruled out at ANY margin) -- here
+% it only needs to explain a ~1dB residual, which is within what margin
+% legitimately controls.
+marginDB       = 25;
+% ASSUMPTION 2 (noise-scale anchor): STILL reused from fig4's approximate
+% visual anchor (P=30, SNR=-5dB, NMSE=22dB) -- this fixes the CURVE SHAPE's
+% noise scaling but NOT necessarily its absolute vertical position for
+% fig5's own operating point (SNR=5dB fixed, P swept). Attempted to
+% independently check this anchor against fig5's own crop (P=5 and P=50
+% points) and got inconsistent implied calib values (~17x apart) from a
+% rough pixel read -- not precise enough to re-anchor confidently. Absolute
+% NMSE level is a KNOWN, DISCLOSED open gap (ours sits ~20dB above the
+% paper's at large P) -- not yet resolved, flagged for future investigation.
 P_anchor       = 30;
 SNR_anchor_dB  = -5;
 NMSE_anchor_dB = 22;
