@@ -1,0 +1,445 @@
+IEEE WIRELESS COMMUNICATIONS LETTERS, VOL. 14, NO. 9, SEPTEMBER 2025                       2957
+
+           Channel Estimation for Rydberg Atomic Receivers
+
+Bokai Xu , Jiayi Zhang , Senior Member, IEEE, Zhongtao Chen , Bingyang Cheng, Ziheng Liu,
+                   Yik-Chung Wu , Senior Member, IEEE, and Bo Ai , Fellow, IEEE
+
+   Abstract--The rapid development of the quantum technology                   Fig. 1. Schematic representation of the atomic receiver using Rydberg atoms.
+presents huge opportunities for 6G communications. Leveraging                  The system encompasses a vapor cell that interacts with an EM wave to excite
+the quantum properties of highly excited Rydberg atoms,                        Rydberg states. The resulting RF signals are detected and processed via a
+Rydberg atom-based antennas present distinct advantages, such                  photo-detector (PD) and a quantum signal processing unit.
+as high sensitivity, broad frequency range, and compact size,
+over traditional antennas. To realize efficient precoding, accurate
+channel state information is essential. However, due to the distinct
+characteristics of atomic receivers, traditional channel estimation
+algorithms developed for conventional receivers are no longer
+applicable. To this end, we propose a novel channel estimation
+algorithm based on projection gradient descent (PGD), which
+is applicable to both one-dimensional (1D) and two-dimensional
+(2D) arrays. Simulation results are provided to show the effec-
+tiveness of our proposed channel estimation method.
+
+   Index Terms--Atomic receivers, multiple-input-multiple-                     transitions between different energy levels when encounter-
+output (MIMO), channel estimation.                                             ing an EM wave [7], demonstrate superior detection and
+                                                                               sensing accuracies, achieving sub-millimeter-level granularity,
+                          I. INTRODUCTION                                      while traditional receivers operate at a coarser granularity.
+                                                                               Moreover, unlike traditional antennas that require costly arrays
+T HE RELENTLESS demand for higher data rates,                                  to match various frequency bands, atomic MIMO receivers
+      enhanced user experiences, and ubiquitous connectivity                   can efficiently respond to a broad frequency range with
+has propelled the evolution from fifth-generation (5G) to the                  fewer resources, thus reducing overall system complexity and
+forthcoming 6G wireless communication networks [1], [2].                       cost [6], [8].
+In recent years, there has been a growing interest
+in leveraging atomic-scale technologies in multiple-input-                        Due to the unique benefit of atomic MIMO receivers,
+multiple-output (MIMO) communications. Termed as atomic                        theoretical modeling and signal processing for atomic receivers
+MIMO receivers [3], [4], these innovative systems utilize                      have appeared recently. For example, [9] proposed a multiple
+atomic-level interactions to achieve unprecedented levels of                   signal classification (MUSIC) algorithm for quantum wireless
+efficiency and performance in wireless communications [5].                     sensing of multiple users. Moreover, a biased Gerchberg-
+                                                                               Saxton (GS) algorithm was proposed to address the non-linear
+   Atomic MIMO receivers integrate advanced materials and                      biased phase retrieval (PR) problem caused by the magnitude-
+nanostructures with quantum-based principles, enabling the                     only measurements of atomic receivers [10]. In [11], a MIMO
+manipulation of electromagnetic (EM) waves at the atomic                       precoding design for atomic receivers that utilizes indepen-
+scale. By employing techniques such as coherent detec-                         dent processing of In-phase-and-Quadrature (IQ) data, was
+tion and adaptive beamforming, atomic MIMO systems can                         introduced. Unfortunately, up to now, there are no related
+dynamically adjust to varying channel conditions [3], [4],                     works on channel estimation for atomic MIMO receivers,
+[5], [6]. Rydberg atoms receivers, which rely on electron                      which is essential for effective signal detection and precoding.
+                                                                               Furthermore, compared to the linear model used in con-
+   Received 8 June 2025; accepted 24 June 2025. Date of publication            ventional MIMO systems, the nonlinear transmission model
+30 June 2025; date of current version 11 September 2025. This work was         significantly complicates channel estimation.
+supported in part by the National Natural Science Foundation of China under
+Grant 62471027 and Grant 62221001; in part by the Fundamental Research            To fill this gap, we for the first time propose a channel
+Funds for the Central Universities under Grant 2022JBQY004; and in part        estimation framework for Rydberg atomic receivers, applicable
+by the ZTE Industry-University-Institute Cooperation Funds under Grant         to both 1D and 2D antenna arrays. Specifically, we reformulate
+IA20250115003-PO0001 and Grant IA20240709018. The associate editor             the channel estimation problem as a matrix rank constrained
+coordinating the review of this article and approving it for publication was   optimization problem, and propose a novel channel estimation
+B. Makki. (Corresponding author: Jiayi Zhang.)                                 algorithm based on the projection gradient descent (PGD).
+                                                                               Compared with the conventional GS algorithm for addressing
+   Bokai Xu, Jiayi Zhang, Ziheng Liu, and Bo Ai are with the State Key         phase recovery challenges, our proposed algorithm not only
+Laboratory of Advanced Rail Autonomous Operation and the School of             delivers comparable performance in 1D case, but also applica-
+Electronics and Information Engineering, Beijing Jiaotong University, Beijing  ble to 2D antenna arrays. Simulation results show the superior
+100044, China (e-mail: 20251197@bjtu.edu.cn; zhangjiayi@bjtu.edu.cn;           performance of the proposed algorithm.
+boai@bjtu.edu.cn).
+
+   Zhongtao Chen, Bingyang Cheng, and Yik-Chung Wu are with the
+Department of Electrical and Electronic Engineering, The University of
+Hong Kong, Hong Kong (e-mail: ztchen@eee.hku.hk; bycheng@eee.hku.hk;
+ycwu@eee.hku.hk).
+
+   Digital Object Identifier 10.1109/LWC.2025.3584040
+
+                         2162-2345 c 2025 IEEE. All rights reserved, including rights for text and data mining, and training of artificial intelligence
+                                   and similar technologies. Personal use is permitted, but republication/redistribution requires IEEE permission.
+                                                       See https://www.ieee.org/publications/rights/index.html for more information.
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on February 17,2026 at 07:08:37 UTC from IEEE Xplore. Restrictions apply.
+2958                                                                          IEEE WIRELESS COMMUNICATIONS LETTERS, VOL. 14, NO. 9, SEPTEMBER 2025
+
+   II. PRELIMINARIES OF RYDBERG ATOMIC RECEIVERS                              Fig. 2. An illustration of the Rydberg atom-based 2D antenna array system
+                                                                              with K users and a reference.
+   As shown in Fig. 2, we consider a MIMO wireless com-
+munication system with K single-antenna users, and the base                   where
+station (BS) is equipped with an atomic array and receiver.
+We first consider a Rydberg atom-based 1D antenna array at                                        K     Lk
+the BS, which comprises I vapor cells, and each is connected
+to a photodetector (PD). These vapor cells are uniformly dis-
+tributed along a linear dimension at the receiver side. Rydberg
+atoms exhibit unique quantum behaviors when transitioning
+from the ground state to excited states due to absorption of
+EM waves. This transition can be mathematically characterized
+using a two-level quantum system representation.
+
+   The general state of a Rydberg atom in the i-th vapor cell
+at time t can be expressed as
+
+                |(t ) i = g,i (t )|g + e,i (t )|e ,                     (1)                 1                 Heg i,k ,l l,k sk ej (i-1)l,k .                 (6)
+                                                                                     i =
+
+where g,i (t) and e,i (t) are the amplitudes for the ground                                     k =1 l=1
+and excited states at time t, respectively, constrained by the
+condition |g,i (t)|2 + |e,i (t)|2 = 1. The ground state |g and                The function of the atomic-MIMO receiver is to extract
+the excited state |e are defined as |g = [0, 1]T and |e =
+[1, 0]T , respectively. In general, the state equation is governed            the values of the Rabi frequency i and we denote the
+                                                                              measurement of i as the received signal at the i-th antenna.
+by the Schrödinger equation [12]
+                                                                                 Based on the analysis in [10], [13], the channel between the
+
+                                                                              i-th vapor cell and the k-th user is modeled as
+
+                i   |(t )  i  =  H^i + V^i      |(t) i ,                (2)            gi,k = Lk 1 eTg i,k ,l l,k e-j (i-1)l,k .
+                      t
+                                                                                                                                                              (7)
+
+where = h/2 is the reduced Planck constant and h =                                                l =1
+
+6.626 × 10-34 J·s is the Planck constant. H^i denotes the                     Given transmitted signal sk,p from the k-th user at the p-the
+free Hamiltonian defined as H^i = diag( e , g ), where e                      time slot, the received signal is [10], [13]
+
+and g represent the angular frequencies of the excited and                                              K
+ground states, respectively. The interaction Hamiltonian V^i
+                                                                                       yi,p =                 gi,k sk,p + bi,p + ni,p ,                       (8)
+encapsulates the energy dynamics of the EM wave interacting
+                                                            
+with the atom. In particular, V^i =       i (t)|e g| +      i  (t  )|g  e |,                            k =1
+
+with                                                                          where |·| denotes the magnitude of the argument, and
+
+               K Lk                                                                    bi,p = sb,p eTg b,i b e-j (i-1)b
+
+      i (t) =            Teg i,k,l l,k sk cos t + (i - 1)l,k ,(3)                                                                                             (9)
+
+               k =1 l=1
+
+where Lk is the number of paths for the k-th user, l,k is                     is a known reference signal composed of the sb,p passes
+the path gain of the l-th path for the k-th user, and sk is                   through a channel with path gain b , phase shift b and
+the information bearing symbol or pilot symbol from the k-th
+                                                                              polarization b,i , while the noise ni,p follows Gaussian dis-
+user. The phase shift for a radio wave propagating from the                   tribution CN (0, 2). Estimating gi,k using (8) can be viewed
+
+transmit antenna to the i-th atomic antenna via the l-th path                 as a phase retrieval problem and the Gerchberg Saxton (GS)
+
+is  given  by   l ,k  =  2d   cos l,k ,  where  d  is  the  inter-antenna     algorithm [14] can be used. However, when the antenna array
+                          
+spacing,  is the wavelength, and l,k is the angle-of-arrival                  is extended to multiple dimensions (to be detailed in the next
+
+(AOA). In equation (3), eg is the transition dipole moment,                   section), the aforementioned method becomes inapplicable.
+
+and i,k,l represents the polarization direction. The frequency                To develop a unified channel estimation framework, we
+
+ of the electromagnetic wave is tuned to be near the transition               consider the case where the reference-to-receiver distance is
+
+frequency eg = e - g , ensuring that quantum jumps                            much shorter than the transmitter-to-receiver distance,1 which
+                                                                                                            K
+predominantly occur between these two energy levels. Note                     leads to |bi,p |       |      k =1  gi  ,k  sk  ,p  + ni,p |.  Defining  ai ,p  =
+
+that the EM wave at i-th vapor cell                                           K      gi,k sk,p ,  the   received      signal      is  rewritten  as
+                                                                              k =1
+
+                   K Lk                                                       yi,p =   ai,p + bi,p + ni,p
+                                                                                    =
+      Ei (t) =            i,k,l l,k sk cos t + (i - 1)l,k (4)                                                                 2
+
+                k =1 l=1                                                               bi ,p      1+        ai,p + ni,p           + 2 Re     ai,p + ni,p
+                                                                                                                bi,p 2                           bi ,p
+is encoded in i (t).
+   The amplitude of the excited state |e,i (t)|2 is given by the                 1In practice, a reference signal generated by a nearby, controlled source
+                                                                              (like a local transmitter or dedicated antenna) travels a short distance to
+Rabi frequency at the i -th vapor cell i [4]                                  the receiver. This ensures its amplitude dominates, as other signals typically
+                                                                              experience greater path loss and fading over longer distances.
+                      |e,i (t )|2 = sin2  i t      ,                    (5)
+                                          2
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on February 17,2026 at 07:08:37 UTC from IEEE Xplore. Restrictions apply.
+XU et al.: CHANNEL ESTIMATION FOR RYDBERG ATOMIC RECEIVERS                                                                               2959
+
+                                         2                     
+                                                               ,
+      (a )  bi,p 1 +        ai,p + ni,p     + Re  ai,p + ni,p                 B. Extension to 2D Antenna Array
+                              2 bi,p 2                bi ,p    (10)
+                                                                                 In this case, the atomic MIMO receiver is equipped with
+                                                                              vapor cells arranged in a 2D planar array, with size I1 × I2.
+where (a) comes from the Taylor expansion (1 + x ) = 1 +                      Consequently, the channel model is extended from (7) and
+
+                                                                              becomes
+
+1  x  +O(x  2)  under  |bi  ,p  |     |ai,p +ni,p |. Thus, (8) is simplified  gi1,i2,k = Lk 1 eTg i1,i2,k ,l l ,k e-j [(i1-1)ul,k +(i2-1)vl,k ],
+2
+to                                                                                           l =1
+
+                                   K                                                                                                                (16)
+
+      yi,p = Ree-jzi,p                   gi,k sk,p  + bi,p + n¯i,p , (11)     where   i1, i2 are the antenna indices, ul,k =        2d1  cos l,k ,
+                                                                              vl,k =                                                  
+                                   k =1                                               2d2
+                                                                                           sin l,k  cos l,k  represent  the  phase  shift with l,k
+
+where zi,p is the angle of bi,p , and n¯i,p = Re(e-j bi,p ni,p )              and l,k representing the elevation angle and azimuth angle
+follows Gaussian distribution N (0, 2/2).
+                                                                              of the l-th path of the k-th user, respectively. We define the
+   Arranging (11) with different i and p into a matrix, we
+obtain                                                                        received reference signal bi1,i2,p as
+
+                                                                              bi1,i2,p = sb,p Teg b,i1,i2 b e-j [(i1-1)ub +(i2-1)vb ]. (17)
+
+                Y = Re Z  (GS) + |B| + N,                      (12)           Similar to (11), the received signal can be derived to be
+
+                                                                                                                     K              
+
+where Y  RI ×P , Z  CI ×P , B  CI ×P and N  CI ×P                                     yi1,i2,p = Ree-jzi1,i2,p          gi1,i2,k sk ,p 
+are with the (i, p)-th element being yi,p , e-jzi,p , bi,p and
+n¯i,p , respectively. Furthermore, G  CI ×K with its (i, k)-th                                                  k =1
+element being gi,k and S  CK ×P with its (k, p)-th element
+being sk,p . Furthermore,  denotes Hadamard product, and |B|                                        + bi1,i2,p + ni1,i2,p ,              (18)
+
+denotes elementwise absolute value of B.                                      which can be put in a I1 × I2 × P tensor as
+
+                                                                                      Y = Re Z  G ×3 ST + |B| + N ,                      (19)
+
+         III. CHANNEL ESTIMATION FROM 1D TO 2D                                where G ×3 ST is the multiplication of the matrix ST to
+                          ANTENNA ARRAY                                       the third mode of the tensor G. Notice that for the three
+                                                                              dimensional tensor G, each frontal slice represents the channel
+   To realize efficient channel estimation in Rydberg atomic
+receivers with a unified framework for 1D and 2D arrays, we                   matrix of a particular user k. According to (16), since there
+propose a gradient based method in this section.
+                                                                              are only Lk paths for user k's channel, the k-th frontal slice
+A. Channel Estimation for 1D Antenna Array                                    of G has only rank Lk . This is in contrast to 1D case where
+                                                                              the channel of each user is represented by a vector, and such
+   Mathematically, the channel estimation problem based
+on (12) can be formulated as solving the following problem2                   rank property does not exist.
+                                                                                 To estimate the channel, we apply mode-3 unfolding to Y:
+
+      arg min L(G) =               Y - |B| - Re Z  (GS)  2  .  (13)           Y(3) = Re Z(3)  ST G(3) + B(3) + N(3). (20)
+                                                         F
+            G
+
+                                                                              Therefore, the optimization problem for channel estimation is
+
+Then, the objective function is minimized via gradient descent,                                                                     2
+i.e.,
+                                                                              min     Y(3) - B(3) - Re Z(3)  ST G(3)                  ,
+
+                Gt+1 = Gt - t G L Gt ,                                        G(3)                                                  F
+
+                                                               (14)
+
+where t is the step-size, and                                                 s. t. rank mat G(3) k,:            Lk , k = 1, 2, . . . , K ,
+                                                                                                                                           (21)
+
+      GL Gt                              Gt S  Z                              where mat([G(3)]k,:) means constructing a matrix from the
+                                                   ZSH . (15)                 k-th row of G(3), which corresponds to the k-th frontal slice
+                                                                              of G with size I1 × I2. Note that compared to 1D array, the
+      = -2 Y - |B| - Re                                                       channel recovery in 2D array includes a rank constraint of
+                                                                              G(3). This makes conventional phase retrieval algorithms not
+While the above solution seems straightforward, it becomes                    applicable here. Moreover, modifying GS to account for the
+more meaningful if the antenna array is 2D.
+                                                                              rank constraint is non-trivial because the iterative projections
+   2We assume perfect synchronization and prior coordination between the
+transmitter and receiver for pilot transmission.                              in GS are tailored to satisfy magnitude constraints in the signal
+
+                                                                              domain and do not naturally extend to enforcing low-rank
+
+                                                                              properties in the channel domain.
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on February 17,2026 at 07:08:37 UTC from IEEE Xplore. Restrictions apply.
+2960                                                                          IEEE WIRELESS COMMUNICATIONS LETTERS, VOL. 14, NO. 9, SEPTEMBER 2025
+
+Algorithm 1 The Proposed PGD Algorithm
+
+Input: Mode-3 unfolded tensor Y(3), Z(3) and B(3); rank L; S
+ 1: Initialize the system parameters and optimization variables.
+ 2: repeat
+
+ 3: Update gradient G(3) f Gt(3) based on (24).
+
+4: Update M = Gt(3) - t G(3) f G(t3) .
+
+5: for k = 1, . . . , K do
+
+6:        Update [X]k,: using (27).
+
+7: end for
+8: Set G(t3+)1 = X, t=t+ 1.
+9: until ||G(t3+)1 - Gt(3)||2F becomes smaller than a pre-defined threshold.
+10: return Channel matrix G(3)                                                Fig. 3. NMSE performance comparison with respect to the SNR under
+                                                                              Rydberg atom-based 1D antenna array.
+
+    We define the objective function in (21) as                                       IV. CRAMÉR-RAO LOWER BOUND ANALYSIS
+
+f G(3) = Y(3) - B(3) - Re Z(3)  ST G(3)                           2              We now derive the Cramér-Rao Lower Bound (CRLB) to
+                                                                              obtain a benchmark for the accuracy of channel estimation.
+                                                                   (2. 2)     First, we rewrite (20) as
+
+                                                                  F
+
+To minimize (22) under the rank constraint, we propose to use                       y = Re z  I  ST g + b + n,              (28)
+the projected gradient descent (PGD) method:
+
+       Gt(3+)1 = projX G(t3) - t G(3) f Gt(3) ,                   (23)        where y = vec(Y)  RI1I2P×1, z = vec(Z)  CI1I2P×1,
+                                                                              g = vec(G)  CI1I2K ×1, b = vec(B)  CI1I2P×1, n =
+where                                                                         vec(N )  RI1I2P×1  N (0, 2II1I2P ), and  denotes the
+                                                                              Kronecker product. Then, the conditional probability density
+G(3)   f    G(t3)
+                                                                              function of y with the given g is
+                                                                         
+= -S Y(3) - B(3) - Re Z(3)  ST G(3)                                Z(3),         Pr y | g                                    
+                                                                                                                            2
+                                                                                 1                 1               I  ST g   .
+                                                                              =  22 I1I2P exp- 22 y - b - Re z 
+                                                                                                                            2
+                                                                  (24)
+                                                                                                                             (29)
+X = {X  RK ×I1I2 | rank(mat([X]k,:))  Lk , k } and t
+is the step size.                                                             The Fisher information matrix (FIM) of (28) can then be
+                                                                              derived as
+    In (23), it involves a projection operation. In general,
+
+projX (M) means solving the problem:                                                               2 ln Pr(y) | g
+
+                   min          X-M  2                                        FIM(g) = - E           gg
+                                     F
+                     X
+
+                             s.t. X  X .                          (25)                          1  I  ST  H  2I  (zzT )  I  ST .
+                                                                                           = 44
+Performing singular value decomposition (SVD) on
+mat([M]k,:) yields [15]                                                                                                     (30)
+
+            Uk k VkT = svd mat([M]k,:) .                          (26)        Since each element in z takes the form e-j bi,p , the matrix
+                                                                              I  (zzT ) = I, the CRB becomes
+
+According to the definition of X , the projection for each                          CRB(g) FIM(g) -1
+row of M is separable. Therefore, using Eckart-Young-Mirsky
+theorem, the solution to (25) is                                                                   = 42 II1I2  SST -1 .     (31)
+
+                   [X]k,: = vec      Uk k VkT  T                  (27)        From (31), it can be observed that the CRLB does not change
+                                                                              with the number of antennas, decreases with signal-to-noise
+                                                 ,                            ratio (SNR), and reduces as the number of pilots grows.
+
+where Uk = [Uk ]:,1:L, Vk = [Vk ]:,1:L, and k =                                                    V. SIMULATION RESULTS
+[k ]1:L,1:L. The PGD iterative channel estimation algorithm
+is summarized in Algorithm 1, with the complexity being                          In the simulation, the Rydberg energy levels 52D5/2 and
+O(T [K min(I1I22, I12I2)+PKI1I2]), where T is the number of                   53P3/2 (highly excited quantum states) are utilized to detect
+iterations. For 1D arrays, the complexity reduces to O(TPKI ),                RF signals corresponding to the angular transition frequency
+since only gradient descent is applied and the projected step                 eg  2×5 GHz. Using the ARC package [16], the transition
+                                                                              dipole moment eg for these levels is represented as eg =
+is not needed. Under the assumption of Lipschitz continuous                   [0, 1785.9 qa0, 0]T , where q = 1.602 × 10-19 C is the charge
+
+gradients, the algorithm guarantees a sufficient decrease condi-
+
+tion for the objective function and convergence to a stationary
+point within O(1/ ) iterations for a given accuracy [15].
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on February 17,2026 at 07:08:37 UTC from IEEE Xplore. Restrictions apply.
+XU et al.: CHANNEL ESTIMATION FOR RYDBERG ATOMIC RECEIVERS                                                                2961
+
+Fig. 4. NMSE performance comparison with respect to the SNR under Fig. 5. NMSE performance with respect to pilot length.
+Rydberg atom-based 2D antenna array.
+
+of an electron, and a0 = 5.292 × 10-11 m is the Bohr                                                        VI. CONCLUSION
+
+radius. The polarization direction is randomized, with i,k,l ,                       In this letter, we proposed a gradient descent based method
+                        1                                                         for channel estimation in Rydberg atomic receivers, and it can
+b,i  following  N  (0,  3  ).  The  channel  gain    l ,k  and   b        follow  be effectively applied to both 1D and 2D antenna arrays. We
+                                                                                  reformulated the channel estimation problem using unfolded
+CN (0, 1) and CN (0, 10), respectively. To assess the accuracy                    tensors, and CRLB has been derived to provide a performance
+                                                                                  benchmark for the estimation algorithm. It is found that
+of various methods, the normalized mean square error (NMSE)                       when the number of pilots is limited, the proposed algorithm
+                                                 G(3)-G^ (3)                      demonstrates a better performance than the phase retrieval
+performance,    defined    as  NMSE  =       E{                  2  }  ,  where   algorithm in 1D case. Furthermore, when the pilot length
+                                                                 F                reaches 20, the proposed algorithms can perform close to the
+                                                           2                      CRLB in 2D antenna array.
+                                                 E{  G(3)  F  }
+                                                                                                               REFERENCES
+G^ (3) is an estimate of the channel, is employed. We set the
+                                                                                   [1] E. Shi et al., "RIS-aided cell-free massive MIMO systems for 6G:
+number of users to K = 3. It is assumed that each user has the                          Fundamentals, system design, and applications," Proc. IEEE, vol. 112,
+                                                                                        no. 4, pp. 331­364, Apr. 2024.
+random number of channel paths, i.e., Lk  Uniform(3, 7).
+The pilot symbols are independent and identically distributed                      [2] B. Xu et al., "Resource allocation for near-field communications:
+                                                                                        Fundamentals, tools, and outlooks," IEEE Wireless Commun., vol. 31,
+and are generated from CN (0, 1). The PGD algorithm ini-                                no. 5, pp. 42­50, Oct. 2024.
+tializes the elements of channel matrix G0(3)  CK ×I1I2
+as i.i.d. random complex-valued variables, i.e., [G(03)]k,i                        [3] M. Cui et al., "Rydberg atomic receiver: Next frontier of wireless
+CN (0, 0.1).                                                                            communications," 2024, arXiv:2412.12485.
+
+The first simulation presents the NMSE performance under                           [4] T. Gong et al., "Rydberg atomic quantum receivers for classical wireless
+                                                                                        communications and sensing: Their models and performance," 2024,
+different SNRs for a Rydberg atom-based 1D antenna array                                arXiv:2412.05554.
+
+with I = 8 vapor cell elements. We can see that when                               [5] C. Wang and A. Rahman, "Quantum-enabled 6G wireless networks:
+                                                                                        Opportunities and challenges," IEEE Wireless Commun., vol. 29,
+the size of the pilot is relatively small (e.g., P = 10),                               pp. 58­69, Feb. 2022.
+
+although the proposed GD method performs better the GS                             [6] Z. Liu et al., "Deep learning enhanced Rydberg multifrequency
+                                                                                        microwave recognition," Nat. Commun., vol. 13, no. 1, p. 1997,
+algorithm [10], [14], they perform far from the CRLB. This                              Apr. 2022.
+
+is because, while the GS algorithm does not rely on an                             [7] C. S. Adams et al., "Rydberg atom quantum technologies," J. Phys. B,
+                                                                                        Atomic, Mol. Opt. Phys., vol. 53, no. 1, 2019, Art. no. 12002.
+approximation of the channel transmission model, it fails to
+                                                                                   [8] J. Ur Rehman et al., "Diversity and multiplexing in quantum MIMO
+account for the impact of noise. On the other hand, in cases                            channels," 2024, arXiv:2408.02483.
+
+with a high number of pilots (e.g., P = 30), both the proposed                     [9] H. Kim et al., "Quantum-MUSIC: Multiple signal classification for
+                                                                                        quantum wireless sensing," 2024, arXiv:2501.00314.
+GD and the GS algorithm perform almost identically and close
+                                                                                  [10] M. Cui et al., "Towards atomic MIMO receivers," 2024,
+to the CRLB. This shows the proposed GD algorithm could be                              arXiv:2404.04864.
+
+a good contender to replace GS algorithm in Rydberg receiver.                     [11] M. Cui et al., "MIMO precoding for Rydberg atomic receivers," 2024,
+                                                                                        arXiv:2408.14366.
+However, the real benefit of GD method is not in 1D array,
+                                                                                  [12] B. Zwiebach, Mastering Quantum Mechanics. Cambridge, MA, USA:
+but in 2D array where GS algorithm is not applicable anymore.                           MIT Press, 2022.
+
+Fig. 4 shows the NMSE performance for a Rydberg atom-                             [13] A. Artusio-Glimpse et al., "Modern RF measurements with hot atoms: A
+                                                                                        technology review of Rydberg atom-based radio frequency field sensors,"
+based 2D antenna array, with 8 × 8 vapor elements. When                                 IEEE Microw. Mag., vol. 23, no. 5, pp. 44­56, May 2022.
+
+the pilot length is small (P = 10), the PGD performs better                       [14] P. Netrapalli et al., "Phase retrieval using alternating minimization,"
+                                                                                        IEEE Trans. Signal Process., vol. 63, no. 18, pp. 4814­4826,
+than the basic GD, as the projection operation in PGD helps to                          Jun. 2015.
+
+exploit the rank constraint. However, their performance is far                    [15] X. Fu and K. Huang, "Block-term tensor decomposition via constrained
+                                                                                        matrix factorization," in Proc. IEEE 29th Int. Workshop Mach. Learn.
+away from CRLB. On the other hand, when the pilot length is                             Signal Process. (MLSP), 2019, pp. 1­6.
+
+relatively large (P = 30), both PGD and GD perform almost                         [16] N. Sibalic´ et al., "ARC: An open-source library for calculating prop-
+                                                                                        erties of alkali Rydberg atoms," Comput. Phys. Commun., vol. 220,
+the same and close to the CRLB.                                                         pp. 319­331, Nov. 2017.
+
+Fig. 5 depicts the NMSE comparison with respect to the
+
+pilot length P when SNR = 5 dB and in 2D array. It can be
+
+observed that the NMSE performance improves as the pilot
+
+length P becomes longer. In particular, to recover channel
+
+information with accuracy close to the CRLB, the length of
+
+the pilot sequence should be longer than 20, which is quite
+
+reasonable in practice.
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on February 17,2026 at 07:08:37 UTC from IEEE Xplore. Restrictions apply.
+
