@@ -1,0 +1,6000 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,bm,mathtools}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{graphicx}
+\setstretch{1.15}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\titleformat{\section}{\large\bfseries}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.7em}{}
+
+\newcommand{\ketg}{\left|g\right\rangle}
+\newcommand{\kete}{\left|e\right\rangle}
+\newcommand{\Efield}{\mathbf E}
+\newcommand{\rvec}{\mathbf r}
+
+\begin{document}
+
+\begin{center}
+    {\Large\bfseries Channel Estimation for a Rydberg Atomic Receiver}\\[4pt]
+\end{center}
+
+\hrule
+\vspace{8pt}
+
+\textbf{Notation.} In the Schr\"odinger equation, $i\hbar$ uses
+$i=j=\sqrt{-1}$ (the imaginary unit is written $j$ elsewhere). The
+subscript $i$ always denotes the vapor-cell index.
+
+% ============================================================
+\section{Quantum System and Two-Level Rydberg State}
+% ============================================================
+
+A quantum system is described by a state vector. For the two-level
+Rydberg-atom model, the ground state and excited state are denoted
+by
+\[
+\ketg,
+\qquad
+\kete.
+\]
+
+The state of atom \(i\) is written as
+\begin{equation}
+\ket{\Phi_i(t)}
+=
+\zeta_{g,i}(t)\ketg
++
+\zeta_{e,i}(t)\kete .
+\tag{1}
+\end{equation}
+
+The quantities
+\(\zeta_{g,i}(t)\) and \(\zeta_{e,i}(t)\) are the probability
+amplitudes corresponding to the ground and excited states,
+respectively.
+
+The probability of finding the atom in the ground state is
+\[
+P_{g,i}(t)
+=
+\left|\zeta_{g,i}(t)\right|^2,
+\]
+while the probability of finding the atom in the excited state is
+\[
+P_{e,i}(t)
+=
+\left|\zeta_{e,i}(t)\right|^2.
+\]
+
+Since the atom must be in either the ground state or the excited
+state, the total probability is unity:
+\[
+P_{g,i}(t)+P_{e,i}(t)=1.
+\]
+
+Therefore,
+\[
+\boxed{
+\left|\zeta_{g,i}(t)\right|^2
++
+\left|\zeta_{e,i}(t)\right|^2
+=1.
+}
+\]
+
+The two-level basis is chosen as
+\[
+\kete
+=
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix},
+\qquad
+\ketg
+=
+\begin{bmatrix}
+0\\
+1
+\end{bmatrix}.
+\]
+
+Substituting these basis vectors into (1),
+\[
+\begin{aligned}
+\ket{\Phi_i(t)}
+&=
+\zeta_{g,i}(t)
+\begin{bmatrix}
+0\\
+1
+\end{bmatrix}
++
+\zeta_{e,i}(t)
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix}\\
+&=
+\begin{bmatrix}
+\zeta_{e,i}(t)\\
+\zeta_{g,i}(t)
+\end{bmatrix}.
+\end{aligned}
+\]
+
+Hence, for the basis ordering
+\[
+(\kete,\ketg),
+\]
+the state vector is
+\[
+\ket{\Phi_i(t)}
+=
+\begin{bmatrix}
+\zeta_{e,i}(t)\\
+\zeta_{g,i}(t)
+\end{bmatrix}.
+\]
+
+% ============================================================
+\section{Time-Dependent Schr\"odinger Equation}
+% ============================================================
+
+The time evolution of a quantum state is described by the
+time-dependent Schr\"odinger equation.
+
+In the absence of an external interaction,
+\[
+i\hbar
+\frac{\partial}{\partial t}
+\ket{\Phi_i(t)}
+=
+\hat H_i
+\ket{\Phi_i(t)},
+\]
+where \(\hat H_i\) is the free Hamiltonian of the atom.
+
+When an external electromagnetic field interacts with the atom,
+an interaction Hamiltonian \(\hat V_i\) is introduced. Therefore,
+the total Hamiltonian is
+\[
+\hat H_{i,\mathrm{tot}}
+=
+\hat H_i+\hat V_i.
+\]
+
+Hence,
+\begin{equation}
+i\hbar
+\frac{\partial}{\partial t}
+\ket{\Phi_i(t)}
+=
+(\hat H_i+\hat V_i)
+\ket{\Phi_i(t)}.
+\tag{2}
+\end{equation}
+
+The free Hamiltonian describes the internal energy of the atom,
+whereas \(\hat V_i\) represents the interaction between the atom
+and the incident electromagnetic field.
+
+% ============================================================
+\section{Free Hamiltonian of the Two-Level Atom}
+% ============================================================
+
+The atomic energy states satisfy the energy eigenvalue equation
+\[
+\hat H_i\ket{\psi_n}
+=
+E_n\ket{\psi_n}.
+\]
+
+For the two states,
+\[
+\hat H_i\kete
+=
+E_e\kete,
+\]
+and
+\[
+\hat H_i\ketg
+=
+E_g\ketg.
+\]
+
+The energies of the two states are related to their angular
+frequencies by
+\[
+E_e=\hbar\omega_e,
+\qquad
+E_g=\hbar\omega_g.
+\]
+
+Using the basis
+\[
+\kete=
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix},
+\qquad
+\ketg=
+\begin{bmatrix}
+0\\
+1
+\end{bmatrix},
+\]
+write the free Hamiltonian in the general form
+\[
+\hat H_i
+=
+\begin{bmatrix}
+a&b\\
+c&d
+\end{bmatrix}.
+\]
+
+Applying \(\hat H_i\) to the excited state gives
+\[
+\begin{aligned}
+\hat H_i\kete
+&=
+\begin{bmatrix}
+a&b\\
+c&d
+\end{bmatrix}
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix}\\
+&=
+\begin{bmatrix}
+a\\
+c
+\end{bmatrix}.
+\end{aligned}
+\]
+
+From the energy eigenvalue equation,
+\[
+\hat H_i\kete
+=
+E_e\kete.
+\]
+
+Therefore,
+\[
+E_e\kete
+=
+E_e
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix}
+=
+\begin{bmatrix}
+E_e\\
+0
+\end{bmatrix}.
+\]
+
+Comparing the two expressions,
+\[
+\begin{bmatrix}
+a\\
+c
+\end{bmatrix}
+=
+\begin{bmatrix}
+E_e\\
+0
+\end{bmatrix},
+\]
+which gives
+\[
+a=E_e,
+\qquad
+c=0.
+\]
+
+Similarly, applying \(\hat H_i\) to the ground state,
+\[
+\begin{aligned}
+\hat H_i\ketg
+&=
+\begin{bmatrix}
+a&b\\
+c&d
+\end{bmatrix}
+\begin{bmatrix}
+0\\
+1
+\end{bmatrix}\\
+&=
+\begin{bmatrix}
+b\\
+d
+\end{bmatrix}.
+\end{aligned}
+\]
+
+The energy eigenvalue equation gives
+\[
+\hat H_i\ketg
+=
+E_g\ketg
+=
+E_g
+\begin{bmatrix}
+0\\
+1
+\end{bmatrix}
+=
+\begin{bmatrix}
+0\\
+E_g
+\end{bmatrix}.
+\]
+
+Therefore,
+\[
+\begin{bmatrix}
+b\\
+d
+\end{bmatrix}
+=
+\begin{bmatrix}
+0\\
+E_g
+\end{bmatrix},
+\]
+and hence
+\[
+b=0,
+\qquad
+d=E_g.
+\]
+
+Thus,
+\begin{equation}
+\boxed{
+\hat H_i
+=
+\begin{bmatrix}
+E_e&0\\
+0&E_g
+\end{bmatrix}.
+}
+\tag{3}
+\end{equation}
+
+Using
+\[
+E_e=\hbar\omega_e,
+\qquad
+E_g=\hbar\omega_g,
+\]
+we obtain
+\begin{equation}
+\boxed{
+\hat H_i
+=
+\begin{bmatrix}
+\hbar\omega_e&0\\
+0&\hbar\omega_g
+\end{bmatrix}
+=
+\operatorname{diag}
+(\hbar\omega_e,\hbar\omega_g).
+}
+\tag{4}
+\end{equation}
+
+% ============================================================
+\section{One-Dimensional Vapor-Cell Array Geometry}
+% ============================================================
+
+Consider a one-dimensional array of vapor cells arranged along
+the \(x\)-axis.
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{1D_array_geometry.png}{%
+    \includegraphics[width=0.85\textwidth]{1D_array_geometry.png}}{%
+    \fbox{\parbox{0.8\textwidth}{\centering\vspace{2cm}
+    [Place \texttt{1D\_array\_geometry.png} in this folder]\vspace{2cm}}}}
+    \caption{1D uniform linear array geometry showing the inter-cell spacing $d$ and the position of the $i$-th vapor cell.}
+    \label{fig:1D_array_geometry}
+\end{figure}
+
+Let the spacing between two adjacent vapor cells be \(d\), and
+choose vapor cell \(1\) as the reference cell.
+
+The position of vapor cell \(i\) is
+\[
+x_i=(i-1)d.
+\]
+
+Therefore,
+\[
+x_1=0,
+\qquad
+x_2=d,
+\qquad
+x_3=2d,
+\qquad
+\ldots
+\]
+
+The separation between the reference cell and cell \(i\) is
+\[
+x_i-x_1
+=
+(i-1)d.
+\]
+
+Consider user \(k\) and propagation path \(l\). Let
+\(\theta_{l,k}\) denote the angle of arrival of this path measured
+with respect to the array axis.
+
+Under the far-field plane-wave assumption, the propagation paths
+arriving at the different vapor cells are approximately parallel.
+
+Hence,
+\begin{equation}
+\boxed{
+\Delta r_{i,k,l}
+=
+(i-1)d\cos\theta_{l,k}.
+}
+\tag{5}
+\end{equation}
+
+where
+\[
+\Delta r_{i,k,l}
+=
+r_{i,k,l}-r_{1,k,l}.
+\]
+
+Here \(r_{i,k,l}\) denotes the propagation distance from user \(k\),
+through path \(l\), to vapor cell \(i\).
+
+For the second vapor cell,
+\[
+\Delta r_{2,k,l}
+=
+d\cos\theta_{l,k}.
+\]
+
+For the third vapor cell,
+\[
+\Delta r_{3,k,l}
+=
+2d\cos\theta_{l,k}.
+\]
+
+In general,
+\[
+\Delta r_{i,k,l}
+=
+(i-1)d\cos\theta_{l,k}.
+\]
+
+% ============================================================
+\section{Propagation Phase Difference}
+% ============================================================
+
+Consider a sinusoidal plane wave represented by
+\begin{equation}
+E(r,t)
+=
+E_0
+\cos
+\left(
+\omega t+kr+\phi_0
+\right),
+\tag{6}
+\end{equation}
+where
+\[
+k=\frac{2\pi}{\lambda}
+\]
+is the wavenumber.
+
+If the propagation distance changes from \(r\) to
+\(r+\Delta r\), the phase changes from
+\[
+kr
+\]
+to
+\[
+k(r+\Delta r).
+\]
+
+Therefore,
+\[
+\begin{aligned}
+\Delta\phi
+&=
+k(r+\Delta r)-kr\\
+&=
+kr+k\Delta r-kr\\
+&=
+k\Delta r.
+\end{aligned}
+\]
+
+Using
+\[
+k=\frac{2\pi}{\lambda},
+\]
+we obtain
+\begin{equation}
+\boxed{
+\Delta\phi
+=
+\frac{2\pi}{\lambda}\Delta r.
+}
+\tag{7}
+\end{equation}
+
+For user \(k\), path \(l\), and vapor cell \(i\),
+\[
+\Delta r
+=
+\Delta r_{i,k,l}.
+\]
+
+Therefore,
+\[
+\begin{aligned}
+\Delta\phi_{i,k,l}
+&=
+\frac{2\pi}{\lambda}
+\Delta r_{i,k,l}\\
+&=
+\frac{2\pi}{\lambda}
+(i-1)d\cos\theta_{l,k}\\
+&=
+(i-1)
+\frac{2\pi d}{\lambda}
+\cos\theta_{l,k}.
+\end{aligned}
+\]
+
+Define the phase shift corresponding to one array spacing as
+\begin{equation}
+\boxed{
+\phi_{l,k}
+=
+\frac{2\pi d}{\lambda}
+\cos\theta_{l,k}.
+}
+\tag{8}
+\end{equation}
+
+Consequently,
+\begin{equation}
+\boxed{
+\Delta\phi_{i,k,l}
+=
+(i-1)\phi_{l,k}.
+}
+\tag{9}
+\end{equation}
+
+For the reference vapor cell,
+\[
+i=1,
+\]
+and hence
+\[
+\Delta\phi_{1,k,l}=0.
+\]
+
+For the second vapor cell,
+\[
+i=2,
+\]
+and hence
+\[
+\Delta\phi_{2,k,l}=\phi_{l,k}.
+\]
+
+For the third vapor cell,
+\[
+i=3,
+\]
+and hence
+\[
+\Delta\phi_{3,k,l}=2\phi_{l,k}.
+\]
+
+Thus, the phase shift increases by \(\phi_{l,k}\) for every
+additional array spacing.
+
+% ============================================================
+\section{Electric Field of One Propagation Path}
+% ============================================================
+
+Consider user \(k\) and propagation path \(l\).
+
+The electric field corresponding to this propagation path can be
+written as
+\begin{equation}
+\mathbf E_{k,l}(r,t)
+=
+\mathbf E_{0,k,l}
+\cos
+\left(
+\omega t+kr+\phi_{0,k,l}
+\right).
+\tag{10}
+\end{equation}
+
+At vapor cell \(i\), the propagation distance is
+\(r_{i,k,l}\). Therefore,
+\begin{equation}
+\mathbf E_{i,k,l}(t)
+=
+\mathbf E_{0,i,k,l}
+\cos
+\left(
+\omega t
++
+kr_{i,k,l}
++
+\phi_{0,k,l}
+\right).
+\tag{11}
+\end{equation}
+
+Choose vapor cell \(1\) as the phase reference and define
+\[
+\Delta r_{i,k,l}
+=
+r_{i,k,l}-r_{1,k,l}.
+\]
+
+Therefore,
+\[
+r_{i,k,l}
+=
+r_{1,k,l}
++
+\Delta r_{i,k,l}.
+\]
+
+Substituting this into (11),
+\[
+\begin{aligned}
+\mathbf E_{i,k,l}(t)
+&=
+\mathbf E_{0,i,k,l}
+\cos
+\left[
+\omega t
++
+k
+\left(
+r_{1,k,l}+\Delta r_{i,k,l}
+\right)
++
+\phi_{0,k,l}
+\right]\\
+&=
+\mathbf E_{0,i,k,l}
+\cos
+\left[
+\omega t
++
+k\Delta r_{i,k,l}
++
+kr_{1,k,l}
++
+\phi_{0,k,l}
+\right].
+\end{aligned}
+\]
+
+Define the common reference phase as
+\[
+\phi_{k,l}^{\mathrm{ref}}
+=
+kr_{1,k,l}
++
+\phi_{0,k,l}.
+\]
+
+Hence,
+\[
+\mathbf E_{i,k,l}(t)
+=
+\mathbf E_{0,i,k,l}
+\cos
+\left[
+\omega t
++
+k\Delta r_{i,k,l}
++
+\phi_{k,l}^{\mathrm{ref}}
+\right].
+\]
+
+Taking vapor cell \(1\) as the phase reference gives
+\[
+\phi_{k,l}^{\mathrm{ref}}=0.
+\]
+
+Therefore,
+\begin{equation}
+\mathbf E_{i,k,l}(t)
+=
+\mathbf E_{0,i,k,l}
+\cos
+\left(
+\omega t+k\Delta r_{i,k,l}
+\right).
+\tag{12}
+\end{equation}
+
+Using
+\[
+\Delta r_{i,k,l}
+=
+(i-1)d\cos\theta_{l,k},
+\]
+we obtain
+\[
+\mathbf E_{i,k,l}(t)
+=
+\mathbf E_{0,i,k,l}
+\cos
+\left[
+\omega t
++
+k(i-1)d\cos\theta_{l,k}
+\right].
+\]
+
+Using
+\[
+k=\frac{2\pi}{\lambda},
+\]
+the electric field becomes
+\[
+\mathbf E_{i,k,l}(t)
+=
+\mathbf E_{0,i,k,l}
+\cos
+\left[
+\omega t
++
+(i-1)
+\frac{2\pi d}{\lambda}
+\cos\theta_{l,k}
+\right].
+\]
+
+From (8),
+\[
+\phi_{l,k}
+=
+\frac{2\pi d}{\lambda}
+\cos\theta_{l,k}.
+\]
+
+Therefore,
+\begin{equation}
+\boxed{
+\mathbf E_{i,k,l}(t)
+=
+\mathbf E_{0,i,k,l}
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right].
+}
+\tag{13}
+\end{equation}
+
+% ============================================================
+\section{Vector Representation and Polarization}
+% ============================================================
+
+The electric field is a vector quantity. Its amplitude can therefore
+be separated into a scalar amplitude and a polarization direction.
+
+Let
+\[
+\boldsymbol{\epsilon}_{i,k,l}
+\]
+denote the polarization vector corresponding to user \(k\),
+path \(l\), and vapor cell \(i\).
+
+The vector amplitude can be written as
+\[
+\mathbf E_{0,i,k,l}
+=
+E_{0,i,k,l}
+\boldsymbol{\epsilon}_{i,k,l}.
+\]
+
+Substituting this into (13),
+\[
+\mathbf E_{i,k,l}(t)
+=
+E_{0,i,k,l}
+\boldsymbol{\epsilon}_{i,k,l}
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right].
+\]
+
+Hence,
+\begin{equation}
+\boxed{
+\mathbf E_{i,k,l}(t)
+=
+E_{0,i,k,l}
+\boldsymbol{\epsilon}_{i,k,l}
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right].
+}
+\tag{14}
+\end{equation}
+
+The polarization vector represents the direction of the electric
+field, while \(E_{0,i,k,l}\) represents its scalar amplitude.
+
+% ============================================================
+\section{Transmitted Symbol and Propagation Coefficient}
+% ============================================================
+
+Consider user \(k\) transmitting the symbol
+\[
+s_k.
+\]
+
+Let
+\[
+\alpha_{l,k}
+\]
+denote the complex coefficient associated with propagation path
+\(l\) from user \(k\).
+
+The scalar field amplitude is represented as
+\[
+E_{0,i,k,l}
+=
+\alpha_{l,k}s_k.
+\]
+
+Substituting this relation into (14),
+\[
+\mathbf E_{i,k,l}(t)
+=
+\alpha_{l,k}s_k
+\boldsymbol{\epsilon}_{i,k,l}
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right].
+\]
+
+Therefore,
+\begin{equation}
+\boxed{
+\mathbf E_{i,k,l}(t)
+=
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}s_k
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right].
+}
+\tag{15}
+\end{equation}
+
+The three terms in this expression represent the polarization
+direction, propagation-path coefficient, and transmitted symbol,
+respectively:
+\[
+\boldsymbol{\epsilon}_{i,k,l},
+\qquad
+\alpha_{l,k},
+\qquad
+s_k.
+\]
+
+The phase accumulated at vapor cell \(i\) is represented by
+\[
+(i-1)\phi_{l,k}.
+\]
+
+\textbf{Remark.} Equation (15) follows the form of Eq.~(3) in
+Xu \emph{et al.}, where the complex baseband amplitude
+$\alpha_{l,k}s_k$ multiplies the real carrier. A strictly real field is
+$\mathbf E_{i,k,l}(t)=\operatorname{Re}\{\boldsymbol\epsilon_{i,k,l}\alpha_{l,k}s_k
+e^{j[\omega t+(i-1)\phi_{l,k}]}\}$; using this form conjugates the
+coupling coefficient obtained later in (40), but leaves its magnitude,
+and hence the Rabi frequency (64), unchanged.
+
+% ============================================================
+\section{Superposition of All Propagation Paths}
+% ============================================================
+
+For user \(k\), the transmitted signal reaches the vapor cell
+through \(L_k\) propagation paths.
+
+The total electric field produced by user \(k\) is therefore the
+sum of the fields associated with all its propagation paths:
+\[
+\mathbf E_{i,k}(t)
+=
+\sum_{l=1}^{L_k}
+\mathbf E_{i,k,l}(t).
+\]
+
+Substituting (15),
+\[
+\mathbf E_{i,k}(t)
+=
+\sum_{l=1}^{L_k}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}s_k
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right].
+\]
+
+The vapor cell receives signals from all \(K\) users. Therefore,
+the total electric field at vapor cell \(i\) is
+\[
+\mathbf E_i(t)
+=
+\sum_{k=1}^{K}
+\mathbf E_{i,k}(t).
+\]
+
+Substituting the expression above,
+\[
+\mathbf E_i(t)
+=
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}s_k
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right].
+\]
+
+Thus,
+\begin{equation}
+\boxed{
+\mathbf E_i(t)
+=
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}s_k
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right].
+}
+\tag{16}
+\end{equation}
+
+% ============================================================
+\section{Electric-Dipole Interaction}
+% ============================================================
+
+The electromagnetic field interacts with the electric dipole of
+the atom.
+
+For an electric dipole moment \(\boldsymbol{\mu}\) in an electric
+field \(\mathbf E\), the interaction energy is represented by the
+dipole--field product.
+
+For a charge \(q\) located at position \(\mathbf r\), the electric
+dipole moment is
+\[
+\boldsymbol{\mu}
+=
+q\mathbf r.
+\]
+
+Therefore, the interaction energy can be written in terms of the
+position vector and electric field as
+\[
+V
+=
+q\mathbf r^{T}\mathbf E.
+\]
+
+In quantum mechanics, the position of the electron is represented
+by a position operator. Hence,
+\[
+\hat{\mathbf r}
+=
+\begin{bmatrix}
+\hat x\\
+\hat y\\
+\hat z
+\end{bmatrix}.
+\]
+
+The interaction Hamiltonian for the atom in vapor cell \(i\) is
+therefore written as
+\begin{equation}
+\boxed{
+\hat V_i
+=
+q\hat{\mathbf r}^{\,T}\mathbf E_i(t).
+}
+\tag{17}
+\end{equation}
+
+The electric field is a vector,
+\[
+\mathbf E_i(t)
+=
+\begin{bmatrix}
+E_{i,x}(t)\\
+E_{i,y}(t)\\
+E_{i,z}(t)
+\end{bmatrix},
+\]
+and hence
+\[
+\begin{aligned}
+\hat{\mathbf r}^{\,T}\mathbf E_i(t)
+&=
+\begin{bmatrix}
+\hat x&\hat y&\hat z
+\end{bmatrix}
+\begin{bmatrix}
+E_{i,x}(t)\\
+E_{i,y}(t)\\
+E_{i,z}(t)
+\end{bmatrix}\\
+&=
+\hat xE_{i,x}(t)
++
+\hat yE_{i,y}(t)
++
+\hat zE_{i,z}(t).
+\end{aligned}
+\]
+
+Therefore,
+\begin{equation}
+\boxed{
+\hat V_i
+=
+q
+\left[
+\hat xE_{i,x}(t)
++
+\hat yE_{i,y}(t)
++
+\hat zE_{i,z}(t)
+\right].
+}
+\tag{18}
+\end{equation}
+
+At this stage, the interaction Hamiltonian is expressed in terms
+of the position operator. The next step is to represent this
+operator in the two-level basis
+\[
+\{\ketg,\kete\}.
+\]
+
+% ============================================================
+\section{Two-Level Representation of the Position Operator}
+% ============================================================
+
+In quantum mechanics, the position of the electron is represented by
+a position operator rather than an ordinary definite coordinate.
+
+The position operator is written as
+\[
+\hat{\mathbf r}
+=
+\begin{bmatrix}
+\hat x\\
+\hat y\\
+\hat z
+\end{bmatrix}.
+\]
+
+For the two-level Rydberg-atom system, the state can be expressed as
+\[
+\ket{\Phi_i(t)}
+=
+\zeta_{g,i}(t)\ketg
++
+\zeta_{e,i}(t)\kete.
+\]
+
+The completeness relation for the two-level basis is
+\begin{equation}
+\boxed{
+\hat I
+=
+\ketg\bra g
++
+\kete\bra e.
+}
+\tag{19}
+\end{equation}
+
+Using the completeness relation on both sides of the position
+operator,
+\[
+\hat{\mathbf r}
+=
+\hat I\hat{\mathbf r}\hat I.
+\]
+
+Therefore,
+\[
+\hat{\mathbf r}
+=
+\left(
+\ketg\bra g+\kete\bra e
+\right)
+\hat{\mathbf r}
+\left(
+\ketg\bra g+\kete\bra e
+\right).
+\]
+
+Expanding the product gives
+\[
+\begin{aligned}
+\hat{\mathbf r}
+={}&
+\ketg\bra g
+\hat{\mathbf r}
+\ketg\bra g
++
+\ketg\bra g
+\hat{\mathbf r}
+\kete\bra e\\
+&+
+\kete\bra e
+\hat{\mathbf r}
+\ketg\bra g
++
+\kete\bra e
+\hat{\mathbf r}
+\kete\bra e.
+\end{aligned}
+\]
+
+The diagonal matrix elements are
+\[
+\bra g\hat{\mathbf r}\ketg
+\]
+and
+\[
+\bra e\hat{\mathbf r}\kete,
+\]
+which represent the position-operator expectation values within
+the ground and excited states.
+
+The off-diagonal matrix elements
+\[
+\bra e\hat{\mathbf r}\ketg
+\]
+and
+\[
+\bra g\hat{\mathbf r}\kete
+\]
+are the transition matrix elements between the two atomic states.
+
+Atomic eigenstates have definite parity, while $\hat{\mathbf r}$ is an
+odd operator. Hence the diagonal elements vanish,
+\[
+\bra g\hat{\mathbf r}\ketg
+=
+\bra e\hat{\mathbf r}\kete
+=
+\mathbf 0,
+\]
+and only the transition terms remain (the states $\ketg$ and $\kete$
+have opposite parity, which is the electric-dipole selection rule).
+Hence,
+\begin{equation}
+\boxed{
+\hat{\mathbf r}
+=
+\bra e\hat{\mathbf r}\ketg
+\kete\bra g
++
+\bra g\hat{\mathbf r}\kete
+\ketg\bra e.
+}
+\tag{20}
+\end{equation}
+
+% ============================================================
+\section{Transition Dipole Moment}
+% ============================================================
+
+The interaction Hamiltonian obtained previously is
+\[
+\hat V_i
+=
+q\hat{\mathbf r}^{\,T}\mathbf E_i(t).
+\]
+
+Substituting the two-level representation of the position operator,
+\[
+\hat V_i
+=
+q
+\left[
+\bra e\hat{\mathbf r}\ketg
+\kete\bra g
++
+\bra g\hat{\mathbf r}\kete
+\ketg\bra e
+\right]^{T}
+\mathbf E_i(t).
+\]
+
+The electric field is an ordinary classical vector. Therefore, it
+can be included in the corresponding scalar products.
+
+Define the transition dipole moment between the ground and excited
+states as
+\begin{equation}
+\boxed{
+\boldsymbol{\mu}_{eg}
+=
+q\bra e\hat{\mathbf r}\ketg.
+}
+\tag{21}
+\end{equation}
+
+Similarly, define
+\begin{equation}
+\boxed{
+\boldsymbol{\mu}_{ge}
+=
+q\bra g\hat{\mathbf r}\kete.
+}
+\tag{22}
+\end{equation}
+
+Therefore,
+\[
+q
+\bra e\hat{\mathbf r}\ketg
+=
+\boldsymbol{\mu}_{eg},
+\qquad
+q
+\bra g\hat{\mathbf r}\kete
+=
+\boldsymbol{\mu}_{ge}.
+\]
+
+Substituting these definitions into the interaction Hamiltonian,
+\[
+\hat V_i
+=
+\left(
+\boldsymbol{\mu}_{eg}^{T}
+\mathbf E_i(t)
+\right)
+\kete\bra g
++
+\left(
+\boldsymbol{\mu}_{ge}^{T}
+\mathbf E_i(t)
+\right)
+\ketg\bra e.
+\]
+
+The position operator is Hermitian:
+\[
+\hat{\mathbf r}^{\dagger}
+=
+\hat{\mathbf r}.
+\]
+
+Hence,
+\[
+\left(
+\bra e\hat{\mathbf r}\ketg
+\right)^{*}
+=
+\bra g\hat{\mathbf r}\kete.
+\]
+
+Therefore,
+\[
+\boldsymbol{\mu}_{ge}
+=
+\boldsymbol{\mu}_{eg}^{*}.
+\]
+
+Consequently,
+\[
+\left(
+\boldsymbol{\mu}_{eg}^{T}\mathbf E_i(t)
+\right)^{*}
+=
+\boldsymbol{\mu}_{ge}^{T}\mathbf E_i(t),
+\]
+for a real electric field.
+
+Define
+\begin{equation}
+\boxed{
+\bar{\omega}_i(t)
+=
+\boldsymbol{\mu}_{eg}^{T}\mathbf E_i(t).
+}
+\tag{23}
+\end{equation}
+
+Then,
+\[
+\bar{\omega}_i^{*}(t)
+=
+\boldsymbol{\mu}_{ge}^{T}\mathbf E_i(t).
+\]
+
+Therefore, the interaction Hamiltonian becomes
+\begin{equation}
+\boxed{
+\hat V_i
+=
+\bar{\omega}_i(t)
+\kete\bra g
++
+\bar{\omega}_i^{*}(t)
+\ketg\bra e.
+}
+\tag{24}
+\end{equation}
+
+% ============================================================
+\section{Matrix Representation of the Interaction Hamiltonian}
+% ============================================================
+
+Using
+\[
+\kete
+=
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix},
+\qquad
+\ketg
+=
+\begin{bmatrix}
+0\\
+1
+\end{bmatrix},
+\]
+we obtain
+\[
+\kete\bra g
+=
+\begin{bmatrix}
+1\\
+0
+\end{bmatrix}
+\begin{bmatrix}
+0&1
+\end{bmatrix}
+=
+\begin{bmatrix}
+0&1\\
+0&0
+\end{bmatrix}.
+\]
+
+Similarly,
+\[
+\ketg\bra e
+=
+\begin{bmatrix}
+0\\
+1
+\end{bmatrix}
+\begin{bmatrix}
+1&0
+\end{bmatrix}
+=
+\begin{bmatrix}
+0&0\\
+1&0
+\end{bmatrix}.
+\]
+
+Substituting these into (24),
+\[
+\begin{aligned}
+\hat V_i
+&=
+\bar{\omega}_i(t)
+\begin{bmatrix}
+0&1\\
+0&0
+\end{bmatrix}
++
+\bar{\omega}_i^{*}(t)
+\begin{bmatrix}
+0&0\\
+1&0
+\end{bmatrix}\\
+&=
+\begin{bmatrix}
+0&\bar{\omega}_i(t)\\
+\bar{\omega}_i^{*}(t)&0
+\end{bmatrix}.
+\end{aligned}
+\]
+
+Hence,
+\begin{equation}
+\boxed{
+\hat V_i
+=
+\begin{bmatrix}
+0&\bar{\omega}_i(t)\\
+\bar{\omega}_i^{*}(t)&0
+\end{bmatrix}.
+}
+\tag{25}
+\end{equation}
+
+% ============================================================
+\section{Interaction Coefficient in Terms of the Electric Field}
+% ============================================================
+
+From the definition
+\[
+\bar{\omega}_i(t)
+=
+\boldsymbol{\mu}_{eg}^{T}\mathbf E_i(t),
+\]
+and the total electric field (16),
+\[
+\mathbf E_i(t)
+=
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}s_k
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right],
+\]
+we obtain
+\[
+\bar{\omega}_i(t)
+=
+\boldsymbol{\mu}_{eg}^{T}
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}s_k
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right].
+\]
+
+Thus,
+\begin{equation}
+\boxed{
+\bar{\omega}_i(t)
+=
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+\boldsymbol{\mu}_{eg}^{T}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}s_k
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right].
+}
+\tag{26}
+\end{equation}
+
+Similarly,
+\[
+\bar{\omega}_i^{*}(t)
+=
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+\boldsymbol{\mu}_{ge}^{T}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}^{*}s_k^{*}
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right].
+\]
+
+% ============================================================
+\section{Total Hamiltonian}
+% ============================================================
+
+The free Hamiltonian is
+\[
+\hat H_i
+=
+\begin{bmatrix}
+\hbar\omega_e&0\\
+0&\hbar\omega_g
+\end{bmatrix},
+\]
+and the interaction Hamiltonian is
+\[
+\hat V_i
+=
+\begin{bmatrix}
+0&\bar{\omega}_i(t)\\
+\bar{\omega}_i^{*}(t)&0
+\end{bmatrix}.
+\]
+
+Therefore,
+\[
+\begin{aligned}
+\hat H_i+\hat V_i
+&=
+\begin{bmatrix}
+\hbar\omega_e&0\\
+0&\hbar\omega_g
+\end{bmatrix}
++
+\begin{bmatrix}
+0&\bar{\omega}_i(t)\\
+\bar{\omega}_i^{*}(t)&0
+\end{bmatrix}\\
+&=
+\begin{bmatrix}
+\hbar\omega_e&\bar{\omega}_i(t)\\
+\bar{\omega}_i^{*}(t)&\hbar\omega_g
+\end{bmatrix}.
+\end{aligned}
+\]
+
+Hence,
+\begin{equation}
+\boxed{
+\hat H_i+\hat V_i
+=
+\begin{bmatrix}
+\hbar\omega_e&\bar{\omega}_i(t)\\
+\bar{\omega}_i^{*}(t)&\hbar\omega_g
+\end{bmatrix}.
+}
+\tag{27}
+\end{equation}
+
+% ============================================================
+\section{Coupled Schr\"odinger Equations}
+% ============================================================
+
+Using
+\[
+\ket{\Phi_i(t)}
+=
+\begin{bmatrix}
+\zeta_{e,i}(t)\\
+\zeta_{g,i}(t)
+\end{bmatrix},
+\]
+the Schr\"odinger equation becomes
+\[
+i\hbar
+\frac{d}{dt}
+\begin{bmatrix}
+\zeta_{e,i}(t)\\
+\zeta_{g,i}(t)
+\end{bmatrix}
+=
+\begin{bmatrix}
+\hbar\omega_e&\bar{\omega}_i(t)\\
+\bar{\omega}_i^{*}(t)&\hbar\omega_g
+\end{bmatrix}
+\begin{bmatrix}
+\zeta_{e,i}(t)\\
+\zeta_{g,i}(t)
+\end{bmatrix}.
+\]
+
+Multiplying the matrices,
+\[
+i\hbar
+\begin{bmatrix}
+\dot{\zeta}_{e,i}(t)\\
+\dot{\zeta}_{g,i}(t)
+\end{bmatrix}
+=
+\begin{bmatrix}
+\hbar\omega_e\zeta_{e,i}(t)
++
+\bar{\omega}_i(t)\zeta_{g,i}(t)
+\\[4pt]
+\bar{\omega}_i^{*}(t)\zeta_{e,i}(t)
++
+\hbar\omega_g\zeta_{g,i}(t)
+\end{bmatrix}.
+\]
+
+Therefore,
+\begin{equation}
+\boxed{
+i\hbar\dot{\zeta}_{e,i}
+=
+\hbar\omega_e\zeta_{e,i}
++
+\bar{\omega}_i(t)\zeta_{g,i}.
+}
+\tag{28a}
+\end{equation}
+
+and
+\begin{equation}
+\boxed{
+i\hbar\dot{\zeta}_{g,i}
+=
+\bar{\omega}_i^{*}(t)\zeta_{e,i}
++
+\hbar\omega_g\zeta_{g,i}.
+}
+\tag{28b}
+\end{equation}
+
+The terms
+\(\hbar\omega_e\zeta_{e,i}\)
+and
+\(\hbar\omega_g\zeta_{g,i}\)
+represent the free atomic evolution, while the terms containing
+\(\bar{\omega}_i(t)\) represent the interaction with the
+electromagnetic field.
+
+% ============================================================
+\section{Removal of the Free-Hamiltonian Evolution}
+% ============================================================
+
+We start from the time-dependent Schr\"odinger equation for the
+free atomic evolution,
+\[
+i\hbar
+\frac{\partial}{\partial t}
+|\Phi_i(t)\rangle
+=
+\hat H_i|\Phi_i(t)\rangle.
+\]
+
+For the free Hamiltonian,
+\[
+\hat H_i
+=
+\begin{bmatrix}
+\hbar\omega_e & 0\\
+0 & \hbar\omega_g
+\end{bmatrix}.
+\]
+
+Consider first the excited-state component. From the free
+Schr\"odinger equation,
+\[
+i\hbar
+\frac{d\zeta_{e,i}(t)}{dt}
+=
+\hbar\omega_e\zeta_{e,i}(t),
+\]
+we obtain
+\[
+\frac{d\zeta_{e,i}(t)}{dt}
+=
+-j\omega_e\zeta_{e,i}(t).
+\]
+
+Now separate the variables:
+\[
+\frac{1}{\zeta_{e,i}(t)}
+\,d\zeta_{e,i}(t)
+=
+-j\omega_e\,dt.
+\]
+
+Integrating both sides,
+\[
+\int
+\frac{1}{\zeta_{e,i}}
+\,d\zeta_{e,i}
+=
+\int
+-j\omega_e\,dt,
+\]
+which gives
+\[
+\ln\zeta_{e,i}(t)
+=
+-j\omega_e t+C.
+\]
+
+Exponentiating,
+\[
+\zeta_{e,i}(t)
+=
+Ce^{-j\omega_e t}.
+\]
+
+Thus, the free evolution of the excited-state component contains
+the phase factor
+\[
+\boxed{
+e^{-j\omega_e t}
+}.
+\]
+
+Similarly, for the ground-state component,
+\[
+i\hbar
+\frac{d\zeta_{g,i}(t)}{dt}
+=
+\hbar\omega_g\zeta_{g,i}(t),
+\]
+which gives
+\[
+\frac{d\zeta_{g,i}(t)}{dt}
+=
+-j\omega_g\zeta_{g,i}(t),
+\]
+and hence
+\[
+\boxed{
+e^{-j\omega_g t}
+}
+\]
+for the ground state.
+
+We now define the slowly varying amplitudes \(a_i(t)\) and
+\(b_i(t)\) by
+\begin{equation}
+\boxed{
+\zeta_{e,i}(t)
+=
+a_i(t)e^{-j\omega_e t}.
+}
+\tag{29a}
+\end{equation}
+
+Similarly,
+\begin{equation}
+\boxed{
+\zeta_{g,i}(t)
+=
+b_i(t)e^{-j\omega_g t}.
+}
+\tag{29b}
+\end{equation}
+
+The functions \(a_i(t)\) and \(b_i(t)\) contain the evolution
+produced by the electromagnetic interaction after the free atomic
+oscillation has been removed.
+
+For the excited state,
+\[
+\zeta_{e,i}(t)
+=
+a_i(t)e^{-j\omega_e t}.
+\]
+
+Differentiating,
+\[
+\begin{aligned}
+\dot{\zeta}_{e,i}(t)
+&=
+\frac{d}{dt}
+\left[
+a_i(t)e^{-j\omega_e t}
+\right]\\
+&=
+\dot a_i(t)e^{-j\omega_e t}
++
+a_i(t)
+\frac{d}{dt}
+\left(
+e^{-j\omega_e t}
+\right)\\
+&=
+\dot a_i(t)e^{-j\omega_e t}
+-
+j\omega_ea_i(t)e^{-j\omega_e t}\\
+&=
+\left(
+\dot a_i-j\omega_ea_i
+\right)
+e^{-j\omega_e t}.
+\end{aligned}
+\]
+
+Hence,
+\begin{equation}
+\boxed{
+\dot{\zeta}_{e,i}
+=
+\left(
+\dot a_i-j\omega_ea_i
+\right)
+e^{-j\omega_e t}.
+}
+\tag{30}
+\end{equation}
+
+Similarly,
+\[
+\begin{aligned}
+\dot{\zeta}_{g,i}
+&=
+\frac{d}{dt}
+\left[
+b_i(t)e^{-j\omega_g t}
+\right]\\
+&=
+\dot b_i(t)e^{-j\omega_g t}
+-
+j\omega_gb_i(t)e^{-j\omega_g t}\\
+&=
+\left(
+\dot b_i-j\omega_gb_i
+\right)
+e^{-j\omega_g t}.
+\end{aligned}
+\]
+
+Therefore,
+\begin{equation}
+\boxed{
+\dot{\zeta}_{g,i}
+=
+\left(
+\dot b_i-j\omega_gb_i
+\right)
+e^{-j\omega_g t}.
+}
+\tag{31}
+\end{equation}
+
+% ============================================================
+\section{Transformation of the Excited-State Equation}
+% ============================================================
+
+Substitute
+\[
+\zeta_{e,i}
+=
+a_i e^{-j\omega_e t},
+\qquad
+\zeta_{g,i}
+=
+b_i e^{-j\omega_g t},
+\]
+and (30) into (28a):
+\[
+i\hbar
+\left(
+\dot a_i-j\omega_ea_i
+\right)
+e^{-j\omega_e t}
+=
+\hbar\omega_e
+a_i e^{-j\omega_e t}
++
+\bar{\omega}_i(t)
+b_i e^{-j\omega_g t}.
+\]
+
+Expanding the left-hand side,
+\[
+i\hbar\dot a_i e^{-j\omega_e t}
++
+\hbar\omega_ea_i e^{-j\omega_e t}
+=
+\hbar\omega_ea_i e^{-j\omega_e t}
++
+\bar{\omega}_i(t)b_i e^{-j\omega_g t}.
+\]
+
+The free-Hamiltonian terms cancel:
+\[
+i\hbar\dot a_i e^{-j\omega_e t}
+=
+\bar{\omega}_i(t)b_i e^{-j\omega_g t}.
+\]
+
+Multiplying both sides by
+\(e^{j\omega_e t}\),
+we obtain
+\[
+i\hbar\dot a_i
+=
+\bar{\omega}_i(t)b_i
+e^{j(\omega_e-\omega_g)t}.
+\]
+
+Define the atomic transition angular frequency as
+\begin{equation}
+\boxed{
+\omega_{eg}
+=
+\omega_e-\omega_g.
+}
+\tag{32}
+\end{equation}
+
+Hence,
+\begin{equation}
+\boxed{
+i\hbar\dot a_i
+=
+\bar{\omega}_i(t)
+b_i
+e^{j\omega_{eg}t}.
+}
+\tag{33}
+\end{equation}
+
+Similarly, substituting the transformations into the ground-state
+equation (28b) gives
+\begin{equation}
+\boxed{
+i\hbar\dot b_i
+=
+\bar{\omega}_i^{*}(t)
+a_i
+e^{-j\omega_{eg}t}.
+}
+\tag{34}
+\end{equation}
+
+% ============================================================
+\section{Substitution of the Electromagnetic Interaction}
+% ============================================================
+
+From (26),
+\[
+\bar{\omega}_i(t)
+=
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+\boldsymbol{\mu}_{eg}^{T}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}s_k
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right].
+\]
+
+Define
+\begin{equation}
+\boxed{
+A_{i,k,l}
+=
+\boldsymbol{\mu}_{eg}^{T}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}s_k.
+}
+\tag{35}
+\end{equation}
+
+Then,
+\[
+\bar{\omega}_i(t)
+=
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+A_{i,k,l}
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right].
+\]
+
+Substituting this expression into (33),
+\[
+i\hbar\dot a_i
+=
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+A_{i,k,l}
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right]
+e^{j\omega_{eg}t}
+b_i.
+\]
+
+Using the identity
+\[
+\cos x
+=
+\frac{e^{jx}+e^{-jx}}{2},
+\]
+we obtain
+\[
+\cos
+\left[
+\omega t+(i-1)\phi_{l,k}
+\right]
+=
+\frac{1}{2}
+\Big[
+e^{j[\omega t+(i-1)\phi_{l,k}]}
++
+e^{-j[\omega t+(i-1)\phi_{l,k}]}
+\Big].
+\]
+
+Therefore,
+\[
+i\hbar\dot a_i
+=
+\frac{1}{2}
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+A_{i,k,l}
+\Big[
+e^{j[\omega t+(i-1)\phi_{l,k}]}
++
+e^{-j[\omega t+(i-1)\phi_{l,k}]}
+\Big]
+e^{j\omega_{eg}t}
+b_i.
+\]
+
+Combining the exponential terms,
+\begin{equation}
+\begin{aligned}
+i\hbar\dot a_i
+=
+\frac{1}{2}
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+A_{i,k,l}
+\Big[
+&
+e^{j(\omega+\omega_{eg})t}
+e^{j(i-1)\phi_{l,k}}
+\\
+&+
+e^{j(\omega_{eg}-\omega)t}
+e^{-j(i-1)\phi_{l,k}}
+\Big]
+b_i.
+\end{aligned}
+\tag{36}
+\end{equation}
+
+% ============================================================
+\section{Resonance Condition}
+% ============================================================
+
+The electromagnetic field is considered resonant with the atomic
+transition when
+\begin{equation}
+\boxed{
+\omega=\omega_{eg}.
+}
+\tag{37}
+\end{equation}
+
+Therefore,
+\[
+\omega+\omega_{eg}=2\omega,
+\qquad
+\omega_{eg}-\omega=0.
+\]
+
+Substituting these relations into (36),
+\begin{equation}
+i\hbar\dot a_i
+=
+\frac{1}{2}
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+A_{i,k,l}
+\Big[
+e^{j2\omega t}
+e^{j(i-1)\phi_{l,k}}
++
+e^{-j(i-1)\phi_{l,k}}
+\Big]
+b_i.
+\tag{38}
+\end{equation}
+
+% ============================================================
+\section{Rotating-Wave Approximation}
+% ============================================================
+
+Under the rotating-wave approximation, terms oscillating rapidly
+compared with the atomic transition dynamics are neglected.
+
+The first term in (38),
+\[
+e^{j2\omega t}
+e^{j(i-1)\phi_{l,k}},
+\]
+contains the rapidly oscillating factor
+\(e^{j2\omega t}\).
+
+The second term,
+\[
+e^{-j(i-1)\phi_{l,k}},
+\]
+is time-independent.
+
+Therefore, the rapidly oscillating term is neglected, giving
+\begin{equation}
+\boxed{
+i\hbar\dot a_i
+=
+\frac{1}{2}
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+A_{i,k,l}
+e^{-j(i-1)\phi_{l,k}}
+b_i.
+}
+\tag{39}
+\end{equation}
+
+Substituting the definition of \(A_{i,k,l}\),
+\[
+i\hbar\dot a_i
+=
+\frac{1}{2}
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+\boldsymbol{\mu}_{eg}^{T}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}s_k
+e^{-j(i-1)\phi_{l,k}}
+b_i.
+\]
+
+Define
+\begin{equation}
+\boxed{
+C_i
+=
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+\boldsymbol{\mu}_{eg}^{T}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}s_k
+e^{-j(i-1)\phi_{l,k}}.
+}
+\tag{40}
+\end{equation}
+
+Then,
+\begin{equation}
+\boxed{
+i\hbar\dot a_i
+=
+\frac{C_i}{2}b_i.
+}
+\tag{41}
+\end{equation}
+
+Similarly, substituting $\bar\omega_i^*(t)$ into (34) and neglecting
+the $e^{-j2\omega t}$ term,
+\begin{equation}
+\boxed{
+i\hbar\dot b_i
+=
+\frac{C_i^{*}}{2}a_i.
+}
+\tag{42}
+\end{equation}
+
+% ============================================================
+\section{Second-Order Differential Equation}
+% ============================================================
+
+From (41),
+\[
+i\hbar\dot a_i
+=
+\frac{C_i}{2}b_i.
+\]
+
+Since \(C_i\) is constant with respect to time in the resonant
+RWA model,
+\[
+i\hbar\ddot a_i
+=
+\frac{C_i}{2}\dot b_i.
+\]
+
+From (42),
+\[
+\dot b_i
+=
+\frac{C_i^{*}}{2i\hbar}a_i.
+\]
+
+Using
+\(1/i=-j\),
+we obtain
+\[
+\dot b_i
+=
+-\frac{jC_i^{*}}{2\hbar}a_i.
+\]
+
+Substituting this into the differentiated form of (41),
+\[
+\begin{aligned}
+i\hbar\ddot a_i
+&=
+\frac{C_i}{2}
+\left(
+-\frac{jC_i^{*}}{2\hbar}a_i
+\right)
+=
+-\frac{jC_iC_i^{*}}{4\hbar}a_i
+=
+-\frac{j|C_i|^2}{4\hbar}a_i.
+\end{aligned}
+\]
+
+Dividing by \(i\hbar\),
+\[
+\ddot a_i
+=
+-\frac{|C_i|^2}{4\hbar^2}a_i.
+\]
+
+Therefore,
+\begin{equation}
+\boxed{
+\ddot a_i
++
+\frac{|C_i|^2}{4\hbar^2}a_i
+=
+0.
+}
+\tag{43}
+\end{equation}
+
+% ============================================================
+\section{Solution of the Excited-State Dynamics}
+% ============================================================
+
+The second-order differential equation obtained in (43) is
+\begin{equation}
+\ddot{a}_i(t)
++
+\frac{|C_i|^2}{4\hbar^2}a_i(t)
+=0.
+\tag{44}
+\end{equation}
+
+Its general solution is
+\begin{equation}
+a_i(t)
+=
+A\cos\left(\frac{|C_i|t}{2\hbar}\right)
++
+B\sin\left(\frac{|C_i|t}{2\hbar}\right).
+\tag{45}
+\end{equation}
+
+The atom is initially prepared in the ground state. Therefore,
+\begin{equation}
+\zeta_{e,i}(0)=0,
+\qquad
+\zeta_{g,i}(0)=1.
+\tag{46}
+\end{equation}
+
+Since
+\begin{equation}
+\zeta_{e,i}(t)=a_i(t)e^{-j\omega_e t},
+\tag{47}
+\end{equation}
+and $e^{-j\omega_e 0}=1$, the initial excited-state condition gives
+\begin{equation}
+a_i(0)=0.
+\tag{48}
+\end{equation}
+
+Evaluating (45) at $t=0$ gives
+\begin{equation}
+a_i(0)=A.
+\tag{49}
+\end{equation}
+
+Hence,
+\begin{equation}
+A=0.
+\tag{50}
+\end{equation}
+
+Therefore, the transformed excited-state amplitude becomes
+\begin{equation}
+a_i(t)
+=
+B\sin\left(\frac{|C_i|t}{2\hbar}\right).
+\tag{51}
+\end{equation}
+
+The coefficient $B$ is determined from the first-order equation
+obtained from the rotating-wave approximation,
+\begin{equation}
+i\hbar\dot a_i(t)=\frac{C_i}{2}b_i(t).
+\tag{52}
+\end{equation}
+
+At $t=0$, $b_i(0)=\zeta_{g,i}(0)=1$, and therefore
+\begin{equation}
+i\hbar\dot a_i(0)=\frac{C_i}{2}.
+\tag{53}
+\end{equation}
+
+Differentiating (51) gives
+\begin{equation}
+\dot a_i(t)
+=
+B\frac{|C_i|}{2\hbar}
+\cos\left(\frac{|C_i|t}{2\hbar}\right).
+\tag{54}
+\end{equation}
+
+Thus, at $t=0$,
+\begin{equation}
+\dot a_i(0)=B\frac{|C_i|}{2\hbar}.
+\tag{55}
+\end{equation}
+
+Substituting (55) into (53) gives
+\begin{equation}
+iB|C_i|=C_i.
+\tag{56}
+\end{equation}
+
+For $C_i\neq0$,
+\begin{equation}
+B=-j\frac{C_i}{|C_i|}.
+\tag{57}
+\end{equation}
+
+Hence,
+\begin{equation}
+a_i(t)
+=
+-j\frac{C_i}{|C_i|}
+\sin\left(\frac{|C_i|t}{2\hbar}\right).
+\tag{58}
+\end{equation}
+
+Using (47), the original excited-state amplitude is
+\begin{equation}
+\zeta_{e,i}(t)
+=
+-j\frac{C_i}{|C_i|}
+\sin\left(\frac{|C_i|t}{2\hbar}\right)e^{-j\omega_e t}.
+\tag{59}
+\end{equation}
+
+The excited-state probability is defined as the squared magnitude of
+the excited-state probability amplitude,
+\begin{equation}
+P_e(t)=|\zeta_{e,i}(t)|^2.
+\tag{60}
+\end{equation}
+
+Using the multiplicative property of the complex magnitude,
+\begin{equation}
+|abc|^2=|a|^2|b|^2|c|^2,
+\tag{61}
+\end{equation}
+and the identities
+\begin{equation}
+|-j|^2=1,
+\qquad
+\left|\frac{C_i}{|C_i|}\right|^2=1,
+\qquad
+|e^{-j\omega_e t}|^2=1,
+\tag{62}
+\end{equation}
+we obtain
+\begin{equation}
+P_e(t)
+=
+\sin^2\left(\frac{|C_i|t}{2\hbar}\right).
+\tag{63}
+\end{equation}
+
+Define the Rabi frequency by
+\begin{equation}
+\boxed{
+\Omega_i=\frac{|C_i|}{\hbar}
+}.
+\tag{64}
+\end{equation}
+
+Therefore,
+\begin{equation}
+\frac{|C_i|t}{2\hbar}=\frac{\Omega_i t}{2}.
+\tag{65}
+\end{equation}
+
+Substituting (65) into (63) gives the final excited-state probability,
+\begin{equation}
+\boxed{
+P_e(t)=\sin^2\left(\frac{\Omega_i t}{2}\right)
+}.
+\tag{66}
+\end{equation}
+Equivalently,
+\begin{equation}
+\boxed{
+|\zeta_{e,i}(t)|^2=\sin^2\left(\frac{\Omega_i t}{2}\right)
+}.
+\tag{66a}
+\end{equation}
+
+% ============================================================
+\section{Expression for the Rabi Frequency}
+% ============================================================
+
+From the definition of the effective interaction coefficient,
+\begin{equation}
+C_i
+=
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+\boldsymbol{\mu}_{eg}^{T}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}s_k
+ e^{-j(i-1)\phi_{l,k}}.
+\tag{67}
+\end{equation}
+
+Using the definition of the Rabi frequency in (64),
+\begin{equation}
+\Omega_i
+=
+\frac{1}{\hbar}
+\left|
+\sum_{k=1}^{K}
+\sum_{l=1}^{L_k}
+\boldsymbol{\mu}_{eg}^{T}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}s_k
+ e^{-j(i-1)\phi_{l,k}}
+\right|.
+\tag{68}
+\end{equation}
+
+\textbf{Remark.} Xu \emph{et al.} write Eq.~(6) with
+$\boldsymbol\mu_{eg}^{H}$ and $e^{+j(i-1)\phi_{l,k}}$, but the channel
+Eq.~(7) with $\boldsymbol\mu_{eg}^{T}$ and $e^{-j(i-1)\phi_{l,k}}$.
+Since $\boldsymbol\mu_{eg}=[0,\,1785.9\,qa_0,\,0]^T$ and
+$\boldsymbol\epsilon_{i,k,l}$ are real, the two sums are complex
+conjugates of each other up to the conjugation of $\alpha_{l,k}s_k$,
+and their magnitudes are equal. Here the form consistent with
+Eq.~(7) is used.
+
+Since $s_k$ does not depend on the path index $l$, it can be factored
+outside the inner summation:
+\begin{equation}
+\Omega_i
+=
+\frac{1}{\hbar}
+\left|
+\sum_{k=1}^{K}
+ s_k
+\sum_{l=1}^{L_k}
+\boldsymbol{\mu}_{eg}^{T}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}
+ e^{-j(i-1)\phi_{l,k}}
+\right|.
+\tag{69}
+\end{equation}
+
+Equivalently,
+\begin{equation}
+\Omega_i
+=
+\left|
+\sum_{k=1}^{K}
+ s_k
+\left(
+\sum_{l=1}^{L_k}
+\frac{1}{\hbar}
+\boldsymbol{\mu}_{eg}^{T}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}
+ e^{-j(i-1)\phi_{l,k}}
+\right)
+\right|.
+\tag{70}
+\end{equation}
+
+Define the channel coefficient
+\begin{equation}
+\boxed{
+g_{i,k}
+=
+\sum_{l=1}^{L_k}
+\frac{1}{\hbar}
+\boldsymbol{\mu}_{eg}^{T}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}
+e^{-j(i-1)\phi_{l,k}}
+}.
+\tag{71}
+\end{equation}
+
+Therefore,
+\begin{equation}
+\boxed{
+\Omega_i
+=
+\left|
+\sum_{k=1}^{K}
+g_{i,k}s_k
+\right|
+}.
+\tag{72}
+\end{equation}
+
+% ============================================================
+\section{Received Signal Model}
+% ============================================================
+
+For the $p$-th time slot, the measured signal at vapor cell $i$ is
+modeled as
+\begin{equation}
+\boxed{
+y_{i,p}
+=
+\left|
+\sum_{k=1}^{K}
+g_{i,k}s_{k,p}
++
+b_{i,p}
++
+n_{i,p}
+\right|
+}.
+\tag{73}
+\end{equation}
+
+For a single communication user $k$, the contribution received at
+vapor cell $i$ during time slot $p$ is
+\begin{equation}
+g_{i,k}s_{k,p}.
+\tag{74}
+\end{equation}
+
+Thus, the channel coefficient represents the complex coupling
+between the transmitted symbol and the received contribution:
+\begin{equation}
+\text{received contribution}
+=
+\text{channel coefficient}
+\times
+\text{transmitted symbol}.
+\tag{75}
+\end{equation}
+
+For $K$ communication users, the contributions arriving at the same
+vapor cell are superposed linearly. Hence,
+\begin{equation}
+a_{i,p}
+=
+\sum_{k=1}^{K}
+g_{i,k}s_{k,p},
+\tag{76}
+\end{equation}
+where $a_{i,p}$ denotes the total desired wireless signal at vapor
+cell $i$ and time slot $p$.
+
+The channel coefficient in (71) is obtained from the atomic coupling
+term,
+\begin{equation}
+\frac{1}{\hbar}
+\boldsymbol{\mu}_{eg}^{T}
+\boldsymbol{\epsilon}_{i,k,l}
+\alpha_{l,k}
+e^{-j(i-1)\phi_{l,k}},
+\tag{77}
+\end{equation}
+which contains the atomic transition dipole coupling, polarization,
+path amplitude, and spatial propagation phase.
+
+% ============================================================
+\section{Reference Signal}
+% ============================================================
+
+In addition to the communication signals, a reference source is
+introduced.
+
+Let the reference source transmit the symbol
+\begin{equation}
+s_{b,p},
+\tag{78}
+\end{equation}
+where the subscript $b$ denotes the reference beam.
+
+The reference source produces an electromagnetic field at vapor cell
+$i$. Its contribution is therefore written in the same form as a
+single propagation path:
+\begin{equation}
+b_{i,p}
+=
+g_{b,i}s_{b,p},
+\tag{79}
+\end{equation}
+where $g_{b,i}$ represents the channel coupling from the reference
+source to vapor cell $i$.
+
+For the communication users, multiple propagation paths are
+considered:
+\begin{equation}
+g_{i,k}
+=
+\sum_{l=1}^{L_k}
+\left(
+\text{contribution of path }l
+\right).
+\tag{80}
+\end{equation}
+
+For the reference source, the model uses one effective propagation
+path. Therefore, the reference channel contains one effective set of
+parameters,
+\begin{equation}
+\boldsymbol{\epsilon}_{b,i},
+\qquad
+\alpha_b,
+\qquad
+\phi_b.
+\tag{81}
+\end{equation}
+
+Starting from the same single-path channel structure,
+\begin{equation}
+g_{i,k}^{(\mathrm{single})}
+=
+\frac{1}{\hbar}
+\boldsymbol{\mu}_{eg}^{T}
+\boldsymbol{\epsilon}_{i,k}
+\alpha_k
+e^{-j(i-1)\phi_k},
+\tag{82}
+\end{equation}
+the reference channel is obtained by replacing the generic path
+parameters with the reference parameters:
+\begin{equation}
+\boldsymbol{\epsilon}_{i,k}
+\rightarrow
+\boldsymbol{\epsilon}_{b,i},
+\qquad
+\alpha_k
+\rightarrow
+\alpha_b,
+\qquad
+\phi_k
+\rightarrow
+\phi_b.
+\tag{83}
+\end{equation}
+
+Hence,
+\begin{equation}
+\boxed{
+g_{b,i}
+=
+\frac{1}{\hbar}
+\boldsymbol{\mu}_{eg}^{T}
+\boldsymbol{\epsilon}_{b,i}
+\alpha_b
+e^{-j(i-1)\phi_b}
+}.
+\tag{84}
+\end{equation}
+
+Substituting (84) into (79),
+\begin{equation}
+\boxed{
+b_{i,p}
+=
+s_{b,p}
+\left[
+\frac{1}{\hbar}
+\boldsymbol{\mu}_{eg}^{T}
+\boldsymbol{\epsilon}_{b,i}
+\alpha_b
+e^{-j(i-1)\phi_b}
+\right]
+}.
+\tag{85}
+\end{equation}
+
+\textbf{Assumption.} The linear phase progression $(i-1)\phi_b$ treats
+the reference (LO) field as a plane wave across the array, as in
+Eq.~(9) of Xu \emph{et al.}
+
+% ============================================================
+\section{Complete Received Signal}
+% ============================================================
+
+The receiver noise at vapor cell $i$ and time slot $p$ is denoted by
+\begin{equation}
+n_{i,p}
+\sim
+\mathcal{CN}(0,\sigma^2),
+\tag{86}
+\end{equation}
+modelled as additive in the Rabi-frequency domain and i.i.d.\ over
+$(i,p)$.
+
+The total complex quantity experienced by the atomic receiver is
+therefore
+\begin{equation}
+a_{i,p}
++
+b_{i,p}
++
+n_{i,p},
+\tag{87}
+\end{equation}
+or, using (76),
+\begin{equation}
+\sum_{k=1}^{K}
+g_{i,k}s_{k,p}
++
+b_{i,p}
++
+n_{i,p}.
+\tag{88}
+\end{equation}
+
+The Rydberg atomic receiver provides a magnitude-based measurement
+of this total coupling. Consequently,
+\begin{equation}
+\boxed{
+y_{i,p}
+=
+\left|
+a_{i,p}
++
+b_{i,p}
++
+n_{i,p}
+\right|
+}.
+\tag{89}
+\end{equation}
+
+Using (76),
+\begin{equation}
+\boxed{
+y_{i,p}
+=
+\left|
+\sum_{k=1}^{K}
+g_{i,k}s_{k,p}
++
+b_{i,p}
++
+n_{i,p}
+\right|
+}.
+\tag{90}
+\end{equation}
+
+% ============================================================
+\section{Strong-Reference Approximation}
+% ============================================================
+
+Define
+\begin{equation}
+x_{i,p}
+=
+a_{i,p}+n_{i,p}.
+\tag{91}
+\end{equation}
+
+Then (89) becomes
+\begin{equation}
+y_{i,p}
+=
+|b_{i,p}+x_{i,p}|.
+\tag{92}
+\end{equation}
+
+Squaring both sides,
+\begin{equation}
+y_{i,p}^{\,2}
+=
+|b_{i,p}+x_{i,p}|^2.
+\tag{93}
+\end{equation}
+
+For any complex quantity $z$,
+\begin{equation}
+|z|^2=zz^*.
+\tag{94}
+\end{equation}
+
+Therefore,
+\begin{equation}
+y_{i,p}^{\,2}
+=
+(b_{i,p}+x_{i,p})
+(b_{i,p}+x_{i,p})^*.
+\tag{95}
+\end{equation}
+
+Using
+\begin{equation}
+(b+x)^*=b^*+x^*,
+\tag{96}
+\end{equation}
+gives
+\begin{align}
+y_{i,p}^{\,2}
+&=
+(b_{i,p}+x_{i,p})
+(b_{i,p}^*+x_{i,p}^*)
+\nonumber\\
+&=
+b_{i,p}b_{i,p}^*
++
+b_{i,p}x_{i,p}^*
++
+x_{i,p}b_{i,p}^*
++
+x_{i,p}x_{i,p}^*.
+\tag{97}
+\end{align}
+
+Since
+\begin{equation}
+|b_{i,p}|^2=b_{i,p}b_{i,p}^*,
+\qquad
+|x_{i,p}|^2=x_{i,p}x_{i,p}^*,
+\tag{98}
+\end{equation}
+and
+\begin{equation}
+z+z^*=2\operatorname{Re}(z),
+\tag{99}
+\end{equation}
+the cross terms satisfy
+\begin{equation}
+b_{i,p}x_{i,p}^*
++
+b_{i,p}^*x_{i,p}
+=
+2\operatorname{Re}
+\left(
+b_{i,p}^*x_{i,p}
+\right).
+\tag{100}
+\end{equation}
+
+Hence,
+\begin{equation}
+\boxed{
+y_{i,p}^{\,2}
+=
+|b_{i,p}|^2
++
+|x_{i,p}|^2
++
+2\operatorname{Re}
+\left(
+b_{i,p}^*x_{i,p}
+\right)
+}.
+\tag{101}
+\end{equation}
+
+Taking the square root,
+\begin{equation}
+y_{i,p}
+=
+\sqrt{
+|b_{i,p}|^2
++
+|x_{i,p}|^2
++
+2\operatorname{Re}
+\left(
+b_{i,p}^*x_{i,p}
+\right)
+}.
+\tag{102}
+\end{equation}
+
+Factor $|b_{i,p}|^2$ from the square root:
+\begin{equation}
+y_{i,p}
+=
+|b_{i,p}|
+\sqrt{
+1+
+\frac{|x_{i,p}|^2}{|b_{i,p}|^2}
++
+\frac{
+2\operatorname{Re}(b_{i,p}^*x_{i,p})
+}{
+|b_{i,p}|^2
+}
+}.
+\tag{103}
+\end{equation}
+
+Using
+\begin{equation}
+|b_{i,p}|^2=b_{i,p}b_{i,p}^*,
+\tag{104}
+\end{equation}
+the last term becomes
+\begin{equation}
+\frac{
+b_{i,p}^*x_{i,p}
+}{
+b_{i,p}b_{i,p}^*
+}
+=
+\frac{x_{i,p}}{b_{i,p}}.
+\tag{105}
+\end{equation}
+
+Thus,
+\begin{equation}
+\boxed{
+y_{i,p}
+=
+|b_{i,p}|
+\sqrt{
+1+
+\frac{|x_{i,p}|^2}{|b_{i,p}|^2}
++
+2\operatorname{Re}
+\left(
+\frac{x_{i,p}}{b_{i,p}}
+\right)
+}
+}.
+\tag{106}
+\end{equation}
+
+% ============================================================
+\section{Taylor Expansion Under Strong Reference}
+% ============================================================
+
+The strong-reference assumption is
+\begin{equation}
+|b_{i,p}|
+\gg
+|x_{i,p}|
+=
+|a_{i,p}+n_{i,p}|.
+\tag{107}
+\end{equation}
+
+Consequently,
+\begin{equation}
+\left|
+\frac{x_{i,p}}{b_{i,p}}
+\right|
+\ll 1.
+\tag{108}
+\end{equation}
+
+Define
+\begin{equation}
+r_{i,p}
+=
+\frac{x_{i,p}}{b_{i,p}}.
+\tag{109}
+\end{equation}
+
+Then
+\begin{equation}
+|r_{i,p}|\ll1,
+\tag{110}
+\end{equation}
+and (106) becomes
+\begin{equation}
+y_{i,p}
+=
+|b_{i,p}|
+\sqrt{
+1+
+|r_{i,p}|^2
++
+2\operatorname{Re}(r_{i,p})
+}.
+\tag{111}
+\end{equation}
+
+Let
+\begin{equation}
+u
+=
+|r_{i,p}|^2
++
+2\operatorname{Re}(r_{i,p}).
+\tag{112}
+\end{equation}
+
+For $|u|\ll1$, the first-order Taylor expansion is
+\begin{equation}
+\sqrt{1+u}
+\approx
+1+\frac{u}{2}.
+\tag{113}
+\end{equation}
+
+Then,
+\begin{equation}
+y_{i,p}
+\approx
+|b_{i,p}|
+\left[
+1+
+\frac{1}{2}
+\left(
+|r_{i,p}|^2
++
+2\operatorname{Re}(r_{i,p})
+\right)
+\right].
+\tag{114}
+\end{equation}
+
+Therefore,
+\begin{equation}
+y_{i,p}
+\approx
+|b_{i,p}|
+\left[
+1+
+\frac{1}{2}|r_{i,p}|^2
++
+\operatorname{Re}(r_{i,p})
+\right].
+\tag{115}
+\end{equation}
+
+Substituting (109),
+\begin{equation}
+y_{i,p}
+\approx
+|b_{i,p}|
+\left[
+1+
+\frac{1}{2}
+\frac{|x_{i,p}|^2}{|b_{i,p}|^2}
++
+\operatorname{Re}
+\left(
+\frac{x_{i,p}}{b_{i,p}}
+\right)
+\right],
+\tag{116}
+\end{equation}
+which is Eq.~(10) of Xu \emph{et al.}
+
+Expanding the factor $|b_{i,p}|$,
+\begin{equation}
+y_{i,p}
+\approx
+|b_{i,p}|
++
+\frac{|x_{i,p}|^2}{2|b_{i,p}|}
++
+|b_{i,p}|
+\operatorname{Re}
+\left(
+\frac{x_{i,p}}{b_{i,p}}
+\right).
+\tag{117}
+\end{equation}
+
+The second term is second order in the small quantity
+$x_{i,p}/b_{i,p}$, whereas the third term is first order. Under the
+strong-reference approximation, the second-order term is neglected.
+
+Hence,
+\begin{equation}
+\boxed{
+y_{i,p}
+\approx
+|b_{i,p}|
++
+|b_{i,p}|
+\operatorname{Re}
+\left(
+\frac{x_{i,p}}{b_{i,p}}
+\right)
+}.
+\tag{118}
+\end{equation}
+
+Since
+\begin{equation}
+x_{i,p}
+=
+a_{i,p}+n_{i,p},
+\tag{119}
+\end{equation}
+we obtain
+\begin{equation}
+y_{i,p}
+\approx
+|b_{i,p}|
++
+|b_{i,p}|
+\operatorname{Re}
+\left(
+\frac{a_{i,p}+n_{i,p}}{b_{i,p}}
+\right).
+\tag{120}
+\end{equation}
+
+% ============================================================
+\section{Reference Magnitude and Phase Representation}
+% ============================================================
+
+Represent the reference signal in magnitude-phase form as
+\begin{equation}
+b_{i,p}
+=
+|b_{i,p}|e^{jz_{i,p}},
+\tag{121}
+\end{equation}
+where
+\begin{equation}
+z_{i,p}
+=
+\angle b_{i,p}
+=
+\arg(b_{i,p}).
+\tag{122}
+\end{equation}
+
+Therefore,
+\begin{equation}
+\frac{|b_{i,p}|}{b_{i,p}}
+=
+e^{-jz_{i,p}}.
+\tag{123}
+\end{equation}
+
+Since $|b_{i,p}|$ is real, it can be moved inside the real part of
+(120). Using (123),
+\begin{equation}
+y_{i,p}
+\approx
+|b_{i,p}|
++
+\operatorname{Re}
+\left(
+e^{-jz_{i,p}}
+(a_{i,p}+n_{i,p})
+\right).
+\tag{124}
+\end{equation}
+
+Using the linearity of the real-part operator,
+\begin{equation}
+\operatorname{Re}(A+B)
+=
+\operatorname{Re}(A)
++
+\operatorname{Re}(B),
+\tag{125}
+\end{equation}
+gives
+\begin{equation}
+y_{i,p}
+\approx
+|b_{i,p}|
++
+\operatorname{Re}
+\left(
+e^{-jz_{i,p}}a_{i,p}
+\right)
++
+\operatorname{Re}
+\left(
+e^{-jz_{i,p}}n_{i,p}
+\right).
+\tag{126}
+\end{equation}
+
+Define the effective real-valued noise term
+\begin{equation}
+\bar n_{i,p}
+=
+\operatorname{Re}
+\left(
+e^{-jz_{i,p}}n_{i,p}
+\right).
+\tag{127}
+\end{equation}
+
+Since $n_{i,p}$ is circularly symmetric, $e^{-jz_{i,p}}n_{i,p}\sim
+\mathcal{CN}(0,\sigma^2)$, and its real part carries half of the
+variance:
+\begin{equation}
+\boxed{
+\bar n_{i,p}
+\sim
+\mathcal{N}\!\left(0,\frac{\sigma^2}{2}\right)
+}.
+\tag{127a}
+\end{equation}
+
+Thus,
+\begin{equation}
+\boxed{
+y_{i,p}
+=
+\operatorname{Re}
+\left(
+e^{-jz_{i,p}}a_{i,p}
+\right)
++
+|b_{i,p}|
++
+\bar n_{i,p}
+}.
+\tag{128}
+\end{equation}
+
+Finally, using
+\begin{equation}
+a_{i,p}
+=
+\sum_{k=1}^{K}
+g_{i,k}s_{k,p},
+\tag{129}
+\end{equation}
+the linearized measurement model becomes
+\begin{equation}
+\boxed{
+y_{i,p}
+=
+\operatorname{Re}
+\left(
+e^{-jz_{i,p}}
+\sum_{k=1}^{K}
+g_{i,k}s_{k,p}
+\right)
++
+|b_{i,p}|
++
+\bar n_{i,p}
+}.
+\tag{130}
+\end{equation}
+
+% ============================================================
+\section{Matrix Representation of the Linearized Measurement Model}
+% ============================================================
+
+From the scalar linearized measurement model obtained previously,
+\begin{equation}
+y_{i,p}
+\approx
+\operatorname{Re}
+\left(
+e^{-jz_{i,p}}
+\sum_{k=1}^{K}
+g_{i,k}s_{k,p}
+\right)
++
+|b_{i,p}|
++
+\bar n_{i,p}.
+\tag{131}
+\end{equation}
+
+The indices are defined as
+\[
+i=1,2,\ldots,I
+\]
+for the $I$ vapor cells or receiving antennas,
+\[
+k=1,2,\ldots,K
+\]
+for the $K$ users, and
+\[
+p=1,2,\ldots,P
+\]
+for the $P$ transmitted symbols or time slots.
+
+Thus, $y_{i,p}$ represents one scalar magnitude measurement
+corresponding to vapor cell $i$ and time slot $p$.
+
+Collecting all measurements gives the matrix
+\begin{equation}
+\boxed{
+Y=[y_{i,p}]
+\in
+\mathbb{R}^{I\times P}
+}.
+\tag{132}
+\end{equation}
+
+Explicitly,
+\begin{equation}
+Y=
+\begin{bmatrix}
+y_{1,1} & y_{1,2} & \cdots & y_{1,P}\\
+y_{2,1} & y_{2,2} & \cdots & y_{2,P}\\
+\vdots & \vdots & \ddots & \vdots\\
+y_{I,1} & y_{I,2} & \cdots & y_{I,P}
+\end{bmatrix}.
+\tag{133}
+\end{equation}
+
+Since $y_{i,p}$ is a magnitude measurement,
+\begin{equation}
+y_{i,p}\in\mathbb{R}.
+\tag{134}
+\end{equation}
+
+\subsection{Construction of the Phase Matrix}
+
+The scalar model contains the phase factor
+\begin{equation}
+e^{-jz_{i,p}}.
+\tag{135}
+\end{equation}
+
+Define the phase matrix
+\begin{equation}
+\boxed{
+Z=
+[e^{-jz_{i,p}}]
+\in
+\mathbb{C}^{I\times P}
+}.
+\tag{136}
+\end{equation}
+
+The matrix is therefore
+\begin{equation}
+Z=
+\begin{bmatrix}
+e^{-jz_{1,1}} & e^{-jz_{1,2}} & \cdots & e^{-jz_{1,P}}\\
+e^{-jz_{2,1}} & e^{-jz_{2,2}} & \cdots & e^{-jz_{2,P}}\\
+\vdots & \vdots & \ddots & \vdots\\
+e^{-jz_{I,1}} & e^{-jz_{I,2}} & \cdots & e^{-jz_{I,P}}
+\end{bmatrix}.
+\tag{137}
+\end{equation}
+
+The phase variable is determined from the reference signal according
+to
+\begin{equation}
+z_{i,p}
+=
+\angle b_{i,p}.
+\tag{138}
+\end{equation}
+
+\subsection{Construction of the Channel Matrix}
+
+The channel coefficient between vapor cell $i$ and user $k$ is
+$g_{i,k}$.
+
+There are $I$ receiving cells and $K$ users. Hence, the channel
+matrix is
+\begin{equation}
+\boxed{
+G=[g_{i,k}]
+\in
+\mathbb{C}^{I\times K}
+}.
+\tag{139}
+\end{equation}
+
+Explicitly,
+\begin{equation}
+G=
+\begin{bmatrix}
+g_{1,1} & g_{1,2} & \cdots & g_{1,K}\\
+g_{2,1} & g_{2,2} & \cdots & g_{2,K}\\
+\vdots & \vdots & \ddots & \vdots\\
+g_{I,1} & g_{I,2} & \cdots & g_{I,K}
+\end{bmatrix}.
+\tag{140}
+\end{equation}
+
+Similarly, the transmitted-symbol matrix is defined as
+\begin{equation}
+\boxed{
+S=[s_{k,p}]
+\in
+\mathbb{C}^{K\times P}
+}.
+\tag{141}
+\end{equation}
+
+Explicitly,
+\begin{equation}
+S=
+\begin{bmatrix}
+s_{1,1} & s_{1,2} & \cdots & s_{1,P}\\
+s_{2,1} & s_{2,2} & \cdots & s_{2,P}\\
+\vdots & \vdots & \ddots & \vdots\\
+s_{K,1} & s_{K,2} & \cdots & s_{K,P}
+\end{bmatrix}.
+\tag{142}
+\end{equation}
+
+The matrix product $GS$ has dimensions
+\begin{equation}
+G S:
+\qquad
+(I\times K)(K\times P)
+=
+I\times P.
+\tag{143}
+\end{equation}
+
+Its $(i,p)$-th element is
+\begin{equation}
+(GS)_{i,p}
+=
+\sum_{k=1}^{K}
+g_{i,k}s_{k,p}.
+\tag{144}
+\end{equation}
+
+Therefore,
+\begin{equation}
+(GS)_{i,p}=a_{i,p}.
+\tag{145}
+\end{equation}
+
+\subsection{Hadamard Product with the Phase Matrix}
+
+The phase factor $e^{-jz_{i,p}}$ has to multiply the corresponding
+$(i,p)$-th element of $GS$.
+
+For two matrices $A$ and $B$ having the same dimensions, the Hadamard
+product is defined element-wise as
+\begin{equation}
+(A\circ B)_{i,p}
+=
+A_{i,p}B_{i,p}.
+\tag{146}
+\end{equation}
+
+Therefore,
+\begin{equation}
+[Z\circ(GS)]_{i,p}
+=
+Z_{i,p}(GS)_{i,p}.
+\tag{147}
+\end{equation}
+
+Using
+\begin{equation}
+Z_{i,p}
+=
+e^{-jz_{i,p}},
+\tag{148}
+\end{equation}
+\begin{equation}
+[Z\circ(GS)]_{i,p}
+=
+e^{-jz_{i,p}}
+\sum_{k=1}^{K}
+g_{i,k}s_{k,p}.
+\tag{149}
+\end{equation}
+
+Applying the real-part operator gives
+\begin{equation}
+\left(
+\operatorname{Re}[Z\circ(GS)]
+\right)_{i,p}
+=
+\operatorname{Re}
+\left(
+e^{-jz_{i,p}}
+\sum_{k=1}^{K}
+g_{i,k}s_{k,p}
+\right).
+\tag{150}
+\end{equation}
+
+\subsection{Construction of the Reference Magnitude Matrix}
+
+The scalar measurement model contains the reference magnitude
+\begin{equation}
+|b_{i,p}|.
+\tag{151}
+\end{equation}
+
+Define the reference matrix as
+\begin{equation}
+\boxed{
+B=[b_{i,p}]
+\in
+\mathbb{C}^{I\times P}
+}.
+\tag{152}
+\end{equation}
+
+The corresponding element-wise absolute-value matrix is
+\begin{equation}
+\boxed{
+|B|=[|b_{i,p}|]
+\in
+\mathbb{R}^{I\times P}
+}.
+\tag{153}
+\end{equation}
+
+Here $|B|$ denotes the element-wise absolute value and not a matrix
+norm. Thus,
+\begin{equation}
+|B|_{i,p}
+=
+|b_{i,p}|.
+\tag{154}
+\end{equation}
+
+\subsection{Construction of the Noise Matrix}
+
+The effective real-valued noise term is $\bar n_{i,p}$. Define
+\begin{equation}
+\boxed{
+N=[\bar n_{i,p}]
+\in
+\mathbb{R}^{I\times P}
+}.
+\tag{155}
+\end{equation}
+
+Explicitly,
+\begin{equation}
+N=
+\begin{bmatrix}
+\bar n_{1,1} & \bar n_{1,2} & \cdots & \bar n_{1,P}\\
+\bar n_{2,1} & \bar n_{2,2} & \cdots & \bar n_{2,P}\\
+\vdots & \vdots & \ddots & \vdots\\
+\bar n_{I,1} & \bar n_{I,2} & \cdots & \bar n_{I,P}
+\end{bmatrix}.
+\tag{156}
+\end{equation}
+
+% ============================================================
+\section{Complete Matrix Measurement Model}
+% ============================================================
+
+The scalar linearized model is
+\begin{equation}
+y_{i,p}
+=
+\operatorname{Re}
+\left(
+e^{-jz_{i,p}}
+\sum_{k=1}^{K}
+g_{i,k}s_{k,p}
+\right)
++
+|b_{i,p}|
++
+\bar n_{i,p}.
+\tag{157}
+\end{equation}
+
+Using the definitions above, the element-wise representation becomes
+\begin{equation}
+y_{i,p}
+=
+\operatorname{Re}
+\left(
+[Z\circ(GS)]_{i,p}
+\right)
++
+|B|_{i,p}
++
+N_{i,p}.
+\tag{158}
+\end{equation}
+
+Collecting all elements into matrix form gives
+\begin{equation}
+\boxed{
+Y
+=
+\operatorname{Re}[Z\circ(GS)]
++
+|B|
++
+N
+}.
+\tag{159}
+\end{equation}
+
+The Hadamard product is commutative,
+\begin{equation}
+Z\circ(GS)
+=
+(GS)\circ Z.
+\tag{160}
+\end{equation}
+
+Therefore, either ordering produces the same element-wise product,
+and (159) is Eq.~(12) of Xu \emph{et al.}
+
+The use of the Hadamard product is required because each phase
+coefficient $e^{-jz_{i,p}}$ multiplies the corresponding measurement
+position $(i,p)$ rather than performing an ordinary matrix
+multiplication.
+
+% ============================================================
+\section{Channel Estimation Problem}
+% ============================================================
+
+The matrix measurement model is
+\begin{equation}
+Y
+=
+\operatorname{Re}[Z\circ(GS)]
++
+|B|
++
+N.
+\tag{161}
+\end{equation}
+
+The objective is to estimate the unknown channel matrix
+\begin{equation}
+G=[g_{i,k}]
+\tag{162}
+\end{equation}
+from the available measurements.
+
+The known quantities are
+\begin{equation}
+Y,
+\qquad
+Z,
+\qquad
+B,
+\qquad
+S,
+\tag{163}
+\end{equation}
+while the channel matrix $G$ is unknown.
+
+Let $G^{t}$ denote the current estimate of the channel matrix at
+iteration $t$.
+
+Using this estimate, the predicted measurement is
+\begin{equation}
+\boxed{
+\widehat Y(G^{t})
+=
+\operatorname{Re}[Z\circ(G^{t}S)]
++
+|B|
+}.
+\tag{164}
+\end{equation}
+
+The prediction error is defined as
+\begin{equation}
+\boxed{
+E(G^{t})
+=
+Y-\widehat Y(G^{t})
+}.
+\tag{165}
+\end{equation}
+
+Substituting (164),
+\begin{equation}
+\boxed{
+E(G^{t})
+=
+Y
+-
+|B|
+-
+\operatorname{Re}[Z\circ(G^{t}S)]
+}.
+\tag{166}
+\end{equation}
+
+The dimensions are
+\begin{equation}
+E(G^{t})
+\in
+\mathbb{R}^{I\times P}.
+\tag{167}
+\end{equation}
+
+% ============================================================
+\section{Least-Squares Objective}
+% ============================================================
+
+The objective is to obtain a channel estimate whose predicted
+measurements are as close as possible to the actual measurements.
+
+The squared Frobenius norm is used to measure the total squared
+error:
+\begin{equation}
+\boxed{
+\mathcal L(G)
+=
+\|E(G)\|_F^2
+}.
+\tag{168}
+\end{equation}
+
+\begin{equation}
+\boxed{
+\mathcal L(G)
+=
+\left\|
+Y-|B|-\operatorname{Re}[Z\circ(GS)]
+\right\|_F^2
+}.
+\tag{169}
+\end{equation}
+
+For an $I\times P$ matrix,
+\begin{equation}
+\|E\|_F^2
+=
+\sum_{i=1}^{I}
+\sum_{p=1}^{P}
+|E_{i,p}|^2.
+\tag{170}
+\end{equation}
+
+Since $E$ is real-valued,
+\begin{equation}
+\|E\|_F^2
+=
+\sum_{i=1}^{I}
+\sum_{p=1}^{P}
+E_{i,p}^2.
+\tag{171}
+\end{equation}
+
+Therefore, the channel estimate is obtained by solving
+\begin{equation}
+\boxed{
+\widehat G
+=
+\arg\min_{G}
+\mathcal L(G)
+}.
+\tag{172}
+\end{equation}
+
+Equivalently,
+\begin{equation}
+\boxed{
+\widehat G
+=
+\arg\min_{G}
+\left\|
+Y-|B|-\operatorname{Re}[Z\circ(GS)]
+\right\|_F^2
+},
+\tag{173}
+\end{equation}
+which is Eq.~(13) of Xu \emph{et al.}
+
+% ============================================================
+\section{Element-by-Element Error Expression}
+% ============================================================
+
+From (158) and (166), the $(i,p)$-th error element is
+\begin{equation}
+E_{i,p}
+=
+y_{i,p}
+-
+|b_{i,p}|
+-
+\operatorname{Re}
+\left[
+Z_{i,p}
+\sum_{r=1}^{K}
+g_{i,r}s_{r,p}
+\right].
+\tag{174}
+\end{equation}
+
+Here $r$ is a dummy summation index.
+
+The channel coefficient with respect to which differentiation will
+be performed is $g_{i,k}$. The index $k$ is therefore kept fixed
+during the differentiation.
+
+The cost function can be written element-wise as
+\begin{equation}
+\boxed{
+\mathcal L
+=
+\sum_{i=1}^{I}
+\sum_{p=1}^{P}
+E_{i,p}^2
+}.
+\tag{175}
+\end{equation}
+
+To obtain the gradient with respect to the complex channel matrix,
+differentiation is performed with respect to the conjugate variable
+$g_{i,k}^*$.
+
+% ============================================================
+\section{Wirtinger Differentiation}
+% ============================================================
+
+Since $G$ is complex-valued, the loss depends on both $G$ and $G^*$.
+Therefore, Wirtinger differentiation is used.
+
+For the selected channel coefficient $g_{i,k}$, only the errors
+corresponding to the same receiving-cell index $i$ depend on
+$g_{i,k}$. By the chain rule applied to (175),
+\begin{equation}
+\frac{\partial\mathcal L}{\partial g_{i,k}^*}
+=
+\sum_{p=1}^{P}
+2E_{i,p}
+\frac{\partial E_{i,p}}{\partial g_{i,k}^*}.
+\tag{176}
+\end{equation}
+
+The error element is
+\begin{equation}
+E_{i,p}
+=
+y_{i,p}
+-
+|b_{i,p}|
+-
+\operatorname{Re}
+\left[
+Z_{i,p}
+\sum_{r=1}^{K}
+g_{i,r}s_{r,p}
+\right].
+\tag{177}
+\end{equation}
+
+Using
+\begin{equation}
+\operatorname{Re}(x)
+=
+\frac{x+x^*}{2},
+\tag{178}
+\end{equation}
+we obtain
+\begin{equation}
+E_{i,p}
+=
+y_{i,p}
+-
+|b_{i,p}|
+-
+\frac{1}{2}
+\left[
+Z_{i,p}
+\sum_{r=1}^{K}
+g_{i,r}s_{r,p}
++
+Z_{i,p}^*
+\sum_{r=1}^{K}
+g_{i,r}^*s_{r,p}^*
+\right].
+\tag{179}
+\end{equation}
+
+Differentiate with respect to $g_{i,k}^*$:
+\begin{equation}
+\frac{\partial E_{i,p}}{\partial g_{i,k}^*}
+=
+-\frac{1}{2}
+\frac{\partial}{\partial g_{i,k}^*}
+\left[
+Z_{i,p}
+\sum_{r=1}^{K}
+g_{i,r}s_{r,p}
++
+Z_{i,p}^*
+\sum_{r=1}^{K}
+g_{i,r}^*s_{r,p}^*
+\right].
+\tag{180}
+\end{equation}
+
+The first term contains $g_{i,r}$ rather than $g_{i,r}^*$. Under
+Wirtinger differentiation,
+\begin{equation}
+\frac{\partial g_{i,r}}{\partial g_{i,k}^*}
+=
+0.
+\tag{181}
+\end{equation}
+
+Therefore,
+\begin{equation}
+\frac{\partial}{\partial g_{i,k}^*}
+\left(
+Z_{i,p}
+\sum_{r=1}^{K}
+g_{i,r}s_{r,p}
+\right)
+=
+0.
+\tag{182}
+\end{equation}
+
+For the second term,
+\begin{equation}
+\frac{\partial}{\partial g_{i,k}^*}
+\left(
+Z_{i,p}^*
+\sum_{r=1}^{K}
+g_{i,r}^*s_{r,p}^*
+\right)
+=
+Z_{i,p}^*
+\sum_{r=1}^{K}
+\frac{\partial g_{i,r}^*}{\partial g_{i,k}^*}
+s_{r,p}^*.
+\tag{183}
+\end{equation}
+
+The derivative satisfies
+\begin{equation}
+\frac{\partial g_{i,r}^*}{\partial g_{i,k}^*}
+=
+\begin{cases}
+1, & r=k,\\
+0, & r\neq k.
+\end{cases}
+\tag{184}
+\end{equation}
+
+Consequently,
+\begin{equation}
+\frac{\partial}{\partial g_{i,k}^*}
+\left(
+Z_{i,p}^*
+\sum_{r=1}^{K}
+g_{i,r}^*s_{r,p}^*
+\right)
+=
+Z_{i,p}^*s_{k,p}^*,
+\tag{185}
+\end{equation}
+and
+\begin{equation}
+\boxed{
+\frac{\partial E_{i,p}}{\partial g_{i,k}^*}
+=
+-\frac{1}{2}
+Z_{i,p}^*s_{k,p}^*
+}.
+\tag{186}
+\end{equation}
+
+% ============================================================
+\section{Derivative of the Least-Squares Cost}
+% ============================================================
+
+Substituting (186) into (176),
+\begin{equation}
+\begin{aligned}
+\frac{\partial\mathcal L}{\partial g_{i,k}^*}
+&=
+\sum_{p=1}^{P}
+2E_{i,p}
+\left(
+-\frac{1}{2}
+Z_{i,p}^*s_{k,p}^*
+\right)
+=
+-\sum_{p=1}^{P}
+E_{i,p}
+Z_{i,p}^*s_{k,p}^*.
+\end{aligned}
+\tag{187}
+\end{equation}
+
+Hence,
+\begin{equation}
+\boxed{
+\frac{\partial\mathcal L}{\partial g_{i,k}^*}
+=
+-\sum_{p=1}^{P}
+E_{i,p}
+Z_{i,p}^*s_{k,p}^*
+}.
+\tag{188}
+\end{equation}
+
+The above operation is performed for every channel coefficient
+\begin{equation}
+g_{i,k},
+\qquad
+i=1,\ldots,I,
+\qquad
+k=1,\ldots,K.
+\tag{189}
+\end{equation}
+
+Thus, all derivatives are collected into the gradient matrix
+\begin{equation}
+\boxed{
+\frac{\partial\mathcal L}{\partial G^*}
+=
+\begin{bmatrix}
+\dfrac{\partial\mathcal L}{\partial g_{1,1}^*}
+&
+\dfrac{\partial\mathcal L}{\partial g_{1,2}^*}
+&
+\cdots
+&
+\dfrac{\partial\mathcal L}{\partial g_{1,K}^*}
+\\[10pt]
+\dfrac{\partial\mathcal L}{\partial g_{2,1}^*}
+&
+\dfrac{\partial\mathcal L}{\partial g_{2,2}^*}
+&
+\cdots
+&
+\dfrac{\partial\mathcal L}{\partial g_{2,K}^*}
+\\
+\vdots&\vdots&\ddots&\vdots
+\\
+\dfrac{\partial\mathcal L}{\partial g_{I,1}^*}
+&
+\dfrac{\partial\mathcal L}{\partial g_{I,2}^*}
+&
+\cdots
+&
+\dfrac{\partial\mathcal L}{\partial g_{I,K}^*}
+\end{bmatrix}
+\in
+\mathbb{C}^{I\times K}
+}.
+\tag{190}
+\end{equation}
+
+% ============================================================
+\section{Conversion of the Gradient to Matrix Form}
+% ============================================================
+
+From (188),
+\begin{equation}
+\frac{\partial\mathcal L}{\partial g_{i,k}^*}
+=
+-\sum_{p=1}^{P}
+E_{i,p}
+Z_{i,p}^*s_{k,p}^*.
+\tag{191}
+\end{equation}
+
+Consider the matrix product
+\begin{equation}
+(E\circ Z^*)S^H.
+\tag{192}
+\end{equation}
+
+The dimensions are
+\begin{equation}
+E\in\mathbb{R}^{I\times P},
+\qquad
+Z^*\in\mathbb{C}^{I\times P},
+\tag{193}
+\end{equation}
+therefore,
+\begin{equation}
+E\circ Z^*
+\in
+\mathbb{C}^{I\times P}.
+\tag{194}
+\end{equation}
+
+Also,
+\begin{equation}
+S\in\mathbb{C}^{K\times P},
+\qquad
+S^H\in\mathbb{C}^{P\times K}.
+\tag{195}
+\end{equation}
+
+Hence,
+\begin{equation}
+(E\circ Z^*)S^H:
+\qquad
+(I\times P)(P\times K)
+=
+I\times K.
+\tag{196}
+\end{equation}
+
+Consider the $(i,k)$-th element:
+\begin{equation}
+[(E\circ Z^*)S^H]_{i,k}
+=
+\sum_{p=1}^{P}
+(E\circ Z^*)_{i,p}
+(S^H)_{p,k}.
+\tag{197}
+\end{equation}
+
+By the definition of the Hadamard product,
+\begin{equation}
+(E\circ Z^*)_{i,p}
+=
+E_{i,p}Z_{i,p}^*,
+\tag{198}
+\end{equation}
+and
+\begin{equation}
+(S^H)_{p,k}
+=
+S_{k,p}^*
+=
+s_{k,p}^*.
+\tag{199}
+\end{equation}
+
+Therefore,
+\begin{equation}
+[(E\circ Z^*)S^H]_{i,k}
+=
+\sum_{p=1}^{P}
+E_{i,p}Z_{i,p}^*s_{k,p}^*.
+\tag{200}
+\end{equation}
+
+Comparing (200) with (191),
+\begin{equation}
+\boxed{
+\frac{\partial\mathcal L}{\partial G^*}
+=
+-(E\circ Z^*)S^H
+}.
+\tag{201}
+\end{equation}
+
+\textbf{Remark (relation to Eq.~(15) of Xu \emph{et al.}).} Xu
+\emph{et al.} write
+$\nabla_G\mathcal L=-2\big((Y-|B|-\operatorname{Re}(GS\circ Z))\circ
+Z^*\big)S^H$, i.e.\ twice (201). The paper uses the convention
+$\nabla\mathcal L=2\,\partial\mathcal L/\partial G^*$ (the gradient
+with respect to the real and imaginary parts combined as
+$\partial/\partial\operatorname{Re}G+j\,\partial/\partial\operatorname{Im}G$),
+while (201) is the Wirtinger derivative. Both give the same descent
+direction; the step sizes differ by a factor of two.
+
+% ============================================================
+\section{Gradient-Descent Channel Update}
+% ============================================================
+
+The gradient-descent update rule, Eq.~(14) of Xu \emph{et al.}, is
+\begin{equation}
+\boxed{
+G^{t+1}
+=
+G^{t}
+-
+\eta_t
+\left.
+\frac{\partial\mathcal L}{\partial G^*}
+\right|_{G=G^{t}}
+},
+\tag{202}
+\end{equation}
+where $\eta_t$ denotes the step size at iteration $t$.
+
+Substituting (201),
+\begin{equation}
+\begin{aligned}
+G^{t+1}
+&=
+G^{t}
+-
+\eta_t
+\left[
+-(E^{t}\circ Z^*)S^H
+\right]\\
+&=
+G^{t}
++
+\eta_t
+(E^{t}\circ Z^*)S^H.
+\end{aligned}
+\tag{203}
+\end{equation}
+
+The error at iteration $t$ is
+\begin{equation}
+\boxed{
+E^{t}
+=
+Y
+-
+|B|
+-
+\operatorname{Re}[Z\circ(G^{t}S)]
+}.
+\tag{204}
+\end{equation}
+
+Therefore, the complete channel update is
+\begin{equation}
+\boxed{
+G^{t+1}
+=
+G^{t}
++
+\eta_t
+\Big(
+\big[
+Y-|B|-\operatorname{Re}[Z\circ(G^{t}S)]
+\big]
+\circ Z^*
+\Big)
+S^H
+}.
+\tag{205}
+\end{equation}
+
+The dimensions of the update are
+\begin{equation}
+G^{t}\in\mathbb{C}^{I\times K},
+\tag{206}
+\end{equation}
+\begin{equation}
+G^{t}S\in\mathbb{C}^{I\times P},
+\tag{207}
+\end{equation}
+\begin{equation}
+E^{t}\in\mathbb{R}^{I\times P},
+\tag{208}
+\end{equation}
+\begin{equation}
+E^{t}\circ Z^*\in\mathbb{C}^{I\times P},
+\tag{209}
+\end{equation}
+and
+\begin{equation}
+(E^{t}\circ Z^*)S^H\in\mathbb{C}^{I\times K}.
+\tag{210}
+\end{equation}
+
+Thus, the gradient has the same dimensions as the channel matrix $G$.
+
+% ============================================================
+\section{Gradient-Descent Channel Estimation Algorithm}
+% ============================================================
+
+The gradient-descent channel estimation procedure is summarized as
+follows.
+\begin{equation}
+\boxed{
+\text{Input: }
+Y,\ S,\ Z,\ B,\ G^{0},\ \eta_t,\ \epsilon,\ T_{\max}
+}
+\tag{211}
+\end{equation}
+
+Initialize
+\begin{equation}
+t=0.
+\tag{212}
+\end{equation}
+
+At iteration $t$, calculate the predicted measurement:
+\begin{equation}
+\boxed{
+\widehat Y^{t}
+=
+\operatorname{Re}[Z\circ(G^{t}S)]
++
+|B|
+}.
+\tag{213}
+\end{equation}
+
+Calculate the measurement error:
+\begin{equation}
+\boxed{
+E^{t}
+=
+Y-\widehat Y^{t}
+}.
+\tag{214}
+\end{equation}
+
+Equivalently,
+\begin{equation}
+\boxed{
+E^{t}
+=
+Y-|B|-\operatorname{Re}[Z\circ(G^{t}S)]
+}.
+\tag{215}
+\end{equation}
+
+Calculate the gradient:
+\begin{equation}
+\boxed{
+D^{t}
+=
+-(E^{t}\circ Z^*)S^H
+}.
+\tag{216}
+\end{equation}
+
+Update the channel estimate:
+\begin{equation}
+\boxed{
+G^{t+1}
+=
+G^{t}
+-
+\eta_t D^{t}
+}.
+\tag{217}
+\end{equation}
+
+Using (216),
+\begin{equation}
+\boxed{
+G^{t+1}
+=
+G^{t}
++
+\eta_t(E^{t}\circ Z^*)S^H
+}.
+\tag{218}
+\end{equation}
+
+The iteration index is then increased according to
+\begin{equation}
+t\leftarrow t+1.
+\tag{219}
+\end{equation}
+
+The iterations continue until
+\begin{equation}
+\boxed{
+\left\|
+G^{t+1}-G^{t}
+\right\|_F^2
+<
+\epsilon
+}
+\tag{220}
+\end{equation}
+or
+\begin{equation}
+t\geq T_{\max}.
+\tag{221}
+\end{equation}
+
+The final channel estimate is
+\begin{equation}
+\boxed{
+\widehat G
+=
+G^{t}
+}.
+\tag{222}
+\end{equation}
+
+% ============================================================
+\section{Algorithmic Form}
+% ============================================================
+
+The complete gradient-descent procedure is
+\begin{equation}
+\fbox{%
+\begin{minipage}{0.72\linewidth}
+\vspace{4pt}
+\textbf{Input:} $Y,\ S,\ Z,\ B,\ G^{0},\ \eta_t,\ \epsilon,\ T_{\max}$\\[4pt]
+$t=0$\\[4pt]
+\textbf{Repeat:}\\[2pt]
+\hspace*{1.5em}$\widehat Y^{t}=\operatorname{Re}[Z\circ(G^{t}S)]+|B|$\\[2pt]
+\hspace*{1.5em}$E^{t}=Y-\widehat Y^{t}$\\[2pt]
+\hspace*{1.5em}$D^{t}=-(E^{t}\circ Z^*)S^H$\\[2pt]
+\hspace*{1.5em}$G^{t+1}=G^{t}-\eta_t D^{t}$\\[2pt]
+\hspace*{1.5em}$t\leftarrow t+1$\\[4pt]
+\textbf{Until:} $\|G^{t+1}-G^{t}\|_F^2<\epsilon$ \ or \ $t\geq T_{\max}$\\[4pt]
+\textbf{Output:} $\widehat G=G^{t}$.
+\vspace{4pt}
+\end{minipage}}
+\tag{223}
+\end{equation}
+
+% ============================================================
+\section{Biased Gerchberg--Saxton Algorithm for the 1D Antenna Array}
+% ============================================================
+
+This section follows Algorithm~1 (biased GS) and Section~V
+(extension to channel estimation) of Cui \emph{et al.},
+``Towards Atomic MIMO Receivers.''
+
+\subsection{1D Channel Estimation Model}
+
+Consider an array consisting of $I$ atomic vapor cells and $K$ users.
+
+For the $i$-th vapor cell, define the channel vector as
+\begin{equation}
+\boxed{
+\mathbf g_i
+=
+\begin{bmatrix}
+g_{i,1}\\
+g_{i,2}\\
+\vdots\\
+g_{i,K}
+\end{bmatrix}
+\in
+\mathbb{C}^{K\times1}
+}.
+\tag{224}
+\end{equation}
+
+The known pilot matrix is
+\begin{equation}
+\boxed{
+S=
+\begin{bmatrix}
+s_{1,1}&s_{1,2}&\cdots&s_{1,P}\\
+s_{2,1}&s_{2,2}&\cdots&s_{2,P}\\
+\vdots&\vdots&\ddots&\vdots\\
+s_{K,1}&s_{K,2}&\cdots&s_{K,P}
+\end{bmatrix}
+\in
+\mathbb{C}^{K\times P}
+}.
+\tag{225}
+\end{equation}
+
+The reference vector and noise vector are
+\begin{equation}
+\mathbf b_i\in\mathbb{C}^{P\times1},
+\qquad
+\mathbf w_i\in\mathbb{C}^{P\times1}.
+\tag{226}
+\end{equation}
+
+The measured magnitude vector, i.e.\ the $i$-th row of the exact
+model (73) written as a column, is
+\begin{equation}
+\boxed{
+\mathbf y_i
+=
+\left|
+S^T\mathbf g_i+\mathbf b_i+\mathbf w_i
+\right|
+\in
+\mathbb{R}^{P\times1}
+}.
+\tag{227}
+\end{equation}
+
+The $p$-th element of $S^T\mathbf g_i$ is
+\begin{equation}
+\left[S^T\mathbf g_i\right]_p
+=
+\sum_{k=1}^{K}
+s_{k,p}g_{i,k}.
+\tag{228}
+\end{equation}
+
+The difficulty is that only the magnitude of the received complex
+signal is measured.
+
+Define the unknown complex received vector
+\begin{equation}
+\boxed{
+\mathbf x_i
+=
+S^T\mathbf g_i+\mathbf b_i+\mathbf w_i
+}.
+\tag{229}
+\end{equation}
+
+Then,
+\begin{equation}
+\mathbf y_i=|\mathbf x_i|.
+\tag{230}
+\end{equation}
+
+If the phase of $\mathbf x_i$ were known, the complex received signal
+could be reconstructed as
+\begin{equation}
+\mathbf x_i
+=
+\mathbf y_i\circ e^{j\boldsymbol\theta_i},
+\tag{231}
+\end{equation}
+where $\boldsymbol\theta_i$ denotes the unknown phase vector.
+
+The GS procedure therefore alternates between phase estimation,
+complex-signal reconstruction, and channel estimation. Unlike the GD
+method of the previous sections, GS works with the exact magnitude
+model (227) and does not use the strong-reference linearization.
+
+% ============================================================
+\section{Spectral Initialization}
+% ============================================================
+
+The iterative GS algorithm depends on its initial channel estimate.
+A spectral initialization is therefore used to obtain an initial
+estimate of the channel.
+
+The biased GS initialization constructs an augmented observation
+model, forms a weighted covariance matrix, extracts its principal
+eigenvector, estimates the corresponding magnitude, and removes the
+arbitrary global phase.
+
+\subsection{Conversion to the Standard Spectral Form}
+
+The channel measurement model is
+\begin{equation}
+\mathbf y_i
+=
+\left|
+S^T\mathbf g_i+\mathbf b_i+\mathbf w_i
+\right|.
+\tag{232}
+\end{equation}
+
+The standard biased phase-retrieval model of Cui \emph{et al.}\ is
+written as
+\begin{equation}
+\mathbf z
+=
+\left|
+A^H\mathbf g+\mathbf b+\mathbf w
+\right|.
+\tag{233}
+\end{equation}
+
+Comparing (232) and (233),
+\begin{equation}
+\boxed{
+A^H=S^T
+}.
+\tag{234}
+\end{equation}
+
+Taking the Hermitian relation,
+\begin{equation}
+A=S^*,
+\tag{235}
+\end{equation}
+since $(S^*)^H=S^T$.
+
+Therefore, the channel model can be written as
+\begin{equation}
+\boxed{
+\mathbf y_i
+=
+\left|
+A^H\mathbf g_i+\mathbf b_i+\mathbf w_i
+\right|,
+\qquad
+A=S^*
+}.
+\tag{236}
+\end{equation}
+
+This mapping permits the standard spectral initialization procedure
+to be applied without changing the definition of the channel vector
+$\mathbf g_i$.
+
+\subsection{Augmented Channel Vector}
+
+The received signal contains an unknown and a known component,
+\begin{equation}
+A^H\mathbf g_i+\mathbf b_i.
+\tag{237}
+\end{equation}
+
+The unknown channel and the known reference are combined into one
+augmented vector:
+\begin{equation}
+\boxed{
+\bar{\mathbf g}_i
+=
+\begin{bmatrix}
+\mathbf g_i\\
+1
+\end{bmatrix}
+\in
+\mathbb{C}^{(K+1)\times1}
+}.
+\tag{238}
+\end{equation}
+
+The last element is fixed to one so that
+\begin{equation}
+\begin{bmatrix}
+A^H&\mathbf b_i
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf g_i\\
+1
+\end{bmatrix}
+=
+A^H\mathbf g_i+\mathbf b_i.
+\tag{239}
+\end{equation}
+
+Define the augmented observation matrix as
+\begin{equation}
+\boxed{
+\bar A_i
+=
+\begin{bmatrix}
+A^H&\mathbf b_i
+\end{bmatrix}
+=
+\begin{bmatrix}
+S^T&\mathbf b_i
+\end{bmatrix}
+}.
+\tag{240}
+\end{equation}
+
+\textbf{Remark.} Cui \emph{et al.}\ define
+$\bar A=[A^H,\mathbf b]^H\in\mathbb C^{(K+1)\times N}$. The matrix
+$\bar A_i$ in (240) is therefore their $\bar A^H$; the columns
+$\bar{\mathbf a}_{i,p}$ of $\bar A_i^H$ defined below coincide with
+their $\bar{\mathbf a}_n$.
+
+The dimensions are
+\begin{equation}
+S^T\in\mathbb{C}^{P\times K},
+\qquad
+\mathbf b_i\in\mathbb{C}^{P\times1},
+\tag{241}
+\end{equation}
+and hence
+\begin{equation}
+\boxed{
+\bar A_i
+\in
+\mathbb{C}^{P\times(K+1)}
+}.
+\tag{242}
+\end{equation}
+
+The measurement model becomes
+\begin{equation}
+\boxed{
+\mathbf y_i
+=
+\left|
+\bar A_i\bar{\mathbf g}_i+\mathbf w_i
+\right|
+}.
+\tag{243}
+\end{equation}
+
+\subsection{Construction of the Augmented Observation Vectors}
+
+The Hermitian transpose of the augmented matrix is
+\begin{equation}
+\bar A_i^H
+\in
+\mathbb{C}^{(K+1)\times P}.
+\tag{244}
+\end{equation}
+
+Its $p$-th column is
+\begin{equation}
+\boxed{
+\bar{\mathbf a}_{i,p}
+=
+\begin{bmatrix}
+s_{1,p}^*\\
+s_{2,p}^*\\
+\vdots\\
+s_{K,p}^*\\
+b_{i,p}^*
+\end{bmatrix}
+\in
+\mathbb{C}^{(K+1)\times1}
+}.
+\tag{245}
+\end{equation}
+
+Since
+\begin{equation}
+\bar A_i^H
+=
+\begin{bmatrix}
+\bar{\mathbf a}_{i,1}&
+\bar{\mathbf a}_{i,2}&
+\cdots&
+\bar{\mathbf a}_{i,P}
+\end{bmatrix},
+\tag{246}
+\end{equation}
+the corresponding inner product is
+\begin{equation}
+\bar{\mathbf a}_{i,p}^H\bar{\mathbf g}_i
+=
+\sum_{k=1}^{K}
+s_{k,p}g_{i,k}
++
+b_{i,p}.
+\tag{247}
+\end{equation}
+
+Thus,
+\begin{equation}
+\boxed{
+\bar{\mathbf a}_{i,p}^H\bar{\mathbf g}_i
+=
+\left[S^T\mathbf g_i\right]_p
++
+b_{i,p}
+}.
+\tag{248}
+\end{equation}
+
+% ============================================================
+\section{Spectral Matrix Construction}
+% ============================================================
+
+\subsection{Weighted Covariance Matrix}
+
+Following Step~2 of Algorithm~1 in Cui \emph{et al.}, the spectral
+method constructs the weighted covariance matrix
+\begin{equation}
+\boxed{
+M_i
+=
+\sum_{p=1}^{P}
+y_{i,p}
+\bar{\mathbf a}_{i,p}
+\bar{\mathbf a}_{i,p}^H
+}.
+\tag{249}
+\end{equation}
+
+The dimensions are
+\begin{equation}
+\bar{\mathbf a}_{i,p}
+\in
+\mathbb{C}^{(K+1)\times1},
+\tag{250}
+\end{equation}
+and therefore
+\begin{equation}
+\bar{\mathbf a}_{i,p}
+\bar{\mathbf a}_{i,p}^H
+\in
+\mathbb{C}^{(K+1)\times(K+1)}.
+\tag{251}
+\end{equation}
+
+Consequently,
+\begin{equation}
+\boxed{
+M_i
+\in
+\mathbb{C}^{(K+1)\times(K+1)}
+}.
+\tag{252}
+\end{equation}
+
+The matrix $M_i$ is Hermitian, since each term
+$y_{i,p}\bar{\mathbf a}_{i,p}\bar{\mathbf a}_{i,p}^H$ is Hermitian and
+$y_{i,p}\in\mathbb R$. It contains the magnitude measurements
+$y_{i,p}$ as weights for the corresponding observation-vector outer
+products.
+
+\subsection{Principal Eigenvector}
+
+Perform the eigendecomposition
+\begin{equation}
+\boxed{
+M_i\mathbf v_{i,r}
+=
+\lambda_{i,r}\mathbf v_{i,r}
+}.
+\tag{253}
+\end{equation}
+
+Select the eigenvector associated with the largest eigenvalue:
+\begin{equation}
+\boxed{
+\mathbf v_i
+=
+\mathbf v_{i,r_{\max}}
+}.
+\tag{254}
+\end{equation}
+
+Equivalently,
+\begin{equation}
+M_i\mathbf v_i
+=
+\lambda_{\max}(M_i)\mathbf v_i.
+\tag{255}
+\end{equation}
+
+The principal eigenvector satisfies
+\begin{equation}
+\boxed{
+\mathbf v_i
+\in
+\mathbb{C}^{(K+1)\times1},
+\qquad
+\|\mathbf v_i\|_2=1
+}.
+\tag{256}
+\end{equation}
+
+The spectral method uses the principal eigenvector as an estimate of
+the direction of the augmented channel vector. Thus,
+\begin{equation}
+\mathbf v_i
+\approx
+e^{j\phi_i}
+\frac{\bar{\mathbf g}_i}{\|\bar{\mathbf g}_i\|_2},
+\tag{257}
+\end{equation}
+where $\phi_i$ represents an arbitrary phase.
+
+The eigenvector provides the direction of the augmented channel, but
+its magnitude is not yet determined.
+
+% ============================================================
+\section{Spectral Magnitude Estimation}
+% ============================================================
+
+Assume the initial augmented channel vector has the form
+\begin{equation}
+\boxed{
+\bar{\mathbf g}_i^{(0)}
+=
+r_i\mathbf v_i
+},
+\tag{258}
+\end{equation}
+where $r_i$ is a real nonnegative scalar.
+
+The predicted magnitude corresponding to this estimate is
+\begin{equation}
+\left|
+\bar A_i\bar{\mathbf g}_i^{(0)}
+\right|
+=
+\left|
+r_i\bar A_i\mathbf v_i
+\right|.
+\tag{259}
+\end{equation}
+
+Since $r_i\geq0$,
+\begin{equation}
+\left|
+r_i\bar A_i\mathbf v_i
+\right|
+=
+r_i
+\left|
+\bar A_i\mathbf v_i
+\right|.
+\tag{260}
+\end{equation}
+
+The magnitude should approximate the measured vector $\mathbf y_i$.
+Therefore,
+\begin{equation}
+\boxed{
+r_i
+=
+\arg\min_{r_i}
+\left\|
+r_i\left|\bar A_i\mathbf v_i\right|
+-
+\mathbf y_i
+\right\|_2^2
+}.
+\tag{261}
+\end{equation}
+
+Define
+\begin{equation}
+\mathbf q_i
+=
+\left|
+\bar A_i\mathbf v_i
+\right|
+\in\mathbb R^{P\times1}.
+\tag{262}
+\end{equation}
+
+Then the scalar least-squares problem becomes
+\begin{equation}
+r_i
+=
+\arg\min_{r_i}
+\left\|
+r_i\mathbf q_i-\mathbf y_i
+\right\|_2^2.
+\tag{263}
+\end{equation}
+
+Expanding the squared norm, with $\mathbf q_i$ and $\mathbf y_i$ real,
+\begin{equation}
+\left\|
+r_i\mathbf q_i-\mathbf y_i
+\right\|_2^2
+=
+r_i^2\mathbf q_i^T\mathbf q_i
+-
+2r_i\mathbf q_i^T\mathbf y_i
++
+\mathbf y_i^T\mathbf y_i.
+\tag{264}
+\end{equation}
+
+Since $r_i$ is real,
+\begin{equation}
+\frac{\partial}{\partial r_i}
+\left\|
+r_i\mathbf q_i-\mathbf y_i
+\right\|_2^2
+=
+2r_i\|\mathbf q_i\|_2^2
+-
+2\mathbf q_i^T\mathbf y_i.
+\tag{265}
+\end{equation}
+
+Setting the derivative equal to zero,
+\begin{equation}
+2r_i\|\mathbf q_i\|_2^2
+-
+2\mathbf q_i^T\mathbf y_i
+=
+0.
+\tag{266}
+\end{equation}
+
+Therefore,
+\begin{equation}
+r_i\|\mathbf q_i\|_2^2
+=
+\mathbf q_i^T\mathbf y_i,
+\tag{267}
+\end{equation}
+and
+\begin{equation}
+\boxed{
+r_i
+=
+\frac{\mathbf q_i^T\mathbf y_i}{\|\mathbf q_i\|_2^2}
+}.
+\tag{268}
+\end{equation}
+
+Using (262),
+\begin{equation}
+\boxed{
+r_i
+=
+\frac{
+\left|\bar A_i\mathbf v_i\right|^T\mathbf y_i
+}{
+\left\|\bar A_i\mathbf v_i\right\|_2^2
+}
+},
+\tag{269}
+\end{equation}
+which is Step~3 of Algorithm~1 in Cui \emph{et al.}, since
+$|\mathbf v^H\bar A|=|\bar A^H\mathbf v|^T$ in their notation.
+
+The initial augmented channel estimate is therefore
+\begin{equation}
+\boxed{
+\bar{\mathbf g}_i^{(0)}
+=
+r_i\mathbf v_i
+}.
+\tag{270}
+\end{equation}
+
+% ============================================================
+\section{Global Phase Removal}
+% ============================================================
+
+Magnitude measurements cannot distinguish between
+\begin{equation}
+\bar{\mathbf g}_i
+\tag{271}
+\end{equation}
+and
+\begin{equation}
+e^{j\phi_i}\bar{\mathbf g}_i,
+\tag{272}
+\end{equation}
+because
+\begin{equation}
+\left|
+\bar A_ie^{j\phi_i}\bar{\mathbf g}_i
+\right|
+=
+\left|
+e^{j\phi_i}\bar A_i\bar{\mathbf g}_i
+\right|
+=
+\left|
+\bar A_i\bar{\mathbf g}_i
+\right|.
+\tag{273}
+\end{equation}
+
+However, the augmented vector is defined as
+\begin{equation}
+\bar{\mathbf g}_i
+=
+\begin{bmatrix}
+\mathbf g_i\\
+1
+\end{bmatrix},
+\tag{274}
+\end{equation}
+so the final element must have zero phase.
+
+Let
+\begin{equation}
+\boxed{
+\phi_i
+=
+\angle
+\left(
+[\bar{\mathbf g}_i^{(0)}]_{K+1}
+\right)
+}.
+\tag{275}
+\end{equation}
+
+Multiply the entire augmented vector by
+\begin{equation}
+e^{-j\phi_i}.
+\tag{276}
+\end{equation}
+
+Thus,
+\begin{equation}
+\boxed{
+\widetilde{\mathbf g}_i^{(0)}
+=
+e^{-j\phi_i}\bar{\mathbf g}_i^{(0)}
+}.
+\tag{277}
+\end{equation}
+
+The last element becomes
+\begin{equation}
+[\widetilde{\mathbf g}_i^{(0)}]_{K+1}
+=
+e^{-j\phi_i}
+[\bar{\mathbf g}_i^{(0)}]_{K+1}.
+\tag{278}
+\end{equation}
+
+Using (275),
+\begin{equation}
+[\bar{\mathbf g}_i^{(0)}]_{K+1}
+=
+\left|
+[\bar{\mathbf g}_i^{(0)}]_{K+1}
+\right|
+e^{j\phi_i},
+\tag{279}
+\end{equation}
+and therefore,
+\begin{equation}
+\begin{aligned}
+[\widetilde{\mathbf g}_i^{(0)}]_{K+1}
+&=
+e^{-j\phi_i}
+\left|
+[\bar{\mathbf g}_i^{(0)}]_{K+1}
+\right|
+e^{j\phi_i}
+=
+\left|
+[\bar{\mathbf g}_i^{(0)}]_{K+1}
+\right|.
+\end{aligned}
+\tag{280}
+\end{equation}
+
+Hence, the final element has zero phase.
+
+The channel estimate for the $i$-th antenna is obtained by retaining
+the first $K$ elements (Step~4 of Algorithm~1 in Cui \emph{et al.}):
+\begin{equation}
+\boxed{
+\mathbf g_i^{(0)}
+=
+\widetilde{\mathbf g}_i^{(0)}(1:K)
+}.
+\tag{281}
+\end{equation}
+
+\subsection{Construction of the Initial Channel Matrix}
+
+The above spectral initialization is performed independently for all
+$I$ vapor cells. For
+\begin{equation}
+i=1,2,\ldots,I,
+\tag{282}
+\end{equation}
+obtain
+\begin{equation}
+\mathbf g_i^{(0)}
+\in
+\mathbb{C}^{K\times1}.
+\tag{283}
+\end{equation}
+
+The initial channel matrix is constructed by placing the channel
+vectors as rows:
+\begin{equation}
+\boxed{
+G^{(0)}
+=
+\begin{bmatrix}
+(\mathbf g_1^{(0)})^T\\
+(\mathbf g_2^{(0)})^T\\
+\vdots\\
+(\mathbf g_I^{(0)})^T
+\end{bmatrix}
+\in
+\mathbb{C}^{I\times K}
+}.
+\tag{284}
+\end{equation}
+
+This matrix provides the initial channel estimate for the subsequent
+GS iterations.
+
+% ============================================================
+\section{Gerchberg--Saxton Iteration}
+% ============================================================
+
+\subsection{Step 1: Prediction of the Complex Received Signal}
+
+Suppose that the channel estimate from the previous iteration is
+\begin{equation}
+G^{(t-1)}
+\in
+\mathbb{C}^{I\times K}.
+\tag{285}
+\end{equation}
+
+For the $i$-th antenna,
+\begin{equation}
+\mathbf g_i^{(t-1)}
+\in
+\mathbb{C}^{K\times1}.
+\tag{286}
+\end{equation}
+
+The predicted complex received signal is
+\begin{equation}
+\boxed{
+\mathbf x_i^{(t)}
+=
+S^T\mathbf g_i^{(t-1)}
++
+\mathbf b_i
+}.
+\tag{287}
+\end{equation}
+
+The noise realization is not added to the predicted signal because
+the actual noise realization is unknown. The measured magnitude
+already contains the noise contribution.
+
+The dimensions are
+\begin{equation}
+S^T\in\mathbb{C}^{P\times K},
+\qquad
+\mathbf g_i^{(t-1)}\in\mathbb{C}^{K\times1},
+\tag{288}
+\end{equation}
+hence
+\begin{equation}
+\mathbf x_i^{(t)}
+\in
+\mathbb{C}^{P\times1}.
+\tag{289}
+\end{equation}
+
+\subsection{Step 2: Phase Estimation}
+
+The phase of the predicted complex received signal (Step~6 of
+Algorithm~1 in Cui \emph{et al.}) is
+\begin{equation}
+\boxed{
+\boldsymbol\theta_i^{(t)}
+=
+\angle
+\left(
+S^T\mathbf g_i^{(t-1)}
++
+\mathbf b_i
+\right)
+}.
+\tag{290}
+\end{equation}
+
+Collecting the phase values gives
+\begin{equation}
+\boldsymbol\theta_i^{(t)}
+=
+\begin{bmatrix}
+\theta_{i,1}^{(t)}\\
+\theta_{i,2}^{(t)}\\
+\vdots\\
+\theta_{i,P}^{(t)}
+\end{bmatrix}
+\in
+\mathbb{R}^{P\times1}.
+\tag{291}
+\end{equation}
+
+The corresponding unit-magnitude phase vector is
+\begin{equation}
+e^{j\boldsymbol\theta_i^{(t)}}.
+\tag{292}
+\end{equation}
+
+Each element has unit magnitude:
+\begin{equation}
+\left|
+e^{j\theta_{i,p}^{(t)}}
+\right|
+=
+1.
+\tag{293}
+\end{equation}
+
+\subsection{Step 3: Replace the Predicted Magnitude with the Measured Magnitude}
+
+The measured vector is
+\begin{equation}
+\mathbf y_i
+=
+|\mathbf x_i|.
+\tag{294}
+\end{equation}
+
+The GS procedure retains the measured magnitude and replaces only the
+unknown phase by the current phase estimate. Define
+\begin{equation}
+\boxed{
+\mathbf r_i^{(t)}
+=
+\mathbf y_i\circ e^{j\boldsymbol\theta_i^{(t)}}
+}.
+\tag{295}
+\end{equation}
+
+Element-wise,
+\begin{equation}
+\boxed{
+r_{i,p}^{(t)}
+=
+y_{i,p}e^{j\theta_{i,p}^{(t)}}
+}.
+\tag{296}
+\end{equation}
+
+Therefore,
+\begin{equation}
+\left|
+r_{i,p}^{(t)}
+\right|
+=
+y_{i,p}
+\left|
+e^{j\theta_{i,p}^{(t)}}
+\right|
+=
+y_{i,p}.
+\tag{297}
+\end{equation}
+
+Thus,
+\begin{equation}
+\boxed{
+|\mathbf r_i^{(t)}|
+=
+\mathbf y_i
+}.
+\tag{298}
+\end{equation}
+
+This operation replaces the unknown complex received signal with a
+complex vector having the measured magnitude and the currently
+estimated phase.
+
+% ============================================================
+\section{Reference Removal and Least-Squares Channel Update}
+% ============================================================
+
+\subsection{Step 4: Remove the Known Reference}
+
+The model for the reconstructed received signal is
+\begin{equation}
+\mathbf r_i^{(t)}
+\approx
+S^T\mathbf g_i+\mathbf b_i.
+\tag{299}
+\end{equation}
+
+Therefore,
+\begin{equation}
+\boxed{
+\mathbf r_i^{(t)}-\mathbf b_i
+\approx
+S^T\mathbf g_i
+}.
+\tag{300}
+\end{equation}
+
+After removing the known reference, the channel estimation becomes a
+standard linear least-squares problem.
+
+\subsection{Step 5: Least-Squares Channel Estimation}
+
+The channel vector is obtained from
+\begin{equation}
+\boxed{
+\mathbf g_i^{(t)}
+=
+\arg\min_{\mathbf g}
+\left\|
+\mathbf r_i^{(t)}-\mathbf b_i-S^T\mathbf g
+\right\|_2^2
+}.
+\tag{301}
+\end{equation}
+
+Using $A=S^*$ and $A^H=S^T$,
+\begin{equation}
+\mathbf g_i^{(t)}
+=
+\arg\min_{\mathbf g}
+\left\|
+(\mathbf r_i^{(t)}-\mathbf b_i)-A^H\mathbf g
+\right\|_2^2.
+\tag{302}
+\end{equation}
+
+The standard least-squares solution (Step~7 of Algorithm~1 in Cui
+\emph{et al.}) is
+\begin{equation}
+\boxed{
+\mathbf g_i^{(t)}
+=
+(AA^H)^{-1}A
+\left(
+\mathbf r_i^{(t)}-\mathbf b_i
+\right)
+}.
+\tag{303}
+\end{equation}
+
+Since
+\begin{equation}
+AA^H
+=
+S^*S^T,
+\tag{304}
+\end{equation}
+we have
+\begin{equation}
+\boxed{
+\mathbf g_i^{(t)}
+=
+(S^*S^T)^{-1}S^*
+\left(
+\mathbf r_i^{(t)}-\mathbf b_i
+\right)
+}.
+\tag{305}
+\end{equation}
+
+Using (295),
+\begin{equation}
+\boxed{
+\mathbf g_i^{(t)}
+=
+(S^*S^T)^{-1}S^*
+\left(
+\mathbf y_i\circ e^{j\boldsymbol\theta_i^{(t)}}
+-
+\mathbf b_i
+\right)
+}.
+\tag{306}
+\end{equation}
+
+The inverse exists when $S$ has full row rank, which requires
+$P\geq K$.
+
+% ============================================================
+\section{Matrix Form of the GS Iteration}
+% ============================================================
+
+\subsection{Simultaneous Update for All Antennas}
+
+Instead of processing each antenna separately, define
+\begin{equation}
+\boxed{
+G^{(t-1)}
+\in
+\mathbb{C}^{I\times K}
+}.
+\tag{307}
+\end{equation}
+
+The predicted complex received matrix is
+\begin{equation}
+\boxed{
+X^{(t)}
+=
+G^{(t-1)}S+B
+}.
+\tag{308}
+\end{equation}
+
+The dimensions are
+\begin{equation}
+G^{(t-1)}S:
+\qquad
+(I\times K)(K\times P)
+=
+I\times P,
+\tag{309}
+\end{equation}
+and
+\begin{equation}
+B\in\mathbb{C}^{I\times P}.
+\tag{310}
+\end{equation}
+
+Hence,
+\begin{equation}
+\boxed{
+X^{(t)}
+\in
+\mathbb{C}^{I\times P}
+}.
+\tag{311}
+\end{equation}
+
+The phase matrix is
+\begin{equation}
+\boxed{
+\Theta^{(t)}
+=
+\angle X^{(t)}
+}.
+\tag{312}
+\end{equation}
+
+The reconstructed complex measurement matrix is
+\begin{equation}
+\boxed{
+R^{(t)}
+=
+Y\circ e^{j\Theta^{(t)}}
+}.
+\tag{313}
+\end{equation}
+
+Since $Y$ contains the measured magnitudes,
+\begin{equation}
+|R^{(t)}|
+=
+Y.
+\tag{314}
+\end{equation}
+
+The known reference matrix is then removed:
+\begin{equation}
+\boxed{
+R^{(t)}-B
+}.
+\tag{315}
+\end{equation}
+
+The channel update is obtained by solving
+\begin{equation}
+\boxed{
+G^{(t)}
+=
+\arg\min_{G}
+\left\|
+R^{(t)}-B-GS
+\right\|_F^2
+}.
+\tag{316}
+\end{equation}
+
+The least-squares solution is
+\begin{equation}
+\boxed{
+G^{(t)}
+=
+(R^{(t)}-B)S^H(SS^H)^{-1}
+}.
+\tag{317}
+\end{equation}
+
+The dimensions are
+\begin{equation}
+R^{(t)}-B\in\mathbb{C}^{I\times P},
+\tag{318}
+\end{equation}
+\begin{equation}
+S^H\in\mathbb{C}^{P\times K},
+\tag{319}
+\end{equation}
+and
+\begin{equation}
+SS^H\in\mathbb{C}^{K\times K}.
+\tag{320}
+\end{equation}
+
+Therefore,
+\begin{equation}
+(R^{(t)}-B)S^H
+\in
+\mathbb{C}^{I\times K},
+\tag{321}
+\end{equation}
+and
+\begin{equation}
+\boxed{
+G^{(t)}
+\in
+\mathbb{C}^{I\times K}
+}.
+\tag{322}
+\end{equation}
+
+\subsection{Equivalence with the Per-Antenna LS Solution}
+
+For the $i$-th row of the matrix model,
+\begin{equation}
+[R^{(t)}-B]_{i,:}
+=
+(\mathbf r_i^{(t)}-\mathbf b_i)^T.
+\tag{323}
+\end{equation}
+
+The corresponding row of $G^{(t)}$ is
+\begin{equation}
+[G^{(t)}]_{i,:}
+=
+(\mathbf g_i^{(t)})^T.
+\tag{324}
+\end{equation}
+
+From (317),
+\begin{equation}
+[G^{(t)}]_{i,:}
+=
+[R^{(t)}-B]_{i,:}
+S^H(SS^H)^{-1}.
+\tag{325}
+\end{equation}
+
+Taking the transpose and using $(SS^H)^T=S^*S^T$ and
+$(S^H)^T=S^*$ gives the corresponding channel-vector representation,
+\begin{equation}
+\mathbf g_i^{(t)}
+=
+(S^*S^T)^{-1}S^*
+(\mathbf r_i^{(t)}-\mathbf b_i),
+\tag{326}
+\end{equation}
+which is (305).
+
+Thus, the matrix update and the per-antenna least-squares solution
+represent the same channel-estimation operation under different
+orientations of the channel vectors.
+
+% ============================================================
+\section{Convergence Criterion}
+% ============================================================
+
+\subsection{Difference Between Consecutive Channel Estimates}
+
+After obtaining $G^{(t)}$, compare it with the channel estimate from
+the previous iteration:
+\begin{equation}
+\boxed{
+\Delta_t
+=
+\left\|
+G^{(t)}-G^{(t-1)}
+\right\|_F^2
+}.
+\tag{327}
+\end{equation}
+
+If
+\begin{equation}
+\boxed{
+\Delta_t<\epsilon
+},
+\tag{328}
+\end{equation}
+where $\epsilon$ is a prescribed convergence tolerance, the iteration
+is terminated. Otherwise, the GS iterations continue.
+
+A maximum iteration number may also be imposed as a stopping
+condition:
+\begin{equation}
+\boxed{
+t\geq T_{\max}
+}.
+\tag{329}
+\end{equation}
+
+Therefore, the algorithm terminates when either
+\begin{equation}
+\Delta_t<\epsilon
+\tag{330}
+\end{equation}
+or
+\begin{equation}
+t\geq T_{\max}.
+\tag{331}
+\end{equation}
+
+\textbf{Remark.} Cui \emph{et al.}\ use a fixed number of iterations
+($t_0=50$); the tolerance test (328) is an addition that leaves the
+fixed point unchanged.
+
+% ============================================================
+\section{Final Biased GS Algorithm for the 1D Array}
+% ============================================================
+
+The complete biased GS channel-estimation algorithm consists of
+spectral initialization followed by iterative phase estimation and
+least-squares channel updates.
+
+\subsection{Algorithm Input}
+
+The required inputs are
+\begin{equation}
+\boxed{
+Y,\quad S,\quad B,\quad T_{\max},\quad \epsilon
+}.
+\tag{332}
+\end{equation}
+
+For the per-antenna spectral initialization,
+\begin{equation}
+\mathbf y_i\in\mathbb{R}^{P\times1},
+\tag{333}
+\end{equation}
+\begin{equation}
+S\in\mathbb{C}^{K\times P},
+\tag{334}
+\end{equation}
+and
+\begin{equation}
+\mathbf b_i\in\mathbb{C}^{P\times1}.
+\tag{335}
+\end{equation}
+
+\subsection{Spectral Initialization Procedure}
+
+For
+\begin{equation}
+i=1,2,\ldots,I,
+\tag{336}
+\end{equation}
+construct
+\begin{equation}
+\boxed{
+\bar A_i
+=
+\begin{bmatrix}
+S^T&\mathbf b_i
+\end{bmatrix}
+}.
+\tag{337}
+\end{equation}
+
+Let $\bar{\mathbf a}_{i,p}$ denote the $p$-th column of $\bar A_i^H$.
+Construct
+\begin{equation}
+\boxed{
+M_i
+=
+\sum_{p=1}^{P}
+y_{i,p}
+\bar{\mathbf a}_{i,p}
+\bar{\mathbf a}_{i,p}^H
+}.
+\tag{338}
+\end{equation}
+
+Obtain the principal eigenvector
+\begin{equation}
+\boxed{
+\mathbf v_i
+=
+\operatorname{PrincipalEigenvector}(M_i)
+}.
+\tag{339}
+\end{equation}
+
+Estimate the magnitude scaling factor:
+\begin{equation}
+\boxed{
+r_i
+=
+\frac{
+|\bar A_i\mathbf v_i|^T\mathbf y_i
+}{
+\|\bar A_i\mathbf v_i\|_2^2
+}
+}.
+\tag{340}
+\end{equation}
+
+Construct the initial augmented channel vector:
+\begin{equation}
+\boxed{
+\bar{\mathbf g}_i^{(0)}
+=
+r_i\mathbf v_i
+}.
+\tag{341}
+\end{equation}
+
+Remove its arbitrary global phase:
+\begin{equation}
+\boxed{
+\widetilde{\mathbf g}_i^{(0)}
+=
+e^{-j\angle([\bar{\mathbf g}_i^{(0)}]_{K+1})}
+\bar{\mathbf g}_i^{(0)}
+}.
+\tag{342}
+\end{equation}
+
+Retain the first $K$ elements:
+\begin{equation}
+\boxed{
+\mathbf g_i^{(0)}
+=
+\widetilde{\mathbf g}_i^{(0)}(1:K)
+}.
+\tag{343}
+\end{equation}
+
+After processing all antennas, construct
+\begin{equation}
+\boxed{
+G^{(0)}
+=
+\begin{bmatrix}
+(\mathbf g_1^{(0)})^T\\
+(\mathbf g_2^{(0)})^T\\
+\vdots\\
+(\mathbf g_I^{(0)})^T
+\end{bmatrix}
+}.
+\tag{344}
+\end{equation}
+
+\subsection{GS Iterations}
+
+For
+\begin{equation}
+t=1,2,\ldots,T_{\max},
+\tag{345}
+\end{equation}
+calculate the predicted complex received matrix:
+\begin{equation}
+\boxed{
+X^{(t)}
+=
+G^{(t-1)}S+B
+}.
+\tag{346}
+\end{equation}
+
+Calculate its phase:
+\begin{equation}
+\boxed{
+\Theta^{(t)}
+=
+\angle X^{(t)}
+}.
+\tag{347}
+\end{equation}
+
+Replace the predicted magnitude by the measured magnitude:
+\begin{equation}
+\boxed{
+R^{(t)}
+=
+Y\circ e^{j\Theta^{(t)}}
+}.
+\tag{348}
+\end{equation}
+
+Remove the reference:
+\begin{equation}
+\boxed{
+R^{(t)}-B
+}.
+\tag{349}
+\end{equation}
+
+Update the channel using least squares:
+\begin{equation}
+\boxed{
+G^{(t)}
+=
+(R^{(t)}-B)S^H(SS^H)^{-1}
+}.
+\tag{350}
+\end{equation}
+
+Evaluate the convergence measure:
+\begin{equation}
+\boxed{
+\Delta_t
+=
+\left\|
+G^{(t)}-G^{(t-1)}
+\right\|_F^2
+}.
+\tag{351}
+\end{equation}
+
+If
+\begin{equation}
+\boxed{
+\Delta_t\leq\epsilon,
+}
+\tag{352}
+\end{equation}
+terminate the iterations. Otherwise, continue until
+\begin{equation}
+t=T_{\max}.
+\tag{353}
+\end{equation}
+
+The final channel estimate is
+\begin{equation}
+\boxed{
+\widehat G
+=
+G^{(t)}
+}.
+\tag{354}
+\end{equation}
+
+% ============================================================
+\section{Complete Algorithm}
+% ============================================================
+
+The complete biased GS algorithm for the 1D atomic receiver array can
+therefore be summarized as
+\begin{equation}
+\fbox{%
+\begin{minipage}{0.72\linewidth}
+\vspace{4pt}
+\textbf{Input:} $Y,\ S,\ B,\ T_{\max},\ \epsilon$\\[6pt]
+\textbf{Spectral Initialization:}\\[2pt]
+\hspace*{1.5em}For $i=1,2,\ldots,I$:\\[2pt]
+\hspace*{3em}$\bar A_i=[S^T\ \ \mathbf b_i]$\\[2pt]
+\hspace*{3em}$\bar{\mathbf a}_{i,p}=p$-th column of $\bar A_i^H$\\[2pt]
+\hspace*{3em}$M_i=\displaystyle\sum_{p=1}^{P}y_{i,p}\bar{\mathbf a}_{i,p}\bar{\mathbf a}_{i,p}^H$\\[2pt]
+\hspace*{3em}$\mathbf v_i=$ principal eigenvector of $M_i$\\[2pt]
+\hspace*{3em}$r_i=\dfrac{|\bar A_i\mathbf v_i|^T\mathbf y_i}{\|\bar A_i\mathbf v_i\|_2^2}$\\[4pt]
+\hspace*{3em}$\bar{\mathbf g}_i^{(0)}=r_i\mathbf v_i$\\[2pt]
+\hspace*{3em}$\widetilde{\mathbf g}_i^{(0)}=e^{-j\angle([\bar{\mathbf g}_i^{(0)}]_{K+1})}\bar{\mathbf g}_i^{(0)}$\\[2pt]
+\hspace*{3em}$\mathbf g_i^{(0)}=\widetilde{\mathbf g}_i^{(0)}(1:K)$\\[2pt]
+\hspace*{1.5em}End\\[2pt]
+\hspace*{1.5em}$G^{(0)}=\big[(\mathbf g_1^{(0)})^T;\ \ldots;\ (\mathbf g_I^{(0)})^T\big]$\\[6pt]
+\textbf{GS Iterations:}\\[2pt]
+\hspace*{1.5em}For $t=1,2,\ldots,T_{\max}$:\\[2pt]
+\hspace*{3em}$X^{(t)}=G^{(t-1)}S+B$\\[2pt]
+\hspace*{3em}$\Theta^{(t)}=\angle X^{(t)}$\\[2pt]
+\hspace*{3em}$R^{(t)}=Y\circ e^{j\Theta^{(t)}}$\\[2pt]
+\hspace*{3em}$G^{(t)}=(R^{(t)}-B)S^H(SS^H)^{-1}$\\[2pt]
+\hspace*{3em}$\Delta_t=\|G^{(t)}-G^{(t-1)}\|_F^2$\\[2pt]
+\hspace*{3em}If $\Delta_t\leq\epsilon$: stop\\[2pt]
+\hspace*{1.5em}End\\[6pt]
+\textbf{Output:} $\widehat G=G^{(t)}$.
+\vspace{4pt}
+\end{minipage}}
+\tag{355}
+\end{equation}
+
+\end{document}

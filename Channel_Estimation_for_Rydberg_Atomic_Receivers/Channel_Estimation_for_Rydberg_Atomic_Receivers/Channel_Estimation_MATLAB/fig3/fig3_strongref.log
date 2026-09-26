@@ -1,0 +1,87 @@
+
+====================================================
+ FIG. 3 NMSE vs SNR for Rydberg atom-based 1D antenna array.
+====================================================
+Monte Carlo trials = 500
+Antennas I         = 8
+Users K            = 3
+Pilot lengths      = [10  30]
+====================================================
+
+
+============================================
+Simulating P = 10
+============================================
+P=10 : Monte Carlo 50 / 500
+P=10 : Monte Carlo 100 / 500
+P=10 : Monte Carlo 150 / 500
+P=10 : Monte Carlo 200 / 500
+P=10 : Monte Carlo 250 / 500
+P=10 : Monte Carlo 300 / 500
+P=10 : Monte Carlo 350 / 500
+P=10 : Monte Carlo 400 / 500
+P=10 : Monte Carlo 450 / 500
+P=10 : Monte Carlo 500 / 500
+
+P=10 empirical E|b|^2 / E|GS+n|^2
+------------------------------------------------------------
+P=10 | SNR=  -5 dB | E|b|^2/E|GS+n|^2 = 598.569 ( 27.77 dB) | E|b|/E|GS+n| = 22.939
+P=10 | SNR=   0 dB | E|b|^2/E|GS+n|^2 = 1245.959 ( 30.96 dB) | E|b|/E|GS+n| = 33.392
+P=10 | SNR=   5 dB | E|b|^2/E|GS+n|^2 = 1909.216 ( 32.81 dB) | E|b|/E|GS+n| = 41.861
+P=10 | SNR=  10 dB | E|b|^2/E|GS+n|^2 = 2273.167 ( 33.57 dB) | E|b|/E|GS+n| = 46.255
+P=10 | SNR=  15 dB | E|b|^2/E|GS+n|^2 = 2419.959 ( 33.84 dB) | E|b|/E|GS+n| = 47.994
+P=10 | SNR=  20 dB | E|b|^2/E|GS+n|^2 = 2475.525 ( 33.94 dB) | E|b|/E|GS+n| = 48.681
+P=10 | SNR=  25 dB | E|b|^2/E|GS+n|^2 = 2491.386 ( 33.96 dB) | E|b|/E|GS+n| = 48.875
+P=10 | SNR=  30 dB | E|b|^2/E|GS+n|^2 = 2496.688 ( 33.97 dB) | E|b|/E|GS+n| = 48.932
+
+Results for P = 10
+------------------------------------------------------------
+P=10 | SNR=  -5 dB | GS=    7.62 dB | GD=    7.92 dB | CRLB=    4.13 dB
+P=10 | SNR=   0 dB | GS=    2.72 dB | GD=    3.04 dB | CRLB=   -0.87 dB
+P=10 | SNR=   5 dB | GS=   -2.20 dB | GD=   -1.76 dB | CRLB=   -5.87 dB
+P=10 | SNR=  10 dB | GS=   -7.11 dB | GD=   -6.33 dB | CRLB=  -10.87 dB
+P=10 | SNR=  15 dB | GS=  -11.45 dB | GD=   -9.91 dB | CRLB=  -15.87 dB
+P=10 | SNR=  20 dB | GS=  -15.19 dB | GD=  -12.24 dB | CRLB=  -20.87 dB
+P=10 | SNR=  25 dB | GS=  -17.37 dB | GD=  -13.22 dB | CRLB=  -25.87 dB
+P=10 | SNR=  30 dB | GS=  -18.52 dB | GD=  -13.62 dB | CRLB=  -30.87 dB
+
+============================================
+Simulating P = 30
+============================================
+P=30 : Monte Carlo 50 / 500
+P=30 : Monte Carlo 100 / 500
+P=30 : Monte Carlo 150 / 500
+P=30 : Monte Carlo 200 / 500
+P=30 : Monte Carlo 250 / 500
+P=30 : Monte Carlo 300 / 500
+P=30 : Monte Carlo 350 / 500
+P=30 : Monte Carlo 400 / 500
+P=30 : Monte Carlo 450 / 500
+P=30 : Monte Carlo 500 / 500
+
+P=30 empirical E|b|^2 / E|GS+n|^2
+------------------------------------------------------------
+P=30 | SNR=  -5 dB | E|b|^2/E|GS+n|^2 = 601.400 ( 27.79 dB) | E|b|/E|GS+n| = 22.793
+P=30 | SNR=   0 dB | E|b|^2/E|GS+n|^2 = 1252.549 ( 30.98 dB) | E|b|/E|GS+n| = 33.162
+P=30 | SNR=   5 dB | E|b|^2/E|GS+n|^2 = 1902.541 ( 32.79 dB) | E|b|/E|GS+n| = 41.532
+P=30 | SNR=  10 dB | E|b|^2/E|GS+n|^2 = 2275.419 ( 33.57 dB) | E|b|/E|GS+n| = 45.997
+P=30 | SNR=  15 dB | E|b|^2/E|GS+n|^2 = 2423.395 ( 33.84 dB) | E|b|/E|GS+n| = 47.785
+P=30 | SNR=  20 dB | E|b|^2/E|GS+n|^2 = 2475.980 ( 33.94 dB) | E|b|/E|GS+n| = 48.396
+P=30 | SNR=  25 dB | E|b|^2/E|GS+n|^2 = 2491.660 ( 33.96 dB) | E|b|/E|GS+n| = 48.594
+P=30 | SNR=  30 dB | E|b|^2/E|GS+n|^2 = 2497.141 ( 33.97 dB) | E|b|/E|GS+n| = 48.659
+
+Results for P = 30
+------------------------------------------------------------
+P=30 | SNR=  -5 dB | GS=   -0.45 dB | GD=   -0.76 dB | CRLB=   -1.61 dB
+P=30 | SNR=   0 dB | GS=   -5.64 dB | GD=   -5.69 dB | CRLB=   -6.61 dB
+P=30 | SNR=   5 dB | GS=  -10.45 dB | GD=  -10.17 dB | CRLB=  -11.61 dB
+P=30 | SNR=  10 dB | GS=  -15.34 dB | GD=  -14.05 dB | CRLB=  -16.61 dB
+P=30 | SNR=  15 dB | GS=  -19.44 dB | GD=  -16.74 dB | CRLB=  -21.61 dB
+P=30 | SNR=  20 dB | GS=  -22.81 dB | GD=  -18.04 dB | CRLB=  -26.61 dB
+P=30 | SNR=  25 dB | GS=  -24.07 dB | GD=  -18.58 dB | CRLB=  -31.61 dB
+P=30 | SNR=  30 dB | GS=  -24.71 dB | GD=  -18.72 dB | CRLB=  -36.61 dB
+
+====================================================
+Simulation completed. Results saved to fig3.mat
+Plot saved to fig3.png
+====================================================

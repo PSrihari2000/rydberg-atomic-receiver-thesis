@@ -1,0 +1,79 @@
+
+====================================================
+ FIG. 3 (s_b,p~CN(0,1) variant): 1D Rydberg Channel Estimation
+====================================================
+Monte Carlo trials = 300
+Antennas I         = 8
+Users K            = 3
+Pilot lengths      = [10  30]
+====================================================
+
+
+============================================
+Simulating P = 10
+============================================
+P=10 : Monte Carlo 50 / 300
+P=10 : Monte Carlo 100 / 300
+P=10 : Monte Carlo 150 / 300
+P=10 : Monte Carlo 200 / 300
+P=10 : Monte Carlo 250 / 300
+P=10 : Monte Carlo 300 / 300
+
+P=10 empirical E|b|^2 / E|a+n|^2
+------------------------------------------------------------
+P=10 | SNR=  -5 dB | E|b|^2/E|a+n|^2 =  0.148 ( -8.30 dB) | E|b|/E|a+n| =  0.283
+P=10 | SNR=   0 dB | E|b|^2/E|a+n|^2 =  0.307 ( -5.13 dB) | E|b|/E|a+n| =  0.411
+P=10 | SNR=   5 dB | E|b|^2/E|a+n|^2 =  0.468 ( -3.30 dB) | E|b|/E|a+n| =  0.513
+P=10 | SNR=  10 dB | E|b|^2/E|a+n|^2 =  0.557 ( -2.54 dB) | E|b|/E|a+n| =  0.567
+P=10 | SNR=  15 dB | E|b|^2/E|a+n|^2 =  0.593 ( -2.27 dB) | E|b|/E|a+n| =  0.588
+P=10 | SNR=  20 dB | E|b|^2/E|a+n|^2 =  0.607 ( -2.17 dB) | E|b|/E|a+n| =  0.596
+P=10 | SNR=  25 dB | E|b|^2/E|a+n|^2 =  0.611 ( -2.14 dB) | E|b|/E|a+n| =  0.599
+P=10 | SNR=  30 dB | E|b|^2/E|a+n|^2 =  0.612 ( -2.13 dB) | E|b|/E|a+n| =  0.600
+
+Results for P = 10
+------------------------------------------------------------
+P=10 | SNR=  -5 dB | GS=    7.32 dB | GD=   11.19 dB | CRLB=    4.20 dB
+P=10 | SNR=   0 dB | GS=    4.24 dB | GD=    7.70 dB | CRLB=   -0.80 dB
+P=10 | SNR=   5 dB | GS=    1.92 dB | GD=    5.78 dB | CRLB=   -5.80 dB
+P=10 | SNR=  10 dB | GS=    0.62 dB | GD=    5.06 dB | CRLB=  -10.80 dB
+P=10 | SNR=  15 dB | GS=   -0.08 dB | GD=    4.67 dB | CRLB=  -15.80 dB
+P=10 | SNR=  20 dB | GS=   -0.31 dB | GD=    4.59 dB | CRLB=  -20.80 dB
+P=10 | SNR=  25 dB | GS=   -0.44 dB | GD=    4.59 dB | CRLB=  -25.80 dB
+P=10 | SNR=  30 dB | GS=   -0.45 dB | GD=    4.56 dB | CRLB=  -30.80 dB
+
+============================================
+Simulating P = 30
+============================================
+P=30 : Monte Carlo 50 / 300
+P=30 : Monte Carlo 100 / 300
+P=30 : Monte Carlo 150 / 300
+P=30 : Monte Carlo 200 / 300
+P=30 : Monte Carlo 250 / 300
+P=30 : Monte Carlo 300 / 300
+
+P=30 empirical E|b|^2 / E|a+n|^2
+------------------------------------------------------------
+P=30 | SNR=  -5 dB | E|b|^2/E|a+n|^2 =  0.158 ( -8.01 dB) | E|b|/E|a+n| =  0.288
+P=30 | SNR=   0 dB | E|b|^2/E|a+n|^2 =  0.330 ( -4.82 dB) | E|b|/E|a+n| =  0.419
+P=30 | SNR=   5 dB | E|b|^2/E|a+n|^2 =  0.501 ( -3.00 dB) | E|b|/E|a+n| =  0.525
+P=30 | SNR=  10 dB | E|b|^2/E|a+n|^2 =  0.599 ( -2.22 dB) | E|b|/E|a+n| =  0.582
+P=30 | SNR=  15 dB | E|b|^2/E|a+n|^2 =  0.640 ( -1.94 dB) | E|b|/E|a+n| =  0.605
+P=30 | SNR=  20 dB | E|b|^2/E|a+n|^2 =  0.653 ( -1.85 dB) | E|b|/E|a+n| =  0.613
+P=30 | SNR=  25 dB | E|b|^2/E|a+n|^2 =  0.657 ( -1.82 dB) | E|b|/E|a+n| =  0.615
+P=30 | SNR=  30 dB | E|b|^2/E|a+n|^2 =  0.659 ( -1.81 dB) | E|b|/E|a+n| =  0.616
+
+Results for P = 30
+------------------------------------------------------------
+P=30 | SNR=  -5 dB | GS=    5.66 dB | GD=    3.75 dB | CRLB=   -1.61 dB
+P=30 | SNR=   0 dB | GS=    2.09 dB | GD=    1.40 dB | CRLB=   -6.61 dB
+P=30 | SNR=   5 dB | GS=   -0.59 dB | GD=    0.28 dB | CRLB=  -11.61 dB
+P=30 | SNR=  10 dB | GS=   -1.98 dB | GD=   -0.20 dB | CRLB=  -16.61 dB
+P=30 | SNR=  15 dB | GS=   -2.62 dB | GD=   -0.36 dB | CRLB=  -21.61 dB
+P=30 | SNR=  20 dB | GS=   -2.79 dB | GD=   -0.41 dB | CRLB=  -26.61 dB
+P=30 | SNR=  25 dB | GS=   -2.85 dB | GD=   -0.43 dB | CRLB=  -31.61 dB
+P=30 | SNR=  30 dB | GS=   -2.86 dB | GD=   -0.44 dB | CRLB=  -36.61 dB
+
+====================================================
+Simulation completed. Results saved to fig3_refpilot_matched_results.mat
+Plot saved to fig3_refpilot_matched_result.png
+====================================================

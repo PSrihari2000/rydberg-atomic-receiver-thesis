@@ -1,0 +1,1608 @@
+                                         Phase Retrieval using Alternating Minimization 
+
+                                         Praneeth Netrapalli      Prateek Jain                 Sujay Sanghavi §
+                                                               June 15, 2015
+
+arXiv:1306.0160v2 [stat.ML] 12 Jun 2015                                                          Abstract
+
+                                             Phase retrieval problems involve solving linear equations, but with missing sign (or phase,
+                                         for complex numbers) information. More than four decades after it was first proposed, the
+                                         seminal error reduction algorithm of Gerchberg and Saxton [21] and Fienup [19] is still the
+                                         popular choice for solving many variants of this problem. The algorithm is based on alternating
+                                         minimization; i.e. it alternates between estimating the missing phase information, and the
+                                         candidate solution. Despite its wide usage in practice, no global convergence guarantees for
+                                         this algorithm are known. In this paper, we show that a (resampling) variant of this approach
+                                         converges geometrically to the solution of one such problem ­ finding a vector x from y, A, where
+                                         y = |AT x| and |z| denotes a vector of element-wise magnitudes of z ­ under the assumption
+                                         that A is Gaussian.
+
+                                             Empirically, we demonstrate that alternating minimization performs similar to recently pro-
+                                         posed convex techniques for this problem (which are based on "lifting" to a convex matrix
+                                         problem) in sample complexity and robustness to noise. However, it is much more efficient and
+                                         can scale to large problems. Analytically, for a resampling version of alternating minimization,
+                                         we show geometric convergence to the solution, and sample complexity that is off by log fac-
+                                         tors from obvious lower bounds. We also establish close to optimal scaling for the case when
+                                         the unknown vector is sparse. Our work represents the first theoretical guarantee for alternat-
+                                         ing minimization (albeit with resampling) for any variant of phase retrieval problems in the
+                                         non-convex setting.
+
+                                         1 Introduction
+
+                                         In this paper we are interested in recovering a complex vector x  Cn from magnitudes of its linear
+                                         measurements. That is, for ai  Cn, if
+
+                                                         yi = | ai, x |, for i = 1, . . . , m                                               (1)
+
+                                         then the task is to recover x using y and the measurement matrix A = [a1 a2 . . . am].
+                                             The above problem arises in many settings where it is harder / infeasible to record the phase
+
+                                         of measurements, while recording the magnitudes is significantly easier. This problem, known as
+                                         phase retrieval, is encountered in several applications in crystallography, optics, spectroscopy and
+                                         tomography [43, 26]. Moreover, the problem is broadly studied in the following two settings:
+
+                                             Copyright (c) 2015 IEEE. Personal use of this material is permitted. However, permission to use this material
+
+                                         for any other purposes must be obtained from the IEEE by sending a request to pubs-permissions@ieee.org.
+                                             Microoft Research New England, Cambridge MA 02142 USA. Email:praneeth@microsoft.com
+                                             Microsoft Research India, Bangalore, India. Email:prajain@microsoft.com
+                                             §The University of Texas at Austin, Austin TX 78712 USA. Email:sanghavi@mail.utexas.edu
+
+                                                               1
+  (i) The measurements in (1) correspond to the Fourier transform (the number of measurements
+       here is equal to n) and there is some apriori information about the signal.
+
+  (ii) The set of measurements y are overcomplete (i.e., m > n), while some apriori information
+       about the signal may or may not be available.
+
+In the first case, various types of apriori information about the underlying signal such as positivity,
+magnitude information on the signal [19], sparsity [50] and so on have been studied. In the sec-
+ond case, algorithms for various measurement schemes such as Fourier oversampling [44], multiple
+random illuminations [8, 54] and wavelet transform [13] have been suggested.
+
+    By and large, the most well known methods for solving this problem are the error reduction al-
+gorithms due to Gerchberg and Saxton [21] and Fienup [19], and variants thereof. These algorithms
+are alternating projection algorithms that iterate between the unknown phases of the measurements
+and the unknown underlying vector. Though the empirical performance of these algorithms has
+been well studied [19, 39, 40]. and they are used in many applications [41, 42], there are not many
+theoretical guarantees regarding their performance.
+
+    More recently, a line of work [12, 11, 54] has approached this problem from a different angle,
+based on the realization that recovering x is equivalent to recovering the rank-one matrix xxT ,
+i.e., its outer product. Inspired by the recent literature on trace norm relaxation of the rank
+constraint, they design SDPs to solve this problem. Refer Section 1.1 for more details.
+
+    In this paper we go back to the empirically more popular ideology of alternating minimization;
+we develop a new alternating minimization algorithm, and show that (a) empirically, it noticeably
+outperforms convex methods, and (b) analytically, a natural resampled version of this algorithm
+requires O(n log3 n log 1 ) i.i.d. random Gaussian measurements to geometrically converge to the
+true vector up to an accuracy of .
+Our contribution:
+
+    · The iterative part of our algorithm is essentially due to Gerchberg and Saxton [21] and
+       Fienup [19]; indeed, with out resampling, our algorithm is exactly their famous error reduction
+       algorithm; the novelty in our algorithmic contribution is the initialization step which makes
+       it more likely for the iterative procedure to succeed - see Figures 1, 2 and 3.
+
+    · Our analytical contribution is the first theoretical guarantee establishing the correctness of
+       alternating minimization (with resampling) in recovering the underlying signal for the phase
+       retrieval problem.
+
+    · When the underlying vector is sparse, we design another algorithm that achieves a sample
+       complexity of O (xm in)-4 log n + k log3 k + log 1 log log 1 and computational complexity
+       of O (xmin)-4 kn log n + k2 log2 1 log log 1 , where k is the sparsity and xmin is the minimum
+       non-zero entry of x. This algorithm also runs over Cn and scales much better than SDP
+       based methods.
+
+    Besides being an empirically better algorithm for this problem, our work is also interesting in
+a broader sense: there are many problems in machine learning, signal procesing and numerical
+linear algebra, where the natural formulation of a problem is non-convex; examples include rank
+constrained problems, applications of EM algorithms etc., and alternating minimization has good
+empirical performance. However, the methods with the best (or only) analytical guarantees involve
+
+                                                                2
+convex relaxations (e.g., by relaxing the rank constraint and penalizing the trace norm). In most
+of these settings, correctness of alternating minimization is an open question. We believe that our
+results in this paper are of interest, and may have implications, in this larger context.
+
+    Difference from standard alternating minimization: The algorithm we analyze in this
+paper uses different measurements in each iteration and differs from standard alternating mini-
+mization approaches in this context, where same measurements are used in each iteration. Since
+our algorithm decays the error at a geometric rate, an error of requires O (log(1/ )) iterations,
+increasing the total number of measurements by this factor. Theoretically, this is still competitive
+with convex optimization approaches under computational constraints. Indeed, for a poly(n) run
+time, the best known bounds for phase retrieval via convex optimization can guarantee an accuracy
+of 1/poly(n). For an accuracy of = 1/poly(n), the use of different samples in different iterations
+of our algorithm contributes an extra factor of just O (log n). Nevertheless, throwing away sam-
+ples (as our algorithm does) is simply not a viable option in many practical settings. In fact, we
+empirically observe that using the same samples in all iterations performs significantly better than
+using different samples in each iteration (indeed, for our numerical experiments, we use the same
+samples in each iteration). Subsequent to our work, Cand`es et al. [7] proposed a non-convex iter-
+ative algorithm based on Wirtinger flow, that uses same samples in each iteration, and show that
+it converges to the true underlying vector. See Section 1.1 for more details. The rest of the paper
+is organized as follows: In section 1.1, we briefly review related work. We clarify our notation in
+Section 2. We present our algorithm in Section 3 and the main results in Section 4. We present
+our results for the sparse case in Section 5. Finally, we present experimental results in Section 6.
+
+1.1 Related Work
+
+Phase Retrieval via Non-Convex Procedures: Inspite of the huge amount of work it has
+attracted, phase retrieval has been a long standing open problem. Early work in this area focused
+on using holography to capture the phase information along with magnitude measurements [20, 35].
+However, computational methods for reconstruction of the signal using only magnitude measure-
+ments received a lot of attention due to their applicability in resolving spurious noise, fringes,
+optical system aberrations and so on and difficulties in the implementation of interferometer setups
+[15]. Though such methods have been developed to solve this problem in various practical settings
+[14, 18, 41, 42], our theoretical understanding of this problem is still far from complete. Many
+papers [6, 24, 48] have focused on determining conditions under which (1) has a unique solution.
+However, the uniqueness results of these papers do not resolve the algorithmic question of how to
+find the solution to (1).
+
+    Since the seminal work of Gerchberg and Saxton [21] and Fienup [19], many iterated projection
+algorithms have been developed targeted towards various applications [1, 17, 3]. [44] first suggested
+the use of multiple magnitude measurements to resolve the phase problem. This approach has been
+successfully used in many practical applications - see [15] and references there in. Following the
+empirical success of these algorithms, researchers were able to explain its success in some of the
+instances [55, 52] using Bregman's theory of iterated projections onto convex sets [5]. However,
+many instances, such as the one we consider in this paper, are out of reach of this theory since they
+involve magnitude constraints which are non-convex. To the best of our knowledge, there are no
+theoretical results on the convergence of these approaches in a non-convex setting.
+
+    Subsequent to our work, Cand`es et al. [7] proposed an iterative algorithm based on Wirtinger
+flow which is similar to optimizing a non-convex function using gradient descent. Despite using
+
+                                                                3
+same samples, they manage to show that their algorithm recovers the true underlying vector for
+
+Gaussian measurements, albeit with a slow convergence rate. Quite interestingly, they also show
+
+that if the initial point is O  1    close to the true vector (which can be achieved by using a small
+                                  n
+
+amount of resampling), their algorithm (using same samples) achieves exact recovery for Gaussian
+
+measurements as well as coded diffraction measurements (which are practically more relevant than
+
+Gaussian measurements), with a fast convergence rate matching that of our algorithm. It has also
+
+been reported that the Wirtinger flow algorithm has better properties than alternating minimization
+
+in some optics settings [4].
+
+Phase Retrieval via Convex Relaxation: An interesting recent approach for solving this
+
+problem formulates it as one of finding the rank-one solution to a system of linear matrix equations.
+
+The papers [12, 11] then take the approach of relaxing the rank constraint by a trace norm penalty,
+
+making the overall algorithm a convex program (called PhaseLift) over n × n matrices. Another
+
+recent line of work [54] takes a similar but different approach : it uses an SDP relaxation (called
+
+PhaseCut) that is inspired by the classical SDP relaxation for the max-cut problem. To date, these
+
+convex methods are the only ones with analytical guarantees on statistical performance (i.e. the
+
+number m of measurements required to recover x) [9, 54]. However, by "lifting" a vector problem
+
+to a matrix one, these methods lead to a much larger representation of the state space, and higher
+
+computational cost as a result.
+
+Measurement Schemes: Earlier results on PhaseLift and PhaseCut [9, 54] assumed an i.i.d.
+
+random Gaussian model on the measurement vectors ai. [22] extends these results for PhaseLift for
+
+measurement schemes known as t-designs, which are more general than Gaussian measurements.
+
+Recently, [10] establishes near-optimal statistical guarantees for PhaseLift under masked Fourier
+
+transform measurements.
+
+Sparse Phase Retrieval: A special case of the phase retrieval problem which has received
+
+a lot of attention recently is when the underlying signal x is known to be sparse. Though this
+
+problem is closely related to the compressed sensing problem, lack of phase information makes this
+
+harder. However, the 1 regularization approach of compressed sensing has been successfully used
+in this setting as well. In particular, if x is sparse, then the corresponding lifted matrix xxT
+
+is also sparse. [50, 46, 37] use this observation to design 1 regularized SDP algorithms for phase
+
+retrieval of sparse vectors. For random Gaussian measurements, [37] shows that 1 regularized
+PhaseLift recovers x correctly if the number of measurements is (k2 log n). By the results of [47],
+
+this result is tight up to logarithmic factors for 1 and trace norm regularized SDP relaxations.
+
+[27, 49] develop algorithms for phase retrieval from Fourier magnitude measurements. However,
+
+achieving the optimal sample complexity of O  k  log  n  is still open [16].
+                                                      k
+
+Alternating Minimization (a.k.a. ALS): Alternating minimization has been successfully
+
+applied to many applications in the low-rank matrix setting. For example, clustering [34], sparse
+
+PCA [56], non-negative matrix factorization [33], signed network prediction [25] etc. However,
+
+despite empirical success, for most of the problems, there are no theoretical guarantees regarding
+
+its convergence except to a local minimum. Of late, however, there has been a spurt of work
+
+in obtaining provable guarantees for alternating minimization in various settings such as learning
+
+sparsely used dictionaries [2], matrix completion [28], robust PCA [45] etc. Though earlier results
+
+for matrix completion [31, 29, 23] use heavy resampling, subsequent work [28] has obtained similar
+
+results with a small amount of resampling.
+
+There has also been some work on designing other non convex optimization algorithms, such
+
+as gradient descent for solving some of these problems. For instance, [32, 30] propose a gradient
+
+                                              4
+descent algorithm on the Grassmanian manifold to solve the matrix completion problem.
+
+2 Notation
+
+We use bold capital letters (A, B etc.) for matrices, bold small case letters (x, y etc.) for vectors
+
+and non-bold letters (, U etc.) for scalars. For every complex vector w  Cn, |w|  Rn denotes
+its element-wise magnitude vector. wT and AT denote the Hermitian transpose of the vector w
+
+and the matrix A respectively. e1, e2, etc. denote the canonical basis vectors in Cn. z denotes the
+
+complex conjugate of the complex number z. In this paper we use the standard Gaussian (or normal)
+
+distribution over Cn. a is said to be distributed according to this distribution if a = a1 + ia2, where
+
+a1  and  a2  are  independent  and  are  distributed  according  to  N (0, I).  We  also  define  Ph (z)  d=ef  z
+                                                                                                                |z|
+
+for every z  C, and dist (w1, w2) d=ef          w1,w2       2                        Cn.
+                                              w1 2 w2
+                                         1-                      for every  w1, w2        Finally, we use
+
+                                                         2
+
+the shorthand wlog for without loss of generality and whp for with high probability.
+
+3 Algorithm
+
+In this section, we present our alternating minimization based algorithm for solving the phase
+retrieval problem. Let A  Cn×m be the measurement matrix, with ai as its ith column; similarly
+let y be the vector of recorded magnitudes. Then,
+
+                                         y = | AT x |.
+
+Recall that, given y and A, the goal is to recover x. If we had access to the true phase c of AT x
+(i.e., ci = Ph ( ai, x )) and m  n, then our problem reduces to one of solving a system of linear
+equations:
+
+                                                      Cy = AT x,
+
+where C d=ef Diag(c) is the diagonal matrix of phases. Of course we do not know C, hence one
+approach to recovering x is to solve:
+
+                                         argmin AT x - Cy 2,                                                    (2)
+
+                                         C,x
+
+where x  Cn and C  Cm×m is a diagonal matrix with each diagonal entry of magnitude 1. Note
+that the above problem is not convex since C is restricted to be a diagonal phase matrix and hence,
+one cannot use standard convex optimization methods to solve it.
+
+    Instead, our algorithm uses the well-known alternating minimization: alternatingly update x
+and C so as to minimize (2). Note that given C, the vector x can be obtained by solving the
+following least squares problem: minx AT x - Cy 2. Since the number of measurements m is
+larger than the dimensionality n and since each entry of A is sampled from independent Gaussians,
+A is invertible with probability 1. Hence, the above least squares problem has a unique solution.
+On the other hand, given x, the optimal C is given by C = Diag Ph AT x .
+
+    While the above algorithm is simple and intuitive, it is known that with bad initial points,
+the solution might not converge to x. In fact, this algorithm with a uniformly random initial
+point has been empirically evaluated for example in [54], where it performs worse than SDP based
+methods. Moreover, since the underlying problem is non-convex, standard analysis techniques fail
+
+                                                      5
+Algorithm 1 AltMinPhase
+
+input A, y, t0
+ 1: Initialize x0  top singular vector of i yi2aiaiT
+ 2: for t = 0, · · · , t0 - 1 do
+ 3: Ct+1  Diag Ph AT xt
+ 4: xt+1  argminxRn AT x - Ct+1y 2
+ 5: end for
+
+output xt0
+
+to guarantee convergence to the global optimum, x. Hence, the key challenges here are: a) a good
+
+initialization step for this method, b) establishing this method's convergence to x.
+
+    We address the first key challenge in our AltMinPhase algorithm (Algorithm 1) by initializing x
+
+as  the  largest  singular  vector  of  the  matrix  S  =  1  i yi2aiaiT . This is similar to the initialization in
+                                                           m
+
+[32] for the matrix completion problem. Theorem 4.1 shows that when A is sampled from standard
+
+complex normal distribution, this initialization is accurate. In particular, if m  C1n log3 n for
+
+large enough C1 > 0, then whp we have x0 - x 2  1/100 (or any other constant).
+
+    Theorem 4.2 addresses the second key challenge and shows that a variant of AltMinPhase (see
+
+Algorithm 2) actually converges to the global optimum x at linear rate. See section 4 for a detailed
+
+analysis of our algorithm.
+
+    We would like to stress that not only does a natural variant of our proposed algorithm have
+
+rigorous theoretical guarantees, it also is effective practically as each of its iterations is fast, has a
+
+closed form solution and does not require SVD computation. AltMinPhase has similar statistical
+
+complexity to that of PhaseLift and PhaseCut while being much more efficient computationally.
+
+In particular, for accuracy , we only need to solve each least squares problem only up to accuracy
+
+O 2 . Since the measurement matrix A is Gaussian with m > Cn, it is well conditioned. This
+
+means that each such step takes O mn log 1 time using the conjugate gradient method. When m =
+
+O (n)  baansdedwme ehtahvoedsgeoonmtehtreicotchoenrvehragnedncree,qtuhieretot(anl3t/ime)ttaikmene.  by the algorithm is O n2 log2 1 .
+SDP                                                                                                  Moreover, our initialization step
+
+increases the likelihood of successful recovery as opposed to a random initialization (which has been
+
+considered so far in prior work). Refer Figure 1 for an empirical validation of these claims.
+
+    A key drawback of our results, however, is the use of resampling. More specifically, our conver-
+
+gence guarantee is obtained for a variant of Algorithm 1 (see Algorithm 2), where we use different
+
+samples in each iteration. In practice, this is not feasible since in many applications, taking so
+
+many measurements may not be possible. On the other hand, the SDP approaches and a recent
+
+non-convex optimization approach do not face this issue. See Section 1 for more details on this
+
+aspect.
+
+4 Main Results: Analysis
+
+In this section we describe the main contribution of this paper: provable statistical guarantees for
+the success of alternating minimization in solving the phase recovery problem. To this end, we
+consider the setting where each measurement vector ai is iid and is sampled from the standard
+complex normal distribution. We would like to stress that all the existing guarantees for phase
+recovery also use exactly the same setting [11, 9, 54]. Table 1 presents a comparison of the theoretical
+
+                                                           6
+                            (a)                                      (b)
+
+Figure 1: Sample and Time complexity of various methods for Gaussian measurement matrices A.
+Figure 1(a) compares the number of measurements required for successful recovery by various meth-
+ods. We note that our initialization improves sample complexity over that of random initialization
+(AltMin (random init)) by a factor of 2. AltMinPhase requires similar number of measurements as
+PhaseLift and PhaseCut. Figure 1(b) compares the running time of various algorithms on log-scale.
+Note that AltMinPhase is almost two orders of magnitude faster than PhaseLift and PhaseCut.
+
+guarantees of Algorithm 2 as compared to PhaseLift and PhaseCut.
+
+                                Sample complexity         Comp. complexity
+                      O n log n log2 n + log 1 log log 1
+     Algorithm 2                                          O n2 log n log2 n + log2 1 log log 1
+    PhaseLift [9]                        O (n)
+    PhaseCut [54]                        O (n)                    O  nn33//2
+                                                                  O
+
+Table 1: Comparison of Algorithm 2 with PhaseLift and PhaseCut: Though the sample complexity
+of Algorithm 2 is off by log factors from that of PhaseLift and PhaseCut, it is O (n) better than
+them in computational complexity. Note that, we can solve the least squares problem in each
+iteration approximately by using fast approximte solvers such as conjugate gradient method in
+time O mn log 1 , since the condition number of our measurement matrix is (1) (this follows for
+instance from Theorem 5.31 of [53]).
+
+    Our proof for convergence of alternating minimization can be broken into two key results. We
+first show that if m  Cn log3 n, then whp the initialization step used by AltMinPhase returns x0
+
+which is at most a constant distance away from x. Furthermore, that constant can be controlled
+
+by using more samples (see Theorem 4.1).
+
+    We then show that if xt is a fixed vector such that dist xt, x < c (small enough) and
+
+A is sampled independently of xt with m > Cn (C large enough) then whp xt+1 satisfies:
+
+dist xt+1, x  <    3  dist  xt, x  (see Theorem 4.2). Note that our analysis critically requires xt
+                   4
+
+to be "fixed" and be independent of the sample matrix A. Hence, we cannot re-use the same A in
+
+each iteration; instead, we need to resample A in every iteration. Using these results, we prove the
+
+correctness of Algorithm 2, which is a natural resampled version of AltMinPhase.
+
+    We now present the two results mentioned above. For our proofs, wlog, we assume that x 2 =
+
+1.
+
+                                          7
+Algorithm 2 AltMinPhase with Resampling
+
+input A, y,
+ 1: t0  c log 1
+
+ 2: Partition y and (the corresponding columns of) A into t0 + 1 equal disjoint sets:
+     (y0, A0), (y1, A1), · · · , (yt0, At0)
+
+ 3: x0  top singular vector of l yl0 2 a0 a0 T
+ 4: for t = 0, · · · , t0 - 1 do
+ 5: Ct+1  Diag Ph At+1 T xt
+
+ 6: xt+1  argminxRn               At+1 T x - Ct+1yt+1
+
+ 7: end for                                                                 2
+output xt0
+
+    Our first result guarantees a good initial vector.
+
+Theorem  4.1.    There  exists    a  constant   C1    such  that               if  m  >  C1  n  log3  n,  then  in  Algorithm  2,  with
+                                                                                         c2
+probability greater than 1 - 4/m2 we have:
+
+                                                dist  x0, x       
+                                                               < c.
+
+    Remark: Note that dist (·, ·) is invariant with the global phase i.e., dist x0, x = dist x0, eix ,
+
+for any   [-, ].
+
+    In the second result, we prove a geometric decay in dist (·, ·) along with a bound on the 2 error
+of our estimate. Since x is unique only up to a global phase factor and 2 error xt+1 - x 2
+depends on the global phase, we choose x such that xt, x  0. With this choice of global phase
+for x, we now state our second theorem:
+
+Theorem 4.2. Choose the global phase factor of x such that xt, x  0. There exist constants
+
+c, c and c such that in iteration t of Algorithm 2, if dist xt, x < c and the number of columns of
+
+At  is  greater  than  cn log  1  then,  with  probability  more               than   1 - ,     we    have:
+                               
+
+                                  dist   xt+1, x         3                     xt, x     , and
+                                                      < dist
+                                                      4
+
+                                     xt+1 - x 2 < c dist xt, x .
+
+Proof. For simplicity of notation in the proof of the theorem, we will use A for At+1, C for Ct+1,
+x for xt, x+ for xt+1, and y for yt+1. Now consider the update in the (t + 1)th iteration:
+
+                               x+ = argmin      AT x - Cy      2=                  AAT       -1 ACy
+
+                                           xRn
+
+                                  = AAT -1 ADAT x,                                                                                 (3)
+
+where D is diagonal with Dll d=ef Ph a T x · a T x . Now (3) can be rewritten as:
+
+                                  x+ = AAT -1 ADAT x
+
+                                         = x + AAT -1 A (D - I) AT x,                                                              (4)
+
+that is, x+ can be viewed as a perturbation of x and the goal is to bound the error term (the
+second term above). We break the proof into two main steps:
+
+                                                            8
+1.  a constant c1 such that x - x+ 2  c1dist (x, x) (see Lemma A.2), and
+
+2.  |  z, x+  |  5    dist  (x,  x  ),    for  all  z  s.t.     zT x = 0.    (see  Lemma      A.4)
+                 9
+
+Firstly, the bound on x - x+ 2, by triangle inequality, implies that x+ 2  1 - c1dist (x, x).
+Further it implies the following bound on | x, x+ |:
+
+                                       x - x+          2     c21dist  (x,    x)2
+                                                       2
+
+                                    1+              x+    2  -  2  x, x+      c21dist (x, x)2
+                                                          2
+
+                                     x, x+  1 - c1dist (x, x) .
+
+Using  the    above   bounds        and   choosing           c  <     1   ,  we   can  prove  the  theorem:
+                                                                   100c1
+
+                            dist  x+, x        2    =           maxzx | z, x+ |2
+                                                          x, x+ |2 + maxzx | z, x+
+                                                       |                                      |2
+
+                                                 (25/81) · dist (x, x)2                 9 dist (x, x)2 ,
+                                               < (1 - c1dist (x, x))2                   16
+
+proving the first part of the theorem. The second part follows easily from (4) and Lemma A.2.
+
+    Intuition and key challenge: If we look at step 6 of Algorithm 2, we see that, for the
+measurements, we use magnitudes calculated from x and phases calculated from x. Intuitively,
+this means that we are trying to push x+ towards x (since we use its magnitudes) and x (since
+
+we use its phases) at the same time. The key intuition behind the success of this procedure is that
+the push towards x is stronger than the push towards x, when x is close to x. The key lemma
+
+that captures this effect is stated below:
+
+Lemma 4.3. Let w1 andw2 be two independent standard complex Gaussian random variables1.
+                                  1-2w2
+Let U = |w1| w2  Ph 1 +           |w1|            - 1 . Fix  > 0. Then, there exists a constant  > 0 such that
+                                                     
+if 1 - 2 < , then: E [U ]  (1 + ) 1 - 2.
+
+    See Appendix A for a proof of the above lemma and how we use it to prove Theorem 4.2.
+Combining Theorems 4.1 and 4.2, we can establish the correctness of Algorithm 2.
+
+Theorem 4.4. Suppose the measurement vectors in (1) are independent standard complex normal
+
+vectors. There exists a constant c such that if m > cn log n log2 n + log 1 log log 1 then, with
+
+probability  greater  than  1-      1  ,  Algorithm          2  outputs      xt0  such  that  xt0 - x 2 <    , for some global
+                                    n
+phase choice of x.
+
+5 Sparse Phase Retrieval
+
+In this section, we consider the case where x is known to be sparse, with sparsity k. A natural
+and practical question to ask here is: can the sample and computational complexity of the recovery
+algorithm be improved when k n.
+
+    1z is standard complex Gaussian if z = z1 +iz2 where z1 and z2 are independent standard normal random variables.
+
+                                                                9
+Algorithm 3 SparseAltMinPhase
+
+input A, y, k
+
+1: S  top-k argmaxj[n]               m    |aij yi |  {Pick  indices     of  k  largest  absolute  value    inner  product}
+                                     i=1
+2: Apply Algorithm 2 on AS, yS and output the resulting vector with elements in Sc set to zero.
+
+                                        Sample complexity                                Comp. complexity
+                                                                               O k2 log n kn + log2 1 log log 1
+Algorithm 3 O k log n k + log3 k + log 1 log log 1
+                                                                                              O n3/ 2
+1-PhaseLift [37]                           O k2 log n
+
+                                                                                                      
+Table 2: Comparison of Algorithm 3 with 1-PhaseLift when xm in =  1/ k . Note that the
+complexity of Algorithm 3 is dominated by the support finding step. If k = O (1), Algorithm 3
+runs in quasi-linear time.
+
+    Recently, [37] studied this problem for Gaussian A and showed that for 1 regularized PhaseLift,
+m = O(k2 log n) samples suffice for exact recovery of x. However, the computational complexity
+of this algorithm is still O(n3/ 2).
+
+    In this section, we provide a simple extension of our AltMinPhase algorithm that we call
+SparseAltMinPhase, for the case of sparse x. The main idea behind our algorithm is to first
+recover the support of x. Then, the problem reduces to phase retrieval of a k-dimensional signal.
+
+We then solve the reduced problem using Algorithm 2. The pseudocode for SparseAltMinPhase
+
+is presented in Algorithm 3. Table 2 provides a comparison of Algorithm 3 with 1-regularized
+PhaseLift in terms of sample complexity as well as computational complexity.
+
+    The following lemma shows that if the number of measurements is large enough, step 1 of
+SparseAltMinPhase recovers the support of x correctly.
+
+Lemma 5.1. Suppose x is k-sparse with support S and x 2 = 1. If ai are standard complex
+                                               c            n
+Gaussian  random      vectors  and   m  >            log       ,  then  Algorithm  3    recovers  S  with  probability  greater
+                                           (xm in)4
+than 1 - , where xmin is the minimum non-zero entry of x.
+
+    The key step of our proof is to show that if j  supp(x), then random variable Zij = i |aijyi|
+has significantly higher mean than for the case when j / supp(x). Now, by applying appropriate
+
+concentration bounds, we can ensure that minjsupp(x) |Zij| > maxj/supp(x) |Zij| and hence our
+algorithm never picks up an element outside the true support set supp(x). See Appendix B for a
+
+detailed proof of the above lemma.
+
+    The correctness of Algorithm 3 now is a direct consequence of Lemma 5.1 and Theorem 4.4.
+
+For the special case where each non-zero value in x is from {- 1 , 1 }, we have the following
+
+                                                                                                                           kk
+
+corollary:
+
+Corollary 5.2. Suppose x is k-sparse with non-zero elements ± 1 . If the number of measure-
+
+                                                                                                                            k
+
+ments m > c log n k2 + k log2 k + k log 1 , then Algorithm 3 will recover x up to accuracy with
+
+probability  greater  than  1  -  1  .
+                                  n
+
+6 Experiments
+
+In this section, we present experimental evaluation of AltMinPhase (Algorithm 1) and compare its
+performance with the SDP based methods PhaseLift [11] and PhaseCut [54]. We also empirically
+
+                                                                  10
+demonstrate the advantage of our initialization procedure over random initialization (denoted by
+AltMin (random init)), which has thus far been considered in the literature [21, 19, 54, 8].
+AltMin (random init) is the same as AltMinPhase except that step 1 of Algorithm 1 is replaced
+with:x0  Uniformly random vector from the unit sphere.
+
+    In the noiseless setting, a trial is said to succeed if the output x satisfies x - x 2 < 10-2. For
+a given dimension, we do a linear search for smallest m (number of samples) such that empirical
+success ratio over 20 runs is at least 0.8. We implemented our methods in Matlab, while we obtained
+the code for PhaseLift and PhaseCut from the authors of [46] and [54] respectively.
+
+    We now present results from our experiments in three different settings.
+    Independent Random Gaussian Measurements: Each measurement vector ai is generated
+from the standard complex Gaussian distribution. This measurement scheme was first suggested
+by [11] as a first step to obtain a theoretical understanding of the problem.
+    Multiple Random Illumination Filters: We now present our results for the setting where
+the measurements are obtained using multiple illumination filters; this setting was suggested by [8].
+In particular, choose J vectors z(1), · · · , z(J) and compute the following discrete Fourier transforms:
+
+                                               x(u) = DFT x ·  z(u) ,
+
+where · denotes component-wise multiplication. Our measurements will then be the magnitudes
+of components of the vectors x(1), · · · , x(J). Note that this gives a total of Jn measurements. The
+above measurement scheme can be implemented by modulating the light beam or by the use of
+masks; see [8] for more details.
+
+    For this setting, we conduct a similar set of experiments as the previous setting. That is, we
+vary dimensionality of the true signal z(u) (generated from the Gaussian distribution)and then
+empirically determine measurement and computational cost of each algorithm. Figures 2 (a) and
+(b) present our experimental results for this measurement scheme. Here again, we make similar
+observations as the last setting. That is, the measurement complexity of AltMinPhase is similar
+to PhaseCut and PhaseLift, but AltMinPhase is orders of magnitude faster than PhaseLift and
+PhaseCut. Note that Figure 2 is on a log-scale.
+
+(a)      (b)
+
+Figure 2: Sample and time complexity for successful recovery using random Gaussian illumination
+filters. Similar to Figure 1, we observe that AltMinPhase has similar number of filters (J) as
+PhaseLift and PhaseCut, but is computationally much more efficient. We also see that AltMinPhase
+performs better than AltMin (randominit).
+
+     11
+    Noisy Phase Retrieval: Finally, we study our method in the following noisy measurement
+scheme:
+
+     yi = | ai, x + wi |      for i = 1, . . . , m,                                 (5)
+
+where wi is the noise in the i-th measurement and is sampled from N (0, 2). We fix n = 64
+and m = 6n. We then vary the amount of noise added  and measure the 2 error in recovery,
+i.e., x - x 2, where x is the recovered vector. Figure 3(a) compares the performance of various
+methods with varying amount of noise. We observe that our method outperforms PhaseLift and
+has similar recovery error as PhaseCut.
+
+    Geometric Decay: Finally, we provide empirical results verifying that AltMinPhase reduces
+the error at a geometric rate as guaranteed by Theorem 4.2 but no faster. The measurement vectors
+were chosen to be standard complex Gaussian with n = 64 and m = 6n. Figure 3(b) shows the
+plot of empirical error vs the number of iterations.
+
+(a)                                                  (b)
+
+Figure 3: (a): Recovery error x - x 2 incurred by various methods with increasing amount of
+
+noise (). AltMinPhase and PhaseCut perform comparably while PhaseLift incurs significantly
+larger error. (b): Plot of empirical error y - AT x 2 vs number of iterations for AltMinPhase.
+Each entry of A is chosen to be standard complex Gaussian with n = 64 and m = 6n. We can see
+
+that the error decreases geometrically suggesting that Theorem 4.2 is tight in some sense.
+
+Acknowledgment
+
+S. Sanghavi would like to acknowledge support from NSF grants 1302435 and 0954059.
+
+                          12
+References
+
+ [1] J. Abrahams and A. Leslie. Methods used in the structure determination of bovine mitochon-
+      drial f1 atpase. Acta Crystallographica Section D: Biological Crystallography, 52(1):30­42,
+      1996.
+
+ [2] A. Agarwal, A. Anandkumar, P. Jain, and P. Netrapalli. Learning sparsely used overcomplete
+      dictionaries via alternating minimization. arXiv preprint arXiv:1310.7991, 2014.
+
+ [3] H. H. Bauschke, P. L. Combettes, and D. R. Luke. Hybrid projection­reflection method for
+      phase retrieval. JOSA A, 20(6):1025­1034, 2003.
+
+ [4] L. Bian, J. Suo, G. Zheng, K. Guo, F. Chen, and Q. Dai. Fourier ptychographic reconstruction
+      using wirtinger flow optimization. arXiv preprint arXiv:1411.6431, 2014.
+
+ [5] L. Bregman. Finding the common point of convex sets by the method of successive projec-
+      tion.(russian). In Dokl. Akad. Nauk SSSR, volume 162, pages 487­490, 1965.
+
+ [6] Y. M. Bruck and L. Sodin. On the ambiguity of the image reconstruction problem. Optics
+      Communications, 30(3):304­308, 1979.
+
+ [7] E. Cand`es, X. Li, and M. Soltanolkotabi. Phase retrieval via wirtinger flow: Theory and
+      algorithms. arXiv preprint arXiv:1407.1065, 2014.
+
+ [8] E. J. Cand`es, Y. C. Eldar, T. Strohmer, and V. Voroninski. Phase retrieval via matrix com-
+      pletion. SIAM Journal on Imaging Sciences, 6(1):199­225, 2013.
+
+ [9] E. J. Cand`es and X. Li. Solving quadratic equations via phaselift when there are about as
+      many equations as unknowns. Foundations of Computational Mathematics, 14(5):1017­1026,
+      2014.
+
+[10] E. J. Candes, X. Li, and M. Soltanolkotabi. Phase retrieval from coded diffraction patterns.
+      Applied and Computational Harmonic Analysis, 2014.
+
+[11] E. J. Cand`es, T. Strohmer, and V. Voroninski. Phaselift: Exact and stable signal recovery
+      from magnitude measurements via convex programming. Communications on Pure and Applied
+      Mathematics, 2012.
+
+[12] A. Chai, M. Moscoso, and G. Papanicolaou. Array imaging using intensity-only measurements.
+      Inverse Problems, 27(1):015005, 2011.
+
+[13] T. Chi, P. Ru, and S. A. Shamma. Multiresolution spectrotemporal analysis of complex sounds.
+      The Journal of the Acoustical Society of America, 118:887, 2005.
+
+[14] J. C. Dainty and J. R. Fienup. Phase retrieval and image reconstruction for astronomy. Image
+      Recovery: Theory and Application, ed. byH. Stark, Academic Press, San Diego, pages 231­275,
+      1987.
+
+[15] H. Duadi, O. Margalit, V. Mico, J. A. Rodrigo, T. Alieva, J. Garcia, and Z. Zalevsky. Digital
+      holography and phase retrieval. Source: Holography, Research and Technologies. InTech, 2011.
+
+                                                               13
+[16] Y. C. Eldar and S. Mendelson. Phase retrieval: Stability and recovery guarantees. Applied
+      and Computational Harmonic Analysis, 2013.
+
+[17] V. Elser. Phase retrieval by iterated projections. JOSA A, 20(1):40­55, 2003.
+
+[18] J. Fienup, J. Marron, T. Schulz, and J. Seldin. Hubble space telescope characterized by using
+      phase-retrieval algorithms. Applied optics, 32(10):1747­1767, 1993.
+
+[19] J. R. Fienup et al. Phase retrieval algorithms: a comparison. Applied optics, 21(15):2758­2769,
+      1982.
+
+[20] D. Gabor. A new microscopic principle. Nature, 161(4098):777­778, 1948.
+
+[21] R. W. Gerchberg and W. O. Saxton. A practical algorithm for the determination of phase
+      from image and diffraction plane pictures. Optik, 35:237, 1972.
+
+[22] D. Gross, F. Krahmer, and R. Kueng. A partial derandomization of phaselift using spherical
+      designs. Journal of Fourier Analysis and Applications, pages 1­38, 2014.
+
+[23] M. Hardt. Understanding alternating minimization for matrix completion. In Foundations
+      of Computer Science (FOCS), 2014 IEEE 55th Annual Symposium on, pages 651­660. IEEE,
+      2014.
+
+[24] M. Hayes. The reconstruction of a multidimensional sequence from the phase or magnitude
+      of its fourier transform. Acoustics, Speech and Signal Processing, IEEE Transactions on,
+      30(2):140­154, 1982.
+
+[25] C.-J. Hsieh, K.-Y. Chiang, and I. S. Dhillon. Low rank modeling of signed networks. In KDD,
+      pages 507­515, 2012.
+
+[26] N. E. Hurt. Phase Retrieval and Zero Crossings: Mathematical Methods in Image Reconstruc-
+      tion, volume 52. Kluwer Academic Print on Demand, 2001.
+
+[27] K. Jaganathan, S. Oymak, and B. Hassibi. Recovery of sparse 1-d signals from the magnitudes
+      of their fourier transform. In Information Theory Proceedings (ISIT), 2012 IEEE International
+      Symposium On, pages 1473­1477. IEEE, 2012.
+
+[28] P. Jain and P. Netrapalli. Fast exact matrix completion with finite samples. In Conference on
+      Learning Theory (COLT), 2015.
+
+[29] P. Jain, P. Netrapalli, and S. Sanghavi. Low-rank matrix completion using alternating mini-
+      mization. In Proceedings of the forty-fifth annual ACM symposium on Theory of computing,
+      pages 665­674. ACM, 2013.
+
+[30] R. Keshavan, A. Montanari, and S. Oh. Matrix completion from noisy entries. In Advances in
+      Neural Information Processing Systems, pages 952­960, 2009.
+
+[31] R. H. Keshavan. Efficient algorithms for collaborative filtering. Phd Thesis, Stanford Univer-
+      sity, 2012.
+
+[32] R. H. Keshavan, A. Montanari, and S. Oh. Matrix completion from a few entries. IEEE
+      Transactions on Information Theory, 56(6):2980­2998, 2010.
+
+                                                               14
+[33] H. Kim and H. Park. Nonnegative matrix factorization based on alternating nonnegativity
+      constrained least squares and active set method. SIAM J. Matrix Anal. Appl., 30(2):713­730,
+      July 2008.
+
+[34] J. Kim and H. Park. Sparse nonnegative matrix factorization for clustering. Technical Report
+      GT-CSE-08-01, Georgia Institute of Technology, 2008.
+
+[35] E. N. Leith and J. Upatnieks. Reconstructed wavefronts and communication theory. JOSA,
+      52(10):1123­1128, 1962.
+
+[36] W. V. Li and A. Wei. Gaussian integrals involving absolute value functions. In Proceedings of
+      the Conference in Luminy, 2009.
+
+[37] X. Li and V. Voroninski. Sparse signal recovery from quadratic measurements via convex
+      programming. SIAM Journal on Mathematical Analysis, 45(5):3019­3033, 2013.
+
+[38] G. G. Lorentz, M. von Golitschek, and Y. Makovoz. Constructive approximation: advanced
+      problems, volume 304. Springer Berlin, 1996.
+
+[39] S. Marchesini. Invited article: A unified evaluation of iterative projection algorithms for phase
+      retrieval. Review of Scientific Instruments, 78(1):011301­011301, 2007.
+
+[40] S. Marchesini. Phase retrieval and saddle-point optimization. JOSA A, 24(10):3289­3296,
+      2007.
+
+[41] J. Miao, P. Charalambous, J. Kirz, and D. Sayre. Extending the methodology of x-ray
+      crystallography to allow imaging of micrometre-sized non-crystalline specimens. Nature,
+      400(6742):342­344, 1999.
+
+[42] J. Miao, T. Ishikawa, B. Johnson, E. H. Anderson, B. Lai, and K. O. Hodgson. High resolution
+      3d x-ray diffraction microscopy. Physical review letters, 89(8):088303, 2002.
+
+[43] R. Millane. Phase retrieval in crystallography and optics. JOSA A, 7(3):394­411, 1990.
+
+[44] D. Misell. A method for the solution of the phase problem in electron microscopy. Journal of
+      Physics D: Applied Physics, 6(1):L6, 1973.
+
+[45] P. Netrapalli, U. Niranjan, S. Sanghavi, A. Anandkumar, and P. Jain. Non-convex robust pca.
+      In Advances in Neural Information Processing Systems, pages 1107­1115, 2014.
+
+[46] H. Ohlsson, A. Y. Yang, R. Dong, and S. S. Sastry. Compressive phase retrieval from squared
+      output measurements via semidefinite programming. arXiv preprint arXiv:1111.6323, 2011.
+
+[47] S. Oymak, A. Jalali, M. Fazel, Y. C. Eldar, and B. Hassibi. Simultaneously structured models
+      with application to sparse and low-rank matrices. arXiv preprint arXiv:1212.3753, 2012.
+
+[48] J. L. Sanz. Mathematical considerations for the problem of fourier transform phase retrieval
+      from magnitude. SIAM Journal on Applied Mathematics, 45(4):651­664, 1985.
+
+[49] Y. Shechtman, A. Beck, and Y. C. Eldar. Gespar: Efficient phase retrieval of sparse signals.
+      Signal Processing, IEEE Transactions on, 62(4):928­938, 2014.
+
+                                                               15
+[50] Y. Shechtman, Y. C. Eldar, A. Szameit, and M. Segev. Sparsity based sub-wavelength imaging
+      with partially incoherent light via quadratic compressed sensing. Optics express, 19(16):14807­
+      14822, 2011.
+
+[51] J. A. Tropp. User-friendly tail bounds for sums of random matrices. Foundations of Compu-
+      tational Mathematics, 12(4):389­434, 2012.
+
+[52] H. Trussell and M. Civanlar. The feasible solution in signal restoration. Acoustics, Speech and
+      Signal Processing, IEEE Transactions on, 32(2):201­212, 1984.
+
+[53] R. Vershynin. Introduction to the non-asymptotic analysis of random matrices. arXiv preprint
+      arXiv:1011.3027, 2010.
+
+[54] I. Waldspurger, A. dAspremont, and S. Mallat. Phase recovery, maxcut and complex semidef-
+      inite programming. Mathematical Programming, 149(1-2):47­81, 2015.
+
+[55] D. C. Youla and H. Webb. Image restoration by the method of convex projections: Part
+      1theory. Medical Imaging, IEEE Transactions on, 1(2):81­94, 1982.
+
+[56] H. Zou, T. Hastie, and R. Tibshirani. Sparse principal component analysis. JCGS, 15(2):262­
+      286, 2006.
+
+                                                               16
+A Proofs for Section 4
+
+A.1 Proof of the Initialization Step
+
+Proof  of  Theorem  4.1.  Recall  that    x0   is  the    top  singular         vector  of     S=   1        |a T x|2a a T . As a
+                                                                                                    n
+are rotationally invariant random variables, wlog, we can assume that x = e1 where e1 is the first
+
+canonical basis vector. Also note that E | a, e1 |2aaT = D, where D is a diagonal matrix with
+
+D11 = EaNC(0,1)[|a|4] = 8 and Dii = EaNC(0,1),bNC(0,1)[|a|2|b|2] = 4, i > 1.
+
+We break our proof of the theorem into two steps:
+
+(1):  Show   that,  with  probability  >    1-      4  :  S - D 2 < c/4.
+                                                   m2
+
+(2): Use (1) to prove the theorem.
+
+Proof of Step (2): We have x0, Sx0  c/4 + 8 x0, e1 2 + 4                                       n    x0i   2 = c/4 + 4  x01 2 + 4.
+                                                                                               i=2
+              hand, since x0 is the top singular value
+On the other                                   2                            of S, by using triangle             inequality,  w2 e<havce.
+  x0, Sx0 >   8 - c/4. Hence,         x0, e1       >   1-  c   .  This      yields dist x0, x =                 1 - x0, e1
+                                                           8
+
+Proof of Step (1): We now complete our proof by proving (1). To this end, we use the
+
+following matrix concentration result from [51]:
+
+Theorem A.1 (Theorem 1.5 of [51]). Consider a finite sequence Xi of self-adjoint independent
+random matrices with dimensions n × n. Assume that E[Xi] = 0 and Xi 2  R, i, almost surely.
+Let 2 := i E[Xi2] 2. Then the following holds   0:
+
+                                  1m                                               -m2  2
+                            P               Xi 2    2n exp 2 + Rm/3 .
+                                   m   i=1
+
+Note that Theorem A.1 assumes max |a1 |2 a 2 to be bounded, where a1 is the first compo-
+
+nent of a . However, a is a normal random variable and hence can be unbounded. We address this
+
+issue by observing that probability that Pr( a                 2       2n   OR     |a1  |2     2 log m)         2 exp(-n/2)  +   1  .
+                                                                                                                                m2
+                                                                      3
+Hence,  for  large  enough  n, c  and  m    >  cn,  w.p.   1-        m2  ,
+
+                                        max |a1 |2 a 2  4n log(m).                                                              (6)
+
+Now, consider truncated random variable a s.t. a = a if |a1 |2  2 log(m)& a 2  2n and
+
+a = 0 otherwise. Now, note that a is symmetric around origin and also E[ai aj ] = 0, i = j.
+Also, E[|ai |2]  1. Hence, E[|a1 |2 a 2a a] 2  4n log(m). Now, applying Theorem A.1 given
+above, we get (w.p.  1 - 1/m2)
+
+                            1           |2a    a - E[|a1          |2a  a]          4n log3/2(m)
+                            m     |a1                                       2                          .
+                                                                                               m
+
+Furthermore, a      =a    with  probability    larger     than       1-      3  .  Hence,   w.p.       1-        4  :
+                                                                            m2                                  m2
+
+                                       S - E[|a1|2a       a]             4n log3/2(m)
+                                                                                            .
+                                                                  2                m
+
+Now, the remaining task is to show that                E[|a1|2a a] - E[|a1|2a a]                  2       1  .  This follows easily
+                                                                                                          m
+by observing that E[ai aj] = 0 and by bounding E[|a1|2|ai |2 - |a1|2|ai |2  1/m by using a simple
+
+second and fourth moment calculations for the normal distribution.
+
+                                                           17
+A.2 Proof of per step reduction in error
+
+In all the lemmas in this section,  is a small numerical constant (can be taken to be 0.01).
+
+Lemma A.2. Assume the hypothesis of Theorem 4.2 and let x+ be as defined in (3). Then,
+
+there exists an absolute numerical constant c such that the following holds (w.p.                                                     1-     ):
+                                                                                                                                          4
+
+    AAT -1 A (D - I) AT x < cdist (x, x) . Furthermore, we have:
+
+                                      2
+
+                                                1 AAT - I               1
+                                               2m                   < ,
+                                                                         c
+                                                                 2
+
+                                                        1                      
+
+                                                        A < 1 + 2/ c, and
+                                                       2m
+                                            (D - I) AT x         2                x, xt      .
+                                                                 2 < c mdist
+
+Proof. Using (4) and the fact that x 2 = 1, xT x+ = 1 + xT AAT -1 A (D - I) AT x. That is,
+
+|xT x+|  1 -           1    AAT  -1            1 A          1 (D - I) AT x            2.  Assuming            m   >  c log   1  n,  Standard
+                      2m                                                                                                     
+                                            2    2m     2     2m
+
+results  in random matrix theory[53] tell us that                     1  AAT      -I  2   <  1 ,   wp         1      -       .  This      means
+that                                                                 2m                                                  10
+                            2  1/(1 - 2/ c)2 and                                               c
+                      -1
+           1  AAT                                                A   2  1 + 2/ c. Note that both                     the quantities can
+          2m
+                                                                                                                                       1  AAT
+be  bounded       by  constants  that       are  close  to  1  by   selecting  a  large   enough   c.         Also   note    that     2m
+
+converges     to  I   (the  identity  matrix),      or  equivalently     1  AAT   converges        to         2I  since  the    elements     of
+                                                                         m
+
+A   are standard normal complex random variables and                        n2obtystcandmadrdistnoxrm, axlt   real random variables.
+     The key challenge now is to bound (D - I) AT x                                                             for a global constant
+
+c > 0. Note that since (4) is invariant with respect to xt 2, we can assume that xt 2 = 1. Note
+further that, since the distribution of A is rotationally invariant and is independent of x and xt,
+wlog, we can assume that x = e1 and xt = e1 + 1 - 2e2, where  = xt, x  0. A subtle
+
+thing to keep in mind here is that , being the inner product of xt and x, is in general complex.
+
+However, we recall from the assumption in our theorem that we choose the global phase factor of
+
+x such that  = xt, x  0. Making the notation
+
+                             Ul d=ef |a1l|2 Ph              a1l +                                          2                              (7)
+
+                                                                        1 - 2a2l a1l - 1
+
+gives us   (D - I) AT e1     2   =          m    U  .
+                             2              l=1
+
+    Using Lemma A.3 finishes the proof.
+
+of   The following lemma, Lemma A.3 shows that if U                          are  Eas[Ude]finecdinmLdiesmt mxa,Ax.t2     then,        the sum
+    U , 1   m concentrates well around E [U ] and                           also                                         . The        proof of
+
+Lemma A.3 requires careful analysis as it provides tail bound and expectation bound of a random
+
+variable that is a product of correlated sub-exponential complex random variables.
+
+Lemma A.3. Assume the hypothesis of Lemma A.2. Let U be as defined in (7) and let each
+
+a1l, a2l, 1  l  m be sampled from standard normal distribution for complex numbers. Then, with
+                                                            m
+probability   greater  than  1   -    4  ,  we   have:      l=1  Ul     c2m(1  -  2),     for   a  global         constant      c  >  0.
+
+Proof. We first estimate P [Ul > t] so as to:
+
+    1. Calculate E [Ul] and,
+
+                                                                    18
+2. Show that Ul is a subexponential random variable and use that fact to derive concentration
+   bounds.
+
+In what follows, we use c to denote a numerical constant whose value may change from line to line.
+                                        
+                                         t
+P [Ul > t] =        p|a1l|(s)P  Wl >    s   |a1l|  ds, where,
+                 t
+
+              2
+
+                                Wl d=ef Ph a1l + 1 - 2a2l a1l - 1 .
+
+                                        
+                                        t
+                          P Wl > s |a1l| = s
+                                                   
+                                                      1 - 2a2l                
+                                                        a1l                     t
+                             =P      Ph 1 +                         - 1 > s |a1l| = s
+
+                             (1)        1 - 2 |a2l|         
+                                           |a1l|            ct
+                             P                           >   s  |a1l|  =   s
+
+                             (2)                 c2t
+
+                                 exp 1 - 1 - 2 ,
+
+where (1) uses Lemma A.7 and (2), the fact that a2l is a sub-gaussian random variable. This
+means:
+
+                                                                    c2t
+
+                                P [Ul > t]          exp     1 - 1 - 2         p|a1l|(s)ds
+                                                      t
+
+                                                   2
+
+                                                             c2t              se-  s2  ds
+                                             exp 1 - 1 - 2                          2
+                                                                         
+                                                                           t
+
+                                                                          2
+
+                                                                ct
+                                             exp 1 - 1 - 2 .                                                                 (8)
+
+ Using this, we have the following bound on the expected value of Ul:
+
+                                                                         
+
+                                       E [Ul] = P [Ul > t] dt  c 1 - 2 .
+
+                                                                       0
+
+From (8), we see that Ul is a subexponential random variable with parameter c 1 - 2 . Using
+Proposition 5.16 from [53], we obtain:
+
+                                m
+
+                          P          Ul - E [Ul] > m 1 - 2
+
+                                l=1
+
+                                                 c2m2 1 - 2 2 cm 1 - 2
+                           2 exp - min (1 - 2)2 m , 1 - 2
+
+                           2 exp      -c2m            
+                                                   .
+                                                      4
+
+Lemma A.4. Assume the hypothesis of Theorem 4.2 and let x+ be as defined in (3). Then, for
+
+every unit vector z s.t.     z, x    =  0,  the  following  holds   (w.p.      1-      e-n):  |  z, x+  |    5  dist  (x  ,  x).
+                                                                                   4                         9
+
+                                                            19
+Proof. Fix z such that z, x = 0. Since the distribution of A is rotationally invariant, wlog
+we can assume that: a) x = e1, b) x = e1 + 1 - 2e2 where   R and   0 and c)
+z = e2 + 1 - ||2e3 for some   C. Note that we first prove the lemma for a fixed z and then
+use union bound.For a fixed z, we have:
+
+                            z, x+  || | e2, x+ | + 1 - ||2| e3, x+ |.                     (9)
+
+Now,
+
+                            e2T x+ = e2T AAT -1 A (D - I) AT e1
+
+                       1          e2T        1 AAT     -1         A (D - I) AT e1
+                                            2m
+                                                          -I
+                      2m
+
+                                1    e2T A (D - I) AT e1
+                            +
+
+                               2m
+
+                       1                1 AAT  -1              A 2 (D - I) AT e1 2
+                                     2m
+                                                  -I
+                      2m
+                                                            2
+
+                                1    e2T A (D - I) AT e1       ,
+                            +
+
+                               2m
+
+                       4c            xt, x      1      e2T A (D - I) AT e1  ,             (10)
+                     dist                   +
+
+                         c                     2m
+
+where the last step uses Lemma A.2. Similarly,
+
+                                  e3T x+  4c dist xt, x
+                                                  c
+
+                                                1      e3T A (D - I) AT e1  .             (11)
+                                            +
+
+                                               2m
+
+Using (9), (10), (11) along with Lemmas A.5 and A.6, we see that for a fixed z, we have:
+
+                                            z, x+  51 dist (x, x) ,                       (12)
+                                                       100
+
+with  probability  greater  than  1  -      exp(-cn).
+                                        10
+
+So far we have proved the result only for a fixed vector z. We now use a covering and union
+
+bound argument to extend this result for every z that is orthogonal to x.
+
+Union bound argument: Construct an -net S for unit vectors in the (n - 1)-dimensional
+
+space that is orthogonal to x. Using standard results (see e.g., Chap. 13 of [38]), we know that
+
+the size of S can be chosen to be 1 O(n). We choose = 1/100, and hence the size of S is exp (cn),
+
+for some fixed constant c. Applying (12) for every z  S, and taking a union bound, we obtain:
+
+                                     z, x+  51 dist (x, x)  z  S,                         (13)
+                                               100
+
+with  probability  greater  than  1  -      exp(-n).
+                                        10
+
+                                                       20
+    Now choose a unit vector z that is orthogonal to x (but is not necessarily in S), that maximizes
+| z, x+ |. In other words, z is such that
+
+                                                  z  argmax | z, x | .                                          (14)
+
+                                                               zx
+
+                                                            z 2=1
+
+Since  S  is   a    1   -net  of  the  orthogonal    space  to  x,  we  know  that  there  is  a  z    S  such  that
+                   100
+           1
+z-z   2<  100  .   So,  we  have:
+
+                              | z, x |  | z, x | + | z - z, x |
+
+                                         (1)  51 dist (x, x) +  1       z - z , x
+                                                                        z-z 2
+                                              100               100
+
+                                         (2)  51 dist (x, x) +  1    | z, x | ,
+
+                                              100               100
+
+where (1) follows from (13) and (2) follows from (14). This means that
+
+                                              | z, x |  51 dist (x, x) .
+                                                            99
+
+Recalling the choice of z from (14) finishes the proof.
+
+Lemma A.5. Assume the hypothesis of Theorem 4.2 and the notation therein. Then,
+
+                                      e2T A (D - I) AT e1      100        1 - 2,
+                                                            m
+
+                                                                99
+
+with  probability  greater  than   1  -      e-n  .
+                                         10
+
+Proof. We have:
+
+                              e2T A (D - I) AT e1
+
+                                     m
+
+                              = a1la2l Ph a1l + 1 - 2a2l a1l - 1
+
+                                   l=1
+                                     m
+
+                              = |a1l| a2l Ph  |a1l| + 1 - 2a2l - 1 ,
+
+                                   l=1
+
+where a2l d=ef a2lPh (a1l) is identically distributed to a2l and is independent of |a1l|. Define the
+random variable Ul as:
+
+                                  Ul d=ef |a1l| a2l                         -1 .
+                                                     Ph 1 + 1 - 2a2l
+
+                                                                     |a1l|
+
+Similar to Lemma A.2, we will calculate P [Ul > t] to show that Ul is subexponential and use it to
+derive concentration bounds. However, using the above estimate to bound E [Ul] will result in a
+
+                                                     21
+weak bound that we will not be able to use. Lemma 4.3 bounds E [Ul] using a different technique
+carefully.
+
+                              P [|Ul| > t]            
+
+                              P      |a1l| a2l       c  1 - 2 |a2l| > t
+                                                          |a1l|
+
+                              =P       a2l  2  >     ct        exp             ct        ,
+                                                                       1- 
+
+                                                    1 - 2                      1 - 2
+
+where the last step follows from the fact that a2l is a subgaussian random variable and hence |a2l|2
+is a subexponential random variable. Using Proposition 5.16 from [53], we obtain:
+
+                                  m
+
+                           P         Ul - E [Ul] > m 1 - 2
+
+                                  l=1                   c2m2 1 - 2              
+                                                                           cm 1 - 2
+                             2 exp       - min                         ,   
+                                                          (1 - 2) m          1 - 2
+
+                             2 exp -c2m .
+
+Choosing     =  1   and    using  Lemma        4.3,  we   obtain:
+                99
+
+                                                              m            100
+
+                              e2T A (D - I) AT e1 =                Ul          m  1 - 2,
+                                                                           99
+                                                             l=1
+
+with  probability  greater  than     1-        exp(-n).   This     proves  the  lemma.
+                                         10
+
+Proof of Lemma 4.3. Let w2 = |w2| ei. Then |w1| , |w2| and  are all independent random variables.
+
+ is a uniform random variable over [-, ] and |w1| and |w2| are identically distributed with
+
+probability distribution function, p(x) = x exp            -  x2   1{x0}. We have:
+                                                              2
+
+                            E [U ] = E [|w1| |w2|
+                                                        
+                                                          1 - 2 |w2| e-i
+                              E ei     Ph      1+              |w1|         -1     |w1| ,
+
+                                                                                   |w2|] .
+
+Let  d=ef    1-2|w2  |
+              |w1|
+                        .  We will first calculate E      ei Ph    1 + e-i        |w1| , |w2| . Note that the above
+
+expectation is taken only over the randomness in . For simplicity of notation, we will drop the
+
+conditioning variables, and calculate the above expectation in terms of  as
+
+                                  eiPh 1 + e-i            =    cos  +  + i sin 
+                                                                                     1.
+                                                             (1 + 2 + 2 cos ) 2
+
+We will first calculate the imaginary part of the above expectation:
+
+                                     Im E eiPh 1 + e-i
+
+                                            =E               sin           1 = 0,           (15)
+
+                                                        (1 + 2 + 2 cos ) 2
+
+                                                           22
+since we are taking the expectation of an odd function. Focusing on the real part, we let:
+
+                                      F () d=ef E         cos  + 
+
+                                                   (1  +  2   +  2  cos      )  1
+                                                                                2
+
+                                                 1               cos  + 
+                                           =                                                 d.
+                                              2                                           1
+                                                   -    (1    +  2  +  2
+                                                                             cos ) 2
+
+Note that F () : R  R and F (0) = 0. We will show that there is a small absolute numerical
+constant  (depending on ) such that:
+
+                                                                          1
+                                      0 <  <   |F ()|  ( + ).                                                                    (16)
+                                                                          2
+
+We show this by calculating F (0) and using the continuity of F () at  = 0. We first calculate
+F () as follows:
+
+                                                 1                     1
+                                  F () =
+                                             2       -  (1    +  2  +  2                  1
+
+                                                                             cos ) 2
+
+                                                   -    (cos  + ) ( + cos )
+                                                                                   3 d
+                                                        (1 + 2 + 2 cos ) 2
+
+                                                 1                  sin2 
+                                           =                                     3 d
+                                              2      - (1 + 2 + 2 cos ) 2
+
+From  the  above,  we  see  that  F   (0)  =  1  and  (16)    then  follows     from         the    continuity  of  F  ()  at    =  0.
+                                              2
+
+Getting back to the expected value of U , we have:
+
+                            |E [U ]|
+
+                                                        1 - 2 |w2|
+                                                           |w1|
+                             E |w1| |w2| F                                1        1-2 |w2       |  <
+                                                                                    |w1 |
+
+                                                       1 - 2 |w2|
+                                                          |w1|
+                            + E |w1| |w2| F                               1        1-2 |w2 |     
+                                                                                    |w1 |
+
+                            (1)   1                              1 - 2 |w2|
+                                                                    |w1|
+                                    +         E    |w1| |w2|
+                                  2
+
+                                      +E         |w1| |w2| 1     1-2 |w2           ,
+                                                                  |w1 |
+                                                                          |  
+
+                                              
+                            (=2) (1 + 2) 1 - 2
+                                                   
+
+                                      +E         |w1| |w2| 1     1-2 |w2           ,                                             (17)
+                                                                  |w1 |
+                                                                          |  
+
+where (1) follows from (16) and the fact that |F ()|  1 for every  and (2) follows from the fact
+that E |z2|2 = 2. We will now bound the second term in the above inequality. We start with the
+
+                                                            23
+following integral:
+
+                                                             s2                                  s2
+                                                              2                                   2
+                                                  s2  e-         ds  =   -         sd        e-
+
+                                           t                                  t
+
+                                                      t2                  s2                             t2
+                                                      2                    2                             c
+                                         =    te-            +        e-      ds      (t     +   e)e-        ,           (18)
+
+                                                                 t
+
+where c is some constant. The last step follows from standard bounds on the tail probabilities of
+gaussian random variables. We now bound the second term of (17) as follows:
+
+                              E  |w1| |w2| 1                 1-2 |w2
+                                                              |w1 |
+                                                                      |  
+
+                                                  t2                         s2
+                                                  2                           2
+                              =          t2e-                        s2  e-      dsdt
+
+                                   0                          t
+
+                                                                1-2
+
+                              (1)                  t2           t                     -         2 t2
+                                                   2         
+                                            t2e-                             +e      e       c(1-2    )  dt
+
+                                      0                          1 - 2
+
+                                                  t3                         -        t2
+
+                                                                 + et2      e    c(1-2    )  dt
+
+                                   0              1 - 2
+
+                              =                                   -       t2                      t2e-        t2
+
+                                                             t3  e   c(1-2 )  dt  +   e                  c(1-2    )  dt
+
+                                    1 - 2 0                                                  0
+
+                              (2)        1 - 2        3 (3)              1 - 2
+
+                              c                       2 
+
+where (1) follows from (18), (2) follows from the formulae for second and third absolute moments
+of gaussian random variables and (3) follows from the fact that 1 - 2 < . Plugging the above
+
+inequality in (17), we obtain:
+
+                                                                            1 - 2 +  1 - 2
+                                                                              
+                                   |E [U ]|  (1 + 2)
+
+                                               (1 + 4) 1 - 2,
+
+where  we  used    the  fact  that            1-          .  This    proves      the   lemma.
+                                                      2
+
+Lemma A.6. Assume the hypothesis of Theorem 4.2 and the notation therein. Then,
+
+                                         e3T A (D - I) AT e1                       1              1 - 2,
+                                                                              m
+
+                                                                                 100
+
+with  probability  greater    than    1  -        e-n     .
+                                              10
+
+Proof. The proof of this lemma is very similar to that of Lemma A.5. We have:
+
+                              e3T A (D - I) AT e1
+
+                                     m
+
+                              = a1la3l Ph a1l + a2l 1 - 2a3l a1l - 1
+
+                                   l=1
+                                     m
+
+                              = |a1l| a3l Ph  |a1l| + a2l 1 - 2 - 1 ,
+
+                                   l=1
+
+                                                                         24
+where a3l d=ef a3lPh (a1l) is identically distributed to a3l and is independent of |a1l| and a2l. Define
+the random variable Ul as:
+
+                              Ul d=ef |a1l| a3l                              -1 .
+                                                 Ph 1 + a2l 1 - 2
+
+                                                                 |a1l|
+
+Since a3l has mean zero and is independent of everything else, we have E [Ul] = 0. Similar to
+Lemma A.5, we will calculate P [Ul > t] to show that Ul is subexponential and use it to derive
+
+concentration bounds.
+
+                                                            c    1 - 2 |a2l| > t
+                                                                   |a1l|
+                            P [|Ul| > t]  P      |a1l| a3l
+
+                                                 ct                          ct
+                            =P       a2la3l  >               exp        1-             ,
+                                                   1 - 2                        1 - 2
+
+where the last step follows from the fact that a2l and a3l are independent subgaussian random
+variables and hence |a2la3l| is a subexponential random variable. Using Proposition 5.16 from [53],
+we obtain:
+
+                                  m
+
+                           P         Ul - E [Ul] > m 1 - 2
+
+                                  l=1            c2m2 1 - 2                  
+                                                                        cm 1 - 2
+                             2 exp       - min                       ,  
+                                                 (1 - 2) m                1 - 2
+
+                             2 exp -c2m .
+
+Choosing    =   1   ,  we  have:
+               100
+
+                                                            m           1
+
+                              e3T A (D - I) AT e1 =              Ul  m       1 - 2,
+                                                                        100
+                                                            l=1
+
+with  probability  greater  than     1-      exp(-n).  This    proves   the  lemma.
+                                         10
+
+Lemma A.7. For every w  C, we have:
+
+                                             |Ph (1 + w) - 1|  2 |w| .
+
+Proof. The proof is straight forward:
+
+                              |Ph (1 + w) - 1|  |Ph (1 + w) - (1 + w)| + |w|
+                                                   = |1 - |1 + w|| + |w|  2 |w| .
+
+B Proofs for Section 5
+
+Proof of Lemma 5.1. For every j  [n] and i  [m], consider the random variable Zij d=ef |aijyi|. We
+have the following:
+
+                                                               25
+· if j  S, then
+
+                                                  2          1 - xj 2 + xj arcsin xj
+                                      E [Zij] = 
+
+                                                 2            5   xj   2- 1    xj 4
+                                                         1-                 6
+
+                                                              6
+
+                                                             +xj    xj  +  1   xj 3
+                                                                           6
+
+                                                   2  +   1  (xmin)2 ,
+                                                          6
+
+   where the first step followsfrom Corollary 3.1 in [36] and the second step follows from the
+   Taylor series expansions of 1 - x2 and arcsin(x),
+
+·  if  j  / S,  then  E [Zij] = E [|aij|] E [|yi|] =       2  and   finally,
+                                                           
+
+· for every j  [n], Zij is a sub-exponential random variable with parameter c = O(1) (since it
+   is a product of two standard normal random variables).
+
+Using the hypothesis of the theorem about m, we have:
+
+· for any j  S, P     1          m    Zij  -    2  +  1   (xmin)2      < 0  exp -c (xm in)4 m      n-c, and
+                      m          i=1                  12
+
+· for any j / S, P    1          m    Zij  -    2  +  1   (xm in)2     > 0  exp -c (xm in)4 m      n-c.
+                      m          i=1                  12
+
+Applying a union bound to the above, we see that with probability greater than 1 - , there is a
+
+separation  in  the  values  of  1    m    Zij  for   j    S  and   j  /  S.   This  proves  the  theorem.
+                                 m    i=1
+
+                                                              26
+

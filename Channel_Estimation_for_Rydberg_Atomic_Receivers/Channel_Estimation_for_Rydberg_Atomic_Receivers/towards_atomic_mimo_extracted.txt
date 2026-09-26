@@ -1,0 +1,1247 @@
+  IEEE JOURNAL ON SELECTED AREAS IN COMMUNICATIONS, VOL. 43, NO. 3, MARCH 2025                                                                               659
+
+
+
+
+                             Towards Atomic MIMO Receivers
+                        Mingyao Cui, Graduate Student Member, IEEE, Qunsong Zeng , Member, IEEE,
+                                             and Kaibin Huang , Fellow, IEEE
+
+
+     Abstract— The advancement of Rydberg atoms in quantum                         of the next-generation computing, communication, and sens-
+  information technology is driving a paradigm shift from classical                ing [3], [5]. For example, ever since the invention of Schor’s
+  radio-frequency (RF) receivers to Rydberg atomic receivers. Cap-                 algorithm, quantum computing has exhibited unparalleled abil-
+  italizing on the extreme sensitivity of Rydberg atoms to external
+  electromagnetic fields, Rydberg atomic receivers are capable                     ities in quadratically or even exponentially accelerating the
+  of realizing more precise radio-wave measurements than RF                        computing speed in solving classically intractable problems,
+  receivers to support high-performance wireless communication                     ranging from factorization to optimization to artificial intelli-
+  and sensing. Although the atomic receiver is developing rapidly                  gence [3]. On the other hand, leveraging quantum mechanisms
+  in quantum-physics domain, its integration with wireless commu-                  such as superposition and entanglement, quantum communica-
+  nications is at a nascent stage. In particular, systematic methods
+  to enhance communication performance through this integration                    tion is capable of establishing unconditionally secure links to
+  are yet to be discovered. Motivated by this observation, we pro-                 protect data privacy [4]. In parallel with communication and
+  pose in this paper to incorporate Rydberg atomic receivers into                  computing, quantum sensing is another promising branch of
+  multiple-input-multiple-output (MIMO) communication, a promi-                    quantum information technologies [5]. It employs microscopic
+  nent 5G technology, as the first attempt on implementing atomic                  particles as “sensors” and capitalizes on their strong sensitiv-
+  MIMO receivers. To begin with, we provide a comprehensive
+  introduction on the principles of Rydberg atomic receivers and                   ity to external disturbance, especially electromagnetic fields,
+  build on them to design the atomic MIMO receivers. Our                           to precisely measure physical quantities. Notable examples of
+  findings reveal that signal detection of atomic MIMO receivers                   quantum sensors include atomic clocks and superconducting
+  corresponds to a non-linear biased phase retrieval (PR) problem,                 interferometers. As an exciting trend, quantum sensors are
+  as opposed to the linear Gaussian model adopted in classical                     being applied to an increasingly broad range of practical use
+  MIMO systems. Then, to recover signals from this non-linear
+  model, we modify the Gerchberg-Saxton (GS) algorithm, a typical                  cases [5], [6], [7]. Relevant techniques promise to reshape the
+  PR solver, into a biased GS algorithm to solve the biased PR prob-               information society and our perception of the environment.
+  lem. Moreover, we propose a novel Expectation-Maximization GS                    Aligned with this end, our work advocates the use of quantum
+  (EM-GS) algorithm to cope with the unique Rician distribution                    sensors to revolutionize next-generation wireless receivers.
+  of the biased PR model. Our EM-GS algorithm introduces a
+  high-pass filter constructed by the ratio of Bessel functions into
+  the iteration procedure of GS, thereby improving the detection                   A. Concept and Properties of Atomic Receiver
+  accuracy without sacrificing the computational efficiency. Finally,
+  the effectiveness of the devised algorithms and the feasibility of                  Recently, at the intersection of quantum sensing and wire-
+  atomic MIMO receivers are demonstrated by theoretical analysis                   less communications, an emerging concept known as Rydberg
+  and numerical simulation.
+                                                                                   atomic receiver (atomic receiver for short) has attracted
+    Index Terms— Rydberg atomic receivers, multiple-input-                         extensive attentions, for their capabilities of high-precision
+  multiple-output (MIMO), quantum sensing, signal detection.                       measurement of electromagnetic fields [7], [8], [9]. An atomic
+                                                                                   receiver leverages Rydberg atoms as “antennas” to detect
+                             I. I NTRODUCTION                                      the amplitude, phase, frequency, and polarization of incident
+                                                                                   electromagnetic waves [10], [11], [12]. Rydberg atoms refer to
+  W      ITH the global deployment of commercial 5G services,
+         cutting-edge research on 6G has been launched world-
+  wide [2]. Meanwhile, the revolutionary quantum information
+                                                                                   highly excited atoms, whose outermost electrons are excited
+                                                                                   to high energy levels far from their nuclei [13]. Attributed
+  technologies are evolving rapidly and deemed as a key enabler                    to their large electric dipole moments and high polarizability,
+                                                                                   such atoms are extremely sensitive to external electromag-
+    Received 24 February 2024; revised 1 September 2024; accepted                  netic fields, rendering them excellent “atomic antennas”.
+  8 November 2024. Date of publication 20 January 2025; date of current
+  version 27 February 2025. This work was supported in part by the Research        To implement wireless receivers, a modulated electromagnetic
+  Grants Council of Hong Kong Special Administrative Region, China, under          wave first interacts with Rydberg atoms to trigger their elec-
+  Grant HKU RFS2122-7S04; in part by the National Natural Science Foun-            tronic transitions between certain energy levels. The resultant
+  dation of China under Grant 624B2123; in part by the Areas of Excellence
+  Scheme under Grant AoE/E-601/22-R; in part by the Collaborative Research         intensity of electron transition can be monitored using an
+  Fund under Grant C1009-22G and Grant 17212423; and in part by the Jockey         all-optical readout mechanism, termed the electromagnetically
+  Club STEM Laboratory of Robotics for Soft Materials funded by The Hong           induced transparency (EIT), to facilitate the ensuing infor-
+  Kong Jockey Club Charities Trust. An earlier version of this paper was
+  presented in part at the 2024 IEEE Global Communications Conference (IEEE        mation demodulation [7]. In contrast with the macroscopic
+  GLOBECOM) [1]. (Corresponding authors: Kaibin Huang; Qunsong Zeng.)              measurement of electromagnetic fields by conventional radio-
+    The authors are with the Department of Electrical and Electronic Engineer-     frequency (RF) receivers, the atomic counterparts operate at
+  ing, The University of Hong Kong, Hong Kong (e-mail: mycui@eee.hku.hk;
+  qszeng@eee.hku.hk; huangkb@eee.hku.hk).                                          the atom-scale microcosm. This fundamentally different prin-
+    Digital Object Identifier 10.1109/JSAC.2025.3531528                            ciple enables the latter to achieve accuracies at the quantum
+                  1558-0008 © 2025 IEEE. All rights reserved, including rights for text and data mining, and training of artificial intelligence
+                        and similar technologies. Personal use is permitted, but republication/redistribution requires IEEE permission.
+                                        See https://www.ieee.org/publications/rights/index.html for more information.
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on April 03,2026 at 06:28:38 UTC from IEEE Xplore. Restrictions apply.
+  660                                                                IEEE JOURNAL ON SELECTED AREAS IN COMMUNICATIONS, VOL. 43, NO. 3, MARCH 2025
+
+
+
+  limit and have the potential of working in tandem with or even                   capacity of up to 8.2 Mbps was measured using the 8-state
+  replacing conventional RF receivers [14].                                        phase-shift-keying modulation. This holographic principle was
+     Benefiting from the advancements in quantum sensing,                          then extended to support angle-of-arrival estimation [23]
+  atomic receivers offer several advantages over conventional                      and micro-vibration monitoring [6]. Another vein of research
+  receivers for wireless communication and sensing. First,                         exploits the capability of atomic receivers for multi-band com-
+  atomic receivers can achieve much higher sensing accura-                         munications [17], [24]. For example, it was proposed in [24]
+  cies as mentioned earlier [5]. For example, as demonstrated                      to excite electrons to the same initial Rydberg energy level
+  in [6], atomic receivers can achieve the sub-millimeter (sub-                    but transfer them to different final Rydberg energy levels via
+  mmWave) level granularity in detecting object vibrations using                   the interaction with separate frequency bands. This approach
+  WiFi sources as opposed to the mmWave level granularity                          enables the co-detection of 5 frequency bands at 1.72, 12.11,
+  attained by traditional receivers. The second advantage lies in                  27.42, 65.11, and 115.75 GHz.
+  low thermal noise. Conventional receivers require RF circuits                       Despite the rapid development of atomic receivers in
+  to intercept radio waves and downconvert RF signals to                           the quantum-sensing domain, their application in wireless
+  the baseband, which comprise components such as analog                           communication is still at a nascent stage. The state-of-the-
+  amplifiers and mixers that generate significant thermal noise.                   art designs are suitable only for primitive communication
+  In contrast, atomic receivers employ all-optical components for                  scenarios and schemes, such as a point-to-point system
+  sensing and downconversion, and thus are immune to thermal                       or a single-input-single-output (SISO) air interface. With-
+  noise [10]. The above two advantages make atomic receivers                       out advanced transmission technologies, the full potential of
+  a promising technology for long-range communications [7],                        atomic receivers cannot be unleashed, with the state-of-the-art
+  such as the space-air-ground integrated networks [15], where                     achieving only a Mbps-scale channel capacity [17], [22], [24].
+  detecting weak electric signals is crucial. Last but not the                     This calls for research on atomic-receiver-specific massive
+  least, the flexible tunability of Rydberg atoms across an ultra-                 multiple-input-multiple-output (MIMO), multi-user commu-
+  wide spectrum is a significant advantage [14]. Traditional                       nications, integrated sensing and communication (ISAC),
+  antennas, with a fixed size typically half the wavelength of                     reconfigurable intelligent surface (RIS), and edge learning
+  the carrier, are limited in the spectrum bandwidth they can                      techniques [25], [26], [27], [28]. To contribute to this emerg-
+  listen to. Detecting multi-band signals requires an array of                     ing field, this paper seeks the feasibility of integrating MIMO
+  costly RF receivers, each of which is matched to a specific                      communications and atomic receivers. MIMO, a key 5G
+  band [16]. In contrast, the numerous energy levels in Rydberg                    technology, features spatial multiplexing of parallel data links
+  atoms allow an atomic receiver to respond to a broad range                       and enhancement of link reliability via diversity gain [25]. It is
+  of frequencies from 100 Megahertz (MHz) to 1 Terahertz                           believed that the consideration of MIMO has the potential to
+  (THz) by exciting electrons to different energy levels [17].                     overcome the capacity and sensitivity bottleneck of current
+  This capability enables the simultaneous measurement of                          atomic SISO receivers.
+  multi-band signals over an extremely wide spectrum using a
+  single atomic receiver, laying the foundation for constructing
+  an extraordinarily cost-effective full-frequency communication                   C. Contributions and Organization
+  platform. To materialize the above visions, this work incorpo-                      To the best of our knowledge, this work represents the first
+  rates atomic receivers into modern wireless communication                        attempt on designing and analyzing atomic MIMO receivers.
+  systems.                                                                         We propose a novel framework for atomic MIMO receiver
+                                                                                   by building on the basic mechanisms of quantum sensing.
+                                                                                   In this framework, phase-modulated symbols simultaneously
+  B. State-of-the-Art Atomic Receivers                                             transmitted by multiple users are detected by multiple atomic
+     Existing research on atomic receivers primarily focuses                       antennas using the mentioned scheme of heterodyne detection.
+  on the lab demonstrations of different signal modulation                         The key contributions and findings are summarized as follows.
+  schemes. It is well-known that via the interaction between                          • Modeling of atomic MIMO receiver: Our model of
+  electromagnetic fields and Rydberg atoms, the strength and                            atomic MIMO receiver reveals that its signal detection
+  frequency of modulated radio waves can be transduced into                             is essentially a biased phase retrieval (PR) problem.
+  the intensity of electron transition, called the Rabi frequency.                      In particular, the transmitted symbols are modulated in
+  Hence, by inferring symbols from the Rabi frequencies, both                           the coupling strength between the electric dipole moment
+  the amplitude demodulation and frequency demodulation at                              of Rydberg atoms and the incident radio waves from
+  37.4 GHz and 29.5 GHz have been realized, respectively [18].                          the users and the reference source. The atomic MIMO
+  For phase demodulation, researchers widely employ the het-                            receiver capitalizes on this strength to infer multi-user
+  erodyne detection scheme, which evolves from the holographic                          symbols without the help of phase information. This
+  phase-sensing method in optics imaging. This scheme uses a                            finding highlights one crucial departure of atomic MIMO
+  local oscillator (LO) to generate a reference electromagnetic                         system from its traditional counterpart: as opposed to the
+  field with a known phase that interferes with the incident                            linear transmission model fitting the latter, the former
+  modulated electromagnetic field [19], [20], [21]. Then, the                           operates in a non-linear transmission model.
+  phase-modulated symbols can be extracted from the phase dif-                        • Signal detection for atomic MIMO receiver: To solve
+  ferences between the aforementioned fields. In [22], a channel                        the discovered biased PR problem, we propose two
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on April 03,2026 at 06:28:38 UTC from IEEE Xplore. Restrictions apply.
+  CUI et al.: TOWARDS ATOMIC MIMO RECEIVERS                                                                                                                  661
+
+
+
+
+  Fig. 1.   Wireless communication systems based on (a) classical receiver and (b) Rydberg atomic receiver.
+
+
+
+       signal detection algorithms: the biased Gerchberg-Saxton                    in this section. We first present the architecture of an atomic
+       (GS) and the Expectation-Maximization GS (EM-GS)                            receiver and explain the underlying physical laws of Rydberg
+       algorithms, which are based on the least square (LS)                        atoms as antennas, followed by an introduction to quantum
+       and maximum likelihood (ML) criteria, respectively.                         jump enabling wireless signal detection. Last, we end this
+       First, the biased GS algorithm extends the classic GS                       section with the implementation of atomic receivers.
+       algorithm [29], a popular PR solver, by eliminating the
+       bias caused by the reference source in the initializa-                      A. Atomic Receiver Architecture
+       tion and iteration steps of the classic algorithm. Next,
+                                                                                      To begin with, the wireless communication systems employ-
+       the proposed EM-GS algorithm employs the Bayesian
+                                                                                   ing classical and atomic receivers are differentiated in Fig. 1.
+       regression to perform ML detection. Its novelty lies in
+                                                                                   The two systems are identical in terms of transmitter architec-
+       treating the unobserved phase information as a latent
+                                                                                   ture and channel. Data symbols are both pre-processed using
+       variable and thereby decoupling the intricate ML problem
+                                                                                   electronic circuits and modulated onto electromagnetic waves.
+       into a sequence of tractable linear regression problems
+                                                                                   Their distinction lies in the receiver architecture. A classical
+       with analytical solutions. A comparison of the proposed
+                                                                                   receiver utilizes a dipole antenna to transduce incident waves
+       EM-GS algorithm to the biased GS algorithm reveals
+                                                                                   into signals and decodes from them transmitted bits using
+       that the former features an additional high-pass filter as
+                                                                                   a series of electronic components, such as mixers, ampli-
+       constructed by the ratio of Bessel functions. This entails
+                                                                                   fiers, filters, and baseband professors. In contrast, an atomic
+       the improvement of detection accuracy without increasing
+                                                                                   receiver employs a different signal-detection paradigm. Such a
+       computational complexity.
+                                                                                   receiver deploys Rydberg atoms as its “antennas” to measure
+    • Performance study: We employ two metrics, namely
+                                                                                   the electromagnetic field. Free from energy-consuming and
+       the normalized mean square error (NMSE) and the bit
+                                                                                   bulky electronic components, a vapor cell filled with Rydberg
+       error ratio (BER), to validate the feasibility of atomic
+                                                                                   atoms suffices for sensing the wireless environment. The
+       MIMO receivers as well as the effectiveness of the
+                                                                                   underpinning mechanism involves the incident electromagnetic
+       proposed algorithms. Targeting the NMSE metric, the
+                                                                                   wave interacting with Rydberg atoms to change their quantum
+       Cramér-Rao lower bound (CRLB) is derived. Numerical
+                                                                                   states, which are monitored using an all-optical readout device,
+       results demonstrate that the proposed EM-GS algorithm
+                                                                                   such as a photodetector (PD). The output is processed by
+       consistently approaches the CRLB and outperforms the
+                                                                                   a signal-detection algorithm to decipher the transmitted bits.
+       biased GS algorithm, especially in the low signal-to-noise
+                                                                                   In summary, the architecture of an atomic-receiver based com-
+       ratio (SNR) regime. Regarding the BER performance,
+                                                                                   munication system comprises a classic transmitter, a classic
+       simulation results confirm that the biased GS and EM-GS
+                                                                                   channel, and a quantum receiver.
+       algorithms achieve BERs close to those from an exhaus-
+       tive search, while being much more computationally
+       efficient.                                                                  B. Rydberg Atoms as Antennas
+    The remainder of this paper is organized as follows.                              1) Atomic Energy Levels: To grasp the concept of atomic
+  The preliminaries of atomic SISO receivers are provided in                       receiver, it is essential to first understand the principle of
+  Section II. The framework of atomic MIMO receiver and the                        Rydberg atoms. Each atom consists of a positively charged
+  corresponding detection algorithms are presented in Section III                  nucleus surrounded by multiple negatively charged electrons.
+  and Section IV, respectively. Section V extends the pro-                         According to the Rutherford–Bohr model, the Coulomb poten-
+  posed designs to channel estimation problems. In Section VI,                     tial from the nucleus confines the electrons to discrete orbits
+  we validate the proposed design by numerical results. Finally,                   with distinct energy levels [30]. An energy level can be
+  conclusions are drawn in Section VII.                                            denoted as nℓj , where n, ℓ, and j represent the princi-
+                                                                                   pal quantum number, the orbit angular momentum quantum
+      II. P RELIMINARIES OF ATOMIC W IRELESS R ECEIVER                             number, and the total angular momentum quantum number,
+    To help understanding of the proposed framework, prelim-                       respectively [31]. While n and j are numerical, ℓ is assigned
+  inaries of atomic receiver for a SISO air interface is provided                  a letter from S, P, D, F, · · · , in an ascending order according
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on April 03,2026 at 06:28:38 UTC from IEEE Xplore. Restrictions apply.
+  662                                                                IEEE JOURNAL ON SELECTED AREAS IN COMMUNICATIONS, VOL. 43, NO. 3, MARCH 2025
+
+
+
+  to the spectroscopic notation. For instance, nℓj = 50P1/2 . Let                  the set of available transition frequencies ωnm becomes larger
+  Enℓj denote the energy corresponding to the energy level nℓj .                   to cover a wide range of spectrum from MHz to THz [6].
+  In particular, for a hydrogen-like atom,                                         For example, the transition between energy levels 52D5/2
+                                    hcRy                                           and 53P3/2 corresponds to a transition frequency ωnm =
+                       Enℓj = −               ,               (1)                  2π × 5 GHz, which falls within the sub-6G band. On the other
+                                 (n − δnlj )2
+                                                                                   hand, mmWave signals at 28 GHz can trigger the transition
+  where h = 6.626 × 10−34 J·s is the Planck constant, c =                          between energy levels 61D5/2 and 63P3/2 . The preceding
+  2.998 × 108 m·s−1 the speed of light, Ry = 1.079 × 107 m−1                       advantages inspire researchers to develop atomic receivers
+  the Rydberg constant, and δnlj the quantum defect constant                       based on Rydberg atoms to realize wireless detection across a
+  specific for each energy level [7]. For ease of notation, we omit                vast range of communication bands [17], [24].
+  the subscript ℓj of Enℓj in the sequel. Besides, it is useful to
+                                                                  ∆
+  define the intrinsic frequency of each energy level as ωn =
+  En                                                                               C. Electromagnetic Wave and Quantum Jump
+   ℏ , and the transition frequency between two energy levels
+            ∆                                                                         1) Quantum State of Rydberg Atom: Let P and s denote
+  as ωnm = ωn − ωm = En −E     ℏ
+                                 m
+                                   , where ℏ = 2π h
+                                                     is the reduced
+  Planck constant.                                                                 transmit power and baseband signal in a narrowband system,
+     2) Quantum Jump: Electrons can jump between energy                            respectively. Consider the system in Fig. 1(b), the incident
+  levels by either absorbing or emitting photons [32]. When                        electromagnetic wave at the receiver is given as
+  a photon is absorbed, the electron is excited to a higher                                    √
+                                                                                      E(t) = ϵ P ρs cos(ωt + ϕ) = [Ex (t), Ey (t), Ez (t)]T , (2)
+  energy level, while transitioning to a lower energy level results
+  in photon emission. This peculiar quantum phenomenon is                          where ρ represents the path loss, ϕ the phase shift, and the
+  known as quantum jump or electron transition. It is worth                        unit-vector, ϵ = [ϵx , ϵy , ϵz ]T with ∥ϵ∥2 = 1, the polarization
+  mentioning that the electromagnetic radiation/sensing essential                  direction. The receiver harnesses a vapor cell filled with Ryd-
+  for wireless communication is a special form of photon                           berg atoms to detect the wave by observing quantum jumps.
+  emission/absorption due to the wave–particle duality [31]. The                   Specifically, we denote the energy levels of the Rydberg
+  energy conservation law dictates that an electron transition                     ground and excited states as Eg = ℏωg and Ee = ℏωe .
+  between two energy levels En and Em (En > Em ) can                               The frequency ω of electromagnetic wave is set close to the
+  occur only when the angular frequency ω of electromagnetic                       transition frequency ωeg = ωe − ωg such that quantum jumps
+  wave is close to the transition frequency, ωnm , (i.e., near-                    primarily happen between these two energy levels. Then, the
+  resonance or resonance). The quantum jumps in response to                        quantum state of this two-level system is expressed by a
+  carrier frequencies are the fundamental phenomenon enabling                      2 × 1 complex vector,1 whose ground and excited states are
+  atomic receivers.                                                                given as |g⟩ = [0, 1]T and |e⟩ = [1, 0]T , respectively. A general
+     3) Definition of Rydberg Atom: An atom becomes a Ryd-                         quantum state, |ψ⟩, is modeled by the linear combination of
+  berg atom when at least one of its electrons is excited to a                     |g⟩ and |e⟩:
+  high energy level (Rydberg state) with a principal quantum
+  number n > 20 [13]. As depicted in Fig. 1(b), to prepare                                          |ψ⟩ = αg |g⟩ + αe |e⟩ = [αe , αg ]T ,                    (3)
+  Rydberg atoms, two laser beams of different frequencies and
+  intensities (i.e., a weak probe beam and a strong coupling                       where the complex coefficients, αg and αe , are called the
+  beam) are steered in opposite directions to propagate through                    probability amplitudes of |ψ⟩, satisfying |αg |2 + |αe |2 = 1.
+  a vapor cell filled with alkali-metal atoms [18]. The probe                      When |ψ⟩ is measured on the basis {|g⟩ , |e⟩}, the outcome is
+  beam excites the outermost electrons from their ground level                     |g⟩ with probability |αg |2 and |e⟩ with probability |αe |2 .
+  to a low excited state (e.g., 6S1/2 → 6P3/2 ). The coupling                         2) State Evolution of Rydberg Atom: For a time-varying
+  beam then further triggers these electrons to jump from the                      system we consider, i.e., |ψ(t)⟩ = αg (t) |g⟩ + αe (t) |e⟩, the
+  state to a highly excited Rydberg state (e.g., 6P3/2 → 47S5/2 ),                 evolution of quantum state is governed by the Schrödinger
+  thereby creating Rydberg atoms. Apart from the preparation                       equation [31]:
+  of Rydberg states, the probe beam also serves the purpose of                                              ∂ |ψ(t)⟩
+  reading out the quantum state of Rydberg atoms, as elaborated                                        iℏ            = (Ĥ + V̂ ) |ψ(t)⟩ ,                   (4)
+                                                                                                               ∂t
+  in Section II-E.                                                                             √
+     4) Properties of Rydberg Atom: Rydberg atoms exhibit                          where i = −1. The operators Ĥ and V̂ are known as the
+  several properties useful for wireless communication due to the                  free Hamiltonian and interaction Hamiltonian operators, which
+  large electron-nucleus separation distance. First, Bohr’s model                  are defined as follows.
+  indicates that the orbit radius of an electron is proportional to                   • Free Hamiltonian: The free Hamiltonian Ĥ repre-
+
+  n2 [13]. The large principal quantum number in a Rydberg                              sents the energy of the isolated nucleus-electron system.
+  atom results in a large atomic radius and, consequently, makes                        By acting Ĥ on the ground state |g⟩ and the excited
+  Rydberg atoms extremely sensitive to incident electromagnetic                         state |e⟩, we can obtain their energy levels Eg = ℏωg
+  waves, enabling accurate signal detection. Second, it follows
+                                                                                     1 In quantum physics, the Dirac notation is widely used for quantum states,
+  from (1) that the energy spacing between two adjacent energy
+                                                                                   where a “bra” represents the conjugate transpose of a ket vector, denoted as
+  levels is approximately ∆E ∝ n13 . This scaling reveals that                     ⟨ψ|, while a “ket” represents a vector in Hilbert space, denoted as |ψ⟩. The
+  energy levels become denser with increasing n. As a result,                      inner product of two kets |ψ⟩ and |ϕ⟩ is expressed as ⟨ψ|ϕ⟩ [31].
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on April 03,2026 at 06:28:38 UTC from IEEE Xplore. Restrictions apply.
+  CUI et al.: TOWARDS ATOMIC MIMO RECEIVERS                                                                                                                  663
+
+
+
+         and Ee = ℏωe . In this context, Ĥ is expressed by a                      D. Integrated Demodulation and Down-Conversion via Rabi
+         2 × 2 diagonal matrix:                                                    Oscillation
+           Ĥ = ℏωe |e⟩ ⟨e| + ℏωg |g⟩ ⟨g| = diag{ℏωe , ℏωg }. (5)                     The aforementioned Rabi oscillation in Rydberg atoms
+                                                                                   provides a mechanism for realizing integrated demodulation
+     •   Interaction Hamiltonian: The Hamiltonian V̂ accounts                      and downconversion, which are the two key operations of the
+         for the interaction energy of the incident electromag-                    atomic receiver. The details are described as follows.
+         netic field (2) acting on this two-level system. Using                       1) Demodulation: The phenomenon of Rabi oscillation is
+         Rutherford–Bohr model, we define the relative position                    useful for demodulation because the transmit symbol, s, and
+         from the nucleus to the electron as r. Then, the interac-                 carrier frequency, ω, are encoded in the Rabi frequency, ΩR ,
+         tion energy in classical physics is determined by V =                     and effective Rabi frequency, Ω. Consider the realization of
+         qrT E(t) = µT E(t), where q is the charge of an electron                  amplitude demodulation first of all, ΩR and Ω are propor-
+         and µ = qr the electric dipole moment. In quantum                         tional to the norm of s. Therefore, the stronger the symbol
+         physics, the position vector r is translated to a position                energy |s|2 , the more frequent the quantum jump occurs.
+         operator r̂ = [r̂x , r̂y , r̂z ]T . Each entry of r̂ refers to a          This property can be exploited by atomic receivers to infer
+         quantum operator denoted by a 2 × 2 Hermitian matrix.                     amplitude-modulated signals by reading the Rabi frequencies.
+         According to the selection role of electron transition [32],              Next, consider frequency demodulation. Though the strength
+         the expansion of r̂d , d ∈ {x, y, z} on the basis {|e⟩ , |g⟩}             of s is fixed, the carrier frequency, ω, and the detuning factor,
+         is expressed as r̂d = ⟨e| r̂d |g⟩ |e⟩ ⟨g| + ⟨g| r̂d |e⟩ |g⟩ ⟨e|,          δ = ωeg − ω, change with time. Note that the changes on ω
+                                              ∗
+         where ⟨e| r̂d |g⟩ = ⟨g| r̂d |e⟩ . Given this operator, the                according to data signals cause δ to vary. Thus one can use the
+         interaction Hamiltonian V̂ = qr̂T E(t) is transferred from                atomic receiver to recover data bits from frequency-modulated
+         the interaction energy V = qrT E(t) as
+                                                                                                                                  p
+                                                                                   signals by measuring the variations in Ω = Ω2R + δ 2 .
+                         X                        
+                                                       0 ξ(t)
+                                                                                     2) Simultaneous Down-Conversion: The Rabi oscillation
+                 V̂ =              qr̂d Ed (t) =                 ,    (6)          in (7) can double as a down-converter. Specifically, in the
+                                                    ξ ∗ (t) 0
+                        d∈{x,y,z}                                                  course of quantum jump, the symbol s modulated on the
+                       ∆            √                                              electromagnetic wave is naturally down-converted to the Rabi
+       where ξ(t) = (µTeg ϵ) P ρs cos(ωt + ϕ) and µeg =
+                                                                                   frequency without any electronic mixer [10]. Its integration
+       q ⟨e| r̂ |g⟩ = q[⟨e| r̂x |g⟩ , ⟨e| r̂y |g⟩ , ⟨e| r̂z |g⟩]T . The vec-
+                                                                                   with the preceding demodulation process represents another
+       tor µeg is called the transition dipole moment [30].
+                                                                                   advantage of atomic receiver.
+     Assume the initial state is αg (0) = 1 and αe (0) = 0.
+  We can solve the Schrödinger equation in (4) using the method
+  of rotating-wave approximation (RWA) (see details in [32] or                     E. Implementation of Atomic Receiver
+  Appendix A). As a result, the probability, |αe (t)|2 , is derived                   Despite the elegant mathematical representation of Rabi
+  as                                                                               oscillation in (7), observing this phenomenon in practice is
+                                                               !
+                                                                                   quite challenging due to various external disturbances that can
+                                               p
+                     2       Ω2R          2       Ω2R + δ 2
+            |αe (t)| = 2              sin                     t ,        (7)       destroy the coherence of a quantum state, such as spontaneous
+                         ΩR + δ 2                     2
+                                                                                   emission [32]. Fortunately, the data-carrying effective Rabi fre-
+                ∆                                                                  quency is still measurable, as it can induce two other quantum
+  where δ = ωeg − ω denotes the detuning of the car-
+  rier frequency√ω from the transition frequency ωeg . In (7),                     phenomena, namely electromagnetically induced transparency
+         ∆ |(µT ϵ) P ρs|
+               eg
+                                                                                   (EIT) and Autler-Townes (AT) splitting [7], [9]. As shown in
+  ΩR =            ℏ       denotes the Rabi frequency, defined as                   Fig. 2, the EIT-AT phenomenon involves a four-level system
+  the frequency at which the probability amplitudes of two                         denoted by quantum states |1⟩, |2⟩, |3⟩, and |4⟩, where |3⟩
+  atomic energy levels fluctuate in response to an oscillating                     and |4⟩ represent the Rydberg states we studied before. Recall
+  electromagnetic field [32]. For ease of notation, we introduce                   that when preparing a Rydberg state, two laser beams, the
+     ∆ p
+  Ω = Ω2R + δ 2 to represent the effective Rabi frequency.                         probe beam and coupling beam, are needed to excite the
+     The oscillation at the Rabi frequency as depicted in (7),                     electron from |1⟩ to |2⟩ and then from |2⟩ to |3⟩. In practice,
+  known as Rabi oscillation, results from electrons’ back-and-                     a PD is deployed to receive the probe beam and illustrate
+  forth transitions between ground and excited states. This                        its spectrum for observing the Rabi frequency. When the
+  causes time-variation of electron populations over energy lev-                   incident electromagnetic wave is turned off and the probe
+  els. When the carrier frequency exactly matches the transition                   beam is turned resonant with the transition |1⟩ → |2⟩, the
+  frequency (i.e., ω = ωeg ), the excited-state  probability in (7)                EIT phenomenon occurs such that the probe beam penetrates
+  is simplified as |αe (t)|2 = sin2 Ω2R t with the oscillation
+                                            
+                                                                                   through the vapor cell nearly without absorption loss. What
+  magnitude at its maximum of one. On the other hand, as the                       reflects on its spectrum is that one peak appears at the
+  carrier frequency ω deviates from ωeg , the magnitude, given                     resonant frequency (see the upper sub-figure of Fig. 2). On the
+        Ω2R
+  as Ω2 +δ  2 , reduces as the detuning factor, δ, increases; the                  other hand, when the incident electromagnetic wave is turned
+        R
+  effective Rabi frequency Ω, however, grows. The above facts                      on, the two Rydberg states |3⟩ and |4⟩ are coupled by the
+  reflect the ability of a resonant (or near-resonant) electromag-                 Rabi frequency. As a result, the AT splitting phenomenon is
+  netic wave to stimulate significant changes on the quantum                       induced, which splits the peak of the spectrum of the probe
+  states of Rydberg atoms.                                                         beam into two as depicted in the lower sub-figure of Fig. 2.
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on April 03,2026 at 06:28:38 UTC from IEEE Xplore. Restrictions apply.
+  664                                                                  IEEE JOURNAL ON SELECTED AREAS IN COMMUNICATIONS, VOL. 43, NO. 3, MARCH 2025
+
+
+
+
+                                                                                      Fig. 3. Schematic diagram of the atomic MIMO receiver. One atomic receiver
+                                                                                      employing N atomic antennas is measuring signals from K-single antenna
+                                                                                      users together with one reference source.
+  Fig. 2. The EIT-AT phenomenon of a four-level system, where |3⟩ and |4⟩
+  represent the Rydberg states. For example, in literature [18], |1⟩, |2⟩, |3⟩, and
+  |4⟩ correspond to the energy levels 6S1/2 , 6P3/2 , 47S1/2 , and 47P1/2 for         power of sk is normalized as E(∥sk√∥2 ) = 1. Then, the transmit
+  measuring 37.4065 GHz electromagnetic wave.
+                                                                                      RF signal is given by xk (t) = Pk |sk | cos(ωt + γk ). We
+                                                                                      adopt the practical multi-path wireless channel with L paths.
+  As physicists have demonstrated, the splitting interval ∆f of                       The simultaneous transmissions from all users result in the
+  the two peaks is linearly proportional to the effective Rabi                        received electromagnetic wave at the n-th vapor cell:
+  frequency [10]:                                                                                 X L
+                                                                                                  K X              p
+                                          λc Ω                                         En (t) =             ϵnkl    Pk ρnkl |sk | cos(ωt + ϕnkl + γk ), (9)
+                                 ∆f =           ,                              (8)                k=1 l=1
+                                          λp 2π
+                                                                                      where variables ϵnkl , ρnkl , and ϕnkl represent the polarization,
+  where λc and λp denote the wavelengths of the coupling and
+                                                                                      path loss, and phase shift of the propagation from the k-th user
+  probe beams, respectively. Then, measuring ∆f , the effective
+                           λ                                                          to the n-th antenna via the l-th path.
+  Rabi frequency, Ω = 2π λpc ∆f , can be read out to infer the
+                                                                                         Next, consider an arbitrary vapor cell, say the n-th cell at
+  transmitted symbol.
+                                                                                      the receiver. For each atom inside this cell, its quantum state
+                                                                                      can be expressed as |ψ(t)⟩n = αg,n (t) |g⟩ + αe,n (t) |e⟩ =
+           III. OVERVIEW OF ATOMIC MIMO R ECEIVER
+                                                                                      [αe,n (t), αg,n (t)]T . Similarly as in the SISO case, the evolu-
+     In the preceding section, we introduced the principles                           tion of |ψ(t)⟩n is governed by the Schrödinger equation
+  of atomic SISO receiver. In this section, building on these
+  principles, we propose the atomic MIMO receiver for multi-                                              ∂ |ψ(t)⟩n
+                                                                                                     iℏ               = (Ĥn + V̂n ) |ψ(t)⟩n .           (10)
+  user communications. First, the transmission model of atomic                                                ∂t
+  MIMO receivers is presented. Then, the heterodyne detection                         As all atoms are exited to the uniform Rydberg states,
+  is incorporated into atomic MIMO receivers for detecting                            the free Hamiltonian Ĥn is the same as (5), i.e.,
+  quadrature amplitude modulation (QAM) symbols, followed                             Ĥn = diag{ℏωe , ℏωg }. Similar to the discussion in (6),
+  by the model of system noise.                                                       the interaction Hamiltonian V̂n results from the coupling
+                                                                                      of the incident wave En (t) and P              the position      opera-
+                                                                                                                      T                K PL           T
+  A. Transmission Model of Atomic MIMO Receiver                                       tor
+                                                                                      √ n   r̂ , i.e.,  V̂n   =   qr̂   E
+                                                                                                                      n n (t) =        k=1    l=1 (qr̂n ϵnkl )
+                                                                                        Pk ρnkl |sk | cos(ωt + ϕnkl + γk ). By expanding the position
+     Consider the multi-user communication system illustrated
+                                                                                      operator r̂n on the basis {|g⟩ , |e⟩} as r̂n = ⟨e| r̂n |g⟩ |e⟩ ⟨g| +
+  in Fig. 3, where K single-antenna users communicate with
+                                                                                      ⟨g| r̂n |e⟩ |g⟩ ⟨e|, we arrive at the matrix-form expression:
+  one atomic MIMO receiver. Its architecture comprises N
+  vapor cells filled with Rydberg atoms and an equal number                                           V̂n = ξn (t) |e⟩ ⟨g| + ξn∗ (t) |g⟩ ⟨e| ,             (11)
+  of PDs. Each vapor cell acts as an atomic antenna for
+                                                                                      where
+  measuring electromagnetic waves, while the PDs read out
+                                                                                                 K X
+                                                                                                   L
+  the measurement results (i.e., the splitting interval, ∆f , and                                X                     p
+  the Rabi frequency, ΩR ) and aggregate them to the digital                           ξn (t)=             µTeg ϵnkl    Pk ρnkl |sk | cos(ωt + ϕnkl + γk ).
+                                                                                                 k=1 l=1
+  processor for signal detection. We assume all users share the
+  same carrier frequency ω, while all atoms are triggered to                                                                                               (12)
+  the uniform Rydberg states ℏωg and ℏωe (e.g., 52D5/2 and                            We assume that the initial state is αe,n = 0. Then, we can
+  53P3/2 ) in response to the carrier frequency (e.g., ω = 5 GHz).                    derive the probability amplitude using RWA (see details in
+  The resonance case where ω = ωeg is considered.                                     Appendix A) as
+     Consider an arbitrary user, say the k-th user. Its phase                                                                   
+  modulated symbol is denoted as sk = |sk |eiγk ∈ S, where                                                                 ΩR,n
+                                                                                                      |αe,n (t)|2 = sin2        t ,         (13)
+  the set S corresponds to the QAM constellation. The average                                                               2
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on April 03,2026 at 06:28:38 UTC from IEEE Xplore. Restrictions apply.
+  CUI et al.: TOWARDS ATOMIC MIMO RECEIVERS                                                                                                                  665
+
+
+
+  where the Rabi frequency is given as                                             RF signal transmitted by LO is expressed as xb (t) =
+                                                                                   √
+                                                                                     Pb |sb | cos(ωt + γb ). Since the LO-to-receiver distance is
+               X L
+               K X       1 H          p
+    ΩR,n =                 (µeg ϵnkl ) Pk ρnkl |sk |ei(ϕnkl +γk ) . (14)           quite short, e.g., tens of centimeters, the LO-to-receiver chan-
+                         ℏ                                                         nel is dominated by the line-of-sight (LoS) path. Thereby, the
+               k=1 l=1
+
+  Note that the detuning factor, δ, vanishes since δ = ωeg − ω =                   received electromagnetic wave in (9) should be modified as
+  0. The preceding formula characterizes the quantum-jump                                          X L
+                                                                                                   K X              p
+  behavior of the n-th atomic antenna as triggered by K sources,                       En (t) =              ϵnkl    Pk ρnkl |sk | cos(ωt + ϕnkl + γk )
+  where multi-user symbols, {sk }, are encoded in the Rabi                                         k=1 l=1
+                                                                                                           p
+  frequencies, {ΩR,n }.                                                                           + ϵb,n    Pb ρb,n |sb | cos(ωt + ϕb,n + γb ),            (16)
+     The goal of atomic-MIMO receiver is to read the values of
+  {ΩR,n } and infer {sk } from {ΩR,n }. To this end, according                     where ρb,n , ϕb,n , and ϵb,n refer to the path loss, phase shift,
+  to the principle of EIT-AT discussed in Section II-E, the Rabi                   and polarization of the LO-to-receiver LoS path, respectively.
+  frequency, ΩR,n , can be measured by the splitting interval,                     Then, following the same steps as (10) to (15), we can arrive
+  ∆fn , of the probe-beam spectrum since ΩR,n = 2π λpc ∆fn .
+                                                                      λ            at the modified received signal:
+  For ease of exposition, let the measurement of ΩR,n be                                                        z = |AH s + b|,                   (17)
+  denoted as zn , which is the equivalent received signal at                                                                          √
+  the n-th antenna. To facilitate the detector design, a compact                   where b = [b1 , · · · , bN ]T and bn = sℏb µH
+                                                                                                                               eg ϵb,n Pb ρb,n e
+                                                                                                                                                 iϕb,n
+                                                                                                                                                       .
+  matrix form of {zn } is derived as follows. We define s =                        Due to the presence of reference signal b, (17) is called a
+  [s1 , s2 , · · · , sK ]T and an √  = [an,1 , an,2 , · · · , an,K ]T , where      biased PR model as opposed to the typical PR model without
+                PL 1 T                          −iϕnkl                             this reference signal.
+  an,k =            l=1 ℏ (µeg ϵn,k ) Pk ρnkl e         . It is straightfor-
+  ward to obtain that zn = aH             n s .  We     further   define the
+  received vector-form signal as z = [z1 , z2 , · · · , zN ]T and                  C. Noise Model
+  the observation matrix as A = [a1 , a2 , · · · , aN ] ∈ CK×N .                      The noise perturbing the atomic MIMO receiver is attributed
+  It follows that                                                                  to both external and internal sources.
+                                 z = |AH s|,                              (15)        External noise is mainly induced by the signal interference
+                                                                                   from adjacent time slots, bands, and nearby cells, which is
+  where the operator |x| takes the magnitude of each element of                    clearly environment-dependent. We use the notation σE      2
+                                                                                                                                                to
+  the vector, x. A crucial conclusion is drawn from (15) that the                  represent the total variance of external noise.
+  transmit symbols in s are embedded in the observed amplitude                        The internal noise comes from the thermal noise of
+  vector z = |AH s|, where the observation matrix A can be                         electronic components and the randomness of quantum mea-
+  treated as an effective MIMO channel. As opposed to the linear                   surement, i.e., quantum shot noise (QSN). In contrast to
+  model adopted in conventional MIMO communications, the                           conventional RF systems, an atomic receiver makes no use of
+  atomic MIMO receiver features a non-linear model based on                        RF circuits at the front end that produce thermal noises, such
+  amplitude detection. This is equivalent to the well-known PR                     as analog filters, amplifiers, and mixers. This fact means that
+  model in the realm of optical imaging [33]. Before delving                       an atomic receiver is immune to thermal noise. Thereafter, the
+  into this PR problem, two factors, the heterodyne detection                      limiting noise source for atomic receivers is the QSN, whose
+  and the noise model, that are part of the proposed framework                     level in the unit of electric field strength [V/m] is presented
+  and affect the receiver’s effectiveness should be discussed.                     by [7]
+                                                                                                                            h
+  B. Heterodyne Detection                                                                               Emin =                           ,                 (18)
+                                                                            i∠s
+                                                                                                                    ∥µeg ∥(Ti Tr Na )1/2
+     One can observe from (15) that the absolute phase e
+  of s is ambiguous to the received signal z, making it hard                       where Ti , Tr , and Na denote the measurement time, the
+  to detect QAM symbols. To address this issue, a heterodyne                       relaxation time of Rydberg states, and the number of partic-
+  detection scheme, which evolves from the holographic phase-                      ipating atoms, respectively. By plugging this noise limit into
+  sensing scheme in optics imaging, is often employed [21].                        the electric field and further transforming it into the unit of
+                                                                                                                                       ∥µ ∥
+  As illustrated in Fig. 3, this scheme artificially introduces a                  Rabi frequency [Rad/s], Emin is normalized to ℏeg Emin =
+                                                                                         2π
+  LO to send known reference signals, denoted as sb = |sb |ejγb ,                  (Tt Tr Na )1/2
+                                                                                                  . As a result, the variance of QSN is given as
+  to interfere with signals from users. The LO is typically
+  implemented by a horn antenna and can be deployed close                                                                 4π 2
+                                                                                                                σS2 =            .                         (19)
+  to the receiver. Utilizing the reference signal sb , one can infer                                                    Ti Tr Na
+  the absolute phase, ei∠s , by estimating the phase difference                    The extreme sensitivity of atomic receivers arises because the
+  between s and sb , thereby enabling QAM detection.                               noise level (19) can be orders of magnitude lower than the
+     Mathematically speaking, let the reference signal share                       thermal noise of conventional receivers [6]. To fairly compare
+  the same carrier frequency ω with the user signal.2 The                          the quantum shot noise and thermal noise, we adopt the
+     2 This article considers the situation where the reference and user signals
+                                                                                   standard Ti = 1 s measurement time for both them. In this
+  share the same frequency. The extension to different frequency scenarios in      case, the power density of room-temperature thermal noise
+  atomic MIMO receiver is left for future works.                                   is −174 dBm [34]. As for the quantum noise, we adopt the
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on April 03,2026 at 06:28:38 UTC from IEEE Xplore. Restrictions apply.
+  666                                                                  IEEE JOURNAL ON SELECTED AREAS IN COMMUNICATIONS, VOL. 43, NO. 3, MARCH 2025
+
+
+
+  typical parameters Tr = 10 µs and Na = 5 × 105 , which                           Algorithm 1 Biased GS Algorithm
+  give rise to a noise level (Ti Tr2π
+                                   Na )1/2
+                                           = 2.81 Hz. According                    Inputs: The equivalent received signal z, the equivalent
+  to transformation between electric field and power [34], this                        channel matrix A, the reference field b, the total number
+  noise refers to a power density of −191 dBm when ω =                                 of iterations t0 .
+  2π×5 GHz, which is 17 dB smaller than the room-temperature                        1: Construct the augmented observation matrix Ā =
+  thermal noise level. This reflects the high sensitivity of atomic                    [AH , b]H = [ā1 , ā2 , · · · āN ]      PN             H
+  receivers [6].                                                                    2: Find the principal eigenvector v of M =     n=1 zn ān ān
+                                                                                                   H
+     In summary, the total variance of noise is expressed as                                     |v Ā|z           0
+                                                                                    3: Set r̄ = ∥ĀH v∥2 and s̄ = r̄v
+                                                                                                           2
+                                                                                                                  0
+
+                           2                    4π 2                                 4: Initialize s0 = e−i∠s̄ (K+1) s̄0 (1 : K)
+                       σ       = σS2 + σE
+                                        2
+                                          =               2
+                                                       + σE .               (20)     5: for t = {1, 2, · · · , t0 } do
+                                              Ti Tr Na
+                                                                                     6:  Update θ t = ∠(AH st−1 + b)
+  We invoke the law-of-large-number to model the noise as                                                              t
+                                                                                    7:   Update st = (AAH )−1 A(z ◦ eiθ − b)
+  an additive Gaussian random vector, w ∼ CN (0, σ 2 I).
+                                                                                    8: end for
+  By adding the noise into (16), we finally arrive at the following
+                                                                                   Output: The estimated symbol s̃ = st0
+  input-output relationship for atomic MIMO systems:
+
+                                 z = |AH s + b + w|.                        (21)
+                                                                                   Gerchberg-Saxton (GS) algorithm [29]. We transform the
+                IV. ATOMIC -MIMO S IGNAL D ETECTION                                classical GS algorithm to a biased GS algorithm to solve
+                                                                                   the biased PR problem in (22). The result is summarized in
+     In this section, we first formulate the signal detection
+                                                                                   Algorithm 1 and elaborated as follows.
+  problems of atomic MIMO receivers based on the LS and ML
+                                                                                      Define y = [y1 , y2 , · · · , yN ]T = AH s + b + w. The funda-
+  principles. Then, two atomic-MIMO detection algorithms are
+                                                                                   mental idea of the GS algorithm is that if the true phase eiθ of
+  proposed to solve the formulated problems. Their performance
+                                                                                   y is accessible, where eiθ = [ei∠y1 , ei∠y2 , · · · , ei∠yN ]T , then
+  and complexity are subsequently analyzed.
+                                                                                   problem (22) becomes a linear regression problem: mins ∥z ◦
+                                                                                   eiθ − AH s − b∥, whose solution is s = (AAH )−1 A(z ◦
+  A. Atomic-MIMO Signal Detection Problems                                         eiθ − b), where ◦ denotes the Hadamard product. As the
+     The objective of atomic-MIMO signal detection is to esti-                     knowledge on eiθ is unavailable, an alternative approach is
+  mate the multi-user data vector, s, from the received signal,                    to jointly optimize eiθ and s:
+  z, in (21). Two problem formulations are provided below.                                                                                 2
+                                                                                                        min      z ◦ eiθ − AH s − b 2 .                    (25)
+     1) Least-Square Criterion: The first formulation follows the                                     θ,s∈S K
+  typical LS criterion:
+                                                                                      Problem (25) is non-convex since eiθ is an oscillating
+                                              H           2
+                               min z − |A s + b|          2
+                                                            .               (22)   function with respect to (w.r.t) θ. Fortunately, this optimization
+                               s∈S K
+                                                                                   problem can be efficiently solved by the well-known alternat-
+    2) Maximum-Likelihood Criterion: It can be proven that                         ing minimization methodology. To be specific, θ and s are
+  each entry of z follows the Rician distribution, i.e.,                           iteratively updated as presented in steps 6-7 of Algorithm 1.
+                             2                                                    During the t-th iteration, given the previous estimate st−1 , θ
+                               zn + |λn |2
+                                           
+                   2zn
+        p(zn ; s) = 2 exp −                  I0 (κn ) ,  (23)                      can be optimized by extracting the phase of AH st−1 + b, that
+                    σ               σ2                                             is θ t = ∠(AH st−1 + b). Furthermore, given θ t , the optimal s
+                                                                                                                                              t
+                  ∆                       ∆       2z |aH s+b |                     is determined by the LS rule: st = (AAH )−1 A(z ◦ eiθ − b).
+  where λn = aH      n s + bn , κn =
+                                        n n
+                                           σ2
+                                                n
+                                                  , and I0 (x) =
+   1
+     R 2π  x cos θ                                                                    One issue in the implementation of biased GS algorithm
+  2π 0 e           dθ is the modified zero-order Bessel function.
+                                                                                   is its sensitivity to the choice of initial point. Without a
+  Thereby, for any given realization of the effective channel and
+                                                                                   proper initial estimate, Algorithm 1 may converge to a shallow
+  reference, the ML detection of s is formulated as
+                                                                                   local optimum. To address this issue, the computationally
+                N                       N                                          efficient spectral method has been developed to yield good
+                X                       X         |λn |2
+        max           log p(zn ; s) ∝         −          + log I0 (κn ) .   (24)   initialization [35]. Specifically, to adapt the spectral method
+        s∈S K
+                n=1                     n=1
+                                                   σ2
+                                                                                   into our model, we first construct an augmented observation
+     Although problems (22) and (24) can be optimally solved                       matrix Ā = [AH , b]H as presented in step 1. This matrix
+  by an exhaustive search, the complexity is prohibitive when                      allows us to treat the user signal and reference signal together:
+  the users are many and/or the constellation size is large.                       s̄ = [sH , 1]H . Thereafter the observed amplitude vector can
+  To this end, two low-complexity algorithms will be designed                      be rewritten in a reference-free form: z = |AH s + b + w| =
+  subsequently.                                                                    |ĀH s̄ + w|, whose initialization can be performed using the
+                                                                                   typical spectral method. To   PN elaborate, define the weighted
+                                                                                   covariance matrix as M = n=1 zn ān āH     n , where ān denotes
+  B. Atomic-MIMO Signal Detection Based on LS Criterion                            the n-th column of Ā. The direction of the initial value
+    Consider the biased PR problem in (22) corresponding to                        s̄0 of s̄ is estimated as the principal eigenvector v of M.
+  LS detection. One of the most popular PR solvers is the                          In addition, the magnitude r̄ of s̄0 is obtained by approaching
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on April 03,2026 at 06:28:38 UTC from IEEE Xplore. Restrictions apply.
+  CUI et al.: TOWARDS ATOMIC MIMO RECEIVERS                                                                                                                     667
+
+
+  Algorithm 2 EM-GS Algorithm                                                      the EM algorithm states that the loglikelihood function is
+  Inputs: The equivalent received signal z, the equivalent                         lower-bounded by the following surrogate function:
+      channel matrix A, the reference field b, the power density                          N                       N
+      of noise σ, the number of iterations t0 .                                           X                       X
+                                                                                               log p(zn ; s) ≥          Ep(θn |zn ,st−1 ) log p(zn , θn ; s)
+   1: Construct the augmented observation matrix Ā =
+                                                                                         n=1                      n=1
+      [AH , b]H = [ā1 , ā2 , · · · āN ]                                                                    ∆
+   2: Find the principal eigenvector v of M =
+                                                 PN             H                                             = Q(s|st−1 ),                                    (28)
+                 H
+                                                   n=1 zn ān ān
+               |v Ā|z            0
+   3: Set r̄ = ∥ĀH v∥2 and s̄ = r̄v                                               where st−1 denotes the previous estimate of s. The EM
+                           2
+                     0         −i∠s̄0 (K+1) 0                                      algorithm proceeds iteratively by two steps to maximize the
+    4: Initialize s      =e               s̄ (1 : K)
+    5: for t = {1, 2, · · · , t0 } do                                              loglikelihood. They are the Expectation step (E-step) to derive
+    6:  Update θ t = ∠(AH st−1 + b)                                                the surrogate function Q(s|st−1 ) by calculating the expecta-
+   7:   Update κt = σ22 z ◦ |AH st−1 + b|                                          tion in (28), and the Maximization step (M-step) to update st
+   8:
+                                        t
+        Update st = (AAH )−1 A(z ◦ eiθ ◦ R(κt ) − b)                               by maximizing Q(s|st−1 ), i.e., st = arg maxs Q(s|st−1 ).
+   9: end for                                                                         • E-step: In (28), the likelihood function p(zn , θn ; s) stands
+
+  Output: The estimate symbol s̃ = st0                                                  for the ML estimator to s when both the amplitude zn
+                                                                                        and phase θn are accessible. Clearly, p(zn , θn ; s) is a
+                                                                                        Gaussian distribution
+                                                                                                                                           
+  |AH s̄0 | = |AH r̄v| to z:                                                                                 1           1        iθn
+                                                                                           p(zn , θn ; s) =      exp  −     z n e     − λn     , (29)
+                                                                                                            πσ 2        σ2
+                                                       |vH Ā|z
+              r̄ = arg min ∥r′ |AH v| − z∥22 =                   .        (26)                            ∆
+                        ′  r                           ∥ĀH v∥22                         where λn = aH     n s + bn . As for the posterior probability
+                                                                                         p(θn |zn , st−1 ), it refers to our current knowledge to the
+  Thereafter, s̄ is initialized as s̄0 = r̄v. Recall that only the
+                                                                                         phase θn given previous estimate st−1 . As shown in [36],
+  first K entries of s̄ are the wanted symbols from users, while
+                                                                                         p(θn |zn , st−1 ) follows the von Mises distribution:
+  the last entry of s̄ refers to the known value 1 with a zero
+  phase. Hence, s0 is initialized by forcing the phase of the last                                                exp (κtn cos(θn − θnt ))
+  entry of s̄0 to zero:                                                                          p(θn |zn , st−1 ) =                       ,     (30)
+                                                                                                                        2πI0 (κtn )
+                                      0
+                         s0 = e−i∠s̄ (K+1) s̄0 (1 : K),                   (27)                      ∆
+                                                                                         where θnt = ∠ aH     t−1
+                                                                                                                                 ∆ 2z |aH st−1 +bn |
+                                                                                                                  + bn and κtn = n n σ2
+                                                                                                           ns                                         .
+  which completes the initialization. After carrying out the ini-                        Based on (29) and (30), we derive the following result
+  tialization and t0 -step iterations, the final estimate is obtained                    that defines the E-step.
+  as s̃ = st0 . Last, one can project each entry of s̃ to the nearest                    Lemma 1: The surrogate function is expressed as
+  point of the QAM constellation to perform demapping, i.e.,                                                  1           t
+
+  ŝk = arg mins∈S ∥s̃k − s∥.                                                             Q(s|st−1 ) = −        2
+                                                                                                                  ∥z ◦ eiθ ◦ R(κt ) − AH s − b∥22 + C,
+                                                                                                              σ
+     The main limitation of the LS based biased GS algorithm                                                                                       (31)
+  arises as it fails to consider the distribution of the received
+                                                                                                      t           t     t             t               H t−1
+  signal, leaving margin for performance improvement. The                               where eiθ = [eiθ1 , eiθ2 , · · · , eiθN ]T = ei∠(A s +b) ,
+  limitation can be overcome by the ML algorithm in the sequel.                                                                                        ∆
+                                                                                        κt = [κt1 , κt2 , · · · , κtN ]T = σ22 z ◦ |AH st−1 + b|, R(x) =
+                                                                                        I1 (x)
+                                                                                        I0 (x) , I1 (x) represents the first-order modified Bessel
+  C. Atomic-MIMO Signal Detection Based on ML Criterion                                 function, and C denotes a constant irrelevant to s.
+     Consider the ML detection problem in (24). We propose to                                 Proof: (See Appendix B).
+                                                                                      • M-step: Lemma 1 reveals that the maximization of
+  solve it by integrating the Expectation-Maximization (EM) and
+  aforementioned GS algorithm, termed the EM-GS algorithm.                              Q(s|st−1 ) is equivalent to the minimization of ∥z ◦
+                                                                                            t
+
+  One can observe from (24) that the occurrence of the non-                             eiθ ◦ R(κt ) − AH s − b∥22 . In this context, the primal
+  trivial modified Bessel function I0 (·) makes the ML detection                        non-convex optimization problem in (24) is converted to
+  intractable. To overcome this difficulty, the EM method is                            a sequence of easily handled linear regression problems.
+  employed to create a series of tractable lower-bound surro-                           Therefore, as presented in steps 6-8 of Algorithm 2, the
+  gate functions to the primal objective in (24), resulting in                          estimate of s is updated successively by
+  sequentially updated estimates of st for t = 1, 2, · · · , t0 as                                                                t
+                                                                                                 st = (AAH )−1 A(z ◦ eiθ ◦ R(κt ) − b),                        (32)
+  summarized in Algorithm 2. The detailed EM-GS algorithm
+  is designed as follows.                                                                where the final estimate is given as s̃ = st0 .
+     To begin with, recall the definition y = AH s + b + w =                          Moreover, to avoid convergence to a shallow local optimum,
+  z ◦ eiθ . Like the basic idea of the biased GS algorithm,                        the spectral method based on the augmented matrix Ā as used
+  the phase eiθ is an unobserved but crucial variable, the                         in Section IV-B is carried out to obtain an initial estimate s0 .
+  information of which can substantially simplify our problem.                     In the end, after performing the initialization and EM-based
+  This observation motivates us to treat the phase eiθ as a latent                 iteration, the projection operation ŝk = arg mins∈S ∥s̃k − s∥
+  variable in our EM algorithm. Based on the Jensen inequality,                    is applied to complete the constellation demapping.
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on April 03,2026 at 06:28:38 UTC from IEEE Xplore. Restrictions apply.
+  668                                                                IEEE JOURNAL ON SELECTED AREAS IN COMMUNICATIONS, VOL. 43, NO. 3, MARCH 2025
+
+
+
+                                                                                   In Section VI, we numerically show that our proposed algo-
+                                                                                   rithms can approach the above CRLB.
+                                                                                      2) Computational Complexity Analysis: It is of interest to
+                                                                                   compare the computational complexity of the biased GS, EM-
+                                                                                   GS, and exhaustive search algorithms. Compared to the biased
+                                                                                   GS algorithm, the EM-GS algorithm only needs the additional
+                                                                                   computing of R(κtn ), which can efficiently rely on searching
+                                                                                   over a lookup table. Hence, these two algorithms share the
+                                                                                   same order of complexity. Take the EM-GS algorithm as
+                                                                                   an example. Its complexity is mainly attributed to the ini-
+                                                                                   tialization and iteration operations. The former requires the
+  Fig. 4.   The high-pass filter corresponding to R(κ) for κ ∈ [0, 10].
+                                                                                   eigenvalue decomposition of M ∈ CK×K , which has a com-
+                                                                                   plexity of O(K 3 ). Moreover, the complexity of solving the
+                                                                                   linear regression problem in (31) with t0 iterations is given as
+  D. Comparison Between Biased GS and EM-GS Algorithms
+                                                                                   O(t0 N K 2 ). As a result, the computational complexity of both
+     Comparing Algorithms 1 and 2, one can discover that the                       the biased GS and EM-GS algorithms is O(t0 N K 2 + K 3 ).
+  major difference between the proposed EM-GS and biased GS                           The exhaustive search method has to try all possible symbol
+                                                            I (κt )
+  is attributed to the ratio of Bessel functions, R(κtn ) = I10 (κnt ) .           combinations for all users from the QAM constellation, S,
+                                                                            n
+  According to the properties of Bessel functions [37], R(κtn ) is                 to optimize (22) and (24). Since the number of combinations
+  monotonically increasing and bounded between [0, 1]. As plot-                    is |S|K , the complexity of exhaustive search is O(|S|K N K).
+  ted in Fig. 4, the shape of R(κtn ) resembles that of a high-pass                It is clear that the biased GS and EM-GS algorithms have
+                                          2z |aH st−1 +bn |                        much lower computational complexity than an exhaustive
+  filter. Note that the variable κtn = n n σ2               implicitly
+  represents the SNR at the n-th antenna. A stronger received                      search.
+                         t−1
+  signal energy zn |aH ns     + bn | together with a smaller noise                            V. E XTENSION TO C HANNEL E STIMATION
+  power σ leads to a larger value of κtn . Therefore, by multi-
+           2
+                                                                                      In previous discussions, we assume that the channel state
+  plying zn with R(κtn ), we can filter out the received signals
+                                                                                   information (CSI) is perfectly known to the receiver. In case
+  zn that have a low SNR, while keeping those zn that have a
+                                                                                   the perfect CSI is not available, we can estimate the CSI, A,
+  large SNR and contain useful information about the symbol
+                                                                                   by sending pilot signals to the receiver.
+  s. Consequently, the high-pass nature of R(κtn ) ensures that
+                                                                                      Consider the received signal at the n-th antenna: zn =
+  the EM-GS outperforms biased GS in the low SNR regime,                                                  H      ∗    ∗
+                                                                                   |aHn s + bn + wn | = |s an + bn + wn |, where an is the channel
+  while the EM-GS will automatically degenerate to biased GS
+                                                                                   vector to be estimated. In practice, the LO is deployed at a
+  at high SNRs, where R(κtn ) → 1 when κtn → +∞. Simulation
+                                                                                   fixed position near the atomic receiver. Thus, the coefficient
+  results are provided in Section IV to quantitatively compare
+                                                                                   bn almost keeps unchanged and can be obtained in advance
+  the performance of biased GS and EM-GS algorithms.
+                                                                                   by measuring the physical locations of LO and receiver.
+                                                                                   To estimate the channel coefficients an , we let the K users
+  E. Performance Analysis                                                          send known pilot signals during P time slots to the receiver,
+     1) CRLB Analysis: We now derive the CRLB for evaluating                       which are denoted as sp ∈ CK×1 , p ∈ {1, · · · , P }. The overall
+  the accuracy of the detected s̃ from Algorithms 1 and 2.                         received signal zn ∈ RP ×1 is thus expressed as
+  CRLB provides a lower bound of E(∥s−s̃∥22 ) for any unbiased                     zn = |[s1 , · · · , sP ]H an + [bn , · · · , bn ]H + [wn,1 , · · · , wn,P ]H |
+  estimate. Specifically, the CRLB of the distribution p(z; s) =
+  QN                                                                                   = |SH an + bn + wn |,                                               (35)
+    n=1 p(zn ; s) is expressed as
+                                                                                   where S = [s1 , . . . , sP ] ∈ CK×P refers to the known pilot
+                     Cs = E(s − s̃)(s − s̃)H ≥ I−1 ,                      (33)     matrix, bn = [bn , · · · , bn ]H ∈ CP ×1 the reference signal, and
+  where I denotes the Fisher information matrix, the                               wn = [wn,1 , · · · , wn,P ]H ∈ CP ×1 the noise. It is clear that
+  (p, q)-th entry                                                                  the channel estimation model in (35) for recovering an from
+               2 of which is     determined by Ipq       =
+     PN          ∂
+  − n=1 E ∂s∗ ∂sq log p(zn ; s) . An explicit expression of I                      zn has the same mathematical structure as the signal detection
+                 p                                                                 model z = |AH s + b + w| for detecting s from z. Thereafter,
+  is provided by the following lemma.
+                                                                                   both the biased GS and EM-GS algorithm can be employed to
+     Lemma 2: The Fisher information matrix for the Rician
+                                                                                   estimate the channel coefficients an . In the end, this process
+  distribution (23) is given by
+                                                                                   can be simultaneously carried out on all receive antennas to
+                                   N
+                                   X                                               recover the whole channel matrix A = [a1 , a2 , · · · , aN ]. This
+                              I=         βn an aH
+                                                n,                        (34)     completes the channel estimation task.
+                                   n=1
+                                                                                                        VI. S IMULATION R ESULTS
+  where βn = σ14 (E{zn2 R2 (κn )} − |λn |2 ).
+     Proof: (See Appendix C).                                                      A. Experimental Settings
+    As a result, the mean square error E(∥s − s̃∥22 ) is lower                        The default simulation setups for atomic MIMO receivers
+  bounded by Tr(I−1 ), where Tr(·) denotes the trace operator.                     are as follows unless specified otherwise. The number
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on April 03,2026 at 06:28:38 UTC from IEEE Xplore. Restrictions apply.
+  CUI et al.: TOWARDS ATOMIC MIMO RECEIVERS                                                                                                                  669
+
+
+
+                                    TABLE I
+               S IMULATION PARAMETERS OF C HANNEL M ODEL
+
+
+
+
+  of atomic antennas is N = 36, while the number of
+  single-antenna users is K = 3. The 4-QAM and 16-QAM
+  modulators are considered. The Rydberg energy levels 52D5/2
+  and 53P3/2 are adopted for detecting the sub-6G signals of fre-
+  quency ωeg = 2π × 5 GHz. Utilizing the Python package [38],                      Fig. 5. The dependence of NMSE performance on SNR for a 16-QAM
+  the transition dipole moment µeg over the states 52D5/2 and                      modulator under 12 dB RSR.
+  53P3/2 is calculated as [0, 1785.916 qa0 , 0]T , where a0 =
+  5.292×10−11 m specifies the Bohr radius. Taking into account
+  the randomness of the polarization direction, vectors ϵnkl and
+  ϵb,n are randomly sampled from unit circles perpendicular to
+  their incident angles. In addition, the channel coefficients are
+  generated using the standard 3GPP TR 38.901 model, whose
+  key parameters are given in Table I. The received SNR is
+  defined as
+                                 E(|aH    2
+                                      n s| )
+                        SNR =                .                (36)
+                                  E(|wn |2 )
+  Moreover, we define the reference-to-signal ratio (RSR) as
+                                     E(|bn |2 )
+                           RSR =                 ,               (37)
+                                  E(|ank sk |2 )
+  which accounts for the relative intensity of the reference                       Fig. 6.   The effect of RSR on the NMSE performance for a 16-QAM
+  source. In our simulation, the SNR is varying from −5 dB                         modulator under 3 dB SNR.
+  to 12 dB and RSR grows from 0 dB to 25 dB. The number of
+  iterations t0 is set as 50 for both Algorithms 1 and 2.
+     Five benchmarking schemes are considered in performance                       B. Evaluation of NMSE Performance
+  comparison with the proposed biased GS and EM-GS algo-                                                          E(∥s−s̃∥2 )
+                                                                                                                            1
+                                                                                      Define the NMSE as E(∥s∥2 )2 = K        E(∥s − s̃∥22 ), where s̃
+                                                                                                                     2
+  rithms.                                                                          represents the recovered signal without constellation demap-
+     • ZF with known phase: Assume the ideal case where the
+                                                                                   ping, e.g., the direct outputs of Algorithms 1 and 2. The curves
+        true phase of y is known in advance. Then the zero-                        of NMSE versus SNR are plotted in Fig. 5. The RSR is fixed as
+        forcing (ZF) detector is employed to recover the QAM                       12 dB and the 16-QAM modulator is employed. It is observed
+        symbol, s.                                                                 from Fig. 5 that both the biased GS and the proposed EM-GS
+     • CRLB: We use numerical integration to calculate the
+                             Tr(I−1 )
+                                                                                   algorithms outperform the CM-ZF by 2 ∼ 5 dB in NMSE.
+                                         1       −1
+        normalized CRLB, E(∥s∥    2 ) = K Tr(I      ). This benchmark              Besides, the proposed EM-GS algorithm is always better than
+                                  2
+        is only used for evaluating the NMSE performance, since                    the biased GS algorithm, especially in the low SNR regime,
+        the normalized CRLB can be regarded as a NMSE lower                        e.g., the performance gap is around 2 dB when SNR = −4dB.
+        bound of all PR solvers.                                                   This observation is consistent with the high-pass nature of
+     • Exhaustive search (LS): This method, employed for                           the function R(·) we analyzed earlier. More importantly, the
+        evaluating the BER, exhaustively searches all feasible                     NMSE performance of EM-GS is close to CRLB, given that
+        constellation points to solve the LS problem in (22).                      the ML estimator is an asymptotic minimum-variance unbiased
+     • Exhaustive search (ML): This scheme is similar to the                       estimator. The final interesting observation is that the NMSE
+        preceding one but aims to solve the ML problem in (24).                    gap between the ZF with known phase and CRLB approaches
+     • CM-ZF: This method is proposed to infer amplitude                           3 dB as the SNR increases, implying that the vanished phase
+        modulation symbols from channel magnitude (CM) [39].                       information imposes a 3 dB NMSE loss to atomic receivers.
+        It utilizes an expanded linear MIMO model to approx-                          We then investigate the effect of RSR on NMSE as shown
+        imate the PR model in (15) and addresses it via a ZF                       in Fig. 6, where the SNR is fixed as 3 dB and the 16-QAM
+        detector. For a fair comparison, we extend this approxi-                   modulator is adopted. As opposed to a uniform NMSE perfor-
+        mation to the biased PR problem and apply the idea of                      mance achieved by the ZF with known phase, the NMSE of
+        CM-ZF algorithm to recover QAM symbols.                                    all PR solvers rapidly declines by 5 dB as the RSR increases.
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on April 03,2026 at 06:28:38 UTC from IEEE Xplore. Restrictions apply.
+  670                                                                IEEE JOURNAL ON SELECTED AREAS IN COMMUNICATIONS, VOL. 43, NO. 3, MARCH 2025
+
+
+
+
+                                                                                   Fig. 8. The effect of RSR on the BER performance under different detection
+                                                                                   algorithms for a 16-QAM modulator under 3 dB SNR.
+
+
+
+                                                                                   Fig. 7(a) that the biased GS and the EM-GS algorithms exhibit
+                                                                                   a remarkable BER reduction compared with CM-ZF and
+                                                                                   can perform similarly as the exhaustive search method with
+                                                                                   much lower complexity. Furthermore, the EM-GS algorithm
+                                                                                   consistently outperforms the biased GS algorithm due to the
+                                                                                   high-pass filter R(·) (see their comparison in Section IV-D).
+                                                                                   For the large-scale configuration depicted in Fig. 7(b), the
+                                                                                   computation of exhaustive search method is prohibitive, so it
+                                                                                   is excluded from this comparison. We can observe that the
+                                                                                   SNR gap between the EM-GS algorithm and the ZF method
+                                                                                   with known phase for realizing the same BER level is between
+                                                                                   3 ∼ 4 dB. This fact indicates that despite the lack of phase
+                                                                                   information, our EM-GS based detector can attain a similar
+                                                                                   BER trend as the ZF detector in the ideal case, demonstrating
+  Fig. 7. The effect of SNR on the BER performance under (a) the small-scale
+  configuration (i.e., N × K = 36 × 3, 4-QAM modulator) and (b) the                the effectiveness of multi-user atomic-MIMO detection.
+  large-scale configuration (i.e., N × K = 100 × 6, 16-QAM modulator).                Finally, the influence of RSR on BER performance is
+                                                                                   illustrated in Fig. 8. The SNR is fixed as 3 dB and a 4-QAM
+                                                                                   modulator is adopted. Similar to Fig. 6, one can observe that
+  This result is surprising but still reasonable because the atomic                the increase in RSR can considerably reduce the BER of all
+  MIMO receiver follows a non-linear model (21). A stronger                        PR solvers. Take the proposed EM-GS as an example. More
+  reference signal makes it easier for PR solvers to estimate                      than one order of magnitude reduction in BER is achievable
+  the phase difference between s and sb , giving rise to a more                    by increasing the RSR from 0 dB to 20 dB. Therefore, we can
+  accurate detection of the true phase of s. Furthermore, the                      draw the conclusion that a strong received reference signal is
+  large RSR situation is common in practice because a LO can                       necessary for detecting QAM symbols by atomic receivers.
+  be deployed near the atomic receiver. Taking account of the
+  path loss that decays quadratically with the path length, the                                              VII. C ONCLUSION
+  strength of the reference signal can be several times greater
+                                                                                      In this paper, we have demonstrated the feasibility of
+  than the user signal. For example, if the LO-to-atomic receiver
+                                                                                   atomic MIMO receivers, marking the first attempt to introduce
+  distance is shorter than a quarter of the user-to-atomic receiver
+                                                                                   atomic receivers into MIMO communications. Different from
+  distance, the RSR is greater than 10 log10 42 ≈ 12 dB.
+                                                                                   the classical linear MIMO model, the signal detection of
+                                                                                   atomic MIMO receiver is shown to be a non-linear biased PR
+  C. Evaluation of BER Performance                                                 problem. Accordingly, two algorithms, the biased GS and the
+     To evaluate the BER performance, the constellation demap-                     EM-GS, are proposed to detect symbols based on the LS and
+  ping step is introduced to project the recovered signals s̃k                     ML criteria, respectively, which are verified to be near-optimal.
+  for each user to the nearest constellation point ŝk and then                    Comprehensive experiment results validate the efficiency and
+  to 0-1 bits. The curves of BER versus SNR are plotted in                         effectiveness of atomic MIMO receiver.
+  Fig. 7. The RSR is set as 12 dB. Fig. 7(a) adopts a small-                          This work serves as an important step towards advanced
+  scale configuration: N ×K = 36×3 with a 4-QAM modulator,                         atomic wireless receivers for next-generation communication
+  while Fig. 7(b) employs a large-scale configuration: N × K =                     systems. Several unexplained issues warrant follow-up studies,
+  100 × 6 with a 16-QAM modulator. It can be seen from                             such as theoretically determining the channel capacity of
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on April 03,2026 at 06:28:38 UTC from IEEE Xplore. Restrictions apply.
+  CUI et al.: TOWARDS ATOMIC MIMO RECEIVERS                                                                                                                  671
+
+
+
+  atomic receivers, given that the transmission model is no                        He n = En+ |En+ ⟩ ⟨En+ | + En− |En− ⟩ ⟨En− |. Specifically, the
+  longer linear and Gaussian. Furthermore, integrating atomic                      eigenvalues are calculated as
+  receivers with various modern communication techniques,                                                        r
+                                                                                                         1                 1
+  such as wideband, cell-free, mmWave/THz, and RIS-aided                                          En± = ℏδ ± |ξn− |2 + ℏ2 δ 2 .               (43)
+  communications, and developing such receivers to enable over-                                          2                 4
+  the-air computation, edge learning, and ISAC, are also of                        The corresponding eigenvectors are derived as
+  interest for 6G research. Furthermore, exploring the potential
+                                                                                         |En ⟩ = e−jΨn sin(Φn /2) |g⟩ + cos(Φn /2) |e⟩
+                                                                                        +
+  incorporation of more quantum information technologies into                                                                             ,   (44)
+                                                                                         |En− ⟩ = e−jΨn cos(Φn /2) |g⟩ − sin(Φn /2) |e⟩
+  atomic receivers to achieve unprecedented communication
+                                                                                                         − 
+  capabilities presents a promising research direction. As a                                              2|ξ |
+                                                                                   where Φn = arctan ℏδn and Ψn = ∠(ξn− ). Thereafter, the
+  preliminary study, this work is expected to inspire more inno-
+                                                                                   evolution of (e
+                                                                                                 αe,n , α
+                                                                                                        eg,n ) driven by (42) is expressed as
+  vations in the development of atomic receivers for advancing
+                                                                                                                       +                    −
+  wireless communications.                                                                                  −i ℏ t
+                                                                                                                      En                   En
+                                                                                      (e      eg,n )T = c+
+                                                                                       αe,n , α          ne        En+ + c−
+                                                                                                                          ne
+                                                                                                                             −i ℏ t
+                                                                                                                                    En− . (45)
+                                    A PPENDIX                                      Here, the coefficients c±   n are determined by the initial con-
+  A. Rotating Wave Approximation for Solving (10)                                  dition. Given the initial states α   ee,n (0) = αe,n (0) = 0 and
+                                                                                   α
+                                                                                   eg,n (0) = αg,n (0) = 1, associated with the initial derivative
+     We follow the standard RWA to solve (10). For ease of                                                        ξ−               ξ−
+  notations, the term “(t)” in variables αe,n (t), αg,n (t), and                   e˙ e,n (0) = −iδ α
+                                                                                   α                 ee,n (0) − i ℏn α
+                                                                                                                     eg,n (0) = −i ℏn , the probability
+  ξn (t) are neglected temporarily. The Schrödinger equation                       density is obtained as
+  in (10) is explicitly written as                                                                                      Ω2R,n
+                                                                                                                                         
+                                                                                                                                 2   Ωn t
+                                                                                           |αe,n (t)|2 = |e
+                                                                                                          αe,n (t)|2 =        sin           ,     (46)
+                                                                                                                         Ω2n
+                                             
+                    α̇e,n        ℏωe ξn      αe,n                                                                                     2
+              iℏ           =                        ,        (38)
+                   α̇g,n          ξn∗ ℏωg    αg,n                                                                      ∗
+                                                                                                                                         q
+                                                                                   where ΩR,n = 2|ξn− |/ℏ = 2|ξn− |/ℏ and Ωn = Ω2R,n + δ 2 .
+  where α̇ denotes the time derivative of α. To solve                              Last, owing to the the resonance condition that δ = 0,
+  this time-varying differential equation, the first step is to                    we arrive at (13).
+  switch (38) into the interaction picture of signal frequency.
+                    ee,n = ei(ω+ωg )t αe,n and α
+  Specifically, let α                          eg,n = eiωg t αg,n .
+  By applying the relationships in (38), the differential equation                 B. Proof of Lemma 1
+  of αee,n is derived as                                                             Substituting (29) and (30) into (28), the surrogate function
+                                                                                   can be expressed as
+     iℏα˙ee,n = e   i(ω+ωg )t
+                                iℏα̇e,n − ℏ(ω + ωg )e   i(ω+ωg )t
+                                                                    αe,n
+                    i(ω+ωg )t                                                                       N
+                                                                                                   X Z 2π
+              =e                (ℏωe αe,n + ξn αg,n ) − ℏ(ω + ωg )e
+                                                                  αe,n                     t−1
+                                                                                      Q(s|s ) =             p(θn |zn , st−1 ) log p(zn , θn ; s)dθn
+                   ee,n + eiωt ξn α
+              = ℏδ α              eg,n ,                                   (39)                        n=1    0
+                                                                                                                  N
+  and the differential equation of α
+                                   eg,n is similarly derived as                                      (a)   1 X
+                                                                                                     = −           (|λn |2 − 2|λn |zn Ln ) + C,            (47)
+                                                                                                           σ 2 n=1
+         e˙ g,n = eiωg t iℏα̇g,n − ℏωg α
+       iℏα                             eg,n = e−iωt ξn∗ α
+                                                        ee,n .             (40)
+                                                                                                           R 2π t              t
+  Given the form of ξn in (12), the time-dependent coefficient                     where Ln = 2πI01(κt ) 0 eκn cos(θn −θn ) cos(θn − ∠λn )dθn ,
+                                                                                                         n
+  eiωt ξn in (39) and (40) is written as                                           and (a) is derived by discarding all terms independent of s
+                                                                                   into C. By changing the integral variable from θn to θn − θnt
+                        eiωt ξn = ξn− + ξn+ ,                 (41)                 and applying the periodic property of sinusoidal functions, the
+                                     √                                             integral Ln can be presented as
+  where ξn− = 21 k l µTeg ϵnkl Pk ρnkl |sk |e−j(ϕnkl +γk ) is
+                   P    P
+  a time-independent    term√ while the time-dependent term                                            Z 2π
+                                                                                                1              t
+                                                                                                             eκn cos θn cos θn + θnt − ∠λn dθn
+                                                                                                                                                
+  ξn+ = 12 k l µTeg ϵnkl Pk ρnkl |sk |ej(ϕnkl +γk ) ej2ωt oscil-
+            P P                                                                       Ln =          t
+                                                                                             2πI0 (κn ) 0
+  lates with frequency 2ω. Due to the rapid oscillation of ξn+ ,                                        Z 2π
+                                                            ∗                            (b)     1              t
+  the RWA states that the time integrals of ξn+ α
+                                                eg,n and ξn+ α                                               eκn cos θn cos θn cos θnt − ∠λn dθn
+                                                                                                                                                  
+                                                              ee,n                       =           t
+  quickly averages to zero, and thus can be neglected. Thereafter,                           2πI0 (κn ) 0
+                                                                                         (c)
+  the equations (39) and (40) are approximated as                                        = R(κtn ) cos θnt − ∠λn ,
+                                                                                                                    
+                                                                                                                                                    (48)
+                   e˙            ℏδ ξn−
+                                              
+                   α                          α
+                                              ee,n                                                              R 2π t
+                                                                                   where (b) holds due to 0 eκn cos θn sin θn dθn = 0 and
+               iℏ ˙ e,n =          ∗                 .        (42)
+                   α            ξn− 0         α
+                                              eg,n                                 (c) holds because of the definition  R 2πofx the    first-order modi-
+                   eg,n
+                                                                                                                      1          cos θ
+  The effective Hamiltonian is thereby H e n = ℏδ |e⟩ ⟨e| +                        fied Bessel function I1 (x) = 2π      0
+                                                                                                                             e          cos θdθ. Finally,
+    −           −∗
+  ξn |e⟩ ⟨g| + ξn |g⟩ ⟨e|. Clearly, the RWA transforms the                         by bringing (48) back to (47), we can conclude that
+  time-dependent Hamiltonian in (38) into a time-independent                         Q(s|st )
+  one, H,
+        e which simplifies our problem significantly. To solve
+                                                                                                 N
+  this new Schrödinger equation, (42), we need to find                                      1 X
+                                                                                                    |λn |2 − 2|λn |zn R(κtn ) cos θnt − ∠λn + C,
+                                                                                                                                           
+                                                                                      =−
+  the eigenvector decomposition (EVD) of H    e n , denoted as                              σ 2 n=1
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on April 03,2026 at 06:28:38 UTC from IEEE Xplore. Restrictions apply.
+  672                                                                IEEE JOURNAL ON SELECTED AREAS IN COMMUNICATIONS, VOL. 43, NO. 3, MARCH 2025
+
+
+                N
+        1 X         t                                                               [7] C. T. Fancher, D. R. Scherer, M. C. S. John, and B. L. S. Marlow,
+     =− 2    ∥zn eiθn R(κtn ) − λn ∥22 + C,                               (49)          “Rydberg atom electric field sensors for communications and sensing,”
+       σ n=1                                                                            IEEE Trans. Quantum Eng., vol. 2, pp. 1–13, 2021.
+  which naturally results in the conclusion in Lemma 1.                             [8] X.-H. Liu et al., “Continuous-frequency microwave heterodyne detection
+                                                                                        in an atomic vapor cell,” Phys. Rev. Appl., vol. 18, no. 5, Nov. 2022,
+                                                                                        Art. no. 054003.
+  C. Proof of Lemma 2                                                               [9] K.-Y. Liao et al., “Microwave electrometry via electromagnetically
+                                                                                        induced absorption in cold Rydberg atoms,” Phys. Rev. A, Gen. Phys.,
+     The first and second derivatives of log p(zn ; s) are given by                     vol. 101, no. 5, May 2020, Art. no. 053432.
+                                                                                   [10] B. Liu et al., “Electric field measurement and application based on
+                                                    ∂|λn |2
+                                                 
+      ∂ log p(zn ; s)     1     zn                                                      Rydberg atoms,” Electromagn. Sci., vol. 1, no. 2, pp. 1–16, Jun. 2023.
+                       =             R(κ n ) −  1            ,   (50)
+            ∂s∗p         σ 2 |λn |                    ∂s∗p                         [11] Y. Wang et al., “Precise measurement of microwave polarization using a
+                                                                                        Rydberg atom-based mixer,” Opt. Exp., vol. 31, no. 6, pp. 10449–10457,
+     ∂ 2 log p(zn ; s)                              ∂ 2 |λn |2
+                                                 
+                          1     zn                                                      Mar. 2023.
+                       =             R(κ n ) −  1                                  [12] Z.-K. Liu et al., “Deep learning enhanced Rydberg multifrequency
+          ∂s∗p ∂sq       σ 2 |λn |                  ∂s∗p ∂sq
+                                                                                       microwave recognition,” Nature Commun., vol. 13, no. 1, p. 1997,
+                               1           zn                                           Apr. 2022.
+                         + 2            −       R(κn )                             [13] M. Saffman, T. G. Walker, and K. Mølmer, “Quantum information with
+                            σ |λn |2      |λn |
+                                                                                        Rydberg atoms,” Rev. Modern Phys., vol. 82, no. 3, pp. 2313–2363,
+                           z 2 − zn2 R2 (κn ) ∂|λn |2 ∂|λn |2
+                                             
+                                                                                        Aug. 2010.
+                         + n                                   . (51)
+                                  σ2               ∂s∗p    ∂sq                     [14] A. Artusio-Glimpse, M. T. Simons, N. Prajapati, and C. L. Holloway,
+                                                                                        “Modern RF measurements with hot atoms: A technology review of
+  In deriving (50), the property I0′ (z) = I1 (z) is harnessed,                         Rydberg atom-based radio frequency field sensors,” IEEE Microw. Mag.,
+                                                                                        vol. 23, no. 5, pp. 44–56, May 2022.
+  while in deriving (50), the property R′ (z) = 1−R2 (z)− z1 R(z)
+                                                                                   [15] J. Liu, Y. Shi, Z. M. Fadlullah, and N. Kato, “Space-air-ground integrated
+  is employed [37]. It was proven in [40] that E{zn R(κn )} =                           network: A survey,” IEEE Commun. Surveys Tuts., vol. 20, no. 4,
+  |λn |. Therefore, the expectation of the first derivative is                          pp. 2714–2741, 4th Quart., 2018.
+                                                                                 [16] M. S. Sim, Y.-G. Lim, S. H. Park, L. Dai, and C.-B. Chae, “Deep
+                          ∂                                                             learning-based mmWave beam selection for 5G NR/6G with sub-
+                     E        log p(zn ; s) = 0,               (52)                     6 GHz channel information: Algorithms and prototype validation,” IEEE
+                         ∂s∗p
+                                                                                        Access, vol. 8, pp. 51634–51646, 2020.
+  implying that the regularity condition of CRLB is satisfied.                     [17] Y. Du et al., “Realization of multiband communications using dif-
+                                                                                        ferent Rydberg final states,” AIP Adv., vol. 12, no. 6, Jun. 2022,
+  since the second moment of Rician distribution is E(zn2 ) =                           Art. no. 065118.
+  |λn |2 + σ 2 , the expectation of the second derivative is given                 [18] D. A. Anderson, R. E. Sapiro, and G. Raithel, “An atomic receiver
+  as                                                                                    for AM and FM radio communication,” IEEE Trans. Antennas Propag.,
+      2                                                                                vol. 69, no. 5, pp. 2455–2462, May 2021.
+                             |λn |2 − E{zn2 R2 (κn )} ∂|λn |2 ∂|λn |2
+                       
+       ∂ log p(zn ; s)                                                             [19] M. T. Simons, A. H. Haddab, J. A. Gordon, and C. L. Holloway,
+   E          ∗
+                         =
+          ∂sp ∂sq                    σ 4 |λn |2         ∂s∗p   ∂sq                      “A Rydberg atom-based mixer: Measuring the phase of a radio frequency
+                                             2      2
+                                                                                        wave,” Appl. Phys. Lett., vol. 114, no. 11, Mar. 2019, Art. no. 114101.
+                                βn ∂|λn | ∂|λn |                                   [20] M. Jing et al., “Atomic superheterodyne receiver based on microwave-
+                         =−                           ,          (53)
+                               |λn |2 ∂s∗p      ∂sq                                     dressed Rydberg spectroscopy,” Nature Phys., vol. 16, no. 9,
+                                                                                        pp. 911–915, Jun. 2020.
+                ∆ E{z 2 R2 (κ )}−|λ |2
+                        n      n                                                   [21] D. A. Anderson, R. E. Sapiro, and G. Raithel, “Rydberg atoms for radio-
+  where βn =       n
+                       σ4        . Then, the (p, q)-th entry of                         frequency communications and sensing: Atomic receivers for pulsed RF
+                                            2      2
+                                         n | ∂|λn |
+                         PN
+  I is derived by Ipq = n=1 |λβnn|2 ∂|λ∂s∗    ∂sq    and thus the                       field and phase detection,” IEEE Aerosp. Electron. Syst. Mag., vol. 35,
+                                         p
+                                                                                        no. 4, pp. 48–56, Apr. 2020.
+  Fisher information matrix is constructed by
+                                                                                   [22] D. H. Meyer, K. C. Cox, F. K. Fatemi, and P. D. Kunz, “Digital com-
+                             N                                                          munication with Rydberg atoms and amplitude-modulated microwave
+                            X    βn ∂|λn |2 ∂|λn |2                                     fields,” Appl. Phys. Lett., vol. 112, no. 21, May 2018, Art. no. 211108.
+                      I=                            ,                     (54)
+                            n=1
+                                |λn |2 ∂s∗ ∂sT                                     [23] A. K. Robinson, N. Prajapati, D. Senic, M. T. Simons, and
+                                                                                        C. L. Holloway, “Determining the angle-of-arrival of a radio-frequency
+             n|
+                 2
+                       ∂|aH s+b |2                                                      source with a Rydberg atom-based sensor,” Appl. Phys. Lett., vol. 118,
+  where ∂|λ∂s∗ = 2 ∂s∗
+                       n n
+                            = an aH
+                                  n s+bn an = λn an . Finally,                          no. 11, Mar. 2021, Art. no. 114001.
+                ∂|λn |                                                             [24] D. H. Meyer, J. C. Hill, P. D. Kunz, and K. C. Cox, “Simultaneous
+  substituting ∂s∗ into I completes the proof.
+                                                                                        multiband demodulation using a Rydberg atomic sensor,” Phys. Rev.
+                                                                                        Appl., vol. 19, no. 1, Jan. 2023, Art. no. 014025.
+                                R EFERENCES                                        [25] L. Lu, G. Y. Li, A. L. Swindlehurst, A. Ashikhmin, and R. Zhang,
+                                                                                        “An overview of massive MIMO: Benefits and challenges,” IEEE J. Sel.
+   [1] M. Cui, Q. Zeng, and K. Huang, “Multi-user SIMO wireless commu-
+                                                                                        Topics Signal Process., vol. 8, no. 5, pp. 742–758, Oct. 2014.
+       nications based on atomic receivers,” in Proc. IEEE Global Commun.
+       Conf. (IEEE GLOBECOM), Dec. 2024, pp. 1–6.                                  [26] Z. Zhang et al., “Active RIS vs. passive RIS: Which will prevail in 6G?”
+   [2] Z. Zhang et al., “6G wireless networks: Vision, requirements, architec-          IEEE Trans. Commun., vol. 71, no. 3, pp. 1707–1725, Mar. 2023.
+       ture, and key technologies,” IEEE Veh. Technol. Mag., vol. 14, no. 3,       [27] Q. Zeng, Y. Du, K. Huang, and K. K. Leung, “Energy-efficient resource
+       pp. 28–41, Sep. 2019.                                                            management for federated edge learning with CPU-GPU heteroge-
+   [3] L. Gyongyosi and S. Imre, “A survey on quantum computing technol-                neous computing,” IEEE Trans. Wireless Commun., vol. 20, no. 12,
+       ogy,” Comput. Sci. Rev., vol. 31, pp. 51–71, Feb. 2019.                          pp. 7947–7962, Dec. 2021.
+   [4] C. Wang and A. Rahman, “Quantum-enabled 6G wireless networks:               [28] M. Cui, Z. Zhang, L. Dai, and K. Huang, “Ice-filling: Near-optimal
+       Opportunities and challenges,” IEEE Wireless Commun., vol. 29, no. 1,            channel estimation for dense array systems,” 2024, arXiv:2404.06806.
+       pp. 58–69, Feb. 2022.                                                       [29] P. Netrapalli, P. Jain, and S. Sanghavi, “Phase retrieval using alter-
+   [5] C. L. Degen, F. Reinhard, and P. Cappellaro, “Quantum sensing,” Rev.             nating minimization,” IEEE Trans. Signal Process., vol. 63, no. 18,
+       Mod. Phys., vol. 89, no. 3, Jul. 2017, Art. no. 035002.                          pp. 4814–4826, Sep. 2015.
+   [6] F. Zhang et al., “Quantum wireless sensing: Principle, design and           [30] C. J. Foot, Atomic Physics. Oxford, U.K.: Oxford Univ. Press, 2005.
+       implementation,” in Proc. 29th Annu. Int. Conf. Mobile Comput. Netw.,       [31] B. Zwiebach, Mastering Quantum Mechanics. Cambridge, MA, USA:
+       Oct. 2023, pp. 1–15.                                                             MIT Press, 2022.
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on April 03,2026 at 06:28:38 UTC from IEEE Xplore. Restrictions apply.
+  CUI et al.: TOWARDS ATOMIC MIMO RECEIVERS                                                                                                                       673
+
+
+
+  [32] M. Fox, Quantum Optics: An Introduction. Oxford, U.K.: Oxford Univ.                                     Qunsong Zeng (Member, IEEE) received the B.S.
+       Press, 2006.                                                                                            degree in physics from the University of Science and
+  [33] J. Dong, L. Valzania, A. Maillard, T.-A. Pham, S. Gigan, and M. Unser,                                  Technology of China (USTC) and the Ph.D. degree
+       “Phase retrieval: From computational imaging to machine learning:                                       in electrical and electronic engineering from The
+       A tutorial,” IEEE Signal Process. Mag., vol. 40, no. 1, pp. 45–57,                                      University of Hong Kong (HKU). He is currently
+       Jan. 2023.                                                                                              a Research Assistant Professor with the Depart-
+  [34] L. W. Bussey, F. A. Burton, K. Bongs, J. Goldwin, and T. Whitley,                                       ment of Electrical and Electronic Engineering,
+       “Quantum shot noise limit in a Rydberg RF receiver compared to thermal                                  HKU. His research interests include edge intelli-
+       noise limit in a conventional receiver,” IEEE Sensors Lett., vol. 6, no. 9,                             gence, 5G/6G techniques, baseband processing, in-
+       pp. 1–4, Sep. 2022.                                                                                     memory computing, quantum sensing, and semantic
+  [35] E. J. Candès, X. Li, and M. Soltanolkotabi, “Phase retrieval via Wirtinger                              communications.
+       flow: Theory and algorithms,” IEEE Trans. Inf. Theory, vol. 61, no. 4,
+       pp. 1985–2007, Apr. 2015.
+  [36] R. Gatto and S. R. Jammalamadaka, “The generalized von Mises
+       distribution,” Stat. Methodol., vol. 4, no. 3, pp. 341–353, Jul. 2007.
+  [37] N. N. Lebedev and R. A. Silverman, Special Functions and Their
+       Applications. Chelmsford, MA, USA: Courier Corporation, 1972.
+  [38] N. Šibalić, J. D. Pritchard, C. S. Adams, and K. J. Weatherill, “ARC:
+       An open-source library for calculating properties of alkali Rydberg
+       atoms,” Comput. Phys. Commun., vol. 220, pp. 319–331, Nov. 2017.
+  [39] Y. Li, R. K. Mallik, and R. Murch, “Channel magnitude-based MIMO
+       with energy detection for Internet of Things applications,” IEEE Internet                                Kaibin Huang (Fellow, IEEE) received the B.Eng.
+       Things J., vol. 6, no. 6, pp. 9893–9907, Dec. 2019.                                                      and M.Eng. degrees in electrical engineering from
+  [40] J. Zhu, K. Liu, Z. Wan, L. Dai, T. J. Cui, and H. V. Poor, “Sensing RISs:                                the National University of Singapore and the Ph.D.
+       Enabling dimension-independent CSI acquisition for beamforming,”                                         degree in electrical engineering from The University
+       IEEE Trans. Inf. Theory, vol. 69, no. 6, pp. 3795–3813, Jun. 2023.                                       of Texas at Austin. He is the Philip K H Wong
+                                                                                                                Wilson K L Wong Professor in Electrical Engineer-
+                                                                                                                ing and the Department Head at the Department of
+                                                                                                                Electrical and Electronic Engineering, The Univer-
+                                                                                                                sity of Hong Kong (HKU), Hong Kong. His work
+                            Mingyao Cui (Graduate Student Member, IEEE)                                         was recognized with seven Best Paper awards from
+                            received the B.E. and M.S. degrees from the                                         the IEEE Communication Society. He is a member
+                            Department of Electronic Engineering, Tsinghua           of the Engineering Panel of Hong Kong Research Grants Council (RGC)
+                            University, Beijing, China, in 2020 and 2023, respec-    and a RGC Research Fellow (2021 Class). He has served on the editorial
+                            tively. He is currently pursuing the Ph.D. degree with   boards of five major journals in the area of wireless communications and co-
+                            The University of Hong Kong. His research interests      edited ten journal special issues. He has been active in organizing international
+                            include Rydberg atomic receiver, massive MIMO,           conferences such as the 2014, 2017, and 2023, editions of IEEE Globecom, a
+                            and near-field communications. He received the           flagship conference in communication. He has been named as a Highly Cited
+                            IEEE ICC Outstanding Demo Award, the National            Researcher by Clarivate in the last six years (2019–2024) and an AI 2000
+                            Scholarship in 2022, and the HKPF Scholarship            Most Influential Scholar (Top 30 in Internet of Things)in 2023–2024. He was
+                            in 2023.                                                 an IEEE Distinguished Lecturer. He is the US National Academy of Inventors.
+
+
+
+
+Authorized licensed use limited to: Indian Institute of Technology - BHUBANESWAR. Downloaded on April 03,2026 at 06:28:38 UTC from IEEE Xplore. Restrictions apply.
+

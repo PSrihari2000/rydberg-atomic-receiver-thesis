@@ -1,0 +1,75 @@
+
+====================================================
+ Fig.4 NMSE performance comparison w.r.t SNR under Rydberg atom-based 2D antenna array.
+====================================================
+Monte Carlo trials = 100
+Array I1 x I2      = 8 x 8
+Users K            = 3
+Pilot lengths      = [10  30]
+====================================================
+
+
+============================================
+Simulating P = 10
+============================================
+P=10 : Monte Carlo 25 / 100
+P=10 : Monte Carlo 50 / 100
+P=10 : Monte Carlo 75 / 100
+P=10 : Monte Carlo 100 / 100
+
+P=10 empirical E|b|^2 / E|a+n|^2
+------------------------------------------------------------
+P=10 | SNR=  -5 dB | E|b|^2/E|a+n|^2 =  27.80 dB
+P=10 | SNR=   0 dB | E|b|^2/E|a+n|^2 =  30.96 dB
+P=10 | SNR=   5 dB | E|b|^2/E|a+n|^2 =  32.79 dB
+P=10 | SNR=  10 dB | E|b|^2/E|a+n|^2 =  33.57 dB
+P=10 | SNR=  15 dB | E|b|^2/E|a+n|^2 =  33.85 dB
+P=10 | SNR=  20 dB | E|b|^2/E|a+n|^2 =  33.94 dB
+P=10 | SNR=  25 dB | E|b|^2/E|a+n|^2 =  33.96 dB
+P=10 | SNR=  30 dB | E|b|^2/E|a+n|^2 =  33.98 dB
+
+Results for P = 10
+------------------------------------------------------------
+P=10 | SNR=  -5 dB | GD=    7.62 dB | PGD=    6.94 dB | CRLB=    4.28 dB
+P=10 | SNR=   0 dB | GD=    2.68 dB | PGD=    1.95 dB | CRLB=   -0.72 dB
+P=10 | SNR=   5 dB | GD=   -2.09 dB | PGD=   -2.87 dB | CRLB=   -5.72 dB
+P=10 | SNR=  10 dB | GD=   -6.39 dB | PGD=   -7.11 dB | CRLB=  -10.72 dB
+P=10 | SNR=  15 dB | GD=   -9.78 dB | PGD=  -10.42 dB | CRLB=  -15.72 dB
+P=10 | SNR=  20 dB | GD=  -11.77 dB | PGD=  -12.12 dB | CRLB=  -20.72 dB
+P=10 | SNR=  25 dB | GD=  -12.59 dB | PGD=  -12.78 dB | CRLB=  -25.72 dB
+P=10 | SNR=  30 dB | GD=  -12.93 dB | PGD=  -13.08 dB | CRLB=  -30.72 dB
+
+============================================
+Simulating P = 30
+============================================
+P=30 : Monte Carlo 25 / 100
+P=30 : Monte Carlo 50 / 100
+P=30 : Monte Carlo 75 / 100
+P=30 : Monte Carlo 100 / 100
+
+P=30 empirical E|b|^2 / E|a+n|^2
+------------------------------------------------------------
+P=30 | SNR=  -5 dB | E|b|^2/E|a+n|^2 =  27.82 dB
+P=30 | SNR=   0 dB | E|b|^2/E|a+n|^2 =  30.97 dB
+P=30 | SNR=   5 dB | E|b|^2/E|a+n|^2 =  32.78 dB
+P=30 | SNR=  10 dB | E|b|^2/E|a+n|^2 =  33.57 dB
+P=30 | SNR=  15 dB | E|b|^2/E|a+n|^2 =  33.84 dB
+P=30 | SNR=  20 dB | E|b|^2/E|a+n|^2 =  33.94 dB
+P=30 | SNR=  25 dB | E|b|^2/E|a+n|^2 =  33.97 dB
+P=30 | SNR=  30 dB | E|b|^2/E|a+n|^2 =  33.98 dB
+
+Results for P = 30
+------------------------------------------------------------
+P=30 | SNR=  -5 dB | GD=   -0.73 dB | PGD=   -0.95 dB | CRLB=   -1.48 dB
+P=30 | SNR=   0 dB | GD=   -5.39 dB | PGD=   -5.66 dB | CRLB=   -6.48 dB
+P=30 | SNR=   5 dB | GD=   -9.98 dB | PGD=  -10.23 dB | CRLB=  -11.48 dB
+P=30 | SNR=  10 dB | GD=  -13.81 dB | PGD=  -13.97 dB | CRLB=  -16.48 dB
+P=30 | SNR=  15 dB | GD=  -16.31 dB | PGD=  -16.42 dB | CRLB=  -21.48 dB
+P=30 | SNR=  20 dB | GD=  -17.60 dB | PGD=  -17.56 dB | CRLB=  -26.48 dB
+P=30 | SNR=  25 dB | GD=  -18.05 dB | PGD=  -17.98 dB | CRLB=  -31.48 dB
+P=30 | SNR=  30 dB | GD=  -18.21 dB | PGD=  -18.11 dB | CRLB=  -36.48 dB
+
+====================================================
+Simulation completed. Results saved to fig4.mat
+Plot saved to fig4.png
+====================================================

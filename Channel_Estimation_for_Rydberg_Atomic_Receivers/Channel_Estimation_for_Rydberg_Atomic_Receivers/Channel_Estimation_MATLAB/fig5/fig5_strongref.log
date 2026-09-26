@@ -1,0 +1,143 @@
+
+====================================================
+ FIG. 5 (s_b,p~CN(0,1) variant): 2D Rydberg Channel Estimation
+====================================================
+Monte Carlo trials = 500
+Array I1 x I2      = 8 x 8
+Users K            = 3
+Fixed SNR          = 5 dB
+Pilot lengths      = [5  10  15  20  25  30  35  40  45  50]
+Reference pilot s_b,p ~ CN(0,1) (matching user pilot distribution)
+====================================================
+
+P= 5 : Monte Carlo 50 / 500
+P= 5 : Monte Carlo 100 / 500
+P= 5 : Monte Carlo 150 / 500
+P= 5 : Monte Carlo 200 / 500
+P= 5 : Monte Carlo 250 / 500
+P= 5 : Monte Carlo 300 / 500
+P= 5 : Monte Carlo 350 / 500
+P= 5 : Monte Carlo 400 / 500
+P= 5 : Monte Carlo 450 / 500
+P= 5 : Monte Carlo 500 / 500
+P=10 : Monte Carlo 50 / 500
+P=10 : Monte Carlo 100 / 500
+P=10 : Monte Carlo 150 / 500
+P=10 : Monte Carlo 200 / 500
+P=10 : Monte Carlo 250 / 500
+P=10 : Monte Carlo 300 / 500
+P=10 : Monte Carlo 350 / 500
+P=10 : Monte Carlo 400 / 500
+P=10 : Monte Carlo 450 / 500
+P=10 : Monte Carlo 500 / 500
+P=15 : Monte Carlo 50 / 500
+P=15 : Monte Carlo 100 / 500
+P=15 : Monte Carlo 150 / 500
+P=15 : Monte Carlo 200 / 500
+P=15 : Monte Carlo 250 / 500
+P=15 : Monte Carlo 300 / 500
+P=15 : Monte Carlo 350 / 500
+P=15 : Monte Carlo 400 / 500
+P=15 : Monte Carlo 450 / 500
+P=15 : Monte Carlo 500 / 500
+P=20 : Monte Carlo 50 / 500
+P=20 : Monte Carlo 100 / 500
+P=20 : Monte Carlo 150 / 500
+P=20 : Monte Carlo 200 / 500
+P=20 : Monte Carlo 250 / 500
+P=20 : Monte Carlo 300 / 500
+P=20 : Monte Carlo 350 / 500
+P=20 : Monte Carlo 400 / 500
+P=20 : Monte Carlo 450 / 500
+P=20 : Monte Carlo 500 / 500
+P=25 : Monte Carlo 50 / 500
+P=25 : Monte Carlo 100 / 500
+P=25 : Monte Carlo 150 / 500
+P=25 : Monte Carlo 200 / 500
+P=25 : Monte Carlo 250 / 500
+P=25 : Monte Carlo 300 / 500
+P=25 : Monte Carlo 350 / 500
+P=25 : Monte Carlo 400 / 500
+P=25 : Monte Carlo 450 / 500
+P=25 : Monte Carlo 500 / 500
+P=30 : Monte Carlo 50 / 500
+P=30 : Monte Carlo 100 / 500
+P=30 : Monte Carlo 150 / 500
+P=30 : Monte Carlo 200 / 500
+P=30 : Monte Carlo 250 / 500
+P=30 : Monte Carlo 300 / 500
+P=30 : Monte Carlo 350 / 500
+P=30 : Monte Carlo 400 / 500
+P=30 : Monte Carlo 450 / 500
+P=30 : Monte Carlo 500 / 500
+P=35 : Monte Carlo 50 / 500
+P=35 : Monte Carlo 100 / 500
+P=35 : Monte Carlo 150 / 500
+P=35 : Monte Carlo 200 / 500
+P=35 : Monte Carlo 250 / 500
+P=35 : Monte Carlo 300 / 500
+P=35 : Monte Carlo 350 / 500
+P=35 : Monte Carlo 400 / 500
+P=35 : Monte Carlo 450 / 500
+P=35 : Monte Carlo 500 / 500
+P=40 : Monte Carlo 50 / 500
+P=40 : Monte Carlo 100 / 500
+P=40 : Monte Carlo 150 / 500
+P=40 : Monte Carlo 200 / 500
+P=40 : Monte Carlo 250 / 500
+P=40 : Monte Carlo 300 / 500
+P=40 : Monte Carlo 350 / 500
+P=40 : Monte Carlo 400 / 500
+P=40 : Monte Carlo 450 / 500
+P=40 : Monte Carlo 500 / 500
+P=45 : Monte Carlo 50 / 500
+P=45 : Monte Carlo 100 / 500
+P=45 : Monte Carlo 150 / 500
+P=45 : Monte Carlo 200 / 500
+P=45 : Monte Carlo 250 / 500
+P=45 : Monte Carlo 300 / 500
+P=45 : Monte Carlo 350 / 500
+P=45 : Monte Carlo 400 / 500
+P=45 : Monte Carlo 450 / 500
+P=45 : Monte Carlo 500 / 500
+P=50 : Monte Carlo 50 / 500
+P=50 : Monte Carlo 100 / 500
+P=50 : Monte Carlo 150 / 500
+P=50 : Monte Carlo 200 / 500
+P=50 : Monte Carlo 250 / 500
+P=50 : Monte Carlo 300 / 500
+P=50 : Monte Carlo 350 / 500
+P=50 : Monte Carlo 400 / 500
+P=50 : Monte Carlo 450 / 500
+P=50 : Monte Carlo 500 / 500
+
+Empirical E|b|^2 / E|a+n|^2 (SNR=5 dB fixed)
+------------------------------------------------------------
+P= 5 | E|b|^2/E|a+n|^2 =  32.81 dB
+P=10 | E|b|^2/E|a+n|^2 =  32.79 dB
+P=15 | E|b|^2/E|a+n|^2 =  32.79 dB
+P=20 | E|b|^2/E|a+n|^2 =  32.79 dB
+P=25 | E|b|^2/E|a+n|^2 =  32.78 dB
+P=30 | E|b|^2/E|a+n|^2 =  32.79 dB
+P=35 | E|b|^2/E|a+n|^2 =  32.79 dB
+P=40 | E|b|^2/E|a+n|^2 =  32.79 dB
+P=45 | E|b|^2/E|a+n|^2 =  32.79 dB
+P=50 | E|b|^2/E|a+n|^2 =  32.79 dB
+
+Results
+------------------------------------------------------------
+P= 5 | PGD=    5.21 dB | CRLB=   -0.58 dB
+P=10 | PGD=   -2.48 dB | CRLB=   -5.84 dB
+P=15 | PGD=   -6.09 dB | CRLB=   -8.06 dB
+P=20 | PGD=   -8.13 dB | CRLB=   -9.58 dB
+P=25 | PGD=   -9.37 dB | CRLB=  -10.67 dB
+P=30 | PGD=  -10.36 dB | CRLB=  -11.58 dB
+P=35 | PGD=  -11.04 dB | CRLB=  -12.33 dB
+P=40 | PGD=  -11.24 dB | CRLB=  -12.93 dB
+P=45 | PGD=  -11.91 dB | CRLB=  -13.49 dB
+P=50 | PGD=  -12.56 dB | CRLB=  -13.93 dB
+
+====================================================
+Simulation completed. Results saved to fig5.mat
+Plot saved to fig5.png
+====================================================
