@@ -1222,17 +1222,16 @@ Therefore,
 
 Expanding the product gives
 \[
-\begin{aligned}
 \hat{\mathbf r}
-={}&
+=
 \ketg\bra g
 \hat{\mathbf r}
 \ketg\bra g
 +
 \ketg\bra g
 \hat{\mathbf r}
-\kete\bra e\\
-&+
+\kete\bra e
++
 \kete\bra e
 \hat{\mathbf r}
 \ketg\bra g
@@ -1240,7 +1239,6 @@ Expanding the product gives
 \kete\bra e
 \hat{\mathbf r}
 \kete\bra e.
-\end{aligned}
 \]
 
 The diagonal matrix elements are
@@ -2087,21 +2085,17 @@ A_{i,k,l}
 
 Substituting this expression into (33),
 \[
-\begin{aligned}
 i\hbar\dot a_i
 =
 \sum_{k=1}^{K}
 \sum_{l=1}^{L_k}
-&
 A_{i,k,l}
 \cos
 \left[
 \omega t+(i-1)\phi_{l,k}
-\right]\\
-&\times
+\right]
 e^{j\omega_{eg}t}
 b_i.
-\end{aligned}
 \]
 
 Using the identity
@@ -2112,7 +2106,6 @@ Using the identity
 \]
 we obtain
 \[
-\begin{aligned}
 \cos
 \left[
 \omega t+(i-1)\phi_{l,k}
@@ -2120,17 +2113,14 @@ we obtain
 =
 \frac{1}{2}
 \Big[
-&
-e^{j[\omega t+(i-1)\phi_{l,k}]}\\
-&+
+e^{j[\omega t+(i-1)\phi_{l,k}]}
++
 e^{-j[\omega t+(i-1)\phi_{l,k}]}
 \Big].
-\end{aligned}
 \]
 
 Therefore,
 \[
-\begin{aligned}
 i\hbar\dot a_i
 =
 \frac{1}{2}
@@ -2138,19 +2128,16 @@ i\hbar\dot a_i
 \sum_{l=1}^{L_k}
 A_{i,k,l}
 \Big[
-&
-e^{j[\omega t+(i-1)\phi_{l,k}]}\\
-&+
+e^{j[\omega t+(i-1)\phi_{l,k}]}
++
 e^{-j[\omega t+(i-1)\phi_{l,k}]}
 \Big]
 e^{j\omega_{eg}t}
 b_i.
-\end{aligned}
 \]
 
 Combining the exponential terms,
-\[
-\begin{aligned}
+\begin{equation}
 i\hbar\dot a_i
 =
 \frac{1}{2}
@@ -2158,18 +2145,15 @@ i\hbar\dot a_i
 \sum_{l=1}^{L_k}
 A_{i,k,l}
 \Big[
-&
 e^{j(\omega+\omega_{eg})t}
 e^{j(i-1)\phi_{l,k}}
-\\
-&+
++
 e^{j(\omega_{eg}-\omega)t}
 e^{-j(i-1)\phi_{l,k}}
 \Big]
 b_i.
-\end{aligned}
 \tag{36}
-\]
+\end{equation}
 
 
 \section{Resonance Condition}
@@ -2193,8 +2177,7 @@ and
 \]
 
 Substituting these relations into (36),
-\[
-\begin{aligned}
+\begin{equation}
 i\hbar\dot a_i
 =
 \frac{1}{2}
@@ -2202,17 +2185,14 @@ i\hbar\dot a_i
 \sum_{l=1}^{L_k}
 A_{i,k,l}
 \Big[
-&
 e^{j2\omega t}
 e^{j(i-1)\phi_{l,k}}
-\\
-&+
++
 e^{-j(i-1)\phi_{l,k}}
 \Big]
 b_i.
-\end{aligned}
 \tag{38}
-\]
+\end{equation}
 
 
 \section{Rotating-Wave Approximation}
@@ -2253,20 +2233,16 @@ b_i.
 
 Substituting the definition of \(A_{i,k,l}\),
 \[
-\begin{aligned}
 i\hbar\dot a_i
 =
 \frac{1}{2}
 \sum_{k=1}^{K}
 \sum_{l=1}^{L_k}
-&
 \boldsymbol{\mu}_{eg}^{T}
 \boldsymbol{\epsilon}_{i,k,l}
-\alpha_{l,k}s_k\\
-&\times
+\alpha_{l,k}s_k
 e^{-j(i-1)\phi_{l,k}}
 b_i.
-\end{aligned}
 \]
 
 Define
@@ -4158,8 +4134,6 @@ E_{i,p}
 y_{i,p}
 -
 |b_{i,p}|
-\nonumber\\
-&\quad
 -
 \frac{1}{2}
 \left[
@@ -7814,7 +7788,7 @@ which is Eq.~(30) of Xu \emph{et al.}
 Using $(A\otimes B)^{-1}=A^{-1}\otimes B^{-1}$, the inverse exists when
 $S$ has full row rank ($P\geq K$), and
 \begin{equation}
-\operatorname{CRB}_{\mathrm{Xu}}
+\operatorname{CRB}
 =F_{gg^*}^{-1}
 =
 4\sigma_r^2
@@ -7827,7 +7801,7 @@ I_{N_a}\otimes(S^*S^T)^{-1}
 Hence the Xu-compatible CRLB is
 \begin{equation}
 \boxed{
-\operatorname{CRB}_{\mathrm{Xu}}
+\operatorname{CRB}
 =
 4\sigma_r^2
 \left[
@@ -7842,7 +7816,7 @@ $\sigma_r^2$ here). Expressed in the complex noise variance of (390),
 which defines the SNR,
 \begin{equation}
 \boxed{
-\operatorname{CRB}_{\mathrm{Xu}}
+\operatorname{CRB}
 =
 2\sigma^2
 \left[
@@ -7863,7 +7837,7 @@ g\in\mathbb C^{192\times1},
 \end{equation}
 and therefore
 \begin{equation}
-F_{gg^*},\operatorname{CRB}_{\mathrm{Xu}}
+F_{gg^*},\operatorname{CRB}
 \in\mathbb C^{192\times192}.
 \tag{456}
 \end{equation}
@@ -7874,7 +7848,7 @@ $\operatorname{tr}(I_{N_a}\otimes X)=N_a\operatorname{tr}(X)$,
 \boxed{
 \mathrm{MSE}_{\mathrm{CRB}}
 =
-\operatorname{tr}\!\left(\operatorname{CRB}_{\mathrm{Xu}}\right)
+\operatorname{tr}\!\left(\operatorname{CRB}\right)
 =
 2\sigma^2 I_1I_2\,
 \operatorname{tr}\!\left[(S^*S^T)^{-1}\right].
@@ -7892,7 +7866,7 @@ normalizing (457) by the expected channel energy:
 \boxed{
 \mathrm{NMSE}_{\mathrm{CRB}}
 =
-\frac{\operatorname{tr}\!\left(\operatorname{CRB}_{\mathrm{Xu}}\right)}
+\frac{\operatorname{tr}\!\left(\operatorname{CRB}\right)}
 {\mathbb E\|g\|_2^2}.
 }
 \tag{457a}
@@ -8029,7 +8003,7 @@ $A_R^TA_I=-A_I^TA_R=\tfrac12\operatorname{Im}(A^HA)$, so that
 \begin{equation}
 \operatorname{tr}\!\left(F_R^{-1}\right)
 =
-\operatorname{tr}\!\left(\operatorname{CRB}_{\mathrm{Xu}}\right).
+\operatorname{tr}\!\left(\operatorname{CRB}\right).
 \tag{464b}
 \end{equation}
 
