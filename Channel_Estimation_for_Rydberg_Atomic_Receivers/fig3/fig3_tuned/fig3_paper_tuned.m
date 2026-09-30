@@ -1,234 +1,276 @@
 %% fig3_paper_tuned.m
 % Fig. 3 of Xu et al., "Channel Estimation for Rydberg Atomic Receivers":
-% NMSE vs SNR, 1D array, P = 10 and 30, GS vs GD vs CRLB.
-% Same equations and values as fig3_paper_literal.m, except the settings
-% marked CHANGED below. Equation numbers refer to ce_derivation_1D_2D_PGD_CRLB.pdf,
-% Xu equation numbers are marked "Xu".
-%
-% Stated in the paper (Sec. II, V) and used here:
-%   I = 8 vapor cells, K = 3 users, L_k ~ U{3,...,7}, P = 10 and 30, SNR -5:5:30 dB
-%   channel Xu (7) = (75), reference Xu (9) = (88)
-%   polarization eps ~ N(0,1/3) per component
-%   path gains alpha_{l,k} ~ CN(0,1), s_b = 1
-%   dipole moment mu_eg = [0, 1785.9 q a0, 0]^T
-%   pilots i.i.d. CN(0,1), initial G0 i.i.d. CN(0,0.1)
-%   GD, Xu (13)-(15) = (216)-(228)
-%   GS, Xu [10] Algorithm 1 = (351)-(369): spectral initialisation + iterations
-%   CRLB, Xu (29)-(31) = (454), (457a)
-%
-% CHANGED from the paper:
-%   1. reference strength: alpha_b ~ CN(0,10) is drawn as in the paper, then the
-%      reference is rescaled so that E|b|^2 / E|a|^2 = RSR = 40 dB. With the paper's
-%      value the RSR is about -1 dB and the linearisation (163) does not hold.
-%   2. polarization: eps drawn once per path (and once for the reference), the same
-%      in every vapor cell, instead of per cell, Xu (7), (9). Per cell, cells with
-%      a small |eps_{b,i}| have a weak reference and the linearisation fails there.
-%   3. iterations: GD stops after 50 iterations at both P (the paper gives a
-%      threshold but no value); GS runs 15 iterations at P = 10 and 50 at P = 30
-%      instead of t0 = 50 of [10]. With these budgets neither method has converged
-%      at P = 10, which gives the error floors seen in the paper at P = 10, with GD
-%      below GS. The GS budget differs between P = 10 and P = 30.
-%
-% Not stated in the paper, chosen here (same as fig3_paper_literal.m):
-%   SNR = E|a|^2 / sigma^2 with a = G S                          (90)
-%   step size eta = 1/lambda_max(S S^H)                          (418a)
-%   G0 ~ CN(0,0.1) is stated for PGD; it is used for GD here as well
-%   element spacing lambda/2, angle of arrival ~ U(0,pi)
-%   500 Monte Carlo trials; channel, pilots and reference drawn once per trial
-%   and reused for every SNR
-%
-% The table gives 95% bootstrap confidence intervals over the trials and the
-% share of trials in which GD reached the threshold within 50 iterations (not
-% part of the paper, printed as a check only).
-%
-% Measurements are generated with the exact magnitude model (94) = Xu (8);
-% GD works on the linearised model (163) = Xu (12), GS on (94) directly.
 
-clear; clc; rng(1);
 
-%% Parameters
-MC      = 500;                  % Monte Carlo trials per point
-K       = 3;                    % users
-I       = 8;                    % vapor cells
-P_list  = [10 30];              % pilot lengths
-SNR_dB  = -5:5:30;
-RSR_dB  = 40;                   % CHANGED 1: reference-to-signal ratio
-d_lam   = 0.5;                  % element spacing / lambda
-T_gd    = [50 50];              % CHANGED 3: GD iterations at P = 10, 30
-T_gs    = [15 50];              % CHANGED 3: GS iterations at P = 10, 30
-tol     = 1e-12;                % GD relative stop rule
+clear; clc; close all;
+rng(1);
 
-q = 1.602e-19; a0 = 5.292e-11; hbar = 1.054571817e-34;
-mu_eg = [0; 1785.9*q*a0; 0];
+%% ---- Parameters ----
+MC = 500;                       % Monte Carlo trials
 
-nP = numel(P_list); nS = numel(SNR_dB);
-e_gd = zeros(MC, nS, nP); e_gs = zeros(MC, nS, nP); e_crb = zeros(MC, nS, nP);
-c_gd = false(MC, nS, nP);                                   % threshold reached
-en   = zeros(MC, nP); rsr = zeros(MC, nP);
+I = 8;                          % vapor cells
+K = 3;                          % users
 
-tic;
-for ip = 1:nP
-    P = P_list(ip);
+P_list = [10 30];               % pilot lengths
+numP = length(P_list);
+
+SNR_dB = -5:5:30;
+numSNR = length(SNR_dB);
+
+RSR_dB = 40;                    % TUNED: reference-to-signal ratio E|b|^2 / E|GS|^2
+
+GS_iterations = [15 50];        % TUNED: GS iterations at P = 10, 30
+GD_max_iterations = 50;         % TUNED: GD iterations (both P)
+GD_tol = 1e-12;                 % stop when ||G_new - G||^2 < GD_tol*||G_new||^2
+
+G0_var = 0.1;                   % G0 ~ CN(0,0.1)
+d_over_lambda = 0.5;            % element spacing / wavelength
+
+%% ---- Physical constants ----
+hbar = 6.62607015e-34/(2*pi);
+q_charge = 1.602e-19;
+a0_bohr = 5.292e-11;
+mu_eg = [0; 1785.9*q_charge*a0_bohr; 0];       % 3 x 1, transition dipole moment
+
+fprintf('\n');
+fprintf('====================================================\n');
+fprintf(' FIG. 3 (tuned): NMSE vs SNR, 1D antenna array\n');
+fprintf('====================================================\n');
+fprintf('Monte Carlo trials = %d\n', MC);
+fprintf('Vapor cells I      = %d\n', I);
+fprintf('Users K            = %d\n', K);
+fprintf('Pilot lengths      = [%s]\n', num2str(P_list));
+fprintf('RSR                = %d dB\n', RSR_dB);
+fprintf('====================================================\n');
+
+%% ---- Result arrays ----
+NMSE_GS = zeros(numP, numSNR);
+NMSE_GD = zeros(numP, numSNR);
+NMSE_CRLB = zeros(numP, numSNR);
+
+%% ---- Main loop over pilot length ----
+for pIndex = 1:numP
+
+    P = P_list(pIndex);
+
+    fprintf('\n============================================\n');
+    fprintf('Simulating P = %d\n', P);
+    fprintf('============================================\n');
+
+    mseGS_acc = zeros(1, numSNR);
+    mseGD_acc = zeros(1, numSNR);
+    crlb_acc = zeros(1, numSNR);
+    channelPower_acc = zeros(1, numSNR);
+
     for mc = 1:MC
-        [G, S, B] = gen_trial(K, I, P, RSR_dB, d_lam, mu_eg, hbar);
-        A = G*S;  Z = exp(-1j*angle(B));                    % (91), (160)
-        en(mc, ip)  = norm(G, 'fro')^2;
-        rsr(mc, ip) = mean(abs(B(:)).^2)/mean(abs(A(:)).^2);
-        Ea = mean(abs(A(:)).^2);
 
-        for is = 1:nS
-            sigma2 = Ea/10^(SNR_dB(is)/10);                 % complex noise variance (90)
-            N = sqrt(sigma2/2)*(randn(I, P) + 1j*randn(I, P));
-            Y = abs(A + B + N);                             % (94)
-
-            G0 = sqrt(0.1/2)*(randn(I, K) + 1j*randn(I, K));    % G0 ~ CN(0,0.1)
-            [G_gd, ~, c_gd(mc, is, ip)] = est_gd(Y, S, B, Z, G0, T_gd(ip), tol);
-            G_gs = est_gs(Y, S, B, T_gs(ip));
-            e_gd(mc, is, ip)  = norm(G_gd - G, 'fro')^2;
-            e_gs(mc, is, ip)  = norm(G_gs - G, 'fro')^2;
-            e_crb(mc, is, ip) = 2*sigma2*I*real(trace(inv(conj(S)*S.')));   % (454), (457)
+        %% ---- True channel, Eq.(7) ----
+        G = zeros(I, K);                                    % I x K
+        for k = 1:K
+            Lk = randi([3, 7]);                             % L_k ~ Uniform{3,...,7}
+            for l = 1:Lk
+                alpha_lk = (randn + 1j*randn)/sqrt(2);      % alpha_{l,k} ~ CN(0,1)
+                theta_lk = 2*pi*rand;                       % AoA ~ U(0,2*pi)
+                phi_lk = 2*pi*d_over_lambda*cos(theta_lk);  % phase shift
+                epsilon_kl = sqrt(1/3)*randn(3, 1);         % TUNED: 3 x 1, epsilon_{k,l} ~ N(0,1/3), one draw per path
+                projection = mu_eg.'*epsilon_kl;            % (1 x 3)(3 x 1) = 1 x 1
+                for i = 1:I
+                    G(i, k) = G(i, k) + (1/hbar)*projection*alpha_lk*exp(-1j*(i-1)*phi_lk);
+                end
+            end
         end
+
+        %% ---- Pilots ----
+        S = (randn(K, P) + 1j*randn(K, P))/sqrt(2);         % K x P, s_{k,p} ~ CN(0,1)
+        A_signal = G*S;                                     % (I x K)(K x P) = I x P
+
+        %% ---- Reference signal, Eq.(9) ----
+        alpha_b = sqrt(10/2)*(randn + 1j*randn);            % alpha_b ~ CN(0,10)
+        theta_b = 2*pi*rand;                                % AoA ~ U(0,2*pi)
+        phi_b = 2*pi*d_over_lambda*cos(theta_b);
+        s_b = ones(1, P);                                   % 1 x P, s_{b,p} = 1 (not given in paper, assumed)
+
+        epsilon_b = sqrt(1/3)*randn(3, 1);                  % TUNED: 3 x 1, epsilon_b ~ N(0,1/3), one draw for all cells
+        projection_b = mu_eg.'*epsilon_b;                   % 1 x 1
+
+        B = zeros(I, P);                                    % I x P
+        for i = 1:I
+            for p = 1:P
+                B(i, p) = s_b(p)*(1/hbar)*projection_b*alpha_b*exp(-1j*(i-1)*phi_b);
+            end
+        end
+
+        signalPower = mean(abs(A_signal(:)).^2);            % E|GS|^2
+
+        % TUNED: scale the reference so that E|b|^2 / E|GS|^2 = RSR
+        B = B*sqrt(10^(RSR_dB/10)*signalPower/mean(abs(B(:)).^2));
+
+        Z = exp(-1j*angle(B));                              % I x P, reference phase
+
+        %% ---- Loop over SNR ----
+        for snrIndex = 1:numSNR
+
+            snrLinear = 10^(SNR_dB(snrIndex)/10);
+            sigma2_complex = signalPower/snrLinear;         % complex noise variance
+
+            N_complex = sqrt(sigma2_complex/2)*(randn(I, P) + 1j*randn(I, P));   % I x P, CN(0,sigma2)
+
+            Y = abs(A_signal + B + N_complex);              % I x P, magnitude observation, Eq.(8)
+
+            %% ---- Biased GS ----
+            G_hat_GS = zeros(I, K);                         % I x K
+
+            for i = 1:I
+
+                y_i = Y(i, :).';                            % P x 1, row i of Y = the P readings of cell i
+                b_i = B(i, :).';                            % P x 1, reference at cell i
+
+                Abar = [S.', b_i];                          % P x (K+1)
+
+                M = zeros(K+1, K+1);                        % (K+1) x (K+1)
+                for p = 1:P
+                    a_bar_p = Abar(p, :)';                  % (K+1) x 1, p-th row as a column
+                    M = M + y_i(p)*(a_bar_p*a_bar_p');      % y_p * a_p * a_p^H
+                end
+
+                [V, D] = eig(M);
+                [~, maxIndex] = max(real(diag(D)));
+                v = V(:, maxIndex);                         % (K+1) x 1, principal eigenvector
+
+                r_bar = (abs(Abar*v).'*y_i)/(norm(Abar*v)^2);    % scale factor
+                gbar0 = r_bar*v;                            % (K+1) x 1
+
+                x = exp(-1j*angle(gbar0(K+1)))*gbar0(1:K);  % K x 1, initial estimate of g_i
+
+                for gsIter = 1:GS_iterations(pIndex)        % TUNED: 15 at P = 10, 50 at P = 30
+                    theta = angle(S.'*x + b_i);             % P x 1, estimated phase
+                    x = inv(conj(S)*S.')*(conj(S)*(y_i.*exp(1j*theta) - b_i));   % K x 1
+                end
+
+                G_hat_GS(i, :) = x.';                       % 1 x K
+
+            end
+
+            %% ---- GD, Eq.(13)-(15) ----
+            G_hat_GD = sqrt(G0_var/2)*(randn(I, K) + 1j*randn(I, K));   % I x K, G0 ~ CN(0,0.1)
+            step = 1/max(eig(S*S'));                        % step size
+            Y_centered = Y - abs(B);                        % I x P
+
+            for gdIter = 1:GD_max_iterations                % TUNED: 50 iterations
+
+                residual = Y_centered - real(Z.*(G_hat_GD*S));   % I x P
+                gradient = -(residual.*conj(Z))*S';         % I x K
+
+                G_new = G_hat_GD - step*gradient;           % I x K
+                relChange = norm(G_new - G_hat_GD, 'fro')^2/norm(G_new, 'fro')^2;
+                G_hat_GD = G_new;
+
+                if relChange < GD_tol
+                    break;
+                end
+
+            end
+
+            %% ---- CRLB, Eq.(31) ----
+            sigma2_real = sigma2_complex/2;
+            CRB_g = 4*sigma2_real*kron(eye(I), inv(conj(S)*S.'));    % IK x IK
+
+            %% ---- Accumulate ----
+            mseGS_acc(snrIndex) = mseGS_acc(snrIndex) + norm(G - G_hat_GS, 'fro')^2;
+            mseGD_acc(snrIndex) = mseGD_acc(snrIndex) + norm(G - G_hat_GD, 'fro')^2;
+            crlb_acc(snrIndex) = crlb_acc(snrIndex) + real(trace(CRB_g));
+            channelPower_acc(snrIndex) = channelPower_acc(snrIndex) + norm(G, 'fro')^2;
+
+        end
+
+        if mod(mc, 50) == 0 || mc == MC
+            fprintf('P = %d : Monte Carlo %d / %d\n', P, mc, MC);
+        end
+
     end
-    fprintf('P = %d done (%.1f s)\n', P, toc);
-end
 
-%% NMSE = sum of errors / sum of energies (457a), with 95% bootstrap intervals
-bs = RandStream('mt19937ar', 'Seed', 7);                    % separate stream
-NM_gd = zeros(nP, nS); NM_gs = zeros(nP, nS); NM_crb = zeros(nP, nS);
-CI_gd = zeros(2, nS, nP); CI_gs = zeros(2, nS, nP); CI_crb = zeros(2, nS, nP);
-for ip = 1:nP
-    E = repmat(en(:, ip), 1, nS);
-    [NM_gd(ip,:),  CI_gd(:,:,ip)]  = nmse_ci(e_gd(:,:,ip),  E, bs);
-    [NM_gs(ip,:),  CI_gs(:,:,ip)]  = nmse_ci(e_gs(:,:,ip),  E, bs);
-    [NM_crb(ip,:), CI_crb(:,:,ip)] = nmse_ci(e_crb(:,:,ip), E, bs);
-end
+    NMSE_GS(pIndex, :) = mseGS_acc./channelPower_acc;
+    NMSE_GD(pIndex, :) = mseGD_acc./channelPower_acc;
+    NMSE_CRLB(pIndex, :) = crlb_acc./channelPower_acc;
 
-%% Table
-for ip = 1:nP
-    fprintf('\nP = %d, RSR = %g dB, polarization per path, GD %d it., GS %d it., %d trials (NMSE in dB, [95%% CI])\n', ...
-        P_list(ip), RSR_dB, T_gd(ip), T_gs(ip), MC);
-    fprintf('  SNR         GS                   GD                 CRLB (454)   GD converged\n');
-    for is = 1:nS
-        fprintf('  %3d  %6.2f [%6.2f,%6.2f]  %6.2f [%6.2f,%6.2f]  %7.2f      %5.1f %%\n', ...
-            SNR_dB(is), NM_gs(ip,is), CI_gs(:,is,ip), NM_gd(ip,is), CI_gd(:,is,ip), ...
-            NM_crb(ip,is), 100*mean(c_gd(:,is,ip)));
+    fprintf('\nResults for P = %d\n', P);
+    fprintf('------------------------------------------------------------------------\n');
+    for snrIndex = 1:numSNR
+        fprintf('P = %2d | SNR = %3d dB | GS = %7.2f dB | GD = %7.2f dB | CRLB = %7.2f dB\n', ...
+            P, SNR_dB(snrIndex), 10*log10(NMSE_GS(pIndex, snrIndex)), 10*log10(NMSE_GD(pIndex, snrIndex)), ...
+            10*log10(NMSE_CRLB(pIndex, snrIndex)));
     end
+
 end
 
-%% Plot (as Xu Fig. 3: GS, GD and CRLB for P = 10 and 30)
-figure('Color', 'w'); hold on; grid on; box on;
-for ip = 1:nP
-    plot(SNR_dB, NM_gs(ip,:),  '--d', 'Color', 'k', 'LineWidth', 1.5, 'MarkerFaceColor', 'w');
-    plot(SNR_dB, NM_gd(ip,:),  '-.s', 'Color', [0.93 0.69 0.13], 'LineWidth', 1.5, ...
-         'MarkerFaceColor', 'w');
-    plot(SNR_dB, NM_crb(ip,:), '-o', 'Color', [0.85 0.33 0.10], 'LineWidth', 1.5);
-end
-% dashed ellipse around each pilot length, as in Xu Fig. 3
-j = SNR_dB == 10;  mark_group(10, [NM_gs(1,j) NM_gd(1,j) NM_crb(1,j)], sprintf('P = %d', P_list(1)), 'above');
-j = SNR_dB == 15;  mark_group(15, [NM_gs(2,j) NM_gd(2,j) NM_crb(2,j)], sprintf('P = %d', P_list(2)), 'left');
-xlabel('SNR [dB]'); ylabel('NMSE [dB]');
-legend('GS', 'GD', 'CRLB', 'Location', 'southwest');
-title({sprintf('Tuned: 1D array, I = %d, K = %d, polarization per path, RSR = %g dB', I, K, RSR_dB), ...
-       sprintf('GD %d it.; GS %d it. (P = %d), %d it. (P = %d); %d trials', ...
-       T_gd(1), T_gs(1), P_list(1), T_gs(2), P_list(2), MC)});
-xlim([SNR_dB(1) SNR_dB(end)]); xticks(SNR_dB);
+%% ---- Plot ----
+NMSE_GS_dB = 10*log10(NMSE_GS);
+NMSE_GD_dB = 10*log10(NMSE_GD);
+NMSE_CRLB_dB = 10*log10(NMSE_CRLB);
+
+colorGD = [0.93 0.69 0.13];
+colorCRLB = [0.85 0.33 0.10];
+
+figure('Color', 'w');
+hold on;
+grid on;
+box on;
+
+% P = 10 (these three lines give the legend)
+plot(SNR_dB, NMSE_GS_dB(1, :), '--d', 'Color', 'k', 'LineWidth', 1.5, 'MarkerFaceColor', 'w', 'DisplayName', 'GS');
+plot(SNR_dB, NMSE_GD_dB(1, :), '-.s', 'Color', colorGD, 'LineWidth', 1.5, 'MarkerFaceColor', 'w', 'DisplayName', 'GD');
+plot(SNR_dB, NMSE_CRLB_dB(1, :), '-o', 'Color', colorCRLB, 'LineWidth', 1.5, 'DisplayName', 'CRLB');
+
+% P = 30
+plot(SNR_dB, NMSE_GS_dB(2, :), '--d', 'Color', 'k', 'LineWidth', 1.5, 'MarkerFaceColor', 'w', 'HandleVisibility', 'off');
+plot(SNR_dB, NMSE_GD_dB(2, :), '-.s', 'Color', colorGD, 'LineWidth', 1.5, 'MarkerFaceColor', 'w', 'HandleVisibility', 'off');
+plot(SNR_dB, NMSE_CRLB_dB(2, :), '-o', 'Color', colorCRLB, 'LineWidth', 1.5, 'HandleVisibility', 'off');
+
+% dashed ellipses marking P = 10 (at SNR = 10 dB) and P = 30 (at SNR = 15 dB)
+index10 = find(SNR_dB == 10);
+index15 = find(SNR_dB == 15);
+drawEllipse(10, [NMSE_GS_dB(1, index10), NMSE_GD_dB(1, index10), NMSE_CRLB_dB(1, index10)], 'P = 10', 'above');
+drawEllipse(15, [NMSE_GS_dB(2, index15), NMSE_GD_dB(2, index15), NMSE_CRLB_dB(2, index15)], 'P = 30', 'below');
+
+xlabel('SNR [dB]');
+ylabel('NMSE [dB]');
+legend('Location', 'southwest');
+title({sprintf('Tuned: 1D array, I = %d, K = %d, polarization per path, RSR = %d dB', I, K, RSR_dB), ...
+       sprintf('GD %d it.; GS %d it. (P = 10), %d it. (P = 30); %d trials', ...
+       GD_max_iterations, GS_iterations(1), GS_iterations(2), MC)});
+xlim([SNR_dB(1) SNR_dB(end)]);
+xticks(SNR_dB);
+
+hold off;
 
 exportgraphics(gcf, 'fig3_paper_tuned.png', 'Resolution', 200);
-save('fig3_paper_tuned.mat', 'P_list', 'SNR_dB', 'RSR_dB', 'NM_gs', 'NM_gd', 'NM_crb', ...
-     'CI_gs', 'CI_gd', 'CI_crb', 'c_gd', 'rsr', 'MC', 'K', 'I', 'T_gd', 'T_gs', 'tol');
-fprintf('\nsaved fig3_paper_tuned.png and .mat\n');
 
-%% ------------------------------------------------------------------------
-function [G, S, B] = gen_trial(K, I, P, RSR_dB, d_lam, mu_eg, hbar)
-% channel Xu (7) = (75), pilots (145), reference Xu (9) = (88) rescaled to RSR_dB,
-% polarization drawn once per path and once for the reference
-idx = (0:I-1).';
-G = zeros(I, K);
-for k = 1:K
-    L     = randi([3 7]);                                   % L_k ~ U{3,...,7}
-    phi   = 2*pi*d_lam*cos(pi*rand(1, L));                  % phase shift, AoA ~ U(0,pi)
-    alpha = (randn(1, L) + 1j*randn(1, L))/sqrt(2);         % CN(0,1)
-    eps_  = sqrt(1/3)*randn(3, L);                          % CHANGED 2: eps_{k,l}, one per path
-    coup  = repmat(mu_eg.'*eps_, I, 1)/hbar;                % same in every cell
-    G(:, k) = sum(coup.*alpha.*exp(-1j*idx*phi), 2);        % (75)
-end
-S = (randn(K, P) + 1j*randn(K, P))/sqrt(2);                 % CN(0,1)
+%% ---- Save results ----
+save('fig3_paper_tuned.mat', 'SNR_dB', 'P_list', 'NMSE_GS', 'NMSE_GD', 'NMSE_CRLB', ...
+     'MC', 'I', 'K', 'RSR_dB', 'GS_iterations', 'GD_max_iterations', 'GD_tol');
 
-% reference: one path, (88)
-phi_b   = 2*pi*d_lam*cos(pi*rand);
-alpha_b = sqrt(10)*(randn + 1j*randn)/sqrt(2);              % CN(0,10)
-eps_b   = repmat(sqrt(1/3)*randn(3, 1), 1, I);              % CHANGED 2: one eps_b
-g_b     = (mu_eg.'*eps_b/hbar).'*alpha_b.*exp(-1j*idx*phi_b);
-B       = g_b*ones(1, P);                                   % s_b,p = 1
-A       = G*S;
-B       = B*sqrt(10^(RSR_dB/10)*mean(abs(A(:)).^2)/mean(abs(B(:)).^2));   % CHANGED 1
-end
+fprintf('\n====================================================\n');
+fprintf('Simulation completed. Results saved to fig3_paper_tuned.mat\n');
+fprintf('Plot saved to fig3_paper_tuned.png\n');
+fprintf('====================================================\n');
 
-function [G, t, converged] = est_gd(Y, S, B, Z, G0, T, tol)
-% gradient descent on the linearised model, (216)-(228), starting from G0.
-% Returns the number of iterations used and whether the threshold was reached.
-G = G0;  converged = false;
-eta = 1/max(eig(S*S'));                         % step size (418a)
-Yc  = Y - abs(B);
-for t = 1:T
-    E     = Yc - real(Z.*(G*S));                % (220)
-    G_new = G + eta*(E.*conj(Z))*S';            % (223)
-    if norm(G_new - G, 'fro')^2 < tol*norm(G_new, 'fro')^2
-        G = G_new;  converged = true;  break;
-    end
-    G = G_new;
-end
+%% ---- Local function: dashed ellipse with a label ----
+function drawEllipse(x0, yValues, label, side)
+% x0: SNR where the ellipse is drawn; yValues: NMSE values [dB] of the curves it encloses
+
+halfWidth = 0.9;                                    % [dB on the SNR axis]
+margin = 1.5;                                       % [dB on the NMSE axis]
+
+yCenter = (min(yValues) + max(yValues))/2;
+halfHeight = (max(yValues) - min(yValues))/2 + margin;
+
+t = linspace(0, 2*pi, 200);
+plot(x0 + halfWidth*cos(t), yCenter + halfHeight*sin(t), 'k--', 'LineWidth', 1, 'HandleVisibility', 'off');
+
+if strcmp(side, 'above')
+    text(x0, yCenter + halfHeight + 1.5, label, 'FontWeight', 'bold', 'HorizontalAlignment', 'center');
+else
+    text(x0, yCenter - halfHeight - 2, label, 'FontWeight', 'bold', 'HorizontalAlignment', 'center');
 end
 
-function G = est_gs(Y, S, B, T)
-% biased Gerchberg-Saxton of [10], spectral init (351)-(358) + T iterations (360)-(364)
-[I, ~] = size(Y); K = size(S, 1);
-G = zeros(I, K);
-for i = 1:I
-    y  = Y(i, :).';
-    Ab = [S.', B(i, :).'];                      % (351), P x (K+1)
-    M  = Ab'*diag(y)*Ab;                        % (352) = sum_p y_p a_p a_p^H
-    [V, D] = eig((M + M')/2);
-    [~, m] = max(real(diag(D)));
-    v  = V(:, m);                               % principal eigenvector (353)
-    q  = abs(Ab*v);
-    r  = (q.'*y)/(q.'*q);                       % (354)
-    gt = exp(-1j*angle(r*v(end)))*r*v;          % (355)-(356)
-    G(i, :) = gt(1:K).';                        % (357)-(358)
-end
-SSinv = S'/(S*S');
-for t = 1:T
-    X = G*S + B;                                % (360)
-    R = Y.*exp(1j*angle(X));                    % (361)-(362)
-    G = (R - B)*SSinv;                          % (363)-(364)
-end
-end
-
-function [nm, ci] = nmse_ci(e, en, bs)
-% NMSE in dB per column (sum of errors / sum of energies) and its 95% bootstrap
-% interval from 2000 resamples of the trials
-[MC, n] = size(e);  nB = 2000;
-nm = 10*log10(sum(e, 1)./sum(en, 1));
-ci = nan(2, n);
-for j = 1:n
-    idx = randi(bs, MC, MC, nB);
-    ej = e(:, j);  enj = en(:, j);
-    r  = sort(10*log10(sum(ej(idx), 1)./sum(enj(idx), 1)));
-    ci(:, j) = [r(round(0.025*nB)); r(round(0.975*nB))];
-end
-end
-
-function mark_group(x0, y, txt, side)
-% dashed ellipse around the curves of one pilot length at SNR = x0 (y = their
-% NMSE values there), with the label txt 'right', 'left', 'below' or 'above'
-rx = 0.9;  pad = 1.5;                           % half-width [dB SNR], margin [dB NMSE]
-cy = (min(y) + max(y))/2;  ry = (max(y) - min(y))/2 + pad;
-t  = linspace(0, 2*pi, 200);
-plot(x0 + rx*cos(t), cy + ry*sin(t), 'k--', 'LineWidth', 1, 'HandleVisibility', 'off');
-switch side
-    case 'right', text(x0 + rx + 0.8, cy - 0.3*ry, txt, 'FontWeight', 'bold');
-    case 'left',  text(x0 - rx - 0.8, cy, txt, 'FontWeight', 'bold', 'HorizontalAlignment', 'right');
-    case 'below', text(x0, cy - ry - 2, txt, 'FontWeight', 'bold', 'HorizontalAlignment', 'center');
-    case 'above', text(x0, cy + ry + 1.5, txt, 'FontWeight', 'bold', 'HorizontalAlignment', 'center');
-end
 end

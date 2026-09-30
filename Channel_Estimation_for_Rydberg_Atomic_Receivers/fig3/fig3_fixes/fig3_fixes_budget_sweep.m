@@ -121,7 +121,7 @@ idx = (0:I-1).';
 G = zeros(I, K);
 for k = 1:K
     L     = randi([3 7]);                                   % L_k ~ U{3,...,7}
-    phi   = 2*pi*d_lam*cos(pi*rand(1, L));                  % phase shift, AoA ~ U(0,pi)
+    phi   = 2*pi*d_lam*cos(2*pi*rand(1, L));                  % phase shift, AoA ~ U(0,2*pi)
     alpha = (randn(1, L) + 1j*randn(1, L))/sqrt(2);         % CN(0,1)
     eps_  = sqrt(1/3)*randn(3, L);                          % eps_{k,l}, one per path
     coup  = repmat(mu_eg.'*eps_, I, 1)/hbar;                % same in every cell
@@ -130,7 +130,7 @@ end
 S = (randn(K, P) + 1j*randn(K, P))/sqrt(2);                 % CN(0,1)
 
 % reference: one path, (88)
-phi_b   = 2*pi*d_lam*cos(pi*rand);
+phi_b   = 2*pi*d_lam*cos(2*pi*rand);
 alpha_b = sqrt(10)*(randn + 1j*randn)/sqrt(2);              % CN(0,10)
 eps_b   = repmat(sqrt(1/3)*randn(3, 1), 1, I);              % one eps_b
 g_b     = (mu_eg.'*eps_b/hbar).'*alpha_b.*exp(-1j*idx*phi_b);

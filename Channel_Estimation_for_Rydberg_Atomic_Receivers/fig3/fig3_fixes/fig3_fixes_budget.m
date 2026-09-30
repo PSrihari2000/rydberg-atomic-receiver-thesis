@@ -31,7 +31,7 @@
 %   SNR = E|a|^2 / sigma^2 with a = G S                          (90)
 %   step size eta = 1/lambda_max(S S^H)                          (418a)
 %   G0 ~ CN(0,0.1) is stated for PGD; it is used for GD here as well
-%   element spacing lambda/2, angle of arrival ~ U(0,pi)
+%   element spacing lambda/2, angle of arrival ~ U(0,2*pi)
 %   500 Monte Carlo trials; channel, pilots and reference drawn once per trial
 %   and reused for every SNR
 %
@@ -143,7 +143,7 @@ idx = (0:I-1).';
 G = zeros(I, K);
 for k = 1:K
     L     = randi([3 7]);                                   % L_k ~ U{3,...,7}
-    phi   = 2*pi*d_lam*cos(pi*rand(1, L));                  % phase shift, AoA ~ U(0,pi)
+    phi   = 2*pi*d_lam*cos(2*pi*rand(1, L));                  % phase shift, AoA ~ U(0,2*pi)
     alpha = (randn(1, L) + 1j*randn(1, L))/sqrt(2);         % CN(0,1)
     eps_  = sqrt(1/3)*randn(3, L);                          % CHANGED 2: eps_{k,l}, one per path
     coup  = repmat(mu_eg.'*eps_, I, 1)/hbar;                % same in every cell
@@ -152,7 +152,7 @@ end
 S = (randn(K, P) + 1j*randn(K, P))/sqrt(2);                 % CN(0,1)
 
 % reference: one path, (88)
-phi_b   = 2*pi*d_lam*cos(pi*rand);
+phi_b   = 2*pi*d_lam*cos(2*pi*rand);
 alpha_b = sqrt(10)*(randn + 1j*randn)/sqrt(2);              % CN(0,10)
 eps_b   = repmat(sqrt(1/3)*randn(3, 1), 1, I);              % CHANGED 2: one eps_b
 g_b     = (mu_eg.'*eps_b/hbar).'*alpha_b.*exp(-1j*idx*phi_b);
