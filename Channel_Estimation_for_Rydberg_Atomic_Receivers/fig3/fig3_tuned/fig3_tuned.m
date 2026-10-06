@@ -1,5 +1,6 @@
-%% fig3_paper_tuned.m
+%% fig3_tuned.m
 % Fig. 3 of Xu et al., "Channel Estimation for Rydberg Atomic Receivers":
+% same as fig3_literal.m except the changes marked TUNED.
 
 
 clear; clc; close all;
@@ -17,10 +18,10 @@ numP = length(P_list);
 SNR_dB = -5:5:30;
 numSNR = length(SNR_dB);
 
-RSR_dB = 40;                    % TUNED: reference-to-signal ratio E|b|^2 / E|GS|^2
+RSR_dB = 50;                    % TUNED: reference-to-signal ratio E|b|^2 / E|GS|^2
 
-GS_iterations = [15 50];        % TUNED: GS iterations at P = 10, 30
-GD_max_iterations = 50;         % TUNED: GD iterations (both P)
+GS_iterations = [10 50];        % TUNED: GS iterations at P = 10, 30
+GD_max_iterations = [30 50];    % TUNED: GD iterations at P = 10, 30
 GD_tol = 1e-12;                 % stop when ||G_new - G||^2 < GD_tol*||G_new||^2
 
 G0_var = 0.1;                   % G0 ~ CN(0,0.1)
@@ -111,7 +112,7 @@ for pIndex = 1:numP
         for snrIndex = 1:numSNR
 
             snrLinear = 10^(SNR_dB(snrIndex)/10);
-            sigma2_complex = signalPower/snrLinear;         % complex noise variance
+            sigma2_complex = signalPower/snrLinear;         % complex noise variance, SNR per cell as in [10] Eq.(36)
 
             N_complex = sqrt(sigma2_complex/2)*(randn(I, P) + 1j*randn(I, P));   % I x P, CN(0,sigma2)
 
@@ -142,7 +143,7 @@ for pIndex = 1:numP
 
                 x = exp(-1j*angle(gbar0(K+1)))*gbar0(1:K);  % K x 1, initial estimate of g_i
 
-                for gsIter = 1:GS_iterations(pIndex)        % TUNED: 15 at P = 10, 50 at P = 30
+                for gsIter = 1:GS_iterations(pIndex)        % TUNED: 10 at P = 10, 50 at P = 30
                     theta = angle(S.'*x + b_i);             % P x 1, estimated phase
                     x = inv(conj(S)*S.')*(conj(S)*(y_i.*exp(1j*theta) - b_i));   % K x 1
                 end
@@ -156,7 +157,7 @@ for pIndex = 1:numP
             step = 1/max(eig(S*S'));                        % step size
             Y_centered = Y - abs(B);                        % I x P
 
-            for gdIter = 1:GD_max_iterations                % TUNED: 50 iterations
+            for gdIter = 1:GD_max_iterations(pIndex)        % TUNED: 30 at P = 10, 50 at P = 30
 
                 residual = Y_centered - real(Z.*(G_hat_GD*S));   % I x P
                 gradient = -(residual.*conj(Z))*S';         % I x K
@@ -210,21 +211,23 @@ NMSE_CRLB_dB = 10*log10(NMSE_CRLB);
 
 colorGD = [0.93 0.69 0.13];
 colorCRLB = [0.85 0.33 0.10];
+lw = 2.5;                                           % line width, as in the paper
+ms = 8;                                             % marker size
 
-figure('Color', 'w');
+figure('Color', 'w', 'Position', [100 100 640 480]);
 hold on;
 grid on;
 box on;
 
 % P = 10 (these three lines give the legend)
-plot(SNR_dB, NMSE_GS_dB(1, :), '--d', 'Color', 'k', 'LineWidth', 1.5, 'MarkerFaceColor', 'w', 'DisplayName', 'GS');
-plot(SNR_dB, NMSE_GD_dB(1, :), '-.s', 'Color', colorGD, 'LineWidth', 1.5, 'MarkerFaceColor', 'w', 'DisplayName', 'GD');
-plot(SNR_dB, NMSE_CRLB_dB(1, :), '-o', 'Color', colorCRLB, 'LineWidth', 1.5, 'DisplayName', 'CRLB');
+plot(SNR_dB, NMSE_GS_dB(1, :), '--d', 'Color', 'k', 'LineWidth', lw, 'MarkerSize', ms, 'MarkerFaceColor', 'w', 'DisplayName', 'GS');
+plot(SNR_dB, NMSE_GD_dB(1, :), '-.s', 'Color', colorGD, 'LineWidth', lw, 'MarkerSize', ms, 'MarkerFaceColor', 'w', 'DisplayName', 'GD');
+plot(SNR_dB, NMSE_CRLB_dB(1, :), '-o', 'Color', colorCRLB, 'LineWidth', lw, 'MarkerSize', ms, 'DisplayName', 'CRLB');
 
 % P = 30
-plot(SNR_dB, NMSE_GS_dB(2, :), '--d', 'Color', 'k', 'LineWidth', 1.5, 'MarkerFaceColor', 'w', 'HandleVisibility', 'off');
-plot(SNR_dB, NMSE_GD_dB(2, :), '-.s', 'Color', colorGD, 'LineWidth', 1.5, 'MarkerFaceColor', 'w', 'HandleVisibility', 'off');
-plot(SNR_dB, NMSE_CRLB_dB(2, :), '-o', 'Color', colorCRLB, 'LineWidth', 1.5, 'HandleVisibility', 'off');
+plot(SNR_dB, NMSE_GS_dB(2, :), '--d', 'Color', 'k', 'LineWidth', lw, 'MarkerSize', ms, 'MarkerFaceColor', 'w', 'HandleVisibility', 'off');
+plot(SNR_dB, NMSE_GD_dB(2, :), '-.s', 'Color', colorGD, 'LineWidth', lw, 'MarkerSize', ms, 'MarkerFaceColor', 'w', 'HandleVisibility', 'off');
+plot(SNR_dB, NMSE_CRLB_dB(2, :), '-o', 'Color', colorCRLB, 'LineWidth', lw, 'MarkerSize', ms, 'HandleVisibility', 'off');
 
 % dashed ellipses marking P = 10 (at SNR = 10 dB) and P = 30 (at SNR = 15 dB)
 index10 = find(SNR_dB == 10);
@@ -232,26 +235,26 @@ index15 = find(SNR_dB == 15);
 drawEllipse(10, [NMSE_GS_dB(1, index10), NMSE_GD_dB(1, index10), NMSE_CRLB_dB(1, index10)], 'P = 10', 'above');
 drawEllipse(15, [NMSE_GS_dB(2, index15), NMSE_GD_dB(2, index15), NMSE_CRLB_dB(2, index15)], 'P = 30', 'below');
 
-xlabel('SNR [dB]');
-ylabel('NMSE [dB]');
-legend('Location', 'southwest');
-title({sprintf('Tuned: 1D array, I = %d, K = %d, polarization per path, RSR = %d dB', I, K, RSR_dB), ...
-       sprintf('GD %d it.; GS %d it. (P = 10), %d it. (P = 30); %d trials', ...
-       GD_max_iterations, GS_iterations(1), GS_iterations(2), MC)});
+xlabel('SNR [dB]', 'FontWeight', 'bold');
+ylabel('NMSE [dB]', 'FontWeight', 'bold');
+legend('Location', 'southwest', 'FontWeight', 'bold');
+set(gca, 'FontWeight', 'bold', 'FontSize', 11, 'LineWidth', 1);
 xlim([SNR_dB(1) SNR_dB(end)]);
 xticks(SNR_dB);
+ylim([-40 10]);
+yticks(-40:5:10);
 
 hold off;
 
-exportgraphics(gcf, 'fig3_paper_tuned.png', 'Resolution', 200);
+exportgraphics(gcf, 'fig3_tuned.png', 'Resolution', 200);
 
 %% ---- Save results ----
-save('fig3_paper_tuned.mat', 'SNR_dB', 'P_list', 'NMSE_GS', 'NMSE_GD', 'NMSE_CRLB', ...
+save('fig3_tuned.mat', 'SNR_dB', 'P_list', 'NMSE_GS', 'NMSE_GD', 'NMSE_CRLB', ...
      'MC', 'I', 'K', 'RSR_dB', 'GS_iterations', 'GD_max_iterations', 'GD_tol');
 
 fprintf('\n====================================================\n');
-fprintf('Simulation completed. Results saved to fig3_paper_tuned.mat\n');
-fprintf('Plot saved to fig3_paper_tuned.png\n');
+fprintf('Simulation completed. Results saved to fig3_tuned.mat\n');
+fprintf('Plot saved to fig3_tuned.png\n');
 fprintf('====================================================\n');
 
 %% ---- Local function: dashed ellipse with a label ----
