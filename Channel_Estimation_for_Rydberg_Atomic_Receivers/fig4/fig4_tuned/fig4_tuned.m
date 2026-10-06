@@ -1,6 +1,6 @@
-%% fig4_paper_tuned.m
+%% fig4_tuned.m
 % Fig. 4 of Xu et al., "Channel Estimation for Rydberg Atomic Receivers":
-% same as fig4_paper_literal.m except the three changes marked TUNED.
+% same as fig4_literal.m except the changes marked TUNED; plot in the paper's style.
 
 clear; clc; close all;
 rng(1);
@@ -19,10 +19,10 @@ numP = length(P_list);
 SNR_dB = -5:5:30;
 numSNR = length(SNR_dB);
 
-RSR_dB = 40;                    % TUNED: reference-to-signal ratio E|b|^2 / E|S^T G3|^2
+RSR_dB = 50;                  % TUNED: reference-to-signal ratio E|b|^2 / E|S^T G3|^2
 
-GD_max_iterations = 50;         % TUNED: GD iterations
-PGD_max_iterations = 50;        % TUNED: PGD iterations
+GD_max_iterations = 50;         % TUNED: GD iterations (all P)
+PGD_max_iterations = 50;      % TUNED: PGD iterations (all P)
 tol = 1e-12;                    % stop when ||G_new - G||^2 < tol*||G_new||^2
 
 G0_var = 0.1;                   % G0 ~ CN(0,0.1)
@@ -240,21 +240,23 @@ NMSE_CRLB_dB = 10*log10(NMSE_CRLB);
 colorGD = [0.93 0.69 0.13];
 colorPGD = [0 0.45 0.74];
 colorCRLB = [0.85 0.33 0.10];
+lw = 1.5;                                           % line width, as in the paper
+ms = 6;                                           % marker size
 
-figure('Color', 'w');
+figure('Color', 'w', 'Position', [100 100 640 480]);
 hold on;
 grid on;
 box on;
 
 % P = 10 (these three lines give the legend)
-plot(SNR_dB, NMSE_GD_dB(1, :), '-.s', 'Color', colorGD, 'LineWidth', 1.5, 'MarkerFaceColor', 'w', 'DisplayName', 'GD');
-plot(SNR_dB, NMSE_PGD_dB(1, :), '-^', 'Color', colorPGD, 'LineWidth', 1.5, 'MarkerFaceColor', colorPGD, 'DisplayName', 'PGD');
-plot(SNR_dB, NMSE_CRLB_dB(1, :), '-o', 'Color', colorCRLB, 'LineWidth', 1.5, 'DisplayName', 'CRLB');
+plot(SNR_dB, NMSE_GD_dB(1, :), '-.s', 'Color', colorGD, 'LineWidth', lw, 'MarkerSize', ms, 'MarkerFaceColor', 'w', 'DisplayName', 'GD');
+plot(SNR_dB, NMSE_PGD_dB(1, :), '-^', 'Color', colorPGD, 'LineWidth', lw, 'MarkerSize', ms, 'MarkerFaceColor', colorPGD, 'DisplayName', 'PGD');
+plot(SNR_dB, NMSE_CRLB_dB(1, :), '-o', 'Color', colorCRLB, 'LineWidth', lw, 'MarkerSize', ms, 'DisplayName', 'CRLB');
 
 % P = 30
-plot(SNR_dB, NMSE_GD_dB(2, :), '-.s', 'Color', colorGD, 'LineWidth', 1.5, 'MarkerFaceColor', 'w', 'HandleVisibility', 'off');
-plot(SNR_dB, NMSE_PGD_dB(2, :), '-^', 'Color', colorPGD, 'LineWidth', 1.5, 'MarkerFaceColor', colorPGD, 'HandleVisibility', 'off');
-plot(SNR_dB, NMSE_CRLB_dB(2, :), '-o', 'Color', colorCRLB, 'LineWidth', 1.5, 'HandleVisibility', 'off');
+plot(SNR_dB, NMSE_GD_dB(2, :), '-.s', 'Color', colorGD, 'LineWidth', lw, 'MarkerSize', ms, 'MarkerFaceColor', 'w', 'HandleVisibility', 'off');
+plot(SNR_dB, NMSE_PGD_dB(2, :), '-^', 'Color', colorPGD, 'LineWidth', lw, 'MarkerSize', ms, 'MarkerFaceColor', colorPGD, 'HandleVisibility', 'off');
+plot(SNR_dB, NMSE_CRLB_dB(2, :), '-o', 'Color', colorCRLB, 'LineWidth', lw, 'MarkerSize', ms, 'HandleVisibility', 'off');
 
 % dashed ellipses marking P = 10 (at SNR = 10 dB) and P = 30 (at SNR = 15 dB)
 index10 = find(SNR_dB == 10);
@@ -262,25 +264,26 @@ index15 = find(SNR_dB == 15);
 drawEllipse(10, [NMSE_GD_dB(1, index10), NMSE_PGD_dB(1, index10), NMSE_CRLB_dB(1, index10)], 'P = 10', 'above');
 drawEllipse(15, [NMSE_GD_dB(2, index15), NMSE_PGD_dB(2, index15), NMSE_CRLB_dB(2, index15)], 'P = 30', 'below');
 
-xlabel('SNR [dB]');
-ylabel('NMSE [dB]');
-legend('Location', 'southwest');
-title({sprintf('Tuned: %d x %d array, K = %d, polarization per path, RSR = %d dB', I1, I2, K, RSR_dB), ...
-       sprintf('GD and PGD %d iterations, %d trials', GD_max_iterations, MC)});
+xlabel('SNR [dB]', 'FontWeight', 'bold');
+ylabel('NMSE [dB]', 'FontWeight', 'bold');
+legend('Location', 'southwest', 'FontWeight', 'bold');
+set(gca, 'FontWeight', 'bold', 'FontSize', 11, 'LineWidth', 1);
 xlim([SNR_dB(1) SNR_dB(end)]);
 xticks(SNR_dB);
+ylim([-40 10]);
+yticks(-40:5:10);
 
 hold off;
 
-exportgraphics(gcf, 'fig4_paper_tuned.png', 'Resolution', 200);
+exportgraphics(gcf, 'fig4_tuned.png', 'Resolution', 200);
 
 %% ---- Save results ----
-save('fig4_paper_tuned.mat', 'SNR_dB', 'P_list', 'NMSE_GD', 'NMSE_PGD', 'NMSE_CRLB', ...
+save('fig4_tuned.mat', 'SNR_dB', 'P_list', 'NMSE_GD', 'NMSE_PGD', 'NMSE_CRLB', ...
      'MC', 'I1', 'I2', 'K', 'RSR_dB', 'GD_max_iterations', 'PGD_max_iterations', 'tol');
 
 fprintf('\n====================================================\n');
-fprintf('Simulation completed. Results saved to fig4_paper_tuned.mat\n');
-fprintf('Plot saved to fig4_paper_tuned.png\n');
+fprintf('Simulation completed. Results saved to fig4_tuned.mat\n');
+fprintf('Plot saved to fig4_tuned.png\n');
 fprintf('====================================================\n');
 
 %% ---- Local function: dashed ellipse with a label ----
