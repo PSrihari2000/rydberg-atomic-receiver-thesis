@@ -1,6 +1,5 @@
 %% fig4_paper_literal.m
 % Fig. 4 of Xu et al., "Channel Estimation for Rydberg Atomic Receivers":
-% NMSE vs SNR, 2D array, GD vs PGD vs CRLB, using the values stated in the paper.
 
 clear; clc; close all;
 rng(1);

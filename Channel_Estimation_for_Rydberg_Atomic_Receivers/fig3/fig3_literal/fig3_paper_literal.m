@@ -115,7 +115,7 @@ for pIndex = 1:numP
 
             Y = abs(A_signal + B + N_complex);              % I x P, magnitude observation, Eq.(8)
 
-            %% ---- Biased GS ----
+            %% ---- Biased GS (one cell at a time) ----
             G_hat_GS = zeros(I, K);                         % I x K
 
             for i = 1:I
