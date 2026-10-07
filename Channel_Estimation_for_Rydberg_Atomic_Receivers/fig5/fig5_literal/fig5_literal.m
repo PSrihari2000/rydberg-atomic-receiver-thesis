@@ -1,4 +1,4 @@
-%% fig5_paper_literal.m
+%% fig5_literal.m
 % Fig. 5 of Xu et al., "Channel Estimation for Rydberg Atomic Receivers":
 % NMSE vs pilot length, 2D array, SNR = 5 dB, PGD vs CRLB, using the values stated in the paper.
 
@@ -198,31 +198,35 @@ NMSE_CRLB_dB = 10*log10(NMSE_CRLB);
 colorPGD = [0 0.45 0.74];
 colorCRLB = [0.85 0.33 0.10];
 
-figure('Color', 'w');
+lw = 2;                                             % line width, as in the paper
+ms = 7;                                             % marker size
+
+figure('Color', 'w', 'Position', [100 100 640 480]);
 hold on;
 grid on;
 box on;
 
-plot(P_list, NMSE_PGD_dB, '-^', 'Color', colorPGD, 'LineWidth', 1.5, 'MarkerFaceColor', colorPGD, 'DisplayName', 'PGD');
-plot(P_list, NMSE_CRLB_dB, '-o', 'Color', colorCRLB, 'LineWidth', 1.5, 'DisplayName', 'CRLB');
+plot(P_list, NMSE_PGD_dB, '-^', 'Color', colorPGD, 'LineWidth', lw, 'MarkerSize', ms, 'MarkerFaceColor', colorPGD, 'DisplayName', 'PGD');
+plot(P_list, NMSE_CRLB_dB, '-o', 'Color', colorCRLB, 'LineWidth', lw, 'MarkerSize', ms, 'DisplayName', 'CRLB');
 
-xlabel('Pilot Length');
-ylabel('NMSE [dB]');
-legend('Location', 'northeast');
-title({sprintf('Paper values: %d x %d array, K = %d, SNR = %d dB', I1, I2, K, SNR_dB), ...
-       sprintf('polarization per cell, \\alpha_b ~ CN(0,10), G_0 ~ CN(0,0.1), %d trials', MC)});
+xlabel('Pilot Length', 'FontWeight', 'bold');
+ylabel('NMSE [dB]', 'FontWeight', 'bold');
+legend('Location', 'northeast', 'FontWeight', 'bold');
+set(gca, 'FontWeight', 'bold', 'FontSize', 11, 'LineWidth', 1);
 xlim([P_list(1) P_list(end)]);
 xticks(P_list);
+ylim([-15 30]);
+yticks(-15:5:30);
 
 hold off;
 
-exportgraphics(gcf, 'fig5_paper_literal.png', 'Resolution', 200);
+exportgraphics(gcf, 'fig5_literal.png', 'Resolution', 200);
 
 %% ---- Save results ----
-save('fig5_paper_literal.mat', 'P_list', 'SNR_dB', 'NMSE_PGD', 'NMSE_CRLB', 'refRatio', ...
+save('fig5_literal.mat', 'P_list', 'SNR_dB', 'NMSE_PGD', 'NMSE_CRLB', 'refRatio', ...
      'MC', 'I1', 'I2', 'K', 'PGD_max_iterations', 'tol');
 
 fprintf('\n====================================================\n');
-fprintf('Simulation completed. Results saved to fig5_paper_literal.mat\n');
-fprintf('Plot saved to fig5_paper_literal.png\n');
+fprintf('Simulation completed. Results saved to fig5_literal.mat\n');
+fprintf('Plot saved to fig5_literal.png\n');
 fprintf('====================================================\n');
