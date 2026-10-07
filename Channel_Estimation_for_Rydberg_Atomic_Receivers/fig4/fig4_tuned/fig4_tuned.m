@@ -240,8 +240,8 @@ NMSE_CRLB_dB = 10*log10(NMSE_CRLB);
 colorGD = [0.93 0.69 0.13];
 colorPGD = [0 0.45 0.74];
 colorCRLB = [0.85 0.33 0.10];
-lw = 1.5;                                           % line width, as in the paper
-ms = 6;                                           % marker size
+lw = 2;                                             % line width, as in the paper
+ms = 7;                                           % marker size
 
 figure('Color', 'w', 'Position', [100 100 640 480]);
 hold on;
