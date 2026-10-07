@@ -1,6 +1,4 @@
 %% fig4_tuned.m
-% Fig. 4 of Xu et al., "Channel Estimation for Rydberg Atomic Receivers":
-% same as fig4_literal.m except the changes marked TUNED; plot in the paper's style.
 
 clear; clc; close all;
 rng(1);

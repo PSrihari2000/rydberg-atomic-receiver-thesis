@@ -112,7 +112,7 @@ for pIndex = 1:numP
         for snrIndex = 1:numSNR
 
             snrLinear = 10^(SNR_dB(snrIndex)/10);
-            sigma2_complex = signalPower/snrLinear;         % complex noise variance, SNR per cell as in [10] Eq.(36)
+            sigma2_complex = signalPower/snrLinear;         % complex noise variance
 
             N_complex = sqrt(sigma2_complex/2)*(randn(I, P) + 1j*randn(I, P));   % I x P, CN(0,sigma2)
 
@@ -131,7 +131,7 @@ for pIndex = 1:numP
                 M = zeros(K+1, K+1);                        % (K+1) x (K+1)
                 for p = 1:P
                     a_bar_p = Abar(p, :)';                  % (K+1) x 1, p-th row as a column
-                    M = M + y_i(p)*(a_bar_p*a_bar_p');      % y_p * a_p * a_p^H
+                    M = M + y_i(p)*(a_bar_p*a_bar_p');      
                 end
 
                 [V, D] = eig(M);

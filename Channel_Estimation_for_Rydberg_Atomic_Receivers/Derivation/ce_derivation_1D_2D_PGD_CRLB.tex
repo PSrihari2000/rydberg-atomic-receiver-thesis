@@ -7307,20 +7307,139 @@ G_{(3)}^{(t)}
 \end{equation}
 where $\zeta_t>0$ is the step size.
 
-\textbf{Step size.} For any perturbation
-$\Delta\in\mathbb C^{K\times I_1I_2}$, since $|Z_{p,q}|=1$ and
-$|\operatorname{Re}(x)|\leq|x|$,
+\textbf{Step size.} Xu \emph{et al.} do not give a value for $\zeta_t$; they
+state that, under Lipschitz continuous gradients, the algorithm converges
+within $\mathcal O(1/\epsilon)$ iterations, citing Fu and
+Huang\footnote{X.~Fu and K.~Huang, ``Block-term tensor decomposition via
+constrained matrix factorization,'' in \emph{Proc.\ IEEE 29th Int.\ Workshop
+Mach.\ Learn.\ Signal Process.\ (MLSP)}, 2019, pp.~1--6; reference~[15] of Xu
+\emph{et al.}}, where the step size is the inverse of the Lipschitz constant
+of the gradient. The same rule is used here: a Lipschitz constant $L$ is
+derived and $\zeta_t\leq1/L$ is taken. The derivation has four parts.
+
+\emph{(i) Effect of a change in the channel estimate.} Let
+$\Delta\in\mathbb C^{K\times I_1I_2}$ denote an arbitrary change of the
+channel estimate, i.e.\ the estimate is moved from $G_{(3)}^{(t)}$ to
+$G_{(3)}^{(t)}+\Delta$. The matrix $\Delta$ has the same dimensions as
+$G_{(3)}$; in the gradient step it will be $\Delta=-\zeta_t\nabla^{(t)}$.
+Since $S^T(G_{(3)}^{(t)}+\Delta)=S^TG_{(3)}^{(t)}+S^T\Delta$ and the real-part
+operator is linear, the residual (415) changes to
 \[
-\left\|\operatorname{Re}\!\left[Z_{(3)}\circ(S^T\Delta)\right]\right\|_F^2
+E^{(t)}-R,
+\qquad
+R\triangleq\operatorname{Re}\!\left[Z_{(3)}\circ(S^T\Delta)\right]
+\in\mathbb R^{P\times I_1I_2}.
+\]
+The terms $Y_{(3)}$ and $|B_{(3)}|$ do not depend on the channel estimate, so
+they do not appear in $R$.
+
+\emph{(ii) Expansion of the objective.} Both $E^{(t)}$ and $R$ are real.
+Using $\|X-Y\|_F^2=\|X\|_F^2-2\sum_{p,q}X_{p,q}Y_{p,q}+\|Y\|_F^2$ for real
+matrices,
+\[
+f\!\left(G_{(3)}^{(t)}+\Delta\right)
+=\left\|E^{(t)}-R\right\|_F^2
+=f\!\left(G_{(3)}^{(t)}\right)
+-2\sum_{p=1}^{P}\sum_{q=1}^{I_1I_2}E^{(t)}_{p,q}R_{p,q}
++\|R\|_F^2 .
+\]
+The middle term is linear in $\Delta$ and is determined by the gradient. Since
+$E^{(t)}_{p,q}$ is real, it can be moved inside the real part:
+\[
+\sum_{p,q}E^{(t)}_{p,q}R_{p,q}
+=\operatorname{Re}\sum_{p,q}E^{(t)}_{p,q}Z_{p,q}\,(S^T\Delta)_{p,q}.
+\]
+With the inner product $\langle X,Y\rangle=\operatorname{tr}(X^HY)
+=\sum_{k,q}X_{k,q}^{*}Y_{k,q}$ and the gradient (416),
+$\nabla^{(t)}=-S^{*}(E^{(t)}\circ Z_{(3)}^{*})$,
+\[
+\left\langle\nabla^{(t)},\Delta\right\rangle
+=-\operatorname{tr}\!\left[(E^{(t)}\circ Z_{(3)})^{T}S^T\Delta\right]
+=-\sum_{p,q}E^{(t)}_{p,q}Z_{p,q}\,(S^T\Delta)_{p,q},
+\]
+where $(E^{(t)}\circ Z_{(3)}^{*})^{H}=(E^{(t)}\circ Z_{(3)})^{T}$ because
+$E^{(t)}$ is real. Therefore
+$\sum_{p,q}E^{(t)}_{p,q}R_{p,q}
+=-\operatorname{Re}\langle\nabla^{(t)},\Delta\rangle$, and
+\[
+f\!\left(G_{(3)}^{(t)}+\Delta\right)
+=f\!\left(G_{(3)}^{(t)}\right)
++2\operatorname{Re}\left\langle\nabla^{(t)},\Delta\right\rangle
++\|R\|_F^2 .
+\]
+This expression is exact. The last term, $\|R\|_F^2$, is the second-order
+(curvature) term.
+
+\emph{(iii) Bound on the curvature term.} Three properties are used.
+\begin{itemize}
+\item \emph{The real part cannot increase the magnitude.} For any complex
+number $x=x_R+jx_I$, $|\operatorname{Re}(x)|=|x_R|\leq\sqrt{x_R^2+x_I^2}=|x|$.
+Applying this to every entry and summing the squares,
+$\|\operatorname{Re}(X)\|_F^2\leq\|X\|_F^2$.
+\item \emph{The phase matrix has unit-modulus entries.} Since
+$Z_{p,q}=e^{-jz_{p,q}}$, $|Z_{p,q}|=1$, so
+$|Z_{p,q}X_{p,q}|=|X_{p,q}|$ and
+$\|Z_{(3)}\circ X\|_F^2=\|X\|_F^2$.
+\item \emph{Rayleigh-quotient bound.} For a matrix $A$ and a vector $x$,
+$\|Ax\|_2^2=x^HA^HAx\leq\lambda_{\max}(A^HA)\,\|x\|_2^2$, because $A^HA$ is
+Hermitian and positive semidefinite. Applying this to every column of a
+matrix $X$ and summing over the columns gives
+$\|AX\|_F^2\leq\lambda_{\max}(A^HA)\,\|X\|_F^2$.
+\end{itemize}
+Applying the three properties in this order, with $A=S^T$ so that
+$A^HA=S^{*}S^T$,
+\[
+\|R\|_F^2
+=\left\|\operatorname{Re}\!\left[Z_{(3)}\circ(S^T\Delta)\right]\right\|_F^2
 \leq
+\left\|Z_{(3)}\circ(S^T\Delta)\right\|_F^2
+=
 \|S^T\Delta\|_F^2
 \leq
-\lambda_{\max}(S^*S^T)\,\|\Delta\|_F^2
-=
-\lambda_{\max}(SS^H)\,\|\Delta\|_F^2 .
+\lambda_{\max}(S^*S^T)\,\|\Delta\|_F^2 .
 \]
-Hence the curvature of $f$ is bounded by $\lambda_{\max}(SS^H)$, and a
-fixed step size
+Finally, $S^{*}S^T=(SS^H)^{*}$ is the complex conjugate of the Hermitian
+matrix $SS^H$. The eigenvalues of a Hermitian matrix are real, and conjugating
+the matrix conjugates its eigenvalues, so the two matrices have the same
+eigenvalues and
+\[
+\lambda_{\max}(S^*S^T)=\lambda_{\max}(SS^H)\triangleq L,
+\qquad
+\|R\|_F^2\leq L\,\|\Delta\|_F^2 .
+\]
+Hence, for every $\Delta$,
+\[
+f\!\left(G_{(3)}^{(t)}+\Delta\right)
+\leq
+f\!\left(G_{(3)}^{(t)}\right)
++2\operatorname{Re}\left\langle\nabla^{(t)},\Delta\right\rangle
++L\,\|\Delta\|_F^2 .
+\]
+The constant $L$ is an upper bound on the curvature of $f$; because of the
+first inequality above (the real part), the true curvature can be smaller.
+
+\emph{(iv) Gradient step.} The step (417) corresponds to
+$\Delta=-\zeta_t\nabla^{(t)}$, for which
+$\operatorname{Re}\langle\nabla^{(t)},\Delta\rangle
+=-\zeta_t\|\nabla^{(t)}\|_F^2$ and
+$\|\Delta\|_F^2=\zeta_t^2\|\nabla^{(t)}\|_F^2$. Substituting,
+\[
+f(M)
+\leq
+f\!\left(G_{(3)}^{(t)}\right)
+-2\zeta_t\|\nabla^{(t)}\|_F^2
++L\zeta_t^2\|\nabla^{(t)}\|_F^2
+=
+f\!\left(G_{(3)}^{(t)}\right)
+-\zeta_t\left(2-L\zeta_t\right)\|\nabla^{(t)}\|_F^2 .
+\]
+If $\zeta_t\leq1/L$, then $2-L\zeta_t\geq1$ and
+\[
+f(M)\leq f\!\left(G_{(3)}^{(t)}\right)-\zeta_t\|\nabla^{(t)}\|_F^2
+\leq f\!\left(G_{(3)}^{(t)}\right),
+\]
+so the objective decreases by at least $\zeta_t\|\nabla^{(t)}\|_F^2$ and cannot
+increase. Therefore a fixed step size
 \begin{equation}
 \boxed{
 \zeta_t\leq\frac{1}{\lambda_{\max}(SS^H)}
@@ -7329,6 +7448,11 @@ fixed step size
 \end{equation}
 is a sufficient (conservative) condition for a non-increasing objective in the
 unconstrained step under the Wirtinger convention of (412).
+
+This is the rule $\alpha^{(t)}\leq 1/\sigma_{\max}^2(C^{(t+1)})$ of Fu and
+Huang with the pilot matrix in place of their factor $C$, since
+$\sigma_{\max}^2(S)=\lambda_{\max}(SS^H)$. As $S$ is known and fixed, the step
+size is constant over the iterations.
 
 The gradient step does not by itself enforce the rank constraints;
 $\operatorname{mat}([M]_{k,:})$ is in general full rank.
