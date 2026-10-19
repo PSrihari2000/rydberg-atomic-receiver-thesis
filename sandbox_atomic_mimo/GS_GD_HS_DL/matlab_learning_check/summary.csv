@@ -1,0 +1,3 @@
+P,TrainingSeconds,SecondsPerEpoch,TrainNMSEdB,ValidationNMSEdB,ValidationPredictionEnergyRatio,ValidationRealVectorCorrelation,TrainingFitPass
+10,23.7398599,0.05934964975,-51.3023,1.334786,0.3439687,-0.0135065,1
+30,9.689948,0.02422487,-54.71782,1.454392,0.3899592,-0.00626273,1

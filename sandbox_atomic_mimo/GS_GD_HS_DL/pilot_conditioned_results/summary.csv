@@ -1,0 +1,3 @@
+P,TrainingSeconds,TrainNMSEdB,ValidationNMSEdB,PredictionEnergyRatio,RealVectorCorrelation
+10,40.4676027,-9.291134,-6.877417,0.8589981,0.8921676
+30,22.9838405,-16.50077,-13.95442,0.9851425,0.9797616

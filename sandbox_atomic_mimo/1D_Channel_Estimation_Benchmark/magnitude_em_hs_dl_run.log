@@ -1,0 +1,81 @@
+
+Generating independent DL data for P=10...
+Training plain MLP for P=10 (50 epochs maximum)...
+P=10 training finished in 54.8 seconds.
+
+Generating independent DL data for P=30...
+Training plain MLP for P=30 (50 epochs maximum)...
+P=30 training finished in 49.4 seconds.
+Completed independent test trial 10/200
+Completed independent test trial 20/200
+Completed independent test trial 30/200
+Completed independent test trial 40/200
+Completed independent test trial 50/200
+Completed independent test trial 60/200
+Completed independent test trial 70/200
+Completed independent test trial 80/200
+Completed independent test trial 90/200
+Completed independent test trial 100/200
+Completed independent test trial 110/200
+Completed independent test trial 120/200
+Completed independent test trial 130/200
+Completed independent test trial 140/200
+Completed independent test trial 150/200
+Completed independent test trial 160/200
+Completed independent test trial 170/200
+Completed independent test trial 180/200
+Completed independent test trial 190/200
+Completed independent test trial 200/200
+    P     SNR_dB       Method        NMSE_dB     MeanRuntimeSeconds    MeanHSRank
+    __    ______    ____________    _________    __________________    __________
+
+    10      -5      {'EM-GS'   }       6.3871         0.018422             NaN   
+    10      -5      {'HS-GS'   }       4.8539          0.15399           1.805   
+    10      -5      {'DL (MLP)'}     0.010423         0.018575             NaN   
+    10       0      {'EM-GS'   }       2.2517         0.017479             NaN   
+    10       0      {'HS-GS'   }      0.92236           0.1601           1.925   
+    10       0      {'DL (MLP)'}    0.0023427        0.0037799             NaN   
+    10       5      {'EM-GS'   }      -2.1497         0.012618             NaN   
+    10       5      {'HS-GS'   }      -2.9404          0.14082            2.25   
+    10       5      {'DL (MLP)'}    0.0052105        0.0037457             NaN   
+    10      10      {'EM-GS'   }      -7.0025        0.0090907             NaN   
+    10      10      {'HS-GS'   }      -6.9913          0.14816            2.78   
+    10      10      {'DL (MLP)'}    0.0036905        0.0036078             NaN   
+    10      15      {'EM-GS'   }      -11.746        0.0073509             NaN   
+    10      15      {'HS-GS'   }      -10.775          0.14556            3.04   
+    10      15      {'DL (MLP)'}    0.0022192        0.0040014             NaN   
+    10      20      {'EM-GS'   }      -16.389         0.006302             NaN   
+    10      20      {'HS-GS'   }      -13.874          0.13154            3.13   
+    10      20      {'DL (MLP)'}    0.0020243        0.0032326             NaN   
+    10      25      {'EM-GS'   }      -19.597        0.0064156             NaN   
+    10      25      {'HS-GS'   }      -15.408          0.13708           3.225   
+    10      25      {'DL (MLP)'}    0.0023928        0.0033131             NaN   
+    10      30      {'EM-GS'   }      -21.599        0.0060817             NaN   
+    10      30      {'HS-GS'   }      -16.147          0.12984            3.25   
+    10      30      {'DL (MLP)'}    0.0028718        0.0030629             NaN   
+    30      -5      {'EM-GS'   }      0.62594         0.032358             NaN   
+    30      -5      {'HS-GS'   }     -0.49705          0.19732           1.935   
+    30      -5      {'DL (MLP)'}     0.013083        0.0057011             NaN   
+    30       0      {'EM-GS'   }      -5.2054          0.03087             NaN   
+    30       0      {'HS-GS'   }      -5.3596          0.20502           2.255   
+    30       0      {'DL (MLP)'}    0.0069411        0.0033071             NaN   
+    30       5      {'EM-GS'   }      -10.783         0.023539             NaN   
+    30       5      {'HS-GS'   }      -10.328          0.18493            2.85   
+    30       5      {'DL (MLP)'}    0.0055847        0.0033011             NaN   
+    30      10      {'EM-GS'   }      -15.847         0.018594             NaN   
+    30      10      {'HS-GS'   }      -15.524          0.16741            3.25   
+    30      10      {'DL (MLP)'}    0.0064259        0.0034471             NaN   
+    30      15      {'EM-GS'   }      -21.042         0.016675             NaN   
+    30      15      {'HS-GS'   }      -20.863          0.16011           3.595   
+    30      15      {'DL (MLP)'}    0.0055253          0.00329             NaN   
+    30      20      {'EM-GS'   }      -25.879         0.015328             NaN   
+    30      20      {'HS-GS'   }      -25.721          0.16515           3.735   
+    30      20      {'DL (MLP)'}    0.0053353         0.004173             NaN   
+    30      25      {'EM-GS'   }      -30.901         0.015883             NaN   
+    30      25      {'HS-GS'   }      -30.752          0.16482           3.815   
+    30      25      {'DL (MLP)'}    0.0051931        0.0036928             NaN   
+    30      30      {'EM-GS'   }       -35.97         0.015169             NaN   
+    30      30      {'HS-GS'   }      -35.927           0.1649           3.885   
+    30      30      {'DL (MLP)'}    0.0052068        0.0043577             NaN   
+
+Saved results to D:\MTech_Thesis_Results\sandbox_atomic_mimo\1D_Channel_Estimation_Benchmark\magnitude_em_hs_dl_results

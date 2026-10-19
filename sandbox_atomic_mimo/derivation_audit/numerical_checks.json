@@ -1,0 +1,26 @@
+{
+  "gradient_directional_relative_error": 8.22518228794762e-10,
+  "step_S9_margin": 16.43426362382442,
+  "per_antenna_vs_matrix_LS_error": 4.1042618949880224e-16,
+  "mode3_kronecker_error": 2.4330783071233414e-15,
+  "exact_real_CRLB_trace": 11.804640483454264,
+  "block_inverse_trace": 6.618812820813458,
+  "block_bound_gap": 5.185827662640806,
+  "necessary_identifiability_counterexample": {
+    "rank_D": 1,
+    "real_unknowns": 2,
+    "complex_block_inverse_finite": true
+  },
+  "RWA_complex_phasor_counterexample": {
+    "written_C_abs": 2.0,
+    "positive_carrier_real_phasor_C_abs": 6.123233995736766e-17
+  },
+  "eq378_missing_beta_error": 3.464101615137755,
+  "rician_one_measurement_FIM_counterexample": {
+    "complex_block": 0.47332184674634004,
+    "real_FIM_rank": 1,
+    "real_unknowns": 2
+  },
+  "correct_kappa_RSR12_SNR0_K3": 10.565954616407423,
+  "tex_kappa_same_case": 95.09359154766679
+}

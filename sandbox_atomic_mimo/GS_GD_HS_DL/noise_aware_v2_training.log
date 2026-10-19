@@ -1,0 +1,41 @@
+P=10: packing 2048 training and 256 validation channels...
+P=10: linearized initialization plus 30 nonlinear layers; initial validation ratio-of-sums -6.655 dB, mean channel NMSE -6.588 dB
+P=10 epoch 1/40: loss 0.027368, validation -6.647 dB, mean-channel -6.676 dB
+P=10 epoch 2/40: loss 0.027097, validation -6.624 dB, mean-channel -6.689 dB
+P=10 epoch 3/40: loss 0.027052, validation -6.617 dB, mean-channel -6.690 dB
+P=10 epoch 4/40: loss 0.027033, validation -6.620 dB, mean-channel -6.691 dB
+P=10 epoch 5/40: loss 0.027018, validation -6.620 dB, mean-channel -6.693 dB
+P=10 epoch 6/40: loss 0.027008, validation -6.624 dB, mean-channel -6.696 dB
+P=10 epoch 7/40: loss 0.026996, validation -6.625 dB, mean-channel -6.698 dB
+P=10 epoch 8/40: loss 0.026988, validation -6.629 dB, mean-channel -6.699 dB
+P=10 epoch 9/40: loss 0.026979, validation -6.633 dB, mean-channel -6.702 dB
+P=10 epoch 10/40: loss 0.026968, validation -6.630 dB, mean-channel -6.706 dB
+P=10 epoch 11/40: loss 0.026958, validation -6.632 dB, mean-channel -6.707 dB
+P=10 epoch 12/40: loss 0.026949, validation -6.632 dB, mean-channel -6.707 dB
+P=10: early stopping after 12 epochs without improvement.
+    P     TrainingChannels    ValidationChannels    TrainingSeconds    BestEpoch    TrainNMSEdB    ValidationNMSEdB    ValidationMeanChannelNMSEdB    InitialValidationNMSEdB    PredictionEnergyRatio
+    __    ________________    __________________    _______________    _________    ___________    ________________    ___________________________    _______________________    _____________________
+
+    10          2048                 256                128.74             0          -6.6168          -6.6548                   -6.5879                      -6.6548                   0.80778       
+
+P=30: packing 2048 training and 256 validation channels...
+P=30: linearized initialization plus 30 nonlinear layers; initial validation ratio-of-sums -10.200 dB, mean channel NMSE -10.214 dB
+P=30 epoch 1/40: loss 0.011786, validation -10.159 dB, mean-channel -10.233 dB
+P=30 epoch 2/40: loss 0.011769, validation -10.164 dB, mean-channel -10.236 dB
+P=30 epoch 3/40: loss 0.011764, validation -10.171 dB, mean-channel -10.239 dB
+P=30 epoch 4/40: loss 0.011763, validation -10.168 dB, mean-channel -10.240 dB
+P=30 epoch 5/40: loss 0.01176, validation -10.167 dB, mean-channel -10.241 dB
+P=30 epoch 6/40: loss 0.011759, validation -10.165 dB, mean-channel -10.241 dB
+P=30 epoch 7/40: loss 0.011757, validation -10.167 dB, mean-channel -10.242 dB
+P=30 epoch 8/40: loss 0.011755, validation -10.170 dB, mean-channel -10.243 dB
+P=30 epoch 9/40: loss 0.011752, validation -10.171 dB, mean-channel -10.243 dB
+P=30 epoch 10/40: loss 0.011749, validation -10.170 dB, mean-channel -10.244 dB
+P=30 epoch 11/40: loss 0.011748, validation -10.169 dB, mean-channel -10.245 dB
+P=30 epoch 12/40: loss 0.011744, validation -10.173 dB, mean-channel -10.247 dB
+P=30: early stopping after 12 epochs without improvement.
+    P     TrainingChannels    ValidationChannels    TrainingSeconds    BestEpoch    TrainNMSEdB    ValidationNMSEdB    ValidationMeanChannelNMSEdB    InitialValidationNMSEdB    PredictionEnergyRatio
+    __    ________________    __________________    _______________    _________    ___________    ________________    ___________________________    _______________________    _____________________
+
+    30          2048                 256                173.37             0          -10.283           -10.2                    -10.214                       -10.2                    0.90248       
+
+Version-2 development training finished; frozen test files were never loaded.

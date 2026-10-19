@@ -1,0 +1,4718 @@
+===== PDF PAGE 1 =====
+ Channel Estimation for a Rydberg Atomic Receiver
+
+
+
+1 Quantum System and Two-Level Rydberg State
+
+
+A quantum system is described by a state vector. For the two-level Rydberg-atom model,
+the ground state and excited state are denoted by
+
+
+                                        |g⟩,     |e⟩.
+
+
+The state of atom i is written as
+
+                          |Φi(t)⟩= ζg,i(t) |g⟩+ ζe,i(t) |e⟩.                           (1)
+
+
+The quantities ζg,i(t) and ζe,i(t) are the probability amplitudes corresponding to the
+ground and excited states, respectively.
+
+The probability of finding the atom in the ground state is
+
+                                         Pg,i(t) = |ζg,i(t)|2 ,
+
+while the probability of finding the atom in the excited state is
+
+                                         Pe,i(t) = |ζe,i(t)|2 .
+
+
+Since the atom must be in either the ground state or the excited state, the total probability
+is unity:
+                                        Pg,i(t) + Pe,i(t) = 1.
+
+Therefore,
+                                          |ζg,i(t)|2 + |ζe,i(t)|2 = 1.
+
+The two-level basis is chosen as
+
+                                                      [︄  ]︄                 [︄  ]︄                                 1             0
+                         |e⟩=        ,    |g⟩=        .
+                                 0             1
+
+
+Substituting these basis vectors into (1),
+
+                                                                [︄  ]︄             [︄  ]︄                                       0          1
+                         |Φi(t)⟩= ζg,i(t)   + ζe,i(t)
+                                       1          0
+
+                                                       [︄        ]︄                                                  ζe,i(t)
+                    =               .
+                                                 ζg,i(t)
+
+                                      1
+===== PDF PAGE 2 =====
+Hence, for the basis ordering
+                                            (|e⟩, |g⟩),
+
+the state vector is
+                                                                 [︄        ]︄                                                          ζe,i(t)
+                               |Φi(t)⟩=               .
+                                                         ζg,i(t)
+
+
+2 Time-Dependent Schr¨odinger Equation
+
+
+The time evolution of a quantum state is described by the time-dependent Schr¨odinger
+equation.
+
+In the absence of an external interaction,
+
+                        iℏ∂ |Φi(t)⟩= ˆHi |Φi(t)⟩,
+                               ∂t
+
+where ˆHi is the free Hamiltonian of the atom. Throughout this document, both i (in iℏ)
+and j denote the imaginary unit, i = j = √−1; the letter i used as a subscript is the
+vapor-cell index.
+
+When an external electromagnetic field interacts with the atom, an interaction Hamiltonian
+ˆVi is introduced. Therefore, the total Hamiltonian is
+
+                                                  ˆHi,tot = ˆHi + ˆVi.
+
+
+Hence,
+                      iℏ∂ |Φi(t)⟩= (ˆHi + ˆVi) |Φi(t)⟩.                          (2)
+                            ∂t
+
+The free Hamiltonian describes the internal energy of the atom, whereas ˆVi represents the
+interaction between the atom and the incident electromagnetic field.
+
+
+3 Free Hamiltonian of the Two-Level Atom
+
+
+The atomic energy states satisfy the energy eigenvalue equation
+
+                                           ˆHi |ψn⟩= En |ψn⟩.
+
+
+For the two states,
+                                             ˆHi |e⟩= Ee |e⟩,
+
+and
+                                            ˆHi |g⟩= Eg |g⟩.
+
+
+
+                                      2
+===== PDF PAGE 3 =====
+The energies of the two states are related to their angular frequencies by
+
+                          Ee = ℏωe,    Eg = ℏωg.
+
+
+Using the basis
+                                                      [︄  ]︄                 [︄  ]︄                                 1             0
+                         |e⟩=        ,    |g⟩=        ,
+                                 0             1
+
+write the free Hamiltonian in the general form
+
+                                                               [︄      ]︄                                     a  b
+                                              ˆHi =             .
+                                             c  d
+
+Applying ˆHi to the excited state gives
+
+                                                               [︄      ]︄[︄  ]︄                                     a  b   1
+                                          ˆHi |e⟩=
+                                             c  d   0
+
+                                                               [︄  ]︄                                     a
+                       =        .
+                                             c
+
+
+From the energy eigenvalue equation,
+
+                                             ˆHi |e⟩= Ee |e⟩.
+
+
+Therefore,
+                                                                [︄  ]︄     [︄    ]︄                                       1     Ee
+                          Ee |e⟩= Ee   =          .
+                                       0      0
+
+Comparing the two expressions,
+                                                       [︄  ]︄     [︄    ]︄                                a     Ee
+                        =          ,
+                                        c      0
+
+which gives
+                             a = Ee,     c = 0.
+
+Similarly, applying ˆHi to the ground state,
+
+                                                               [︄      ]︄[︄  ]︄                                     a  b   0
+                                          ˆHi |g⟩=
+                                             c  d   1
+
+                                                               [︄  ]︄                                              b
+                       =        .
+                                     d
+
+
+
+
+
+                                      3
+===== PDF PAGE 4 =====
+The energy eigenvalue equation gives
+
+                                                                      [︄  ]︄     [︄    ]︄                                           0      0
+                                 ˆHi |g⟩= Eg |g⟩= Eg   =          .
+                                           1     Eg
+
+
+Therefore,
+                                                       [︄  ]︄     [︄    ]︄                                        b      0
+                        =          ,
+                                 d     Eg
+
+and hence
+                                    b = 0,    d = Eg.
+
+Thus,
+                                                             [︄          ]︄                                   Ee  0
+                                            ˆHi =                 .                                  (3)
+                                      0  Eg
+
+
+Using
+                          Ee = ℏωe,    Eg = ℏωg,
+
+we obtain
+                                               [︄ ℏωe   0  ]︄
+                                ˆHi =       = diag(ℏωe, ℏωg).                        (4)
+                              0   ℏωg
+
+
+4 One-Dimensional Vapor-Cell Array Geometry
+
+
+Consider a one-dimensional array of vapor cells arranged along the x-axis.
+
+
+
+
+
+Figure 1: 1D uniform linear array geometry showing the inter-cell spacing d and the
+position of the i-th vapor cell.
+
+
+
+                                      4
+===== PDF PAGE 5 =====
+Let the spacing between two adjacent vapor cells be d, and choose vapor cell 1 as the
+reference cell.
+
+The position of vapor cell i is
+                                        xi = (i −1)d.
+
+Therefore,
+                       x1 = 0,     x2 = d,     x3 = 2d,        . . .
+
+The separation between the reference cell and cell i is
+
+                                     xi −x1 = (i −1)d.
+
+
+Consider user k and propagation path l. Let θl,k denote the angle of arrival of this path
+measured with respect to the array axis.
+
+Under the far-field plane-wave assumption, the propagation paths arriving at the different
+vapor cells are approximately parallel.
+
+Hence,
+                                       ∆ri,k,l = (i −1)d cos θl,k.                              (5)
+
+where
+                                         ∆ri,k,l = ri,k,l −r1,k,l.
+
+Here ri,k,l denotes the propagation distance from user k, through path l, to vapor cell i.
+
+For the second vapor cell,
+                                         ∆r2,k,l = d cos θl,k.
+
+For the third vapor cell,
+                                        ∆r3,k,l = 2d cos θl,k.
+
+In general,
+                                       ∆ri,k,l = (i −1)d cos θl,k.
+
+
+5 Propagation Phase Difference
+
+
+Consider a sinusoidal plane wave represented by
+
+                          E(r, t) = E0 cos (ωt + kr + ϕ0) ,                          (6)
+
+where
+                                     2π
+                                  k =
+                                  λ
+is the wavenumber.
+
+
+                                      5
+===== PDF PAGE 6 =====
+If the propagation distance changes from r to r + ∆r, the phase changes from
+
+
+                                     kr
+
+
+to
+                                     k(r + ∆r).
+
+
+Therefore,
+                    ∆ϕ = k(r + ∆r) −kr
+
+                     = kr + k∆r −kr
+
+                     = k∆r.
+
+Using
+                                     2π
+                                  k =      ,
+                                  λ
+we obtain
+                                    2π
+                       ∆ϕ =   ∆r.                                    (7)
+                                  λ
+
+For user k, path l, and vapor cell i,
+
+                          ∆r = ∆ri,k,l.
+
+
+Therefore,
+                                 2π
+                                   ∆ϕi,k,l =    ∆ri,k,l
+                              λ
+                                 2π
+                     =    (i −1)d cos θl,k
+                              λ
+                     = (i −1)2πd cos θl,k.
+                                    λ
+
+Define the phase shift corresponding to one array spacing as
+
+                                  2πd
+                                            ϕl,k =     cos θl,k.                                 (8)
+                                λ
+
+
+Consequently,
+                                       ∆ϕi,k,l = (i −1)ϕl,k.                                (9)
+
+For the reference vapor cell,
+                                                     i = 1,
+
+and hence
+                                          ∆ϕ1,k,l = 0.
+
+
+
+
+
+                                      6
+===== PDF PAGE 7 =====
+For the second vapor cell,
+                                                     i = 2,
+
+and hence
+                                         ∆ϕ2,k,l = ϕl,k.
+
+For the third vapor cell,
+                                                     i = 3,
+
+and hence
+                                        ∆ϕ3,k,l = 2ϕl,k.
+
+Thus, the phase shift increases by ϕl,k for every additional array spacing.
+
+
+6  Electric Field of One Propagation Path
+
+
+Consider user k and propagation path l.
+
+The electric field corresponding to this propagation path can be written as
+
+                             Ek,l(r, t) = E0,k,l cos (ωt + kr + ϕ0,k,l) .                     (10)
+
+
+At vapor cell i, the propagation distance is ri,k,l. Therefore,
+
+                             Ei,k,l(t) = E0,i,k,l cos (ωt + kri,k,l + ϕ0,k,l) .                   (11)
+
+
+Choose vapor cell 1 as the phase reference and define
+
+                                         ∆ri,k,l = ri,k,l −r1,k,l.
+
+
+Therefore,
+                                                    ri,k,l = r1,k,l + ∆ri,k,l.
+
+Substituting this into (11),
+
+                       Ei,k,l(t) = E0,i,k,l cos [ωt + k (r1,k,l + ∆ri,k,l) + ϕ0,k,l]
+
+               = E0,i,k,l cos [ωt + k∆ri,k,l + kr1,k,l + ϕ0,k,l] .
+
+
+Define the common reference phase as
+
+                                          ϕrefk,l = kr1,k,l + ϕ0,k,l.
+
+
+
+
+
+                                      7
+===== PDF PAGE 8 =====
+Hence,
+                             Ei,k,l(t) = E0,i,k,l cos [︁ωt + k∆ri,k,l + ϕrefk,l ]︁ .
+
+The phase ϕrefk,l is common to all vapor cells, so it does not change the relative phase across
+the array. It is absorbed into the complex path coefficient αl,k introduced in Section 8.
+Without loss of generality, therefore,
+
+                                                 ϕrefk,l = 0.
+
+
+Therefore,
+                                 Ei,k,l(t) = E0,i,k,l cos (ωt + k∆ri,k,l) .                      (12)
+
+Using
+                                       ∆ri,k,l = (i −1)d cos θl,k,
+
+we obtain
+                            Ei,k,l(t) = E0,i,k,l cos [ωt + k(i −1)d cos θl,k] .
+
+Using
+                                     2π
+                                  k =      ,
+                                  λ
+the electric field becomes
+
+                                                                   [︃                                     ]︃                          Ei,k,l(t) = E0,i,k,l cos ωt + (i −1)2πd cos θl,k   .
+                                          λ
+
+
+From (8),
+                                  2πd
+                                            ϕl,k =     cos θl,k.
+                                λ
+
+Therefore,
+                               Ei,k,l(t) = E0,i,k,l cos [ωt + (i −1)ϕl,k] .                     (13)
+
+
+7 Vector Representation and Polarization
+
+
+The electric field is a vector quantity. Its amplitude can therefore be separated into a
+scalar amplitude and a polarization direction.
+
+Let
+                                                               ϵi,k,l
+
+denote the polarization vector corresponding to user k, path l, and vapor cell i.
+
+The vector amplitude can be written as
+
+                                               E0,i,k,l = E0,i,k,lϵi,k,l.
+
+
+                                      8
+===== PDF PAGE 9 =====
+Substituting this into (13),
+
+                             Ei,k,l(t) = E0,i,k,lϵi,k,l cos [ωt + (i −1)ϕl,k] .
+
+
+Hence,
+                             Ei,k,l(t) = E0,i,k,lϵi,k,l cos [ωt + (i −1)ϕl,k] .                   (14)
+
+The polarization vector represents the direction of the electric field, while E0,i,k,l represents
+its scalar amplitude.
+
+
+8 Transmitted Symbol and Propagation Coefficient
+
+
+Consider user k transmitting the symbol
+
+                                               sk.
+
+
+Let
+                                                    αl,k
+
+denote the complex coefficient associated with propagation path l from user k.
+
+The scalar field amplitude is represented as
+
+                                                  E0,i,k,l = αl,ksk.
+
+
+Substituting this relation into (14),
+
+                             Ei,k,l(t) = αl,kskϵi,k,l cos [ωt + (i −1)ϕl,k] .
+
+
+Therefore,
+                             Ei,k,l(t) = ϵi,k,lαl,ksk cos [ωt + (i −1)ϕl,k] .                   (15)
+
+The three terms in this expression represent the polarization direction, propagation-path
+coefficient, and transmitted symbol, respectively:
+
+                                                 ϵi,k,l,      αl,k,     sk.
+
+
+The phase accumulated at vapor cell i is represented by
+
+                                               (i −1)ϕl,k.
+
+
+
+
+
+                                      9
+===== PDF PAGE 10 =====
+9  Superposition of All Propagation Paths
+
+
+For user k, the transmitted signal reaches the vapor cell through Lk propagation paths.
+
+The total electric field produced by user k is therefore the sum of the fields associated
+with all its propagation paths:
+
+
+                                              Lk
+                                     Ei,k(t) = ∑︂ Ei,k,l(t).
+
+                                                  l=1
+
+
+Substituting (15),
+
+
+                                  Lk
+                        Ei,k(t) = ∑︂ ϵi,k,lαl,ksk cos [ωt + (i −1)ϕl,k] .
+
+                                     l=1
+
+
+The vapor cell receives signals from all K users. Therefore, the total electric field at vapor
+cell i is
+                               K
+                                   Ei(t) = ∑︂ Ei,k(t).
+
+                                           k=1
+
+Substituting the expression above,
+
+
+                     K  Lk
+                     Ei(t) = ∑︂ ∑︂ ϵi,k,lαl,ksk cos [ωt + (i −1)ϕl,k] .
+
+                             k=1 l=1
+
+
+Thus,
+
+                     K  Lk
+                     Ei(t) = ∑︂ ∑︂ ϵi,k,lαl,ksk cos [ωt + (i −1)ϕl,k] .                 (16)
+
+                             k=1 l=1
+
+
+10  Electric-Dipole Interaction
+
+
+The electromagnetic field interacts with the electric dipole of the atom.
+
+For an electric dipole moment µ in an electric field E, the interaction energy is represented
+by the dipole–field product.
+
+For a charge q located at position r, the electric dipole moment is
+
+
+                        µ = qr.
+
+
+Therefore, the interaction energy can be written in terms of the position vector and electric
+
+
+
+
+                                      10
+===== PDF PAGE 11 =====
+field as
+                             V = qrTE.
+
+
+In quantum mechanics, the position of the electron is represented by a position operator.
+Hence,
+                            ⎡ ˆx⎤
+                                                                     ˆr = ⎢⎣ ˆy⎥⎦.
+                                                                       ˆz
+
+The interaction Hamiltonian for the atom in vapor cell i is therefore written as
+
+                                                           ˆVi = qˆr TEi(t).                                 (17)
+
+
+Physically, the dipole interaction energy is −µTE. The sign convention in (17) follows Cui
+et al.; it only reverses the sign of every channel and reference coefficient simultaneously,
+so all magnitudes, and hence all later results, are unchanged.
+
+The electric field is a vector,
+                            ⎡Ei,x(t)⎤
+                                   Ei(t) = ⎢⎣ Ei,y(t) ⎥⎦,
+                                                  Ei,z(t)
+
+and hence
+                             ⎡Ei,x(t)⎤
+                                                                [︂              ]︂                                           ˆr TEi(t) =   ˆx   ˆy   ˆz   Ei,y(t)                                                          ⎢⎣        ⎥⎦
+                                                     Ei,z(t)
+
+                  = ˆxEi,x(t) + ˆyEi,y(t) + ˆzEi,z(t).
+
+Therefore,
+                                         ˆVi = q [ˆxEi,x(t) + ˆyEi,y(t) + ˆzEi,z(t)] .                     (18)
+
+At this stage, the interaction Hamiltonian is expressed in terms of the position operator.
+The next step is to represent this operator in the two-level basis
+
+
+                                        {|g⟩, |e⟩}.
+
+
+11 Two-Level Representation of the Position Operator
+
+
+In quantum mechanics, the position of the electron is represented by a position operator
+rather than an ordinary definite coordinate.
+
+
+
+
+
+                                      11
+===== PDF PAGE 12 =====
+The position operator is written as
+
+                            ⎡ ˆx⎤
+                                                                     ˆr = ⎢⎣ ˆy⎥⎦.
+                                                                      ˆz
+
+
+For the two-level Rydberg-atom system, the state can be expressed as
+
+                          |Φi(t)⟩= ζg,i(t) |g⟩+ ζe,i(t) |e⟩.
+
+
+The completeness relation for the two-level basis is
+
+                                                ˆI = |g⟩⟨g| + |e⟩⟨e| .                              (19)
+
+
+Using the completeness relation on both sides of the position operator,
+
+                                                                      ˆr = ˆIˆrˆI.
+
+
+Therefore,
+                                           ˆr = (|g⟩⟨g| + |e⟩⟨e|)ˆr (|g⟩⟨g| + |e⟩⟨e|) .
+
+Expanding the product gives
+
+
+                   ˆr = |g⟩⟨g|ˆr |g⟩⟨g| + |g⟩⟨g|ˆr |e⟩⟨e| + |e⟩⟨e|ˆr |g⟩⟨g| + |e⟩⟨e|ˆr |e⟩⟨e| .
+
+
+The diagonal matrix elements are
+                                            ⟨g| ˆr |g⟩
+
+and
+                                              ⟨e| ˆr |e⟩,
+
+which represent the position-operator expectation values within the ground and excited
+states.
+
+The off-diagonal matrix elements
+                                              ⟨e| ˆr |g⟩
+
+and
+                                            ⟨g| ˆr |e⟩
+
+are the transition matrix elements between the two atomic states.
+
+The position operator is odd under parity, and the two dipole-coupled states |g⟩and |e⟩
+have opposite parity. Therefore the diagonal elements vanish,
+
+
+                                    ⟨g| ˆr |g⟩= ⟨e|ˆr |e⟩= 0,
+
+
+                                      12
+===== PDF PAGE 13 =====
+and only the transition terms remain. Hence,
+
+
+                                               ˆr = ⟨e| ˆr |g⟩|e⟩⟨g| + ⟨g|ˆr |e⟩|g⟩⟨e| .                       (20)
+
+
+12  Transition Dipole Moment
+
+
+The interaction Hamiltonian obtained previously is
+
+                                                          ˆVi = qˆr TEi(t).
+
+
+Substituting the two-level representation of the position operator,
+
+                                   ˆVi = q [⟨e| ˆr |g⟩|e⟩⟨g| + ⟨g|ˆr |e⟩|g⟩⟨e|]T Ei(t).
+
+
+The electric field is an ordinary classical vector. Therefore, it can be included in the
+corresponding scalar products.
+
+Define the transition dipole moment between the ground and excited states as
+
+                                  µeg = q ⟨e| ˆr |g⟩.                                (21)
+
+
+Similarly, define
+                                 µge = q ⟨g| ˆr |e⟩.                                (22)
+
+Therefore,
+                                    q ⟨e| ˆr |g⟩= µeg,
+
+and
+                                    q ⟨g| ˆr |e⟩= µge.
+
+Substituting these definitions into the interaction Hamiltonian,
+
+                                     ˆVi = (︁ µTegEi(t))︁ |e⟩⟨g| + (︁ µTgeEi(t))︁ |g⟩⟨e| .
+
+
+The position operator is Hermitian:
+                                                                  ˆr† = ˆr.
+
+
+Hence,
+                                      (⟨e| ˆr |g⟩)∗= ⟨g| ˆr |e⟩.
+
+
+Therefore,
+                                    µge = µ∗eg.
+
+
+
+                                      13
+===== PDF PAGE 14 =====
+Consequently,
+                                                             (︁ µTegEi(t))︁∗= µTgeEi(t),
+
+since the physical electric field is real. Writing the complex amplitude αl,ksk inside the
+cosine in (15) is shorthand for the real part of the corresponding phasor; because µeg and
+the polarization vectors can be taken real, this does not change |Ci| or any later result.
+
+Define
+                                              ¯ωi(t) = µTegEi(t).                               (23)
+
+Then,
+                                              ¯ω∗i (t) = µTgeEi(t).
+
+Therefore, the interaction Hamiltonian becomes
+
+                                             ˆVi = ¯ωi(t) |e⟩⟨g| + ¯ω∗i (t) |g⟩⟨e| .                        (24)
+
+
+13 Matrix Representation of the Interaction Hamiltonian
+
+
+Using
+                                                      [︄  ]︄                 [︄  ]︄                                 1             0
+                         |e⟩=        ,    |g⟩=        ,
+                                 0             1
+
+we obtain
+                                                       [︄                  [︄      ]︄                                  1           0  1                                                        ]︄[︂        ]︂                              |e⟩⟨g| =     0  1 =             .
+                                  0           0  0
+
+Similarly,
+                                                       [︄                  [︄      ]︄                                  0           0  0                                                        ]︄[︂        ]︂                              |g⟩⟨e| =     1  0 =             .
+                                  1           1  0
+
+Substituting these into (24),
+
+                                                        [︄      ]︄            [︄      ]︄                                   0  1          0  0
+                                            ˆVi = ¯ωi(t)    + ¯ω∗i (t)
+                                   0  0          1  0
+
+                                                 [︄                 ]︄                                0     ¯ωi(t)
+                 =                        .
+                                            ¯ω∗i (t)   0
+
+
+Hence,
+                                                         [︄                 ]︄                                     0     ¯ωi(t)
+                                                      ˆVi =                        .                              (25)
+                                                    ¯ω∗i (t)   0
+
+
+
+
+
+                                      14
+===== PDF PAGE 15 =====
+14  Interaction Coefficient in Terms of the Electric Field
+
+
+From the definition
+                                              ¯ωi(t) = µTegEi(t),
+
+and the total electric field obtained previously,
+
+
+                     K  Lk
+                     Ei(t) = ∑︂ ∑︂ ϵi,k,lαl,ksk cos [ωt + (i −1)ϕl,k] ,
+
+                             k=1 l=1
+
+we obtain
+                       K  Lk
+                         ¯ωi(t) = µTeg ∑︂ ∑︂ ϵi,k,lαl,ksk cos [ωt + (i −1)ϕl,k] .
+                               k=1 l=1
+
+Thus,
+
+                    K  Lk
+                         ¯ωi(t) = ∑︂ ∑︂ µTegϵi,k,lαl,ksk cos [ωt + (i −1)ϕl,k] .               (26)
+                           k=1 l=1
+
+Similarly,
+                    K  Lk
+                         ¯ω∗i (t) = ∑︂ ∑︂ µTgeϵi,k,lα∗l,ks∗k cos [ωt + (i −1)ϕl,k] .
+                           k=1 l=1
+
+
+15  Total Hamiltonian
+
+
+The free Hamiltonian is
+                                                            [︄ ℏωe   0  ]︄
+                                           ˆHi =                    ,
+                                      0   ℏωg
+
+and the interaction Hamiltonian is
+
+                                                         [︄                 ]︄                                     0     ¯ωi(t)
+                                                      ˆVi =                        .
+                                                    ¯ω∗i (t)   0
+
+
+Therefore,
+                                                   [︄ ℏωe   0  ]︄    [︄  0     ¯ωi(t)]︄
+                              ˆHi + ˆVi =       +
+                                 0   ℏωg       ¯ω∗i (t)   0
+                                                   [︄ ℏωe    ¯ωi(t)]︄
+                  =                        .
+                                               ¯ω∗i (t)  ℏωg
+
+Hence,
+                                                             [︄ ℏωe    ¯ωi(t)]︄
+                                      ˆHi + ˆVi =                        .                           (27)
+                                                       ¯ω∗i (t)  ℏωg
+
+
+
+                                      15
+===== PDF PAGE 16 =====
+16 Coupled Schr¨odinger Equations
+
+
+Using
+                                                                 [︄        ]︄                                                          ζe,i(t)
+                               |Φi(t)⟩=               ,
+                                                         ζg,i(t)
+
+the Schr¨odinger equation becomes
+
+                                          [︄        ]︄     [︄               ]︄[︄        ]︄
+                   iℏd   ζe,i(t) =  ℏωe    ¯ωi(t)    ζe,i(t)   .
+                          dt  ζg,i(t)       ¯ω∗i (t)  ℏωg     ζg,i(t)
+
+
+Multiplying the matrices,
+
+                                       [︄˙ζe,i(t) ]︄     [︄ ℏωeζe,i(t) + ¯ωi(t)ζg,i(t) ]︄                        iℏ     =                                         .
+                                        ˙ζg,i(t)       ¯ω∗i (t)ζe,i(t) + ℏωgζg,i(t)
+
+
+Therefore,
+                                              iℏ˙ζe,i = ℏωeζe,i + ¯ωi(t)ζg,i.                         (28a)
+
+and
+                                            iℏ˙ζg,i = ¯ω∗i (t)ζe,i + ℏωgζg,i.                        (28b)
+
+The terms
+                                             ℏωeζe,i
+
+and
+                                            ℏωgζg,i
+
+represent the free atomic evolution, while the terms containing ¯ωi(t) represent the interac-
+tion with the electromagnetic field.
+
+
+17 Removal of the Free-Hamiltonian Evolution
+
+
+We start from the time-dependent Schr¨odinger equation for the free atomic evolution,
+
+                         iℏ∂            ˆHi|Φi(t)⟩.                               ∂t|Φi(t)⟩=
+
+For the free Hamiltonian,
+                                                            [︄ ℏωe   0  ]︄
+                                           ˆHi =                    .
+                                      0   ℏωg
+
+
+
+
+
+                                      16
+===== PDF PAGE 17 =====
+Consider first the excited-state component. From the free Schr¨odinger equation,
+
+                                     iℏdζe,i(t) = ℏωeζe,i(t).
+                                      dt
+
+we obtain
+                                        dζe,i(t)
+                       = −jωeζe,i(t).
+                                    dt
+
+Now separate the variables:
+
+                              1
+                                              dζe,i(t) = −jωe dt.
+                                         ζe,i(t)
+
+
+Integrating both sides,
+                                                 ∫︂  1             ∫︂
+                                                dζe,i =   −jωe dt,
+                                                  ζe,i
+
+which gives
+                                   ln ζe,i(t) = −jωet + C.
+
+Exponentiating,
+                                              ζe,i(t) = Ce−jωet.
+
+Thus, the free evolution of the excited-state component contains the phase factor
+
+                                             e−jωet .
+
+
+Similarly, for the ground-state component,
+
+                                     iℏdζg,i(t) = ℏωgζg,i(t),
+                                     dt
+
+which gives
+                                        dζg,i(t)
+                       = −jωgζg,i(t),
+                                    dt
+and hence
+                                            e−jωgt
+
+for the ground state.
+
+We now define the slowly varying amplitudes ai(t) and bi(t) by
+
+                                            ζe,i(t) = ai(t)e−jωet.                            (29a)
+
+
+Similarly,
+                                           ζg,i(t) = bi(t)e−jωgt.                            (29b)
+
+The functions ai(t) and bi(t) contain the evolution produced by the electromagnetic
+
+                                      17
+===== PDF PAGE 18 =====
+interaction after the free atomic oscillation has been removed.
+
+For the excited state,
+                                            ζe,i(t) = ai(t)e−jωet.
+
+Differentiating,
+                              d
+                                      ˙ζe,i(t) =       [︁ai(t)e−jωet]︁
+                                  dt
+                                            d
+                  = ˙ai(t)e−jωet + ai(t)     (︁ e−jωet)︁
+                                                    dt
+                  = ˙ai(t)e−jωet −jωeai(t)e−jωet
+                  = (˙ai −jωeai) e−jωet.
+
+Hence,
+                                                         ˙ζe,i = (˙ai −jωeai) e−jωet.                            (30)
+
+Similarly,
+                             d
+                                                 ˙ζg,i =       [︁bi(t)e−jωgt]︁
+                                  dt
+                  = ˙bi(t)e−jωgt −jωgbi(t)e−jωgt
+                                                 (︂              )︂                  =    ˙bi −jωgbi  e−jωgt.
+
+Therefore,
+                                                       ˙ζg,i = (︂ ˙bi −jωgbi )︂ e−jωgt.                           (31)
+
+
+18 Transformation of the Excited-State Equation
+
+
+Substitute
+                                        ζe,i = aie−jωet,       ζg,i = bie−jωgt,
+
+and (30) into (28a):
+
+                       iℏ(˙ai −jωeai) e−jωet = ℏωeaie−jωet + ¯ωi(t)bie−jωgt.
+
+
+Expanding the left-hand side,
+
+                     iℏ˙aie−jωet + ℏωeaie−jωet = ℏωeaie−jωet + ¯ωi(t)bie−jωgt.
+
+
+The free-Hamiltonian terms cancel:
+
+                                     iℏ˙aie−jωet = ¯ωi(t)bie−jωgt.
+
+
+
+
+
+                                      18
+===== PDF PAGE 19 =====
+Multiplying both sides by
+                                                  ejωet,
+
+we obtain
+                                           iℏ˙ai = ¯ωi(t)biej(ωe−ωg)t.
+
+Define the atomic transition angular frequency as
+
+                                     ωeg = ωe −ωg.                                 (32)
+
+
+Hence,
+                                              iℏ˙ai = ¯ωi(t)biejωegt.                              (33)
+
+Similarly, substituting the transformations into the ground-state equation gives
+
+                                               iℏ˙bi = ¯ω∗i (t)aie−jωegt.                             (34)
+
+
+19  Substitution of the Electromagnetic Interaction
+
+
+From (26),
+                    K  Lk
+                         ¯ωi(t) = ∑︂ ∑︂ µTegϵi,k,lαl,ksk cos [ωt + (i −1)ϕl,k] .
+                           k=1 l=1
+
+Define
+                                            Ai,k,l = µTegϵi,k,lαl,ksk.                             (35)
+
+Then,
+                       K  Lk
+                              ¯ωi(t) = ∑︂ ∑︂ Ai,k,l cos [ωt + (i −1)ϕl,k] .
+
+                               k=1 l=1
+
+Substituting this expression into (33),
+
+
+                    K  Lk
+                           iℏ˙ai = ∑︂ ∑︂ Ai,k,l cos [ωt + (i −1)ϕl,k] ejωegtbi.
+
+                            k=1 l=1
+
+
+Using the identity
+                                               ejx + e−jx
+                                  cos x =                 ,
+                                         2
+we obtain
+                                  1                                                                         [︂                cos [ωt + (i −1)ϕl,k] =    ej[ωt+(i−1)ϕl,k] + e−j[ωt+(i−1)ϕl,k]]︂ .
+                                  2
+
+
+
+
+
+                                      19
+===== PDF PAGE 20 =====
+Therefore,
+
+
+                 K  Lk
+                   1
+                   iℏ˙ai =  ∑︂ ∑︂ Ai,k,l [︂ ej[ωt+(i−1)ϕl,k] + e−j[ωt+(i−1)ϕl,k]]︂ ejωegtbi.
+                   2
+                       k=1 l=1
+
+
+Combining the exponential terms,
+
+
+                K  Lk
+                 1
+                iℏ˙ai =  ∑︂ ∑︂ Ai,k,l [︂ ej(ω+ωeg)tej(i−1)ϕl,k + ej(ωeg−ω)te−j(i−1)ϕl,k ]︂ bi.        (36)
+                 2
+                     k=1 l=1
+
+
+20 Resonance Condition
+
+
+The electromagnetic field is considered resonant with the atomic transition when
+
+                            ω = ωeg.                                   (37)
+
+
+Therefore,
+                          ω + ωeg = 2ω,
+
+and
+                                      ωeg −ω = 0.
+
+Substituting these relations into (36),
+
+
+                    K  Lk
+                      1
+                        iℏ˙ai =  ∑︂ ∑︂ Ai,k,l [︂ ej2ωtej(i−1)ϕl,k + e−j(i−1)ϕl,k ]︂ bi.              (38)
+                      2
+                           k=1 l=1
+
+
+21 Rotating-Wave Approximation
+
+
+Under the rotating-wave approximation, terms oscillating rapidly compared with the
+atomic transition dynamics are neglected.
+
+The first term in (38),
+                                              ej2ωtej(i−1)ϕl,k,
+
+contains the rapidly oscillating factor
+
+                                                 ej2ωt.
+
+
+The second term,
+                                                e−j(i−1)ϕl,k,
+
+is slowly varying with respect to the atomic transition dynamics.
+
+
+                                      20
+===== PDF PAGE 21 =====
+Therefore, the rapidly oscillating term is neglected, giving
+
+
+                           K  Lk
+                              1
+                                    iℏ˙ai =  ∑︂ ∑︂ Ai,k,le−j(i−1)ϕl,kbi.                       (39)
+                              2
+                                    k=1 l=1
+
+
+Substituting the definition of Ai,k,l,
+
+
+                        K  Lk
+                           1
+                               iℏ˙ai =  ∑︂ ∑︂ µTegϵi,k,lαl,kske−j(i−1)ϕl,kbi.
+                           2
+                                k=1 l=1
+
+
+Define
+                       K  Lk
+                        Ci = ∑︂ ∑︂ µTegϵi,k,lαl,kske−j(i−1)ϕl,k.                      (40)
+                               k=1 l=1
+
+Then,
+                                         Ci
+                                                  iℏ˙ai =     bi.                                  (41)
+                                        2
+
+Similarly, taking the conjugate interaction coefficient in the ground-state equation,
+
+                                  C∗i                                                     iℏ˙bi =     ai.                                 (42)
+                                        2
+
+
+22 Second-Order Differential Equation
+
+
+From (41),
+                                         Ci
+                                                  iℏ˙ai =     bi.
+                                        2
+
+Since Ci is constant with respect to time in the resonant RWA model,
+
+                                         Ci
+                                                  iℏ¨ai =      ˙bi.
+                                        2
+
+From (42),
+                                  C∗i                                                     iℏ˙bi =     ai.
+                                        2
+
+Therefore,
+                                 C∗i                                                                            ˙bi =                                            2iℏai.
+
+Using
+                                   1
+                        = −j,
+                                                    i
+
+
+
+                                      21
+===== PDF PAGE 22 =====
+we obtain
+                                                                         ˙bi = −jC∗i                                       2ℏai.
+
+Substituting this into the differentiated form of (41),
+
+                                                                                         i   )︃                                     Ci (︃ −jC∗                                            iℏ¨ai =                                    2    2ℏai
+                     = −jCiC∗i ai.                                     4ℏ
+
+Since
+                              CiC∗i = |Ci|2,
+
+we have
+                                               iℏ¨ai = −j|Ci|2                                  4ℏai.
+Dividing by iℏ,
+                                                               ¨ai = −|Ci|2 ai.                                         4ℏ2
+
+Therefore,
+                                              |Ci|2
+                                                             ¨ai +      ai = 0.                                (43)                                       4ℏ2
+
+
+23  Solution of the Excited-State Dynamics
+
+
+The second-order differential equation obtained in (43) is
+
+                                              |Ci|2
+                                             ¨ai(t) +      ai(t) = 0.                             (44)                                       4ℏ2
+
+Its general solution is
+
+
+                                         (︃|Ci|t )︃         (︃|Ci|t )︃
+                            ai(t) = A cos     + B sin              .                    (45)                                  2ℏ            2ℏ
+
+The atom is initially prepared in the ground state. Therefore,
+
+
+                                     ζe,i(0) = 0,      ζg,i(0) = 1.                           (46)
+
+Since
+
+
+                                            ζe,i(t) = ai(t)e−jωet,                              (47)
+
+and e−jωe0 = 1, the initial excited-state condition gives
+
+
+                                      22
+===== PDF PAGE 23 =====
+                                         ai(0) = 0.                                   (48)
+
+Evaluating (45) at t = 0 gives
+
+
+                                         ai(0) = A.                                   (49)
+
+Hence,
+
+
+                        A = 0.                                    (50)
+
+
+Therefore, the transformed excited-state amplitude becomes
+
+
+                                                  (︃|Ci|t )︃
+                                     ai(t) = B sin              .                             (51)                                         2ℏ
+
+The coefficient B is determined from the first-order equation obtained from the rotating-
+wave approximation,
+
+                                         Ci
+                                            iℏ˙ai(t) =    bi(t).                               (52)
+                                        2
+
+At t = 0, bi(0) = 1, and therefore
+
+                                           Ci
+                                            iℏ˙ai(0) =     .                                 (53)
+                                          2
+
+Differentiating (51) gives
+
+
+                                                     (︃|Ci|t )︃                                         ˙ai(t) = B|Ci|                    .                           (54)                               2ℏcos   2ℏ
+
+Thus, at t = 0,
+
+                                              ˙ai(0) = B|Ci|                                 (55)                                     2ℏ.
+
+Substituting (55) into (53) gives
+
+
+                                     iB|Ci| = Ci.                                  (56)
+
+For Ci̸ = 0,
+
+                                          Ci
+                      B = −j |Ci|.                                 (57)
+
+
+                                      23
+===== PDF PAGE 24 =====
+Hence,
+
+
+                                      Ci     (︃|Ci|t )︃
+                                  ai(t) = −j     sin              .                          (58)
+                                              |Ci|      2ℏ
+
+Using (47), the original excited-state amplitude is
+
+
+                                    Ci     (︃|Ci|t )︃
+                                   ζe,i(t) = −j     sin          e−jωet.                       (59)
+                                           |Ci|      2ℏ
+
+The excited-state probability is defined as the squared magnitude of the excited-state
+probability amplitude,
+
+
+                                    Pe(t) = |ζe,i(t)|2.                                (60)
+
+Using the multiplicative property of the complex magnitude,
+
+
+                                       |abc|2 = |a|2|b|2|c|2,                              (61)
+
+
+and the identities
+
+                                    Ci  2
+                                 | −j|2 =  1,⃓⃓⃓⃓       = 1,      |e−jωet|2 = 1,                 (62)                                                                                      |Ci|⃓⃓⃓⃓
+we obtain
+
+
+                                                  (︃|Ci|t )︃
+                                  Pe(t) = sin2              .                             (63)                                        2ℏ
+
+Define the Rabi frequency by
+
+
+                                                  |Ci|
+                                   Ωi =        .                                  (64)                                    ℏ
+
+Therefore,
+
+
+                                           |Ci|t   Ωit
+                        =       .                                  (65)
+                                 2ℏ     2
+
+Substituting (65) into (63) gives the final excited-state probability,
+
+
+                                              (︃Ωit )︃
+                                   Pe(t) = sin2             .                             (66)
+                                           2
+
+
+
+
+                                      24
+===== PDF PAGE 25 =====
+The corresponding magnitude of the excited-state amplitude is
+
+
+                                              (︃Ωit )︃⃓⃓⃓⃓
+                                           |ζe,i(t)| =⃓⃓⃓⃓sin   2      .                            (67)
+
+The oscillation argument in (66) is equivalently written as
+
+
+                                     Ωit    |Ci|t
+                        =                                        (68)                                  2    2ℏ.
+
+Thus, the excited-state probability is completely determined by the magnitude of the
+effective interaction coefficient Ci through the Rabi frequency Ωi.
+
+
+                                0 ≤Pe(t) ≤1.                                 (69)
+
+                                                                                                              . With bi(0) = 1,For the ground state, (42) and (58) give ˙bi = −jC∗2ℏai                                                                                                 i  = −|Ci|2ℏsin (︂ |Ci|t2ℏ  )︂
+                                           (︂ |Ci|t )︂this integrates to bi(t) = cos   2ℏ    , so that |ζg,i(t)|2 = cos2(︁Ωit2  )︁ . The normalization
+condition is therefore satisfied because the corresponding ground-state probability obeys
+
+
+                                            |ζg,i(t)|2 + Pe(t) = 1.                              (70)
+
+
+24 Expression for the Rabi Frequency
+
+
+From the definition of the effective interaction coefficient,
+
+
+                       K  Lk
+                        Ci = ∑︂ ∑︂ µTegϵi,k,lαl,kske−j(i−1)ϕl,k.                      (71)
+                               k=1 l=1
+
+Using the definition of the Rabi frequency in (64),
+
+
+                        K  Lk
+                          1
+                      Ωi =  ∑︂ ∑︂ µTegϵi,k,lαl,kske−j(i−1)ϕl,k⃓⃓⃓⃓⃓.                    (72)
+                                k=1 l=1                                                                                                                                            ℏ⃓⃓⃓⃓⃓
+
+Since sk does not depend on the path index  l, it can be factored outside the inner
+summation:
+
+
+                        K     Lk
+                          1
+                     Ωi =  ∑︂ sk ∑︂ µTegϵi,k,lαl,ke−j(i−1)ϕl,k⃓⃓⃓⃓⃓.                   (73)
+                                k=1    l=1                                                                                                                                           ℏ⃓⃓⃓⃓⃓
+
+Equivalently,
+
+
+
+
+                                      25
+===== PDF PAGE 26 =====
+                     K    (︄Lk                                                                                          )︄⃓⃓⃓⃓⃓                                   1
+                    Ωi   =⃓⃓⃓⃓⃓ ∑︂ sk ∑︂ ℏµTegϵi,k,lαl,ke−j(i−1)ϕl,k     .                  (74)
+                            k=1      l=1
+
+
+                                    Lk
+                                 1
+                                     gi,k = ∑︂ ℏµTegϵi,k,lαl,ke−j(i−1)ϕl,k .                       (75)
+                                       l=1
+
+Therefore,
+
+
+
+                               K
+                                Ωi   =⃓⃓⃓⃓⃓ ∑︂                                          k=1 gi,ksk⃓⃓⃓⃓⃓.                               (76)
+
+
+25 Received Signal Model
+
+
+For the p-th time slot, the measured signal at vapor cell i is modeled as
+
+
+
+                          K
+                                       yi,p   =⃓⃓⃓⃓⃓ ∑︂                                                  gi,ksk,p + bi,p + ni,p⃓⃓⃓⃓⃓.                        (77)                                    k=1
+
+For a single communication user k, the contribution received at vapor cell i during time
+slot p is
+
+
+                                                   gi,ksk,p.                                    (78)
+
+Thus, the channel coefficient represents the complex coupling between the transmitted
+symbol and the received contribution:
+
+
+           received contribution = channel coefficient × transmitted symbol.       (79)
+
+
+For K communication users, the contributions arriving at the same vapor cell are super-
+posed linearly. Hence,
+
+
+
+                               K
+                                               ai,p = ∑︂ gi,ksk,p,                               (80)
+
+                                          k=1
+
+where ai,p denotes the total desired wireless signal at vapor cell i and time slot p.
+
+The channel coefficient in (75) is obtained from the atomic coupling term,
+
+
+
+
+
+                                      26
+===== PDF PAGE 27 =====
+                             1
+                        ℏµTegϵi,k,lαl,ke−j(i−1)ϕl,k,                            (81)
+
+which contains the atomic transition dipole coupling, polarization, path amplitude, and
+spatial propagation phase.
+
+
+26 Reference Signal
+
+
+In addition to the communication signals, a reference source is introduced.
+
+Let the reference source transmit the symbol
+
+
+                                                       sb,p,                                      (82)
+
+where the subscript b denotes the reference beam.
+
+The reference source produces an electromagnetic field at vapor cell i. Its contribution is
+therefore written in the same form as a single propagation path:
+
+
+                                                     bi,p = gb,isb,p,                                 (83)
+
+where gb,i represents the channel coupling from the reference source to vapor cell i.
+
+For the communication users, multiple propagation paths are considered:
+
+
+                                    Lk
+                                    gi,k = ∑︂ (contribution of path l) .                       (84)
+
+                                      l=1
+
+For the reference source, the model uses one effective propagation path. Therefore, the
+reference channel contains one effective set of parameters,
+
+
+                                                ϵb,i,     αb,     ϕb.                              (85)
+
+Starting from the same single-path channel structure,
+
+
+                                  1
+                                        g(single)i,k  = ℏµTegϵi,kαke−j(i−1)ϕk,                         (86)
+
+the reference channel is obtained by replacing the generic path parameters with the
+reference parameters:
+
+
+                                 ϵi,k →ϵb,i,    αk →αb,    ϕk →ϕb.                     (87)
+
+
+
+
+                                      27
+===== PDF PAGE 28 =====
+Hence,
+
+
+                                 1
+                                            gb,i = ℏµTegϵb,iαbe−j(i−1)ϕb .                          (88)
+
+Substituting (88) into (83),
+
+
+                                          [︃1                             ]︃
+                                        bi,p = sb,p ℏµTegϵb,iαbe−j(i−1)ϕb   .                       (89)
+
+
+27 Complete Received Signal
+
+
+The receiver noise at vapor cell i and time slot p is denoted by
+
+
+                                            ni,p ∼CN(0, σ2).                               (90)
+
+The total complex quantity experienced by the atomic receiver is therefore
+
+
+                                                ai,p + bi,p + ni,p,                                (91)
+
+or, using (80),
+
+
+
+                        K
+                   ∑︂ gi,ksk,p + bi,p + ni,p.                            (92)
+
+                                 k=1
+
+The Rydberg atomic receiver provides a magnitude-based measurement of this total
+coupling. Consequently,
+
+
+                                            yi,p = |ai,p + bi,p + ni,p| .                            (93)
+
+Using (80),
+
+
+
+                          K
+                                       yi,p   =⃓⃓⃓⃓⃓ ∑︂                                                  gi,ksk,p + bi,p + ni,p⃓⃓⃓⃓⃓.                        (94)                                    k=1
+
+
+28 Strong-Reference Approximation
+
+
+Define
+
+
+
+
+                                      28
+===== PDF PAGE 29 =====
+                                              xi,p = ai,p + ni,p.                                (95)
+
+Then (93) becomes
+
+
+                                                yi,p = |bi,p + xi,p|.                               (96)
+
+Squaring both sides,
+
+
+                                y i,p2 = |bi,p + xi,p|2.                               (97)
+
+For any complex quantity z,
+
+
+                                               |z|2 = zz∗.                                   (98)
+
+
+Therefore,
+
+
+                           y i,p2 = (bi,p + xi,p)(bi,p + xi,p)∗.                         (99)
+
+Using
+
+
+                                      (b + x)∗= b∗+ x∗,                             (100)
+
+
+gives
+
+
+                      y i,p2 = (bi,p + xi,p)(b∗i,p + x∗i,p)
+                = bi,pb∗i,p + bi,px∗i,p + xi,pb∗i,p + xi,px∗i,p.                  (101)
+
+
+Since
+
+
+                                     |bi,p|2 = bi,pb∗i,p,      |xi,p|2 = xi,px∗i,p,                     (102)
+
+and
+
+
+                                  z + z∗= 2 Re(z),                             (103)
+
+
+the cross terms satisfy
+
+
+                                 bi,px∗i,p + b∗i,pxi,p = 2 Re (︁ b∗i,pxi,p )︁ .                      (104)
+
+
+                                      29
+===== PDF PAGE 30 =====
+Hence,
+
+
+                       y i,p2 = |bi,p|2 + |xi,p|2 + 2 Re (︁ b∗i,pxi,p )︁ .                    (105)
+
+Taking the square root,
+
+
+                           √︂
+                                  yi,p =    |bi,p|2 + |xi,p|2 + 2 Re (︁ b∗i,pxi,p )︁ .                   (106)
+
+Factor |bi,p|2 from the square root:
+
+
+                              √︄                                                      |xi,p|2   2 Re(b∗i,pxi,p)
+                                 yi,p = |bi,p|  1 +    +                     .                   (107)
+                                                          |bi,p|2          |bi,p|2
+
+Using
+
+
+                                                   |bi,p|2 = bi,pb∗i,p,                              (108)
+
+the last term becomes
+
+                                          b∗i,pxi,p     xi,p
+                         =       .                               (109)
+                                                bi,pb∗i,p      bi,p
+
+Thus,
+
+
+                              √︄                                                       |xi,p|2         (︃xi,p )︃
+                                  yi,p = |bi,p|  1 +    + 2 Re             .                   (110)
+                                                           |bi,p|2              bi,p
+
+
+29  Taylor Expansion Under Strong Reference
+
+
+The strong-reference assumption is
+
+
+                                            |bi,p| ≫|xi,p| = |ai,p + ni,p|.                         (111)
+
+Consequently,⃓⃓⃓⃓
+
+                                                  xi,p
+                            ≪1.                                (112)
+                                                                                                                 bi,p⃓⃓⃓⃓
+Define
+
+
+
+
+                                      30
+===== PDF PAGE 31 =====
+                                                          xi,p
+                                                      ri,p =       .                                 (113)
+                                                                bi,p
+
+Then
+
+
+                                                       |ri,p| ≪1.                                 (114)
+
+Equation (110) becomes
+
+
+                                √︂                                     yi,p = |bi,p|  1 + |ri,p|2 + 2 Re(ri,p).                     (115)
+
+For |u| ≪1, the first-order Taylor expansion is
+
+                   √          u
+                                 1 + u ≈1 + 2.                              (116)
+
+Let
+
+
+                          u = |ri,p|2 + 2 Re(ri,p).                           (117)
+
+Then,
+
+
+                                                         [︃    1                                 yi,p ≈|bi,p| 1 +     (︁ |ri,p|2 + 2 Re(ri,p))︁]︃ .                   (118)
+                                    2
+
+Therefore,
+
+
+                                                             [︃    1                         ]︃
+                                    yi,p ≈|bi,p| 1 + 2|ri,p|2 + Re(ri,p)   .                     (119)
+
+Substituting (113),
+
+                                                          [︃    1 |xi,p|2       (︃xi,p )︃]︃
+                                  yi,p ≈|bi,p| 1 +     + Re              .                   (120)
+                                    2 |bi,p|2            bi,p
+
+Expanding the factor |bi,p|,
+
+                                                   |xi,p|2             (︃xi,p )︃
+                                  yi,p ≈|bi,p| +    + |bi,p| Re            .                   (121)
+                                                   2|bi,p|                  bi,p
+
+The second term is second order in the small quantity xi,p/bi,p, whereas the third term is
+first order. Under the strong-reference approximation, the second-order term is neglected.
+(A complete second-order expansion of √1 + u would also contain −1                                                                                            2|bi,p| Re2(xi,p/bi,p);
+it is neglected for the same reason.)
+
+
+                                      31
+===== PDF PAGE 32 =====
+Hence,
+
+
+                                                            (︃xi,p )︃
+                                        yi,p ≈|bi,p| + |bi,p| Re             .                       (122)
+                                                                           bi,p
+
+Since
+
+
+                                              xi,p = ai,p + ni,p,                              (123)
+
+we obtain
+
+
+                                                         (︃ai,p + ni,p )︃
+                                    yi,p ≈|bi,p| + |bi,p| Re                      .                     (124)
+                                                                          bi,p
+
+
+30 Reference Magnitude and Phase Representation
+
+
+Represent the reference signal in magnitude-phase form as
+
+
+                                                    bi,p = |bi,p|ejzi,p,                              (125)
+
+where
+
+
+                                             zi,p = ∠bi,p = arg(bi,p).                           (126)
+
+Therefore,
+
+
+                                                     |bi,p|
+                        = e−jzi,p.                               (127)
+                                                      bi,p
+
+Using (127) in (124),
+
+
+                                   yi,p ≈|bi,p| + Re (︁ e−jzi,p(ai,p + ni,p))︁ .                    (128)
+
+Using the linearity of the real-part operator,
+
+
+                      Re(A + B) = Re(A) + Re(B),                       (129)
+
+
+gives
+
+
+                             yi,p ≈|bi,p| + Re (︁ e−jzi,pai,p )︁ + Re (︁ e−jzi,pni,p )︁ .                (130)
+
+
+
+                                      32
+===== PDF PAGE 33 =====
+Define the effective real-valued noise term
+
+
+                                                    ¯ni,p = Re (︁ e−jzi,pni,p )︁ .                           (131)
+
+Since ni,p is circularly symmetric, e−jzi,pni,p ∼CN(0, σ2), and its real part carries half of
+the variance:
+
+
+                                                   (︃  σ2 )︃
+                                                       ¯ni,p ∼N  0,         .                           (131a)
+                                           2
+
+Thus,
+
+
+                                    yi,p ≈Re (︁ e−jzi,pai,p )︁ + |bi,p| + ¯ni,p .                     (132)
+
+Finally, using
+
+
+
+                               K
+                                               ai,p = ∑︂ gi,ksk,p,                             (133)
+
+                                          k=1
+
+the linearized measurement model becomes
+
+
+                                  (︄     K         )︄
+                              yi,p ≈Re   e−jzi,p ∑︂ gi,ksk,p + |bi,p| + ¯ni,p .                (134)
+
+                                        k=1
+
+
+31 Matrix Representation of the Linearized Measurement Model
+
+
+From the scalar linearized measurement model obtained previously,
+
+
+                                  (︄     K         )︄
+                              yi,p ≈Re   e−jzi,p ∑︂ gi,ksk,p + |bi,p| + ¯ni,p.                 (135)
+
+                                        k=1
+
+The indices are defined as
+
+
+                                                i = 1, 2, . . . , I
+
+
+for the I vapor cells or receiving antennas,
+
+
+                               k = 1, 2, . . . , K
+
+
+for the K users, and
+
+
+                                      33
+===== PDF PAGE 34 =====
+                                p = 1, 2, . . . , P
+
+
+for the P transmitted symbols or time slots.
+
+Thus, yi,p represents one scalar magnitude measurement corresponding to vapor cell i and
+time slot p.
+
+Collecting all measurements gives the matrix
+
+
+                           Y = [yi,p] ∈RI×P  .                            (136)
+
+Explicitly,
+
+
+                      ⎡            ⎤                                             y1,1   y1,2   · · ·  y1,P
+                                             y2,1   y2,2   · · ·  y2,P
+                       Y =                 ...                      ...    ...                 ...      .                        (137)                                                                                                                ⎢⎢⎢⎢⎣                                                             ⎥⎥⎥⎥⎦
+                                             yI,1   yI,2   · · ·  yI,P
+
+Since yi,p is a magnitude measurement,
+
+
+                                                      yi,p ∈R.                                  (138)
+
+
+31.1 Construction of the Phase Matrix
+
+
+The scalar model contains the phase factor
+
+
+                                                   e−jzi,p.                                  (139)
+
+
+Define the phase matrix
+
+
+                      Z = [e−jzi,p] ∈CI×P  .                           (140)
+
+
+The matrix is therefore
+
+                    ⎡ e−jz1,1   e−jz1,2   · · ·  e−jz1,P ⎤
+                                        e−jz2,1   e−jz2,2   · · ·  e−jz2,P
+                 Z =                       ...                                  ...      ...                       ...        .                    (141)                                                                                                    ⎢⎢⎢⎢⎣                                                                                      ⎥⎥⎥⎥⎦                                        e−jzI,1   e−jzI,2   · · ·  e−jzI,P
+
+The phase variable is determined from the reference signal according to
+
+
+
+
+                                      34
+===== PDF PAGE 35 =====
+                                                     zi,p = ∠bi,p.                                (142)
+
+
+31.2 Construction of the Channel Matrix
+
+The channel coefficient between vapor cell i and user k is gi,k.
+
+There are I receiving cells and K users. Hence, the channel matrix is
+
+
+                   G = [gi,k] ∈CI×K .                            (143)
+
+Explicitly,
+
+
+                      ⎡            ⎤                                              g1,1   g1,2   · · ·  g1,K
+                                              g2,1   g2,2   · · ·  g2,K
+                 G =                 ...                      ...    ...                  ...      .                        (144)                                                                                                                ⎢⎢⎢⎢⎣                                                              ⎥⎥⎥⎥⎦
+                                             gI,1   gI,2   · · ·  gI,K
+
+Similarly, the transmitted-symbol matrix is defined as
+
+
+                         S = [sk,p] ∈CK×P  .                            (145)
+
+Explicitly,
+
+
+                      ⎡             ⎤                                             s1,1   s1,2    · · ·   s1,P
+                                             s2,1   s2,2    · · ·   s2,P
+                     S =                  ...                        ...     ...                   ...      .                       (146)                                                                                                             ⎢⎢⎢⎢⎣                                                                  ⎥⎥⎥⎥⎦
+                                      sK,1  sK,2   · · ·  sK,P
+
+The matrix product GS has dimensions
+
+
+                GS :      (I × K)(K × P) = I × P.                    (147)
+
+
+Its (i, p)-th element is
+
+
+
+                                K
+                                  (GS)i,p = ∑︂ gi,ksk,p.                           (148)
+
+                                            k=1
+
+Therefore,
+
+
+                                     (GS)i,p = ai,p.                               (149)
+
+
+                                      35
+===== PDF PAGE 36 =====
+31.3 Hadamard Product with the Phase Matrix
+
+The phase factor e−jzi,p has to multiply the corresponding (i, p)-th element of GS.
+
+For two matrices A and B having the same dimensions, the Hadamard product is defined
+element-wise as
+
+
+                          (A ◦B)i,p = Ai,pBi,p.                            (150)
+
+Therefore,
+
+
+                            [Z ◦(GS)]i,p = Zi,p(GS)i,p.                         (151)
+
+Using
+
+
+                                            Zi,p = e−jzi,p,                               (152)
+
+and (148),
+
+
+
+                                    K
+                         [Z ◦(GS)]i,p = e−jzi,p ∑︂ gi,ksk,p.                      (153)
+
+                                                 k=1
+
+Applying the real-part operator gives
+
+
+                                                 (︄     K         )︄
+                   (Re[Z ◦(GS)])i,p = Re   e−jzi,p ∑︂ gi,ksk,p    .                (154)
+                                                     k=1
+
+
+31.4 Construction of the Reference Magnitude Matrix
+
+
+The scalar measurement model contains the reference magnitude
+
+
+                                                            |bi,p|.                                   (155)
+
+Define the reference matrix as
+
+
+                    B = [bi,p] ∈CI×P  .                            (156)
+
+The corresponding element-wise absolute-value matrix is
+
+
+                                |B| = [|bi,p|] ∈RI×P  .                           (157)
+
+
+
+                                      36
+===== PDF PAGE 37 =====
+Here |B| denotes the element-wise absolute value and not a matrix norm. Thus,
+
+
+                                             |B|i,p = |bi,p|.                               (158)
+
+
+31.5 Construction of the Noise Matrix
+
+The effective real-valued noise term is ¯ni,p. Define
+
+
+                   N = [¯ni,p] ∈RI×P  .                            (159)
+
+Explicitly,
+
+
+                      ⎡             ⎤                                                    ¯n1,1   ¯n1,2   · · ·   ¯n1,P
+                                                    ¯n2,1   ¯n2,2   · · ·   ¯n2,P
+                N =                 ...                       ...    ...                  ...      .                        (160)                                                                                                                ⎢⎢⎢⎢⎣                                                               ⎥⎥⎥⎥⎦
+                                                    ¯nI,1   ¯nI,2   · · ·   ¯nI,P
+
+
+32 Complete Matrix Measurement Model
+
+
+The scalar linearized model is
+
+
+                                  (︄     K         )︄
+                              yi,p ≈Re   e−jzi,p ∑︂ gi,ksk,p + |bi,p| + ¯ni,p.                 (161)
+
+                                        k=1
+
+Using the definitions above, the element-wise representation becomes
+
+
+                                  yi,p = Re ([Z ◦(GS)]i,p) + |B|i,p + Ni,p.                   (162)
+
+Collecting all elements into matrix form gives
+
+
+                      Y = Re[Z ◦(GS)] + |B| + N .                       (163)
+
+
+The Hadamard product is commutative,
+
+
+                     Z ◦(GS) = (GS) ◦Z.                           (164)
+
+
+Therefore, either ordering produces the same element-wise product.
+
+The use of the Hadamard product is required because each phase coefficient e−jzi,p
+multiplies the corresponding measurement position (i, p) rather than performing an
+
+
+                                      37
+===== PDF PAGE 38 =====
+ordinary matrix multiplication.
+
+
+33 Channel Estimation Problem
+
+
+The matrix measurement model is
+
+
+                      Y = Re[Z ◦(GS)] + |B| + N.                       (165)
+
+
+The objective is to estimate the unknown channel matrix
+
+
+                      G = [gi,k]                                 (166)
+
+from the available measurements.
+
+The known quantities are
+
+
+                               Y,    Z,    B,     S,                          (167)
+
+
+while the channel matrix G is unknown.
+
+Let Gt denote the current estimate of the channel matrix at iteration t.
+
+Using this estimate, the predicted measurement is
+
+                                                        ˆ︁Y (Gt) = Re[Z ◦(GtS)] + |B| .                       (168)
+
+The prediction error is defined as
+
+                            E(Gt) = Y −ˆ︁Y (Gt) .                           (169)
+
+Substituting (168),
+
+
+                      E(Gt) = Y −|B| −Re[Z ◦(GtS)] .                    (170)
+
+
+The dimensions are
+
+
+                              E(Gt) ∈RI×P.                              (171)
+
+
+
+
+
+                                      38
+===== PDF PAGE 39 =====
+34  Least-Squares Objective
+
+
+The objective is to obtain a channel estimate whose predicted measurements are as close
+as possible to the actual measurements.
+
+The squared Frobenius norm is used to measure the total squared error:
+
+
+                           L(G) = ∥E(G)∥2F  .                            (172)
+
+Using (170),
+
+                    L(G) = ∥Y −|B| −Re[Z ◦(GS)]∥2F  .                   (173)
+
+For an I × P matrix,
+
+
+
+                                                            I   P
+                          ∥E∥2F = ∑︂ ∑︂ |Ei,p|2.                           (174)
+                                               i=1 p=1
+
+Since E is real-valued,
+
+
+
+                                                             I   P
+                           ∥E∥2F = ∑︂ ∑︂ E2i,p.                            (175)
+                                                i=1 p=1
+
+Therefore, the channel estimate is obtained by solving
+
+                                                          ˆ︁G = arg minG L(G) .                            (176)
+
+Equivalently,
+
+
+                                                            F  .                 (177)                                        ˆ︁G = arg minG ∥Y −|B| −Re[Z ◦(GS)]∥2
+
+
+35 Element-by-Element Error Expression
+
+
+From (170), the (i, p)-th error element is
+
+
+                                                                     [︄   K           ]︄
+                           Ei,p = yi,p −|bi,p| −Re  Zi,p ∑︂ gi,rsr,p   .                  (178)
+                                                      r=1
+
+Here r is a dummy summation index.
+
+
+
+                                      39
+===== PDF PAGE 40 =====
+The channel coefficient with respect to which differentiation will be performed is gi,k. The
+index k is therefore kept fixed during the differentiation.
+
+The cost function can be written element-wise as
+
+
+
+                                                          I   P
+                      L = ∑︂ ∑︂ E2i,p .                             (179)
+                                              i=1 p=1
+
+To obtain the gradient with respect to the complex channel matrix, differentiation is
+performed with respect to the conjugate variable g∗i,k.
+
+
+36 Wirtinger Differentiation
+
+
+Since G is complex-valued, the loss depends on both G and G∗. Therefore, Wirtinger
+differentiation is used.
+
+For the selected channel coefficient gi,k,
+
+
+
+                                        P
+                       ∂L             ∂Ei,p
+                      = ∑︂ 2Ei,p         .                           (180)
+                              ∂g∗i,k    p=1     ∂g∗i,k
+
+This follows from the chain rule applied to
+
+
+
+                                                          I   P
+                      L = ∑︂ ∑︂ E2i,p.                              (181)
+                                              i=1 p=1
+
+For the selected gi,k, only the errors corresponding to the same receiving-cell index i
+depend on gi,k.
+
+From (178),
+
+
+                                                                     [︄   K           ]︄
+                           Ei,p = yi,p −|bi,p| −Re  Zi,p ∑︂ gi,rsr,p   .                  (182)
+                                                      r=1
+
+Using
+
+                                   x + x∗
+                               Re(x) =            ,                              (183)
+                                          2
+
+we obtain
+
+
+
+
+
+                                      40
+===== PDF PAGE 41 =====
+                                                        [︄   K           K           ]︄
+                  Ei,p = yi,p −|bi,p| −1  Zi,p                          ∑︂ gi,rsr,p + Z∗i,p ∑︂ g∗i,rs∗r,p   .           (184)
+                                2
+                                             r=1              r=1
+
+Differentiate (184) with respect to g∗i,k:
+
+
+                                                    [︄   K           K           ]︄                   ∂Ei,p       ∂              = −1        Zi,p                        ∑︂ gi,rsr,p + Z∗i,p ∑︂ g∗i,rs∗r,p   .             (185)
+                 ∂g∗i,k     2 ∂g∗i,k      r=1              r=1
+
+The first term contains gi,r rather than g∗i,r. Under Wirtinger differentiation,
+
+                                               ∂gi,r
+                         = 0.                                 (186)
+                                   ∂g∗i,k
+
+Therefore,
+
+
+                                       (︄   K        )︄                           ∂
+                                            Zi,p ∑︂ gi,rsr,p = 0.                        (187)
+                           ∂g∗i,k       r=1
+
+For the second term,
+
+
+                     ∂                               (︄   K        )︄      K  ∂g∗i,r
+                        Z∗i,p ∑︂ g∗i,rs∗r,p = Z∗i,p ∑︂      s∗r,p.                 (188)
+                     ∂g∗i,k       r=1                r=1 ∂g∗i,k
+
+The derivative satisfies
+
+
+                    ⎧
+                               ∂g∗i,r  ⎨1,  r = k,                      =                                        (189)
+                               ∂g∗i,k      0,    r̸ = k.                    ⎩
+
+Consequently,
+
+
+                                   (︄   K        )︄                        ∂
+                           Z∗i,p ∑︂ g∗i,rs∗r,p = Z∗i,ps∗k,p.                      (190)
+                         ∂g∗i,k       r=1
+
+Substituting (187) and (190) into (185),
+
+
+                                   ∂Ei,p                       = −1  i,ps∗k,p .                            (191)                               ∂g∗i,k    2Z∗
+
+
+
+
+
+                                      41
+===== PDF PAGE 42 =====
+37  Derivative of the Least-Squares Cost
+
+
+Substituting (191) into (180),
+
+
+
+
+                                    P
+                    ∂L               (︃            )︃                   = ∑︂ 2Ei,p −1  i,ps∗k,p                                      2Z∗                          ∂g∗i,k    p=1
+
+                                      P
+                   = − ∑︂ Ei,pZ∗i,ps∗k,p.                            (192)
+                                        p=1
+
+
+Hence,
+
+
+
+                                         P
+                      ∂L
+                     = − ∑︂ Ei,pZ∗i,ps∗k,p .                         (193)
+                             ∂g∗i,k      p=1
+
+The above operation is performed for every channel coefficient
+
+
+                                 gi,k,      i = 1, . . . , I,    k = 1, . . . , K.                   (194)
+
+Thus, all derivatives are collected into the gradient matrix
+
+
+                   ⎡ ∂L   ∂L      ∂L ⎤
+                                                                      · · ·
+                            ∂g∗1,1  ∂g∗1,2      ∂g∗1,K
+                      ∂L   ∂L      ∂L
+                                                                      · · ·                ∂L                            ∂g∗2,1  ∂g∗2,2      ∂g∗2,K  ∈CI×K .                (195)             ∂G∗=                                                                                                                                                              ...                              ...     ...                      ...
+                      ∂L   ∂L      ∂L                                                                                                                                                                                              ⎢⎢⎢⎢⎢⎢⎢⎢⎢⎣                      · · ·                                                  ⎥⎥⎥⎥⎥⎥⎥⎥⎥⎦
+                            ∂g∗I,1  ∂g∗I,2      ∂g∗I,K
+
+
+38 Conversion of the Gradient to Matrix Form
+
+
+From (193),
+
+
+
+                                         P
+                      ∂L
+                     = − ∑︂ Ei,pZ∗i,ps∗k,p.                         (196)
+                             ∂g∗i,k      p=1
+
+Consider the matrix product
+
+
+                             (E ◦Z∗)SH.                                (197)
+
+
+                                      42
+===== PDF PAGE 43 =====
+The dimensions are
+
+
+                  E ∈RI×P,    Z∗∈CI×P,                         (198)
+
+
+therefore,
+
+
+                      E ◦Z∗∈CI×P.                              (199)
+
+
+Also,
+
+
+                     S ∈CK×P,   SH ∈CP×K.                        (200)
+
+
+Hence,
+
+
+                   (E ◦Z∗)SH : (I × P)(P × K) = I × K.                   (201)
+
+
+Consider the (i, k)-th element:
+
+
+
+
+                                         P
+                       [(E ◦Z∗)SH]i,k = ∑︂ (E ◦Z∗)i,p(SH)p,k.                   (202)
+
+                                           p=1
+
+
+By the definition of the Hadamard product,
+
+
+                          (E ◦Z∗)i,p = Ei,pZ∗i,p,                           (203)
+
+and
+
+
+                                 (SH)p,k = S∗k,p = s∗k,p.                           (204)
+
+Therefore,
+
+
+
+
+                                             P
+                          [(E ◦Z∗)SH]i,k = ∑︂ Ei,pZ∗i,ps∗k,p.                      (205)
+                                               p=1
+
+
+Comparing (205) with (193),
+
+
+                       ∂L
+                    ∂G∗= −(E ◦Z∗)SH .                           (206)
+
+
+                                      43
+===== PDF PAGE 44 =====
+39 Gradient-Descent Channel Update
+
+
+The gradient-descent update rule is
+
+
+                                ∂L
+                            Gt+1 = Gt −ηt                                    (207)
+                                                                                   ∂G∗⃓⃓⃓⃓ G=Gt
+
+where ηt denotes the step size at iteration t.
+
+Using (206),
+
+
+
+                         Gt+1 = Gt −ηt [︁−(Et ◦Z∗)SH]︁
+                   = Gt + ηt(Et ◦Z∗)SH.                          (208)
+
+
+The error at iteration t is
+
+
+                        Et = Y −|B| −Re[Z ◦(GtS)] .                      (209)
+
+
+Therefore, the complete channel update is
+
+
+                Gt+1 = Gt + ηt (︁[︁ Y −|B| −Re[Z ◦(GtS)] ]︁ ◦Z∗)︁ SH .            (210)
+
+The dimensions of the update are
+
+
+                                Gt ∈CI×K,                                (211)
+
+
+                             GtS ∈CI×P,                               (212)
+
+
+                                Et ∈RI×P,                                (213)
+
+
+                              Et ◦Z∗∈CI×P,                              (214)
+
+
+and
+
+
+                              (Et ◦Z∗)SH ∈CI×K.                           (215)
+
+
+Thus, the gradient has the same dimensions as the channel matrix G.
+
+
+
+                                      44
+===== PDF PAGE 45 =====
+40 Gradient-Descent Channel Estimation Algorithm
+
+
+The gradient-descent channel estimation procedure is summarized as follows.
+
+
+                          Input: Y, S, Z, B, G0, ηt, ϵ, Tmax                     (216)
+
+Initialize
+
+
+                                                  t = 0.                                   (217)
+
+
+At iteration t, calculate the predicted measurement:
+
+                                                            ˆ︁Y t = Re[Z ◦(GtS)] + |B| .                        (218)
+
+Calculate the measurement error:
+
+                               Et = Y −ˆ︁Y t .                              (219)
+
+Equivalently,
+
+
+                        Et = Y −|B| −Re[Z ◦(GtS)] .                      (220)
+
+
+Calculate the gradient:
+
+
+                           Dt = −(Et ◦Z∗)SH .                           (221)
+
+
+Update the channel estimate:
+
+
+                               Gt+1 = Gt −ηtDt .                            (222)
+
+Using (221),
+
+
+                           Gt+1 = Gt + ηt(Et ◦Z∗)SH .                        (223)
+
+The iteration index is then increased according to
+
+
+                                               t ←t + 1.                                 (224)
+
+
+The iterations continue until
+
+
+
+
+                                      45
+===== PDF PAGE 46 =====
+                            < ϵ                             (225)                                                      ⃦⃦Gt −Gt−1⃦⃦  2F
+
+or
+
+
+                                                t ≥Tmax.                                 (226)
+
+The final channel estimate is
+
+                                                                   ˆ︁G = Gt .                                 (227)
+
+
+41 Algorithmic Form
+
+
+The complete gradient-descent procedure is
+
+
+                    Input: Y, S, Z, B, G0, ηt, ϵ, Tmax
+
+                             t = 0
+
+                   Repeat:
+                                                       ˆ︁Y t = Re[Z ◦(GtS)] + |B|
+                       Et = Y −ˆ︁Y t                                                                                (228)
+                      Dt = −(Et ◦Z∗)SH
+                         Gt+1 = Gt −ηtDt
+
+                                  t ←t + 1
+
+                      Until: ∥Gt −Gt−1∥2F < ϵ  or   t ≥Tmax
+                  Output:  ˆ︁G = Gt.
+
+
+42 Biased Gerchberg–Saxton Algorithm for the 1D Antenna
+   Array
+
+
+42.1 1D Channel Estimation Model
+
+
+Consider an array consisting of I atomic vapor cells and K users.
+
+For the i-th vapor cell, define the channel vector as
+
+
+
+
+
+                                      46
+===== PDF PAGE 47 =====
+                         ⎡  ⎤                                                       gi,1
+                                                       gi,2
+                                    gi =     ∈CK×1 .                           (229)                                                                                                                                                                                                      ...                                                                                                                             ⎢⎢⎢⎢⎣            ⎥⎥⎥⎥⎦
+                                              gi,K
+
+
+The known pilot matrix is
+
+
+                   ⎡             ⎤                                        s1,1   s1,2    · · ·   s1,P
+                                        s2,1   s2,2    · · ·   s2,P
+                  S =                ∈CK×P  .                   (230)
+                                                                                                                                                            ...                        ...     ...                   ...                                                                                                ⎢⎢⎢⎢⎣                                                                  ⎥⎥⎥⎥⎦
+                                 sK,1  sK,2   · · ·  sK,P
+
+
+The reference vector and noise vector are
+
+
+                              bi ∈CP×1,    wi ∈CP×1.                         (231)
+
+The measured magnitude vector is
+
+                              yi =⃓⃓STgi + bi + wi⃓⃓∈RP×1 .                      (232)
+
+The p-th element of STgi is
+
+
+
+                                K
+                                                                    [︁STgi ]︁p = ∑︂ sk,pgi,k.                           (233)
+                                            k=1
+
+The difficulty is that only the magnitude of the received complex signal is measured.
+
+Define the unknown complex received vector
+
+
+                                   xi = STgi + bi + wi .                           (234)
+
+Then,
+
+
+                                         yi = |xi|.                                 (235)
+
+If the phase of xi were known, the complex received signal could be reconstructed as
+
+
+                                      xi = yi ◦ejθi,                               (236)
+
+where θi denotes the unknown phase vector.
+
+
+                                      47
+===== PDF PAGE 48 =====
+The GS procedure therefore alternates between phase estimation, complex-signal recon-
+struction, and channel estimation.
+
+
+43  Spectral Initialization
+
+
+The iterative GS algorithm depends on its initial channel estimate. A spectral initialization
+is therefore used to obtain an initial estimate of the channel.
+
+The biased GS initialization constructs an augmented observation model, forms a weighted
+covariance matrix, extracts its principal eigenvector, estimates the corresponding magni-
+tude, and removes the arbitrary global phase.
+
+
+43.1 Conversion to the Standard Spectral Form
+
+
+The channel measurement model is
+
+                                  yi =⃓⃓STgi + bi + wi⃓⃓.                           (237)
+
+The standard biased phase-retrieval model is written as
+
+                        y =⃓⃓AHg + b + w⃓⃓.                            (238)
+
+Comparing (237) and (238),
+
+
+                          AH = ST  .                                (239)
+
+
+Taking the Hermitian relation,
+
+
+                       A = S∗.                                  (240)
+
+
+Therefore, the channel model can be written as
+
+                           yi =⃓⃓AHgi + bi + wi⃓⃓,   A = S∗.                    (241)
+
+The relation
+
+
+                          AH = ST                                 (242)
+
+
+follows from
+
+
+
+
+                                      48
+===== PDF PAGE 49 =====
+                                  (S∗)H = ST.                                (243)
+
+
+This mapping permits the standard spectral initialization procedure to be applied without
+changing the definition of the channel vector gi.
+
+
+43.2 Augmented Channel Vector
+
+The received signal contains one unknown component, AHgi, and one known component,
+bi:
+
+
+                              AHgi + bi.                                (244)
+
+The unknown channel and the known reference are combined into one augmented vector:
+
+
+                                                        [︄   ]︄                                          gi
+                                                     ¯gi =     ∈C(K+1)×1 .                          (245)
+                                   1
+
+
+The last element is fixed to one so that
+
+
+                                                               ]︄                                                      [︂          ]︂[︄ gi                    AH  bi    = AHgi + bi.                        (246)
+                                    1
+
+Define the augmented observation matrix as
+
+                                                ¯Ai = [︂ AH  bi ]︂ .                             (247)
+
+
+Since
+
+
+                          AH = ST,                                 (248)
+
+
+we have
+
+                                                ¯Ai = [︂ ST  bi ]︂ .                              (249)
+
+
+The dimensions are
+
+
+                        ST ∈CP×K,     bi ∈CP×1,                        (250)
+
+and hence
+
+
+                                      49
+===== PDF PAGE 50 =====
+                                                ¯Ai ∈CP×(K+1) .                              (251)
+
+The measurement model becomes
+
+
+                                     yi      ¯Ai¯gi +                                  (252)                                                                 =⃓⃓         wi⃓⃓.
+
+
+43.3 Construction of the Augmented Observation Vectors
+
+
+The Hermitian transpose of the augmented matrix is
+
+                                   ¯AHi ∈C(K+1)×P.                              (253)
+
+Consider its p-th column:
+
+                        ⎡ s∗1,p ⎤
+                                          s∗
+                                                  ¯ai,p =          2,p...  ∈C(K+1)×1 .                         (254)
+                                         s∗K,p                                                                                                                                                                         ⎢⎢⎢⎢⎢⎢⎣                 ⎥⎥⎥⎥⎥⎥⎦
+                                            b∗i,p
+
+Since
+
+                             ¯AHi = [︂ ¯ai,1   ¯ai,2   · · ·   ¯ai,P ]︂ ,                        (255)
+
+the corresponding inner product is
+
+
+
+                             K
+                                    ¯aHi,p¯gi = ∑︂ sk,pgi,k + bi,p.                          (256)
+                                        k=1
+
+Thus,
+
+                                      ¯aHi,p¯gi = [︁STgi ]︁p + bi,p .                          (257)
+
+
+44  Spectral Matrix Construction
+
+
+44.1 Weighted Covariance Matrix
+
+
+The spectral method constructs the weighted covariance matrix
+
+
+                                      50
+===== PDF PAGE 51 =====
+                                       P
+                         Mi = ∑︂ yi,p¯ai,p¯aHi,p .                           (258)
+                                         p=1
+
+The dimensions are
+
+
+                                                          ¯ai,p ∈C(K+1)×1,                              (259)
+
+and therefore
+
+                                             ¯ai,p¯aHi,p ∈C(K+1)×(K+1).                           (260)
+
+Consequently,
+
+
+                         Mi ∈C(K+1)×(K+1) .                            (261)
+
+The spectral matrix can also be written as
+
+
+
+                                       P
+                         Mi = ∑︂ yi,p¯ai,p¯aHi,p.                            (262)
+                                         p=1
+
+This matrix contains the magnitude measurements yi,p as weights for the corresponding
+observation-vector outer products.
+
+
+44.2  Principal Eigenvector
+
+
+Perform the eigendecomposition
+
+
+                                    Mivi,r = λi,rvi,r .                             (263)
+
+Select the eigenvector associated with the largest eigenvalue:
+
+
+                                       vi = vi,rmax .                               (264)
+
+Equivalently,
+
+
+                            Mivi = λmax(Mi)vi.                            (265)
+
+The principal eigenvector satisfies
+
+
+
+
+                                      51
+===== PDF PAGE 52 =====
+                                      vi ∈C(K+1)×1 .                              (266)
+
+The spectral method uses the principal eigenvector as an estimate of the direction of the
+augmented channel vector.
+
+Thus,
+
+                                                                           ¯gi
+                                      vi ≈ejϕi         ,                              (267)
+                                                     ∥¯gi∥2
+
+where ϕi represents an arbitrary phase.
+
+The eigenvector provides the direction of the augmented channel, but its magnitude is
+not yet determined.
+
+
+45  Spectral Magnitude Estimation
+
+
+45.1 Magnitude Estimation
+
+
+Assume the initial augmented channel vector has the form
+
+                                                        ¯g(0)i = rivi ,                                (268)
+
+where ri is a real nonnegative scalar.
+The predicted magnitude corresponding to this estimate  is⃓⃓⃓
+
+                                                ¯Ai¯g(0)                                        (269)                                            =⃓⃓ri ¯Aivi⃓⃓.                                                                                                                                                                                                                                                                                     i⃓⃓⃓
+Since ri ≥0,⃓⃓
+
+                                            ri                                             (270)                                       ¯Aivi⃓⃓= ri⃓⃓¯Aivi⃓⃓.
+
+The magnitude should approximate the measured vector yi.
+
+Therefore,
+
+
+
+                                                                     2
+                                     ri = arg min                   2 .                       (271)                                                      ri⃓⃓¯Aivi⃓⃓−yi⃦⃦                                                                                                                           ri⃦⃦
+
+Define
+
+
+                                                                                (272)                                       qi =⃓⃓  ¯Aivi⃓⃓.
+
+                                      52
+===== PDF PAGE 53 =====
+Then the scalar least-squares problem becomes
+
+                                       ri = arg min ∥riqi −yi∥22 .                         (273)
+                                                                 ri
+
+Expanding the squared norm,
+
+                         ∥riqi −yi∥22 = r2i qTi qi −2riqTi yi + yTi yi.                  (274)
+
+Since ri is real,
+
+
+                      ∂
+                               ∥riqi −yi∥22 = 2ri∥qi∥22 −2qTi yi.                    (275)
+                           ∂ri
+
+Setting the derivative equal to zero,
+
+
+                                 2ri∥qi∥22 −2qTi yi = 0.                           (276)
+
+Therefore,
+
+
+                                     ri∥qi∥22 = qTi yi,                              (277)
+
+and
+
+
+                                     qTi yi
+                                                ri =           .                                (278)
+                                          ∥qi∥22
+
+Using (272),
+
+
+
+                                                 T
+                                              ri       ¯Aivi⃓⃓     yi⃦⃦2   .                             (279)                                                                 =⃓⃓
+                                                            2                                                                      ¯Aivi⃦⃦
+
+The initial augmented channel estimate is therefore
+
+                                                        ¯g(0)i = rivi .                                (280)
+
+
+46 Global Phase Removal
+
+
+46.1 Arbitrary Global Phase
+
+
+Magnitude measurements cannot distinguish between
+
+
+                                      53
+===== PDF PAGE 54 =====
+                                                                     ¯gi                                     (281)
+
+and
+
+
+                                                      ejϕi¯gi,                                   (282)
+
+because⃓⃓
+
+
+                                                                                (283)                                   ¯Aiejϕi¯gi⃓⃓=⃓⃓ejϕi ¯Ai¯gi⃓⃓=⃓⃓  ¯Ai¯gi⃓⃓.
+
+However, the augmented vector is defined as
+
+
+                                                                [︄   ]︄                                                gi
+                                                              ¯gi =         ,                                (284)
+                                        1
+
+so the final element must have zero phase.
+
+Let
+
+                                    ϕi = ∠ (︂ [¯g(0)i  ]K+1 )︂ .                            (285)
+
+
+Multiply the entire augmented vector by
+
+
+                                              e−jϕi.                                   (286)
+
+
+Thus,
+
+                                                                   i = e−jϕi¯g(0)i    .                             (287)                                                               ˜︁g(0)
+
+The last element becomes
+
+                                                           i  ]K+1 = e−jϕi[¯g(0)i  ]K+1.                         (288)                                                      [˜︁g(0)
+
+Using (285),
+
+
+
+
+                                                                                 i                                             [¯g(0)i  ]K+1 =⃓⃓⃓[¯g(0)                                                           ]K+1⃓⃓⃓ejϕi,                         (289)
+
+and therefore,
+
+
+
+
+
+                                      54
+===== PDF PAGE 55 =====
+                                                 [˜︁g(0)                                                      i  ]K+1 = e−jϕi⃓⃓⃓[¯g(0)i  ]K+1⃓⃓⃓ejϕi
+
+                                                                            i                                                    =⃓⃓⃓[¯g(0)                                                           ]K+1⃓⃓⃓.                              (290)
+
+Hence, the final element has zero phase.
+
+The channel estimate for the i-th antenna is obtained by retaining the first K elements:
+
+
+                                                                             i  (1 : K) .                            (291)                                         g(0)i = ˜︁g(0)
+
+
+46.2 Construction of the Initial Channel Matrix
+
+
+The above spectral initialization is performed independently for all I vapor cells.
+
+For
+
+
+                                                i = 1, 2, . . . , I,                               (292)
+
+
+obtain
+
+                                            g(0)i  ∈CK×1.                                (293)
+
+The initial channel matrix is constructed by placing the channel vectors as rows:
+
+                         ⎡(g(0)1  )T ⎤
+                                              (g(0)2  )T
+                                G(0) =       ∈CI×K .                         (294)
+                                                                                                                                                                                                           ...                                                                                                                           ⎢⎢⎢⎢⎣                     ⎥⎥⎥⎥⎦
+                                              (g(0)I  )T
+
+This matrix provides the initial channel estimate for the subsequent GS iterations.
+
+
+47 Gerchberg–Saxton Iteration
+
+
+47.1 Step 1: Prediction of the Complex Received Signal
+
+
+Suppose that the channel estimate from the previous iteration is
+
+
+                                      G(t−1) ∈CI×K.                              (295)
+
+
+
+                                      55
+===== PDF PAGE 56 =====
+For the i-th antenna,
+
+                                          g(t−1)i   ∈CK×1.                               (296)
+
+The predicted complex received signal is
+
+                                          x(t)i = STg(t−1)i  + bi .                           (297)
+
+The noise realization is not added to the predicted signal because the actual noise
+realization is unknown. The measured magnitude already contains the noise contribution.
+
+The dimensions are
+
+                       ST ∈CP×K,      g(t−1)i   ∈CK×1,                      (298)
+
+hence
+
+                                               x(t)i  ∈CP×1.                                (299)
+
+
+47.2 Step 2: Phase Estimation
+
+
+The phase of the predicted complex received signal is
+
+                                       θ(t)i = ∠ (︂ STg(t−1)i  + bi )︂ .                         (300)
+
+
+Collecting the phase values gives
+
+                          ⎡ θ(t)i,1 ⎤
+                                                       θ(t)
+                                                                                (301)                                         θ(t)i =           i,2...  ∈RP×1.                                                                                                                                ⎢⎢⎢⎢⎣           ⎥⎥⎥⎥⎦
+                                                       θ(t)i,P
+
+The corresponding unit-magnitude phase vector is
+
+
+
+
+
+                                                                                     i                                                        ejθ(t) .                                   (302)
+
+Each element has unit magnitude:⃓⃓⃓
+
+                                                       ejθ(t)     1.                                (303)                                                         i,p⃓⃓⃓=
+
+
+
+                                      56
+===== PDF PAGE 57 =====
+47.3 Step 3: Replace the Predicted Magnitude with the Measured Magnitude
+
+
+The measured vector is
+
+
+                                         yi = |xi|.                                 (304)
+
+The GS procedure retains the measured magnitude and replaces only the unknown phase
+by the current phase estimate.
+
+Define
+
+
+
+
+
+                                                                                               i                                                 r(t)i = yi ◦ejθ(t) .                             (305)
+
+Element-wise,
+
+
+
+
+
+                                                                                     i,p                                                  r(t)i,p = yi,pejθ(t) .                              (306)
+
+Therefore,⃓⃓⃓
+
+                                                                i,p⃓⃓⃓= yi,p.                          (307)                                            r(t)i,p⃓⃓⃓= yi,p⃓⃓⃓ejθ(t)
+
+Thus,
+
+                                                      |r(t)i  | = yi .                                (308)
+
+This operation replaces the unknown complex received signal with a complex vector having
+the measured magnitude and the currently estimated phase.
+
+
+48 Reference Removal and Least-Squares Channel Update
+
+
+48.1 Step 4: Remove the Known Reference
+
+
+The model for the reconstructed received signal is
+
+                                                 r(t)i ≈STgi + bi.                              (309)
+
+Therefore,
+
+                                                 r(t)i −bi ≈STgi .                             (310)
+
+After removing the known reference, the channel estimation becomes a standard linear
+
+
+                                      57
+===== PDF PAGE 58 =====
+least-squares problem.
+
+
+48.2 Step 5: Least-Squares Channel Estimation
+
+
+The channel vector is obtained from
+
+
+
+                                                                        2
+                                  g(t)i = arg min  r(t)i −bi −STg⃦⃦⃦  2 .                     (311)                                                                                                                                                                   g⃦⃦⃦
+
+To obtain the standard least-squares form, define
+
+
+                       A = S∗.                                  (312)
+
+
+Then
+
+
+                          AH = ST.                                 (313)
+
+
+Therefore,
+
+
+                                                                         2
+                                g(t)i = arg min  (r(t)i −bi) −AHg⃦⃦⃦  2 .                    (314)                                                                                                                                                             g⃦⃦⃦
+The standard least-squares solution is
+
+                                     g(t)i = (AAH)−1A (︂ r(t)i −bi )︂ .                       (315)
+
+This solution requires AAH = S∗ST ∈CK×K to be invertible, i.e. S must have full row
+rank K, which needs P ≥K.
+
+Since
+
+
+                       A = S∗,                                  (316)
+
+
+and
+
+
+                          AH = ST,                                 (317)
+
+
+we have
+
+
+                       AAH = S∗ST.                               (318)
+
+
+Hence,
+
+
+                                      58
+===== PDF PAGE 59 =====
+                                    g(t)i = (S∗ST)−1S∗(︂ r(t)i −bi )︂ .                       (319)
+
+
+Using (305),
+
+
+                                                                                      )︂                                                                                                  .                    (320)                                                                                                      i −bi                                g(t)i = (S∗ST)−1S∗(︂ yi ◦ejθ(t)
+
+
+49 Matrix Form of the GS Iteration
+
+
+49.1 Simultaneous Update for All Antennas
+
+
+Instead of processing each antenna separately, define
+
+
+                                      G(t−1) ∈CI×K .                              (321)
+
+
+The predicted complex received matrix is
+
+
+                                   X(t) = G(t−1)S + B .                           (322)
+
+
+The dimensions are
+
+
+                         G(t−1)S : (I × K)(K × P) = I × P,                     (323)
+
+
+and
+
+
+                      B ∈CI×P.                                (324)
+
+
+Hence,
+
+
+                                      X(t) ∈CI×P  .                               (325)
+
+
+The phase matrix is
+
+
+                                         Θ(t) = ∠X(t) .                               (326)
+
+
+The reconstructed complex measurement matrix is
+
+
+                                       R(t) = Y ◦ejΘ(t) .                             (327)
+
+
+
+                                      59
+===== PDF PAGE 60 =====
+Since Y contains the measured magnitudes,
+
+
+                                               |R(t)| = Y.                                 (328)
+
+
+The known reference matrix is then removed:
+
+
+                                           R(t) −B .                                 (329)
+
+
+The channel update is obtained by solving
+
+                              G(t) = arg min  R(t) −B         2  .                     (330)                                                        F                                               −GS⃦⃦                                                                                           G⃦⃦
+
+The least-squares solution is
+
+
+                                G(t) = (R(t) −B)SH(SSH)−1 .                       (331)
+
+
+The dimensions are
+
+
+                                       R(t) −B ∈CI×P,                             (332)
+
+
+                          SH ∈CP×K,                                (333)
+
+
+and
+
+
+                         SSH ∈CK×K.                               (334)
+
+
+Therefore,
+
+
+                                    (R(t) −B)SH ∈CI×K,                           (335)
+
+
+and
+
+
+                                         G(t) ∈CI×K .                               (336)
+
+
+49.2 Equivalence with the Per-Antenna LS Solution
+
+
+For the i-th row of the matrix model,
+
+                                    [R(t) −B]i,: = (r(t)i  −bi)T.                         (337)
+
+                                      60
+===== PDF PAGE 61 =====
+The corresponding row of G(t) is
+
+                                                 [G(t)]i,: = (g(t)i  )T.                              (338)
+
+From (331),
+
+
+                                      [G(t)]i,: = [R(t) −B]i,:SH(SSH)−1.                      (339)
+
+Taking the transpose gives the corresponding channel-vector representation,
+
+                                     g(t)i = (S∗ST)−1S∗(r(t)i  −bi).                        (340)
+
+Thus, the matrix update and the per-antenna least-squares solution represent the same
+channel-estimation operation under different orientations of the channel vectors.
+
+
+50 Convergence Criterion
+
+
+50.1  Difference Between Consecutive Channel Estimates
+
+After obtaining G(t), compare it with the channel estimate from the previous iteration:
+
+
+
+                                                                 2
+                                                                                        .                          (341)                                                   F                          ∆t =⃦⃦  G(t) −G(t−1)⃦⃦
+
+If
+
+
+                                ∆t < ϵ ,                                 (342)
+
+where ϵ is a prescribed convergence tolerance, the iteration is terminated.
+
+Otherwise, the GS iterations continue.
+
+A maximum iteration number may also be imposed as a stopping condition:
+
+
+                                                t ≥Tmax .                                 (343)
+
+Therefore, the algorithm terminates when either
+
+
+                                 ∆t < ϵ                                  (344)
+
+or
+
+
+
+
+                                      61
+===== PDF PAGE 62 =====
+                                                t ≥Tmax.                                 (345)
+
+
+51  Final Biased GS Algorithm for the 1D Array
+
+
+The complete biased GS channel-estimation algorithm consists of spectral initialization
+followed by iterative phase estimation and least-squares channel updates.
+
+
+51.1 Algorithm Input
+
+
+The required inputs are
+
+
+                               Y,   S,  B,   Tmax,   ϵ .                         (346)
+
+For the per-antenna spectral initialization,
+
+
+                                        yi ∈RP×1,                                (347)
+
+
+                            S ∈CK×P,                                (348)
+
+
+and
+
+
+                                      bi ∈CP×1.                                (349)
+
+
+51.2  Spectral Initialization Procedure
+
+
+For
+
+
+                                                i = 1, 2, . . . , I,                               (350)
+
+
+construct
+
+                                                ¯Ai = [︂ ST  bi ]︂ .                              (351)
+
+Let ¯ai,p denote the p-th column of ¯AHi  .
+
+Construct
+
+
+
+
+
+                                      62
+===== PDF PAGE 63 =====
+                                       P
+                         Mi = ∑︂ yi,p¯ai,p¯aHi,p .                           (352)
+                                         p=1
+
+Obtain the principal eigenvector
+
+
+                             vi = PrincipalEigenvector(Mi) .                      (353)
+
+Estimate the magnitude scaling factor:
+
+                                                                |¯Aivi|Tyi
+                                              ri =                 .                              (354)
+                                             ∥¯Aivi∥22
+
+Construct the initial augmented channel vector:
+
+                                                        ¯g(0)i = rivi .                                (355)
+
+Remove its arbitrary global phase:
+
+
+
+
+
+                                                                                       i                                                            i = e−j∠([¯g(0)                                                            ]K+1)¯g(0)i    .                          (356)                                                        ˜︁g(0)
+
+Retain the first K elements:
+
+
+                                                                             i  (1 : K) .                            (357)                                         g(0)i = ˜︁g(0)
+
+After processing all antennas, construct
+
+                           ⎡(g(0)1  )T ⎤
+                                                   (g(0)2  )T
+                                    G(0) =                 .                             (358)
+                                                                                                                                                                                                                              ...                                                                                                                                        ⎢⎢⎢⎢⎣                     ⎥⎥⎥⎥⎦
+                                                   (g(0)I  )T
+
+
+51.3 GS Iterations
+
+
+For
+
+
+                                           t = 1, 2, . . . , Tmax,                             (359)
+
+calculate the predicted complex received matrix:
+
+
+
+                                      63
+===== PDF PAGE 64 =====
+                                   X(t) = G(t−1)S + B .                           (360)
+
+
+Calculate its phase:
+
+
+                                         Θ(t) = ∠X(t) .                               (361)
+
+
+Replace the predicted magnitude by the measured magnitude:
+
+
+                                       R(t) = Y ◦ejΘ(t) .                             (362)
+
+
+Remove the reference:
+
+
+                                           R(t) −B .                                 (363)
+
+
+Update the channel using least squares:
+
+
+                                G(t) = (R(t) −B)SH(SSH)−1 .                       (364)
+
+
+Evaluate the convergence measure:
+
+
+
+                                                                 2
+                                                                                        .                          (365)                                                   F                          ∆t =⃦⃦  G(t) −G(t−1)⃦⃦
+
+If
+
+
+                                ∆t < ϵ,                                  (366)
+
+terminate the iterations.
+
+Otherwise, continue until
+
+
+                                                t = Tmax.                                 (367)
+
+The final channel estimate is
+
+                                                                  ˆ︁G = G(t) .                                (368)
+
+
+
+
+
+                                      64
+===== PDF PAGE 65 =====
+52 Complete Algorithm
+
+
+The complete biased GS algorithm for the 1D atomic receiver array can therefore be
+summarized as
+
+
+                      Input: Y, S, B, Tmax, ϵ
+
+                      Spectral Initialization:
+                           For i = 1, 2, . . . , I :
+                                        ¯Ai = [ST  bi]
+                                                 ¯ai,p = pth column of ¯AHi
+                                    P
+                      Mi = ∑︂ yi,p¯ai,p¯aHi,p
+                                     p=1
+                               vi = principal eigenvector of Mi
+                                                       |¯Aivi|Tyi
+                                      ri =
+                                      ∥¯Aivi∥22
+                                            ¯g(0)i = rivi
+                                                        i = e−j∠([¯g(0)                                                                                   i  ]K+1)¯g(0)i                                                     ˜︁g(0)
+                                                                    i  (1 : K)                                   g(0)i = ˜︁g(0)
+                      End                                                                                (369)
+                        ⎡(g(0)1  )T ⎤
+                               G(0) =                         ...                                                ⎢⎣         ⎥⎦
+                                             (g(0)I  )T
+               GS Iterations:
+                           For t = 1, 2, . . . , Tmax :
+                               X(t) = G(t−1)S + B
+                                 Θ(t) = ∠X(t)
+                                 R(t) = Y ◦ejΘ(t)
+                                 G(t) = (R(t) −B)SH(SSH)−1
+                        ∆t = ∥G(t) −G(t−1)∥2F
+                                        If ∆t < ϵ : stop
+                      End
+
+                    Output:   ˆ︁G = G(t) .
+
+
+53 Extension to a 2D Antenna Array
+
+
+The one-dimensional channel model is extended to a planar array of vapor cells containing
+I1 × I2 receiver elements. The two array indices are denoted by
+
+                                i1 ∈{1, . . . , I1},      i2 ∈{1, . . . , I2}.
+
+
+                                      65
+===== PDF PAGE 66 =====
+The spatial phase of the l-th path of user k is determined independently along the two
+array dimensions, in the same way as the 1D phase (8) was obtained along one dimension.
+
+
+53.1 Two-Dimensional Spatial Phase
+
+Let d1 and d2 denote the inter-element spacings along the two array axes. For the l-th
+path of user k, let θl,k and ϕl,k denote the elevation and azimuth angles, respectively. The
+phase increments between adjacent elements along the two dimensions are
+
+                       2πd1                 2πd2
+                         ul,k =      cos θl,k,       vl,k =       sin θl,k cos ϕl,k.              (370)
+                     λ                 λ
+
+
+Both ul,k and vl,k are real scalars. Taking element (1, 1) as the phase reference, the total
+spatial phase at the (i1, i2)-th receiver element is
+
+                                      (i1 −1)ul,k + (i2 −1)vl,k.                          (371)
+
+
+Using e−j(a+b) = e−jae−jb,
+
+                            e−j[(i1−1)ul,k+(i2−1)vl,k] = e−j(i1−1)ul,ke−j(i2−1)vl,k.                (372)
+
+
+The phase factor therefore separates into a term depending only on i1 and a term depending
+only on i2. This separability gives the 2D channel matrix its low-rank structure.
+
+
+53.2 Two-Dimensional Channel Coefficient
+
+
+Extending (75) to two array dimensions, the path-dependent coupling coefficient of the
+l-th path of user k is defined as
+
+                                  1
+                                          βl,k = ℏµTegϵk,lαl,k ∈C.                          (373)
+
+
+For the rank-constrained model, the polarization of each path is assumed to be invariant
+across the array aperture,
+                                                        ϵi1,i2,k,l = ϵk,l.                               (374)
+
+Under this assumption, the channel coefficient between user k and the (i1, i2)-th receiver
+element is
+                                   Lk
+                                 gi1,i2,k = ∑︂ βl,ke−j[(i1−1)ul,k+(i2−1)vl,k] ∈C.                  (375)
+                                     l=1
+
+
+
+
+
+                                      66
+===== PDF PAGE 67 =====
+Define the two spatial steering vectors
+
+                                                    [︂                                       ]︂T                             a1,l,k =  1  e−jul,k   · · ·  e−j(I1−1)ul,k   ∈CI1×1,               (376)
+
+                                                    [︂                                      ]︂T                             a2,l,k =  1  e−jvl,k   · · ·  e−j(I2−1)vl,k   ∈CI2×1.               (377)
+
+The (i1, i2)-th element of the outer product a1,l,kaT2,l,k is
+
+                                  [a1,l,k]i1[a2,l,k]i2 = e−j(i1−1)ul,ke−j(i2−1)vl,k,
+
+which is exactly the phase factor in (372). Hence the contribution of the l-th path to the
+k-th user’s channel matrix is
+
+                        G(l)k = βl,ka1,l,kaT2,l,k,       a1,l,k aT2,l,k = G(l)k   .                 (378)
+                                          ⏞⏟⏟⏞I1×1 ⏞⏟⏟⏞1×I2    I1×I2⏞⏟⏟⏞
+
+Since both steering vectors are nonzero (their first entries equal one) and βl,k̸ = 0, every
+column of G(l)k  is a multiple of a1,l,k. Therefore,
+
+                                                           (︂      )︂                                rank G(l)k  = 1.                              (379)
+
+
+The complete channel matrix of user k is the superposition of its Lk paths:
+
+
+                              Lk
+               Gk = ∑︂ G(l)k  ∈CI1×I2,      [Gk]i1,i2 = gi1,i2,k.                (380)
+                                l=1
+
+
+Using the rank subadditivity property rank(X + Y ) ≤rank(X) + rank(Y ),
+
+                            (︄Lk      )︄    Lk                 Lk
+            rank(Gk) = rank ∑︂ G(l)k  ≤ ∑︂ rank(︂ G(l)k )︂ = ∑︂ 1 = Lk.        (381)
+                                      l=1           l=1                  l=1
+
+
+Since the rank of an I1 × I2 matrix also cannot exceed min(I1, I2),
+
+                          rank(Gk) ≤min(Lk, I1, I2).                         (382)
+
+
+The assumption in (374) is required for this rank argument. If the polarization varies with
+(i1, i2), the path matrix becomes αl,k Ck,l ◦(a1,l,kaT2,l,k), where [Ck,l]i1,i2 = ℏ−1µTegϵi1,i2,k,l,
+and the rank-one decomposition in (378) no longer holds. In simulation, ϵk,l must therefore
+be drawn once per path, not once per vapor cell.
+
+
+
+
+
+                                      67
+===== PDF PAGE 68 =====
+53.3 Two-Dimensional Reference Signal
+
+Extending (89) to two dimensions, the received reference signal at the (i1, i2)-th receiver
+element and pilot instant p is
+
+                            1
+                             bi1,i2,p = sb,p ℏµTegϵb,i1,i2αbe−j[(i1−1)ub+(i2−1)vb] ∈C,              (383)
+
+where ub and vb are the phase increments of the reference path, defined as in (370). As in
+the 1D case, the reference (LO) field is treated as a plane wave across the array.
+
+Consistent with (125)–(127), the reference is written in magnitude–phase form,
+
+                                                                                       |bi1,i2,p|
+              bi1,i2,p = |bi1,i2,p|ejzi1,i2,p,       zi1,i2,p = ∠bi1,i2,p,       = e−jzi1,i2,p.    (384)
+                                                                                        bi1,i2,p
+
+
+53.4 Received Signal and Strong-Reference Linearisation
+
+As in (93), for pilot p the received magnitude at receiver (i1, i2) is
+
+
+                       K
+                              yi1,i2,p   =⃓⃓⃓⃓⃓ ∑︂                                              gi1,i2,ksk,p + bi1,i2,p + ni1,i2,p⃓⃓⃓⃓⃓∈R.                (385)                               k=1
+
+
+Define the desired signal and the normalized perturbation
+
+
+                    K
+                                                                             ai1,i2,p + ni1,i2,p                          ai1,i2,p = ∑︂ gi1,i2,ksk,p,       ri1,i2,p =                         .             (386)
+                                                                                      bi1,i2,p                           k=1
+
+Factoring bi1,i2,p out of (385) and using |1 + r|2 = (1 + r)(1 + r∗) = 1 + 2 Re(r) + |r|2, as
+in (97)–(110),
+                               yi1,i2,p = |bi1,i2,p| |1 + ri1,i2,p|
+                                                                                (387)                                √︂
+                = |bi1,i2,p|  1 + 2 Re(ri1,i2,p) + |ri1,i2,p|2.
+
+Under the strong-reference condition |ri1,i2,p| ≪1, the second-order term |ri1,i2,p|2 is
+neglected and √1 + x ≈1 + x/2 is used. Applying (384),
+
+                            yi1,i2,p ≈|bi1,i2,p| + |bi1,i2,p| Re(ri1,i2,p)
+                                                                                (388)
+               = |bi1,i2,p| + Re[︁e−jzi1,i2,p (ai1,i2,p + ni1,i2,p)]︁ ,
+
+where the real scalar |bi1,i2,p| was moved inside the real part.
+
+Define the effective real-valued noise
+
+                                          ¯ni1,i2,p = Re(︁ e−jzi1,i2,pni1,i2,p )︁ ∈R.                      (389)
+
+
+
+                                      68
+===== PDF PAGE 69 =====
+If the complex noise is
+                                               ni1,i2,p ∼CN(0, σ2),                            (390)
+
+then e−jzi1,i2,pni1,i2,p ∼CN(0, σ2) by circular symmetry, and its real part carries half of
+the variance:
+                                                     (︃  σ2 )︃
+                                                    ¯ni1,i2,p ∼N  0,        .                            (391)
+                                            2
+
+The resulting linearised 2D observation model is
+
+
+                              (︄       K           )︄
+                       yi1,i2,p ≈Re  e−jzi1,i2,p ∑︂ gi1,i2,ksk,p + |bi1,i2,p| + ¯ni1,i2,p,           (392)
+                                      k=1
+
+which is Eq. (18) of Xu et al. and the 2D counterpart of (134).
+
+
+54 Tensor Representation and Mode-3 Unfolding
+
+
+Define the channel tensor by stacking the K user matrices Gk along the third dimension:
+
+            G ∈CI1×I2×K,       [G]i1,i2,k = gi1,i2,k,     G(:, :, k) = Gk.           (393)
+
+
+Each frontal slice G(:, :, k) is therefore a channel matrix of rank at most Lk by (382).
+Similarly, define
+                                   [Y]i1,i2,p = yi1,i2,p,   Y ∈RI1×I2×P,
+                                  [Z]i1,i2,p = e−jzi1,i2,p, Z ∈CI1×I2×P,
+                                                                                (394)
+                                    [B]i1,i2,p = bi1,i2,p,    B ∈CI1×I2×P,
+                                [N]i1,i2,p = ¯ni1,i2,p,  N ∈RI1×I2×P.
+
+The pilot matrix is the same as in (145):
+
+                     S ∈CK×P,      [S]k,p = sk,p.                        (395)
+
+The mode-3 product multiplies every mode-3 fibre G(i1, i2, :) ∈CK by ST ∈CP×K:
+
+
+                                       K
+        G ×3 ST ∈CI1×I2×P,     [G ×3 ST]i1,i2,p = ∑︂ gi1,i2,ksk,p = ai1,i2,p.      (396)
+                                                      k=1
+
+
+Collecting (392) over all (i1, i2, p), the linearised tensor model is
+
+                 Y = Re[︁Z ◦(G ×3 ST)]︁ + |B| + N,                     (397)
+
+which is Eq. (19) of Xu et al.; here ◦is the elementwise product and |B| the elementwise
+
+
+                                      69
+===== PDF PAGE 70 =====
+magnitude.
+
+Let the mode-3 unfolding place the mode-3 fibres as columns of a matrix whose rows are
+indexed by the third index, with (i1, i2) mapped to the column index
+
+                         q = i1 + (i2 −1)I1,     q = 1, . . . , I1I2,                   (398)
+
+which is column-major order. Then
+
+                          G(3) ∈CK×I1I2,      [G(3)]k,q = gi1,i2,k,                  (398a)
+
+and
+                           Y(3), N(3) ∈RP×I1I2,      Z(3), B(3) ∈CP×I1I2.                (399)
+
+For the mode-3 product, the unfolding identity (X ×3 U)(3) = UX(3) gives
+
+                 (G ×3 ST)(3) = STG(3),     ST  G(3) = STG(3) .              (400)
+                                             ⏞⏟⏟⏞P×K                                                      K×I1I2⏞⏟⏟⏞  ⏞⏟⏟⏞P×I1I2
+
+
+Unfolding every term of (397) along mode 3,
+
+                           Y(3) = Re[︁Z(3) ◦(STG(3))]︁ + |B(3)| + N(3),                  (401)
+
+which is Eq. (20) of Xu et al. Compared with the 1D model (163), the roles of rows and
+columns are transposed: rows now index pilots and columns index antennas.
+
+For user k, the k-th row of G(3) is vec(Gk)T ∈C1×I1I2 in the same column-major order.
+Reshaping it back gives
+                       mat(︁ [G(3)]k,: )︁ = Gk ∈CI1×I2,                        (402)
+
+where mat(·) is the inverse of vec(·) (in MATLAB, reshape(row, I1, I2)). Hence, from
+(382),
+                            rank(︁ mat(︁ [G(3)]k,: )︁)︁ ≤Lk.                         (403)
+
+The channel estimation problem is therefore the rank-constrained least-squares problem
+
+
+                                                                                     2
+              min  f(G(3))     Y(3) −|B(3)| −Re[︁Z(3) ◦(STG(3))]︁⃦⃦ F                       G(3)                  =⃦⃦                                                                                (404)
+                        s.t.  rank(︁ mat([G(3)]k,:))︁ ≤Lk,    k = 1, . . . , K,
+
+
+which is Eq. (21) of Xu et al. The rank constraint is what distinguishes the 2D problem
+from the 1D problem (173), and it is why the GS algorithm of Section 42 cannot be
+applied directly.
+
+
+
+
+
+                                      70
+===== PDF PAGE 71 =====
+55 Projected Gradient Descent for the 2D Channel
+
+
+Define the residual
+
+           E = Y(3) −|B(3)| −Re[︁Z(3) ◦(STG(3))]︁ ∈RP×I1I2.              (405)
+
+
+Then the objective in (404) is
+
+
+                                              P  I1I2
+                            f(G(3)) = ∥E∥2F = ∑︂ ∑︂ E2p,q,                       (406)
+                                                 p=1 q=1
+
+which is Eq. (22) of Xu et al. Because Y(3), |B(3)|, and the real-part term are real, Ep,q ∈R.
+
+
+55.1 Elementwise Gradient Derivation
+
+
+Fix a differentiation index (k, q) and use r as the dummy user index. The (p, q)-th element
+of STG(3) is
+                          K             K
+                      (STG(3))p,q = ∑︂ [ST]p,r[G(3)]r,q = ∑︂ sr,pGr,q.                (407)
+                                     r=1                  r=1
+
+Using Re(x) = (x + x∗)/2,
+
+                                                        [︄    K            K            ]︄                                1
+          Re[︁Zp,q(STG(3))p,q ]︁ =    Zp,q ∑︂ sr,pGr,q + Z∗p,q ∑︂ s∗r,pG∗r,q   .        (408)
+                                2
+                                             r=1               r=1
+
+In Wirtinger calculus, Gr,q and G∗r,q are treated as independent variables, so that
+
+                              ∂Gr,q        ∂G∗r,q
+                    = 0,      = δr,k.
+                       ∂G∗k,q        ∂G∗k,q
+
+Only the second sum in (408) contributes, and only its r = k term survives. Therefore,
+
+                                  ∂Ep,q                       = −1  p,qs∗k,p.                            (409)                          ∂G∗k,q    2Z∗
+
+
+Since
+                                  f = ∑︂ E2p,q,                               (410)
+                                                               p,q
+
+and only the entries in column q of E depend on Gk,q, the chain rule gives
+
+
+                 P                P                         P
+      ∂f              ∂Ep,q               (︃            )︃       = 2 ∑︂ Ep,q    = 2 ∑︂ Ep,q −1  p,qs∗k,p = −                                     ∑︂ s∗k,pEp,qZ∗p,q.      (411)                                   2Z∗     ∂G∗k,q     p=1    ∂G∗k,q     p=1                                                               p=1
+
+
+                                      71
+===== PDF PAGE 72 =====
+Since [S∗]k,p = s∗k,p and [E ◦Z∗(3)]p,q = Ep,qZ∗p,q, the sum in (411) is the (k, q)-th element of
+the matrix product S∗(E ◦Z∗(3)). Collecting all (k, q),
+
+                        ∇G∗(3)f = −S∗(︁ E ◦Z∗(3) )︁ .                         (412)
+
+
+The dimensions are
+
+                 S∗   (︁ E ◦Z∗(3) )︁ ,   E ∈RP×I1I2,  Z∗(3) ∈CP×I1I2,             (413)
+                  ⏞⏟⏟⏞K×P                       ⏞ P×I1I2⏟⏟   ⏞
+
+so that
+                           ∇G∗(3)f ∈CK×I1I2,                             (414)
+
+which is the same dimension as G(3). Equation (412) is Eq. (24) of Xu et al., and it is the
+transposed 2D counterpart of the 1D gradient (206). Like (206), it uses the Wirtinger
+convention; Eq. (15) of Xu et al. carries an extra factor of 2, which only rescales the step
+size.
+
+
+55.2 Gradient Descent Step
+
+
+At iteration t, let
+
+                    E(t) = Y(3) −|B(3)| −Re[︂ Z(3) ◦(STG(t)(3))]︂ ∈RP×I1I2.             (415)
+
+
+The gradient is
+                            ∇(t) = −S∗(︁ E(t) ◦Z∗(3) )︁ ∈CK×I1I2.                     (416)
+
+The unconstrained gradient step (step 4 of Algorithm 1 of Xu et al.) is
+
+                M = G(t)(3) −ζt∇(t)                             (417)
+
+and hence
+           M = G(t)(3) + ζtS∗(︁ E(t) ◦Z∗(3) )︁ ∈CK×I1I2,                  (418)
+
+where ζt > 0 is the step size.
+
+Step size. Xu et al. do not give a value for ζt; they state that, under Lipschitz continuous
+gradients, the algorithm converges within O(1/ϵ) iterations, citing Fu and Huang1, where
+the step size is the inverse of the Lipschitz constant of the gradient. The same rule is used
+here: a Lipschitz constant L is derived and ζt ≤1/L is taken. The derivation is given
+step by step below. The intermediate results are labelled (S1)–(S9) so that the existing
+
+   1X. Fu and K. Huang, “Block-term tensor decomposition via constrained matrix factorization,” in
+Proc. IEEE 29th Int. Workshop Mach. Learn. Signal Process. (MLSP), 2019, pp. 1–6; reference [15] of
+Xu et al.
+
+
+                                      72
+===== PDF PAGE 73 =====
+equation numbers are not changed.
+
+Step 0: Notation. Only one iteration t is considered, so the iteration index is dropped to
+keep the expressions short:
+
+G ≜G(t)(3) ∈CK×I1I2,  E ≜E(t) ∈RP×I1I2,  Z ≜Z(3) ∈CP×I1I2,  ∇≜∇(t),   ζ ≜ζt > 0.
+
+The objective is f(G) = ∥E∥2F from (406), and the gradient (416) is ∇= −S∗(E ◦Z∗) ∈
+CK×I1I2. The following definitions are used.
+
+   • ∆∈CK×I1I2 is a change of the channel estimate: the estimate is moved from G to
+   G + ∆. It has the same size as G. The gradient step (417) is M = G −ζ∇, i.e. it is
+      the change ∆= −ζ∇.
+
+   • Frobenius norm: ∥X∥2F = ∑︁p,q |Xp,q|2, the sum of the squared magnitudes of all
+       entries.
+
+   • Inner product of two matrices of the same size: ⟨X, Y ⟩= tr(XHY ) = ∑︁k,q X∗k,qYk,q.
+      In particular ⟨X, X⟩= ∑︁k,q |Xk,q|2 = ∥X∥2F, which is real and non-negative.
+
+Aim: find the values of ζ for which f(M) ≤f(G), i.e. for which the gradient step cannot
+increase the objective.
+
+Step 1: Residual after the change ∆. By (415), the residual at G + ∆is
+
+             E(G + ∆) = Y(3) −|B(3)| −Re[︁Z ◦ (︁ ST(G + ∆))︁]︁ .
+
+Three properties are used.
+
+   • Matrix multiplication distributes over addition: ST(G + ∆) = STG + ST∆.
+
+   • The Hadamard product distributes over addition: Z ◦(A + B) = Z ◦A + Z ◦B.
+
+   • The real part is linear: Re(a + b) = Re(a) + Re(b).
+
+
+Hence
+
+      E(G + ∆) = Y(3) −|B(3)| −Re[︁Z ◦(STG) ]︁ −Re[︁Z ◦(ST∆)]︁ = E −R,
+                     ⏞          =⏟⏟E            ⏞
+
+where
+
+  W ≜ST∆∈CP×I1I2,   R ≜Re[Z ◦W] ∈RP×I1I2,     Rp,q = Re(Zp,qWp,q) .
+
+Y(3) and |B(3)| do not depend on the channel estimate, so they do not appear in R.
+Therefore
+                        f(G + ∆) = ∥E −R∥2F.                           (S1)
+
+                                      73
+===== PDF PAGE 74 =====
+Step 2: Expanding the square. E and R are real, so every entry Ep,q −Rp,q is a real number.
+For real numbers, (a −b)2 = a2 −2ab + b2. Applying this to every entry and adding,
+
+       ∥E −R∥2F = ∑︂ (Ep,q −Rp,q)2 = ∑︂ E2p,q −2 ∑︂ Ep,qRp,q + ∑︂ R2p,q.
+                                    p,q                           p,q               p,q                  p,q
+
+The first sum is ∥E∥2F = f(G) and the last sum is ∥R∥2F. Writing T ≜∑︁p,q Ep,qRp,q,
+
+                     f(G + ∆) = f(G) −2T + ∥R∥2F.                       (S2)
+
+f(G) does not depend on ∆; T is linear in ∆(doubling ∆doubles T); ∥R∥2F is quadratic
+in ∆(doubling ∆multiplies it by four). The next two steps handle T and ∥R∥2F.
+
+Step 3: Writing T with the gradient.
+
+(3a) For a real number c and a complex number x, c Re(x) = Re(cx). Since Ep,q is real,
+Ep,qRp,q = Ep,q Re(Zp,qWp,q) = Re(Ep,qZp,qWp,q). The sum of real parts is the real part of
+the sum, so
+                        T = Re ∑︂ Ep,qZp,qWp,q.
+
+                                                            p,q
+
+(3b) Next, ⟨∇, ∆⟩= tr(∇H∆) is computed. Using (AB)H = BHAH and (S∗)H = ST,
+
+             ∇H = −(E ◦Z∗)H (S∗)H = −(E ◦Z∗)H ST.
+
+The (p, q) entry of E ◦Z∗is Ep,qZ∗p,q. Its conjugate is Ep,qZp,q because Ep,q is real. Hence
+(E ◦Z∗)H = (E ◦Z)T, and
+
+           ⟨∇, ∆⟩= tr(∇H∆) = −tr[︁(E ◦Z)TST∆]︁ = −tr[︁(E ◦Z)TW ]︁ .
+
+For two matrices of the same size, tr(ATB) = ∑︁p,q Ap,qBp,q (the diagonal entry q of ATB
+is ∑︁p Ap,qBp,q). Therefore
+
+                          ⟨∇, ∆⟩= − ∑︂ Ep,qZp,qWp,q.
+
+                                                               p,q
+
+
+(3c) Comparing (3a) and (3b), the same sum appears in both, so
+
+
+                           T = −Re⟨∇, ∆⟩.                              (S3)
+
+
+Substituting (S3) into (S2),
+
+                  f(G + ∆) = f(G) + 2 Re⟨∇, ∆⟩+ ∥R∥2F.                   (S4)
+
+No approximation has been made up to this point; (S4) is exact.
+
+Step 4: Upper bound on ∥R∥2F.
+
+
+                                      74
+===== PDF PAGE 75 =====
+(4a) Property: the real part is never larger than the magnitude. Let x = a + jb with a, b
+               √   √
+real. Then | Re(x)| = |a| =   a2 ≤   a2 + b2 = |x|, and squaring, Re(x)2 ≤|x|2. With
+x = Zp,qWp,q,
+                           R2p,q ≤|Zp,qWp,q|2.
+
+(4b) Property: |ab| = |a| |b| and |e−jθ| = 1. Since Zp,q = e−jzp,q, |Zp,q| = 1 and |Zp,qWp,q|2 =
+|Zp,q|2|Wp,q|2 = |Wp,q|2. Adding over all (p, q),
+
+                       ∥R∥2F ≤ ∑︂ |Wp,q|2 = ∥ST∆∥2F.                       (S5)
+                                                        p,q
+
+
+(4c) Property:  Rayleigh-quotient bound.  Let H be a Hermitian (HH = H) positive
+semidefinite matrix with eigendecomposition H = UΛU H, where U is unitary and Λ =
+diag(λ1, λ2, . . .) holds the real, non-negative eigenvalues. For any vector x, put y = U Hx;
+a unitary matrix does not change the length of a vector, so ∥y∥2 = ∥x∥2. Then
+
+        xHHx = yHΛy = ∑︂ λi|yi|2 ≤λmax(H) ∑︂ |yi|2 = λmax(H) ∥x∥22.
+                                                        i                                     i
+
+This is applied with H = S∗ST ∈CK×K, which is Hermitian, (S∗ST)H = (ST)H(S∗)H =
+S∗ST, and positive semidefinite, xHS∗STx = ∥STx∥22 ≥0. Let δq be the q-th column of
+∆. Then the q-th column of ST∆is STδq and
+
+             ∥STδq∥22 = δHq (ST)HSTδq = δHq S∗STδq ≤λmax(S∗ST) ∥δq∥22.
+
+The squared Frobenius norm of a matrix is the sum of the squared lengths of its columns.
+Adding over q = 1, . . . , I1I2,
+
+       ∥ST∆∥2F = ∑︂ ∥STδq∥22 ≤λmax(S∗ST) ∑︂ ∥δq∥22 = λmax(S∗ST) ∥∆∥2F.     (S6)
+                               q                                    q
+
+
+(4d) Property: a matrix and its complex conjugate have the same eigenvalues when the
+eigenvalues are real. S∗ST = (SSH)∗. If SSHv = λv, taking the complex conjugate of
+both sides gives (SSH)∗v∗= λ∗v∗= λv∗, because λ is real (SSH is Hermitian). Hence
+S∗ST and SSH have the same eigenvalues. Defining
+
+                   L ≜λmax(SSH) = λmax(S∗ST),
+
+(S5) and (S6) give
+                             ∥R∥2F ≤L ∥∆∥2F.                              (S7)
+
+Using (S7) in (S4), for every change ∆,
+
+                 f(G + ∆) ≤f(G) + 2 Re⟨∇, ∆⟩+ L ∥∆∥2F.                  (S8)
+
+
+
+                                      75
+===== PDF PAGE 76 =====
+L is an upper bound on the curvature of f. Because of the inequality in (4a), the true
+curvature can be smaller than L.
+
+Step 5: The gradient step. Put ∆= −ζ∇in (S8). Using ⟨X, cY ⟩= c⟨X, Y ⟩for a real
+number c and ⟨∇, ∇⟩= ∥∇∥2F,
+
+               Re⟨∇, −ζ∇⟩= −ζ∥∇∥2F,   ∥−ζ∇∥2F = ζ2∥∇∥2F.
+
+Since G + ∆= G −ζ∇= M,
+
+         f(M) ≤f(G) −2ζ∥∇∥2F + Lζ2∥∇∥2F = f(G) −ζ (2 −Lζ) ∥∇∥2F.        (S9)
+
+Step 6: Choice of the step size. In (S9), ζ > 0 and ∥∇∥2F ≥0.
+
+   •  If 2 −Lζ > 0, i.e. ζ < 2/L, the subtracted term is non-negative and f(M) ≤f(G).
+
+   • The bound in (S9) gives the largest guaranteed decrease when g(ζ) = −2ζ + Lζ2 is
+      smallest. Setting g′(ζ) = −2 + 2Lζ = 0 gives ζ = 1/L; g′′(ζ) = 2L > 0, so this is a
+     minimum.
+
+   • For any ζ ≤1/L, Lζ ≤1, so 2 −Lζ ≥1 and
+
+                      f(M) ≤f(G) −ζ∥∇∥2F ≤f(G).
+
+    The objective decreases by at least ζ∥∇∥2F and cannot increase.
+
+
+Therefore a fixed step size
+                                        1
+                                             ζt ≤                                        (418a)
+                                  λmax(SSH)
+
+is a sufficient (conservative) condition for a non-increasing objective in the unconstrained
+step under the Wirtinger convention of (412).
+
+This is the rule α(t) ≤1/σ2max(C(t+1)) of Fu and Huang with the pilot matrix in place of
+their factor C, since σ2max(S) = λmax(SSH). As S is known and fixed, the step size is
+constant over the iterations.
+
+The gradient step does not by itself enforce the rank constraints; mat([M]k,:) is in general
+full rank.
+
+
+55.3  Projection onto the Rank-Constrained Set
+
+
+Define the feasible set
+
+           X = {︁ X ∈CK×I1I2 : rank(mat([X]k,:)) ≤Lk, ∀k }︁ .             (419)
+
+
+
+                                      76
+===== PDF PAGE 77 =====
+The projected gradient update, Eq. (23) of Xu et al., is
+
+                                    G(t+1)(3) = projX(M),                            (420)
+
+
+where, as in Eq. (25) of Xu et al.,
+
+                       projX(M) = arg min ∥X −M∥2F.                      (421)
+                                   X∈X
+
+
+The Frobenius norm separates over the rows:
+
+
+                              K
+                 ∥X −M∥2F = ∑︂ ∥[X]k,: −[M]k,:∥22.                    (422)
+                                        k=1
+
+
+Since the k-th constraint in (419) involves only the k-th row, each term of (422) can be
+minimized independently, and each user’s rank constraint is enforced separately.
+
+For user k, reshape the row using the same column-major ordering as the mode-3 unfolding:
+
+                    Mk = mat([M]k,:) ∈CI1×I2.                        (423)
+
+
+Since ∥[X]k,: −[M]k,:∥2 = ∥Xk −Mk∥F with Xk = mat([X]k,:), the k-th subproblem is
+
+                            min   ∥Xk −Mk∥2F.                         (423a)
+                                    rank(Xk)≤Lk
+
+
+Compute the singular value decomposition, Eq. (26) of Xu et al.:
+
+         Mk = UkΣkVkH ,    Uk ∈CI1×I1,  Σk ∈RI1×I2,  Vk ∈CI2×I2.        (424)
+
+
+Let the singular values be ordered as
+
+               Σk = diag(σk,1, σk,2, . . .),      σk,1 ≥σk,2 ≥· · · ≥0.             (425)
+
+
+Retaining the largest Lk singular values gives, as in Eq. (27) of Xu et al.,
+
+      M k(Lk) = Uk(:, 1 : Lk) Σk(1 : Lk, 1 : Lk) Vk(:, 1 : Lk)H ∈CI1×I2.        (426)
+                     ⏞  I1×Lk⏟⏟    ⏞ ⏞    Lk×Lk⏟⏟      ⏞ ⏞   Lk×I2⏟⏟    ⏞
+
+
+
+                                                  (Lk)
+By the Eckart–Young–Mirsky theorem, M k     is the closest matrix to Mk in the Frobenius
+
+
+
+
+
+                                      77
+===== PDF PAGE 78 =====
+norm among matrices of rank at most Lk, i.e. it solves (423a):
+
+   M k(Lk) = arg   min   ∥Xk −Mk∥2F,   ∥M k(Lk) −Mk∥2F = ∑︂ σ2k,r.       (427)
+                      rank(Xk)≤Lk
+                                                                    r>Lk
+
+
+Since Vk is complex, the Hermitian transpose VkH is used in (424) and (426); Eqs. (26)–(27)
+of Xu et al. write VkT . If Lk ≥min(I1, I2), the projection leaves Mk unchanged.
+
+After the projection, the k-th row of the updated unfolded channel is
+
+                             [G(t+1)(3)   ]k,: = vec(M k(Lk) )T ∈C1×I1I2.                     (428)
+
+
+Thus, one PGD iteration is
+
+                    G(t)(3) −−−−−−−−−−→Mgradient step (418)    −−−−−−−−−−−−−−−→G(t+1)rank projection (426)–(428)     (3)   .             (429)
+
+
+55.4 Complete PGD Algorithm
+
+The iterations stop when ∥G(t+1)(3)  −G(t)(3)∥2F < ϵ or t ≥Tmax. Following Xu et al., the initial
+estimate has i.i.d. entries [G(0)(3)]k,q ∼CN(0, 0.1). The complete procedure (Algorithm 1 of
+Xu et al.) is
+
+     Input: Y(3), Z(3), B(3), S, {Lk}Kk=1, ζt, ϵ, Tmax
+      Initialize: G(0)(3),  t = 0
+     Repeat:
+          E(t) = Y(3) −|B(3)| −Re[Z(3) ◦(STG(t)(3))]
+    M = G(t)(3) + ζtS∗(E(t) ◦Z∗(3))
+        For k = 1, . . . , K:
+                                                                              (429a)
+        Mk = mat([M]k,:), Mk = UkΣkVkH
+              [G(t+1)(3)   ]k,: = vec (︁ Uk(:, 1:Lk)Σk(1:Lk, 1:Lk)Vk(:, 1:Lk)H)︁T
+       End
+
+           t ←t + 1
+     Until: ∥G(t)(3) −G(t−1)(3)  ∥2F < ϵ  or  t ≥Tmax
+     Output:  ˆ︁G(3) = G(t)(3).
+
+
+Per iteration, the gradient costs O(PKI1I2) and the K SVDs cost O(K min(I1I22, I21I2)),
+which is the complexity stated by Xu et al. Without the projection, (429a) reduces to
+plain gradient descent (GD).
+
+
+
+                                      78
+===== PDF PAGE 79 =====
+56 CRLB Analysis for the 2D Channel
+
+
+The Cram´er–Rao lower bound is used as an estimation-accuracy benchmark. The deriva-
+tion below first follows the convention used by Xu et al.  and then gives the exact
+real-parameter Fisher information for the real observation model.
+
+
+56.1  Vectorized Observation Model
+
+
+Let
+                             Na = I1I2                                 (430)
+
+denote the total number of array elements. To obtain a Kronecker representation consistent
+with the mode-3 unfolding, define
+
+                y = vec(Y(3)) ∈RPNa×1,     g = vec(G(3)) ∈CKNa×1.            (431)
+
+
+Here vec(·) stacks the columns, so y lists the P pilot measurements of antenna 1, then of
+antenna 2, and so on, and g lists the K user channels of antenna 1, then of antenna 2,
+and so on. Similarly,
+
+   z = vec(Z(3)),   b = vec(B(3)),   nr = vec(N(3)),      z, b ∈CPNa×1,   nr ∈RPNa×1,
+                                                                                (432)
+where each entry of z has the form e−jzi1,i2,p and therefore |[z]m| = 1.
+
+Using the identity
+                      vec(AXB) = (BT ⊗A) vec(X),                       (433)
+
+with A = ST, X = G(3) and B = INa,
+
+                            vec(STG(3)) = (INa ⊗ST)g.                        (434)
+
+
+Using z ◦x = diag(z)x, define
+
+                   A = diag(z)(INa ⊗ST).                          (435)
+
+
+The dimensions are
+
+          diag(z) ∈CPNa×PNa,     INa ⊗ST ∈CPNa×KNa,   A ∈CPNa×KNa.     (436)
+
+
+Vectorizing (401), the observation model becomes
+
+                              y = Re(Ag) + |b| + nr,                           (437)
+
+
+
+
+                                      79
+===== PDF PAGE 80 =====
+which is Eq. (28) of Xu et al.
+
+From (391), the effective real noise satisfies
+
+                                 ≜σ2 ,                      (438)                          nr ∼N(0, σ2rIPNa),    σ2r
+                                                   2
+
+where σ2 is the variance of the complex noise in (390), which defines the SNR, and σ2r is
+the variance of the effective real noise.
+
+
+56.2  Likelihood Function
+
+
+The conditional mean of the observation is
+
+                         µ(g) = Re(Ag) + |b| ∈RPNa×1.                       (439)
+
+
+Since the entries of nr are independent Gaussian, the likelihood, Eq. (29) of Xu et al., is
+
+                               1
+                                     exp                     p(y|g) =                                                                           [︃−1 ∥y −µ(g)∥22 ]︃ .               (440)
+                           (2πσ2r)PNa/2       2σ2r
+
+
+Let
+                              e = y −µ(g) ∈RPNa×1.                          (441)
+
+
+Then
+                                           1
+                                  ln p(y|g) = C −    eTe,                          (442)
+                                           2σ2r
+
+where C = −PNa                ln(2πσ2r) is independent of g.                  2
+
+
+56.3 Xu-Compatible Fisher Information and CRLB
+
+
+Since
+                                     1
+                          Re(Ag) = 2(Ag + A∗g∗),                          (443)
+the Wirtinger derivatives of the mean are
+
+                    ∂µ   1      ∂µ    1
+                   =        =                             (444)                          ∂gT   2A,    ∂gH   2A∗.
+
+Since ∂e/∂gH = −12A∗and e is real, the score with respect to g∗is
+
+
+              ∂ln p(y|g)                = −1  2 (︃∂e )︃T e =  1 AHe ∈CKNa×1.           (445)
+                  ∂g∗        2σ2r   ∂gH       2σ2r
+
+
+                                      80
+===== PDF PAGE 81 =====
+Since e = nr at the true g,
+                                   E[eeT] = σ2rIPNa.                             (446)
+
+The Fisher information block used by Xu et al. is therefore
+
+                                   [︄                     ∂ln p (︃∂ln p )︃H]︄    1               1
+           Fgg∗= E           =    AHE[eeT]A =   AHA.         (447)
+                       ∂g∗    ∂g∗        4σ4r             4σ2r
+
+
+Substituting (435),
+
+            AHA = (INa ⊗ST)H diag(z)H diag(z)(INa ⊗ST).              (448)
+
+
+Since |[z]m| = 1 for every entry,
+
+                 diag(z)H diag(z) = diag (︁ |[z]1|2, . . . , |[z]PNa|2)︁ = IPNa.            (449)
+
+
+Therefore, using (I ⊗ST)H = I ⊗S∗and the mixed-product property (A ⊗B)(C ⊗D) =
+(AC) ⊗(BD),
+
+       AHA = (INa ⊗S∗)(INa ⊗ST) = INa ⊗(S∗ST),    S∗ST ∈CK×K,      (450)
+
+and
+                            1
+                  Fgg∗=          [︁INa ⊗(S∗ST)]︁ ∈CKNa×KNa,                  (451)
+                            4σ2r
+
+which is Eq. (30) of Xu et al.
+
+Using (A ⊗B)−1 = A−1 ⊗B−1, the inverse exists when S has full row rank (P ≥K), and
+
+                CRB = Fgg∗=−1   4σ2r [︁INa ⊗(S∗ST)−1]︁ .                    (452)
+
+
+Hence the Xu-compatible CRLB is
+
+                 CRB = 4σ2r [︁II1I2 ⊗(S∗ST)−1]︁ ,                       (453)
+
+which is Eq. (31) of Xu et al., whose Eq. (28) denotes the effective real noise variance
+by σ2 (i.e. their σ2 is σ2r here). Expressed in the complex noise variance of (390), which
+defines the SNR,
+                 CRB = 2σ2 [︁II1I2 ⊗(S∗ST)−1]︁ .                       (454)
+
+For example, if I1 = I2 = 8 and K = 3, then
+
+                 Na = 64,   KNa = 192,     g ∈C192×1,                 (455)
+
+
+
+
+                                      81
+===== PDF PAGE 82 =====
+and therefore
+                                   Fgg∗, CRB ∈C192×192.                           (456)
+
+The mean-square-error benchmark is the trace of the CRLB. Since tr(INa ⊗X) = Na tr(X),
+
+               MSECRB = tr(CRB) = 2σ2I1I2 tr[︁(S∗ST)−1]︁ .                (457)
+
+Because the mean in (437) is not holomorphic in g, (457) is the Xu-compatible benchmark;
+the rigorous inequality for the real observation model is (463a).
+The NMSE of Xu et al. is E∥ˆG(3) −G(3)∥2F/E∥G(3)∥2F. Since ∥G(3)∥2F = ∥g∥22, the CRLB
+benchmark curve is obtained by normalizing (457) by the expected channel energy:
+
+
+                                      tr(CRB)
+                      NMSECRB =               .                         (457a)
+                                        E∥g∥22
+
+
+Under the assumed channel statistics (equal average channel power per array element),
+both the numerator and E∥g∥22 grow linearly with I1I2, so NMSECRB does not depend
+on the number of antennas; it decreases with SNR through σ2 and with the pilot length
+through tr[(S∗ST)−1], as stated by Xu et al.
+
+
+56.4 Exact Real-Parameter Fisher Information
+
+
+The real-part operation in (437) makes the mean non-holomorphic in the complex pa-
+rameter g. Therefore, (453)–(454) are the Xu-compatible Fisher-information block rather
+than an exact complex-parameter CRLB. The following exact real-parameter formulation
+goes beyond the derivation of Xu et al. Write
+
+                         g = gR + jgI,   A = AR + jAI,                      (458)
+
+with gR, gI ∈RKNa×1 and AR, AI ∈RPNa×KNa. Then
+
+              Re(Ag) = Re[(AR + jAI)(gR + jgI)] = ARgR −AIgI.            (459)
+
+
+Define the real parameter vector and real Jacobian
+
+                             [︄    ]︄                  gR                                          [︂                 ]︂           ϑ =     ∈R2KNa×1,   D = AR −AI  ∈RPNa×2KNa.          (460)
+                       gI
+
+
+The mean can then be written as a real linear model,
+
+
+                              µ(ϑ) = Dϑ + |b|.                             (461)
+
+
+
+                                      82
+===== PDF PAGE 83 =====
+For a real Gaussian linear model with noise covariance σ2rI, the exact Fisher information
+matrix is
+                                1
+                      FR =  DTD ∈R2KNa×2KNa.                       (462)
+                                σ2r
+
+If FR is nonsingular, the corresponding real-parameter CRLB is
+
+                   CRBR = FR−1 = σ2r (︁ DTD )︁−1 .                       (463)
+
+For I1 = I2 = 8 and K = 3, ϑ ∈R384×1 and FR, CRBR ∈R384×384, compared with the
+192 × 192 complex matrices in (456). Since ∥ˆg −g∥22 = ∥ˆgR −gR∥22 + ∥ˆgI −gI∥22,
+
+                                  E∥ˆg −g∥22 ≥tr(︁ FR−1 )︁ .                         (463a)
+
+
+Equivalently, with the augmented parameter [gT, gH]T, the score is  1 [AH; AT]e, and                                                                                                              2σ2r
+the augmented Fisher information matrix is
+
+                                                   [︄                   ]︄                            1  AHA AHA∗
+                     Faug =                 ∈C2KNa×2KNa.                 (464)
+                           4σ2r  ATA  ATA∗
+
+
+The off-diagonal block is
+
+             AHA∗= (INa ⊗S∗) diag(z∗◦z∗) (INa ⊗SH),               (464a)
+
+which is generally nonzero. For circularly symmetric pilots its expectation is zero, and
+for a large pilot length P it becomes negligible relative to AHA. When this block is zero,
+ATRAR = ATI AI = 12 Re(AHA) and ATRAI = −ATI AR = 12 Im(AHA), so that
+
+                                      tr(︁ FR−1 )︁ = tr(CRB) .                          (464b)
+
+When the off-diagonal block is nonzero, the g-block of F−1aug is the inverse of a Schur
+complement of Fgg∗, which is larger than Fgg∗.−1  The Xu-compatible bound (453) is
+therefore optimistic for short pilot sequences, while (462)–(463a) give the exact bound for
+the real observation model.
+
+
+56.5  Relation Between PGD and the CRLB
+
+
+The PGD estimator incorporates the structural constraint
+
+                       rank(Gk) ≤Lk,    k = 1, . . . , K,                     (465)
+
+
+
+
+
+                                      83
+===== PDF PAGE 84 =====
+whereas the CRLBs in (453) and (463) treat the unfolded channel coefficients as uncon-
+strained parameters. Therefore, the CRLB is an accuracy benchmark for the unconstrained
+channel-estimation problem; a rank-constrained CRLB would use Lk(I1 +I2 −Lk) complex
+degrees of freedom per user instead of I1I2. Both bounds apply to the linearised model
+(437) and to unbiased estimators only; the model error from the neglected second-order
+term in (387) is set by |(ai1,i2,p + ni1,i2,p)/bi1,i2,p|, i.e. by the reference strength, not by the
+SNR. It does not shrink as σ2 →0, so at high SNR it dominates the noise and appears as
+an NMSE floor for any estimator based on (437).
+
+The number of real unknowns in an unconstrained complex channel vector is 2KNa, and
+the number of real observations is PNa. A generic real-dimension counting condition for
+local identifiability of the unconstrained channel is therefore
+
+                   PNa ≥2KNa  =⇒  P ≥2K.                      (466)
+
+
+This is a generic counting condition rather than a sufficient condition for every pi-
+lot/reference configuration. Identifiability also requires D in (460) to have full column
+rank. In particular, for K ≤P < 2K, Fgg∗in (451) is invertible, so the Xu-compatible
+bound (453) is finite, whereas FR in (462) is singular and the exact bound is infinite. This
+is a further reason why (453) is optimistic for short pilot sequences.
+
+
+
+
+
+                                      84
