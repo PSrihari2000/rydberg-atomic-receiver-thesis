@@ -35,7 +35,7 @@ for P_index = 1:length(P_list)
         sigma2_data = zeros(number_of_samples, 1, 'single');                  % number_of_samples x 1
         SNR_dB_data = zeros(number_of_samples, 1, 'single');                  % number_of_samples x 1
         for sample_index = 1:number_of_samples
-            %% -------------------- TRUE CHANNEL G --------------------
+            % -------------------- TRUE CHANNEL G --------------------
             G = zeros(N, K);                                                  % N x K: true channel matrix
             for k = 1:K
                 L_k = randi([3 7]);                                           % Xu gives L_k ~ Uniform{3,4,5,6,7}
