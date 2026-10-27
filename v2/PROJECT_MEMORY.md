@@ -57,3 +57,31 @@ The subsequent versioned scripts and outputs are retained in `HS_GS_V10_*.m` thr
 3. Preserve V2-V9 and their saved outputs. Add future experiments under new versioned filenames with explicit provenance, checkpoint/resume for long runs, and no changes to unrelated folders.
 
 The V5-V9 files and V9 fresh data/results were pushed as commit `91ea71b` on branch `fresh-figure-rebuild`. V10-V21 scripts and their result artifacts are the current follow-up package; check the latest Git commit after this handover is pushed. Pull `fresh-figure-rebuild` on Dell to obtain Git-synced files and handover updates. Local Codex memory on the Asus laptop is separate from Git and may not appear on Dell.
+
+## 2026-10-27 handover: N=8 RSR=12 comparison and DL next phase
+
+### Latest three-estimator script
+
+- `GS_GD_HS_GS_FINAL_N8_RSR12.m` is the current simple MATLAB comparison for biased GS, linearized GD, and hard-rank HS-GS. It uses N=8, K=3, P=10/30, SNR=-5:5:30 dB, RSR=12 dB, 500 Monte Carlo trials per P/SNR, six `parpool` workers, GS/GD caps of 1000 with relative-change tolerance 1e-10, candidate Hankel ranks 1:4 for the 5x4 Hankel matrix, 25 updates for rank selection, 100 final HS-GS updates, and four Cadzow sweeps.
+- For each simulated sample, the first 70% of pilot slots are used to estimate the channel and the remaining 30% choose rank by held-out magnitude prediction error. This is an internal per-sample pilot split, not an external validation MAT file. True channel is used only for NMSE scoring. If maximum candidate rank 4 is selected, the final update is EM-GS without a Hankel projection.
+- The script now uses `parpool` and per-trial deterministic random substreams. It was not rerun by Codex after the parallel edit; the user ran it and supplied the CSV values below.
+
+### User-reported result from `results/GS_GD_HS_GS_FINAL_N8_RSR12_table.csv`
+
+At P=10, HS-GS beats GS at -5, 0, 5, and 10 dB; GS is better at 15 through 30 dB. HS-GS beats GD through 10 dB, while GD is better at 15 through 30 dB. At P=30, HS-GS beats GS only at -5 and 0 dB, is close but worse at 5 through 30 dB, and beats GD from 5 through 30 dB (but not at -5/0). These are ratio-of-sums NMSE point estimates without confidence intervals, so small gaps should not be presented as statistically significant. This does not establish HS-GS as uniformly superior.
+
+Exact reported rows (GS/GD/HS-GS NMSE dB):
+- P=10: -5 (7.077, 7.633, 5.022); 0 (2.847, 3.259, 0.990); 5 (-1.987, -1.205, -3.192); 10 (-6.798, -4.435, -7.154); 15 (-11.795, -6.779, -10.644); 20 (-16.634, -7.760, -14.103); 25 (-20.517, -8.178, -15.992); 30 (-23.638, -8.277, -16.670).
+- P=30: -5 (1.847, -0.502, -0.719); 0 (-4.833, -5.089, -5.527); 5 (-10.540, -9.185, -10.397); 10 (-15.770, -12.112, -15.553); 15 (-20.791, -13.739, -20.542); 20 (-25.813, -14.391, -25.619); 25 (-30.914, -14.628, -30.841); 30 (-35.861, -14.718, -35.603).
+
+### Current DL direction
+
+- The user is moving focus to a stronger, standalone DL channel estimator after the HS-GS diagnostics. Keep DL independent from HS-GS.
+- Existing Colab files are `colab_unfolded_dl_v2.py` (40-layer noise-aware unfolded estimator; eight learned scalar parameters/layer) and `colab_unfolded_dl_v3_highsnr.py` (same model with high-SNR-weighted training loss). Prior V2 metrics reported by the user are historical and not independently verified against checkpoints here.
+- Do not claim the old DL model beats GS/GD at every SNR. Preserve the 40-layer unfolded baseline and create a new versioned trainer for any architectural/objective changes.
+- Fair next comparison requires matching RSR, channel/pilot/noise generation, sample splits, and test observations across DL and baselines. The currently available DL dataset is RSR=25 dB whereas the latest three-method script is RSR=12 dB; resolve this explicitly before claiming a direct comparison. Prefer keeping the paper-motivated RSR=12 dB study coherent by generating separate train/validation/test data at RSR=12 dB, without overwriting RSR=25 dB files, then train and compare on held-out test samples. Use validation for model selection only and test only once for the final report.
+- Recommended DL experiment: first establish a matched RSR data package and validate MAT/HDF5 complex-array decoding/shapes; then train separate P=10 and P=30 models with a per-SNR-balanced NMSE objective and early stopping on validation; compare to GS/GD/HS-GS on paired test samples, reporting per-SNR NMSE and paired confidence intervals. An unfolded physics-informed baseline is the starting point; compare any residual-CNN add-on as a separate ablation rather than replacing the baseline prematurely.
+
+### Git handover
+
+- New v2 scripts and outputs are intended to be shared with Dell via branch `fresh-figure-rebuild`. Do not include the unrelated pre-existing top-level deletions/modifications in the commit.
