@@ -1,0 +1,501 @@
+Study,N,K,P,SNR_dB,Method,SampleCount,ConvergenceApplicable,ConvergedCount,ConvergenceRate_percent,NotConvergedCount,MeanUpdates,MedianUpdates,MaximumUpdates,DL_FixedStages,Note
+Antenna_sweep,8,3,10,-10,GS,500,1,500,100,0,215.312,165,1272,NaN,NaN
+Antenna_sweep,8,3,10,-10,GD,500,1,500,100,0,278.58,202,2666,NaN,NaN
+Antenna_sweep,8,3,10,-10,EM-GS,500,1,500,100,0,198.078,164,954,NaN,NaN
+Antenna_sweep,8,3,10,-10,Hard-rank HS-GS,500,1,500,100,0,75.988,59,602,NaN,NaN
+Antenna_sweep,8,3,10,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,8,3,10,0,GS,500,1,500,100,0,188.098,136.5,960,NaN,NaN
+Antenna_sweep,8,3,10,0,GD,500,1,500,100,0,271.554,219,1152,NaN,NaN
+Antenna_sweep,8,3,10,0,EM-GS,500,1,500,100,0,186.434,136,1278,NaN,NaN
+Antenna_sweep,8,3,10,0,Hard-rank HS-GS,500,1,500,100,0,66.894,52,281,NaN,NaN
+Antenna_sweep,8,3,10,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,8,3,10,10,GS,500,1,500,100,0,173.916,102,11414,NaN,NaN
+Antenna_sweep,8,3,10,10,GD,500,1,500,100,0,265.492,202.5,2217,NaN,NaN
+Antenna_sweep,8,3,10,10,EM-GS,500,1,500,100,0,166.144,102,7698,NaN,NaN
+Antenna_sweep,8,3,10,10,Hard-rank HS-GS,500,1,499,99.8,1,161.644,89.5,20000,NaN,NaN
+Antenna_sweep,8,3,10,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,8,3,10,20,GS,500,1,500,100,0,138.76,102.5,1960,NaN,NaN
+Antenna_sweep,8,3,10,20,GD,500,1,500,100,0,259.58,204,1984,NaN,NaN
+Antenna_sweep,8,3,10,20,EM-GS,500,1,500,100,0,138.72,102.5,1951,NaN,NaN
+Antenna_sweep,8,3,10,20,Hard-rank HS-GS,500,1,499,99.8,1,194.568,115,20000,NaN,NaN
+Antenna_sweep,8,3,10,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,8,3,10,30,GS,500,1,500,100,0,129.896,97,2665,NaN,NaN
+Antenna_sweep,8,3,10,30,GD,500,1,500,100,0,263.802,205,3355,NaN,NaN
+Antenna_sweep,8,3,10,30,EM-GS,500,1,500,100,0,129.89,97,2665,NaN,NaN
+Antenna_sweep,8,3,10,30,Hard-rank HS-GS,500,1,500,100,0,129.89,97,2665,NaN,NaN
+Antenna_sweep,8,3,10,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,16,3,10,-10,GS,500,1,500,100,0,268.772,205.5,3711,NaN,NaN
+Antenna_sweep,16,3,10,-10,GD,500,1,500,100,0,275.33,221,1799,NaN,NaN
+Antenna_sweep,16,3,10,-10,EM-GS,500,1,500,100,0,261.344,201.5,1943,NaN,NaN
+Antenna_sweep,16,3,10,-10,Hard-rank HS-GS,500,1,500,100,0,53.454,42,378,NaN,NaN
+Antenna_sweep,16,3,10,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,16,3,10,0,GS,500,1,500,100,0,220.484,135,3241,NaN,NaN
+Antenna_sweep,16,3,10,0,GD,500,1,500,100,0,269.052,202,1516,NaN,NaN
+Antenna_sweep,16,3,10,0,EM-GS,500,1,500,100,0,216.628,132.5,2164,NaN,NaN
+Antenna_sweep,16,3,10,0,Hard-rank HS-GS,500,1,499,99.8,1,86.998,36,20000,NaN,NaN
+Antenna_sweep,16,3,10,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,16,3,10,10,GS,500,1,500,100,0,160.48,108,1321,NaN,NaN
+Antenna_sweep,16,3,10,10,GD,500,1,500,100,0,274.342,212,3111,NaN,NaN
+Antenna_sweep,16,3,10,10,EM-GS,500,1,500,100,0,160.144,108,1296,NaN,NaN
+Antenna_sweep,16,3,10,10,Hard-rank HS-GS,500,1,498,99.6,2,192.988,93,20000,NaN,NaN
+Antenna_sweep,16,3,10,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,16,3,10,20,GS,500,1,500,100,0,130.868,100,1351,NaN,NaN
+Antenna_sweep,16,3,10,20,GD,500,1,500,100,0,249.916,202,1608,NaN,NaN
+Antenna_sweep,16,3,10,20,EM-GS,500,1,500,100,0,130.832,100,1346,NaN,NaN
+Antenna_sweep,16,3,10,20,Hard-rank HS-GS,500,1,499,99.8,1,208.406,133.5,20000,NaN,NaN
+Antenna_sweep,16,3,10,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,16,3,10,30,GS,500,1,500,100,0,137.442,104,1152,NaN,NaN
+Antenna_sweep,16,3,10,30,GD,500,1,500,100,0,266.166,205.5,1886,NaN,NaN
+Antenna_sweep,16,3,10,30,EM-GS,500,1,500,100,0,137.442,104,1152,NaN,NaN
+Antenna_sweep,16,3,10,30,Hard-rank HS-GS,500,1,499,99.8,1,199.804,120,20000,NaN,NaN
+Antenna_sweep,16,3,10,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,24,3,10,-10,GS,500,1,500,100,0,300.446,241.5,1882,NaN,NaN
+Antenna_sweep,24,3,10,-10,GD,500,1,500,100,0,287.398,215,2779,NaN,NaN
+Antenna_sweep,24,3,10,-10,EM-GS,500,1,500,100,0,303.772,238,2059,NaN,NaN
+Antenna_sweep,24,3,10,-10,Hard-rank HS-GS,500,1,500,100,0,45.572,36,415,NaN,NaN
+Antenna_sweep,24,3,10,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,24,3,10,0,GS,500,1,500,100,0,235.802,169.5,2531,NaN,NaN
+Antenna_sweep,24,3,10,0,GD,500,1,500,100,0,282.938,211,5193,NaN,NaN
+Antenna_sweep,24,3,10,0,EM-GS,500,1,500,100,0,235.016,169,1767,NaN,NaN
+Antenna_sweep,24,3,10,0,Hard-rank HS-GS,500,1,500,100,0,39.574,31,542,NaN,NaN
+Antenna_sweep,24,3,10,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,24,3,10,10,GS,500,1,500,100,0,174.4,107,2291,NaN,NaN
+Antenna_sweep,24,3,10,10,GD,500,1,500,100,0,273.136,204,3061,NaN,NaN
+Antenna_sweep,24,3,10,10,EM-GS,500,1,500,100,0,173.708,107,2132,NaN,NaN
+Antenna_sweep,24,3,10,10,Hard-rank HS-GS,500,1,500,100,0,131.392,99.5,1651,NaN,NaN
+Antenna_sweep,24,3,10,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,24,3,10,20,GS,500,1,500,100,0,150.912,106,2505,NaN,NaN
+Antenna_sweep,24,3,10,20,GD,500,1,500,100,0,271.606,200,3304,NaN,NaN
+Antenna_sweep,24,3,10,20,EM-GS,500,1,500,100,0,150.86,106,2497,NaN,NaN
+Antenna_sweep,24,3,10,20,Hard-rank HS-GS,500,1,499,99.8,1,193.562,113.5,20000,NaN,NaN
+Antenna_sweep,24,3,10,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,24,3,10,30,GS,500,1,500,100,0,144.496,103,4393,NaN,NaN
+Antenna_sweep,24,3,10,30,GD,500,1,500,100,0,255.402,201,1498,NaN,NaN
+Antenna_sweep,24,3,10,30,EM-GS,500,1,500,100,0,144.484,103,4388,NaN,NaN
+Antenna_sweep,24,3,10,30,Hard-rank HS-GS,500,1,499,99.8,1,199.648,119.5,20000,NaN,NaN
+Antenna_sweep,24,3,10,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,32,3,10,-10,GS,500,1,500,100,0,331.184,256,3515,NaN,NaN
+Antenna_sweep,32,3,10,-10,GD,500,1,500,100,0,272.132,213,2399,NaN,NaN
+Antenna_sweep,32,3,10,-10,EM-GS,500,1,500,100,0,313.964,258,1515,NaN,NaN
+Antenna_sweep,32,3,10,-10,Hard-rank HS-GS,500,1,500,100,0,41.942,33,271,NaN,NaN
+Antenna_sweep,32,3,10,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,32,3,10,0,GS,500,1,500,100,0,268.636,164,5099,NaN,NaN
+Antenna_sweep,32,3,10,0,GD,500,1,500,100,0,268.524,206,2966,NaN,NaN
+Antenna_sweep,32,3,10,0,EM-GS,500,1,500,100,0,246.842,163,1539,NaN,NaN
+Antenna_sweep,32,3,10,0,Hard-rank HS-GS,500,1,500,100,0,65.078,53,868,NaN,NaN
+Antenna_sweep,32,3,10,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,32,3,10,10,GS,500,1,500,100,0,159.45,110,2940,NaN,NaN
+Antenna_sweep,32,3,10,10,GD,500,1,500,100,0,249.932,201,1956,NaN,NaN
+Antenna_sweep,32,3,10,10,EM-GS,500,1,500,100,0,159.062,110,2794,NaN,NaN
+Antenna_sweep,32,3,10,10,Hard-rank HS-GS,500,1,498,99.6,2,180.296,80,20000,NaN,NaN
+Antenna_sweep,32,3,10,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,32,3,10,20,GS,500,1,500,100,0,137.94,102,1153,NaN,NaN
+Antenna_sweep,32,3,10,20,GD,500,1,500,100,0,245.796,198,1674,NaN,NaN
+Antenna_sweep,32,3,10,20,EM-GS,500,1,500,100,0,137.912,102,1151,NaN,NaN
+Antenna_sweep,32,3,10,20,Hard-rank HS-GS,500,1,500,100,0,155.688,112,2546,NaN,NaN
+Antenna_sweep,32,3,10,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,32,3,10,30,GS,500,1,500,100,0,137.012,99,1793,NaN,NaN
+Antenna_sweep,32,3,10,30,GD,500,1,500,100,0,255.962,200,5791,NaN,NaN
+Antenna_sweep,32,3,10,30,EM-GS,500,1,500,100,0,137,99,1792,NaN,NaN
+Antenna_sweep,32,3,10,30,Hard-rank HS-GS,500,1,500,100,0,158.122,120,1859,NaN,NaN
+Antenna_sweep,32,3,10,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,8,3,30,-10,GS,500,1,500,100,0,51.038,45,198,NaN,NaN
+Antenna_sweep,8,3,30,-10,GD,500,1,500,100,0,59.032,56,137,NaN,NaN
+Antenna_sweep,8,3,30,-10,EM-GS,500,1,500,100,0,48.216,43.5,211,NaN,NaN
+Antenna_sweep,8,3,30,-10,Hard-rank HS-GS,500,1,500,100,0,45.162,36,429,NaN,NaN
+Antenna_sweep,8,3,30,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,8,3,30,0,GS,500,1,500,100,0,37.428,36,83,NaN,NaN
+Antenna_sweep,8,3,30,0,GD,500,1,500,100,0,57.642,55,117,NaN,NaN
+Antenna_sweep,8,3,30,0,EM-GS,500,1,500,100,0,37.264,35.5,81,NaN,NaN
+Antenna_sweep,8,3,30,0,Hard-rank HS-GS,500,1,500,100,0,51.572,42,319,NaN,NaN
+Antenna_sweep,8,3,30,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,8,3,30,10,GS,500,1,500,100,0,35.826,34,73,NaN,NaN
+Antenna_sweep,8,3,30,10,GD,500,1,500,100,0,57.268,55,180,NaN,NaN
+Antenna_sweep,8,3,30,10,EM-GS,500,1,500,100,0,35.81,34,73,NaN,NaN
+Antenna_sweep,8,3,30,10,Hard-rank HS-GS,500,1,500,100,0,45.782,40,221,NaN,NaN
+Antenna_sweep,8,3,30,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,8,3,30,20,GS,500,1,500,100,0,34.772,34,75,NaN,NaN
+Antenna_sweep,8,3,30,20,GD,500,1,500,100,0,56.466,54,116,NaN,NaN
+Antenna_sweep,8,3,30,20,EM-GS,500,1,500,100,0,34.772,34,75,NaN,NaN
+Antenna_sweep,8,3,30,20,Hard-rank HS-GS,500,1,500,100,0,40.196,36,192,NaN,NaN
+Antenna_sweep,8,3,30,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,8,3,30,30,GS,500,1,500,100,0,35.174,34,71,NaN,NaN
+Antenna_sweep,8,3,30,30,GD,500,1,500,100,0,56.998,56,141,NaN,NaN
+Antenna_sweep,8,3,30,30,EM-GS,500,1,500,100,0,35.176,34,71,NaN,NaN
+Antenna_sweep,8,3,30,30,Hard-rank HS-GS,500,1,500,100,0,35.176,34,71,NaN,NaN
+Antenna_sweep,8,3,30,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,16,3,30,-10,GS,500,1,500,100,0,60.984,51,798,NaN,NaN
+Antenna_sweep,16,3,30,-10,GD,500,1,500,100,0,59.742,58,136,NaN,NaN
+Antenna_sweep,16,3,30,-10,EM-GS,500,1,500,100,0,56.796,48,410,NaN,NaN
+Antenna_sweep,16,3,30,-10,Hard-rank HS-GS,500,1,500,100,0,36.056,29,310,NaN,NaN
+Antenna_sweep,16,3,30,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,16,3,30,0,GS,500,1,500,100,0,37.364,36,78,NaN,NaN
+Antenna_sweep,16,3,30,0,GD,500,1,500,100,0,57.566,56,130,NaN,NaN
+Antenna_sweep,16,3,30,0,EM-GS,500,1,500,100,0,37.208,36,76,NaN,NaN
+Antenna_sweep,16,3,30,0,Hard-rank HS-GS,500,1,500,100,0,41.164,33,290,NaN,NaN
+Antenna_sweep,16,3,30,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,16,3,30,10,GS,500,1,500,100,0,35.984,34,78,NaN,NaN
+Antenna_sweep,16,3,30,10,GD,500,1,500,100,0,56.664,54,139,NaN,NaN
+Antenna_sweep,16,3,30,10,EM-GS,500,1,500,100,0,35.978,34,78,NaN,NaN
+Antenna_sweep,16,3,30,10,Hard-rank HS-GS,500,1,500,100,0,51.404,44,620,NaN,NaN
+Antenna_sweep,16,3,30,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,16,3,30,20,GS,500,1,500,100,0,35.516,34,83,NaN,NaN
+Antenna_sweep,16,3,30,20,GD,500,1,500,100,0,56.22,53,134,NaN,NaN
+Antenna_sweep,16,3,30,20,EM-GS,500,1,500,100,0,35.514,34,83,NaN,NaN
+Antenna_sweep,16,3,30,20,Hard-rank HS-GS,500,1,500,100,0,51.128,44,281,NaN,NaN
+Antenna_sweep,16,3,30,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,16,3,30,30,GS,500,1,500,100,0,35.414,34,76,NaN,NaN
+Antenna_sweep,16,3,30,30,GD,500,1,500,100,0,56.012,53.5,125,NaN,NaN
+Antenna_sweep,16,3,30,30,EM-GS,500,1,500,100,0,35.414,34,76,NaN,NaN
+Antenna_sweep,16,3,30,30,Hard-rank HS-GS,500,1,500,100,0,44.624,40,143,NaN,NaN
+Antenna_sweep,16,3,30,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,24,3,30,-10,GS,500,1,500,100,0,57.808,52,271,NaN,NaN
+Antenna_sweep,24,3,30,-10,GD,500,1,500,100,0,58.296,55,112,NaN,NaN
+Antenna_sweep,24,3,30,-10,EM-GS,500,1,500,100,0,55.084,49.5,392,NaN,NaN
+Antenna_sweep,24,3,30,-10,Hard-rank HS-GS,500,1,500,100,0,32.806,27,230,NaN,NaN
+Antenna_sweep,24,3,30,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,24,3,30,0,GS,500,1,500,100,0,37.462,36,95,NaN,NaN
+Antenna_sweep,24,3,30,0,GD,500,1,500,100,0,56.972,55,156,NaN,NaN
+Antenna_sweep,24,3,30,0,EM-GS,500,1,500,100,0,37.318,35,93,NaN,NaN
+Antenna_sweep,24,3,30,0,Hard-rank HS-GS,500,1,500,100,0,46.108,38,321,NaN,NaN
+Antenna_sweep,24,3,30,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,24,3,30,10,GS,500,1,500,100,0,35.472,34,92,NaN,NaN
+Antenna_sweep,24,3,30,10,GD,500,1,500,100,0,56.126,54,129,NaN,NaN
+Antenna_sweep,24,3,30,10,EM-GS,500,1,500,100,0,35.454,34,92,NaN,NaN
+Antenna_sweep,24,3,30,10,Hard-rank HS-GS,500,1,500,100,0,46.034,39,284,NaN,NaN
+Antenna_sweep,24,3,30,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,24,3,30,20,GS,500,1,500,100,0,35.652,35,74,NaN,NaN
+Antenna_sweep,24,3,30,20,GD,500,1,500,100,0,56.572,55,135,NaN,NaN
+Antenna_sweep,24,3,30,20,EM-GS,500,1,500,100,0,35.652,35,74,NaN,NaN
+Antenna_sweep,24,3,30,20,Hard-rank HS-GS,500,1,500,100,0,46.596,41,215,NaN,NaN
+Antenna_sweep,24,3,30,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,24,3,30,30,GS,500,1,500,100,0,35.734,34,85,NaN,NaN
+Antenna_sweep,24,3,30,30,GD,500,1,500,100,0,57.686,55,118,NaN,NaN
+Antenna_sweep,24,3,30,30,EM-GS,500,1,500,100,0,35.734,34,85,NaN,NaN
+Antenna_sweep,24,3,30,30,Hard-rank HS-GS,500,1,500,100,0,45.238,41,189,NaN,NaN
+Antenna_sweep,24,3,30,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,32,3,30,-10,GS,500,1,500,100,0,58.296,51,206,NaN,NaN
+Antenna_sweep,32,3,30,-10,GD,500,1,500,100,0,58.176,55,150,NaN,NaN
+Antenna_sweep,32,3,30,-10,EM-GS,500,1,500,100,0,55.206,49,208,NaN,NaN
+Antenna_sweep,32,3,30,-10,Hard-rank HS-GS,500,1,500,100,0,29.07,25,131,NaN,NaN
+Antenna_sweep,32,3,30,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,32,3,30,0,GS,500,1,500,100,0,37.338,36,84,NaN,NaN
+Antenna_sweep,32,3,30,0,GD,500,1,500,100,0,56.706,55,118,NaN,NaN
+Antenna_sweep,32,3,30,0,EM-GS,500,1,500,100,0,37.216,35,83,NaN,NaN
+Antenna_sweep,32,3,30,0,Hard-rank HS-GS,500,1,500,100,0,42.08,35,582,NaN,NaN
+Antenna_sweep,32,3,30,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,32,3,30,10,GS,500,1,500,100,0,35.734,34,88,NaN,NaN
+Antenna_sweep,32,3,30,10,GD,500,1,500,100,0,56.344,54,151,NaN,NaN
+Antenna_sweep,32,3,30,10,EM-GS,500,1,500,100,0,35.726,34,88,NaN,NaN
+Antenna_sweep,32,3,30,10,Hard-rank HS-GS,500,1,500,100,0,48.62,42,190,NaN,NaN
+Antenna_sweep,32,3,30,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,32,3,30,20,GS,500,1,500,100,0,34.94,33.5,63,NaN,NaN
+Antenna_sweep,32,3,30,20,GD,500,1,500,100,0,56.192,54,130,NaN,NaN
+Antenna_sweep,32,3,30,20,EM-GS,500,1,500,100,0,34.938,33.5,63,NaN,NaN
+Antenna_sweep,32,3,30,20,Hard-rank HS-GS,500,1,500,100,0,49.334,42,299,NaN,NaN
+Antenna_sweep,32,3,30,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+Antenna_sweep,32,3,30,30,GS,500,1,500,100,0,35.582,34,64,NaN,NaN
+Antenna_sweep,32,3,30,30,GD,500,1,500,100,0,56.66,54,129,NaN,NaN
+Antenna_sweep,32,3,30,30,EM-GS,500,1,500,100,0,35.582,34,64,NaN,NaN
+Antenna_sweep,32,3,30,30,Hard-rank HS-GS,500,1,500,100,0,48.004,42,197,NaN,NaN
+Antenna_sweep,32,3,30,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,1,10,-10,GS,500,1,500,100,0,40.706,33,261,NaN,NaN
+User_sweep,8,1,10,-10,GD,500,1,500,100,0,32.122,28,107,NaN,NaN
+User_sweep,8,1,10,-10,EM-GS,500,1,500,100,0,39.918,33,245,NaN,NaN
+User_sweep,8,1,10,-10,Hard-rank HS-GS,500,1,500,100,0,32.076,26,273,NaN,NaN
+User_sweep,8,1,10,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,1,10,0,GS,500,1,500,100,0,34.68,29,266,NaN,NaN
+User_sweep,8,1,10,0,GD,500,1,500,100,0,32.736,28,187,NaN,NaN
+User_sweep,8,1,10,0,EM-GS,500,1,500,100,0,34.64,29,263,NaN,NaN
+User_sweep,8,1,10,0,Hard-rank HS-GS,500,1,500,100,0,38.568,32,258,NaN,NaN
+User_sweep,8,1,10,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,1,10,10,GS,500,1,500,100,0,32.386,28,130,NaN,NaN
+User_sweep,8,1,10,10,GD,500,1,500,100,0,31.594,28,134,NaN,NaN
+User_sweep,8,1,10,10,EM-GS,500,1,500,100,0,32.382,28,129,NaN,NaN
+User_sweep,8,1,10,10,Hard-rank HS-GS,500,1,500,100,0,38.116,32,323,NaN,NaN
+User_sweep,8,1,10,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,1,10,20,GS,500,1,500,100,0,32.416,28,243,NaN,NaN
+User_sweep,8,1,10,20,GD,500,1,500,100,0,31.658,28,205,NaN,NaN
+User_sweep,8,1,10,20,EM-GS,500,1,500,100,0,32.416,28,243,NaN,NaN
+User_sweep,8,1,10,20,Hard-rank HS-GS,500,1,500,100,0,35.254,29,236,NaN,NaN
+User_sweep,8,1,10,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,1,10,30,GS,500,1,500,100,0,32.844,30,109,NaN,NaN
+User_sweep,8,1,10,30,GD,500,1,500,100,0,32.144,29,108,NaN,NaN
+User_sweep,8,1,10,30,EM-GS,500,1,500,100,0,32.844,30,109,NaN,NaN
+User_sweep,8,1,10,30,Hard-rank HS-GS,500,1,500,100,0,32.844,30,109,NaN,NaN
+User_sweep,8,1,10,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,2,10,-10,GS,500,1,500,100,0,111.272,82.5,1226,NaN,NaN
+User_sweep,8,2,10,-10,GD,500,1,500,100,0,101.01,82.5,988,NaN,NaN
+User_sweep,8,2,10,-10,EM-GS,500,1,500,100,0,108.186,79,975,NaN,NaN
+User_sweep,8,2,10,-10,Hard-rank HS-GS,500,1,500,100,0,52.498,41,648,NaN,NaN
+User_sweep,8,2,10,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,2,10,0,GS,500,1,500,100,0,73.402,56,746,NaN,NaN
+User_sweep,8,2,10,0,GD,500,1,500,100,0,99.42,84,455,NaN,NaN
+User_sweep,8,2,10,0,EM-GS,500,1,500,100,0,72.948,56,836,NaN,NaN
+User_sweep,8,2,10,0,Hard-rank HS-GS,500,1,500,100,0,43.142,35,318,NaN,NaN
+User_sweep,8,2,10,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,2,10,10,GS,500,1,500,100,0,61.836,53,286,NaN,NaN
+User_sweep,8,2,10,10,GD,500,1,500,100,0,97.6,82,776,NaN,NaN
+User_sweep,8,2,10,10,EM-GS,500,1,500,100,0,61.81,53,287,NaN,NaN
+User_sweep,8,2,10,10,Hard-rank HS-GS,500,1,500,100,0,84.31,64,785,NaN,NaN
+User_sweep,8,2,10,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,2,10,20,GS,500,1,500,100,0,60.478,51,389,NaN,NaN
+User_sweep,8,2,10,20,GD,500,1,500,100,0,98.44,82,679,NaN,NaN
+User_sweep,8,2,10,20,EM-GS,500,1,500,100,0,60.476,51,389,NaN,NaN
+User_sweep,8,2,10,20,Hard-rank HS-GS,500,1,500,100,0,72.072,56,1252,NaN,NaN
+User_sweep,8,2,10,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,2,10,30,GS,500,1,500,100,0,57.97,49,367,NaN,NaN
+User_sweep,8,2,10,30,GD,500,1,500,100,0,93.89,79.5,428,NaN,NaN
+User_sweep,8,2,10,30,EM-GS,500,1,500,100,0,57.97,49,367,NaN,NaN
+User_sweep,8,2,10,30,Hard-rank HS-GS,500,1,500,100,0,57.97,49,367,NaN,NaN
+User_sweep,8,2,10,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,3,10,-10,GS,500,1,500,100,0,224.508,171,1773,NaN,NaN
+User_sweep,8,3,10,-10,GD,500,1,500,100,0,287.344,215.5,3440,NaN,NaN
+User_sweep,8,3,10,-10,EM-GS,500,1,500,100,0,226.334,162,2677,NaN,NaN
+User_sweep,8,3,10,-10,Hard-rank HS-GS,500,1,500,100,0,76.152,58,615,NaN,NaN
+User_sweep,8,3,10,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,3,10,0,GS,500,1,500,100,0,186.204,124.5,1732,NaN,NaN
+User_sweep,8,3,10,0,GD,500,1,500,100,0,274.81,208,2273,NaN,NaN
+User_sweep,8,3,10,0,EM-GS,500,1,500,100,0,182.158,125.5,1265,NaN,NaN
+User_sweep,8,3,10,0,Hard-rank HS-GS,500,1,500,100,0,68.27,49,1869,NaN,NaN
+User_sweep,8,3,10,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,3,10,10,GS,500,1,500,100,0,146.89,102.5,2781,NaN,NaN
+User_sweep,8,3,10,10,GD,500,1,500,100,0,263.554,193.5,4180,NaN,NaN
+User_sweep,8,3,10,10,EM-GS,500,1,500,100,0,146.264,101.5,2580,NaN,NaN
+User_sweep,8,3,10,10,Hard-rank HS-GS,500,1,500,100,0,177.88,128,2492,NaN,NaN
+User_sweep,8,3,10,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,3,10,20,GS,500,1,500,100,0,133.582,104,1011,NaN,NaN
+User_sweep,8,3,10,20,GD,500,1,500,100,0,258.048,205,2176,NaN,NaN
+User_sweep,8,3,10,20,EM-GS,500,1,500,100,0,133.592,104,1023,NaN,NaN
+User_sweep,8,3,10,20,Hard-rank HS-GS,500,1,500,100,0,149.958,116.5,1038,NaN,NaN
+User_sweep,8,3,10,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,3,10,30,GS,500,1,500,100,0,133.162,97,1402,NaN,NaN
+User_sweep,8,3,10,30,GD,500,1,500,100,0,258.39,190,2429,NaN,NaN
+User_sweep,8,3,10,30,EM-GS,500,1,500,100,0,133.158,97,1402,NaN,NaN
+User_sweep,8,3,10,30,Hard-rank HS-GS,500,1,500,100,0,133.158,97,1402,NaN,NaN
+User_sweep,8,3,10,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,4,10,-10,GS,500,1,500,100,0,468.924,349,5484,NaN,NaN
+User_sweep,8,4,10,-10,GD,500,1,498,99.6,2,1199.85,659,20000,NaN,NaN
+User_sweep,8,4,10,-10,EM-GS,500,1,500,100,0,441.872,347.5,2323,NaN,NaN
+User_sweep,8,4,10,-10,Hard-rank HS-GS,500,1,499,99.8,1,149.756,84,20000,NaN,NaN
+User_sweep,8,4,10,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,4,10,0,GS,500,1,500,100,0,575.528,407.5,5411,NaN,NaN
+User_sweep,8,4,10,0,GD,500,1,499,99.8,1,1214.93,658.5,20000,NaN,NaN
+User_sweep,8,4,10,0,EM-GS,500,1,500,100,0,562.404,410,5755,NaN,NaN
+User_sweep,8,4,10,0,Hard-rank HS-GS,500,1,498,99.6,2,187.398,75,20000,NaN,NaN
+User_sweep,8,4,10,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,4,10,10,GS,500,1,500,100,0,561.108,305,8008,NaN,NaN
+User_sweep,8,4,10,10,GD,500,1,500,100,0,992.58,588.5,16944,NaN,NaN
+User_sweep,8,4,10,10,EM-GS,500,1,500,100,0,564.446,306.5,6769,NaN,NaN
+User_sweep,8,4,10,10,Hard-rank HS-GS,500,1,500,100,0,564.446,306.5,6769,NaN,NaN
+User_sweep,8,4,10,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,4,10,20,GS,500,1,500,100,0,492.648,267.5,5374,NaN,NaN
+User_sweep,8,4,10,20,GD,500,1,499,99.8,1,959.584,593.5,20000,NaN,NaN
+User_sweep,8,4,10,20,EM-GS,500,1,500,100,0,491.166,267,5368,NaN,NaN
+User_sweep,8,4,10,20,Hard-rank HS-GS,500,1,500,100,0,491.166,267,5368,NaN,NaN
+User_sweep,8,4,10,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,4,10,30,GS,500,1,500,100,0,526.782,246,19360,NaN,NaN
+User_sweep,8,4,10,30,GD,500,1,500,100,0,955.474,565.5,13970,NaN,NaN
+User_sweep,8,4,10,30,EM-GS,500,1,500,100,0,526.726,246,19339,NaN,NaN
+User_sweep,8,4,10,30,Hard-rank HS-GS,500,1,500,100,0,526.726,246,19339,NaN,NaN
+User_sweep,8,4,10,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,5,10,-10,GS,500,1,500,100,0,1853.844,1547.5,6877,NaN,NaN
+User_sweep,8,5,10,-10,GD,500,1,384,76.8,116,8886.782,6130.5,20000,NaN,NaN
+User_sweep,8,5,10,-10,EM-GS,500,1,500,100,0,1663.946,1283.5,9609,NaN,NaN
+User_sweep,8,5,10,-10,Hard-rank HS-GS,500,1,491,98.2,9,520.626,120,20000,NaN,NaN
+User_sweep,8,5,10,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,5,10,0,GS,500,1,500,100,0,2810.706,2359,14133,NaN,NaN
+User_sweep,8,5,10,0,GD,500,1,401,80.2,99,8130.834,5135,20000,NaN,NaN
+User_sweep,8,5,10,0,EM-GS,500,1,500,100,0,2792.796,2342,14553,NaN,NaN
+User_sweep,8,5,10,0,Hard-rank HS-GS,500,1,497,99.4,3,287.494,114,20000,NaN,NaN
+User_sweep,8,5,10,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,5,10,10,GS,500,1,498,99.6,2,4000.616,3361,20000,NaN,NaN
+User_sweep,8,5,10,10,GD,500,1,392,78.4,108,8559.834,5618,20000,NaN,NaN
+User_sweep,8,5,10,10,EM-GS,500,1,498,99.6,2,4001.598,3382.5,20000,NaN,NaN
+User_sweep,8,5,10,10,Hard-rank HS-GS,500,1,497,99.4,3,307.092,112,20000,NaN,NaN
+User_sweep,8,5,10,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,5,10,20,GS,500,1,491,98.2,9,4970.036,3957,20000,NaN,NaN
+User_sweep,8,5,10,20,GD,500,1,391,78.2,109,8664.73,5698,20000,NaN,NaN
+User_sweep,8,5,10,20,EM-GS,500,1,491,98.2,9,4972.314,3947,20000,NaN,NaN
+User_sweep,8,5,10,20,Hard-rank HS-GS,500,1,491,98.2,9,4972.314,3947,20000,NaN,NaN
+User_sweep,8,5,10,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,5,10,30,GS,500,1,491,98.2,9,4521.586,3200,20000,NaN,NaN
+User_sweep,8,5,10,30,GD,500,1,411,82.2,89,7253.34,3926,20000,NaN,NaN
+User_sweep,8,5,10,30,EM-GS,500,1,491,98.2,9,4521.648,3202,20000,NaN,NaN
+User_sweep,8,5,10,30,Hard-rank HS-GS,500,1,491,98.2,9,4521.648,3202,20000,NaN,NaN
+User_sweep,8,5,10,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,1,30,-10,GS,500,1,500,100,0,24.316,23,53,NaN,NaN
+User_sweep,8,1,30,-10,GD,500,1,500,100,0,22.948,22,47,NaN,NaN
+User_sweep,8,1,30,-10,EM-GS,500,1,500,100,0,24.234,23,51,NaN,NaN
+User_sweep,8,1,30,-10,Hard-rank HS-GS,500,1,500,100,0,24.042,21,94,NaN,NaN
+User_sweep,8,1,30,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,1,30,0,GS,500,1,500,100,0,23.278,22,61,NaN,NaN
+User_sweep,8,1,30,0,GD,500,1,500,100,0,23.018,22,60,NaN,NaN
+User_sweep,8,1,30,0,EM-GS,500,1,500,100,0,23.274,22,61,NaN,NaN
+User_sweep,8,1,30,0,Hard-rank HS-GS,500,1,500,100,0,25.75,23,117,NaN,NaN
+User_sweep,8,1,30,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,1,30,10,GS,500,1,500,100,0,23.216,22,46,NaN,NaN
+User_sweep,8,1,30,10,GD,500,1,500,100,0,22.99,22,46,NaN,NaN
+User_sweep,8,1,30,10,EM-GS,500,1,500,100,0,23.216,22,46,NaN,NaN
+User_sweep,8,1,30,10,Hard-rank HS-GS,500,1,500,100,0,26.546,24,168,NaN,NaN
+User_sweep,8,1,30,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,1,30,20,GS,500,1,500,100,0,23.13,22,46,NaN,NaN
+User_sweep,8,1,30,20,GD,500,1,500,100,0,22.928,22,46,NaN,NaN
+User_sweep,8,1,30,20,EM-GS,500,1,500,100,0,23.128,22,46,NaN,NaN
+User_sweep,8,1,30,20,Hard-rank HS-GS,500,1,500,100,0,23.128,22,46,NaN,NaN
+User_sweep,8,1,30,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,1,30,30,GS,500,1,500,100,0,23.164,22,52,NaN,NaN
+User_sweep,8,1,30,30,GD,500,1,500,100,0,23.018,22,51,NaN,NaN
+User_sweep,8,1,30,30,EM-GS,500,1,500,100,0,23.164,22,52,NaN,NaN
+User_sweep,8,1,30,30,Hard-rank HS-GS,500,1,500,100,0,23.164,22,52,NaN,NaN
+User_sweep,8,1,30,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,2,30,-10,GS,500,1,500,100,0,34.532,31.5,451,NaN,NaN
+User_sweep,8,2,30,-10,GD,500,1,500,100,0,39.256,37,79,NaN,NaN
+User_sweep,8,2,30,-10,EM-GS,500,1,500,100,0,34.092,31,532,NaN,NaN
+User_sweep,8,2,30,-10,Hard-rank HS-GS,500,1,500,100,0,33.756,29,261,NaN,NaN
+User_sweep,8,2,30,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,2,30,0,GS,500,1,500,100,0,29.31,28,53,NaN,NaN
+User_sweep,8,2,30,0,GD,500,1,500,100,0,39.39,38,92,NaN,NaN
+User_sweep,8,2,30,0,EM-GS,500,1,500,100,0,29.278,28,53,NaN,NaN
+User_sweep,8,2,30,0,Hard-rank HS-GS,500,1,500,100,0,36.168,31,216,NaN,NaN
+User_sweep,8,2,30,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,2,30,10,GS,500,1,500,100,0,28.784,28,57,NaN,NaN
+User_sweep,8,2,30,10,GD,500,1,500,100,0,39.216,37,88,NaN,NaN
+User_sweep,8,2,30,10,EM-GS,500,1,500,100,0,28.784,28,57,NaN,NaN
+User_sweep,8,2,30,10,Hard-rank HS-GS,500,1,500,100,0,35.278,31,204,NaN,NaN
+User_sweep,8,2,30,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,2,30,20,GS,500,1,500,100,0,28.358,28,61,NaN,NaN
+User_sweep,8,2,30,20,GD,500,1,500,100,0,38.65,37,76,NaN,NaN
+User_sweep,8,2,30,20,EM-GS,500,1,500,100,0,28.358,28,61,NaN,NaN
+User_sweep,8,2,30,20,Hard-rank HS-GS,500,1,500,100,0,32.318,29,216,NaN,NaN
+User_sweep,8,2,30,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,2,30,30,GS,500,1,500,100,0,28.9,28,58,NaN,NaN
+User_sweep,8,2,30,30,GD,500,1,500,100,0,38.774,37,90,NaN,NaN
+User_sweep,8,2,30,30,EM-GS,500,1,500,100,0,28.9,28,58,NaN,NaN
+User_sweep,8,2,30,30,Hard-rank HS-GS,500,1,500,100,0,28.9,28,58,NaN,NaN
+User_sweep,8,2,30,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,3,30,-10,GS,500,1,500,100,0,51.854,46,223,NaN,NaN
+User_sweep,8,3,30,-10,GD,500,1,500,100,0,59.02,56,170,NaN,NaN
+User_sweep,8,3,30,-10,EM-GS,500,1,500,100,0,49.74,44,205,NaN,NaN
+User_sweep,8,3,30,-10,Hard-rank HS-GS,500,1,499,99.8,1,82.882,37,20000,NaN,NaN
+User_sweep,8,3,30,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,3,30,0,GS,500,1,500,100,0,37.402,36,96,NaN,NaN
+User_sweep,8,3,30,0,GD,500,1,500,100,0,58.666,56,120,NaN,NaN
+User_sweep,8,3,30,0,EM-GS,500,1,500,100,0,37.244,35.5,95,NaN,NaN
+User_sweep,8,3,30,0,Hard-rank HS-GS,500,1,500,100,0,46.144,40,193,NaN,NaN
+User_sweep,8,3,30,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,3,30,10,GS,500,1,500,100,0,35.656,34,74,NaN,NaN
+User_sweep,8,3,30,10,GD,500,1,500,100,0,57.32,55,135,NaN,NaN
+User_sweep,8,3,30,10,EM-GS,500,1,500,100,0,35.652,34,74,NaN,NaN
+User_sweep,8,3,30,10,Hard-rank HS-GS,500,1,500,100,0,45.614,40,201,NaN,NaN
+User_sweep,8,3,30,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,3,30,20,GS,500,1,500,100,0,34.988,33,101,NaN,NaN
+User_sweep,8,3,30,20,GD,500,1,500,100,0,55.818,53,147,NaN,NaN
+User_sweep,8,3,30,20,EM-GS,500,1,500,100,0,34.986,33,101,NaN,NaN
+User_sweep,8,3,30,20,Hard-rank HS-GS,500,1,500,100,0,40.062,36,219,NaN,NaN
+User_sweep,8,3,30,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,3,30,30,GS,500,1,500,100,0,35.048,34,80,NaN,NaN
+User_sweep,8,3,30,30,GD,500,1,500,100,0,56.328,54,116,NaN,NaN
+User_sweep,8,3,30,30,EM-GS,500,1,500,100,0,35.048,34,80,NaN,NaN
+User_sweep,8,3,30,30,Hard-rank HS-GS,500,1,500,100,0,35.048,34,80,NaN,NaN
+User_sweep,8,3,30,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,4,30,-10,GS,500,1,500,100,0,78.648,68,504,NaN,NaN
+User_sweep,8,4,30,-10,GD,500,1,500,100,0,81.992,78,176,NaN,NaN
+User_sweep,8,4,30,-10,EM-GS,500,1,500,100,0,71.982,64,257,NaN,NaN
+User_sweep,8,4,30,-10,Hard-rank HS-GS,500,1,500,100,0,57.894,47,844,NaN,NaN
+User_sweep,8,4,30,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,4,30,0,GS,500,1,500,100,0,46.892,44,185,NaN,NaN
+User_sweep,8,4,30,0,GD,500,1,500,100,0,79.068,75,212,NaN,NaN
+User_sweep,8,4,30,0,EM-GS,500,1,500,100,0,46.56,44,171,NaN,NaN
+User_sweep,8,4,30,0,Hard-rank HS-GS,500,1,500,100,0,64.92,51.5,505,NaN,NaN
+User_sweep,8,4,30,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,4,30,10,GS,500,1,500,100,0,43.424,42,134,NaN,NaN
+User_sweep,8,4,30,10,GD,500,1,500,100,0,79.752,76,225,NaN,NaN
+User_sweep,8,4,30,10,EM-GS,500,1,500,100,0,43.396,42,133,NaN,NaN
+User_sweep,8,4,30,10,Hard-rank HS-GS,500,1,500,100,0,59.754,51,332,NaN,NaN
+User_sweep,8,4,30,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,4,30,20,GS,500,1,500,100,0,42.888,41,94,NaN,NaN
+User_sweep,8,4,30,20,GD,500,1,500,100,0,77.748,74,171,NaN,NaN
+User_sweep,8,4,30,20,EM-GS,500,1,500,100,0,42.886,41,94,NaN,NaN
+User_sweep,8,4,30,20,Hard-rank HS-GS,500,1,500,100,0,49.94,45,174,NaN,NaN
+User_sweep,8,4,30,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,4,30,30,GS,500,1,500,100,0,43.4,42,94,NaN,NaN
+User_sweep,8,4,30,30,GD,500,1,500,100,0,77.806,75,156,NaN,NaN
+User_sweep,8,4,30,30,EM-GS,500,1,500,100,0,43.4,42,94,NaN,NaN
+User_sweep,8,4,30,30,Hard-rank HS-GS,500,1,500,100,0,43.4,42,94,NaN,NaN
+User_sweep,8,4,30,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,5,30,-10,GS,500,1,500,100,0,129.8,106,1002,NaN,NaN
+User_sweep,8,5,30,-10,GD,500,1,500,100,0,112.292,106.5,228,NaN,NaN
+User_sweep,8,5,30,-10,EM-GS,500,1,500,100,0,116.984,95.5,1079,NaN,NaN
+User_sweep,8,5,30,-10,Hard-rank HS-GS,500,1,500,100,0,67.878,55,551,NaN,NaN
+User_sweep,8,5,30,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,5,30,0,GS,500,1,500,100,0,59.346,55,193,NaN,NaN
+User_sweep,8,5,30,0,GD,500,1,500,100,0,103.936,100,196,NaN,NaN
+User_sweep,8,5,30,0,EM-GS,500,1,500,100,0,58.682,55,194,NaN,NaN
+User_sweep,8,5,30,0,Hard-rank HS-GS,500,1,500,100,0,50.86,41,490,NaN,NaN
+User_sweep,8,5,30,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,5,30,10,GS,500,1,500,100,0,54.266,52,133,NaN,NaN
+User_sweep,8,5,30,10,GD,500,1,500,100,0,107.02,101,250,NaN,NaN
+User_sweep,8,5,30,10,EM-GS,500,1,500,100,0,54.21,52,133,NaN,NaN
+User_sweep,8,5,30,10,Hard-rank HS-GS,500,1,500,100,0,74.184,65,496,NaN,NaN
+User_sweep,8,5,30,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,5,30,20,GS,500,1,500,100,0,52.914,50,144,NaN,NaN
+User_sweep,8,5,30,20,GD,500,1,500,100,0,104.514,98,228,NaN,NaN
+User_sweep,8,5,30,20,EM-GS,500,1,500,100,0,52.91,50,144,NaN,NaN
+User_sweep,8,5,30,20,Hard-rank HS-GS,500,1,500,100,0,63.998,56,261,NaN,NaN
+User_sweep,8,5,30,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,5,30,30,GS,500,1,500,100,0,52.344,50,105,NaN,NaN
+User_sweep,8,5,30,30,GD,500,1,500,100,0,103.078,99,255,NaN,NaN
+User_sweep,8,5,30,30,EM-GS,500,1,500,100,0,52.342,50,105,NaN,NaN
+User_sweep,8,5,30,30,Hard-rank HS-GS,500,1,500,100,0,52.342,50,105,NaN,NaN
+User_sweep,8,5,30,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,6,30,-10,GS,500,1,500,100,0,182.532,146,1013,NaN,NaN
+User_sweep,8,6,30,-10,GD,500,1,500,100,0,147.16,139,310,NaN,NaN
+User_sweep,8,6,30,-10,EM-GS,500,1,500,100,0,159.798,136,1417,NaN,NaN
+User_sweep,8,6,30,-10,Hard-rank HS-GS,500,1,500,100,0,82.36,64.5,699,NaN,NaN
+User_sweep,8,6,30,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,6,30,0,GS,500,1,500,100,0,83.06,76,247,NaN,NaN
+User_sweep,8,6,30,0,GD,500,1,500,100,0,144.482,138,332,NaN,NaN
+User_sweep,8,6,30,0,EM-GS,500,1,500,100,0,81.494,74,252,NaN,NaN
+User_sweep,8,6,30,0,Hard-rank HS-GS,500,1,500,100,0,56.664,48,398,NaN,NaN
+User_sweep,8,6,30,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,6,30,10,GS,500,1,500,100,0,66.098,63,190,NaN,NaN
+User_sweep,8,6,30,10,GD,500,1,500,100,0,141.074,136,364,NaN,NaN
+User_sweep,8,6,30,10,EM-GS,500,1,500,100,0,66.014,63,189,NaN,NaN
+User_sweep,8,6,30,10,Hard-rank HS-GS,500,1,500,100,0,97.278,79,849,NaN,NaN
+User_sweep,8,6,30,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,6,30,20,GS,500,1,500,100,0,64.284,61,154,NaN,NaN
+User_sweep,8,6,30,20,GD,500,1,500,100,0,136.604,131,329,NaN,NaN
+User_sweep,8,6,30,20,EM-GS,500,1,500,100,0,64.276,61,154,NaN,NaN
+User_sweep,8,6,30,20,Hard-rank HS-GS,500,1,500,100,0,76.796,69,359,NaN,NaN
+User_sweep,8,6,30,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,6,30,30,GS,500,1,500,100,0,65.438,62,143,NaN,NaN
+User_sweep,8,6,30,30,GD,500,1,500,100,0,139.214,134,321,NaN,NaN
+User_sweep,8,6,30,30,EM-GS,500,1,500,100,0,65.438,62,143,NaN,NaN
+User_sweep,8,6,30,30,Hard-rank HS-GS,500,1,500,100,0,65.438,62,143,NaN,NaN
+User_sweep,8,6,30,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,7,30,-10,GS,500,1,500,100,0,235.128,191,1474,NaN,NaN
+User_sweep,8,7,30,-10,GD,500,1,500,100,0,203.65,190.5,480,NaN,NaN
+User_sweep,8,7,30,-10,EM-GS,500,1,500,100,0,227.936,179,2674,NaN,NaN
+User_sweep,8,7,30,-10,Hard-rank HS-GS,500,1,500,100,0,99.934,80.5,1175,NaN,NaN
+User_sweep,8,7,30,-10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,7,30,0,GS,500,1,500,100,0,119.242,101,823,NaN,NaN
+User_sweep,8,7,30,0,GD,500,1,500,100,0,191.704,179,454,NaN,NaN
+User_sweep,8,7,30,0,EM-GS,500,1,500,100,0,117.798,99,1214,NaN,NaN
+User_sweep,8,7,30,0,Hard-rank HS-GS,500,1,500,100,0,65.894,55,507,NaN,NaN
+User_sweep,8,7,30,0,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,7,30,10,GS,500,1,500,100,0,85.436,81,254,NaN,NaN
+User_sweep,8,7,30,10,GD,500,1,500,100,0,189.56,180,455,NaN,NaN
+User_sweep,8,7,30,10,EM-GS,500,1,500,100,0,85.226,80.5,251,NaN,NaN
+User_sweep,8,7,30,10,Hard-rank HS-GS,500,1,500,100,0,94.234,81,1016,NaN,NaN
+User_sweep,8,7,30,10,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,7,30,20,GS,500,1,500,100,0,79.758,76,222,NaN,NaN
+User_sweep,8,7,30,20,GD,500,1,500,100,0,180.786,170,408,NaN,NaN
+User_sweep,8,7,30,20,EM-GS,500,1,500,100,0,79.734,76,222,NaN,NaN
+User_sweep,8,7,30,20,Hard-rank HS-GS,500,1,500,100,0,99.36,88,360,NaN,NaN
+User_sweep,8,7,30,20,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable
+User_sweep,8,7,30,30,GS,500,1,500,100,0,80.59,76,203,NaN,NaN
+User_sweep,8,7,30,30,GD,500,1,500,100,0,186.42,180,540,NaN,NaN
+User_sweep,8,7,30,30,EM-GS,500,1,500,100,0,80.59,76,203,NaN,NaN
+User_sweep,8,7,30,30,Hard-rank HS-GS,500,1,500,100,0,80.59,76,203,NaN,NaN
+User_sweep,8,7,30,30,PI-DU-RACE (DL),500,0,NaN,NaN,NaN,NaN,NaN,NaN,16,Fixed-stage network; iterative convergence is not applicable

@@ -1,0 +1,8 @@
+Frozen PI-DU-RACE V4 vs nonlearned soft-rank HS-GS
+Status: paired reanalysis of previously viewed test releases; not blind confirmation.
+No test data were used for threshold tuning. No V4 checkpoint was modified.
+Bootstrap replicates: 2000; seed: 2026111302; CI: percentile 95%.
+Positive V4 improvement means soft-rank NMSE is higher (V4 is better).
+NMSE: pooled squared error / pooled true-channel energy; dB after pooling.
+SNR aggregate: arithmetic mean of five pooled linear NMSE values, then dB.
+Full outputs: D:\MTech_Thesis_Results\v3\Case_Studies\N8_FROZEN_V4_VS_SOFT_RANK_ZERO_SHOT

@@ -1,0 +1,35 @@
+Frozen PI-DU-RACE V4 vs nonlearned soft-rank HS-GS comparison
+Static inspection record; MATLAB has not been run by Codex.
+
+New files in this experiment
+- MATLAB/run_validation_tuning.m
+- MATLAB/run_test_scoring.m
+- MATLAB/run_statistical_analysis_and_figures.m
+- README.md
+
+Inspected source implementations
+- Case_Studies/V4_Frozen_Transfer/V4_frozen_classical_sweeps.m
+  Source of sweep dimensions, test dataset metadata, GS initialization, exact
+  V4 forward pass, Hankel vectorization map, and pooled NMSE convention.
+- Case_Studies/Baseline_Validation_Diagnostic/compare_v4_soft_hsgs_validation.m
+  Source of the established 16-step EM-GS plus conventional Hankel SVT baseline,
+  threshold scaling, and prior validation threshold grid.
+- Case_Studies/V4_Frozen_Transfer/results/V4_FROZEN_CLASSICAL_FRESH_TEST_V1/
+  fresh_test_nmse_by_condition_corrected.csv, used only for V4 score reproduction.
+- Case_Studies/V4_Frozen_Transfer/data/V4_FROZEN_CLASSICAL_FRESH_TEST_V1/
+  Existing exact test observations, channels, pilots, references, and noise variances.
+- Case_Studies/Antenna_sweep/data/ANTENNA_COUNT_N8_16_24_32_K3_RSR25DB_SNR_m10_0_10_20_30/
+  Dimension-matched antenna validation splits.
+- Case_Studies/Users_sweep/data/USER_COUNT_CONFIRMATORY_V2_P10_K1_2_3_4_5_P30_K1_2_3_4_5_6_7_RSR25_SNR_m10_0_10_20_30/
+  Dimension-matched user validation splits.
+
+Frozen V4 checkpoint hashes (SHA-256)
+P=10: C22CACDE9048AB4305ED2251AFB9B620D7A31A66CFD809157B45098662996C15
+Path: baselines/N8_FROZEN_V4_BASELINE/models/P10/selected_model_P10.mat
+P=30: 7B4740BCCAF412A50B283BB2515122956084B559AB5CF34BFC34811B4E3B1A00
+Path: baselines/N8_FROZEN_V4_BASELINE/models/P30/selected_model_P30.mat
+
+Current interpretation limitation
+The sweep test releases have already been examined in this project. Any new
+scores from those files are paired reanalysis only, not untouched confirmation.
+No test data have been used by the validation tuning script.
